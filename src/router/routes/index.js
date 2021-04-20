@@ -17,6 +17,18 @@ const Routes = [
     component: lazy(() => import('../../views/SecondPage'))
   },
   {
+    path: '/currency-list',
+    component: lazy(() => import('../../components/currency/CurrencyList'))
+  },
+  {
+    path: '/city-list',
+    component: lazy(() => import('../../components/city/CityList'))
+  },
+  {
+    path: '/category-list',
+    component: lazy(() => import('../../components/category/CategoryList'))
+  },
+  {
     path: '/login',
     component: lazy(() => import('../../views/Login')),
     layout: 'BlankLayout',
