@@ -9,7 +9,7 @@ import { Fragment, useState, forwardRef } from 'react'
 import { data } from './data'
 
 // ** Add New Modal Component
-import ModelForm from './FormModel'
+import ModelForm from './formModel'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -49,6 +49,7 @@ const DataTableWithButtons = () => {
 
   const [addClicked, setAddClicked] = useState(0)
 
+
    //deleteCountry
   const deleteState = (val) => {
     //here we passing id to delete this specific record
@@ -65,28 +66,28 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'StateName',
-          selector: 'StateName',
+          name: 'Service Name',
+          selector: 'Name',
           sortable: true,
           minWidth: '250px',
           cell: row => (
             <div className='d-flex align-items-center'>
-              <div className='user-info text-truncate ml-1'>
-                <span className='d-block font-weight-bold text-truncate'>{row.StateName}</span>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>{row.Name}</span>
               </div>
             </div>
           )
         },
         {
-          name: 'Country',
-          selector: 'Country',
+          name: 'Cost',
+          selector: 'Cost',
           sortable: true,
           minWidth: '250px',
           cell: row => {
             return (
                 <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate ml-1'>
-                    <span className='d-block font-weight-bold text-truncate'>{row.Country}</span>
+                  <div className='user-info text-truncate'>
+                    <span className='d-block font-weight-bold text-truncate'>${row.Cost}</span>
                   </div>
                 </div>
             )
@@ -142,13 +143,14 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
+        const Cost = item.Cost.toString() 
         const startsWith =
-          item.StateName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Country.toLowerCase().startsWith(value.toLowerCase()) 
+          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
+          Cost.toLowerCase().startsWith(value.toLowerCase()) 
 
         const includes =
-          item.StateName.toLowerCase().includes(value.toLowerCase()) ||
-          item.Country.toLowerCase().includes(value.toLowerCase()) 
+          item.Name.toLowerCase().includes(value.toLowerCase()) ||
+          Cost.toLowerCase().includes(value.toLowerCase()) 
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -197,12 +199,12 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>States List</CardTitle>
+          <CardTitle tag='h4'>Service List</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             {addClicked === 0 ? (
                 <Button className='ml-2' color='primary' onClick={handleModal}>
                                         <Plus size={15} />
-                                        <span className='align-middle ml-50'>Add Your State</span>
+                                        <span className='align-middle ml-50'>Add Your Service</span>
                 </Button>
                 ) : (
                 <span></span>

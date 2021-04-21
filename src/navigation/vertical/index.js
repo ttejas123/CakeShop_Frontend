@@ -1,22 +1,10 @@
-import { Mail, Home, Grid, Database, FileText, Circle, DollarSign, User, Globe, AtSign, Flag }  from 'react-feather'
+import { Mail, Home, Globe, AtSign, Flag, Circle, DollarSign, Database, Grid, FileText } from 'react-feather'
 
 export default [
   {
-    id: 'Country',
-    title: 'country',
-    icon: <Globe size={20} />,
-    navLink: '/country'
-  },
-  {
-    id: 'secondPage',
-    title: 'Second Page',
-    icon: <Mail size={20} />,
-    navLink: '/second-page'
-  },
-  {
-    id: 'master',
-    title: 'Master',
-    icon: <User size={20} />,
+    id: 'Masters',
+    title: 'Masters',
+    icon: <Home size={20} />,
     children: [
       {
         id: 'CurrencyList',
@@ -60,18 +48,55 @@ export default [
         icon: <Circle size={20} />,
         navLink: '/industry-list'
       },
-    {
-    id: 'StatePage',
-    title: 'State',
-    icon: <Flag size={20} />,
-    navLink: '/state'
-  },
-  {
-    id: 'BrandPage',
-    title: 'Brand',
-    icon: <AtSign size={20} />,
-    navLink: '/brand'
-  }
-]
-}
+      {
+        id: 'Country',
+        title: 'Country',
+        icon: <Circle size={20} />,
+        navLink: '/country'
+      },
+      {
+        id: 'StatePage',
+        title: 'State',
+        icon: <Circle size={20} />,
+        navLink: '/state'
+      },
+      {
+        id: 'BrandPage',
+        title: 'Brand',
+        icon: <Circle size={20} />,
+        navLink: '/brand'
+      },
+      {
+        id: 'ValueAddedServices',
+        title: 'VAS',
+        icon: <Circle size={20} />,
+        navLink: '/vas'
+      },
+      {
+        id: 'LogisticsPartners',
+        title: 'Logistics Partners',
+        icon: <Circle size={20} />,
+        navLink: '/losgistics'
+      },
+      {
+        id: 'UserPage',
+        title: 'User',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'Add User',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/userAdd'
+                },
+                {
+                  id: 'list',
+                  title: 'list',
+                  icon: <Circle size={20} />,
+                  navLink: '/userlist'
+                }
+        ]
+      }
+    ]
+  } 
 ]
