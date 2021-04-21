@@ -41,24 +41,16 @@ import {
         <CardBody>
           <Form>
             <Row >
-            <Col className='d-flex' md={{ size: 9, offset: 1 }}>
+            <Col className='d-flex' md={{ size: 9, offset: 3 }}>
             <FormGroup row  >
               <Label sm='4' size='lg' for='name'>
-                City
+                Name
               </Label>
               <Col sm='8'>
                 <Input type='text' name='name' id='name' placeholder='City Name' onChange={handleInputeChange}/>
               </Col>
             </FormGroup>
   
-            <FormGroup className='ml-3' row>
-              <Label sm='4' size='lg' for='state'>
-                State
-              </Label>
-              <Col sm='8'>
-                <Input type='text' name='State' id='State' placeholder='State' onChange={handleInputeChange}/>
-              </Col>
-            </FormGroup>
             {/* <FormGroup className='ml-3' row>
               <Label sm='4' size='lg' for='country'>
                 Country
@@ -68,7 +60,7 @@ import {
               </Col>
             </FormGroup> */}
               <FormGroup className='ml-3' row>
-                <Label sm='5' size='lg' for='country'>Country</Label>
+                <Label sm='5' size='lg' for='country'>Category</Label>
                 <Col sm='7'>
                 <Input  type='select' name='country' id='country' defaultValue="India" onChange={handleInputeChange}>
                 <option value='select'>Select</option>
@@ -83,7 +75,7 @@ import {
             </Col>
             </Row>
             <FormGroup className='mb-0 mx-auto' row>
-              <Col className='d-flex' md={{ size: 5, offset: 5 }}>
+              <Col className='d-flex' md={{ size: 8, offset: 5 }}>
                 <Button.Ripple className='mr-1' color='primary' type='submit' onClick={e => { 
                                                 e.preventDefault() 
                                                 handleSubmit()

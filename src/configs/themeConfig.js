@@ -3,8 +3,8 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'Vuexy',
-    appLogoImage: require('@src/assets/images/logo/logo.svg').default
+    appName: 'Bidoya',
+    appLogoImage: require('@src/assets/images/logo/logo.jpg').default
   },
   layout: {
     isRTL: false,

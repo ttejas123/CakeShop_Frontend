@@ -14,9 +14,9 @@ import {
     Label
   } from 'reactstrap'
   
-  const EditForm = (props) => {
-      console.log(props.data)
-      const [values, setValues] = useState('')
+  const HorizontalForm = (props) => {
+    
+    const [values, setValues] = useState('')
     const handleInputeChange = (event) => {
         const {name, value} = event.target
         setValues(
@@ -33,40 +33,39 @@ import {
         //prop.editAction(values)
         //setValues(initialvalues)
       }
+
+    
+    //   const handleSubmit = () => {
+    //       console.log(name)
+    //       console.log(symbol)
+    //   }
     return (
       <Card>  
         <CardBody>
           <Form>
             <Row >
-            <Col className='d-flex' md={{ size: 9, offset: 3 }}>
+            <Col className='d-flex' md={{ size: 9, offset: 5 }}>
             <FormGroup row  md={{ size: 9, offset: 3 }}>
               <Label sm='4' size='lg' for='name'>
-                Code
+                Name
               </Label>
               <Col sm='8'>
-                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder='Code' onChange={handleInputeChange}/>
+                <Input type='text' name='name' id='name' placeholder='KYC Name' onChange={handleInputeChange} />
               </Col>
             </FormGroup>
   
-            <FormGroup className='ml-2' row>
-              <Label sm='4' size='lg' for='Email'>
-                Symbol
-              </Label>
-              <Col sm='8'>
-                <Input type='text' name='Symbol' defaultValue={props.data.symbol} id='Symbol' placeholder='Symbol' onChange={handleInputeChange}/>
-              </Col>
-            </FormGroup>
+            
             </Col>
             </Row>
             <FormGroup className='mb-0 mx-auto' row>
               <Col className='d-flex' md={{ size: 8, offset: 5 }}>
-              <Button.Ripple className='mr-1' color='primary' type='submit' onClick={e => { 
+                <Button.Ripple className='mr-1' color='primary' type='submit' onClick={e => { 
                                                 e.preventDefault() 
                                                 handleSubmit()
                                                 } } >
                   Submit
                 </Button.Ripple>
-                <Button.Ripple outline color='secondary' type='reset' onClick={props.handleCancel}>
+                <Button.Ripple outline color='secondary' type='reset' onClick={props.handleCancel} >
                   Cancel
                 </Button.Ripple>
               </Col>
@@ -76,5 +75,5 @@ import {
       </Card>
     )
   }
-  export default EditForm
+  export default HorizontalForm
   

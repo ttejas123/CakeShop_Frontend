@@ -1,6 +1,8 @@
 
 // ** React Imports
 import { Fragment, useState } from 'react'
+import '@styles/react/libs/react-select/_react-select.scss'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** Table Columns
 import { cityData } from './data'
@@ -268,7 +270,7 @@ const handleDelete = (data) => {
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>City List</CardTitle>
+        <CardTitle tag='h4'>city List</CardTitle>
         <Button className='ml-2' color='primary' onClick={handleAddClick} >
               <Plus size={15} />
               <span className='align-middle ml-50'>Add city</span>

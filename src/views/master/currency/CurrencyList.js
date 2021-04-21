@@ -1,9 +1,9 @@
-
 // ** React Imports
 import { Fragment, useState } from 'react'
-
+import '@styles/react/libs/react-select/_react-select.scss'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { cityData } from './data'
+import { data1 } from './data'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -11,14 +11,14 @@ import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
 import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus} from 'react-feather'
 import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
-//import InputBasic from './AddCity'
-import HorizontalForm from './AddCity'
-import EditForm from './EditCity'
+//import InputBasic from './AddCurrency'
+import HorizontalForm from './AddCurrency'
+import EditForm from './EditCurrency'
 
-const CityList = () => {
+const CurrencyList = () => {
 
-    //console.log(cityColumns)
-    console.log(cityData)
+    //console.log(currencyColumns)
+    console.log(data1)
   // ** State
 //   const data = [
 //     {
@@ -36,77 +36,32 @@ const CityList = () => {
 // ]
 // console.log(data)
 
-//   const cityColumns = [
-//     {
-//       name: 'city Name',
-//       selector: 'name',
-//       sortable: true,
-//       minWidth: '200px'
-//     },
-//     {
-//       name: 'Symbol',
-//       selector: 'symbol',
-//       sortable: false,
-//       minWidth: '250px'
-//     },
-//     {
-//       name: 'Actions',
-//       allowOverflow: true,
-//       cell: row => {
-//         return (
-//           <div className='d-flex'>
-//             <UncontrolledDropdown>
-//               <DropdownToggle className='pr-1' tag='span'>
-//                 <MoreVertical size={15} />
-//               </DropdownToggle>
-//               <DropdownMenu right>
-//                 <DropdownItem>
-//                   <FileText size={15} />
-//                   <span className='align-middle ml-50'>Details</span>
-//                 </DropdownItem>
-//                 <DropdownItem>
-//                   <Archive size={15} />
-//                   <span className='align-middle ml-50'>Archive</span>
-//                 </DropdownItem>
-//                 <DropdownItem>
-//                   <Trash size={15} />
-//                   <span className='align-middle ml-50'>Delete</span>
-//                 </DropdownItem>
-//               </DropdownMenu>
-//             </UncontrolledDropdown>
-//             <Edit size={15} />
-//           </div>
-//         )
-//       }
-//     }
-//   ]
-
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [addClicked, setAddClicked] = useState(0)
   const [editClicked, setEditClicked] = useState(0)
   const [editData, setEditData] = useState({})
-
-  // ** Function to handle pagination
+  
   const handlePagination = page => {
     setCurrentPage(page.selected)
   }
 
-  const handleAddClick = () => {
-    if (!editClicked) {
-      setAddClicked(!addClicked)
-    }
+  const handleEditClick = (item) => {
+      if (!addClicked) { 
+        setEditClicked(!editClicked)
+        setEditData(item)
+      }
+    //console.log(item)
   }
 
-  const handleEditClick = (item) => {
-    if (!addClicked) { 
-      setEditClicked(!editClicked)
-      setEditData(item)
-    }
-  //console.log(item)
-}
-const handleCancelOfEdit = () => {
+  const handleAddClick = () => {
+      if (!editClicked) {
+        setAddClicked(!addClicked)
+      }
+  }
+
+  const handleCancelOfEdit = () => {
     console.log("in Cancel")
     setEditClicked(!editClicked)
 }
@@ -115,18 +70,59 @@ const handleCancelOfAdd = () => {
     setAddClicked(!addClicked)
 }
 const handleSubmitOfAdd = (data) => {
-  console.log("in submit", data)
-  setAddClicked(!addClicked)
+    console.log("in submit", data)
+    setAddClicked(!addClicked)
 }
 
 const handleSubmitOfEdit = (data) => {
-  console.log("in submit of edit", data)
-  setEditClicked(!editClicked)
+    console.log("in submit of edit", data)
+    setEditClicked(!editClicked)
 }
 
 const handleDelete = (data) => {
-  console.log("in delete", data)
+    console.log("in delete", data)
 }
+
+  const currencyColumns = [
+    {
+      name: 'Currency Name',
+      selector: 'name',
+      sortable: true,
+      minWidth: '250px'
+    },
+    {
+      name: 'Symbol',
+      selector: 'symbol',
+      sortable: false,
+      minWidth: '250px'
+    },
+    {
+      name: 'Actions',
+      allowOverflow: true,
+      cell: row => {
+        return (
+          <div className='d-flex'>
+            <UncontrolledDropdown>
+              <DropdownToggle className='pr-1' tag='span'>
+                <MoreVertical size={15} />
+              </DropdownToggle>
+              <DropdownMenu right onClick={e => { handleDelete(row) }}>
+                <DropdownItem>
+                  <Trash size={15} />
+                  <span className='align-middle ml-50'>Delete</span>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            <Edit size={15} onClick={ e => { 
+                                                e.preventDefault() 
+                                                handleEditClick(row) 
+                                                } } />
+          </div>
+        )
+      }
+    }
+  ]
+  
   // ** Function to handle filter
   // const handleFilter = e => {
   //   const value = e.target.value
@@ -172,52 +168,6 @@ const handleDelete = (data) => {
   //   }
   // }
 
-  const cityColumns = [
-    {
-        name: 'City Name',
-        selector: 'name',
-        sortable: false,
-        minWidth: '250px'
-      },
-      {
-        name: 'State',
-        selector: 'state',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Country',
-        selector: 'country',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Actions',
-        allowOverflow: true,
-        cell: row => {
-          return (
-            <div className='d-flex'>
-              <UncontrolledDropdown>
-                <DropdownToggle className='pr-1' tag='span'>
-                  <MoreVertical size={15} />
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem onClick={e => { handleDelete(row) }}>
-                    <Trash size={15} />
-                    <span className='align-middle ml-50'>Delete</span>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-              <Edit size={15} onClick={ e => { 
-                                                e.preventDefault() 
-                                                handleEditClick(row) 
-                                                } } />
-            </div>
-          )
-        }
-      }
-    ]
-
   // ** Pagination Previous Component
   const Previous = () => {
     return (
@@ -247,7 +197,7 @@ const handleDelete = (data) => {
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : cityData.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : data1.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -268,14 +218,14 @@ const handleDelete = (data) => {
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>City List</CardTitle>
-        <Button className='ml-2' color='primary' onClick={handleAddClick} >
+        <CardTitle tag='h4'>Currency List</CardTitle>
+        <Button className='ml-2' color='primary' onClick={handleAddClick}>
               <Plus size={15} />
-              <span className='align-middle ml-50'>Add city</span>
+              <span className='align-middle ml-50'>Add Currency</span>
             </Button>
       </CardHeader>
-      {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd}/> : null}
-      {editClicked ? <EditForm data = {editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit}/> : null}
+      {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
+      {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null}
       {/* <Row className='justify-content-end mx-0'>
         <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
           <Label className='mr-1' for='search-input-1'>
@@ -295,13 +245,13 @@ const handleDelete = (data) => {
         noHeader
         pagination
         selectableRowsNoSelectAll
-        columns={cityColumns}
+        columns={currencyColumns}
         className='react-dataTable'
         paginationPerPage={7}
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={cityData}
+        data={data1}
       />
       {/* <CardFooter>
         <CardText className='mb-0'>
@@ -314,4 +264,4 @@ const handleDelete = (data) => {
   )
 }
 
-export default CityList
+export default CurrencyList

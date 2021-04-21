@@ -14,8 +14,18 @@ import {
     Label
   } from 'reactstrap'
   import { useForm, Controller } from 'react-hook-form'
+  import Select from 'react-select'
+  import { selectThemeColors } from '@utils'
   
   const HorizontalForm = (props) => {
+    const colourOptions = [
+      { value: 'ocean', label: 'Ocean' },
+      { value: 'blue', label: 'Blue' },
+      { value: 'purple', label: 'Purple' },
+      { value: 'red', label: 'Red' },
+      { value: 'orange', label: 'Orange' }
+    ]
+    
     const { register, errors, control, setValue, trigger } = useForm({
       defaultValues: { gender: 'gender-female', dob: null }
     })
@@ -41,24 +51,16 @@ import {
         <CardBody>
           <Form>
             <Row >
-            <Col className='d-flex' md={{ size: 9, offset: 1 }}>
+            <Col className='d-flex' md={{ size: 15, offset: 3 }}>
             <FormGroup row  >
               <Label sm='4' size='lg' for='name'>
-                City
+                Name
               </Label>
               <Col sm='8'>
-                <Input type='text' name='name' id='name' placeholder='City Name' onChange={handleInputeChange}/>
+                <Input type='text' name='name' id='name' placeholder='Sub Category Name' onChange={handleInputeChange}/>
               </Col>
             </FormGroup>
   
-            <FormGroup className='ml-3' row>
-              <Label sm='4' size='lg' for='state'>
-                State
-              </Label>
-              <Col sm='8'>
-                <Input type='text' name='State' id='State' placeholder='State' onChange={handleInputeChange}/>
-              </Col>
-            </FormGroup>
             {/* <FormGroup className='ml-3' row>
               <Label sm='4' size='lg' for='country'>
                 Country
@@ -68,22 +70,26 @@ import {
               </Col>
             </FormGroup> */}
               <FormGroup className='ml-3' row>
-                <Label sm='5' size='lg' for='country'>Country</Label>
-                <Col sm='7'>
-                <Input  type='select' name='country' id='country' defaultValue="India" onChange={handleInputeChange}>
-                <option value='select'>Select</option>
-                  <option value='inida'>India</option>
-                  <option value='usa'>USA</option>
-                  <option value='uk'>UK</option>
-                  <option value='australia'>Australia</option>
-                  <option value='vatican city'>Vatican City</option>
-                </Input>
-                </Col>
+              <Label sm='4' size='lg' for='country' >Category</Label>
+              <Col sm='8'>
+            <Select
+              name='category'
+              id='category'
+              onChange={handleInputeChange}
+              theme={selectThemeColors}
+              className='react-select'
+              classNamePrefix='select'
+              defaultValue={colourOptions[3]}
+              options={colourOptions}
+              isDisabled={false}
+              isClearable={false}
+            />
+            </Col>
               </FormGroup>
             </Col>
             </Row>
             <FormGroup className='mb-0 mx-auto' row>
-              <Col className='d-flex' md={{ size: 5, offset: 5 }}>
+              <Col className='d-flex' md={{ size: 8, offset: 5 }}>
                 <Button.Ripple className='mr-1' color='primary' type='submit' onClick={e => { 
                                                 e.preventDefault() 
                                                 handleSubmit()

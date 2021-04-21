@@ -1,4 +1,4 @@
-import { Mail, Home } from 'react-feather'
+import { Mail, Home, Grid, Database, FileText, Circle, DollarSign, User }  from 'react-feather'
 
 export default [
   {
@@ -14,21 +14,52 @@ export default [
     navLink: '/second-page'
   },
   {
-    id: 'CurrencyList',
-    title: 'Currrency List Page',
-    icon: <Mail size={20} />,
-    navLink: '/currency-List'
-  },
-  {
-    id: 'CityList',
-    title: 'City List Page',
-    icon: <Mail size={20} />,
-    navLink: '/city-List'
-  },
-  {
-    id: 'Category',
-    title: 'Category List Page',
-    icon: <Mail size={20} />,
-    navLink: '/category-List'
+    id: 'master',
+    title: 'Master',
+    icon: <User size={20} />,
+    children: [
+      {
+        id: 'CurrencyList',
+        title: 'Currrency',
+        icon: <DollarSign size={20} />,
+        navLink: '/currency-list'
+      },
+      {
+        id: 'CityList',
+        title: 'City',
+        icon: <Circle size={20} />,
+        navLink: '/city-list'
+      },
+      {
+        id: 'Category',
+        title: 'Category',
+        icon: <Grid size={20} />,
+        navLink: '/category-list'
+      },
+      {
+        id: 'SubCategory',
+        title: 'Sub Category',
+        icon: <Database size={20} />,
+        navLink: '/sub-category-list'
+      },
+      {
+        id: 'KYC',
+        title: 'KYC',
+        icon: <FileText size={20} />,
+        navLink: '/kyc-document-list'
+      },
+      {
+        id: 'CompanyList',
+        title: 'Company',
+        icon: <Circle size={20} />,
+        navLink: '/company-list'
+      },
+      {
+        id: 'IndustryList',
+        title: 'Industry',
+        icon: <Circle size={20} />,
+        navLink: '/industry-list'
+      }
+    ]
   }
 ]

@@ -38,24 +38,16 @@ import {
         <CardBody>
           <Form>
             <Row >
-            <Col className='d-flex' md={{ size: 9, offset: 3 }}>
+            <Col className='d-flex' md={{ size: 9, offset: 5 }}>
             <FormGroup row  md={{ size: 9, offset: 3 }}>
               <Label sm='4' size='lg' for='name'>
-                Code
+                Name
               </Label>
               <Col sm='8'>
-                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder='Code' onChange={handleInputeChange}/>
+                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder='KYC Name' onChange={handleInputeChange}/>
               </Col>
             </FormGroup>
-  
-            <FormGroup className='ml-2' row>
-              <Label sm='4' size='lg' for='Email'>
-                Symbol
-              </Label>
-              <Col sm='8'>
-                <Input type='text' name='Symbol' defaultValue={props.data.symbol} id='Symbol' placeholder='Symbol' onChange={handleInputeChange}/>
-              </Col>
-            </FormGroup>
+
             </Col>
             </Row>
             <FormGroup className='mb-0 mx-auto' row>

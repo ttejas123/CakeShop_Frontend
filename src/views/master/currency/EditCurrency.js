@@ -44,12 +44,12 @@ import {
                 Code
               </Label>
               <Col sm='8'>
-                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder='Code' onChange={handleInputeChange}/>
+                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder=' Name' onChange={handleInputeChange}/>
               </Col>
             </FormGroup>
   
             <FormGroup className='ml-2' row>
-              <Label sm='4' size='lg' for='Email'>
+              <Label sm='4' size='lg' for='symbol'>
                 Symbol
               </Label>
               <Col sm='8'>

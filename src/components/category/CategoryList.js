@@ -2,7 +2,7 @@
 import { Fragment, useState } from 'react'
 
 // ** Table Columns
-//import { data1 } from './data'
+import { CategoryData } from './data'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -17,7 +17,7 @@ import EditForm from './EditCategory'
 const CurrencyList = () => {
 
     //console.log(BrandColumns)
-    const data1 = [
+    const CategoryData = [
         {
             name:"Temp1"
         },
@@ -31,7 +31,7 @@ const CurrencyList = () => {
             name:"Temp4"
         }
     ]
-    console.log(data1)
+    console.log(CategoryData)
   // ** State
 //   const data = [
 //     {
@@ -205,7 +205,7 @@ const handleDelete = (data) => {
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data1.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : CategoryData.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -226,10 +226,10 @@ const handleDelete = (data) => {
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Currency List</CardTitle>
+        <CardTitle tag='h4'>Category List</CardTitle>
         <Button className='ml-2' color='primary' onClick={handleAddClick}>
               <Plus size={15} />
-              <span className='align-middle ml-50'>Add Currency</span>
+              <span className='align-middle ml-50'>Add Category</span>
             </Button>
       </CardHeader>
       {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
@@ -259,7 +259,7 @@ const handleDelete = (data) => {
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={data1}
+        data={CategoryData}
       />
       {/* <CardFooter>
         <CardText className='mb-0'>
