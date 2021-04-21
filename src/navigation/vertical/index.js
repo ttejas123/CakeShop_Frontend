@@ -24,5 +24,11 @@ export default [
     title: 'Brand',
     icon: <AtSign size={20} />,
     navLink: '/brand'
+  },
+  {
+    id: 'UserList',
+    title: 'User',
+    icon: <AtSign size={20} />,
+    navLink: '/user'
   }
 ]

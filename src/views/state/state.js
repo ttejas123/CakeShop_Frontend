@@ -64,6 +64,15 @@ const DataTableWithButtons = () => {
       setCurrentId("")
       console.log(val)
   }
+   const basicColumns = [
+    {
+      name: 'ID',
+      selector: 'StateName',
+      // sortable: true,
+      maxWidth: '100px'
+    }
+   
+  ]
 
   //columns
   const columns = [
@@ -236,7 +245,7 @@ const DataTableWithButtons = () => {
             />
           </Col>
         </Row>
-        <DataTable
+        {/* <DataTable
           noHeader
           pagination
           selectableRows
@@ -248,7 +257,16 @@ const DataTableWithButtons = () => {
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
-        />
+        /> */}
+         <DataTable
+        noHeader
+        pagination
+        data={searchValue.length ? filteredData : data}
+        columns={basicColumns}
+        className='react-dataTable'
+        sortIcon={<ChevronDown size={10} />}
+        paginationRowsPerPageOptions={[10, 25, 50, 100]}
+      />
         
       </Card>
     </Fragment>
