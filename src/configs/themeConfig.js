@@ -3,12 +3,12 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'Vuexy',
-    appLogoImage: require('@src/assets/images/logo/logo.svg').default
+    appName: 'Bidoya',
+    appLogoImage: require('@src/assets/images/bidoyaLogo.jpg').default
   },
   layout: {
     isRTL: false,
-    skin: 'light', // light, dark, bordered, semi-dark
+    skin: 'dark', // light, dark, bordered, semi-dark
     routerTransition: 'fadeIn', // fadeIn, fadeInLeft, zoomIn, none or check this for more transition https://animate.style/
     type: 'vertical', // vertical, horizontal
     contentWidth: 'full', // full, boxed

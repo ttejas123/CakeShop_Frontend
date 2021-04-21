@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { selectThemeColors } from '@utils'
-import Select from 'react-select'
 import {
     Card,
     CardHeader,
@@ -16,17 +14,10 @@ import {
     Label
   } from 'reactstrap'
   
-
-  const option = [
-    {value: "India", label: "India"},
-    {value: "USA", label: "USA"},
-    {value: "Japan", label: "Japan"}
-  ]
-
   const HorizontalForm = (prop) => {
     const initialvalues = {
-    StateName: "",
-    Country: ""
+    Name: "",
+    Cost: ""
   }
 
   const [values, setValues] = useState(initialvalues)
@@ -42,22 +33,13 @@ import {
   }, [prop.currentId, prop.data])
 
   const handleInputeChange = (event) => {
-    const {name, value} = event.target
+    const {name, value, files} = event.target
+    console.log(event.target)
     setValues(
     {
       ...values,
       [name] : value
     }
-    )
-  }
-    //for drop down
-  const handleChange = (selectedOption) => {
-    
-    setValues(
-      {
-        ...values,
-        Country : selectedOption.value
-      }
     )
   }
 
@@ -73,34 +55,22 @@ import {
             <Row >
             <Col className='d-flex' md={{ size: 9, offset: 2 }}>
               <FormGroup row  >
-                <Label sm='4' size='lg' for='StateName'>
-                  State Name
+                <Label sm='4' size='lg' for='Cost'>
+                   Cost
                 </Label>
                 <Col sm='8'>
-                  <Input type='text' value={values.StateName}  name='StateName' id='StateName' placeholder='StateName' onChange={handleInputeChange} />
+                  <Input type='number' value={values.Cost}  name='Cost' id='Cost' placeholder='Cost' onChange={handleInputeChange} />
                 </Col>
               </FormGroup>
-              <FormGroup className='ml-5' row>
-                  <Label className='mb-1' md='6' sm='10'>
-                      Country
-                  </Label>
-                  <Col className='mb-1' md='6' sm='12'>
-                  <Select
-                    theme={selectThemeColors}
-                    className='react-select'
-                    classNamePrefix='select'
-                    defaultValue={values.Country}
-                    value={values.Country}
-                    name='Country'
-                    options={option}
-                    isLoading={false}
-                    onChange={handleChange}
-                    isClearable={false}
-                  />
-                  </Col>
-         
+    
+              <FormGroup className='ml-3' row>
+                <Label sm='4' size='lg' for='state'>
+                  Service
+                </Label>
+                <Col sm='8'>
+                  <Input type='text' value={values.Name}  name='Name' id='Name' placeholder='Name' onChange={handleInputeChange} />
+                </Col>
               </FormGroup>
-              
             </Col>
             </Row>
             <FormGroup className='mb-0 mx-auto' row>
