@@ -4,29 +4,25 @@ import { lazy } from 'react'
 const TemplateTitle = '%s - Vuexy React Admin Template'
 
 // ** Default Route
-const DefaultRoute = '/home'
+const DefaultRoute = '/country'
 
 // ** Merge Routes
 const Routes = [
   {
-    path: '/home',
-    component: lazy(() => import('../../views/Home'))
+    path: '/country',
+    component: lazy(() => import('../../views/country/Home'))
   },
   {
     path: '/second-page',
     component: lazy(() => import('../../views/SecondPage'))
   },
   {
-    path: '/currency-list',
-    component: lazy(() => import('../../components/currency/CurrencyList'))
+    path: '/state',
+    component: lazy(() => import('../../views/state/state'))
   },
   {
-    path: '/city-list',
-    component: lazy(() => import('../../components/city/CityList'))
-  },
-  {
-    path: '/category-list',
-    component: lazy(() => import('../../components/category/CategoryList'))
+    path: '/brand',
+    component: lazy(() => import('../../views/brand/brand'))
   },
   {
     path: '/login',

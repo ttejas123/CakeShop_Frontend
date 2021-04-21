@@ -1,11 +1,11 @@
-import { Mail, Home } from 'react-feather'
+import { Mail, Home, Globe, AtSign, Flag } from 'react-feather'
 
 export default [
   {
-    id: 'home',
-    title: 'Home',
-    icon: <Home size={20} />,
-    navLink: '/home'
+    id: 'Country',
+    title: 'country',
+    icon: <Globe size={20} />,
+    navLink: '/country'
   },
   {
     id: 'secondPage',
@@ -14,21 +14,15 @@ export default [
     navLink: '/second-page'
   },
   {
-    id: 'CurrencyList',
-    title: 'Currrency List Page',
-    icon: <Mail size={20} />,
-    navLink: '/currency-List'
+    id: 'StatePage',
+    title: 'State',
+    icon: <Flag size={20} />,
+    navLink: '/state'
   },
   {
-    id: 'CityList',
-    title: 'City List Page',
-    icon: <Mail size={20} />,
-    navLink: '/city-List'
-  },
-  {
-    id: 'Category',
-    title: 'Category List Page',
-    icon: <Mail size={20} />,
-    navLink: '/category-List'
+    id: 'BrandPage',
+    title: 'Brand',
+    icon: <AtSign size={20} />,
+    navLink: '/brand'
   }
 ]
