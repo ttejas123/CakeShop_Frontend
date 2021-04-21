@@ -1,11 +1,11 @@
-import { Mail, Home, Grid, Database, FileText, Circle, DollarSign, User }  from 'react-feather'
+import { Mail, Home, Grid, Database, FileText, Circle, DollarSign, User, Globe, AtSign, Flag }  from 'react-feather'
 
 export default [
   {
-    id: 'home',
-    title: 'Home',
-    icon: <Home size={20} />,
-    navLink: '/home'
+    id: 'Country',
+    title: 'country',
+    icon: <Globe size={20} />,
+    navLink: '/country'
   },
   {
     id: 'secondPage',
@@ -59,7 +59,19 @@ export default [
         title: 'Industry',
         icon: <Circle size={20} />,
         navLink: '/industry-list'
-      }
-    ]
+      },
+    {
+    id: 'StatePage',
+    title: 'State',
+    icon: <Flag size={20} />,
+    navLink: '/state'
+  },
+  {
+    id: 'BrandPage',
+    title: 'Brand',
+    icon: <AtSign size={20} />,
+    navLink: '/brand'
   }
+]
+}
 ]
