@@ -3,7 +3,8 @@ import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
-
+import '@styles/react/libs/react-select/_react-select.scss'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
@@ -56,8 +57,8 @@ const DataTableWithButtons = () => {
     //here we passing id to delete this specific record
     const userselection = confirm("Are you sure you want to delete")
  
-      if (userselection === true) {
-        console.log(" your record is delete")
+      if (userselection === true) { 
+        console.log("Deleted")
       } else {
       console.log("not deleted ")
       }
@@ -140,17 +141,11 @@ const DataTableWithButtons = () => {
               <div className='d-flex'>
                 <UncontrolledDropdown>
                   <DropdownToggle className='pr-1' tag='span'>
-                    <MoreVertical size={15} />
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+                    <Trash size={15} onClick={e => {
                                                                                     e.preventDefault()
                                                                                     deleteCountry(row.id)
-                                                                                  } }>
-                      <Trash size={15} />
-                      <span  className='align-middle ml-50'>Delete</span>
-                    </DropdownItem>
-                  </DropdownMenu>
+                                                                                  } }/>
+                  </DropdownToggle>
                 </UncontrolledDropdown>
 
                 <Edit size={15} onClick={ () => { 
