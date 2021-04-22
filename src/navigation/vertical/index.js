@@ -25,6 +25,24 @@ export default [
         navLink: '/brand'
       },
       {
+        id: 'category',
+        title: 'Category',
+        icon: <Circle size={20} />,
+        navLink: '/category'
+      },
+      {
+        id: 'city',
+        title: 'City',
+        icon: <Circle size={20} />,
+        navLink: '/city'
+      },
+      {
+        id: 'currency',
+        title: 'Currency',
+        icon: <Circle size={20} />,
+        navLink: '/currency'
+      },
+      {
         id: 'ValueAddedServices',
         title: 'VAS',
         icon: <Circle size={20} />,
