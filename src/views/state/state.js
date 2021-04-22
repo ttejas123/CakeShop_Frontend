@@ -1,6 +1,7 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
-
+import '@styles/react/libs/react-select/_react-select.scss'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
@@ -52,7 +53,13 @@ const DataTableWithButtons = () => {
    //deleteCountry
   const deleteState = (val) => {
     //here we passing id to delete this specific record
-    console.log(val)
+   const userselection = confirm("Are you sure you want to delete")
+ 
+      if (userselection === true) {
+        console.log(" your record is deleted")
+      } else {
+      console.log("not deleted ")
+      }
   }
     //edit action
    const AddeditEvent = (val) => {
@@ -100,17 +107,11 @@ const DataTableWithButtons = () => {
               <div className='d-flex'>
                 <UncontrolledDropdown>
                   <DropdownToggle className='pr-1' tag='span'>
-                    <MoreVertical size={15} />
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
+                    <Trash size={15} onClick={e => {
                                                                                     e.preventDefault()
                                                                                     deleteState(row.id)
-                                                                                  } }>
-                      <Trash size={15} />
-                      <span  className='align-middle ml-50'>Delete</span>
-                    </DropdownItem>
-                  </DropdownMenu>
+                                                                                  } } />
+                  </DropdownToggle>
                 </UncontrolledDropdown>
 
                 <Edit size={15} onClick={ () => { 
