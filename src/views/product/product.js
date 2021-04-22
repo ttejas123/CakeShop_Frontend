@@ -1,3 +1,9 @@
+// ** Custom Components
+import Avatar from '@components/avatar'
+//import { DropDownList } from '@progress/kendo-react-dropdowns'
+// ** Third Party Components
+import axios from 'axios'
+
 
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
@@ -6,7 +12,8 @@ import { Fragment, useState, forwardRef } from 'react'
 import { data } from './data'
 
 // ** Add New Modal Component
-import ModelForm from './formModel'
+import FormModel from './formModel'
+
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -44,18 +51,20 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
 
-  const [addClicked, setAddClicked] = useState(0)
-
-
    //deleteCountry
-  const deleteState = (val) => {
+  const deleteCountry = (val) => {
     //here we passing id to delete this specific record
-    console.log(val)
+    const userselection = confirm("Are you sure you want to delete")
+ 
+      if (userselection === true) {
+        console.log(" your record is delete")
+      } else {
+      console.log("not deleted ")
+      }
   }
     //edit action
    const AddeditEvent = (val) => {
      //here we hande event which comming from addNewModel.js (Form for add and edit)
-     console.log(currentId)
       setCurrentId("")
       console.log(val)
   }
@@ -63,10 +72,16 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'Service Name',
+          name: 'Id',
+          selector: 'id',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Name',
           selector: 'Name',
           sortable: true,
-          minWidth: '250px',
+          minWidth: '150px',
           cell: row => (
             <div className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
@@ -76,15 +91,42 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Cost',
-          selector: 'Cost',
+          name: 'Category Name',
+          selector: 'Category',
           sortable: true,
-          minWidth: '250px',
+          minWidth: '150px'
+        },
+        {
+          name: 'Sub-Category',
+          selector: 'SubCategory',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Default-Commission',
+          selector: 'DefaultCommission',
+          sortable: true,
+          minWidth: '150px',
           cell: row => {
             return (
                 <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate'>
-                    <span className='d-block font-weight-bold text-truncate'>${row.Cost}</span>
+                  <div className='user-info text-truncate '>
+                    <span className='d-block font-weight-bold text-truncate'>{row.DefaultCommission}%</span>
+                  </div>
+                </div>
+            )
+          }
+        },
+        {
+          name: 'GST',
+          selector: 'GST',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => {
+            return (
+                <div className='d-flex align-items-center'>
+                  <div className='user-info text-truncate '>
+                    <span className='d-block font-weight-bold text-truncate'>{row.GST}%</span>
                   </div>
                 </div>
             )
@@ -103,7 +145,7 @@ const DataTableWithButtons = () => {
                   <DropdownMenu right>
                     <DropdownItem tag='a' href='/' className='w-100' onClick={e => {
                                                                                     e.preventDefault()
-                                                                                    deleteState(row.id)
+                                                                                    deleteCountry(row.id)
                                                                                   } }>
                       <Trash size={15} />
                       <span  className='align-middle ml-50'>Delete</span>
@@ -113,7 +155,7 @@ const DataTableWithButtons = () => {
 
                 <Edit size={15} onClick={ () => { 
                                     setCurrentId(row.id)
-                                     setAddClicked(!addClicked)
+                                    setModal(true)
                                      } }/>
               </div>
             )
@@ -122,32 +164,36 @@ const DataTableWithButtons = () => {
     ]
 
 
-  // ** Function to handle toggle
+  // ** Function to handle Modal toggle
   const handleModal = () => {
-    if (addClicked === 1) {
-     setAddClicked(0)
-    } else {
-      setAddClicked(1)
-    }
+    setModal(!modal)
   }
 
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
     let updatedData = []
-    console.log(data)
     setSearchValue(value)
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const Cost = item.Cost.toString() 
+        const GST = item.GST.toString()
+        const DefaultCommission = item.DefaultCommission.toString()
+        console.log(GST)
         const startsWith =
           item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          Cost.toLowerCase().startsWith(value.toLowerCase()) 
+          item.Category.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.SubCategory.toLowerCase().startsWith(value.toLowerCase()) ||
+          GST.toLowerCase().startsWith(value.toLowerCase()) ||
+          DefaultCommission.toLowerCase().startsWith(value.toLowerCase())
 
         const includes =
           item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          Cost.toLowerCase().includes(value.toLowerCase()) 
+          item.Category.toLowerCase().includes(value.toLowerCase()) ||
+          item.SubCategory.toLowerCase().includes(value.toLowerCase()) ||
+          GST.toLowerCase().includes(value.toLowerCase()) ||
+          DefaultCommission.toLowerCase().includes(value.toLowerCase())
+
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -196,20 +242,15 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Service List</CardTitle>
+          <CardTitle tag='h4'>Product Category</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            {addClicked === 0 ? (
-                <Button className='ml-2' color='primary' onClick={handleModal}>
-                                        <Plus size={15} />
-                                        <span className='align-middle ml-50'>Add Your Service</span>
-                </Button>
-                ) : (
-                <span></span>
-                )
-            }
+            <Button className='ml-2' color='primary' onClick={handleModal}>
+              <Plus size={15} />
+              <span className='align-middle ml-50'>Add Your Product</span>
+            </Button>
           </div>
         </CardHeader>
-        {addClicked ? <ModelForm handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} /> : null}
+
         <Row className='justify-content-end mx-0'>
           <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
             <Label className='mr-1' for='search-input'>
@@ -225,6 +266,7 @@ const DataTableWithButtons = () => {
             />
           </Col>
         </Row>
+
         <DataTable
           noHeader
           pagination
@@ -240,6 +282,7 @@ const DataTableWithButtons = () => {
         />
         
       </Card>
+      <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} />
     </Fragment>
   )
 }

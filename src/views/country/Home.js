@@ -97,7 +97,7 @@ const DataTableWithButtons = () => {
           sortable: true,
           minWidth: '150px',
           cell: row => {
-            const currency = row.currencies.[0].symbol
+            const currency = row.currencies
             return (
                 <div className='d-flex align-items-center'>
                   <div className='user-info text-truncate ml-1'>

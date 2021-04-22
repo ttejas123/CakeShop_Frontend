@@ -3,7 +3,7 @@ import Avatar from '@components/avatar'
 import Select from 'react-select'
 // ** Third Party Components
 import axios from 'axios'
-import { MoreVertical, Edit, FileText, Archive, Trash,  MapPin, DollarSign, X  } from 'react-feather'
+import { MoreVertical, Home, Edit, FileText, Archive, Trash,  MapPin, DollarSign, X  } from 'react-feather'
 
 // ** React Imports
 import { useState, useEffect } from 'react'
@@ -23,9 +23,10 @@ const AddNewModal = (prop) => {
   ]
   const initialvalues = {
     Name: "",
-    Initial: "",
-    code: "",
-    Currency:""
+    Category: "",
+    SubCategory: "",
+    DefaultCommission: null,
+    GST: null
   }
   const [selectedOption, setselectedOption] = useState()
   const [values, setValues] = useState(initialvalues)
@@ -86,7 +87,7 @@ const AddNewModal = (prop) => {
           <InputGroup>
             <InputGroupAddon addonType='prepend'>
               <InputGroupText>
-                <MapPin size={15} />
+                <Home size={15} />
               </InputGroupText>
             </InputGroupAddon>
             <Input name="Name" onChange={handleInputeChange} id='Name' placeholder='Afghanistan' value={values.Name} />
@@ -94,31 +95,31 @@ const AddNewModal = (prop) => {
         </FormGroup>
 
         <FormGroup>
-          <Label for='Initial'>Initial</Label>
+          <Label for='Initial'>Category</Label>
           <InputGroup>
-            <Input name="Initial" onChange={handleInputeChange} id='Initial' placeholder='eg. Afghanistan : AF' value={values.Initial} />
+            <Input name="Category" onChange={handleInputeChange} id='Category' placeholder='eg. Afghanistan : AF' value={values.Category} />
           </InputGroup>
         </FormGroup>
 
         <FormGroup>
-          <Label for='code'>Country code</Label>
+          <Label for='Initial'>SubCategory</Label>
           <InputGroup>
-            <Input name="code" onChange={handleInputeChange} id='post' placeholder='eg. Afghanistan : 004' value={values.code} />
+            <Input name="SubCategory" onChange={handleInputeChange} id='SubCategory' placeholder='eg. Afghanistan : AF' value={values.SubCategory} />
           </InputGroup>
         </FormGroup>
 
-        <FormGroup className='mb-4'>
-          <Label for='Currency'>Currency</Label>
-          
-            
-            <Select
-              className='mb-4'
-              name="Currency"
-              defaultValue={values.Currency}
-              onChange={handleChange}
-              options={option}
-          />
-         
+        <FormGroup>
+          <Label for='DefaultCommission'>DefaultCommission %</Label>
+          <InputGroup>
+            <Input type="number" name="DefaultCommission" onChange={handleInputeChange} id='post' placeholder='eg. Afghanistan : 004' value={values.DefaultCommission} />
+          </InputGroup>
+        </FormGroup>
+
+        <FormGroup>
+          <Label for='GST'>GST %</Label>
+          <InputGroup>
+            <Input type="number" name="GST" onChange={handleInputeChange} id='post' placeholder='eg. Afghanistan : 004' value={values.GST} />
+          </InputGroup>
         </FormGroup>
 
         <Button className='mr-1' color='primary' onClick={ e =>  {

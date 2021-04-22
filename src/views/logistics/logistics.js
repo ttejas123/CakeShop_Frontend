@@ -157,7 +157,7 @@ const DataTableWithButtons = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 6 : data.length / 6 || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -182,7 +182,7 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Logistics Partners List</CardTitle>
+          <CardTitle tag='h4'>Logistics Partners</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             {addClicked === 0 ? (
                 <Button className='ml-2' color='primary' onClick={handleModal}>

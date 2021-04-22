@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 
 // ** Document title
-const TemplateTitle = '%s - Vuexy React Admin Template'
+const TemplateTitle = '%s - Bidoya'
 
 // ** Default Route
 const DefaultRoute = '/country'
@@ -13,20 +13,24 @@ const Routes = [
     component: lazy(() => import('../../views/country/Home'))
   },
   {
-    path: '/second-page',
-    component: lazy(() => import('../../views/SecondPage'))
+    path: '/state',
+    component: lazy(() => import('../../views/state/state'))
   },
   {
-    path: '/currency-list',
-    component: lazy(() => import('../../views/master/currency/CurrencyList'))
+    path: '/vas',
+    component: lazy(() => import('../../views/vas/vas'))
   },
   {
-    path: '/city-list',
-    component: lazy(() => import('../../views/master/city/CityList'))
+    path: '/brand',
+    component: lazy(() => import('../../views/brand/brand'))
   },
   {
     path: '/category-list',
     component: lazy(() => import('../../views/master/category/CategoryList'))
+  },
+  {
+    path: '/city-list',
+    component: lazy(() => import('../../views/master/city/CityList'))
   },
   {
     path: '/sub-category-list',
@@ -45,6 +49,18 @@ const Routes = [
     component: lazy(() => import('../../views/master/industry/IndustryList'))
   },
   {
+    path: '/currency-list',
+    component: lazy(() => import('../../views/master/currency/CurrencyList'))
+  },
+  {
+    path: '/losgistics',
+    component: lazy(() => import('../../views/logistics/logistics'))
+  },
+  {
+    path: '/product',
+    component: lazy(() => import('../../views/product/product'))
+  },
+  {
     path: '/apps/user/list',
     component: lazy(() => import('../../views/master/user/list'))
   },
@@ -59,22 +75,6 @@ const Routes = [
     meta: {
       navLink: '/apps/user/edit'
     }
-  },
-  {
-    path: '/state',
-    component: lazy(() => import('../../views/state/state'))
-  },
-  {
-    path: '/vas',
-    component: lazy(() => import('../../views/vas/vas'))
-  },
-  {
-    path: '/brand',
-    component: lazy(() => import('../../views/brand/brand'))
-  },
-  {
-    path: '/losgistics',
-    component: lazy(() => import('../../views/logistics/logistics'))
   },
   {
     path: '/login',

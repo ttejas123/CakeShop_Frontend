@@ -270,7 +270,7 @@ const handleDelete = (data) => {
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>city List</CardTitle>
+        <CardTitle tag='h4'>City List</CardTitle>
         <Button className='ml-2' color='primary' onClick={handleAddClick} >
               <Plus size={15} />
               <span className='align-middle ml-50'>Add city</span>

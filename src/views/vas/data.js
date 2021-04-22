@@ -22,7 +22,7 @@ export const data = [
       },
       {
         Name: "instagram Maneger",
-        Cost: 800,
+        Cost: 750,
         id: 5
       },
       {
@@ -42,7 +42,7 @@ export const data = [
       },
       {
         Name: "instagram Maneger",
-        Cost: 800,
+        Cost: 600,
         id: 9
       },
       {
