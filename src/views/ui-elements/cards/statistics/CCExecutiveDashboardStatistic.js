@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import Avatar from '@components/avatar'
-import { TrendingUp, User, Box, DollarSign } from 'react-feather'
+import { TrendingUp, User, Box, DollarSign, Layers, FileText} from 'react-feather'
 import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col, Media } from 'reactstrap'
 
 const CCExecutiveDashboardStatistic = ({ cols }) => {
@@ -21,13 +21,13 @@ const CCExecutiveDashboardStatistic = ({ cols }) => {
       title: '40',
       subtitle: 'Ticket',
       color: 'light-danger',
-      icon: <Box size={24} />
+      icon: <FileText size={24} />
     },
     {
       title: '70',
       subtitle: 'Customization',
       color: 'light-success',
-      icon: <DollarSign size={24} />
+      icon: <Layers size={24} />
     }
   ]
 

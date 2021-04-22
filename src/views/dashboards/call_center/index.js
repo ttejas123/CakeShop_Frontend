@@ -9,6 +9,9 @@ import CCDashboardState from '@src/views/ui-elements/cards/advance/CCDashboardSt
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
 
+import CompanyTable from './CompanyTable'
+import CustomizationTable from './CustomizationTable'
+
 
 const Dashboard = () => {
     const { colors } = useContext(ThemeColors),
@@ -24,20 +27,23 @@ const Dashboard = () => {
                 </Col>
             </Row>
             <Row className='match-height'>
+                <Col lg='12' xs='12'>
+                    <CompanyTable />
+                </Col>
+            </Row>
+            <Row className='match-height'>
                 
                 <Col lg='4' md='6' xs='12'>
                 <CCDashboardState colors={colors} trackBgColor={trackBgColor} />
                 </Col>
-                <Col lg='4' md='6' xs='12'>
-                    {/* <CardMedal/> */}
+                <Col lg='8' md='6' xs='12'>
+                    <CustomizationTable/>
                 </Col>
-                <Col lg='4' md='6' xs='12'>
-                    {/* <CardMedal /> */}
-                </Col>
+                
             </Row>
         </div>  
 
     )
-
+    
 }
 export default Dashboard
