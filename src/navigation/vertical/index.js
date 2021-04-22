@@ -9,7 +9,7 @@ export default [
       {
         id: 'CurrencyList',
         title: 'Currrency',
-        icon: <DollarSign size={20} />,
+        icon: <Circle size={20} />,
         navLink: '/currency-list'
       },
       {
@@ -21,19 +21,19 @@ export default [
       {
         id: 'Category',
         title: 'Category',
-        icon: <Grid size={20} />,
+        icon: <Circle size={20} />,
         navLink: '/category-list'
       },
       {
         id: 'SubCategory',
         title: 'Sub Category',
-        icon: <Database size={20} />,
+        icon: <Circle size={20} />,
         navLink: '/sub-category-list'
       },
       {
         id: 'KYC',
         title: 'KYC',
-        icon: <FileText size={20} />,
+        icon: <Circle size={20} />,
         navLink: '/kyc-document-list'
       },
       {

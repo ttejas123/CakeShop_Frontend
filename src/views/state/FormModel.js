@@ -52,7 +52,7 @@ import {
   }
     //for drop down
   const handleChange = (selectedOption) => {
-    
+    console.log(selectedOption)
     setValues(
       {
         ...values,
@@ -71,26 +71,25 @@ import {
         <CardBody>
           <Form>
             <Row >
-            <Col className='d-flex' md={{ size: 9, offset: 2 }}>
-              <FormGroup row  >
+            <Col  className="ml-5">
+              <FormGroup row >
                 <Label sm='4' size='lg' for='StateName'>
                   State Name
                 </Label>
-                <Col sm='8'>
+                <Col sm='4'>
                   <Input type='text' value={values.StateName}  name='StateName' id='StateName' placeholder='StateName' onChange={handleInputeChange} />
                 </Col>
               </FormGroup>
-              <FormGroup className='ml-5' row>
-                  <Label className='mb-1' md='6' sm='10'>
+              <FormGroup  row>
+                  <Label md='4' sm='1'>
                       Country
                   </Label>
-                  <Col className='mb-1' md='6' sm='12'>
+                  <Col className='mb-1' md='4' sm='8'>
                   <Select
                     theme={selectThemeColors}
                     className='react-select'
                     classNamePrefix='select'
                     defaultValue={values.Country}
-                    value={values.Country}
                     name='Country'
                     options={option}
                     isLoading={false}
@@ -104,7 +103,7 @@ import {
             </Col>
             </Row>
             <FormGroup className='mb-0 mx-auto' row>
-              <Col className='d-flex' md={{ size: 8, offset: 5 }}>
+              <Col className='d-flex' md={{ size: 8, offset: 4 }}>
                 <Button.Ripple className='mr-1' color='primary' onClick={ e =>  {
                                                           prop.handleModal() 
                                                           submitHandle()

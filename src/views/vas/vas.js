@@ -1,6 +1,3 @@
-// ** Custom Components
-import Avatar from '@components/avatar'
-
 
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
