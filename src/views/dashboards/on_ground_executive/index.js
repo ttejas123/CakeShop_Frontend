@@ -5,6 +5,8 @@ import { ThemeColors } from '@src/utility/context/ThemeColors'
 import GreetingCard from './greetingcard'
 import StateCard from './statestic'
 import CardMeetup from './corporate_meet'
+import CompanyTable from './CompanyTable'
+
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
 const ExecutiveDashboard = () => {
@@ -22,7 +24,7 @@ const ExecutiveDashboard = () => {
           </Row>
           <Row className='match-height'>
             <Col lg='8' xs='12'>
-              {/* <CompanyTable /> */}
+              <CompanyTable />
             </Col>
             <Col lg='4' md='6' xs='12'>
               <CardMeetup />
