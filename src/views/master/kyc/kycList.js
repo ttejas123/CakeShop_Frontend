@@ -95,7 +95,13 @@ const handleSubmitOfEdit = (data) => {
 }
 
 const handleDelete = (data) => {
-    console.log("in delete", data)
+   const userselection = confirm("Are you sure you want to delete")
+ 
+      if (userselection === true) {
+        console.log(" your record is deleted")
+      } else {
+      console.log("not deleted ")
+      }
 }
 
   const BrandColumns = [
@@ -114,14 +120,8 @@ const handleDelete = (data) => {
           <div className='d-flex'>
             <UncontrolledDropdown>
               <DropdownToggle className='pr-1' tag='span'>
-                <MoreVertical size={15} />
+                <Trash size={15} onClick={e => { handleDelete(row) }} />
               </DropdownToggle>
-              <DropdownMenu right onClick={e => { handleDelete(row) }}>
-                <DropdownItem>
-                  <Trash size={15} />
-                  <span className='align-middle ml-50'>Delete</span>
-                </DropdownItem>
-              </DropdownMenu>
             </UncontrolledDropdown>
             <Edit size={15} onClick={ e => { 
                                                 e.preventDefault() 

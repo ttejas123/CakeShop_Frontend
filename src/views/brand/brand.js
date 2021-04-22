@@ -1,7 +1,8 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
 
-
+import '@styles/react/libs/react-select/_react-select.scss'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
 
@@ -63,7 +64,13 @@ const DataTableWithButtons = () => {
    //deleteCountry
   const deleteState = (val) => {
     //here we passing id to delete this specific record
-    console.log(val)
+    const userselection = confirm("Are you sure you want to delete")
+ 
+      if (userselection === true) {
+        console.log(" your record is deleted")
+      } else {
+      console.log("not deleted ")
+      }
   }
     //edit action
    const AddeditEvent = (val) => {
