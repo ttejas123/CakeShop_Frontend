@@ -92,6 +92,10 @@ const Routes = [
   {
     path: '/ccdashboard',
     component: lazy(() => import('../../views/dashboards/call_center'))
+  },
+  {
+    path: '/ogedashbaord',
+    component: lazy(() => import('../../views/dashboards/on_ground_executive'))
   }
 ]
 

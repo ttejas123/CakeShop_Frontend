@@ -13,6 +13,13 @@ export default [
         navLink: '/ccdashboard'
       },
       {
+        id: 'Call Center',
+        title: 'On Ground Staff',
+        icon: <Circle size={20} />,
+        navLink: '/ogedashbaord'
+      },
+      
+      {
         id: 'Admin',
         title: 'Admin',
         icon: <Circle size={20} />,
