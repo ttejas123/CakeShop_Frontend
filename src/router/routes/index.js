@@ -88,6 +88,10 @@ const Routes = [
     path: '/error',
     component: lazy(() => import('../../views/Error')),
     layout: 'BlankLayout'
+  },
+  {
+    path: '/ccdashboard',
+    component: lazy(() => import('../../views/dashboards/call_center'))
   }
 ]
 

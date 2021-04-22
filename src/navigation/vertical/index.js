@@ -5,7 +5,13 @@ export default [
     id: 'Masters',
     title: 'Masters',
     icon: <Home size={20} />,
-    children: [
+    children: [ 
+      {
+        id: 'CCDashboard',
+        title: 'CC',
+        icon: <DollarSign size={20} />,
+        navLink: '/ccdashboard'
+      },
       {
         id: 'CurrencyList',
         title: 'Currrency',
