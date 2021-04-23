@@ -3,12 +3,12 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'Vuexy',
-    appLogoImage: require('@src/assets/images/logo/logo.svg').default
+    appName: 'Bidoya',
+    appLogoImage: require('@src/assets/images/logo/bidoyaBlogo.jpg').default
   },
   layout: {
     isRTL: false,
-    skin: 'light', // light, dark, bordered, semi-dark
+    skin: 'dark', // light, dark, bordered, semi-dark
     routerTransition: 'fadeIn', // fadeIn, fadeInLeft, zoomIn, none or check this for more transition https://animate.style/
     type: 'vertical', // vertical, horizontal
     contentWidth: 'full', // full, boxed
@@ -18,8 +18,10 @@ const themeConfig = {
     },
     navbar: {
       // ? For horizontal menu, navbar type will work for navMenu type
-      type: 'floating', // static , sticky , floating, hidden
-      backgroundColor: 'white' // BS color options [primary, success, etc]
+      // type: 'floating', // static , sticky , floating, hidden
+      type: 'sticky', // static , sticky , floating, hidden
+
+      backgroundColor: 'primary' // BS color options [primary, success, etc]
     },
     footer: {
       type: 'static' // static, sticky, hidden

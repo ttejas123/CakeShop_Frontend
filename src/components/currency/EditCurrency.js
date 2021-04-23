@@ -44,7 +44,7 @@ import {
                 Code
               </Label>
               <Col sm='8'>
-                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder='First Name' onChange={handleInputeChange}/>
+                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder='Code' onChange={handleInputeChange}/>
               </Col>
             </FormGroup>
   
@@ -53,7 +53,7 @@ import {
                 Symbol
               </Label>
               <Col sm='8'>
-                <Input type='email' name='Email' defaultValue={props.data.symbol} id='Email' placeholder='Email' onChange={handleInputeChange}/>
+                <Input type='text' name='Symbol' defaultValue={props.data.symbol} id='Symbol' placeholder='Symbol' onChange={handleInputeChange}/>
               </Col>
             </FormGroup>
             </Col>

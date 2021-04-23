@@ -41,10 +41,10 @@ import {
             <Col className='d-flex' md={{ size: 9, offset: 5 }}>
             <FormGroup row  md={{ size: 9, offset: 3 }}>
               <Label sm='4' size='lg' for='name'>
-                Code
+                Name
               </Label>
               <Col sm='8'>
-                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder='First Name' onChange={handleInputeChange}/>
+                <Input type='text' name='name' id='name' defaultValue={props.data.name} placeholder='Category Name' onChange={handleInputeChange}/>
               </Col>
             </FormGroup>
 
@@ -52,7 +52,7 @@ import {
             </Row>
             <FormGroup className='mb-0 mx-auto' row>
               <Col className='d-flex' md={{ size: 8, offset: 5 }}>
-              <Button.Ripple className='mr-1' color='primary' type='submit' onClick={e => { 
+              <Button.Ripple className='mr-1' color='primary' type='submit' onClick={e => { s
                                                 e.preventDefault() 
                                                 handleSubmit()
                                                 } } >

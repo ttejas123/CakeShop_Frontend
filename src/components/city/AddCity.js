@@ -83,7 +83,7 @@ import {
             </Col>
             </Row>
             <FormGroup className='mb-0 mx-auto' row>
-              <Col className='d-flex' md={{ size: 8, offset: 5 }}>
+              <Col className='d-flex' md={{ size: 5, offset: 5 }}>
                 <Button.Ripple className='mr-1' color='primary' type='submit' onClick={e => { 
                                                 e.preventDefault() 
                                                 handleSubmit()

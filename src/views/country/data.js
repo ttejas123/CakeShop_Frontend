@@ -1,13 +1,4 @@
-// ** Vars
-const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary']
 
-const status = {
-  1: { title: 'Current', color: 'light-primary' },
-  2: { title: 'Professional', color: 'light-success' },
-  3: { title: 'Rejected', color: 'light-danger' },
-  4: { title: 'Resigned', color: 'light-warning' },
-  5: { title: 'Applied', color: 'light-info' }
-}
 //expot data
 export const data = [
     {
@@ -15,39 +6,21 @@ export const data = [
       Name: "Afghanistan",
       Initial: "AF",
       code: "004",
-      currencies: [
-            {
-              code: "AFN",
-              name: "Afghan afghani",
-              symbol: "؋"
-            }
-      ]
+      currencies: "؋"
     },
     {
       id:2,
       Name: "Åland Islands",
       Initial: "AX",
-      code: "248",
-      currencies: [
-        {
-        code: "EUR",
-        name: "Euro",
-        symbol: "€"
-        }
-      ]
+      code: 248,
+      currencies: "€"
     },
     {
       id:3,
       Name: "Albania",
       Initial: "AL",
       code: "008",
-      currencies: [
-          {
-          code: "ALL",
-          name: "Albanian lek",
-          symbol: "L"
-          }
-      ]
+      currencies: "L"
     }
 ]
 

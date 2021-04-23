@@ -19,5 +19,10 @@ export const data = [
       id:4,
       StateName: "PencilVenia",
       Country: "USA"
+    },
+    {
+      id:5,
+      StateName: "Tokeyo",
+      Country: "Japan"
     }
 ]

@@ -34,10 +34,8 @@ const AddNewModal = (prop) => {
 
   useEffect(() => {
     if (prop.currentId === "") {
-        console.log("empty")
         setValues({...initialvalues})
     } else {
-        console.log(prop.data[prop.currentId - 1])
         setValues({
           ...prop.data[prop.currentId - 1]
         })
@@ -116,7 +114,7 @@ const AddNewModal = (prop) => {
             <Select
               className='mb-4'
               name="Currency"
-              value={values.Currency}
+              defaultValue={values.Currency}
               onChange={handleChange}
               options={option}
           />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { selectThemeColors } from '@utils'
 import Select from 'react-select'
 import {
     Card,
@@ -51,7 +52,7 @@ import {
   }
     //for drop down
   const handleChange = (selectedOption) => {
-    
+    console.log(selectedOption)
     setValues(
       {
         ...values,
@@ -70,26 +71,30 @@ import {
         <CardBody>
           <Form>
             <Row >
-            <Col className='d-flex' md={{ size: 11, offset: 1 }}>
-              <FormGroup row  md={{ size: 9, offset: 3 }}>
+            <Col  className="ml-5">
+              <FormGroup row >
                 <Label sm='4' size='lg' for='StateName'>
                   State Name
                 </Label>
-                <Col sm='8'>
+                <Col sm='4'>
                   <Input type='text' value={values.StateName}  name='StateName' id='StateName' placeholder='StateName' onChange={handleInputeChange} />
                 </Col>
               </FormGroup>
-              <FormGroup className='ml-5 ' row>
-                  <Label sm='10' size='lg' for='state'>
-                  Country
+              <FormGroup  row>
+                  <Label md='4' sm='1'>
+                      Country
                   </Label>
-                  <Col sm='12'>
-                    <Select
-                      className='ml-5'
-                      name='Country'
-                      value={values.Country}
-                      onChange={handleChange}
-                      options={option}
+                  <Col className='mb-1' md='4' sm='8'>
+                  <Select
+                    theme={selectThemeColors}
+                    className='react-select'
+                    classNamePrefix='select'
+                    defaultValue={values.Country}
+                    name='Country'
+                    options={option}
+                    isLoading={false}
+                    onChange={handleChange}
+                    isClearable={false}
                   />
                   </Col>
          
@@ -98,7 +103,7 @@ import {
             </Col>
             </Row>
             <FormGroup className='mb-0 mx-auto' row>
-              <Col className='d-flex' md={{ size: 8, offset: 5 }}>
+              <Col className='d-flex' md={{ size: 8, offset: 4 }}>
                 <Button.Ripple className='mr-1' color='primary' onClick={ e =>  {
                                                           prop.handleModal() 
                                                           submitHandle()

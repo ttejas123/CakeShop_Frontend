@@ -50,16 +50,16 @@ import {
                 Code
               </Label>
               <Col sm='8'>
-                <Input type='text' name='name' id='name' placeholder='First Name' onChange={handleInputeChange} />
+                <Input type='text' name='name' id='name' placeholder='Country Code' onChange={handleInputeChange} />
               </Col>
-            </FormGroup>
+            </FormGroup>s
   
             <FormGroup className='ml-2' row>
               <Label sm='4' size='lg' for='Email'>
                 Symbol
               </Label>
               <Col sm='8'>
-                <Input type='email' name='Email' id='Email' placeholder='Email' onChange={handleInputeChange} />
+                <Input type='text' name='Symbol' id='Symbol' placeholder='Symbol' onChange={handleInputeChange} />
               </Col>
             </FormGroup>
             </Col>
