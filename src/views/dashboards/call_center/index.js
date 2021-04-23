@@ -5,7 +5,7 @@ import CardMedal from '@src/views/ui-elements/cards/advance/CCExecutiveTicketCar
 
 import CCExecutiveDashboardStatistic from '@src/views/ui-elements/cards/statistics/CCExecutiveDashboardStatistic'
 import CCDashboardState from '@src/views/ui-elements/cards/advance/CCDashboardState'
-
+ 
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
 

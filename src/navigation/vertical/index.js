@@ -1,4 +1,4 @@
-import { Mail, User, BarChart2, Bell, Home, Globe, LogOut, DollerSign, Share, Codesandbox, AtSign, Flag, Circle, DollarSign, Database, Grid, FileText, Book } from 'react-feather'
+import { Mail, User, BarChart2, Bell, Home, Globe, LogOut, DollerSign, Share, Codesandbox, AtSign, Flag, Circle, DollarSign, Database, Grid, FileText, Book, Clipboard } from 'react-feather'
 
 export default [
   {
@@ -294,6 +294,31 @@ export default [
     title: 'Employee',
     icon: <User size={20} />,
     navLink: '/employee'
+  },
+  {
+    id: 'Disbursement',
+    title: 'Disbursement',
+    icon: <Clipboard size={20} />,
+    children: [
+      {
+        // id: 'My Notification',
+        title: 'GST',
+        icon: <Circle size={20} />
+        // navLink: '/buyer'
+      },
+      {
+        // id: 'My Notification',
+        title: 'Report Invoices',
+        icon: <Circle size={20} />
+        // navLink: '/buyer'
+      },
+       {
+        // id: 'My Notification',
+        title: 'Disbursement Form',
+        icon: <Circle size={20} />
+        // navLink: '/buyer'
+      }
+    ]
   },
   {
         id: 'LOGOUT',

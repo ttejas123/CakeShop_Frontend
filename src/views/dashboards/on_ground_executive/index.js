@@ -1,11 +1,14 @@
 import { useContext } from 'react'
-import { Row, Col } from 'reactstrap'
+import { Row, Col, Card, CardBody, CardTitle, CardText} from 'reactstrap'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 
 import GreetingCard from './greetingcard'
 import StateCard from './statestic'
 import CardMeetup from './corporate_meet'
 import CompanyTable from './CompanyTable'
+import ProfileState from './Profile_Stat'
+import QuickHelp from './Quickhelp'
+import IdeaCard from './IdeaCard'
 
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
@@ -28,6 +31,17 @@ const ExecutiveDashboard = () => {
             </Col>
             <Col lg='4' md='6' xs='12'>
               <CardMeetup />
+            </Col>
+          </Row>
+          <Row className='match-height'>
+            <Col lg='4' md='6' xs='12'>
+              <ProfileState colors={colors} trackBgColor={trackBgColor} />
+            </Col>
+            <Col lg='4' md='6' xs='12'>
+            <IdeaCard/>
+            </Col>
+            <Col lg='4' md='6' xs='12'>
+              <QuickHelp />
             </Col>
           </Row>
           </div>
