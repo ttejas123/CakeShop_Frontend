@@ -12,6 +12,8 @@ import IdeaCard from './IdeaCard'
 
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
+import '@styles/react/apps/app-users.scss'
+
 const ExecutiveDashboard = () => {
     const { colors } = useContext(ThemeColors),
       trackBgColor = '#e9ecef'

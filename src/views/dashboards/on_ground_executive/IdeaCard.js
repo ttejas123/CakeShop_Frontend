@@ -1,7 +1,5 @@
 import { Row, Col, Card, CardBody, CardTitle, CardText} from 'reactstrap'
 
-
-
 const IdeaCard = () => {
     return (
         <Card>
