@@ -330,7 +330,7 @@ export default [
     id: 'UserList',
     title: 'KOMALTest',
     icon: <AtSign size={20} />,
-    navLink: '/user'
+    navLink: '/usertest'
   },
     {
         id: 'LOGOUT',

@@ -99,7 +99,17 @@ const Routes = [
   {
     path: '/ogedashbaord',
     component: lazy(() => import('../../views/dashboards/on_ground_executive'))
-  }
+  },
+  {
+    path: '/user',
+    component: lazy(() => import('../../views/user/list')),
+    layout: 'BlankLayout',
+    path: '/ccdashboard',
+    component: lazy(() => import('../../views/dashboards/call_center'))
+  },
+  
+
+  usertest
 ]
 
 export { DefaultRoute, TemplateTitle, Routes }
