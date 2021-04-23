@@ -48,16 +48,34 @@ export default [
     icon: <Codesandbox size={20} />,
     children: [
       {
-        id: 'CurrencyList',
-        title: 'Currrency',
+        id: 'Bids',
+        title: 'Bids',
         icon: <Circle size={20} />,
-        navLink: '/currency-list'
+        navLink: '/bids'
+      },
+      {
+        id: 'ProductList',
+        title: 'Product',
+        icon: <Circle size={20} />,
+        navLink: '/product'
+      },
+      {
+        id: 'Country',
+        title: 'Country',
+        icon: <Circle size={20} />,
+        navLink: '/country'
       },
       {
         id: 'CityList',
         title: 'City',
         icon: <Circle size={20} />,
         navLink: '/city-list'
+      },
+      {
+        id: 'CurrencyList',
+        title: 'Currrency',
+        icon: <Circle size={20} />,
+        navLink: '/currency-list'
       },
       {
         id: 'Category',
@@ -90,12 +108,6 @@ export default [
         navLink: '/industry-list'
       },
       {
-        id: 'Country',
-        title: 'Country',
-        icon: <Circle size={20} />,
-        navLink: '/country'
-      },
-      {
         id: 'StatePage',
         title: 'State',
         icon: <Circle size={20} />,
@@ -118,12 +130,6 @@ export default [
         title: 'Logistics Partners',
         icon: <Circle size={20} />,
         navLink: '/losgistics'
-      },
-      {
-        id: 'ProductList',
-        title: 'Product',
-        icon: <Circle size={20} />,
-        navLink: '/product'
       },
       {
         id: 'UserPage',

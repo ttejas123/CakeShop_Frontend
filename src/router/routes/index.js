@@ -4,25 +4,29 @@ import { lazy } from 'react'
 const TemplateTitle = '%s - Bidoya'
 
 // ** Default Route
-const DefaultRoute = '/country'
+const DefaultRoute = '/ccdashboard'
 
 // ** Merge Routes
 const Routes = [
   {
     path: '/country',
-    component: lazy(() => import('../../views/country/Home'))
+    component: lazy(() => import('../../views/master/country/Home'))
   },
   {
     path: '/state',
-    component: lazy(() => import('../../views/state/state'))
+    component: lazy(() => import('../../views/master/state/state'))
+  },
+  {
+    path: '/edit',
+    component: lazy(() => import('../../views/master/bids/edit'))
   },
   {
     path: '/vas',
-    component: lazy(() => import('../../views/vas/vas'))
+    component: lazy(() => import('../../views/master/vas/vas'))
   },
   {
     path: '/brand',
-    component: lazy(() => import('../../views/brand/brand'))
+    component: lazy(() => import('../../views/master/brand/brand'))
   },
   {
     path: '/category-list',
@@ -41,6 +45,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/kyc/kycList'))
   },
   {
+    path: '/bids',
+    component: lazy(() => import('../../views/master/bids/bids'))
+  },
+  {
     path: '/company-list',
     component: lazy(() => import('../../views/master/company/CompanyList'))
   },
@@ -54,11 +62,11 @@ const Routes = [
   },
   {
     path: '/losgistics',
-    component: lazy(() => import('../../views/logistics/logistics'))
+    component: lazy(() => import('../../views/master/logistics/logistics'))
   },
   {
     path: '/product',
-    component: lazy(() => import('../../views/product/product'))
+    component: lazy(() => import('../../views/master/product/product'))
   },
   {
     path: '/apps/user/list',
