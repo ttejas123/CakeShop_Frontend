@@ -167,7 +167,7 @@ const NotificationDropdown = () => {
                   <Button.Ripple color='primary' block>
                     Read all notifications
                   </Button.Ripple>
-                </li> */}
+            </li> */}
       </DropdownMenu>
     </UncontrolledDropdown>
   )

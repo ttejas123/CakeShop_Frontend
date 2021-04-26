@@ -107,11 +107,11 @@ const DataTableWithButtons = () => {
           name: 'Id',
           selector: 'id',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '50px'
         },
         {
           name: 'User',
-          minWidth: '297px',
+          minWidth: '250px',
           selector: 'Name',
           sortable: true,
           cell: row => (
@@ -129,7 +129,7 @@ const DataTableWithButtons = () => {
           name: 'Name',
           selector: 'Name',
           sortable: true,
-          minWidth: '150px',
+          minWidth: '130px',
           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
