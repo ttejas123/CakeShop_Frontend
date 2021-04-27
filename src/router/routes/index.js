@@ -21,6 +21,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/bids/bidDetails'))
   },
   {
+    path: '/productDetails',
+    component: lazy(() => import('../../views/master/product/productDetails'))
+  },
+  {
     path: '/edit',
     component: lazy(() => import('../../views/master/bids/edit'))
   },

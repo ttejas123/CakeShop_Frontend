@@ -23,7 +23,7 @@ const EcommerceDashboard = () => {
       <Row >
         <Col xl='8' md='6' xs='12'>
           <StatsCard cols={{ xl: '3', sm: '6' }} />
-          <Timeline />
+          {/* <Timeline /> */}
         </Col>
         <Col xl='4' md='2' xs='12'>
           <CardBrowserStates colors={colors} trackBgColor={trackBgColor} />
