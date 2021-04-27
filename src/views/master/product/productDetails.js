@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { Row, Col, Card, CardTitle, CardBody, CardText } from 'reactstrap'
+import { Row, Col, Card, CardTitle, CardBody, CardText, CardHeader, Badge } from 'reactstrap'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 import {
     Eye,
@@ -9,8 +9,6 @@ import {
   } from 'react-feather'
 import StatsVertical from '@components/widgets/stats/StatsVertical'
 import classnames from 'classnames'
-import StatsCard from './productUiElements/cards/statistics/StatsCard'
-import CardBrowserStates from './productUiElements/cards/advance/CardBrowserState'
 //import Comments from './productUiElements/cards/advance/Comments.js'
 // import ApprovedCostom from './productUiElements/cards/advance/ApprovedCostom.js'
 //import Timeline from './timeline'
@@ -18,8 +16,10 @@ import CardBrowserStates from './productUiElements/cards/advance/CardBrowserStat
 
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
-import ProductCarousel from './productUiElements/cards/advance/productCarousel'
+import '@styles/base/pages/app-ecommerce-details.scss'
+import ProductCarousel from './productCarousel'
 import RelatedProducts from './relatedProducts'
+import ProductInfo from './productInfo'
 
 const EcommerceDashboard = () => {
     const [selectedColor, setSelectedColor] = useState('primary')
@@ -49,13 +49,32 @@ const EcommerceDashboard = () => {
 
   return (
     <div id='dashboard-ecommerce'>
+
         <Col>
+        <Row>
+        <Col lg='12' md='6'>
+        <Card >
+        <CardHeader>
+        <CardTitle tag='h4'>T-Shirt</CardTitle>
+        <CardText className='card-text mr-25 mb-0'>Sample Available</CardText>
+      </CardHeader>
+      <div className='demo-inline-spacing card-text ml-2 mr-0 mb-1'>
+      <Badge color='danger'>Full Sleeve</Badge>
+      <Badge color='warning'>Printed</Badge>
+      <Badge color='info'>Wash Proof</Badge>
+      <Badge color='dark'>Half Sleeve</Badge>
+    </div>
+          </Card>
+        </Col>
+        </Row>
+
       <Row >
-        <Col xl='6' md='6' xs='12'>
-          <StatsCard cols={{ xl: '3', sm: '6' }} />
+        <Col lg='6' md='6'>
+            <ProductInfo cols={{ xl: '3', sm: '6' }}/>
+          {/* <StatsCard cols={{ xl: '3', sm: '6' }} /> */}
           {/* <Timeline /> */}
         </Col>
-        <Col xl='6' md='6' xs='6'>
+        <Col lg='6' md='6'>
         <Card >
         <CardBody>
             <CardTitle tag='h4'>Images</CardTitle>
@@ -69,6 +88,7 @@ const EcommerceDashboard = () => {
           {/* <Timeline /> */}
         </Col>
       </Row>
+
       <Row>
         {/* Stats With Icons */}
         <Col lg='3' sm='6'>
@@ -85,6 +105,7 @@ const EcommerceDashboard = () => {
         </Col>
         {/* Stats With Icons */}
       </Row>
+
       <Row>
       <Card className='position-static '>
         <CardBody>
@@ -101,6 +122,7 @@ const EcommerceDashboard = () => {
         </CardBody>
       </Card>
       </Row>
+
       <Row>
       <Card className='position-static'>
         <CardBody>
@@ -117,7 +139,8 @@ const EcommerceDashboard = () => {
         </CardBody>
       </Card>
       </Row>
-      <Row>
+      
+      <Row className='app-ecommerce-details'>
           <Card>
               <CardBody>
               <RelatedProducts/>

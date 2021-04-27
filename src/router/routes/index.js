@@ -74,7 +74,7 @@ const Routes = [
   },
   {
     path: '/product',
-    component: lazy(() => import('../../views/master/product/product'))
+    component: lazy(() => import('../../views/master/product/ProductList'))
   },
   {
     path: '/apps/user/list',

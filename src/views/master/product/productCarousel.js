@@ -19,7 +19,7 @@ const images = [
   }
 ]
 
-const CarouselBasic = () => {
+const ProductCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [animating, setAnimating] = useState(0)
 
@@ -65,4 +65,4 @@ const CarouselBasic = () => {
   )
 }
 
-export default CarouselBasic
+export default ProductCarousel

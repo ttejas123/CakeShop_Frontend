@@ -17,7 +17,7 @@ import img5 from '@src/assets/images/elements/iphone-x.png'
 
 // ** Styles
 import '@styles/react/libs/swiper/swiper.scss'
-
+import '@styles/base/pages/app-ecommerce-details.scss'
 const RelatedProducts = () => {
   SwiperCore.use([Navigation])
 
@@ -25,35 +25,35 @@ const RelatedProducts = () => {
   const slides = [
     {
       name: 'Apple Watch Series 6',
-      brand: 'Apple',
+      brand: 'Bidoya',
       ratings: 4,
       price: 399.98,
       img: img1
     },
     {
       name: 'Apple MacBook Pro - Silver',
-      brand: 'Apple',
+      brand: 'Bidoya',
       ratings: 2,
       price: 2449.49,
       img: img2
     },
     {
       name: 'Apple HomePod (Space Grey)',
-      brand: 'Apple',
+      brand: 'Bidoya',
       ratings: 3,
       price: 229.29,
       img: img3
     },
     {
       name: 'Magic Mouse 2 - Black',
-      brand: 'Apple',
+      brand: 'Bidoya',
       ratings: 3,
       price: 90.98,
       img: img4
     },
     {
       name: 'iPhone 12 Pro',
-      brand: 'Apple',
+      brand: 'Bidoya',
       ratings: 4,
       price: 1559.99,
       img: img5
