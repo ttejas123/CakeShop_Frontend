@@ -1,4 +1,5 @@
 import Chart from 'react-apexcharts'
+import Avatar from '@components/avatar'
 import { MoreVertical } from 'react-feather'
 import {
   Card,
@@ -13,31 +14,35 @@ import {
   DropdownToggle,
   Button
 } from 'reactstrap'
-import komal  from '../../../../../assets/images/logo/komal.jpg'
-import pravin  from '../../../../../assets/images/logo/pravin.jpg'
-import himanshu  from '../../../../../assets/images/logo/himanshu.jpg'
-import reethika  from '../../../../../assets/images/logo/reethika.jpg'
+import komal  from '../../../../assets/images/logo/komal.jpg'
+import pravin  from '../../../../assets/images/logo/pravin.jpg'
+import himanshu  from '../../../../assets/images/logo/himanshu.jpg'
+import reethika  from '../../../../assets/images/logo/reethika.jpg'
 const CardBrowserState = () => {
   const statesArr = [
     {
-      avatar: require('@src/assets/images/icons/google-chrome.png').default,
-      title: 'This is Question and answer section'
+      name:"Tejas",
+      title: 'This is my Review'
     },
     {
+      name:"Pravin",
       avatar: pravin,
-      title: 'This is Question and answer sectionn'
+      title: 'This is my Review'
     },
     {
+      name:"Komal",
       avatar: komal,
-      title: 'This is Question and answer section'
+      title: 'This is my Review'
     },
     {
+      name:"Reethika",
       avatar: reethika,
-      title: 'This is Question and answer section'
+      title: 'This is my Review'
     },
     {
+      name:"Himanshu",
       avatar: himanshu,
-      title: 'This is Question and answer section'
+      title: 'This is my Review'
     }
   ]
 
@@ -46,8 +51,17 @@ const CardBrowserState = () => {
       return (
         <div key={state.title} className='browser-states'>
           <Media>
-            <img className='rounded mr-1' src={state.avatar} height='30' alt={state.title} />
-            <h6 className='align-self-center mb-0'>{state.title}</h6>
+            { state.avatar ? (
+              <Avatar img={state.avatar} width='50' height='50' className='mr-2' />
+              ) : (
+              <Avatar
+                width='50' height='50' className='mr-2'
+                color= "light-success"
+                content={state.name.substring(0, 1)}
+              />) }
+            <div>
+              <p>{state.name} ~ {state.title}</p>
+            </div>
           </Media>
         </div>
       )
@@ -58,7 +72,7 @@ const CardBrowserState = () => {
     <Card className='card-browser-states'>
       <CardHeader>
         <div>
-          <CardTitle tag='h4'>Comments</CardTitle>
+          <CardTitle tag='h4'>Reviews and Ratings</CardTitle>
           <CardText className='font-small-2'>view all comments</CardText>
         </div>
         <div color='' className='bg-transparent btn-sm border-0 p-50'>
@@ -67,11 +81,10 @@ const CardBrowserState = () => {
       </CardHeader>
 
       <CardBody>{renderStates()}</CardBody>
-
       <CardBody>
-           <li className='dropdown-menu-footer'>
+           <li>
                   <Button color='primary' block>
-                    Read all Comments
+                    Read all Reviews
                   </Button>
             </li>
       </CardBody>

@@ -5,7 +5,7 @@ const Timeline = () => {
   return (
     <Fragment>
       <Row>
-        <Col lg='6'>
+        <Col lg='12'>
           <BasicTimeline />
         </Col>
       </Row>

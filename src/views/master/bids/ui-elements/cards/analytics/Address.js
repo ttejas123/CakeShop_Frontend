@@ -9,7 +9,7 @@ const Address = (props) => {
           <Col xs='12'>
             <CardTitle className='mb-1'>{props.title}</CardTitle>
             <hr />
-            <h3>{props.Address}</h3>   
+            <h4>{props.Address}</h4>   
           </Col>
         </Row>
       </CardBody>

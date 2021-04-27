@@ -1,8 +1,8 @@
 // <input
 //                 className='custom-control-input'
-//                 type='checkbox'
-//                 id="checkbox"
-//                 checked={}
+//                 type='checkSquarebox'
+//                 id="checkSquarebox"
+//                 checkSquareed={}
 //                 {  onChange={e => e.stopPropagation()}
 //                                 onClick={e => {
 //                                   e.stopPropagation()
@@ -10,7 +10,7 @@
 //                                 }
 //               />
 import Chart from 'react-apexcharts'
-import { MoreVertical } from 'react-feather'
+import { MoreVertical, CheckSquare } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -24,10 +24,10 @@ import {
   DropdownToggle,
   Button
 } from 'reactstrap'
-import komal  from '../../../../../assets/images/logo/komal.jpg'
-import pravin  from '../../../../../assets/images/logo/pravin.jpg'
-import himanshu  from '../../../../../assets/images/logo/himanshu.jpg'
-import reethika  from '../../../../../assets/images/logo/reethika.jpg'
+import komal  from '../../../../../../assets/images/logo/komal.jpg'
+import pravin  from '../../../../../../assets/images/logo/pravin.jpg'
+import himanshu  from '../../../../../../assets/images/logo/himanshu.jpg'
+import reethika  from '../../../../../../assets/images/logo/reethika.jpg'
 const CardBrowserState = () => {
   const statesArr = [
     {
@@ -56,17 +56,10 @@ const CardBrowserState = () => {
     return statesArr.map(state => {
       return (
         <div key={state.title} className='browser-states'>
-          <Media>
-            <div className='custom-control custom-checkbox'>
-              <input className='custom-control-input' type="checkbox" id="vehicle1" name="vehicle1" />
-              <label
-                className='custom-control-label'
-                onClick={e => {
-                  e.stopPropagation()
-                }}
-              >{state.title}</label>
-          </div>
-          </Media>
+            <div>
+              <CheckSquare color="lightGreen" className='mr-2'/>
+              <label className="float-right">{state.title}</label>
+            </div>
         </div>
       )
     })

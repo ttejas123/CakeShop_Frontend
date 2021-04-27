@@ -2,11 +2,11 @@ import { useContext } from 'react'
 import { Row, Col } from 'reactstrap'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 
-import StatsCard from '../ui-elements/cards/statistics/StatsCard'
-import CardBrowserStates from '../ui-elements/cards/advance/CardBrowserState'
-import Comments from '../ui-elements/cards/advance/Comments.js'
-import ApprovedCostom from '../ui-elements/cards/advance/ApprovedCostom.js'
-import Timeline from '../timeline'
+import StatsCard from './ui-elements/cards/statistics/StatsCard'
+import CardBrowserStates from './ui-elements/cards/advance/CardBrowserState'
+import Comments from './ui-elements/cards/advance/Comments.js'
+import ApprovedCostom from './ui-elements/cards/advance/ApprovedCostom.js'
+
 
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
@@ -29,7 +29,6 @@ const EcommerceDashboard = () => {
           <CardBrowserStates colors={colors} trackBgColor={trackBgColor} />
           <Comments colors={colors} trackBgColor={trackBgColor} />
           <ApprovedCostom colors={colors} trackBgColor={trackBgColor} />
-
         </Col>
       </Row>
       

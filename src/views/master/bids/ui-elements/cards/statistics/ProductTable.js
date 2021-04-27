@@ -5,7 +5,7 @@ const CompanyTable = () => {
   const data = [
       {
         img: require('@src/assets/images/icons/toolbox.svg').default,
-        name: 'Dixons',
+        name: 'Bags',
         email: 'meguc@ruj.io',
         icon: <Monitor size={18} />,
         category: 'Technology',
@@ -100,7 +100,7 @@ const CompanyTable = () => {
               </div>
               <div>
                 <div className='font-weight-bolder'>{col.name}</div>
-                <div className='font-small-1 text-muted'>{col.email}</div>
+                { /*<div className='font-small-1 text-muted'>{col.email}</div>*/ }
               </div>
             </div>
           </td>
@@ -113,7 +113,6 @@ const CompanyTable = () => {
           <td className='text-nowrap'>
             <div className='d-flex flex-column'>
               <span className='font-weight-bolder mb-25'>{col.views}</span>
-              <span className='font-small-2 text-muted'>in {col.time}</span>
             </div>
           </td>
           <td>${col.revenue}</td>
@@ -127,10 +126,10 @@ const CompanyTable = () => {
       <Table responsive>
         <thead>
           <tr>
-            <th>Company</th>
-            <th>Category</th>
-            <th>Views</th>
-            <th>Revenue</th>
+            <th>Name</th>
+            <th>Sku</th>
+            <th>Required Quntity</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>{renderData()}</tbody>
