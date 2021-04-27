@@ -10,55 +10,60 @@ import komal  from '../../../../../../assets/images/logo/komal.jpg'
 const StatsCard = () => {
     const ShoopingAddre = "Shivshakti so, A-35 0/4 sector-15 airoli navi mumbai 400708" 
   const BillAddre = "Shivshakti so, A-35 0/4 sector-15 airoli navi mumbai 400708" 
-
+ const statesArr = [
+        {
+          avatar: komal,
+          Tag: "by",
+          Name: "Komal"
+        },
+        {
+          Tag: "Posted On",
+          Name: "21-feb-21"
+        },
+        {
+          Tag: "Budget",
+          Name: "150K"
+        },
+        {
+          Tag: "Quntity",
+          Name: "100"
+        }
+ ]
   const renderBidData = () => {
-      return (
-        <>
-        <Col className='mb-2'>
-          <Media>
-            <Avatar img={komal} width='50' height='50' className='mr-2' />
-            <Media className='my-auto' body>
-              <CardText className='font-small-3 mb-0'>By</CardText>
-              <h4 className='font-weight-bolder mb-0'>Komal</h4>
-            </Media>
-          </Media>
-        </Col>
-        <Col className='mb-2'>
-          <Media>
-            <Media className='my-auto' body>
-              <CardText className='font-small-3 mb-0'>Posted On</CardText>
-              <h4 className='font-weight-bolder mb-0'>21-feb-21</h4>
-            </Media>
-          </Media>
-        </Col>
-        <Col className='mb-2'>
-          <Media>
-            <Media className='my-auto' body>
-              <CardText className='font-small-3 mb-0'>Budget</CardText>
-              <h4 className='font-weight-bolder mb-0'>150K</h4>
-            </Media>
-          </Media>
-        </Col>
-        <Col className='mb-2'>
-          <Media>
-            <Media className='my-auto' body>
-              <CardText className='font-small-3 mb-0'>Quntity</CardText>
-              <h4 className='font-weight-bolder mb-0'>100</h4>
-            </Media>
-          </Media>
-        </Col>
-        </>
-
-      )
+      return statesArr.map(state => {
+          return (
+                <Col className='mb-2 mr-2'>
+                  { state?.avatar ? (
+                      <Media>
+                        <Avatar img={state.avatar} size='lg' className='mr-2' />
+                        <Media className='my-auto' body>
+                          <CardText className='font-small-3 mb-0'>{state.Tag}</CardText>
+                          <h4 className='font-weight-bolder mb-0'>{state.Name}</h4>
+                        </Media>
+                      </Media>
+                    ) : (
+                  <Media className='my-auto' body>
+                    <CardText className='font-small-3 mb-0'>{state.Tag}</CardText>
+                    <h4 className='font-weight-bolder mb-0'>{state.Name}</h4>
+                  </Media>
+                   )
+                 }
+ 
+                </Col>
+          )
+    })
   }
 
   const renderData = () => {
       return (
           <Col>
             <Media>
-              <Media className='my-auto ' body>
+              <Media className='my-auto d-flex' body>
+                  <Badge className='card-text font-small-2 mr-2' color="light-success" pill>
+                        <h4 className='mb-0 text-success' color="success"> T- Shirt</h4>
+                  </Badge>
                   <Badge className='card-text font-small-2 mr-25 mb-0' color="light-success" pill>
-                        <h5 className='font-weight-bolder '>  T - Shirt  </h5>
+                        <h4 className='mb-0 text-success'> T- Shirt2</h4>
                   </Badge>
               </Media>
             </Media>
@@ -73,7 +78,7 @@ const StatsCard = () => {
       <CardHeader>
         <CardTitle tag='h4'><h2>BID 468</h2></CardTitle>
         <Badge className='card-text font-small-2 mr-25 mb-0' color="light-success" pill>
-                          OnGoing
+                          <h4 className='mb-0 text-success'> OnGoing </h4>
         </Badge>
       </CardHeader>
       <CardBody className='statistics-body'>
@@ -122,7 +127,7 @@ const StatsCard = () => {
     <Card className='card-statistics'>
        <CardHeader>  
           <CardTitle tag='h4'><h2>Products</h2></CardTitle>
-      </CardHeader>  
+       </CardHeader>  
         <CardBody>
           <Row className='match-height'>
             <Col lg='12' xs='12'>
