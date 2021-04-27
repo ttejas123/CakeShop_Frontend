@@ -1,4 +1,5 @@
 import Chart from 'react-apexcharts'
+import Avatar from '@components/avatar'
 import { MoreVertical } from 'react-feather'
 import {
   Card,
@@ -12,35 +13,34 @@ import {
   DropdownItem,
   DropdownToggle
 } from 'reactstrap'
-import komal  from '../../../../../assets/images/logo/komal.jpg'
-import pravin  from '../../../../../assets/images/logo/pravin.jpg'
-import himanshu  from '../../../../../assets/images/logo/himanshu.jpg'
-import reethika  from '../../../../../assets/images/logo/reethika.jpg'
+import komal  from '../../../../../../assets/images/logo/komal.jpg'
+import pravin  from '../../../../../../assets/images/logo/pravin.jpg'
+import himanshu  from '../../../../../../assets/images/logo/himanshu.jpg'
+import reethika  from '../../../../../../assets/images/logo/reethika.jpg'
 const CardBrowserState = ({ colors, trackBgColor }) => {
   const statesArr = [
     {
-      avatar: require('@src/assets/images/icons/google-chrome.png').default,
-      title: 'Tejas',
+      name: 'Tejas',
       value: '520K'
     },
     {
       avatar: pravin,
-      title: 'Pravin',
+      name: 'Pravin',
       value: '206K'
     },
     {
       avatar: komal,
-      title: 'Komal',
+      name: 'Komal',
       value: '120K'
     },
     {
       avatar: reethika,
-      title: 'Reethika',
+      name: 'Reethika',
       value: '200K'
     },
     {
       avatar: himanshu,
-      title: 'himanshu',
+      name: 'himanshu',
       value: '209K'
     }
   ]
@@ -48,10 +48,17 @@ const CardBrowserState = ({ colors, trackBgColor }) => {
   const renderStates = () => {
     return statesArr.map(state => {
       return (
-        <div key={state.title} className='browser-states'>
+        <div key={state.name} className='browser-states'>
           <Media>
-            <img className='rounded mr-1' src={state.avatar} height='30' alt={state.title} />
-            <h6 className='align-self-center mb-0'>{state.title}</h6>
+            { state.avatar ? (
+              <Avatar img={state.avatar} width='50' height='50' className='mr-2' />
+              ) : (
+              <Avatar
+                width='50' height='50' className='mr-2'
+                color= "light-success"
+                content={state.name.substring(0, 1)}
+              />) }
+            <h6 className='align-self-center mb-0'>{state.name}</h6>
           </Media>
           <div className='d-flex align-items-center'>
             <div className='font-weight-bold text-body-heading mr-1'>{state.value}</div>
