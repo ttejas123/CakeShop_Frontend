@@ -9,6 +9,11 @@ import {data} from './data'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+
+// ** Store & Actions
+import { getAllData, getData } from '../store/action'
+
+
 const UsersList = () => {
     const dispatch = useDispatch()
     const store = useSelector(state => state.users)
@@ -36,13 +41,20 @@ const UsersList = () => {
     { value: 'USA', label: 'USA' },
     { value: 'India', label: 'India' }
   ]
+  console.log("the store data ===", store)
   // ** Get data on mount
   useEffect(() => {
+    console.log("the store Hey Komal", store)
     dispatch(getAllData())
    
   }, [dispatch, store.data.length])
     return (
+      
         <Card>
+          {/* {console.log(
+
+            "Store----"
+          )} */}
                <CardBody>
           <Row>
             <Col md='4'>

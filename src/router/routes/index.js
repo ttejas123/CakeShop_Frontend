@@ -92,24 +92,31 @@ const Routes = [
   {
     path: '/user',
     component: lazy(() => import('../../views/user/list')),
-    layout: 'BlankLayout',
-    path: '/ccdashboard',
-    component: lazy(() => import('../../views/dashboards/call_center'))
+    layout: 'BlankLayout'
+    // path: '/ccdashboard',
+    // component: lazy(() => import('../../views/dashboards/call_center'))
   },
   {
     path: '/ogedashbaord',
     component: lazy(() => import('../../views/dashboards/on_ground_executive'))
   },
   {
-    path: '/user',
-    component: lazy(() => import('../../views/user/list')),
-    layout: 'BlankLayout',
+    // path: '/user',
+    // component: lazy(() => import('../../views/user/list')),
+    // layout: 'BlankLayout',
     path: '/ccdashboard',
     component: lazy(() => import('../../views/dashboards/call_center'))
   },
+  {
+    // path: '/user',
+    // component: lazy(() => import('../../views/user/list')),
+    // layout: 'BlankLayout',
+    path: '/usertest',
+    component: lazy(() => import('../../views/user/list'))
+  }
   
 
-  usertest
+  // 
 ]
 
 export { DefaultRoute, TemplateTitle, Routes }
