@@ -146,7 +146,7 @@ export default [
                   id: 'list',
                   title: 'list',
                   icon: <Circle size={20} />,
-                  navLink: '/userlist'
+                  navLink: '/user-list'
                 }
         ]
       }

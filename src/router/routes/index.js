@@ -81,20 +81,12 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/ProductList'))
   },
   {
-    path: '/apps/user/list',
-    component: lazy(() => import('../../views/master/user/list'))
+    path: '/user-list',
+    component: lazy(() => import('../../views/master/user/users'))
   },
   {
-    path: '/apps/user/edit',
-    exact: true,
-    component: () => <Redirect to='/components/user/edit/1' />
-  },
-  {
-    path: '/apps/user/edit/:id',
-    component: lazy(() => import('../../components/user/edit')),
-    meta: {
-      navLink: '/apps/user/edit'
-    }
+    path: '/user-edit',
+    component: lazy(() => import('../../views/master/user/edit'))
   },
   {
     path: '/login',
