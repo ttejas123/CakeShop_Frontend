@@ -20,27 +20,27 @@ import reethika  from '../../../../../../assets/images/logo/reethika.jpg'
 const CardBrowserState = ({ colors, trackBgColor }) => {
   const statesArr = [
     {
-      name: 'Tejas',
+      name: 'Tejas Vijay Thakare',
       value: '520K'
     },
     {
       avatar: pravin,
-      name: 'Pravin',
+      name: 'Pravin poshmani',
       value: '206K'
     },
     {
       avatar: komal,
-      name: 'Komal',
+      name: 'Komal Kamble',
       value: '120K'
     },
     {
       avatar: reethika,
-      name: 'Reethika',
+      name: 'Reethika john Deo',
       value: '200K'
     },
     {
       avatar: himanshu,
-      name: 'himanshu',
+      name: 'himanshu Chanda',
       value: '209K'
     }
   ]
@@ -58,12 +58,11 @@ const CardBrowserState = ({ colors, trackBgColor }) => {
                 color= "light-success"
                 content={state.name.substring(0, 1)}
               />) }
-            <h6 className='align-self-center mb-0'>{state.name}</h6>
+            <h6 className='align-self-center mb-0 text-truncate w-50'>{state.name}</h6>
           </Media>
           <div className='d-flex align-items-center'>
             <div className='font-weight-bold text-body-heading mr-1'>{state.value}</div>
-            
-          </div>
+          </div> 
         </div>
       )
     })
@@ -73,11 +72,7 @@ const CardBrowserState = ({ colors, trackBgColor }) => {
     <Card className='card-browser-states'>
       <CardHeader>
         <div>
-          <CardTitle tag='h4'>Participents</CardTitle>
-          <CardText className='font-small-2'>Budget</CardText>
-        </div>
-        <div color='' className='bg-transparent btn-sm border-0 p-50'>
-            <MoreVertical size={18} className='cursor-pointer' />
+          <CardTitle tag='h4'>Participants</CardTitle>
         </div>
       </CardHeader>
       <CardBody>{renderStates()}</CardBody>

@@ -5,7 +5,7 @@ const CompanyTable = () => {
   const data = [
       {
         img: require('@src/assets/images/icons/toolbox.svg').default,
-        name: 'Bags',
+        name: 'Bags of 180 masica brand',
         email: 'meguc@ruj.io',
         icon: <Monitor size={18} />,
         category: 'Technology',
@@ -49,41 +49,6 @@ const CompanyTable = () => {
         revenue: '291.01',
         sales: '88',
         salesUp: true
-      },
-      {
-        img: require('@src/assets/images/icons/book.svg').default,
-        name: 'Cafés',
-        email: 'pudais@jife.com',
-        icon: <Coffee size={18} />,
-        category: 'Grocery',
-        views: '208',
-        time: '1 week',
-        revenue: '783.93',
-        sales: '16'
-      },
-      {
-        img: require('@src/assets/images/icons/rocket.svg').default,
-        name: 'Kmart',
-        email: 'bipri@cawiw.com',
-        icon: <Watch size={18} />,
-        category: 'Fashion',
-        views: '990',
-        time: '1 month',
-        revenue: '780.05',
-        sales: '78',
-        salesUp: true
-      },
-      {
-        img: require('@src/assets/images/icons/speaker.svg').default,
-        name: 'Payers',
-        email: 'luk@izug.io',
-        icon: <Watch size={18} />,
-        category: 'Fashion',
-        views: '12.9k',
-        time: '12 hours',
-        revenue: '531.49',
-        sales: '42',
-        salesUp: true
       }
     ]
 
@@ -98,8 +63,8 @@ const CompanyTable = () => {
                   <img src={col.img} alt={col.name} />
                 </div>
               </div>
-              <div>
-                <div className='font-weight-bolder'>{col.name}</div>
+              <div className="w-50">
+                <div className='font-weight-bolder text-truncate'>{col.name}</div>
                 { /*<div className='font-small-1 text-muted'>{col.email}</div>*/ }
               </div>
             </div>
@@ -126,10 +91,10 @@ const CompanyTable = () => {
       <Table responsive>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Sku</th>
-            <th>Required Quntity</th>
-            <th>Price</th>
+            <th className="w-25">Name</th>
+            <th className="w-25">category</th>
+            <th className="w-25">Required Quntity</th>
+            <th className="w-25">Price</th>
           </tr>
         </thead>
         <tbody>{renderData()}</tbody>

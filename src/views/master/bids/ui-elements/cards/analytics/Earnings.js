@@ -1,6 +1,7 @@
 import Chart from 'react-apexcharts'
 import { Card, CardTitle, CardText, CardBody, Row, Col, Button } from 'reactstrap'
 import React, {  useState } from "react"
+import { MoreVertical, CheckSquare } from 'react-feather'
 //import {Button, Form} from "react-bootstrap";
 import { makeStyles } from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
@@ -38,19 +39,21 @@ const Earnings = () => {
   return (
     <Card className='Details-card'>
                       <Modal open = {open} onClose = {() => setOpen(false)} >
-              
                           <div style={modalStyle} className={classes.paper}>
                             <h4>1. Red Color</h4>
                             <h4>2. Logo</h4>
                             <h4>3. Half colored</h4>
                           </div>
-
                       </Modal>
       <CardBody>
-            <CardTitle className='mb-1'> Details</CardTitle>
+            <CardTitle className='mb-1'>Additional Details</CardTitle>
             <div className="d-flex justify-content-between">
-              <div className='font-small-2'>Bid Id : </div>
-              <h5 className='mb-1'> 123432</h5>
+              <div className='font-small-2'>Prime Buyer : </div>
+               <CheckSquare className='mb-1' color="lightGreen"/>
+            </div>
+            <div className="d-flex justify-content-between">
+              <div className='font-small-2'>Prime Seller : </div>
+               <CheckSquare className='mb-1' color="lightGreen"/>
             </div>
             <div className="d-flex justify-content-between">
               <div className='font-small-2'>Live Date : </div>
@@ -61,8 +64,16 @@ const Earnings = () => {
               <h5 className='mb-1'> 23-mar-21</h5>
             </div>
             <div className="d-flex justify-content-between">
+              <div className='font-small-2'>Cradit Applicable :  </div>
+               <CheckSquare className='mb-1' color="lightGreen"/>
+            </div>
+            <div className="d-flex justify-content-between">
               <div className='font-small-2'>Application Date : </div>
               <h5 className='mb-1'> 22-mar-21</h5>
+            </div>
+            <div className="d-flex justify-content-between">
+              <div className='font-small-2'>GST : </div>
+              <h5 className='mb-1'> 12% </h5>
             </div>
             
               <div className='font-small-2'>Coustomization required : </div>

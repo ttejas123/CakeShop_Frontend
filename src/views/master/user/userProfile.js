@@ -9,6 +9,7 @@ import Statistics from './profileComponets/statistics.js'
 import Reviews from './profileComponets/reviews.js'
 import TimeLine from './timeline'
 import BidHistory from './profileComponets/bidHistory.js'
+import UserActivities from './profileComponets/userActivities.js'
 import Craditoverview from "./profileComponets/CraditOverview.js"
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
@@ -23,14 +24,11 @@ const EcommerceDashboard = () => {
   return (
     <div id='dashboard-ecommerce'>
       <Row className='match-height' >
-        <Col xl='5' md='6' xs='12'>
+        <Col xl='8' md='6' xs='12'>
           <UserProfileCard />
         </Col>
         <Col xl='4' md='6' xs='12'>
-              <StatusCard header="Your Details" Name="userName :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />
-        </Col>
-        <Col xl='3' md='6' xs='12'>
-          <StatusCard header="Organization" Name="Name :" secName="No. Members :" thrName="Details :" NameData="Coense" secNameData="12" thrNameData={Details}/>
+              <StatusCard header="Your Details"  created="Created Date" date="21-jan-2012" three="Email :" threeData="komal@gmail.com" Name="userName :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />
         </Col>
       </Row>
 
@@ -50,10 +48,10 @@ const EcommerceDashboard = () => {
           </Card>
         </Col>
         <Col xl='4' md='6' xs='12'>
-          <BidStatus colors={colors} trackBgColor={trackBgColor} />
+          <StatusCard header="Organization" three="#WareHouse :"  created="Created Date" date="21-jan-2012" threeData="Navi Mumbai" Name="Name :" secName="No. Members :" thrName="Headquarters :" thrNameData="Navi mumbai" NameData="Coense" secNameData="12"/>
         </Col>
         <Col xl='4' md='6' xs='12'>
-          <Statistics header="Organization" Name="Name :" secName="No. Members :" thrName="Details :" NameData="Coense" secNameData="12" thrNameData={Details}/>
+          <Statistics/>
         </Col>
       </Row>
 
@@ -66,24 +64,34 @@ const EcommerceDashboard = () => {
         </Col>
       </Row>
 
-      <Row>
+      <Row className='match-height'>
         <Col xl='6' md='6' xs='12'>
-          <TimeLine />
-        </Col>
-         <Col xl='6' md='6' xs='12'>
           <Card className='card-statistics'>
-       <CardHeader>  
-          <CardTitle tag='h4'><h4>Bid History</h4></CardTitle>
-       </CardHeader>  
-        <CardBody>
-          <Row className='match-height'>
-            <Col lg='12' xs='12'>
-              <BidHistory />
-            </Col>
-          </Row>
-        </CardBody>  
-      </Card>
-  
+             <CardHeader>  
+                <CardTitle tag='h4'><h4>Your Activities</h4></CardTitle>
+             </CardHeader>  
+              <CardBody>
+                <Row className='match-height'>
+                  <Col lg='12' xs='12'>
+                    <UserActivities />
+                  </Col>
+                </Row>
+              </CardBody>  
+          </Card>
+        </Col>
+        <Col xl='6' md='6' xs='12'>
+          <Card className='card-statistics'>
+             <CardHeader>  
+                <CardTitle tag='h4'><h4>Bid History</h4></CardTitle>
+             </CardHeader>  
+              <CardBody>
+                <Row className='match-height'>
+                  <Col lg='12' xs='12'>
+                    <BidHistory />
+                  </Col>
+                </Row>
+              </CardBody>  
+          </Card>
         </Col>
       </Row>
       

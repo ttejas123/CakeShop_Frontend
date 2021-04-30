@@ -41,7 +41,7 @@ const UserInfoCard = () => {
         <div key={state.title} className='browser-states'>
           <Media>
             { state.avatar ? (
-              <img src={state.avatar} width='80' height='60' className='mr-2 mb-2 h-25 w-10' />
+              <img src={state.avatar} width='80' height='60' className='mr-2 mb-3 h-25 w-10' />
               ) : (
               <Avatar
                 size="lg"

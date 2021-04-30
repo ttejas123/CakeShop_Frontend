@@ -126,6 +126,12 @@ export default [
         navLink: '/vas'
       },
       {
+        id: 'RFQ',
+        title: 'RFQ',
+        icon: <Circle size={20} />,
+        navLink: '/rfq'
+      },
+      {
         id: 'LogisticsPartners',
         title: 'Logistics Partners',
         icon: <Circle size={20} />,
@@ -140,7 +146,7 @@ export default [
                   id: 'Add User',
                   title: 'Add',
                   icon: <Circle size={20} />,
-                  navLink: '/userAdd'
+                  navLink: '/user-edit'
                 },
                 {
                   id: 'list',
@@ -182,10 +188,16 @@ export default [
         navLink: '/onground'
       },
       {
-        id: 'CA',
-        title: 'CA',
+        id: 'Redressal',
+        title: 'Redressal',
         icon: <Circle size={20} />,
-        navLink: '/ca'
+        navLink: '/report/redressal'
+      },
+      {
+        id: 'Reviews',
+        title: 'Reviews',
+        icon: <Circle size={20} />,
+        navLink: '/report/review'
       }
     ]
   },

@@ -25,7 +25,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
   {
-    path: '/userProfile',
+    path: '/PReviewsle',
     component: lazy(() => import('../../views/master/user/userProfile'))
   },
   {
@@ -85,8 +85,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/users'))
   },
   {
+    path: '/rfq',
+    component: lazy(() => import('../../views/master/RFQ/RFQ'))
+  },
+  {
     path: '/user-edit',
     component: lazy(() => import('../../views/master/user/edit'))
+  },
+  {
+    path: '/report/review',
+    component: lazy(() => import('../../views/report/Reviews/Reviews'))
+  },
+  {
+    path: '/report/redressal',
+    component: lazy(() => import('../../views/report/Redressal/Redressal'))
   },
   {
     path: '/login',

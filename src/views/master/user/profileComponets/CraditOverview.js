@@ -78,15 +78,15 @@ const GoalOverview = props => {
       </CardBody>
       <Row className='border-top text-center mx-0'>
         <Col xs='4' className='border-right py-1'>
-          <CardText className='text-muted mb-0'>Cradit Used</CardText>
+          <CardText className='text-muted mb-0'>Total Cradit</CardText>
           <h3 className='font-weight-bolder mb-0'>125K</h3>
         </Col>
         <Col xs='4' className='border-right py-1'>
-          <CardText className='text-muted mb-0'>Creadit Balance</CardText>
+          <CardText className='text-muted mb-0'>Cradit Utilize</CardText>
           <h3 className='font-weight-bolder mb-0'>100K</h3>
         </Col>
         <Col xs='4' className='py-1'>
-          <CardText className='text-muted mb-0'>Cradit Brough</CardText>
+          <CardText className='text-muted mb-0'>Cradit Balance</CardText>
           <h3 className='font-weight-bolder mb-0'>223K</h3>
         </Col>
       </Row>

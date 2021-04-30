@@ -55,29 +55,18 @@ const renderClient = row => {
   if (row.avatar.length) {
     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.To || 'John Doe'} initials status="online" />
   }
 }
 
-const optionCountry = [
-    {value: "", label: "Search country"},
-    {value: "India", label: "India"},
-    {value: "USA", label: "USA"},
-    {value: "Canada", label: "Canada"},
-    {value: "Japan", label: "Japan"}
-]
-
-const optionCity = [
-    {value: "", label: "Search City"},
-    {value: "Mumbai", label: "Mumbai"},
-    {value: "Pune", label: "Pune"}
-]
-
-const optionState = [
-    {value: "", label: "Search State"},
-    {value: "Maharashtra", label: "Maharashtra"},
-    {value: "Up", label: "Up"}
-]
+const optionStatus = [
+    {value: "", label: "Filter Status"},
+    {value: "created", label: "created"},
+    {value: "live", label: "live"},
+    {value: "extended", label: "extended"},
+    {value: "closed", label: "closed"},
+    {value: "rejected", label: "rejected"}
+  ]
 
 const DataTableWithButtons = () => {
   const statusObj = {
@@ -91,9 +80,7 @@ const DataTableWithButtons = () => {
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
-  const [FilterCity, setFilterCity] = useState('')
-  const [FilterState, setFilterState] = useState('')
-  const [FilterCountry, setFilterCountry] = useState('')
+  const [Filter, setFilter] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -115,131 +102,96 @@ const DataTableWithButtons = () => {
 
   //columns
   const columns = [
+        // id
+// To
+// From
+// Order_Id
+// Issue_Type
+// Bid_Id
+// Message
+// Status
+// Created_Time
+// Action(Response)
         {
-          name: 'First-Name',
-          selector: 'firstName',
+          name: 'Id',
+          selector: 'id',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '50px'
         },
         {
-          name: 'Last-Name',
-          minWidth: '150px',
-          selector: 'lastName',
-          sortable: true
+          name: 'To',
+          minWidth: '200px',
+          selector: 'To',
+          sortable: true,
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderClient(row)}
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.To}</span>
+                <small className='text-truncate text-muted mb-0'>@{row.To}</small>
+              </div>
+            </div>
+          )
         },
         {
-          name: 'Email',
-          selector: 'email',
+          name: 'From',
+          selector: 'From',
           sortable: true,
-          minWidth: '250px',
+          minWidth: '130px',
           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.email}</span>
+                <span className='d-block font-weight-bold text-truncate'>{row.From}</span>
               </div>
             </div>
           )
         },
         {
-          name: 'Mobile',
-          selector: 'mobileNo',
+          name: 'Order Id',
+          selector: 'Order_Id',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'User-Type',
-          selector: 'userType[0].label',
-          sortable: true,
-          minWidth: '150px',
-           cell: row => (
-            <div key={row.created} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      
-                          {row.userType[0].label}
-                      
-                </span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Created Date',
-          selector: 'CreatedDate',
+          name: 'Issue Type',
+          selector: 'Issue_Type',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Verified',
-          selector: 'isVerified[0].label',
+          name: 'Bid Id',
+          selector: 'Bid_Id',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Message',
+          selector: 'Message',
+          sortable: true,
+          minWidth: '130px',
+          maxWidth: '150px'
+        },
+        {
+          name: 'Status',
+          selector: 'Status',
           sortable: true,
           minWidth: '150px',
-           cell: row => (
-            <div key={row.created} className='d-flex align-items-center'>
+          cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
                 <span className='d-block font-weight-bold text-truncate'>
-                      
-                          {row.isVerified[0].label}
-                      
+                      <Badge className='text-capitalize' color={statusObj[row.Status[0].label]} pill>
+                          {row.Status[0].label}
+                      </Badge>
                 </span>
               </div>
             </div>
           )
         },
         {
-          name: 'Country',
-          selector: 'country[0].label',
-          sortable: true,
-          minWidth: '150px',
-           cell: row => (
-            <div key={row.created} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      
-                          {row.country[0].label}
-                      
-                </span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'State',
-          selector: 'state[0].label',
-          sortable: true,
-          minWidth: '150px',
-           cell: row => (
-            <div key={row.created} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      
-                          {row.state[0].label}
-                      
-                </span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'City',
-          selector: 'city[0].label',
-          sortable: true,
-          minWidth: '150px',
-           cell: row => (
-            <div key={row.created} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      
-                          {row.city[0].label}
-                      
-                </span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Profile Score',
-          selector: 'profileScore',
+          name: 'Created Time',
+          selector: 'Created_Time',
           sortable: true,
           minWidth: '150px'
         },
@@ -275,15 +227,32 @@ const DataTableWithButtons = () => {
   }
 
   // handle drop down filter
-  const handleFilterByDropDown = (name, value) => {
-   const updatedData = []
-   if (name === 'country') {
-      setFilterCountry(value)
-   } else if (name === 'state') {
-      setFilterState(value)
-   } else if (name === 'city') {
-      setFilterCity(value)
-   }
+  const handleFilterByDropDown = (value) => {
+    let updatedData = []
+    setFilter(value)
+    console.log(value.value)
+    let search = "l"
+    search = value.value
+    setSearchValue(search)
+      if (search.length) {
+          updatedData = data.filter(item => {
+            const startsWith =
+              item.Status[0].value.toLowerCase().startsWith(search.toLowerCase()) 
+              
+            const includes =
+              item.Status[0].value.toLowerCase().includes(search.toLowerCase())
+    
+            if (startsWith) {
+              return startsWith
+            } else if (!startsWith && includes) {
+              return includes
+            } else return null
+           })
+        
+      setFilteredData(updatedData)
+      // setSearchValue(search)
+      setFilter(value)
+    }
   }
   // ** Function to handle filter
   const handleFilter = e => {
@@ -295,21 +264,15 @@ const DataTableWithButtons = () => {
       updatedData = data.filter(item => {
         const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.BidCloseDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.BidApplicationDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.GoLive.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.CustomStatus[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.BidStatus[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          NoOfBidder.toLowerCase().startsWith(value.toLowerCase())
-          console.log(startsWith)
-        const includes =
-          item.BidCloseDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.BidApplicationDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.GoLive.toLowerCase().includes(value.toLowerCase()) ||
-          item.CustomStatus[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.BidStatus[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          NoOfBidder.toLowerCase().includes(value.toLowerCase())
+          item.To.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
 
+        const includes =
+          item.To.toLowerCase().includes(value.toLowerCase()) ||
+          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
+          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
+         
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -362,51 +325,16 @@ const DataTableWithButtons = () => {
         <CardBody>
           <Row>
             <Col md='4'>
-              <Label className='mr-1' for='search-input'>
-                Filter Country
-              </Label>
-
+              <label>Search label</label>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
-                options={optionCountry}
-                value={FilterCountry}
+                options={optionStatus}
+                value={Filter}
                 onChange={data => {
-                  handleFilterByDropDown("country", data)
-                }}
-              />
-            </Col>
-            <Col md='4'>
-              <Label className='mr-1' for='search-input'>
-                Filter State
-              </Label>
-              <Select
-                isClearable={false}
-                theme={selectThemeColors}
-                className='react-select'
-                classNamePrefix='select'
-                options={optionCity}
-                value={FilterState}
-                onChange={data => {
-                  handleFilterByDropDown("state", data)
-                }}
-              />
-            </Col>
-            <Col md='4'>
-              <Label className='mr-1' for='search-input'>
-                Filter City
-              </Label>
-              <Select
-                isClearable={false}
-                theme={selectThemeColors}
-                className='react-select'
-                classNamePrefix='select'
-                options={optionState}
-                value={FilterCity}
-                onChange={data => {
-                  handleFilterByDropDown("city", data)
+                  handleFilterByDropDown(data)
                 }}
               />
             </Col>
@@ -417,9 +345,12 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Bids</CardTitle>
+          <CardTitle tag='h4'>Redressal</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+               <Button className='ml-2' color='primary' onClick={handleModal}>
+                  <Plus size={15} />
+                  <span className='align-middle ml-50'>Add New</span>
+              </Button>
           </div>
         </CardHeader>
 
