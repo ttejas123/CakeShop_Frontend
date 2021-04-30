@@ -61,6 +61,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/bids/bids'))
   },
   {
+    path: '/warehouse',
+    component: lazy(() => import('../../views/master/warehouse/warehouse'))
+  },
+  {
     path: '/company-list',
     component: lazy(() => import('../../views/master/company/CompanyList'))
   },
@@ -99,6 +103,10 @@ const Routes = [
   {
     path: '/report/redressal',
     component: lazy(() => import('../../views/report/Redressal/Redressal'))
+  },
+  {
+    path: '/report/Invoice',
+    component: lazy(() => import('../../views/report/Invoice/Invoice'))
   },
   {
     path: '/login',

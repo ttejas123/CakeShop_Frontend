@@ -1,19 +1,4 @@
-// Redressal Add/Edit
-// ID
-// To
-// From
-// Order Id
-// Issue Type
-// Bid Id
-// Message
-// Status
 
-// //Invoice
-// order_id
-// invoice_number
-// order_amount
-// order_number
-//invoice_time
 import Avatar from '@components/avatar'
 import Select from 'react-select'
 // ** Third Party Components

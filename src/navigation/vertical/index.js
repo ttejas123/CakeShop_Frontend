@@ -132,6 +132,12 @@ export default [
         navLink: '/rfq'
       },
       {
+        id: 'warehouse',
+        title: 'Warehouse',
+        icon: <Circle size={20} />,
+        navLink: '/warehouse'
+      },
+      {
         id: 'LogisticsPartners',
         title: 'Logistics Partners',
         icon: <Circle size={20} />,
@@ -182,10 +188,10 @@ export default [
         navLink: '/approval'
       },
       {
-        id: 'OnGround',
-        title: 'Onground',
+        id: 'Invoice',
+        title: 'Invoice',
         icon: <Circle size={20} />,
-        navLink: '/onground'
+        navLink: '/report/Invoice'
       },
       {
         id: 'Redressal',
