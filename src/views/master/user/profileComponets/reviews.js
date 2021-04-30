@@ -21,35 +21,26 @@ import reethika  from '../../../../assets/images/logo/reethika.jpg'
 const CardBrowserState = () => {
   const statesArr = [
     {
-      name:"Tejas",
-      title: 'This is my Review'
-    },
-    {
-      name:"Pravin",
-      avatar: pravin,
-      title: 'This is my Review'
-    },
-    {
-      name:"Komal",
+      name:"Komal kamble",
       avatar: komal,
-      title: 'This is my Review'
+      Review: 'Your Bid is awasome but we need some more items which is not metion also there are many privacy related issues you presented which is pain in my head'
     },
     {
       name:"Reethika",
       avatar: reethika,
-      title: 'This is my Review'
+      Review: 'looking forwork in our deal'
     },
     {
       name:"Himanshu",
       avatar: himanshu,
-      title: 'This is my Review'
+      Review: 'Your Bids are awasome try to add more costomization'
     }
   ]
 
   const renderStates = () => {
     return statesArr.map(state => {
       return (
-        <div key={state.title} className='browser-states'>
+        <div key={state.Review} className='browser-states'>
           <Media>
             { state.avatar ? (
               <Avatar img={state.avatar} width='50' height='50' className='mr-2' />
@@ -59,8 +50,14 @@ const CardBrowserState = () => {
                 color= "light-success"
                 content={state.name.substring(0, 1)}
               />) }
-            <div>
-              <p>{state.name} ~ {state.title}</p>
+            <div className="p-0">
+              <div className="d-flex p-0 m-0">
+                <p className="m-0"><b>{state.name}</b></p>
+                <p className="m-0">- {new Date().toGMTString()}</p>
+              </div>
+              <div>
+                  <p> ~ {state.Review}</p>
+                </div>
             </div>
           </Media>
         </div>
@@ -73,17 +70,14 @@ const CardBrowserState = () => {
       <CardHeader>
         <div>
           <CardTitle tag='h4'>Reviews and Ratings</CardTitle>
-          <CardText className='font-small-2'>view all comments</CardText>
-        </div>
-        <div color='' className='bg-transparent btn-sm border-0 p-50'>
-            <MoreVertical size={18} className='cursor-pointer' />
+          <CardText className='font-small-2'>view all reviews</CardText>
         </div>
       </CardHeader>
 
-      <CardBody>{renderStates()}</CardBody>
-      <CardBody>
+      <CardBody className="pb-0 ">{renderStates()}</CardBody>
+      <CardBody className="pt-0">
            <li>
-                  <Button color='primary' block>
+                  <Button color='primary' block >
                     Read all Reviews
                   </Button>
             </li>

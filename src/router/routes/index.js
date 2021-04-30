@@ -25,12 +25,12 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
   {
-    path: '/corporateView',
-    component: lazy(() => import('../../views/master/corporate/corporateView'))
+    path: '/PReviewsle',
+    component: lazy(() => import('../../views/master/user/userProfile'))
   },
   {
-    path: '/userProfile',
-    component: lazy(() => import('../../views/master/user/userProfile'))
+    path: '/product-category',
+    component: lazy(() => import('../../views/master/product/productCategory'))
   },
   {
     path: '/edit',
@@ -47,6 +47,10 @@ const Routes = [
   {
     path: '/category-list',
     component: lazy(() => import('../../views/master/category/CategoryList'))
+  },
+  {
+    path: '/corporateView',
+    component: lazy(() => import('../../views/master/corporate/corporateView'))
   },
   {
     path: '/city-list',
@@ -101,20 +105,24 @@ const Routes = [
     component: lazy(() => import('../../views/master/corporate/CorporateList'))
   },
   {
-    path: '/apps/user/list',
-    component: lazy(() => import('../../views/master/user/list'))
+    path: '/user-list',
+    component: lazy(() => import('../../views/master/user/users'))
   },
   {
-    path: '/apps/user/edit',
-    exact: true,
-    component: () => <Redirect to='/components/user/edit/1' />
+    path: '/rfq',
+    component: lazy(() => import('../../views/master/RFQ/RFQ'))
   },
   {
-    path: '/apps/user/edit/:id',
-    component: lazy(() => import('../../components/user/edit')),
-    meta: {
-      navLink: '/apps/user/edit'
-    }
+    path: '/user-edit',
+    component: lazy(() => import('../../views/master/user/edit'))
+  },
+  {
+    path: '/report/review',
+    component: lazy(() => import('../../views/report/Reviews/Reviews'))
+  },
+  {
+    path: '/report/redressal',
+    component: lazy(() => import('../../views/report/Redressal/Redressal'))
   },
   {
     path: '/login',

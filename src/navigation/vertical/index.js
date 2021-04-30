@@ -120,10 +120,22 @@ export default [
         navLink: '/vas'
       },
       {
+        id: 'RFQ',
+        title: 'RFQ',
+        icon: <Circle size={20} />,
+        navLink: '/rfq'
+      },
+      {
         id: 'LogisticsPartners',
         title: 'Logistics Partners',
         icon: <Circle size={20} />,
         navLink: '/losgistics'
+      },
+      {
+        id: 'FinancialPartners',
+        title: 'Financial Partners',
+        icon: <Circle size={20} />,
+        navLink: '/financialPartner-list'
       },
       {
         id: 'ProductPage',
@@ -147,7 +159,14 @@ export default [
                   title: 'Edit',
                   icon: <Circle size={20} />,
                   navLink: '/edit-product'
+                },
+                {
+                  id: 'productCategory',
+                  title: 'Product Category',
+                  icon: <Circle size={20} />,
+                  navLink: '/product-category'
                 }
+                
         ]
       },
       {
@@ -184,13 +203,13 @@ export default [
                   id: 'Add User',
                   title: 'Add',
                   icon: <Circle size={20} />,
-                  navLink: '/userAdd'
+                  navLink: '/user-edit'
                 },
                 {
                   id: 'list',
                   title: 'list',
                   icon: <Circle size={20} />,
-                  navLink: '/userlist'
+                  navLink: '/user-list'
                 }
         ]
       }
@@ -226,10 +245,16 @@ export default [
         navLink: '/onground'
       },
       {
-        id: 'CA',
-        title: 'CA',
+        id: 'Redressal',
+        title: 'Redressal',
         icon: <Circle size={20} />,
-        navLink: '/ca'
+        navLink: '/report/redressal'
+      },
+      {
+        id: 'Reviews',
+        title: 'Reviews',
+        icon: <Circle size={20} />,
+        navLink: '/report/review'
       }
     ]
   },

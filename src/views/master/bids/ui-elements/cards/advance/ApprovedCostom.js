@@ -32,33 +32,25 @@ const CardBrowserState = () => {
   const statesArr = [
     {
       avatar: require('@src/assets/images/icons/google-chrome.png').default,
-      title: 'This is Question and answer section'
+      title: 'We require a new coustom made logo in our T-shirt Also it need to be more colorfull'
     },
     {
       avatar: pravin,
-      title: 'This is Question and answer sectionn'
+      title: 'we require some T-shirt for our x-employess so we need 25 xl size.'
     },
     {
       avatar: komal,
-      title: 'This is Question and answer section'
-    },
-    {
-      avatar: reethika,
-      title: 'This is Question and answer section'
-    },
-    {
-      avatar: himanshu,
-      title: 'This is Question and answer section'
+      title: 'we require some designed T-shirts for young employees'
     }
   ]
 
   const renderStates = () => {
     return statesArr.map(state => {
       return (
-        <div key={state.title} className='browser-states'>
-            <div>
-              <CheckSquare color="lightGreen" className='mr-2'/>
-              <label className="float-right">{state.title}</label>
+        <div key={state.title} className='mb-2 container-fluid'>
+            <div className='d-flex'>
+              <CheckSquare color="lightGreen"/>
+              <label className="float-right w-75 float-right ml-2">{state.title}</label>
             </div>
         </div>
       )

@@ -1,6 +1,6 @@
 import Avatar from '@components/avatar'
 import * as Icon from 'react-feather'
-import { Card, CardHeader, CardTitle, CardBody, Media, Truck, User } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Media, Truck, Users, Package } from 'reactstrap'
 
 const CardTransactions = () => {
   const transactionsArr = [
@@ -9,14 +9,14 @@ const CardTransactions = () => {
       color: 'light-info',
       subtitle: 'No Created Bids',
       amount: '250',
-      Icon: Icon['Truck']
+      Icon: Icon['Package']
     },
     {
       title: 'Bid Participents',
       color: 'light-success',
       subtitle: 'Participents',
       amount: '74',
-      Icon: Icon['User']
+      Icon: Icon['Users']
     },
     {
       title: 'Bid Live',

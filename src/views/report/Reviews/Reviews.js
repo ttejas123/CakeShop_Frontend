@@ -8,21 +8,21 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
-
+import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
 import { data } from './data'
+import Select from 'react-select'
 
 // ** Add New Modal Component
 import FormModel from './formModel'
-
-
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye  } from 'react-feather'
 import {
   Card,
   CardHeader,
+  CardBody,
   CardTitle,
   Button,
   UncontrolledButtonDropdown,
@@ -44,94 +44,91 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
+
+// ** Renders Client Columns
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.avatar.length) {
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+  }
+}
+
+const optionBidStatus = [
+    {value: "", label: "Filter Status"},
+    {value: "created", label: "created"},
+    {value: "live", label: "live"},
+    {value: "extended", label: "extended"},
+    {value: "closed", label: "closed"},
+    {value: "rejected", label: "rejected"},
+    {value: "auto closed", label: "auto closed"}
+  ]
+
 const DataTableWithButtons = () => {
+  const statusObj = {
+        pending: 'light-secondary',
+        approved: 'light-success',
+        approval: 'light-warning'
+  }
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
+  const [Filter, setFilter] = useState('')
 
-   //deleteCountry
-  const deleteCountry = (val) => {
+   //view
+  const view = (val) => {
     //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
-    //edit action
-   const AddeditEvent = (val) => {
-     //here we hande event which comming from addNewModel.js (Form for add and edit)
-      setCurrentId("")
-      console.log(val)
+   setModal(true)
   }
 
   //columns
   const columns = [
         {
-          name: 'Id',
-          selector: 'id',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Name',
+          name: 'User',
+          minWidth: '250px',
           selector: 'Name',
           sortable: true,
-          minWidth: '150px',
           cell: row => (
-            <div className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Name}</span>
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderClient(row)}
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.Name}</span>
+                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
               </div>
             </div>
           )
         },
         {
-          name: 'Category Name',
-          selector: 'Category',
+          name: 'Review Date',
+          selector: 'reviewDate',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Sub-Category',
-          selector: 'SubCategory',
+          name: 'Given By',
+          selector: 'GivenBy',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Default-Commission',
-          selector: 'DefaultCommission',
+          name: 'Rating',
+          selector: 'rating',
           sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            return (
-                <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.DefaultCommission}%</span>
-                  </div>
-                </div>
-            )
-          }
+          minWidth: '150px'
         },
         {
-          name: 'GST',
-          selector: 'GST',
+          name: 'Review',
+          selector: 'review',
           sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            return (
-                <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.GST}%</span>
-                  </div>
-                </div>
-            )
-          }
+          maxWidth: '150px'
         },
         {
           name: 'Actions',
@@ -140,18 +137,13 @@ const DataTableWithButtons = () => {
             return (
               <div className='d-flex'>
                 <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                                                    e.preventDefault()
-                                                                                    deleteCountry(row.id)
+                  <DropdownToggle className='pl-1' tag='span'>
+                    <Eye size={15} onClick={e => {
+                                                                                    view(row)
+                                                                                    setCurrentId(row.id)
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-
-                <Edit size={15} onClick={ () => { 
-                                    setCurrentId(row.id)
-                                    setModal(true)
-                                     } }/>
               </div>
             )
           }
@@ -172,22 +164,20 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const GST = item.GST.toString()
-        const DefaultCommission = item.DefaultCommission.toString()
-        console.log(GST)
+        
         const startsWith =
           item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.SubCategory.toLowerCase().startsWith(value.toLowerCase()) ||
-          GST.toLowerCase().startsWith(value.toLowerCase()) ||
-          DefaultCommission.toLowerCase().startsWith(value.toLowerCase())
+          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
 
         const includes =
           item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category.toLowerCase().includes(value.toLowerCase()) ||
-          item.SubCategory.toLowerCase().includes(value.toLowerCase()) ||
-          GST.toLowerCase().includes(value.toLowerCase()) ||
-          DefaultCommission.toLowerCase().includes(value.toLowerCase())
+          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
+          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
+          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
+          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
 
         if (startsWith) {
           return startsWith
@@ -234,15 +224,13 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
+
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Product Category</CardTitle>
+          <CardTitle tag='h4'>Reviews</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <Button className='ml-2' color='primary' onClick={handleModal}>
-              <Plus size={15} />
-              <span className='align-middle ml-50'>Add Your Product</span>
-            </Button>
+            
           </div>
         </CardHeader>
 
@@ -277,7 +265,7 @@ const DataTableWithButtons = () => {
         />
         
       </Card>
-      <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} />
+       <FormModel open={modal} handleModal={handleModal} currentId={currentId}  data={data} />
     </Fragment>
   )
 }
