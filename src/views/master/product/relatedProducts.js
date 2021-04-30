@@ -9,11 +9,11 @@ import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 // ** Related products images
-import img1 from '@src/assets/images/elements/apple-watch.png'
-import img2 from '@src/assets/images/elements/macbook-pro.png'
-import img3 from '@src/assets/images/elements/homepod.png'
-import img4 from '@src/assets/images/elements/magic-mouse.png'
-import img5 from '@src/assets/images/elements/iphone-x.png'
+import img1 from '@src/assets/images/elements/nike-basketball-shoes.jpg'
+import img2 from '@src/assets/images/elements/nike-air-zoom.jpg'
+import img3 from '@src/assets/images/elements/nike-unisex-shoes.jpg'
+import img4 from '@src/assets/images/elements/puma-unisex-basketball.jpg'
+import img5 from '@src/assets/images/elements/puma-super-mario.jpg'
 
 // ** Styles
 import '@styles/react/libs/swiper/swiper.scss'
@@ -24,35 +24,35 @@ const RelatedProducts = () => {
   // ** Related products Slides
   const slides = [
     {
-      name: 'Apple Watch Series 6',
+      name: 'Nike Unisex Black LEBRON XVIII Basketball Shoes',
       brand: 'Bidoya',
       ratings: 4,
-      price: 399.98,
+      price: 17595,
       img: img1
     },
     {
-      name: 'Apple MacBook Pro - Silver',
+      name: 'Nike Unisex White AIR ZOOM BB NXT Basketball Shoes',
       brand: 'Bidoya',
       ratings: 2,
       price: 2449.49,
       img: img2
     },
     {
-      name: 'Apple HomePod (Space Grey)',
+      name: 'Nike Unisex White & Black Colourblocked LEBRON XVIII LOW Basketball Shoes',
       brand: 'Bidoya',
       ratings: 3,
       price: 229.29,
       img: img3
     },
     {
-      name: 'Magic Mouse 2 - Black',
+      name: 'Puma Unisex Black & Blue Rise XT FUSE 1 Basketball Shoes',
       brand: 'Bidoya',
       ratings: 3,
       price: 90.98,
       img: img4
     },
     {
-      name: 'iPhone 12 Pro',
+      name: 'PUMA Hoops Unisex Red & Blue Colourblocked RS-Dreamer Super Mario 64 Basketball Shoes',
       brand: 'Bidoya',
       ratings: 4,
       price: 1559.99,
@@ -97,15 +97,15 @@ const RelatedProducts = () => {
           return (
             <SwiperSlide key={slide.name}>
               <a href='/' onClick={e => e.preventDefault()}>
-                <div className='item-heading'>
+                {/* <div className='item-heading'>
                   <h5 className='text-truncate mb-0'>{slide.name}</h5>
                   <small className='text-body'>by {slide.brand}</small>
-                </div>
+                </div> */}
                 <div className='img-container w-50 mx-auto py-75'>
                   <img src={slide.img} alt='swiper 1' className='img-fluid' />
                 </div>
                 <div className='item-meta'>
-                  <ul className='unstyled-list list-inline mb-25'>
+                  {/* <ul className='unstyled-list list-inline mb-25'>
                     {new Array(5).fill().map((listItem, index) => {
                       return (
                         <li key={index} className='ratings-list-item mr-25'>
@@ -118,7 +118,11 @@ const RelatedProducts = () => {
                         </li>
                       )
                     })}
-                  </ul>
+                  </ul> */}
+                   <div className='item-heading'>
+                  <h5 className='text-truncate mb-0'>{slide.name}</h5>
+                  {/* <small className='text-body'>by {slide.brand}</small> */}
+                </div>
                   <CardText className='text-primary mb-0'>${slide.price}</CardText>
                 </div>
               </a>

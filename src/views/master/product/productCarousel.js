@@ -51,7 +51,10 @@ const ProductCarousel = () => {
   const slides = images.map(item => {
     return (
       <CarouselItem onExiting={onExiting} onExited={onExited} key={item.id}>
-        <img src={item.src} className='img-fluid' alt={item.id} />
+        <img src={item.src}  style={{
+            height:"27em",
+            width:"38em"
+          }} className='img-fluid' alt={item.id} />
       </CarouselItem>
     )
   })

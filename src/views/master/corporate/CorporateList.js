@@ -106,73 +106,127 @@ const DataTableWithButtons = () => {
         {
           name: 'Id',
           selector: 'id',
-          sortable: true,
+          sortable: false,
           minWidth: '50px'
         },
         {
-          name: 'Product Name',
-          selector: 'productName',
+          name: 'Corporate Name',
+          selector: 'corporateName',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'EAN UPC Code',
-          selector: 'ean_upc_code',
+          name: 'Comapny Type Id',
+          selector: 'companyTypeId',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Category',
-          selector: 'category',
+          name: 'Industry Id',
+          selector: 'industryId',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Sub Category',
-          selector: 'subCategory',
+          name: 'Email',
+          selector: 'email',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Product Category',
-          selector: 'productCategory',
+          name: 'Country Code',
+          selector: 'countryCode',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Hsn Code',
-          selector: 'hsnCode',
+          name: 'Phone',
+          selector: 'phone',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'gst(Number)%',
-          selector: 'gstNumber',
+          name: 'Country Id',
+          selector: 'countryId',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'MRP',
-          selector: 'mrp',
+          name: 'State Id',
+          selector: 'stateId',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Description',
-          selector: 'description',
+          name: 'City Id',
+          selector: 'cityId',
           sortable: true,
           minWidth: '150px'
         },
         {
-            name: 'User',
+            name: 'Currency Id',
+            selector: 'currencyId',
+            sortable: true,
+            minWidth: '150px'
+          },
+          {
+            name: 'Pan Number',
+            selector: 'panNumber',
+            sortable: true,
+            minWidth: '150px'
+          },
+          {
+            name: 'Is Verified',
+            selector: 'isVerified',
+            sortable: true,
+            minWidth: '150px'
+          },
+          {
+            name: 'Has Subscription',
+            selector: 'hasSubscription',
+            sortable: true,
+            minWidth: '150px'
+          },
+          {
+            name: 'Has Preferred Partner',
+            selector: 'hasPreferredPartner',
+            sortable: true,
+            minWidth: '150px'
+          },
+        {
+            name: 'Logo',
             minWidth: '150px',
-            selector: 'Name',
+            selector: 'logo',
             sortable: true,
             cell: row => (
               <div className='d-flex justify-content-left align-items-center'>
                 {renderClient(row)}
               </div>
             )
+          },
+          {
+            name: 'Verified By',
+            selector: 'verifiedBy',
+            sortable: true,
+            minWidth: '150px'
+          },
+          {
+            name: 'Created By',
+            selector: 'createdBy',
+            sortable: true,
+            minWidth: '150px'
+          },
+          {
+            name: 'Created Time',
+            selector: 'createdTime',
+            sortable: true,
+            minWidth: '150px'
+          },
+          {
+            name: 'Updated Time',
+            selector: 'updatedTime',
+            sortable: true,
+            minWidth: '150px'
           },
         {
           name: 'Actions',
@@ -188,7 +242,8 @@ const DataTableWithButtons = () => {
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link  to={`/edit-product/${row.id}`}><Edit  
+
+                <Link  to={`/edit-corporate/${row.id}`}><Edit  
                   size={15} 
                   onClick={ () => { 
                                     setCurrentId(row.id)
@@ -326,7 +381,7 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Products</CardTitle>
+          <CardTitle tag='h4'>Corporate list</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             
           </div>

@@ -54,12 +54,6 @@ export default [
         navLink: '/bids'
       },
       {
-        id: 'ProductList',
-        title: 'Product',
-        icon: <Circle size={20} />,
-        navLink: '/product'
-      },
-      {
         id: 'Country',
         title: 'Country',
         icon: <Circle size={20} />,
@@ -130,6 +124,56 @@ export default [
         title: 'Logistics Partners',
         icon: <Circle size={20} />,
         navLink: '/losgistics'
+      },
+      {
+        id: 'ProductPage',
+        title: 'Product',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/product-list'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/productDetails'
+                },
+                {
+                  id: 'edit',
+                  title: 'Edit',
+                  icon: <Circle size={20} />,
+                  navLink: '/edit-product'
+                }
+        ]
+      },
+      {
+        id: 'CorporatePage',
+        title: 'Corporate',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporate-list'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporateView'
+                },
+                {
+                  id: 'edit',
+                  title: 'Edit',
+                  icon: <Circle size={20} />,
+                  navLink: '/edit-corporate'
+                }
+        ]
       },
       {
         id: 'UserPage',

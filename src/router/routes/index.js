@@ -25,6 +25,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
   {
+    path: '/corporateView',
+    component: lazy(() => import('../../views/master/corporate/corporateView'))
+  },
+  {
     path: '/userProfile',
     component: lazy(() => import('../../views/master/user/userProfile'))
   },
@@ -77,8 +81,24 @@ const Routes = [
     component: lazy(() => import('../../views/master/logistics/logistics'))
   },
   {
-    path: '/product',
+    path: '/product-list',
     component: lazy(() => import('../../views/master/product/ProductList'))
+  },
+  {
+    path: '/financialPartner-list',
+    component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
+  },
+  {
+    path: '/edit-product',
+    component: lazy(() => import('../../views/master/product/editProduct'))
+  },
+  {
+    path: '/edit-corporate',
+    component: lazy(() => import('../../views/master/corporate/editCorporate'))
+  },
+  {
+    path: '/corporate-list',
+    component: lazy(() => import('../../views/master/corporate/CorporateList'))
   },
   {
     path: '/apps/user/list',
@@ -116,6 +136,10 @@ const Routes = [
   {
     path: '/ogedashbaord',
     component: lazy(() => import('../../views/dashboards/on_ground_executive'))
+  },
+  {
+    path: '/comingSoon',
+    component: lazy(() => import('../../views/pages/comingSoon'))
   }
 ]
 
