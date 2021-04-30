@@ -46,6 +46,7 @@ import {
   const submitHandle = (event) => {
     console.log(values)
     prop.editAction(values)
+    prop.handleModal()
     setValues(initialvalues)
   }
     return (
@@ -76,8 +77,8 @@ import {
             <FormGroup className='mb-0 mx-auto' row>
               <Col className='d-flex' md={{ size: 8, offset: 5 }}>
                 <Button.Ripple className='mr-1' color='primary' onClick={ e =>  {
-                                                          prop.handleModal() 
                                                           submitHandle()
+
                                                         }
                                                       }>
                   Submit

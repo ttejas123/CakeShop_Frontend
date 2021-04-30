@@ -117,14 +117,14 @@ const DataTableWithButtons = () => {
   const columns = [
         {
           name: 'First-Name',
-          selector: 'firstName',
+          selector: 'first_name',
           sortable: true,
           minWidth: '150px'
         },
         {
           name: 'Last-Name',
           minWidth: '150px',
-          selector: 'lastName',
+          selector: 'last_name',
           sortable: true
         },
         {
@@ -142,7 +142,7 @@ const DataTableWithButtons = () => {
         },
         {
           name: 'Mobile',
-          selector: 'mobileNo',
+          selector: 'mobile',
           sortable: true,
           minWidth: '150px'
         },
@@ -417,9 +417,12 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Bids</CardTitle>
+          <CardTitle tag='h4'>Users</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+              <Button className='ml-2' color='primary' onClick={handleModal}>
+                  <Plus size={15} />
+                  <span className='align-middle ml-50'>Add New</span>
+              </Button>
           </div>
         </CardHeader>
 

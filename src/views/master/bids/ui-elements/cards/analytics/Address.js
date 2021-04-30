@@ -7,6 +7,7 @@ const Address = (props) => {
       <CardBody>
         <Row>
           <Col xs='12'>
+            <CardTitle tag='h4'>{props.title}</CardTitle>
             <hr />
             <div className="d-flex justify-content-between">
               <div className='font-small-2'>Warehouse : </div>

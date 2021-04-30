@@ -15,7 +15,6 @@ import Select from 'react-select'
 
 // ** Add New Modal Component
 import FormModel from './formModel'
-import Response from './responseModel' 
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -46,30 +45,26 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
-
-// ** Renders Client Columns
-const renderClient = row => {
-  const stateNum = Math.floor(Math.random() * 6),
-    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-    color = states[stateNum]
-
-  if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
-  } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.To || 'John Doe'} initials status="online" />
-  }
-}
-
-const optionStatus = [
-    {value: "", label: "Filter Status"},
-    {value: "created", label: "created"},
-    {value: "live", label: "live"},
-    {value: "extended", label: "extended"},
-    {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"}
-  ]
-
 const DataTableWithButtons = () => {
+  const optionCountry = [
+    {value: "", label: "Select Your country"},
+    {value: "India", label: "India"},
+    {value: "USA", label: "USA"},
+    {value: "Canada", label: "Canada"},
+    {value: "Japan", label: "Japan"}
+]
+
+const optionCity = [
+    {value: "", label: "Select Your City"},
+    {value: "Mumbai", label: "Mumbai"},
+    {value: "Pune", label: "Pune"}
+]
+
+const optionState = [
+    {value: "", label: "Select Your State"},
+    {value: "Maharashtra", label: "Maharashtra"},
+    {value: "Up", label: "Up"}
+]
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -77,9 +72,7 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
-  const [responseModel, setResponseModel] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
-  const [reviewId, setreviewId] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
@@ -103,24 +96,9 @@ const DataTableWithButtons = () => {
       console.log(val)
   }
 
-  //add or edit response
-  const responseADDEDIT = (val) => {
-     setreviewId("")
-     console.log(val)
-  }
 
   //columns
   const columns = [
-        // id
-// To
-// From
-// Order_Id
-// Issue_Type
-// Bid_Id
-// Message
-// Status
-// Created_Time
-// Action(Response)
         {
           name: 'Id',
           selector: 'id',
@@ -128,43 +106,23 @@ const DataTableWithButtons = () => {
           minWidth: '50px'
         },
         {
-          name: 'To',
+          name: 'WareHouse Name',
           minWidth: '200px',
-          selector: 'To',
+          selector: 'name',
           sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(row)}
               <div className='d-flex flex-column'>
                 
-                  <span className='font-weight-bold'>{row.To}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.To}</small>
+                  <span className='font-weight-bold'>{row.name}</span>
+               
               </div>
             </div>
           )
         },
         {
-          name: 'From',
-          selector: 'From',
-          sortable: true,
-          minWidth: '130px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.From}</span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Order Id',
-          selector: 'Order_Id',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Issue Type',
-          selector: 'Issue_Type',
+          name: 'Country',
+          selector: 'country',
           sortable: true,
           minWidth: '150px',
           cell: row => (
@@ -172,7 +130,7 @@ const DataTableWithButtons = () => {
               <div className='user-info text-truncate'>
                 <span className='d-block font-weight-bold text-truncate'>
                       
-                          {row.Issue_Type[0].label}
+                          {row.country[0].label}
                       
                 </span>
               </div>
@@ -180,57 +138,63 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Bid Id',
-          selector: 'Bid_Id',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Message',
-          selector: 'Message',
-          sortable: true,
-          minWidth: '130px',
-          maxWidth: '150px'
-        },
-        {
-          name: 'Status',
-          selector: 'Status',
+          name: 'State',
+          selector: 'state',
           sortable: true,
           minWidth: '150px',
           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
                 <span className='d-block font-weight-bold text-truncate'>
-                      <Badge className='text-capitalize' color={statusObj[row.Status[0].label]} pill>
-                          {row.Status[0].label}
-                      </Badge>
+                      
+                          {row.state[0].label}
+                      
                 </span>
               </div>
             </div>
           )
         },
         {
-          name: 'Created Time',
-          selector: 'Created_Time',
+          name: 'City',
+          selector: 'city',
           sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Admin response',
-          selector: 'adminRes',
-          sortable: true,
-          minWidth: '130px',
+          minWidth: '150px',
           cell: row => (
-            <div key={row.id} className='d-flex align-items-center ml-1'>
+            <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
-               { row.adminRes === "" ? (
-                    <X size={15} />
-               ) : (
-                    <Check size={15} />
-               ) }
+                <span className='d-block font-weight-bold text-truncate'>
+                      
+                          {row.city[0].label}
+                      
+                </span>
               </div>
             </div>
           )
+        },
+        {
+          name: 'Is Bidoya WareHouse',
+          selector: 'is_Bidoya_WareHouse',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => (
+            <div key={row.id} className='ml-1 d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>
+                      { row.is_Bidoya_WareHouse === 0 ? (
+                            <X size={15} />
+                       ) : (
+                            <Check size={15} />
+                       ) }
+                </span>
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'Created Date',
+          selector: 'Created_Date',
+          sortable: true,
+          minWidth: '130px'
         },
         {
           name: 'Actions',
@@ -253,10 +217,6 @@ const DataTableWithButtons = () => {
                                     setModal(true)
                                      } }/>
 
-                <Eye size={15} onClick={ () => { 
-                                    setreviewId(row.id)
-                                    setResponseModel(true)
-                                     } }/>
               </div>
             )
           }
@@ -267,10 +227,6 @@ const DataTableWithButtons = () => {
   // ** Function to handle Modal toggle
   const handleModal = () => {
     setModal(!modal)
-  }
-
-  const handleResponse = () => {
-    setResponseModel(!responseModel)
   }
 
   // handle drop down filter
@@ -362,7 +318,6 @@ const DataTableWithButtons = () => {
     />
   )
 
-
   return (
     <Fragment>
       <Card>
@@ -372,13 +327,41 @@ const DataTableWithButtons = () => {
         <CardBody>
           <Row>
             <Col md='4'>
-              <label>Search label</label>
+              <label>Search Country</label>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
-                options={optionStatus}
+                options={optionCountry}
+                value={Filter}
+                onChange={data => {
+                  handleFilterByDropDown(data)
+                }}
+              />
+            </Col>
+            <Col md='4'>
+              <label>Search Country</label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionCountry}
+                value={Filter}
+                onChange={data => {
+                  handleFilterByDropDown(data)
+                }}
+              />
+            </Col>
+            <Col md='4'>
+              <label>Search Country</label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionCountry}
                 value={Filter}
                 onChange={data => {
                   handleFilterByDropDown(data)
@@ -433,7 +416,7 @@ const DataTableWithButtons = () => {
         
       </Card>
             <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} />
-            <Response open={responseModel} handleModal={handleResponse}  responseADDEDIT={responseADDEDIT} currentId={reviewId} data={data} />
+            
     </Fragment>
   )
 }

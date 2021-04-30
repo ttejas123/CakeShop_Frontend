@@ -16,15 +16,15 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const AddNewModal = (prop) => {
   const init = {
-    GivenBy: "",
-    Name: "",
-    avatar: "",
-    customizations: "",
-    id: 0,
-    rating: 0,
-    review: "",
-    reviewDate: "",
-    username: ""
+    id:0,
+    adminRes:"",
+    To:'',
+    From:'',
+    Order_Id:'',
+    Issue_Type:[{value: "dd", label: ""}],
+    Bid_Id:0,
+    Message:'',
+    Status:''
   }
   const [values, setValues] = useState('')
   // ** Custom close btn
@@ -34,22 +34,46 @@ const AddNewModal = (prop) => {
     if (prop.currentId === "") {
         setValues("")
     } else {
-        
         setValues({
           ...prop.data[prop.currentId - 1]
         })
     }
   }, [prop.currentId, prop.data])
+
+    const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+  //for drop down
+  const handleChange = (selectedOption) => {
+    
+    setValues(
+      {
+        ...values,
+        Currency : selectedOption.value
+      }
+    )
+  }
+//handle admin submit
+  const submitHandle = (event) => {
+    console.log(values)
+    prop.responseADDEDIT(values)
+    setValues(init)
+  }
   
   const renderClient = row => {
       const stateNum = Math.floor(Math.random() * 6),
         states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
         color = states[stateNum]
-        console.log(row)
       if (row.avatar) {
         return <Avatar className='mr-1' img={row.avatar} size='lg'  />
       } else {
-        return <Avatar color={color || 'primary'} className='mr-1' size='lg' content={row.Name || 'John Doe'} initials status="online" />
+        return <Avatar color={color || 'primary'} className='mr-1' size='lg' content={row.To || 'John Doe'} initials status="online" />
       }
   }
   return (
@@ -61,7 +85,7 @@ const AddNewModal = (prop) => {
       contentClassName='pt-0'
     >
       <ModalHeader className='mb-1' toggle={prop.handleModal} close={CloseBtn} tag='div'>
-        <h5 className='modal-title'>Review</h5>
+        <h5 className='modal-title'>Redressal Response</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <Row>
@@ -69,34 +93,44 @@ const AddNewModal = (prop) => {
             <div className='d-flex justify-content-left align-items-center'>
               {renderClient(values)}
               <div className='d-flex flex-column'>
-                <span className='font-weight-bold'>{values.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{values.username}</small>
+                <span className='font-weight-bold'>{values.To}</span>
+                <small className='text-truncate text-muted mb-0'>@{values.To}</small>
               </div>
             </div>
             <hr />
-            <div className="d-flex justify-content-between">
-              <div className='font-small-2'>User Name : </div>
-              <h5 className='mb-1'> {values.Name}</h5>
+            <div className='d-flex justify-content-between'>
+                <span className='font-small-2'>To :</span>
+                <h5 className='font-weight-bold'>{values.To}</h5>
             </div>
             <div className="d-flex justify-content-between">
-              <div className='font-small-2'>Given By : </div>
-              <h5 className='mb-1'> {values.GivenBy}</h5> 
+              <div className='font-small-2'>From : </div>
+              <h5 className='mb-1'> {values.From}</h5>
             </div>
             <div className="d-flex justify-content-between">
-              <div className='font-small-2'>Rating : </div>
-              <h5 className='mb-1'> {values.rating}</h5>
+              <div className='font-small-2'>Issue Type : </div>
+              <h5 className='mb-1'> {values.Issue_Type ? (<div> {values.Issue_Type[0].label} </div>) : null }</h5> 
             </div>
-            <div className="d-flex justify-content-between">
-              <div className='font-small-2'>Review Date : </div>
-              <h5 className='mb-1'> {values.reviewDate}</h5>
+            <div className="justify-content-between">
+              <div className='font-small-2'>Message : </div><br />
+              <h5 className='mb-1'> {values.Message}</h5>
             </div>
-            <div className=" justify-content-between">
-              <div className='font-small-2'>Review :  </div>
-               <br />
-              <h5 className='mb-1'> {values.review}</h5>
-            </div>
+            <hr />
+            <FormGroup>
+              <Label for='Name'>Admin Response</Label>
+              <InputGroup>
+                <Input type='textarea' rows='3'  name="adminRes" onChange={handleInputeChange} id='Message' placeholder='Your Response ...' value={values.adminRes} />
+              </InputGroup>
+            </FormGroup>
+            
           </Col>
         </Row>
+        <Button className='mr-1' color='primary' onClick={ e =>  {
+                                                          prop.handleModal() 
+                                                          submitHandle()
+                                                        }
+                                                      }>
+          Submit
+        </Button>
         <Button color='secondary' onClick={ prop.handleModal } outline>
           Cancel
         </Button>
