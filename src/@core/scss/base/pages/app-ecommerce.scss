@@ -9,7 +9,6 @@
 
 @import '../bootstrap-extended/include'; // Bootstrap includes
 @import '../components/include'; // Components includes
-
 $search-bar-height: 48px;
 
 .ecommerce-application {
@@ -401,11 +400,18 @@ $search-bar-height: 48px;
     }
   }
   // Checkout items list
+
+
+
+
+
+
+
   .checkout-items {
     .ecommerce-card {
       .item-img {
         img {
-          width: 200px;
+          width: 100px;
         }
       }
       // adding order as we have updated order for shop list view

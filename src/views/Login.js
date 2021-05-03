@@ -13,7 +13,7 @@ const Login = () => {
 
   return (
     <div className='auth-wrapper auth-v2'>
-      <Row className='auth-inner m-0 ' lg='8' sm='12'>
+      <Row className='auth-inner m-0 ' >
         <Link className='brand-logo' to='/'>
           { /* <svg viewBox='0 0 139 95' version='1.1' height='28'>
                       <defs>

@@ -133,6 +133,10 @@ const Routes = [
     component: lazy(() => import('../../views/report/Invoice/Invoice'))
   },
   {
+    path: '/Rfq7/rfqN',
+    component: lazy(() => import('../../views/Rfq7/rfqN'))
+  },
+  {
     path: '/login',
     component: lazy(() => import('../../views/Login')),
     layout: 'BlankLayout',
