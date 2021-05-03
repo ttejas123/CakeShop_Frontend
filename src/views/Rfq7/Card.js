@@ -34,7 +34,7 @@ const Cart = props => {
   const renderCart = () => {
     return products.map(item => {
       return (
-        <Card key={item.name} className='grid-view ecommerce-card '>
+        <Card key={item.name} className=' ecommerce-card '>
           <div className='item-img'>
             <Link to={`/apps/ecommerce/product/${item.slug}`}>
               <img className='img-fluid'   src={item.image} alt={item.name} />
