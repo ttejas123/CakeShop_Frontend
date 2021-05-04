@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { useParams } from 'react-router-dom'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col} from 'reactstrap'
 import UserProfileCard from "./profileComponets/userInfoCard.js"
@@ -17,7 +18,7 @@ import '@styles/base/pages/dashboard-ecommerce.scss'
 const EcommerceDashboard = () => {
   const Address = "Shivshakti so, A-35 0/4 sector-15 airoli navi mumbai 400708" 
   const Details = "This startup Provide IT Softwares to other startup and organizations"
-
+  const { id } = useParams()
    const { colors } = useContext(ThemeColors),
    trackBgColor = '#e9ecef'
 
@@ -25,7 +26,7 @@ const EcommerceDashboard = () => {
     <div id='dashboard-ecommerce'>
       <Row className='match-height' >
         <Col xl='8' md='6' xs='12'>
-          <UserProfileCard />
+          <UserProfileCard userId = {id} />
         </Col>
         <Col xl='4' md='6' xs='12'>
               <StatusCard header="Your Details"  created="Created Date" date="21-jan-2012" three="Email :" threeData="komal@gmail.com" Name="userName :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />

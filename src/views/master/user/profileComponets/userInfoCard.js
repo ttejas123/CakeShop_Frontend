@@ -1,9 +1,9 @@
 // ** React Imports
 import { Link } from 'react-router-dom'
-
+import { useEffect, useState } from 'react'
 // ** Custom Components
 import Avatar from '@components/avatar'
-
+import { data } from '../data.js'
 // ** Third Party Components
 import { DollarSign, TrendingUp, User, Check, Star, Flag, Phone } from 'react-feather'
 import {
@@ -25,33 +25,55 @@ import komal  from '../../../../assets/images/logo/komal.jpg'
 import pravin  from '../../../../assets/images/logo/pravin.jpg'
 import himanshu  from '../../../../assets/images/logo/himanshu.jpg'
 import reethika  from '../../../../assets/images/logo/reethika.jpg'
-const UserInfoCard = () => {
+const UserInfoCard = (props) => {
   // ** render user img
-  const statesArr = [
-    {
-      name: "Komal kamble",
-      avatar: komal,
-      email: 'komal@gmail.com',
-      lastLogin: '12-jan-2021'
+  const init = {
+      name: "",
+      avatar: "",
+      email: '',
+      lastLogin: ''
     }
-  ]
+  const [statesArr, setstatesArr] = useState(init)
+  console.log(props.userId)
+  useEffect(() => {
+    setstatesArr({
+      ...data[props.userId - 1]
+    })
+  }, [props])
+  
   const renderUserImg = () => {
-      return statesArr.map(state => {
+      const stateNum = Math.floor(Math.random() * 6),
+      states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+      color = states[stateNum]
+      const str = `${statesArr.first_name}`
+      const initial = str.substring(0, 1)
       return (
-        <div key={state.title} className='browser-states'>
+        <div key={statesArr.id} className='browser-states'>
           <Media>
-            { state.avatar ? (
-              <img src={state.avatar} width='80' height='60' className='mr-2 mb-3 h-25 w-10' />
+            { statesArr.avatar ? (
+              <img src={statesArr.avatar} width='80' height='60' className='mr-2 mb-3 h-25 w-10' />
               ) : (
-              <Avatar
-                size="lg"
-                color= "light-success"
-                content={state.name.substring(0, 1)}
-              />) }
+                <Avatar
+                  initials
+                  className='mr-2 mb-3 h-25 w-10'
+                  color={color}
+                  className='rounded mr-2 my-25'
+                  content={initial}
+                  contentStyles={{
+                    borderRadius: 0,
+                    fontSize: 'calc(36px)',
+                    width: '100%',
+                    height: '100%'
+                  }}
+                  style={{
+                    height: '80px',
+                    width: '80px'
+                  }}
+              />)
+             }
           </Media>
         </div>
       )
-    })
   }
 
   return (
@@ -64,12 +86,12 @@ const UserInfoCard = () => {
                 {renderUserImg()}
                 <div className='d-flex flex-column ml-1'>
                   <div className='user-info mb-1'>
-                    <h4 className='mb-1'><b>{statesArr[0].name}</b></h4>
+                    <h4 className='mb-1'><b>{statesArr.first_name} {statesArr.last_name}</b></h4>
                     <CardText tag='span'>
-                      {statesArr[0].email}
+                      {statesArr.email}
                     </CardText><br />
                     <CardText tag='span'>
-                      Last Login: {statesArr[0].lastLogin}
+                      Last Login: {statesArr.last_login}
                     </CardText>
                   </div>
                 </div>

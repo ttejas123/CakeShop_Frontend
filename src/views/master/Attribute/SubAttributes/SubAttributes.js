@@ -1,6 +1,5 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
-import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
@@ -15,7 +14,8 @@ import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
-import FormModel from './formModel'
+import FormModel from './addedit'
+import Response from './viewSubAttr'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -54,13 +54,13 @@ const renderClient = row => {
     color = states[stateNum]
 
   if (row.avatar.length) {
-    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
   } else {
-    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
   }
 }
 
-const optionBidStatus = [
+const optionSubAttribute = [
     {value: "", label: "Filter Status"},
     {value: "created", label: "created"},
     {value: "live", label: "live"},
@@ -78,6 +78,8 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
+   const [responseModel, setResponseModel] = useState(false)
+    const [reviewId, setreviewId] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
@@ -108,154 +110,51 @@ const DataTableWithButtons = () => {
           name: 'Id',
           selector: 'id',
           sortable: true,
-          minWidth: '50px'
+          minWidth: '50px',
+          maxWidth: '200px'
         },
         {
-          name: 'User',
-          minWidth: '250px',
-          selector: 'Name',
-          sortable: true,
+          name: 'Attributes',
+          selector: 'subAttributes',
+          minWidth: '150px',
           cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(row)}
-              <div className=''>
-                <Link to={`/bidDetails/${row.id}`}>
-                  <div className='user-info text-truncate d-flex flex-column'>
-                     <span className='font-weight-bold'>{row.Name}</span>
-                     <small className='text-truncate text-muted mb-0'>@{row.username}</small>
-                  </div>
-                </Link>  
+            <div key={row.id} className='d-flex align-items-center ml-2'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate d-flex '>
+                {row.subAttributes.map((val, index) => {
+                  if (index < 1) {
+                    return (
+                      <div className="mr-1">{val.value}</div>
+                      )
+                  }
+                })
+                }
+                {row.subAttributes.length > 1 ? (
+                                                  <u><a href="#" onClick={ () => { 
+                                                                   setreviewId(row.id)
+                                                                    setResponseModel(true)
+                                                                     } }>
+                                                      view
+                                                </a></u>
+                                                  ) : null}
+                </span>
+                
               </div>
             </div>
           )
         },
         {
-          name: 'Name',
-          selector: 'Name',
+          name: 'Sub Category',
+          selector: 'Attribute',
           sortable: true,
           minWidth: '130px',
           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Name}</span>
+                <span className='d-block font-weight-bold text-truncate'>{row.Attribute}</span>
               </div>
             </div>
           )
-        },
-        {
-          name: 'Customization Status',
-          selector: 'CustomStatus',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      <Badge className='text-capitalize' color={statusObj[row.CustomStatus[0].label]} pill>
-                          {row.CustomStatus[0].label}
-                      </Badge>
-                </span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'catalogue Id',
-          selector: 'catalogueId',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Quantity',
-          selector: 'ReqQuantity',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'created',
-          selector: 'created',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Go Live',
-          selector: 'GoLive',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Bid Close',
-          selector: 'BidCloseDate',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Bid Application',
-          selector: 'BidApplicationDate',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Bidders',
-          selector: 'NoOfBidder',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Requested Constomization',
-          selector: 'ReqCustomization',
-          sortable: true,
-          minWidth: '250px'
-        },
-        {
-          name: 'Delivery',
-          selector: 'DeliveryDate',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Seller Id',
-          selector: 'finalSellerId',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Buyer Budget',
-          selector: 'BuyerBudget',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Bid Status',
-          selector: 'BidStatus',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            
-            return (
-                <div key={row.id} className='d-flex align-items-center'>
-                  <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.BidStatus[0].label}</span>
-                  </div>
-                </div>
-            )
-          }
-        },
-        {
-          name: 'Delivery Location',
-          selector: 'DeliveryLocation',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            
-            return (
-                <div key={row.id} className='d-flex align-items-center'>
-                  <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.DeliveryLocation[0].label}</span>
-                  </div>
-                </div>
-            )
-          }
         },
         {
           name: 'Actions',
@@ -287,7 +186,10 @@ const DataTableWithButtons = () => {
   const handleModal = () => {
     setModal(!modal)
   }
-
+  
+  const handleResponse = () => {
+    setResponseModel(!responseModel)
+  }
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
     let updatedData = []
@@ -387,34 +289,14 @@ const DataTableWithButtons = () => {
   return (
     <Fragment>
       <Card>
-        <CardHeader>
-          <CardTitle tag='h4'>Search Filter</CardTitle>
-        </CardHeader>
-        <CardBody>
-          <Row>
-            <Col md='4'>
-              <Select
-                isClearable={false}
-                theme={selectThemeColors}
-                className='react-select'
-                classNamePrefix='select'
-                options={optionBidStatus}
-                value={Filter}
-                onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
-              />
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
-
-      <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Bids</CardTitle>
+          <CardTitle tag='h4'>Sub Category</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+            <Button className='ml-2' color='primary' onClick={handleModal}>
+                                        <Plus size={15} />
+                                        <span className='align-middle ml-50'>Add Sub Category</span>
+                </Button>
           </div>
         </CardHeader>
 
@@ -437,7 +319,7 @@ const DataTableWithButtons = () => {
         <DataTable
           noHeader
           pagination
-          selectableRows
+         
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -445,11 +327,12 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          selectableRowsComponent={BootstrapCheckbox}
+          
         />
         
       </Card>
-            <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} />
+          <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} />
+          <Response open={responseModel} handleModal={handleResponse} currentId={reviewId} data={data} />
     </Fragment>
   )
 }

@@ -24,6 +24,8 @@ import reethika  from '../../../assets/images/logo/reethika.jpg'
 export const data = [
       {
         id:1,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"30-10-2021",
         email: "tthakare73@gmail.com",
         designation:"job",
@@ -44,6 +46,8 @@ export const data = [
       },
       {
         id:2,
+        last_login : "04-10-2021",
+        avatar:pravin,
         CreatedDate :"23-10-2021",
         email: "pravinP@gmail.com",
         designation:"job",
@@ -65,6 +69,8 @@ export const data = [
 
       {
         id:3,
+        last_login : "04-10-2021",
+        avatar:komal,
         CreatedDate :"13-10-2021",
         designation:"job",
         email: "komal@gmail.com",
@@ -84,6 +90,8 @@ export const data = [
       },
       {
         id:4,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"21-10-2021",
         email: "mehul@gmail.com",
         designation:"job",
@@ -104,6 +112,8 @@ export const data = [
       },
       {
         id:5,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"30-10-2021",
         email: "harpriya@gmail.com",
         designation:"job",
@@ -124,6 +134,8 @@ export const data = [
       },
       {
         id:6,
+        last_login : "04-10-2021",
+        avatar:reethika,
         CreatedDate :"22-10-2021",
         email: "reethika@gmail.com",
         designation:"job",
@@ -144,6 +156,8 @@ export const data = [
       },
       {
         id:7,
+        last_login : "04-10-2021",
+        avatar:himanshu,
         CreatedDate :"29-10-2021",
         email: "himanshu@gmail.com",
         designation:"job",
@@ -164,6 +178,8 @@ export const data = [
       },
       {
         id:8,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"13-10-2021",
         email: "suryaDas@gmail.com",
         designation:"job",
@@ -184,6 +200,8 @@ export const data = [
       },
       {
         id:9,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"03-10-2021",
         email: "avinash@gmail.com",
         designation:"job",

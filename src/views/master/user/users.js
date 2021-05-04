@@ -1,5 +1,6 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
@@ -119,24 +120,44 @@ const DataTableWithButtons = () => {
           name: 'First-Name',
           selector: 'first_name',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+           cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <Link to={`/PReviewsle/${row.id}`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.first_name}</span>
+                </div>
+              </Link>  
+            </div>
+          )
         },
         {
           name: 'Last-Name',
           minWidth: '150px',
           selector: 'last_name',
-          sortable: true
+          sortable: true,
+           cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <Link to={`/PReviewsle/${row.id}`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.last_name}</span>
+                </div>
+              </Link>  
+            </div>
+          )
         },
         {
           name: 'Email',
           selector: 'email',
           sortable: true,
           minWidth: '250px',
-          cell: row => (
+           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.email}</span>
-              </div>
+              <Link to={`/PReviewsle/${row.id}`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.email}</span>
+                </div>
+              </Link>  
             </div>
           )
         },

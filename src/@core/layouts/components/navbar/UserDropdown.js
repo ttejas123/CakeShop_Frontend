@@ -48,23 +48,25 @@ const UserDropdown = () => {
         <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online' />
       </DropdownToggle>
       <DropdownMenu right>
-        <DropdownItem tag={Link} to='/kfbvkf' onClick={e => e.preventDefault()}>
-          <User size={14} className='mr-75' />
-          <span className='align-middle'>Profile</span>
+        
+        <DropdownItem tag={Link} to='/PReviewsle'>
+              <User size={14} className='mr-75' />
+              <span className='align-middle'>Profile</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
+        
+        <DropdownItem tag={Link} to='#'>
           <Bell size={14} className='mr-75' />
           <span className='align-middle'>Notification</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
+        <DropdownItem tag={Link} to='#'>
           <CheckSquare size={14} className='mr-75' />
           <span className='align-middle'>Report</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
+        <DropdownItem tag={Link} to='#'>
           <MessageSquare size={14} className='mr-75' />
           <span className='align-middle'>Status</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
+        <DropdownItem tag={Link} to='#'>
           <LogOut size={14} className='mr-75' />
           <span className='align-middle'>Logout</span>
         </DropdownItem>

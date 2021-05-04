@@ -222,6 +222,18 @@ $search-bar-height: 48px;
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
   // margin for both views
   .grid-view,
   .list-view {
@@ -234,7 +246,7 @@ $search-bar-height: 48px;
   .grid-view {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 2rem;
+    column-gap: 1rem;
     &.wishlist-items {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
@@ -245,7 +257,8 @@ $search-bar-height: 48px;
       // Item Image
       .item-img {
         padding-top: 0.5rem;
-        min-height: 15.85rem;
+        min-height: 50.85rem;
+        max-height: 80.85rem;
         display: flex;
         align-items: center;
       }
@@ -276,7 +289,7 @@ $search-bar-height: 48px;
       }
 
       .item-name {
-        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
       }
 
       // Item Description
@@ -302,10 +315,27 @@ $search-bar-height: 48px;
     display: grid;
     grid-template-columns: 1fr;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     .ecommerce-card {
       overflow: hidden;
       display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
+      grid-template-row: 1fr 4fr;
+      grid-template-columns: 1fr 3fr 3fr;
 
       // list view image
       .item-img {
@@ -400,23 +430,17 @@ $search-bar-height: 48px;
     }
   }
   // Checkout items list
-
-
-
-
-
-
-
   .checkout-items {
     .ecommerce-card {
       .item-img {
         img {
-          width: 100px;
+          width: 200px;
         }
       }
       // adding order as we have updated order for shop list view
       .item-name {
         order: 0 !important;
+
       }
       .item-company,
       .item-rating {
@@ -604,6 +628,8 @@ $search-bar-height: 48px;
     }
   }
 }
+
+
 @include media-breakpoint-down(sm) {
   .ecommerce-application {
     .grid-view.wishlist-items {

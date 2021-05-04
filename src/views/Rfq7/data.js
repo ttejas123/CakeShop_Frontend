@@ -14,12 +14,12 @@ import komal  from '../../assets/images/logo/komal.jpg'
 import pravin  from '../../assets/images/logo/pravin.jpg'
 import himanshu  from '../../assets/images/logo/himanshu.jpg'
 import reethika  from '../../assets/images/logo/reethika.jpg'
-
+import useC from '../../assets/images/logo/useC.jpg'
 
 //expot data
 export const products = [
       {
-        image: pravin,
+        image: useC,
         name:"Tejas Thakare",
        brand:"Pravin",
        price:2000,
