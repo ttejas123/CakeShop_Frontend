@@ -20,8 +20,37 @@ import komal  from '../../../assets/images/logo/komal.jpg'
 import pravin  from '../../../assets/images/logo/pravin.jpg'
 import himanshu  from '../../../assets/images/logo/himanshu.jpg'
 import reethika  from '../../../assets/images/logo/reethika.jpg'
+import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Button,
+  UncontrolledButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Input,
+  Label,
+  Row,
+  Col,
+  Badge, UncontrolledDropdown
+} from 'reactstrap'
 
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
 
+  if (row.avatar.length) {
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+  }
+}
 //expot data
 export const data = [
       {
@@ -143,4 +172,103 @@ export const data1 = [
         Name: "MasterCard",
         id: 8
       }
+]
+export const columns = [
+  {
+    name: 'Id',
+    selector: 'id',
+    sortable: true,
+    minWidth: '50px'
+  },
+  {
+    name: 'Product Name',
+    selector: 'productName',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'EAN UPC Code',
+    selector: 'ean_upc_code',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Category',
+    selector: 'category',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Sub Category',
+    selector: 'subCategory',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Product Category',
+    selector: 'productCategory',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Hsn Code',
+    selector: 'hsnCode',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'gst(Number)%',
+    selector: 'gstNumber',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'MRP',
+    selector: 'mrp',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Description',
+    selector: 'description',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+      name: 'User',
+      minWidth: '150px',
+      selector: 'Name',
+      sortable: true,
+      cell: row => (
+        <div className='d-flex justify-content-left align-items-center'>
+          {renderClient(row)}
+        </div>
+      )
+    },
+  {
+    name: 'Actions',
+    allowOverflow: true,
+    cell: row => {
+      return (
+        <div className='d-flex'>
+          <UncontrolledDropdown>
+            <DropdownToggle className='pr-1' tag='span'>
+              <Trash size={15} onClick={e => {
+                                                                              e.preventDefault()
+                                                                              deleteCountry(row.id)
+                                                                            } }/>
+            </DropdownToggle>
+          </UncontrolledDropdown>
+          <Link  to={`/edit-product/${row.id}`}><Edit  
+            size={15} 
+            onClick={ () => { 
+                              setCurrentId(row.id)
+                              setModal(true)
+                               } }>
+                                 <Link to='/edit-product'/>
+                               </Edit></Link>
+        </div>
+      )
+    }
+  }
 ]

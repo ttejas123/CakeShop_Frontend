@@ -10,7 +10,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data, columns } from './data'
+import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
@@ -47,17 +47,17 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 
 
 // ** Renders Client Columns
-// const renderClient = row => {
-//   const stateNum = Math.floor(Math.random() * 6),
-//     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-//     color = states[stateNum]
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
 
-//   if (row.avatar.length) {
-//     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
-//   } else {
-//     return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
-//   }
-// }
+  if (row.avatar.length) {
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+  }
+}
 
 const optionBidStatus = [
     {value: "", label: "Filter Status"},
@@ -69,7 +69,7 @@ const optionBidStatus = [
     {value: "productCategory", label: "Product Category"}
   ]
 
-const ProductList = () => {
+const WarehouseList = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -102,105 +102,76 @@ const ProductList = () => {
   }
 
   //columns
-  // const columns = [
-  //       {
-  //         name: 'Id',
-  //         selector: 'id',
-  //         sortable: true,
-  //         minWidth: '50px'
-  //       },
-  //       {
-  //         name: 'Product Name',
-  //         selector: 'productName',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'EAN UPC Code',
-  //         selector: 'ean_upc_code',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Category',
-  //         selector: 'category',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Sub Category',
-  //         selector: 'subCategory',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Product Category',
-  //         selector: 'productCategory',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Hsn Code',
-  //         selector: 'hsnCode',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'gst(Number)%',
-  //         selector: 'gstNumber',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'MRP',
-  //         selector: 'mrp',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Description',
-  //         selector: 'description',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //           name: 'User',
-  //           minWidth: '150px',
-  //           selector: 'Name',
-  //           sortable: true,
-  //           cell: row => (
-  //             <div className='d-flex justify-content-left align-items-center'>
-  //               {renderClient(row)}
-  //             </div>
-  //           )
-  //         },
-  //       {
-  //         name: 'Actions',
-  //         allowOverflow: true,
-  //         cell: row => {
-  //           return (
-  //             <div className='d-flex'>
-  //               <UncontrolledDropdown>
-  //                 <DropdownToggle className='pr-1' tag='span'>
-  //                   <Trash size={15} onClick={e => {
-  //                                                                                   e.preventDefault()
-  //                                                                                   deleteCountry(row.id)
-  //                                                                                 } }/>
-  //                 </DropdownToggle>
-  //               </UncontrolledDropdown>
-  //               <Link  to={`/edit-product/${row.id}`}><Edit  
-  //                 size={15} 
-  //                 onClick={ () => { 
-  //                                   setCurrentId(row.id)
-  //                                   setModal(true)
-  //                                    } }>
-  //                                      <Link to='/edit-product'/>
-  //                                    </Edit></Link>
-  //             </div>
-  //           )
-  //         }
-  //       }
-  //   ]
+  const columns = [
+        {
+          name: 'Name',
+          selector: 'name',
+          sortable: false,
+          minWidth: '50px'
+        },
+        {
+          name: 'Address',
+          selector: 'address',
+          sortable: false,
+          minWidth: '150px'
+        },
+        {
+          name: 'City',
+          selector: 'city',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'State',
+          selector: 'state',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Country',
+          selector: 'country',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: `Bidoya's Warehouse`,
+          selector: 'isBidoyasWarehouse',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Created Date',
+          selector: 'createdDate',
+          sortable: false,
+          minWidth: '150px'
+        },
+        {
+          name: 'Actions',
+          allowOverflow: true,
+          cell: row => {
+            return (
+              <div className='d-flex'>
+                <UncontrolledDropdown>
+                  <DropdownToggle className='pr-1' tag='span'>
+                    <Trash size={15} onClick={e => {
+                                                                                    e.preventDefault()
+                                                                                    deleteCountry(row.id)
+                                                                                  } }/>
+                  </DropdownToggle>
+                </UncontrolledDropdown>
+                <Link  to={`/edit-warehouse/${row.id}`}><Edit  
+                  size={15} 
+                  onClick={ () => { 
+                                    setCurrentId(row.id)
+                                    setModal(true)
+                                     } }>
+                                       <Link to='/edit-warehouse'/>
+                                     </Edit></Link>
+              </div>
+            )
+          }
+        }
+    ]
 
 
   // ** Function to handle Modal toggle
@@ -303,6 +274,13 @@ const ProductList = () => {
       <Card>
         <CardHeader>
           <CardTitle tag='h4'>Search Filter</CardTitle>
+          <Link  to={`/edit-warehouse
+          `}>
+          <Button className='ml-2' color='primary'>
+              <Plus size={15} />
+              <span className='align-middle ml-50'>Add Warehouse</span>
+            </Button>
+            </Link>
         </CardHeader>
         <CardBody>
           <Row>
@@ -326,7 +304,7 @@ const ProductList = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Products</CardTitle>
+          <CardTitle tag='h4'>Warehouse List</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             
           </div>
@@ -368,4 +346,4 @@ const ProductList = () => {
   )
 }
 
-export default ProductList
+export default WarehouseList

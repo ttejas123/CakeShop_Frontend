@@ -24,19 +24,22 @@ const EcommerceDashboard = () => {
   return (
     <div id='dashboard-ecommerce'>
       <Row className='match-height' >
-        <Col xl='8' md='6' xs='12'>
+        <Col xl='4' md='6' xs='12'>
           <UserProfileCard />
         </Col>
         <Col xl='4' md='6' xs='12'>
               <StatusCard header="Your Details"  created="Created Date" date="21-jan-2012" three="Email :" threeData="komal@gmail.com" Name="userName :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />
         </Col>
+        <Col xl='4' md='6' xs='12'>
+          <StatusCard header="Organization" three="#WareHouse :"  created="Created Date" date="21-jan-2012" threeData="Navi Mumbai" Name="Name :" secName="No. Members :" thrName="Headquarters :" thrNameData="Navi mumbai" NameData="Coense" secNameData="12"/>
+        </Col>
       </Row>
 
       <Row className='match-height' >
-        <Col xl='4' md='6' xs='12'>
+        <Col xl='8' md='6' xs='12'>
           <Card className='card-statistics'>
            <CardHeader>  
-              <CardTitle tag='h5'><h4>Kyc Submitted</h4></CardTitle>
+              <CardTitle tag='h5'><h4>Documents Submitted</h4></CardTitle>
            </CardHeader>  
             <CardBody>
               <Row className='match-height'>
@@ -46,9 +49,6 @@ const EcommerceDashboard = () => {
               </Row>
             </CardBody>  
           </Card>
-        </Col>
-        <Col xl='4' md='6' xs='12'>
-          <StatusCard header="Organization" three="#WareHouse :"  created="Created Date" date="21-jan-2012" threeData="Navi Mumbai" Name="Name :" secName="No. Members :" thrName="Headquarters :" thrNameData="Navi mumbai" NameData="Coense" secNameData="12"/>
         </Col>
         <Col xl='4' md='6' xs='12'>
           <Statistics/>

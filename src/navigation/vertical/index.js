@@ -138,6 +138,24 @@ export default [
         navLink: '/financialPartner-list'
       },
       {
+        id: 'WarehouseList',
+        title: 'Warehouse',
+        icon: <Circle size={20} />,
+        navLink: '/warehouse-list'
+      },
+      {
+        id: 'onGroundStaff',
+        title: 'On Ground Staff',
+        icon: <Circle size={20} />,
+        navLink: '/on-ground-staff'
+      },
+      {
+        id: 'badges',
+        title: 'Badges',
+        icon: <Circle size={20} />,
+        navLink: '/badges-list'
+      },
+      {
         id: 'ProductPage',
         title: 'Product',
         icon: <Circle size={20} />,
@@ -161,10 +179,54 @@ export default [
                   navLink: '/edit-product'
                 },
                 {
+                  id: 'add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/add-product'
+                },
+                {
                   id: 'productCategory',
                   title: 'Product Category',
                   icon: <Circle size={20} />,
                   navLink: '/product-category'
+                }
+                
+        ]
+      },
+      {
+        id: 'EmployeePage',
+        title: 'Employee',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/employee-list'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/employee-view'
+                },
+                {
+                  id: 'edit',
+                  title: 'Edit',
+                  icon: <Circle size={20} />,
+                  navLink: '/edit-employee'
+                },
+                {
+                  id: 'backupAccounts',
+                  title: 'BackUp Accounts',
+                  icon: <Circle size={20} />,
+                  navLink: '/backup-accounts'
+                },
+                {
+                  id: 'rightAssignment',
+                  title: 'Right Assignment',
+                  icon: <Circle size={20} />,
+                  navLink: '/right-assignment'
                 }
                 
         ]
@@ -191,6 +253,31 @@ export default [
                   title: 'Edit',
                   icon: <Circle size={20} />,
                   navLink: '/edit-corporate'
+                }
+        ]
+      },
+      {
+        id: 'MembershipPage',
+        title: 'Membership',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/membership-list'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/membershipView'
+                },
+                {
+                  id: 'edit',
+                  title: 'Edit',
+                  icon: <Circle size={20} />,
+                  navLink: '/edit-membership'
                 }
         ]
       },
@@ -237,6 +324,18 @@ export default [
         title: 'Approval',
         icon: <Circle size={20} />,
         navLink: '/approval'
+      },
+      {
+        id: 'emails',
+        title: 'Emails',
+        icon: <Circle size={20} />,
+        navLink: '/report/emails-list'
+      },
+      {
+        id: 'ticket',
+        title: 'Tickets',
+        icon: <Circle size={20} />,
+        navLink: '/report/ticket-List'
       },
       {
         id: 'OnGround',

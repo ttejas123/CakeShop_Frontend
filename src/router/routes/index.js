@@ -37,6 +37,18 @@ const Routes = [
     component: lazy(() => import('../../views/master/bids/edit'))
   },
   {
+    path: '/edit-employee',
+    component: lazy(() => import('../../views/master/employee/editEmployee'))
+  },
+  {
+    path: '/backup-accounts',
+    component: lazy(() => import('../../views/master/employee/backupAccount'))
+  },
+  {
+    path: '/right-assignment',
+    component: lazy(() => import('../../views/master/employee/rightAssignment.js'))
+  },
+  {
     path: '/vas',
     component: lazy(() => import('../../views/master/vas/vas'))
   },
@@ -73,6 +85,42 @@ const Routes = [
     component: lazy(() => import('../../views/master/company/CompanyList'))
   },
   {
+    path: '/warehouse-list',
+    component: lazy(() => import('../../views/master/warehouse/warehouseList'))
+  },
+  {
+    path: '/membership-list',
+    component: lazy(() => import('../../views/master/membership/membershipList'))
+  },
+  {
+    path: '/bga-list',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaList'))
+  },
+  {
+    path: '/edit-bank-guarrante-appl',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/editBga'))
+  },
+  {
+    path: '/badges-list',
+    component: lazy(() => import('../../views/master/badges/badgesList'))
+  },
+  {
+    path: '/edit-warehouse',
+    component: lazy(() => import('../../views/master/warehouse/editWarehouse'))
+  },
+  {
+    path: '/edit-badge',
+    component: lazy(() => import('../../views/master/badges/editBadge'))
+  },
+  {
+    path: '/edit-membership',
+    component: lazy(() => import('../../views/master/membership/editMembership'))
+  },
+  {
+    path: '/on-ground-staff',
+    component: lazy(() => import('../../views/master/onGroundStaff/OnGroundStaff'))
+  },
+  {
     path: '/industry-list',
     component: lazy(() => import('../../views/master/industry/IndustryList'))
   },
@@ -97,6 +145,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/editProduct'))
   },
   {
+    path: '/add-product',
+    component: lazy(() => import('../../views/master/product/add'))
+  },
+  {
     path: '/edit-corporate',
     component: lazy(() => import('../../views/master/corporate/editCorporate'))
   },
@@ -107,6 +159,10 @@ const Routes = [
   {
     path: '/user-list',
     component: lazy(() => import('../../views/master/user/users'))
+  },
+  {
+    path: '/report/ticket-list',
+    component: lazy(() => import('../../views/report/tickets/ticketsList'))
   },
   {
     path: '/rfq',
@@ -123,6 +179,14 @@ const Routes = [
   {
     path: '/report/redressal',
     component: lazy(() => import('../../views/report/Redressal/Redressal'))
+  },
+  {
+    path: '/report/emails-list',
+    component: lazy(() => import('../../views/report/emails/emailsList'))
+  },
+  {
+    path: '/report/add-email',
+    component: lazy(() => import('../../views/report/emails/addEmail'))
   },
   {
     path: '/login',

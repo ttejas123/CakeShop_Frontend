@@ -61,15 +61,15 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 
 const optionBidStatus = [
     {value: "", label: "Filter Status"},
-    {value: "productName", label: "Product Name"},
+    {value: "UserName", label: "User Name"},
     {value: "mrp", label: "MRP"},
     {value: "gst", label: "GSt"},
     {value: "category", label: "Category"},
     {value: "subCategory", label: "Sub Category"},
-    {value: "productCategory", label: "Product Category"}
+    {value: "UserCategory", label: "User Category"}
   ]
 
-const ProductList = () => {
+const UserTable = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -99,113 +99,6 @@ const ProductList = () => {
      //here we hande event which comming from addNewModel.js (Form for add and edit)
       setCurrentId("")
       console.log(val)
-  }
-
-  //columns
-  // const columns = [
-  //       {
-  //         name: 'Id',
-  //         selector: 'id',
-  //         sortable: true,
-  //         minWidth: '50px'
-  //       },
-  //       {
-  //         name: 'Product Name',
-  //         selector: 'productName',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'EAN UPC Code',
-  //         selector: 'ean_upc_code',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Category',
-  //         selector: 'category',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Sub Category',
-  //         selector: 'subCategory',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Product Category',
-  //         selector: 'productCategory',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Hsn Code',
-  //         selector: 'hsnCode',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'gst(Number)%',
-  //         selector: 'gstNumber',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'MRP',
-  //         selector: 'mrp',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Description',
-  //         selector: 'description',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //           name: 'User',
-  //           minWidth: '150px',
-  //           selector: 'Name',
-  //           sortable: true,
-  //           cell: row => (
-  //             <div className='d-flex justify-content-left align-items-center'>
-  //               {renderClient(row)}
-  //             </div>
-  //           )
-  //         },
-  //       {
-  //         name: 'Actions',
-  //         allowOverflow: true,
-  //         cell: row => {
-  //           return (
-  //             <div className='d-flex'>
-  //               <UncontrolledDropdown>
-  //                 <DropdownToggle className='pr-1' tag='span'>
-  //                   <Trash size={15} onClick={e => {
-  //                                                                                   e.preventDefault()
-  //                                                                                   deleteCountry(row.id)
-  //                                                                                 } }/>
-  //                 </DropdownToggle>
-  //               </UncontrolledDropdown>
-  //               <Link  to={`/edit-product/${row.id}`}><Edit  
-  //                 size={15} 
-  //                 onClick={ () => { 
-  //                                   setCurrentId(row.id)
-  //                                   setModal(true)
-  //                                    } }>
-  //                                      <Link to='/edit-product'/>
-  //                                    </Edit></Link>
-  //             </div>
-  //           )
-  //         }
-  //       }
-  //   ]
-
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
   }
 
   // handle drop down filter
@@ -246,12 +139,12 @@ const ProductList = () => {
       updatedData = data.filter(item => {
         const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.productName.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.UserName.toLowerCase().startsWith(value.toLowerCase()) ||
           item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
           item.gst.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.productName.toLowerCase().includes(value.toLowerCase()) ||
+          item.UserName.toLowerCase().includes(value.toLowerCase()) ||
           item.mrp.toLowerCase().includes(value.toLowerCase()) ||
           item.gst.toLowerCase().includes(value.toLowerCase()) 
           
@@ -278,7 +171,7 @@ const ProductList = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 5 : data.length / 5 || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -300,7 +193,7 @@ const ProductList = () => {
 
   return (
     <Fragment>
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle tag='h4'>Search Filter</CardTitle>
         </CardHeader>
@@ -322,11 +215,11 @@ const ProductList = () => {
           </Row>
         </CardBody>
       </Card>
-
-      <Card>
+ */}
+      <Card className='mb-0'>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Products</CardTitle>
+          <CardTitle tag='h4'>Users</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             
           </div>
@@ -353,7 +246,7 @@ const ProductList = () => {
           pagination
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={5}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
@@ -368,4 +261,4 @@ const ProductList = () => {
   )
 }
 
-export default ProductList
+export default UserTable
