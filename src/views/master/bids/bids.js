@@ -1,5 +1,6 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
@@ -53,9 +54,9 @@ const renderClient = row => {
     color = states[stateNum]
 
   if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
   }
 }
 
@@ -117,10 +118,13 @@ const DataTableWithButtons = () => {
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
               {renderClient(row)}
-              <div className='d-flex flex-column'>
-                
-                  <span className='font-weight-bold'>{row.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
+              <div className=''>
+                <Link to={`/bidDetails/${row.id}`}>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.Name}</span>
+                     <small className='text-truncate text-muted mb-0'>@{row.username}</small>
+                  </div>
+                </Link>  
               </div>
             </div>
           )

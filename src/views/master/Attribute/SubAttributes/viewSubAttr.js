@@ -16,15 +16,10 @@ import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const AddNewModal = (prop) => {
   const init = {
-    GivenBy: "",
-    Name: "",
-    avatar: "",
-    customizations: "",
-    id: 0,
-    rating: 0,
-    review: "",
-    reviewDate: "",
-    username: ""
+    id:2,
+    Attribute: "",
+    subAttributes: ""
+        
   }
   const [values, setValues] = useState('')
   // ** Custom close btn
@@ -34,24 +29,12 @@ const AddNewModal = (prop) => {
     if (prop.currentId === "") {
         setValues("")
     } else {
-        
         setValues({
           ...prop.data[prop.currentId - 1]
         })
     }
   }, [prop.currentId, prop.data])
-  
-  const renderClient = row => {
-      const stateNum = Math.floor(Math.random() * 6),
-        states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-        color = states[stateNum]
-        console.log(row)
-      if (row.avatar) {
-        return <Avatar className='mr-1' img={row.avatar} size='lg'  />
-      } else {
-        return <Avatar color={color || 'primary'} className='mr-1' size='lg' content={row.Name || 'John Doe'} initials status="online" />
-      }
-  }
+
   return (
     <Modal
       isOpen={prop.open}
@@ -61,42 +44,38 @@ const AddNewModal = (prop) => {
       contentClassName='pt-0'
     >
       <ModalHeader className='mb-1' toggle={prop.handleModal} close={CloseBtn} tag='div'>
-        <h5 className='modal-title'>Review</h5>
+        <h5 className='modal-title'>View Sub Category</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <Row>
           <Col xs='12'>
             <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(values)}
+             
               <div className='d-flex flex-column'>
-                <span className='font-weight-bold'>{values.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{values.username}</small>
+                <span className='font-weight-bold'>Sub Category: <b>{values.Attribute}</b></span>
+                
               </div>
             </div>
             <hr />
-            <div className="d-flex justify-content-between">
-              <div className='font-small-2'>User Name : </div>
-              <h5 className='mb-1'> {values.Name}</h5>
-            </div>
-            <div className="d-flex justify-content-between">
-              <div className='font-small-2'>Given By : </div>
-              <h5 className='mb-1'> {values.GivenBy}</h5> 
-            </div>
-            <div className="d-flex justify-content-between">
-              <div className='font-small-2'>Rating : </div>
-              <h5 className='mb-1'> {values.rating}</h5>
-            </div>
-            <div className="d-flex justify-content-between">
-              <div className='font-small-2'>Review Date : </div>
-              <h5 className='mb-1'> {values.reviewDate}</h5>
-            </div>
-            <div className=" justify-content-between">
-              <div className='font-small-2'>Review :  </div>
-               <br />
-              <h5 className='mb-1'> {values.review}</h5>
+            <div className='d-flex justify-content-between mb-2'>
+                <span className='font-small-2'>Attributes :
+                      {prop.data[prop.currentId - 1] ? (
+                        <div className="mt-1">
+                          {prop.data[prop.currentId - 1].subAttributes.map((val) => {
+                             return (
+                                <Badge className='text-capitalize ml-1' color='primary' pill>
+                                    {val.value}
+                                </Badge>
+                              )
+                          })}
+                        </div>
+                        ) : null}
+                          
+                </span>
             </div>
           </Col>
         </Row>
+        
         <Button color='secondary' onClick={ prop.handleModal } outline>
           Cancel
         </Button>

@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { useParams } from 'react-router-dom'
 import { Row, Col } from 'reactstrap'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 
@@ -11,6 +12,7 @@ import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
 
 const EcommerceDashboard = () => {
+  const { id } = useParams()
   const ShoopingAddre = {
     shopName: "Shivshakti so, CHS",
     shopNumber: "A/35, 0/4",
@@ -37,7 +39,7 @@ const EcommerceDashboard = () => {
     <div id='dashboard-ecommerce'>
       <Row >
         <Col xl='8' md='6' xs='12'>
-          <StatsCard cols={{ xl: '3', sm: '6' }} />
+          <StatsCard userId = {id} cols={{ xl: '3', sm: '6' }} />
           {/* <Timeline /> */}
         </Col>
         <Col xl='4' md='2' xs='12'>

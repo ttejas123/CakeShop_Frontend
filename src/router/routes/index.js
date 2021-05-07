@@ -17,7 +17,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/state/state'))
   },
   {
-    path: '/bidDetails',
+    path: '/bidDetails/:id',
     component: lazy(() => import('../../views/master/bids/bidDetails'))
   },
   {
@@ -25,7 +25,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
   {
-    path: '/PReviewsle',
+    path: '/PReviewsle/:id',
     component: lazy(() => import('../../views/master/user/userProfile'))
   },
   {
@@ -173,6 +173,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/edit'))
   },
   {
+    path: '/master/attribute',
+    component: lazy(() => import('../../views/master/Attribute/Attributes/Attributes'))
+  },
+  {
+    path: '/master/subattribute',
+    component: lazy(() => import('../../views/master/Attribute/SubAttributes/SubAttributes'))
+  },
+  {
     path: '/report/review',
     component: lazy(() => import('../../views/report/Reviews/Reviews'))
   },
@@ -187,6 +195,14 @@ const Routes = [
   {
     path: '/report/add-email',
     component: lazy(() => import('../../views/report/emails/addEmail'))
+  },
+  {
+    path: '/report/Invoice',
+    component: lazy(() => import('../../views/report/Invoice/Invoice'))
+  },
+  {
+    path: '/Rfq7/rfqN',
+    component: lazy(() => import('../../views/Rfq7/rfqN'))
   },
   {
     path: '/login',

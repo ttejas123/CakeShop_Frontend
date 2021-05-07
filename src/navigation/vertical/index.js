@@ -66,22 +66,35 @@ export default [
         navLink: '/city-list'
       },
       {
-        id: 'CurrencyList',
-        title: 'Currrency',
-        icon: <Circle size={20} />,
-        navLink: '/currency-list'
-      },
-      {
         id: 'Category',
         title: 'Category',
         icon: <Circle size={20} />,
         navLink: '/category-list'
-      },
+      }, 
       {
-        id: 'SubCategory',
+        id: 'Sub Category',
         title: 'Sub Category',
         icon: <Circle size={20} />,
-        navLink: '/sub-category-list'
+        children: [
+          {
+            id: 'Sub_Category',
+            title: 'Sub Category',
+            icon: <Circle size={20} />,
+            navLink: '/master/subattribute'
+          },
+          {
+            id: 'Attributes',
+            title: 'Attributes',
+            icon: <Circle size={20} />,
+            navLink: '/master/attribute'
+          }
+        ]
+      },   
+      {
+        id: 'CurrencyList',
+        title: 'Currrency',
+        icon: <Circle size={20} />,
+        navLink: '/currency-list'
       },
       {
         id: 'KYC',
@@ -340,8 +353,10 @@ export default [
       {
         id: 'OnGround',
         title: 'Onground',
+        id: 'Invoice',
+        title: 'Invoice',
         icon: <Circle size={20} />,
-        navLink: '/onground'
+        navLink: '/report/Invoice'
       },
       {
         id: 'Redressal',
@@ -354,6 +369,12 @@ export default [
         title: 'Reviews',
         icon: <Circle size={20} />,
         navLink: '/report/review'
+      },
+      {
+        id: 'RFQ_Nigotiation',
+        title: 'RFQ Nigotiation',
+        icon: <Circle size={20} />,
+        navLink: '/Rfq7/rfqN'
       }
     ]
   },

@@ -1,5 +1,6 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
@@ -117,32 +118,52 @@ const DataTableWithButtons = () => {
   const columns = [
         {
           name: 'First-Name',
-          selector: 'firstName',
+          selector: 'first_name',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+           cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <Link to={`/PReviewsle/${row.id}`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.first_name}</span>
+                </div>
+              </Link>  
+            </div>
+          )
         },
         {
           name: 'Last-Name',
           minWidth: '150px',
-          selector: 'lastName',
-          sortable: true
+          selector: 'last_name',
+          sortable: true,
+           cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <Link to={`/PReviewsle/${row.id}`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.last_name}</span>
+                </div>
+              </Link>  
+            </div>
+          )
         },
         {
           name: 'Email',
           selector: 'email',
           sortable: true,
           minWidth: '250px',
-          cell: row => (
+           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.email}</span>
-              </div>
+              <Link to={`/PReviewsle/${row.id}`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.email}</span>
+                </div>
+              </Link>  
             </div>
           )
         },
         {
           name: 'Mobile',
-          selector: 'mobileNo',
+          selector: 'mobile',
           sortable: true,
           minWidth: '150px'
         },
@@ -417,9 +438,12 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Bids</CardTitle>
+          <CardTitle tag='h4'>Users</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+              <Button className='ml-2' color='primary' onClick={handleModal}>
+                  <Plus size={15} />
+                  <span className='align-middle ml-50'>Add New</span>
+              </Button>
           </div>
         </CardHeader>
 

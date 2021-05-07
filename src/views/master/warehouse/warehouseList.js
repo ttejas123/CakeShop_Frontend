@@ -274,8 +274,7 @@ const WarehouseList = () => {
       <Card>
         <CardHeader>
           <CardTitle tag='h4'>Search Filter</CardTitle>
-          <Link  to={`/edit-warehouse
-          `}>
+          <Link  to={`/edit-warehouse`}>
           <Button className='ml-2' color='primary'>
               <Plus size={15} />
               <span className='align-middle ml-50'>Add Warehouse</span>

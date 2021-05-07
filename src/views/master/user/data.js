@@ -23,10 +23,14 @@ import reethika  from '../../../assets/images/logo/reethika.jpg'
 //expot data
 export const data = [
       {
+        id:1,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"30-10-2021",
         email: "tthakare73@gmail.com",
-        
-        mobileNo : 321342,
+        designation:"job",
+        DeliveryLocation:[{value:""}],
+        mobile : 321342,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
        
@@ -37,14 +41,18 @@ export const data = [
         country : [{value: "USA", label: "USA"}],
         state : [{value: "Jorgi", label: "Jorgi"}],
         city : [{value: "New York", label: "New York"}],
-        lastName: "Thakare",
-        firstName: "Tejas"
+        last_name: "Thakare",
+        first_name: "Tejas"
       },
       {
+        id:2,
+        last_login : "04-10-2021",
+        avatar:pravin,
         CreatedDate :"23-10-2021",
         email: "pravinP@gmail.com",
+        designation:"job",
         
-        mobileNo : 321342,
+        mobile : 321342,
         
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         
@@ -55,13 +63,18 @@ export const data = [
         country : [{value: "Japan", label: "Japan"}],
         state : [{value: "Osaka", label: "Osaka"}],
         city : [{value: "kimoye", label: "kimoye"}],
-        lastName: "Poshmani",
-        firstName: "Pravin"
+        last_name: "Poshmani",
+        first_name: "Pravin"
       },
+
       {
+        id:3,
+        last_login : "04-10-2021",
+        avatar:komal,
         CreatedDate :"13-10-2021",
+        designation:"job",
         email: "komal@gmail.com",
-        mobileNo : 541342,
+        mobile : 541342,
         
         userType: [{value: "Both", label: "Both"}], //Buyer Seller
        
@@ -72,14 +85,18 @@ export const data = [
         country : [{value: "India", label: "India"}],
         state : [{value: "kerla", label: "kerla"}],
         city : [{value: "sharana", label: "sharana"}],
-        lastName: "Kamble",
-        firstName: "komal"
+        last_name: "Kamble",
+        first_name: "komal"
       },
       {
+        id:4,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"21-10-2021",
         email: "mehul@gmail.com",
+        designation:"job",
         
-        mobileNo : 721342,
+        mobile : 721342,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
@@ -90,14 +107,18 @@ export const data = [
         country : [{value: "Viatnam", label: "Viatnam"}],
         state : [{value: "nakoi", label: "nakoi"}],
         city : [{value: "noki", label: "noki"}],
-        lastName: "B",
-        firstName: "Mehul"
+        last_name: "B",
+        first_name: "Mehul"
       },
       {
+        id:5,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"30-10-2021",
         email: "harpriya@gmail.com",
+        designation:"job",
         
-        mobileNo : 2331342,
+        mobile : 2331342,
         
         userType: [{value: "Both", label: "Both"}],  //Buyer Seller
         
@@ -108,14 +129,18 @@ export const data = [
         country : [{value: "Sweedan", label: "Sweedan"}],
         state : [{value: "seedon", label: "seedon"}],
         city : [{value: "nipu", label: "nipu"}],
-        lastName: "H",
-        firstName: "Harpriya"
+        last_name: "H",
+        first_name: "Harpriya"
       },
       {
+        id:6,
+        last_login : "04-10-2021",
+        avatar:reethika,
         CreatedDate :"22-10-2021",
         email: "reethika@gmail.com",
+        designation:"job",
         
-        mobileNo : 771356,
+        mobile : 771356,
         
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         
@@ -126,14 +151,18 @@ export const data = [
         country : [{value: "India", label: "India"}],
         state : [{value: "UtterPradesh", label: "UtterPradesh"}],
         city : [{value: "lihipur", label: "lihipur"}],
-        lastName: "R",
-        firstName: "Reethika"
+        last_name: "R",
+        first_name: "Reethika"
       },
       {
+        id:7,
+        last_login : "04-10-2021",
+        avatar:himanshu,
         CreatedDate :"29-10-2021",
         email: "himanshu@gmail.com",
+        designation:"job",
         
-        mobileNo : 671356,
+        mobile : 671356,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
@@ -144,14 +173,18 @@ export const data = [
         country : [{value: "Japan", label: "Japan"}],
         state : [{value: "Osaka", label: "Osaka"}],
         city : [{value: "lipi", label: "lipi"}],
-        lastName: "H",
-        firstName: "Himanshu"
+        last_name: "H",
+        first_name: "Himanshu"
       },
       {
+        id:8,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"13-10-2021",
         email: "suryaDas@gmail.com",
+        designation:"job",
         
-        mobileNo : 921345,
+        mobile : 921345,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
@@ -162,14 +195,18 @@ export const data = [
         country : [{value: "India", label: "India"}],
         state : [{value: "Maharashtra", label: "Maharashtra"}],
         city : [{value: "Navi Mumbai", label: "Navi Mumbai"}],
-        lastName: "Das",
-        firstName: "Surya"
+        last_name: "Das",
+        first_name: "Surya"
       },
       {
+        id:9,
+        last_login : "04-10-2021",
+        avatar:"",
         CreatedDate :"03-10-2021",
         email: "avinash@gmail.com",
+        designation:"job",
         
-        mobileNo : 3421332,
+        mobile : 3421332,
        
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         
@@ -180,7 +217,7 @@ export const data = [
         country : [{value: "USA", label: "USA"}],
         state : [{value: "pencilVenia", label: "pencilVenia"}],
         city : [{value: "created", label: "created"}],
-        lastName: "A",
-        firstName: "Avinash"
+        last_name: "A",
+        first_name: "Avinash"
       }
 ]
