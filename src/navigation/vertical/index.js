@@ -151,6 +151,12 @@ export default [
         navLink: '/financialPartner-list'
       },
       {
+        id: 'bankGuaranteeApplication',
+        title: 'Bank Guarantee',
+        icon: <Circle size={20} />,
+        navLink: '/bga-list'
+      },
+      {
         id: 'WarehouseList',
         title: 'Warehouse',
         icon: <Circle size={20} />,

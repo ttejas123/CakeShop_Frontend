@@ -3,7 +3,7 @@
 import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-
+import { Link } from 'react-router-dom'
 // ** Table Columns
 import { cityData } from './data'
 
@@ -14,8 +14,8 @@ import DataTable from 'react-data-table-component'
 import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus} from 'react-feather'
 import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
 //import InputBasic from './AddCity'
-import HorizontalForm from './AddAtributes'
-import EditForm from './EditAttributes'
+// import HorizontalForm from './AddAtributes'
+// import EditForm from './EditAttributes'
 
 const Attributes = () => {
   
@@ -176,13 +176,14 @@ const handleDelete = (data) => {
     <Card>
       <CardHeader className='border-bottom'>
         <CardTitle tag='h4'>Attribute List</CardTitle>
-        <Button className='ml-2' color='primary' onClick={handleAddClick} >
+        <Link  to={`/add-attribute`}>        <Button className='ml-2' color='primary' onClick={handleAddClick} >
               <Plus size={15} />
               <span className='align-middle ml-50'>Add Attribute</span>
             </Button>
+            </Link>
       </CardHeader>
-      {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd}/> : null}
-      {editClicked ? <EditForm data = {editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit}/> : null}
+      {/* {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd}/> : null} */}
+      {/* {editClicked ? <EditForm data = {editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit}/> : null} */}
       {/* <Row className='justify-content-end mx-0'>
         <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
           <Label className='mr-1' for='search-input-1'>

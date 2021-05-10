@@ -149,6 +149,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/add'))
   },
   {
+    path: '/add-attribute',
+    component: lazy(() => import('../../views/master/Attribute/Attributes/add'))
+  },
+  {
     path: '/edit-corporate',
     component: lazy(() => import('../../views/master/corporate/editCorporate'))
   },
