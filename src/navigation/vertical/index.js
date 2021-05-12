@@ -75,20 +75,7 @@ export default [
         id: 'Sub Category',
         title: 'Sub Category',
         icon: <Circle size={20} />,
-        children: [
-          {
-            id: 'Sub_Category',
-            title: 'Sub Category',
-            icon: <Circle size={20} />,
-            navLink: '/master/subattribute'
-          },
-          {
-            id: 'Attributes',
-            title: 'Attributes',
-            icon: <Circle size={20} />,
-            navLink: '/master/attribute'
-          }
-        ]
+        navLink: '/master/subattribute'
       },   
       {
         id: 'CurrencyList',

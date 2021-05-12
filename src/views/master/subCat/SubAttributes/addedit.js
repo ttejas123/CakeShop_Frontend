@@ -26,7 +26,8 @@ const AddNewModal = (prop) => {
 
   const initialvalues = {
     id:0,
-    Attribute: "",
+    Cat: "",
+    subCat: "",
     subAttributes: '' 
   }
   const [selectedOption, setselectedOption] = useState()
@@ -86,19 +87,22 @@ const AddNewModal = (prop) => {
       <ModalBody className='flex-grow-1'>
        
         <FormGroup>
-          <Label for='Name'>Attribute</Label>
+          <Label for='Name'>Category</Label>
           <InputGroup>
-            <InputGroupAddon addonType='prepend'>
-              <InputGroupText>
-                <User size={15} />
-              </InputGroupText>
-            </InputGroupAddon>
-            <Input name="Attribute" onChange={handleInputeChange} id='Attribute' placeholder='shoes' value={values.Attribute} />
+            
+            <Input name="Cat" onChange={handleInputeChange} id='Cat' placeholder='Textile' value={values.Cat} />
+          </InputGroup>
+        </FormGroup>
+
+        <FormGroup>
+          <Label for='Name'>Sub Category</Label>
+          <InputGroup>
+            <Input name="subCat" onChange={handleInputeChange} id='subCat' placeholder='T-shirt' value={values.subCat} />
           </InputGroup>
         </FormGroup>
 
           <FormGroup>
-            <Label for='ReqCustomization'>Requested Customization</Label>
+            <Label for='ReqCustomization'>Attribute</Label>
             
             <Select
               isMulti
