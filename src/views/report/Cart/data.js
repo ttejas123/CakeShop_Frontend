@@ -1,13 +1,3 @@
-//Redressal
-// id
-// name
-// From
-//adminRes:"",// 
-//Order_Id
-// Issuesage
-// Status
-// Created_Time
-// Action(Response)
 import komal  from '../../../assets/images/logo/komal.jpg'
 import pravin  from '../../../assets/images/logo/pravin.jpg'
 import himanshu  from '../../../assets/images/logo/himanshu.jpg'
@@ -19,9 +9,9 @@ export const data = [
       {
         avatar: "",
         name:"Tejas Thakare",
-        userName:"@Pravin",
+        userName:"Pravin",
         bids:[{value: "BidCreated", label: "BidCreated"}, {value: "BidCreated", label: "BidCreated"}, {value: "BidCreated", label: "BidCreated"}],
-        noOfitemIn Carts:3,
+        noOfitemInCarts:3,
         Created_Time : "04-10-2021",
         Status : [{value: "created", label: "created"}],
         id: 1
@@ -29,10 +19,10 @@ export const data = [
       {
         avatar: pravin,
         name:"Pravin",
-        userName:"@Tejas",
+        userName:"Tejas",
         Order_Id:23432,
         bids:[{value: "BidCreated", label: "BidCreated"}],
-        noOfitemIn Carts:3,  //Single multiple
+        noOfitemInCarts:3,  //Single multiple
         Created_Time : "07-10-2021",
         Status : [{value: "live", label: "live"}],
         id: 2
@@ -40,10 +30,10 @@ export const data = [
       {
         avatar: komal,
         name:"Komal Kamble",
-        userName:"@Mehul",
+        userName:"Mehul",
         Order_Id:23432,
         bids:[{value: "BidCreated", label: "BidCreated"}],
-        noOfitemIn Carts:3,
+        noOfitemInCarts:3,
         Created_Time : "04-10-2021",
         Status : [{value: "Closed", label: "Closed"}],
         id: 3
@@ -51,10 +41,10 @@ export const data = [
       {
         avatar: "",
         name:"Mehul",
-        userName:"@Komal",
+        userName:"Komal",
         Order_Id:23432,
         bids:[{value: "BidUpdate", label: "BidUpdate"}],
-        noOfitemIn Carts:3,
+        noOfitemInCarts:3,
         Created_Time : "11-10-2021",
         Status : [{value: "created", label: "created"}],
         id: 4
@@ -62,10 +52,10 @@ export const data = [
       {
         avatar: "",
         name:"Harpriya",
-        userName:"@Mehul",
+        userName:"Mehul",
         Order_Id:23432,
         bids:[{value: "BidUpdate", label: "BidUpdate"}],
-        noOfitemIn Carts:3,  //Single multiple
+        noOfitemInCarts:3,  //Single multiple
         Created_Time : "31-10-2021",
         Status : [{value: "rejected", label: "rejected"}],
         id: 5
@@ -73,10 +63,10 @@ export const data = [
       {
         avatar: reethika,
         name:"Reethika",
-        userName:"@Harpriya",
+        userName:"Harpriya",
         Order_Id:23432,
         bids:[{value: "BidUpdate", label: "BidUpdate"}],
-        noOfitemIn Carts:3,  //Single multiple
+        noOfitemInCarts:3,  //Single multiple
         Created_Time : "30-10-2021",
         Status : [{value: "Closed", label: "Closed"}],
         id: 6
@@ -84,10 +74,10 @@ export const data = [
       {
         avatar: himanshu,
         name:"Himanshu",
-        userName:"@Tejas",
+        userName:"Tejas",
         Order_Id:23432,
         bids:[{value: "Transcation", label: "Transcation"}],
-        noOfitemIn Carts:3,
+        noOfitemInCarts:3,
         Created_Time : "12-10-2021",
         Status : [{value: "live", label: "live"}],
         id: 7
@@ -95,10 +85,10 @@ export const data = [
       {
         avatar: "",
         name:"Surya Das",
-        userName:"@Avinash",
+        userName:"Avinash",
         Order_Id:23432,
         bids:[{value: "Transcation", label: "Transcation"}],
-        noOfitemIn Carts:3,
+        noOfitemInCarts:3,
         Created_Time : "22-10-2021",
         Status : [{value: "Closed", label: "Closed"}],
         id: 8
@@ -106,10 +96,10 @@ export const data = [
       {
         avatar: "",
         name:"Avinash",
-        userName:"@Surya Das",
+        userName:"Surya Das",
         Order_Id:23432,
         bids:[{value: "Transcation", label: "Transcation"}],
-        noOfitemIn Carts:3,  //Single multiple
+        noOfitemInCarts:3,  //Single multiple
         Created_Time : "04-10-2021",
         Status : [{value: "extended", label: "extended"}],
         id: 9

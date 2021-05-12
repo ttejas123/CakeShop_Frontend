@@ -128,139 +128,50 @@ const DataTableWithButtons = () => {
           minWidth: '50px'
         },
         {
-          name: 'To',
+          name: 'Name',
           minWidth: '200px',
-          selector: 'To',
+          selector: 'name',
           sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
               {renderClient(row)}
               <div className='d-flex flex-column'>
                 
-                  <span className='font-weight-bold'>{row.To}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.To}</small>
+                  <span className='font-weight-bold'>{row.name}</span>
+                <small className='text-truncate text-muted mb-0'>@{row.userName}</small>
               </div>
             </div>
           )
         },
         {
-          name: 'From',
-          selector: 'From',
-          sortable: true,
-          minWidth: '130px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.From}</span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Order Id',
-          selector: 'Order_Id',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Issue Type',
-          selector: 'Issue_Type',
+          name: 'No Of Items In Cart',
+          selector: 'noOfitemInCarts',
           sortable: true,
           minWidth: '150px',
           cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      
-                          {row.Issue_Type[0].label}
-                      
-                </span>
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className='ml-1'>
+                
+                  <span className='font-weight-bold'>{row.noOfitemInCarts}</span>
               </div>
             </div>
           )
         },
         {
-          name: 'Bid Id',
-          selector: 'Bid_Id',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Message',
-          selector: 'Message',
-          sortable: true,
-          minWidth: '130px',
-          maxWidth: '150px'
-        },
-        {
-          name: 'Status',
-          selector: 'Status',
+          name: 'Items In Cart',
+          selector: 'bids',
           sortable: true,
           minWidth: '150px',
           cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      <Badge className='text-capitalize' color={statusObj[row.Status[0].label]} pill>
-                          {row.Status[0].label}
-                      </Badge>
-                </span>
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className='ml-1'>
+                
+                  <span className='font-weight-bold'>{row.bids[0].label}</span>
               </div>
             </div>
           )
-        },
-        {
-          name: 'Created Time',
-          selector: 'Created_Time',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Admin response',
-          selector: 'adminRes',
-          sortable: true,
-          minWidth: '130px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center ml-1'>
-              <div className='user-info text-truncate'>
-               { row.adminRes === "" ? (
-                    <X size={15} />
-               ) : (
-                    <Check size={15} />
-               ) }
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          minWidth:'130px',
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                                                    e.preventDefault()
-                                                                                    deleteCountry(row.id)
-                                                                                  } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-
-                <Edit size={15} className='mr-1' onClick={ () => { 
-                                    setCurrentId(row.id)
-                                    setModal(true)
-                                     } }/>
-
-                <Eye size={15} onClick={ () => { 
-                                    setreviewId(row.id)
-                                    setResponseModel(true)
-                                     } }/>
-              </div>
-            )
-          }
         }
+        
     ]
 
 
@@ -293,6 +204,7 @@ const DataTableWithButtons = () => {
               return startsWith
             } else if (!startsWith && includes) {
               return includes
+              
             } else return null
            })
         
@@ -394,10 +306,7 @@ const DataTableWithButtons = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Redressal</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-               <Button className='ml-2' color='primary' onClick={handleModal}>
-                  <Plus size={15} />
-                  <span className='align-middle ml-50'>Add New</span>
-              </Button>
+              
           </div>
         </CardHeader>
 

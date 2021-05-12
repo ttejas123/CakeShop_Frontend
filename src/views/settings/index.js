@@ -27,7 +27,7 @@ const AccountSettings = () => {
 
   return (
     <Fragment>
-      <Breadcrumbs breadCrumbTitle='Bid Settings' breadCrumbParent='Bids list' breadCrumbParent='Bids list' breadCrumbActive='Bid Settings' />
+      <Breadcrumbs breadCrumbTitle='Settings' breadCrumbParent='General' breadCrumbActive='General Settings' />
       {data !== null ? (
         <Row>
           <Col className='mb-2 mb-md-0' md='3'>

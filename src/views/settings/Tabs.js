@@ -13,13 +13,13 @@ const Tabs = ({ activeTab, toggleTab }) => {
       <NavItem>
         <NavLink active={activeTab === '2'} onClick={() => toggleTab('2')}>
           <Lock size={18} className='mr-1' />
-          <span className='font-weight-bold'>Side 1</span>
+          <span className='font-weight-bold'>Notifications</span>
         </NavLink>
       </NavItem>
       <NavItem>
         <NavLink active={activeTab === '3'} onClick={() => toggleTab('3')}>
           <Info size={18} className='mr-1' />
-          <span className='font-weight-bold'>Side 2</span>
+          <span className='font-weight-bold'>User Activities</span>
         </NavLink>
       </NavItem>
       <NavItem>
