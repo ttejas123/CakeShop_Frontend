@@ -144,6 +144,19 @@ const DataTableWithButtons = () => {
           )
         },
         {
+          name: 'Category',
+          selector: 'Attribute',
+          sortable: true,
+          minWidth: '130px',
+          cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>{row.Cat}</span>
+              </div>
+            </div>
+          )
+        },
+        {
           name: 'Sub Category',
           selector: 'Attribute',
           sortable: true,
@@ -151,7 +164,7 @@ const DataTableWithButtons = () => {
           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Attribute}</span>
+                <span className='d-block font-weight-bold text-truncate'>{row.subCat}</span>
               </div>
             </div>
           )
@@ -223,25 +236,16 @@ const DataTableWithButtons = () => {
     const value = e.target.value
     let updatedData = []
     setSearchValue(value)
-
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.BidCloseDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.BidApplicationDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.GoLive.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.CustomStatus[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.BidStatus[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          NoOfBidder.toLowerCase().startsWith(value.toLowerCase())
-          console.log(startsWith)
+          item.subCat.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Cat.toLowerCase().startsWith(value.toLowerCase()) 
+          
         const includes =
-          item.BidCloseDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.BidApplicationDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.GoLive.toLowerCase().includes(value.toLowerCase()) ||
-          item.CustomStatus[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.BidStatus[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          NoOfBidder.toLowerCase().includes(value.toLowerCase())
+          item.subCat.toLowerCase().includes(value.toLowerCase()) ||
+          item.Cat.toLowerCase().includes(value.toLowerCase()) 
+          
 
         if (startsWith) {
           return startsWith

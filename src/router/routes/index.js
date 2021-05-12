@@ -150,7 +150,7 @@ const Routes = [
   },
   {
     path: '/add-attribute',
-    component: lazy(() => import('../../views/master/Attribute/Attributes/add'))
+    component: lazy(() => import('../../views/master/subCat/Attributes/add'))
   },
   {
     path: '/edit-corporate',
@@ -177,12 +177,8 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/edit'))
   },
   {
-    path: '/master/attribute',
-    component: lazy(() => import('../../views/master/Attribute/Attributes/Attributes'))
-  },
-  {
     path: '/master/subattribute',
-    component: lazy(() => import('../../views/master/Attribute/SubAttributes/SubAttributes'))
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/SubAttributes'))
   },
   {
     path: '/report/review',
@@ -217,8 +213,8 @@ const Routes = [
     component: lazy(() => import('../../views/report/Invoice/Invoice'))
   },
   {
-    path: '/Rfq7/rfqN',
-    component: lazy(() => import('../../views/Rfq7/rfqN'))
+    path: '/settings',
+    component: lazy(() => import('../../views/settings'))
   },
   {
     path: '/login',
