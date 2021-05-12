@@ -4,7 +4,7 @@
 const themeConfig = {
   app: {
     appName: 'Bidoya',
-    appLogoImage: require('@src/assets/images/logo/bidoyaBlogo.jpg').default
+    appLogoImage: require('@src/assets/images/logo/logo.jpg').default
   },
   layout: {
     isRTL: false,

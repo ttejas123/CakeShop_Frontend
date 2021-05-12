@@ -4,29 +4,65 @@ import { lazy } from 'react'
 const TemplateTitle = '%s - Bidoya'
 
 // ** Default Route
-const DefaultRoute = '/country'
+const DefaultRoute = '/ccdashboard'
 
 // ** Merge Routes
 const Routes = [
   {
     path: '/country',
-    component: lazy(() => import('../../views/country/Home'))
+    component: lazy(() => import('../../views/master/country/Home'))
   },
   {
     path: '/state',
-    component: lazy(() => import('../../views/state/state'))
+    component: lazy(() => import('../../views/master/state/state'))
+  },
+  {
+    path: '/bidDetails/:id',
+    component: lazy(() => import('../../views/master/bids/bidDetails'))
+  },
+  {
+    path: '/productDetails',
+    component: lazy(() => import('../../views/master/product/productDetails'))
+  },
+  {
+    path: '/PReviewsle/:id',
+    component: lazy(() => import('../../views/master/user/userProfile'))
+  },
+  {
+    path: '/product-category',
+    component: lazy(() => import('../../views/master/product/productCategory'))
+  },
+  {
+    path: '/edit',
+    component: lazy(() => import('../../views/master/bids/edit'))
+  },
+  {
+    path: '/edit-employee',
+    component: lazy(() => import('../../views/master/employee/editEmployee'))
+  },
+  {
+    path: '/backup-accounts',
+    component: lazy(() => import('../../views/master/employee/backupAccount'))
+  },
+  {
+    path: '/right-assignment',
+    component: lazy(() => import('../../views/master/employee/rightAssignment.js'))
   },
   {
     path: '/vas',
-    component: lazy(() => import('../../views/vas/vas'))
+    component: lazy(() => import('../../views/master/vas/vas'))
   },
   {
     path: '/brand',
-    component: lazy(() => import('../../views/brand/brand'))
+    component: lazy(() => import('../../views/master/brand/brand'))
   },
   {
     path: '/category-list',
     component: lazy(() => import('../../views/master/category/CategoryList'))
+  },
+  {
+    path: '/corporateView',
+    component: lazy(() => import('../../views/master/corporate/corporateView'))
   },
   {
     path: '/city-list',
@@ -41,8 +77,48 @@ const Routes = [
     component: lazy(() => import('../../views/master/kyc/kycList'))
   },
   {
+    path: '/bids',
+    component: lazy(() => import('../../views/master/bids/bids'))
+  },
+  {
     path: '/company-list',
     component: lazy(() => import('../../views/master/company/CompanyList'))
+  },
+  {
+    path: '/warehouse-list',
+    component: lazy(() => import('../../views/master/warehouse/warehouseList'))
+  },
+  {
+    path: '/membership-list',
+    component: lazy(() => import('../../views/master/membership/membershipList'))
+  },
+  {
+    path: '/bga-list',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaList'))
+  },
+  {
+    path: '/edit-bank-guarrante-appl',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/editBga'))
+  },
+  {
+    path: '/badges-list',
+    component: lazy(() => import('../../views/master/badges/badgesList'))
+  },
+  {
+    path: '/edit-warehouse',
+    component: lazy(() => import('../../views/master/warehouse/editWarehouse'))
+  },
+  {
+    path: '/edit-badge',
+    component: lazy(() => import('../../views/master/badges/editBadge'))
+  },
+  {
+    path: '/edit-membership',
+    component: lazy(() => import('../../views/master/membership/editMembership'))
+  },
+  {
+    path: '/on-ground-staff',
+    component: lazy(() => import('../../views/master/onGroundStaff/OnGroundStaff'))
   },
   {
     path: '/industry-list',
@@ -54,27 +130,95 @@ const Routes = [
   },
   {
     path: '/losgistics',
-    component: lazy(() => import('../../views/logistics/logistics'))
+    component: lazy(() => import('../../views/master/logistics/logistics'))
   },
   {
-    path: '/product',
-    component: lazy(() => import('../../views/product/product'))
+    path: '/product-list',
+    component: lazy(() => import('../../views/master/product/ProductList'))
   },
   {
-    path: '/apps/user/list',
-    component: lazy(() => import('../../views/master/user/list'))
+    path: '/financialPartner-list',
+    component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
   },
   {
-    path: '/apps/user/edit',
-    exact: true,
-    component: () => <Redirect to='/components/user/edit/1' />
+    path: '/edit-product',
+    component: lazy(() => import('../../views/master/product/editProduct'))
   },
   {
-    path: '/apps/user/edit/:id',
-    component: lazy(() => import('../../components/user/edit')),
-    meta: {
-      navLink: '/apps/user/edit'
-    }
+    path: '/add-product',
+    component: lazy(() => import('../../views/master/product/add'))
+  },
+  {
+    path: '/add-attribute',
+    component: lazy(() => import('../../views/master/Attribute/Attributes/add'))
+  },
+  {
+    path: '/edit-corporate',
+    component: lazy(() => import('../../views/master/corporate/editCorporate'))
+  },
+  {
+    path: '/corporate-list',
+    component: lazy(() => import('../../views/master/corporate/CorporateList'))
+  },
+  {
+    path: '/user-list',
+    component: lazy(() => import('../../views/master/user/users'))
+  },
+  {
+    path: '/report/ticket-list',
+    component: lazy(() => import('../../views/report/tickets/ticketsList'))
+  },
+  {
+    path: '/rfq',
+    component: lazy(() => import('../../views/master/RFQ/RFQ'))
+  },
+  {
+    path: '/user-edit',
+    component: lazy(() => import('../../views/master/user/edit'))
+  },
+  {
+    path: '/master/attribute',
+    component: lazy(() => import('../../views/master/Attribute/Attributes/Attributes'))
+  },
+  {
+    path: '/master/subattribute',
+    component: lazy(() => import('../../views/master/Attribute/SubAttributes/SubAttributes'))
+  },
+  {
+    path: '/report/review',
+    component: lazy(() => import('../../views/report/Reviews/Reviews'))
+  },
+  {
+    path: '/report/redressal',
+    component: lazy(() => import('../../views/report/Redressal/Redressal'))
+  },
+  {
+    path: '/report/emails-list',
+    component: lazy(() => import('../../views/report/emails/emailsList'))
+  },
+  {
+    path: '/report/revenue-list',
+    component: lazy(() => import('../../views/report/revenue/revenueList'))
+  },
+  {
+    path: '/report/purchase-intent-list',
+    component: lazy(() => import('../../views/report/purchaseIntent/purchaseIntentList'))
+  },
+  {
+    path: '/report/sms-history-list',
+    component: lazy(() => import('../../views/report/smsHistory/smsHistoryList'))
+  },
+  {
+    path: '/report/add-email',
+    component: lazy(() => import('../../views/report/emails/addEmail'))
+  },
+  {
+    path: '/report/Invoice',
+    component: lazy(() => import('../../views/report/Invoice/Invoice'))
+  },
+  {
+    path: '/Rfq7/rfqN',
+    component: lazy(() => import('../../views/Rfq7/rfqN'))
   },
   {
     path: '/login',
@@ -101,18 +245,8 @@ const Routes = [
     component: lazy(() => import('../../views/dashboards/on_ground_executive'))
   },
   {
-    // path: '/user',
-    // component: lazy(() => import('../../views/user/list')),
-    // layout: 'BlankLayout',
-    path: '/ccdashboard',
-    component: lazy(() => import('../../views/dashboards/call_center'))
-  },
-  {
-    // path: '/user',
-    // component: lazy(() => import('../../views/user/list')),
-    // layout: 'BlankLayout',
-    path: '/usertest',
-    component: lazy(() => import('../../views/user/list'))
+    path: '/comingSoon',
+    component: lazy(() => import('../../views/pages/comingSoon'))
   }
   
 

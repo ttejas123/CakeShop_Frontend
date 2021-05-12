@@ -48,10 +48,16 @@ export default [
     icon: <Codesandbox size={20} />,
     children: [
       {
-        id: 'CurrencyList',
-        title: 'Currrency',
+        id: 'Bids',
+        title: 'Bids',
         icon: <Circle size={20} />,
-        navLink: '/currency-list'
+        navLink: '/bids'
+      },
+      {
+        id: 'Country',
+        title: 'Country',
+        icon: <Circle size={20} />,
+        navLink: '/country'
       },
       {
         id: 'CityList',
@@ -64,12 +70,31 @@ export default [
         title: 'Category',
         icon: <Circle size={20} />,
         navLink: '/category-list'
-      },
+      }, 
       {
-        id: 'SubCategory',
+        id: 'Sub Category',
         title: 'Sub Category',
         icon: <Circle size={20} />,
-        navLink: '/sub-category-list'
+        children: [
+          {
+            id: 'Sub_Category',
+            title: 'Sub Category',
+            icon: <Circle size={20} />,
+            navLink: '/master/subattribute'
+          },
+          {
+            id: 'Attributes',
+            title: 'Attributes',
+            icon: <Circle size={20} />,
+            navLink: '/master/attribute'
+          }
+        ]
+      },   
+      {
+        id: 'CurrencyList',
+        title: 'Currrency',
+        icon: <Circle size={20} />,
+        navLink: '/currency-list'
       },
       {
         id: 'KYC',
@@ -90,12 +115,6 @@ export default [
         navLink: '/industry-list'
       },
       {
-        id: 'Country',
-        title: 'Country',
-        icon: <Circle size={20} />,
-        navLink: '/country'
-      },
-      {
         id: 'StatePage',
         title: 'State',
         icon: <Circle size={20} />,
@@ -114,16 +133,172 @@ export default [
         navLink: '/vas'
       },
       {
+        id: 'RFQ',
+        title: 'RFQ',
+        icon: <Circle size={20} />,
+        navLink: '/rfq'
+      },
+      {
         id: 'LogisticsPartners',
         title: 'Logistics Partners',
         icon: <Circle size={20} />,
         navLink: '/losgistics'
       },
       {
-        id: 'ProductList',
+        id: 'FinancialPartners',
+        title: 'Financial Partners',
+        icon: <Circle size={20} />,
+        navLink: '/financialPartner-list'
+      },
+      {
+        id: 'bankGuaranteeApplication',
+        title: 'Bank Guarantee',
+        icon: <Circle size={20} />,
+        navLink: '/bga-list'
+      },
+      {
+        id: 'WarehouseList',
+        title: 'Warehouse',
+        icon: <Circle size={20} />,
+        navLink: '/warehouse-list'
+      },
+      {
+        id: 'onGroundStaff',
+        title: 'On Ground Staff',
+        icon: <Circle size={20} />,
+        navLink: '/on-ground-staff'
+      },
+      {
+        id: 'badges',
+        title: 'Badges',
+        icon: <Circle size={20} />,
+        navLink: '/badges-list'
+      },
+      {
+        id: 'ProductPage',
         title: 'Product',
         icon: <Circle size={20} />,
-        navLink: '/product'
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/product-list'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/productDetails'
+                },
+                {
+                  id: 'edit',
+                  title: 'Edit',
+                  icon: <Circle size={20} />,
+                  navLink: '/edit-product'
+                },
+                {
+                  id: 'add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/add-product'
+                },
+                {
+                  id: 'productCategory',
+                  title: 'Product Category',
+                  icon: <Circle size={20} />,
+                  navLink: '/product-category'
+                }
+                
+        ]
+      },
+      {
+        id: 'EmployeePage',
+        title: 'Employee',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/employee-list'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/employee-view'
+                },
+                {
+                  id: 'edit',
+                  title: 'Edit',
+                  icon: <Circle size={20} />,
+                  navLink: '/edit-employee'
+                },
+                {
+                  id: 'backupAccounts',
+                  title: 'BackUp Accounts',
+                  icon: <Circle size={20} />,
+                  navLink: '/backup-accounts'
+                },
+                {
+                  id: 'rightAssignment',
+                  title: 'Right Assignment',
+                  icon: <Circle size={20} />,
+                  navLink: '/right-assignment'
+                }
+                
+        ]
+      },
+      {
+        id: 'CorporatePage',
+        title: 'Corporate',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporate-list'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporateView'
+                },
+                {
+                  id: 'edit',
+                  title: 'Edit',
+                  icon: <Circle size={20} />,
+                  navLink: '/edit-corporate'
+                }
+        ]
+      },
+      {
+        id: 'MembershipPage',
+        title: 'Membership',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/membership-list'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/membershipView'
+                },
+                {
+                  id: 'edit',
+                  title: 'Edit',
+                  icon: <Circle size={20} />,
+                  navLink: '/edit-membership'
+                }
+        ]
       },
       {
         id: 'UserPage',
@@ -134,13 +309,13 @@ export default [
                   id: 'Add User',
                   title: 'Add',
                   icon: <Circle size={20} />,
-                  navLink: '/userAdd'
+                  navLink: '/user-edit'
                 },
                 {
                   id: 'list',
                   title: 'list',
                   icon: <Circle size={20} />,
-                  navLink: '/userlist'
+                  navLink: '/user-list'
                 }
         ]
       }
@@ -158,28 +333,66 @@ export default [
         navLink: '/transaction'
       },
       {
-        id: 'Revenue',
-        title: 'Revenue',
-        icon: <Circle size={20} />,
-        navLink: '/revenue'
-      },
-      {
         id: 'Approval',
         title: 'Approval',
         icon: <Circle size={20} />,
         navLink: '/approval'
       },
       {
-        id: 'OnGround',
-        title: 'Onground',
+        id: 'emails',
+        title: 'Emails',
         icon: <Circle size={20} />,
-        navLink: '/onground'
+        navLink: '/report/emails-list'
       },
       {
-        id: 'CA',
-        title: 'CA',
+        id: 'purchaseIntent',
+        title: 'Purchase Intent',
         icon: <Circle size={20} />,
-        navLink: '/ca'
+        navLink: '/report/purchase-intent-list'
+      },
+      {
+        id: 'revenue',
+        title: 'Revenue',
+        icon: <Circle size={20} />,
+        navLink: '/report/revenue-list'
+      },
+      {
+        id: 'smsHistory',
+        title: 'SMS History',
+        icon: <Circle size={20} />,
+        navLink: '/report/sms-history-list'
+      },
+      {
+        id: 'ticket',
+        title: 'Tickets',
+        icon: <Circle size={20} />,
+        navLink: '/report/ticket-List'
+      },
+      {
+        id: 'OnGround',
+        title: 'Onground',
+        id: 'Invoice',
+        title: 'Invoice',
+        icon: <Circle size={20} />,
+        navLink: '/report/Invoice'
+      },
+      {
+        id: 'Redressal',
+        title: 'Redressal',
+        icon: <Circle size={20} />,
+        navLink: '/report/redressal'
+      },
+      {
+        id: 'Reviews',
+        title: 'Reviews',
+        icon: <Circle size={20} />,
+        navLink: '/report/review'
+      },
+      {
+        id: 'RFQ_Nigotiation',
+        title: 'RFQ Nigotiation',
+        icon: <Circle size={20} />,
+        navLink: '/Rfq7/rfqN'
       }
     ]
   },

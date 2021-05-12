@@ -5,8 +5,8 @@ import { Monitor, Coffee, Watch, TrendingUp, TrendingDown } from 'react-feather'
 const CompanyTable = () => {
     const statusObj = {
         pending: 'light-warning',
-        active: 'light-success',
-        inactive: 'light-secondary'
+        approved: 'light-success',
+        approval: 'light-secondary'
       }
   const data = [
       {

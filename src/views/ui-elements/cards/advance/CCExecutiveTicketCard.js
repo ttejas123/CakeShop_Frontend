@@ -2,7 +2,7 @@
 import { Card, CardBody, CardText, Button } from 'reactstrap'
 // import medal from '@src/assets/images/avatars/1-small.png'
 import medal from '@src/assets/images/illustration/badge.svg'
-
+import { Link } from 'react-router-dom'
 const CCExecutiveTicketCard = () => {
   return (
     <Card className='card-congratulations-medal'>
@@ -14,7 +14,9 @@ const CCExecutiveTicketCard = () => {
             $48.9k
           </a>
         </h3> */}
+        <Link  to={`/report/ticket-list`}>
         <Button.Ripple color='primary'>View Tickets</Button.Ripple>
+        </Link>
         <img className='congratulation-medal' src={medal} alt='Medal Pic' />
       </CardBody>
     </Card>
