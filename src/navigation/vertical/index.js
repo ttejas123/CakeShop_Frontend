@@ -333,12 +333,6 @@ export default [
         navLink: '/transaction'
       },
       {
-        id: 'Revenue',
-        title: 'Revenue',
-        icon: <Circle size={20} />,
-        navLink: '/revenue'
-      },
-      {
         id: 'Approval',
         title: 'Approval',
         icon: <Circle size={20} />,
@@ -349,6 +343,24 @@ export default [
         title: 'Emails',
         icon: <Circle size={20} />,
         navLink: '/report/emails-list'
+      },
+      {
+        id: 'purchaseIntent',
+        title: 'Purchase Intent',
+        icon: <Circle size={20} />,
+        navLink: '/report/purchase-intent-list'
+      },
+      {
+        id: 'revenue',
+        title: 'Revenue',
+        icon: <Circle size={20} />,
+        navLink: '/report/revenue-list'
+      },
+      {
+        id: 'smsHistory',
+        title: 'SMS History',
+        icon: <Circle size={20} />,
+        navLink: '/report/sms-history-list'
       },
       {
         id: 'ticket',

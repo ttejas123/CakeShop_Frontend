@@ -197,6 +197,18 @@ const Routes = [
     component: lazy(() => import('../../views/report/emails/emailsList'))
   },
   {
+    path: '/report/revenue-list',
+    component: lazy(() => import('../../views/report/revenue/revenueList'))
+  },
+  {
+    path: '/report/purchase-intent-list',
+    component: lazy(() => import('../../views/report/purchaseIntent/purchaseIntentList'))
+  },
+  {
+    path: '/report/sms-history-list',
+    component: lazy(() => import('../../views/report/smsHistory/smsHistoryList'))
+  },
+  {
     path: '/report/add-email',
     component: lazy(() => import('../../views/report/emails/addEmail'))
   },
