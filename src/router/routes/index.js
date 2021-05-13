@@ -181,6 +181,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/subCat/SubAttributes/SubAttributes'))
   },
   {
+    path: '/master/addE/:id',
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/addE'))
+  },
+  {
+    path: '/master/add',
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
+  },
+  {
     path: '/report/review',
     component: lazy(() => import('../../views/report/Reviews/Reviews'))
   },
@@ -215,6 +223,10 @@ const Routes = [
   {
     path: '/report/Cart',
     component: lazy(() => import('../../views/report/Cart/cart'))
+  },
+  {
+    path: '/report/SrchKeyWHistory',
+    component: lazy(() => import('../../views/report/SrchKeyWHistory'))
   },
   {
     path: '/settings',

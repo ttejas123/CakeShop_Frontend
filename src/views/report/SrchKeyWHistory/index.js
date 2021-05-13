@@ -2,7 +2,6 @@
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
@@ -15,12 +14,13 @@ import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
-import Response from './viewSubAttr'
-
+//import FormModel from './formModel'
+//import Response from './responseModel' 
+//import Response from './viewAllitems'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Eye, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash, Check, X  } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -56,18 +56,17 @@ const renderClient = row => {
   if (row.avatar.length) {
     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.name || 'John Doe'} initials status="online" />
   }
 }
 
-const optionSubAttribute = [
+const optionStatus = [
     {value: "", label: "Filter Status"},
     {value: "created", label: "created"},
     {value: "live", label: "live"},
     {value: "extended", label: "extended"},
     {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"},
-    {value: "auto closed", label: "auto closed"}
+    {value: "rejected", label: "rejected"}
   ]
 
 const DataTableWithButtons = () => {
@@ -78,9 +77,10 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
-   const [responseModel, setResponseModel] = useState(false)
-    const [reviewId, setreviewId] = useState(0)
+
+  const [responseModel, setResponseModel] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
+  const [reviewId, setreviewId] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
@@ -104,92 +104,82 @@ const DataTableWithButtons = () => {
       console.log(val)
   }
 
+  //add or edit response
+  const responseADDEDIT = (val) => {
+     setreviewId("")
+     console.log(val)
+  }
+
   //columns
   const columns = [
+        // id
+// To
+// From
+// Order_Id
+// Issue_Type
+// Bid_Id
+// Message
+// Status
+// Created_Time
+// Action(Response)
         {
           name: 'Id',
           selector: 'id',
           sortable: true,
           minWidth: '50px',
-          maxWidth: '200px'
+          maxWidth: '100px'
         },
         {
-          name: 'Attributes',
-          selector: 'subAttributes',
-          minWidth: '150px',
+          name: 'User Name',
+          minWidth: '200px',
+          maxWidth: '310px',
+          selector: 'name',
+          sortable: true,
           cell: row => (
-            <div key={row.id} className='d-flex align-items-center ml-2'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate d-flex '>
-                {row.subAttributes.map((val, index) => {
-                  if (index < 1) {
-                    return (
-                      <div className="mr-1">{val.value}</div>
-                      )
-                  }
-                })
-                }
-                {row.subAttributes.length > 1 ? (
-                                                  <u><a href="#" onClick={ () => { 
-                                                                   setreviewId(row.id)
-                                                                    setResponseModel(true)
-                                                                     } }>
-                                                      view
-                                                </a></u>
-                                                  ) : null}
-                </span>
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderClient(row)}
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.name}</span>
+                <small className='text-truncate text-muted mb-0'>@{row.userName}</small>
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'Keyword',
+          selector: 'Keyword',
+          sortable: true,
+          minWidth: '180px',
+          maxWidth: '280px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className='d-flex flex-column ml-1'>
+                
+                  <span className='font-weight-bold'>{row.Keyword}</span>
                 
               </div>
             </div>
           )
         },
         {
-          name: 'Category',
-          selector: 'Attribute',
+          name: 'Result Found',
+          selector: 'Result_found',
           sortable: true,
-          minWidth: '130px',
+          minWidth: '180px',
+          maxWidth: '280px',
           cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Cat}</span>
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className='d-flex flex-column ml-3'>
+                
+                  <span className='font-weight-bold'>{row.Result_found}</span>
+                
               </div>
             </div>
           )
-        },
-        {
-          name: 'Sub Category',
-          selector: 'Attribute',
-          sortable: true,
-          minWidth: '130px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.subCat[0]}</span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                                                    e.preventDefault()
-                                                                                    deleteCountry(row.id)
-                                                                                  } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-                <Link to={`/master/addE/${row.id}`}>
-                  <Edit size={15} />
-                </Link>  
-              </div>
-            )
-          }
-        }
+        }       
     ]
 
 
@@ -197,10 +187,11 @@ const DataTableWithButtons = () => {
   const handleModal = () => {
     setModal(!modal)
   }
-  
+
   const handleResponse = () => {
     setResponseModel(!responseModel)
   }
+
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
     let updatedData = []
@@ -212,15 +203,15 @@ const DataTableWithButtons = () => {
       if (search.length) {
           updatedData = data.filter(item => {
             const startsWith =
-              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
+              item.Status[0].value.toLowerCase().startsWith(search.toLowerCase()) 
               
             const includes =
-              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
+              item.Status[0].value.toLowerCase().includes(search.toLowerCase())
     
             if (startsWith) {
               return startsWith
             } else if (!startsWith && includes) {
-              return includes
+              return includes 
             } else return null
            })
         
@@ -234,17 +225,20 @@ const DataTableWithButtons = () => {
     const value = e.target.value
     let updatedData = []
     setSearchValue(value)
+
     if (value.length) {
       updatedData = data.filter(item => {
+        const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.subCat.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Cat.toLowerCase().startsWith(value.toLowerCase()) 
-          
-        const includes =
-          item.subCat.toLowerCase().includes(value.toLowerCase()) ||
-          item.Cat.toLowerCase().includes(value.toLowerCase()) 
-          
+          item.To.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
 
+        const includes =
+          item.To.toLowerCase().includes(value.toLowerCase()) ||
+          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
+          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
+         
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -290,40 +284,21 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
+      
+
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Sub Category</CardTitle>
+          <CardTitle tag='h4'>Search Keyword History</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <Link to={`/master/add`}>
-              <Button className='ml-2' color='primary' onClick={handleModal}>
-                                          <Plus size={15} />
-                                          <span className='align-middle ml-50'>Add Sub Category</span>
-              </Button>
-            </Link>
+              
           </div>
         </CardHeader>
-
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
 
         <DataTable
           noHeader
           pagination
-         
+          selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -331,11 +306,10 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          
+          selectableRowsComponent={BootstrapCheckbox}
         />
         
       </Card>
-          <Response open={responseModel} handleModal={handleResponse} currentId={reviewId} data={data} />
     </Fragment>
   )
 }

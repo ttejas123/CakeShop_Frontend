@@ -1,3 +1,5 @@
+//Keyword, Result found, User name
+
 import komal  from '../../../assets/images/logo/komal.jpg'
 import pravin  from '../../../assets/images/logo/pravin.jpg'
 import himanshu  from '../../../assets/images/logo/himanshu.jpg'
@@ -11,12 +13,11 @@ export const data = [
         name:"Tejas Thakare",
         userName:"Pravin",
         bids:[{value: "T-Shirt", label: "T-Shirt"}, {value: "Back-Cover", label: "Back-Cover"}, {value: "Glasses", label: "Glasses"}],
-        noOfitemInCarts:3,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
+        Keyword: "TShirt",
+        Result_found: "Yes",
 
-        Delivery_Time : "04-10-2021",
+
         Status : [{value: "created", label: "created"}],
         id: 1
       },
@@ -26,12 +27,11 @@ export const data = [
         userName:"Tejas",
         Order_Id:23432,
         bids:[{value: "Back-Cover", label: "Back-Cover"}, {value: "T-Shirt", label: "T-Shirt"}],
-        noOfitemInCarts:2,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
+        Keyword: "Glasses 1000",
+        Result_found: "No",
+
           //Single multiple
-        Delivery_Time : "07-10-2021",
         Status : [{value: "live", label: "live"}],
         id: 2
       },
@@ -41,12 +41,10 @@ export const data = [
         userName:"Mehul",
         Order_Id:23432,
         bids:[{value: "Glasses", label: "Glasses"}],
-        noOfitemInCarts:1,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
+        Keyword: "100000rs TapDoor",
+        Result_found: "No",
 
-        Delivery_Time : "04-10-2021",
         Status : [{value: "Closed", label: "Closed"}],
         id: 3
       },
@@ -56,12 +54,9 @@ export const data = [
         userName:"Komal",
         Order_Id:23432,
         bids:[{value: "T-Shirt", label: "T-Shirt"}],
-        noOfitemInCarts:1,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
-
-        Delivery_Time : "11-10-2021",
+        Keyword: "Glass Frame",
+        Result_found: "Yes",
         Status : [{value: "created", label: "created"}],
         id: 4
       },
@@ -71,12 +66,11 @@ export const data = [
         userName:"Mehul",
         Order_Id:23432,
         bids:[{value: "Shoes", label: "Shoes"}],
-        noOfitemInCarts:1,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
+        Keyword: "Shoes",
+        Result_found: "Yes",
+
           //Single multiple
-        Delivery_Time : "31-10-2021",
         Status : [{value: "rejected", label: "rejected"}],
         id: 5
       },
@@ -86,12 +80,11 @@ export const data = [
         userName:"Harpriya",
         Order_Id:23432,
         bids:[{value: "T-Shirt", label: "T-Shirt"}, {value: "T-Shirt", label: "T-Shirt"}],
-        noOfitemInCarts:2,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
+        Keyword: "TShirt",
+        Result_found: "Yes",
+
           //Single multiple
-        Delivery_Time : "30-10-2021",
         Status : [{value: "Closed", label: "Closed"}],
         id: 6
       },
@@ -101,12 +94,11 @@ export const data = [
         userName:"Tejas",
         Order_Id:23432,
         bids:[{value: "T-Shirt", label: "T-Shirt"}],
-        noOfitemInCarts:1,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
+        Keyword: "TShirt",
+        Result_found: "Yes",
 
-        Delivery_Time : "12-10-2021",
+
         Status : [{value: "live", label: "live"}],
         id: 7
       },
@@ -116,12 +108,11 @@ export const data = [
         userName:"Avinash",
         Order_Id:23432,
         bids:[{value: "T-Shirt", label: "T-Shirt"}],
-        noOfitemInCarts:1,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
+        Keyword: "TShirt",
+        Result_found: "Yes",
 
-        Delivery_Time : "22-10-2021",
+
         Status : [{value: "Closed", label: "Closed"}],
         id: 8
       },
@@ -131,12 +122,11 @@ export const data = [
         userName:"Surya Das",
         Order_Id:23432,
         bids:[{value: "T-Shirt", label: "T-Shirt"}],
-        noOfitemInCarts:1,
-        SKU: 1500,
-        MOQ_Units: 21,
         Sample_MRP: 20000,
+        Keyword: "TShirt",
+        Result_found: "Yes",
+
           //Single multiple
-        Delivery_Time : "04-10-2021",
         Status : [{value: "extended", label: "extended"}],
         id: 9
       }

@@ -16,7 +16,7 @@ import Select from 'react-select'
 // ** Add New Modal Component
 //import FormModel from './formModel'
 //import Response from './responseModel' 
-
+import Response from './viewAllitems'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
@@ -77,6 +77,7 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
+
   const [responseModel, setResponseModel] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [reviewId, setreviewId] = useState(0)
@@ -125,11 +126,13 @@ const DataTableWithButtons = () => {
           name: 'Id',
           selector: 'id',
           sortable: true,
-          minWidth: '50px'
+          minWidth: '50px',
+          maxWidth: '100px'
         },
         {
           name: 'Name',
           minWidth: '200px',
+          maxWidth: '310px',
           selector: 'name',
           sortable: true,
           cell: row => (
@@ -148,6 +151,7 @@ const DataTableWithButtons = () => {
           selector: 'noOfitemInCarts',
           sortable: true,
           minWidth: '150px',
+          maxWidth: '230px',
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
               <div className='ml-1'>
@@ -158,20 +162,66 @@ const DataTableWithButtons = () => {
           )
         },
         {
+          name: 'SKU',
+          selector: 'SKU',
+          sortable: true,
+          minWidth: '150px',
+          maxWidth: '230px'
+        },
+        {
+          name: 'MOQ Units',
+          selector: 'MOQ_Units',
+          sortable: true,
+          minWidth: '150px',
+          maxWidth: '230px'
+        },
+        {
+          name: 'Sample MRP',
+          selector: 'Sample_MRP',
+          sortable: true,
+          minWidth: '150px',
+          maxWidth: '230px'
+        },
+        {
           name: 'Items In Cart',
           selector: 'bids',
           sortable: true,
-          minWidth: '150px',
+          minWidth: '180px',
+          maxWidth: '300px',
           cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              <div className='ml-1'>
+            <div key={row.id} className='d-flex align-items-center ml-2'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate d-flex '>
+                {row.bids.map((val, index) => {
+                  if (index < 1) {
+                    return (
+                      <div className="mr-1">{val.label}</div>
+                      )
+                  }
+                })
+                }
+
+                {row.bids.length > 1 ? (
+                                                  <u><a href="#" onClick={ () => { 
+                                                                   setreviewId(row.id)
+                                                                    setResponseModel(true)
+                                                                     } }>
+                                                      view
+                                                </a></u>
+                                                  ) : null}
+                </span>
                 
-                  <span className='font-weight-bold'>{row.bids[0].label}</span>
               </div>
             </div>
           )
-        }
-        
+        },
+        {
+          name: 'Delivery Time',
+          selector: 'Delivery_Time',
+          sortable: true,
+          minWidth: '150px',
+          maxWidth: '230px'
+        }        
     ]
 
 
@@ -203,8 +253,7 @@ const DataTableWithButtons = () => {
             if (startsWith) {
               return startsWith
             } else if (!startsWith && includes) {
-              return includes
-              
+              return includes 
             } else return null
            })
         
@@ -277,54 +326,16 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
-      <Card>
-        <CardHeader>
-          <CardTitle tag='h4'>Search Filter</CardTitle>
-        </CardHeader>
-        <CardBody>
-          <Row>
-            <Col md='4'>
-              <label>Search label</label>
-              <Select
-                isClearable={false}
-                theme={selectThemeColors}
-                className='react-select'
-                classNamePrefix='select'
-                options={optionStatus}
-                value={Filter}
-                onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
-              />
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
+      
 
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Redressal</CardTitle>
+          <CardTitle tag='h4'>Cart</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
               
           </div>
         </CardHeader>
-
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
 
         <DataTable
           noHeader
@@ -341,6 +352,7 @@ const DataTableWithButtons = () => {
         />
         
       </Card>
+      <Response open={responseModel} handleModal={handleResponse} currentId={reviewId} data={data} />
     </Fragment>
   )
 }

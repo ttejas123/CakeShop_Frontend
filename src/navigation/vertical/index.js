@@ -356,6 +356,18 @@ export default [
         navLink: '/report/ticket-List'
       },
       {
+        id: 'Search_keyWord_History',
+        title: 'Search keyWord History',
+        icon: <Circle size={20} />,
+        navLink: '/report/SrchKeyWHistory'
+      },
+      {
+        id: 'Cart',
+        title: 'Cart',
+        icon: <Circle size={20} />,
+        navLink: '/report/Cart'
+      },
+      {
         id: 'OnGround',
         title: 'Onground',
         id: 'Invoice',
