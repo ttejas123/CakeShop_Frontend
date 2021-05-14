@@ -181,11 +181,11 @@ const Routes = [
     component: lazy(() => import('../../views/master/subCat/SubAttributes/SubAttributes'))
   },
   {
-    path: '/master/addE/:id',
+    path: '/master/Sub/addE/:id',
     component: lazy(() => import('../../views/master/subCat/SubAttributes/addE'))
   },
   {
-    path: '/master/add',
+    path: '/master/Sub/add',
     component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
   },
   {
@@ -229,6 +229,18 @@ const Routes = [
     component: lazy(() => import('../../views/report/SrchKeyWHistory'))
   },
   {
+    path: '/report/bidCoin',
+    component: lazy(() => import('../../views/report/bidCoin'))
+  },
+  {
+    path: '/report/bidCoin-add',
+    component: lazy(() => import('../../views/report/bidCoin/add.js'))
+  },
+  {
+    path: '/report/bidCoin-edit/:id',
+    component: lazy(() => import('../../views/report/bidCoin/edit.js'))
+  },
+  {
     path: '/settings',
     component: lazy(() => import('../../views/settings'))
   },
@@ -248,6 +260,10 @@ const Routes = [
   {
     path: '/ccdashboard',
     component: lazy(() => import('../../views/dashboards/call_center'))
+  },
+  {
+    path: '/adashboard',
+    component: lazy(() => import('../../views/dashboards/admin'))
   },
   {
     path: '/ogedashbaord',

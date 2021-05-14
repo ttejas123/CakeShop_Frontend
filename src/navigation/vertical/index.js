@@ -23,7 +23,7 @@ export default [
         id: 'Admin',
         title: 'Admin',
         icon: <Circle size={20} />,
-        navLink: '/admin'
+        navLink: '/adashboard'
       },
       {
         id: 'Finances',

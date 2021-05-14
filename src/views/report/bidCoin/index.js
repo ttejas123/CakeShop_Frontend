@@ -1,8 +1,9 @@
 // ** Custom Components
+import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
-import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
@@ -14,15 +15,13 @@ import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
-import Response from './viewSubAttr'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye, Trash  } from 'react-feather'
 import {
   Card,
-  CardText,
   CardHeader,
   CardBody,
   CardTitle,
@@ -60,7 +59,7 @@ const renderClient = row => {
   }
 }
 
-const optionSubAttribute = [
+const optionBidStatus = [
     {value: "", label: "Filter Status"},
     {value: "created", label: "created"},
     {value: "live", label: "live"},
@@ -78,16 +77,13 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
-   const [responseModel, setResponseModel] = useState(false)
-    const [reviewId, setreviewId] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-   //deleteCountry
-  const deleteCountry = (val) => {
+    const deleteCountry = (val) => {
     //here we passing id to delete this specific record
     const userselection = confirm("Are you sure you want to delete")
  
@@ -97,77 +93,36 @@ const DataTableWithButtons = () => {
       console.log("not deleted ")
       }
   }
-    //edit action
-   const AddeditEvent = (val) => {
-     //here we hande event which comming from addNewModel.js (Form for add and edit)
-      setCurrentId("")
-      console.log(val)
-  }
 
   //columns
   const columns = [
         {
-          name: 'Id',
-          selector: 'id',
+          name: 'User',
+          minWidth: '250px',
+          selector: 'Name',
           sortable: true,
-          minWidth: '50px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Attributes',
-          selector: 'subAttributes',
-          minWidth: '150px',
           cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate d-flex '>
-                {row.subAttributes.map((val, index) => {
-                  if (index < 1) {
-                    return (
-                      <div className="mr-1">{val.title}</div>
-                      )
-                  }
-                })
-                }
-                {row.subAttributes.length > 1 ? (
-                                                  <u><a href="#" onClick={ () => { 
-                                                                   setreviewId(row.id)
-                                                                    setResponseModel(true)
-                                                                     } }>
-                                                      view
-                                                </a></u>
-                                                  ) : null}
-                </span>
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderClient(row)}
+              <div className='d-flex flex-column'>
                 
+                  <span className='font-weight-bold'>{row.Name}</span>
+                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
               </div>
             </div>
           )
         },
         {
-          name: 'Category',
-          selector: 'Cat',
+          name: 'Transaction',
+          selector: 'transaction',
           sortable: true,
-          minWidth: '130px',
-         cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Cat}</span>
-              </div>
-            </div>
-          )
+          minWidth: '150px'
         },
         {
-          name: 'Sub Category',
-          selector: 'subCat',
+          name: 'Balance',
+          selector: 'balance',
           sortable: true,
-          minWidth: '130px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.subCat[0].value}</span>
-              </div>
-            </div>
-          )
+          minWidth: '150px'
         },
         {
           name: 'Actions',
@@ -178,12 +133,10 @@ const DataTableWithButtons = () => {
                 <UncontrolledDropdown>
                   <DropdownToggle className='pr-1' tag='span'>
                     <Trash size={15} onClick={e => {
-                                                                                    e.preventDefault()
-                                                                                    deleteCountry(row.id)
-                                                                                  } }/>
+                                                           } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link to={`/master/Sub/addE/${row.id}`}>
+                <Link to={`/report/bidCoin-edit/${row.id}`}>
                   <Edit size={15} />
                 </Link>  
               </div>
@@ -197,53 +150,29 @@ const DataTableWithButtons = () => {
   const handleModal = () => {
     setModal(!modal)
   }
-  
-  const handleResponse = () => {
-    setResponseModel(!responseModel)
-  }
-  // handle drop down filter
-  const handleFilterByDropDown = (value) => {
-    let updatedData = []
-    setFilter(value)
-    console.log(value.value)
-    let search = "l"
-    search = value.value
-    setSearchValue(search)
-      if (search.length) {
-          updatedData = data.filter(item => {
-            const startsWith =
-              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
-              
-            const includes =
-              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
-    
-            if (startsWith) {
-              return startsWith
-            } else if (!startsWith && includes) {
-              return includes
-            } else return null
-           })
-        
-      setFilteredData(updatedData)
-      // setSearchValue(search)
-      setFilter(value)
-    }
-  }
+
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
     let updatedData = []
     setSearchValue(value)
+
     if (value.length) {
       updatedData = data.filter(item => {
+        
         const startsWith =
-          item.subCat.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Cat.toLowerCase().startsWith(value.toLowerCase()) 
-          
+          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
+
         const includes =
-          item.subCat.toLowerCase().includes(value.toLowerCase()) ||
-          item.Cat.toLowerCase().includes(value.toLowerCase()) 
-          
+          item.Name.toLowerCase().includes(value.toLowerCase()) ||
+          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
+          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
+          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
+          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
 
         if (startsWith) {
           return startsWith
@@ -290,40 +219,20 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
+
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Sub Category</CardTitle>
+          <CardTitle tag='h4'>BidCoin</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <Link to={`/master/sub/add`}>
-              <Button className='ml-2' color='primary' onClick={handleModal}>
-                                          <Plus size={15} />
-                                          <span className='align-middle ml-50'>Add Sub Category</span>
-              </Button>
-            </Link>
+            
           </div>
         </CardHeader>
-
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
 
         <DataTable
           noHeader
           pagination
-         
+          selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -331,11 +240,11 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          
+          selectableRowsComponent={BootstrapCheckbox}
         />
         
       </Card>
-          <Response open={responseModel} handleModal={handleResponse} currentId={reviewId} data={data} />
+      
     </Fragment>
   )
 }
