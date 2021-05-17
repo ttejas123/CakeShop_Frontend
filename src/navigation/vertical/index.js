@@ -162,6 +162,12 @@ export default [
         navLink: '/badges-list'
       },
       {
+        id: 'SMS_Add',
+        title: 'SMS Add',
+        icon: <Circle size={20} />,
+        navLink: '/master/sms/add'
+      },
+      {
         id: 'ProductPage',
         title: 'Product',
         icon: <Circle size={20} />,
@@ -344,6 +350,12 @@ export default [
         navLink: '/report/revenue-list'
       },
       {
+        id: 'Bid_Coin',
+        title: 'Bid Coin',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCoin'
+      },
+      {
         id: 'smsHistory',
         title: 'SMS History',
         icon: <Circle size={20} />,
@@ -388,10 +400,22 @@ export default [
         navLink: '/report/review'
       },
       {
-        id: 'RFQ_Nigotiation',
-        title: 'RFQ Nigotiation',
+        id: 'Bank_Guarantee_Transaction',
+        title: 'Bank Guarantee Transaction',
         icon: <Circle size={20} />,
-        navLink: '/Rfq7/rfqN'
+        navLink: '/report/bankGTransca'
+      },
+      {
+        id: 'Product Issue',
+        title: 'Product Issue',
+        icon: <Circle size={20} />,
+        navLink: '/report/productIssue'
+      },
+      {
+        id: 'Profile_Completion_Checklist',
+        title: 'Profile Completion Checklist',
+        icon: <Circle size={20} />,
+        navLink: '/report/ProfileCmpltChklist'
       }
     ]
   },

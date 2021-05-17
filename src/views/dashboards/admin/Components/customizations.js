@@ -1,9 +1,8 @@
 // ** Custom Components
-import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
-import axios from 'axios'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
@@ -14,14 +13,14 @@ import { selectThemeColors } from '@utils'
 import { data } from './data'
 import Select from 'react-select'
 
-// ** Add New Modal Component
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye, Trash  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
 import {
   Card,
+  CardText,
   CardHeader,
   CardBody,
   CardTitle,
@@ -59,7 +58,7 @@ const renderClient = row => {
   }
 }
 
-const optionBidStatus = [
+const optionSubAttribute = [
     {value: "", label: "Filter Status"},
     {value: "created", label: "created"},
     {value: "live", label: "live"},
@@ -77,13 +76,16 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
+   const [responseModel, setResponseModel] = useState(false)
+    const [reviewId, setreviewId] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-    const deleteCountry = (val) => {
+   //deleteCountry
+  const deleteCountry = (val) => {
     //here we passing id to delete this specific record
     const userselection = confirm("Are you sure you want to delete")
  
@@ -93,36 +95,56 @@ const DataTableWithButtons = () => {
       console.log("not deleted ")
       }
   }
+    //edit action
+   const AddeditEvent = (val) => {
+     //here we hande event which comming from addNewModel.js (Form for add and edit)
+      setCurrentId("")
+      console.log(val)
+  }
 
   //columns
   const columns = [
         {
-          name: 'User',
-          minWidth: '250px',
-          selector: 'Name',
+          name: 'Bid',
+          selector: 'Bid',
           sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Customization',
+          selector: 'customization',
+          minWidth: '150px',
           cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(row)}
-              <div className='d-flex flex-column'>
+            <div key={row.id} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate d-flex '>
+                {row.customization.map((val, index) => {
+                  if (index < 1) {
+                    return (
+                      <Badge className='text-capitalize mr-1' color='light-primary' pill> {val.value} </Badge>
+                      )
+                  }
+                })
+                }
+                {row.customization.length > 1 ? (
+                                                  <u><a href="#" onClick={ () => { 
+                                                                   setreviewId(row.id)
+                                                                    setResponseModel(true)
+                                                                     } }>
+                                                      view
+                                                </a></u>
+                                                  ) : null}
+                </span>
                 
-                  <span className='font-weight-bold'>{row.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
               </div>
             </div>
           )
         },
         {
-          name: 'Transaction',
-          selector: 'transaction',
+          name: 'Date',
+          selector: 'Date',
           sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Balance',
-          selector: 'balance',
-          sortable: true,
-          minWidth: '150px'
+          minWidth: '130px'
         },
         {
           name: 'Actions',
@@ -133,10 +155,12 @@ const DataTableWithButtons = () => {
                 <UncontrolledDropdown>
                   <DropdownToggle className='pr-1' tag='span'>
                     <Trash size={15} onClick={e => {
-                                                           } }/>
+                                                                                    e.preventDefault()
+                                                                                    deleteCountry(row.id)
+                                                                                  } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link to={`/report/bidCoin-edit/${row.id}`}>
+                <Link to={`/master/Sub/addE/${row.id}`}>
                   <Edit size={15} />
                 </Link>  
               </div>
@@ -150,39 +174,9 @@ const DataTableWithButtons = () => {
   const handleModal = () => {
     setModal(!modal)
   }
-
-  // ** Function to handle filter
-  const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        
-        const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
-        const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
-
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
+  
+  const handleResponse = () => {
+    setResponseModel(!responseModel)
   }
 
   // ** Function to handle Pagination
@@ -219,37 +213,30 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
-
       <Card>
-
-        <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>BidCoin</CardTitle>
-          <div className='d-flex mt-md-0 mt-1'>
-            <Link to={`/report/bidCoin-add`}>
-              <Button className='ml-2' color='primary'>
-                  <Plus size={15} />
-                  <span className='align-middle ml-50'>Add New</span>
-              </Button>
-            </Link>
-          </div>
+        <CardHeader>
+          <CardTitle tag='h4'>Customization</CardTitle>
+          <CardText className='card-text font-small-2 mr-75 mb-0 pb-0'><Button.Ripple color='primary' className="">View All</Button.Ripple></CardText>
         </CardHeader>
 
+        <CardBody className='statistics-body'>
         <DataTable
           noHeader
           pagination
-          selectableRows
+         
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={5}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          selectableRowsComponent={BootstrapCheckbox}
+          
         />
+        </CardBody>
         
       </Card>
-      
+         
     </Fragment>
   )
 }

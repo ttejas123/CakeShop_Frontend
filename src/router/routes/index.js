@@ -185,8 +185,16 @@ const Routes = [
     component: lazy(() => import('../../views/master/subCat/SubAttributes/addE'))
   },
   {
+    path: '/master/sms/add',
+    component: lazy(() => import('../../views/master/SMSAdd'))
+  },
+  {
     path: '/master/Sub/add',
     component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
+  },
+  {
+    path: '/report/ProfileCmpltChklist',
+    component: lazy(() => import('../../views/report/ProfileCmpltChklist'))
   },
   {
     path: '/report/review',
@@ -195,6 +203,10 @@ const Routes = [
   {
     path: '/report/redressal',
     component: lazy(() => import('../../views/report/Redressal/Redressal'))
+  },
+  {
+    path: '/report/productIssue',
+    component: lazy(() => import('../../views/report/productIssue'))
   },
   {
     path: '/report/emails-list',
@@ -239,6 +251,10 @@ const Routes = [
   {
     path: '/report/bidCoin-edit/:id',
     component: lazy(() => import('../../views/report/bidCoin/edit.js'))
+  },
+  {
+    path: '/report/bankGTransca',
+    component: lazy(() => import('../../views/report/bankGTransca'))
   },
   {
     path: '/settings',

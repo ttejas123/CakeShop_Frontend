@@ -26,7 +26,7 @@ const EcommerceDashboard = () => {
     <div id='dashboard-ecommerce'>
       <Row className='match-height' >
         <Col xl='4' md='6' xs='12'>
-          <UserProfileCard />
+          <UserProfileCard userId = {id}/>
         </Col>
         <Col xl='4' md='6' xs='12'>
               <StatusCard header="Your Details"  created="Created Date" date="21-jan-2012" three="Email :" threeData="komal@gmail.com" Name="userName :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />

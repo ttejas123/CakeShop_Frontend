@@ -70,7 +70,6 @@ const CCExecutiveDashboardStatistic = ({ cols }) => {
       <CardBody className='statistics-body'>
         <Row>{renderData()}</Row>
         <hr />
-        
       </CardBody>
     </Card>
   )

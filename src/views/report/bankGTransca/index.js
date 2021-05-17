@@ -1,9 +1,14 @@
+//order id
+//seller id
+//amount 
+//balance
+//transaction time
+
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
@@ -14,12 +19,10 @@ import { selectThemeColors } from '@utils'
 import { data } from './data'
 import Select from 'react-select'
 
-// ** Add New Modal Component
-
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye, Trash  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Eye, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash, Check, X  } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -46,27 +49,13 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 ))
 
 
-// ** Renders Client Columns
-const renderClient = row => {
-  const stateNum = Math.floor(Math.random() * 6),
-    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-    color = states[stateNum]
-
-  if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
-  } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
-  }
-}
-
-const optionBidStatus = [
+const optionStatus = [
     {value: "", label: "Filter Status"},
     {value: "created", label: "created"},
     {value: "live", label: "live"},
     {value: "extended", label: "extended"},
     {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"},
-    {value: "auto closed", label: "auto closed"}
+    {value: "rejected", label: "rejected"}
   ]
 
 const DataTableWithButtons = () => {
@@ -77,13 +66,16 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
+  const [responseModel, setResponseModel] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
+  const [reviewId, setreviewId] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-    const deleteCountry = (val) => {
+   //deleteCountry
+  const deleteCountry = (val) => {
     //here we passing id to delete this specific record
     const userselection = confirm("Are you sure you want to delete")
  
@@ -93,55 +85,76 @@ const DataTableWithButtons = () => {
       console.log("not deleted ")
       }
   }
+    //edit action
+   const AddeditEvent = (val) => {
+     //here we hande event which comming from addNewModel.js (Form for add and edit)
+      setCurrentId("")
+      console.log(val)
+  }
+
+  //add or edit response
+  const responseADDEDIT = (val) => {
+     setreviewId("")
+     console.log(val)
+  }
 
   //columns
   const columns = [
+//order id
+//seller id
+//amount 
+//balance
+//transaction time
         {
-          name: 'User',
-          minWidth: '250px',
-          selector: 'Name',
+          name: 'Id',
+          selector: 'id',
+          sortable: true,
+          minWidth: '50px'
+        },
+        {
+          name: 'order id',
+          minWidth: '200px',
+          selector: 'Order_Id',
           sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(row)}
               <div className='d-flex flex-column'>
-                
-                  <span className='font-weight-bold'>{row.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
+                  <span className='font-weight-bold'>{row.Order_Id}</span>
               </div>
             </div>
           )
         },
         {
-          name: 'Transaction',
-          selector: 'transaction',
+          name: 'Seller Id',
+          selector: 'Seller_Id',
+          sortable: true,
+          minWidth: '130px',
+          cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>{row.Seller_Id}</span>
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'amount',
+          selector: 'amount',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Balance',
+          name: 'balance',
           selector: 'balance',
           sortable: true,
           minWidth: '150px'
+         
         },
         {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                           } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-                <Link to={`/report/bidCoin-edit/${row.id}`}>
-                  <Edit size={15} />
-                </Link>  
-              </div>
-            )
-          }
+          name: 'transactionTime',
+          selector: 'transactionTime',
+          sortable: true,
+          minWidth: '150px'
         }
     ]
 
@@ -151,6 +164,38 @@ const DataTableWithButtons = () => {
     setModal(!modal)
   }
 
+  const handleResponse = () => {
+    setResponseModel(!responseModel)
+  }
+
+  // handle drop down filter
+  const handleFilterByDropDown = (value) => {
+    let updatedData = []
+    setFilter(value)
+    console.log(value.value)
+    let search = "l"
+    search = value.value
+    setSearchValue(search)
+      if (search.length) {
+          updatedData = data.filter(item => {
+            const startsWith =
+              item.Status[0].value.toLowerCase().startsWith(search.toLowerCase()) 
+              
+            const includes =
+              item.Status[0].value.toLowerCase().includes(search.toLowerCase())
+    
+            if (startsWith) {
+              return startsWith
+            } else if (!startsWith && includes) {
+              return includes
+            } else return null
+           })
+        
+      setFilteredData(updatedData)
+      // setSearchValue(search)
+      setFilter(value)
+    }
+  }
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
@@ -159,21 +204,17 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        
+        const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
+          item.To.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
 
         const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
-
+          item.To.toLowerCase().includes(value.toLowerCase()) ||
+          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
+          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
+         
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -223,14 +264,9 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>BidCoin</CardTitle>
+          <CardTitle tag='h4'>Bank Guarantee Transaction</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <Link to={`/report/bidCoin-add`}>
-              <Button className='ml-2' color='primary'>
-                  <Plus size={15} />
-                  <span className='align-middle ml-50'>Add New</span>
-              </Button>
-            </Link>
+             
           </div>
         </CardHeader>
 
@@ -249,7 +285,6 @@ const DataTableWithButtons = () => {
         />
         
       </Card>
-      
     </Fragment>
   )
 }
