@@ -44,7 +44,7 @@ const AddNewModal = (prop) => {
       contentClassName='pt-0'
     >
       <ModalHeader className='mb-1' toggle={prop.handleModal} close={CloseBtn} tag='div'>
-        <h5 className='modal-title'>View Sub Category</h5>
+        <h5 className='modal-title'>View Category</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <Row>
@@ -52,7 +52,7 @@ const AddNewModal = (prop) => {
             <div className='d-flex justify-content-left align-items-center'>
              
               <div className='d-flex flex-column'>
-                <span className='font-weight-bold'>Sub Category: <b>{values.Attribute}</b></span>
+                <span className='font-weight-bold'>Category: <b>{values.Attribute}</b></span>
                 
               </div>
             </div>

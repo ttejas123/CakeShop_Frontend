@@ -69,12 +69,6 @@ export default [
         id: 'Category',
         title: 'Category',
         icon: <Circle size={20} />,
-        navLink: '/category-list'
-      }, 
-      {
-        id: 'Sub Category',
-        title: 'Sub Category',
-        icon: <Circle size={20} />,
         navLink: '/master/subattribute'
       },   
       {
@@ -162,10 +156,16 @@ export default [
         navLink: '/badge-mapping-list'
       },
       {
-        id: 'SMS_Add',
-        title: 'SMS Add',
+        id: 'profileCompAdd',
+        title: 'profile Completion Add',
         icon: <Circle size={20} />,
-        navLink: '/master/sms/add'
+        navLink: '/master/profileCompAdd'
+      },
+      {
+           id: 'SMS_Add',
+           title: 'SMS Add',
+           icon: <Circle size={20} />,
+           navLink: '/master/sms/add'
       },
       {
         id: 'ProductPage',
@@ -212,6 +212,12 @@ export default [
                 // }
                 
         ]
+      },
+      {
+                  id: 'productCategory',
+                  title: 'Product Category',
+                  icon: <Circle size={20} />,
+                  navLink: '/product-category'
       },
       {
         id: 'EmployeePage',
