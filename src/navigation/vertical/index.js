@@ -151,12 +151,6 @@ export default [
         navLink: '/financialPartner-list'
       },
       {
-        id: 'bankGuaranteeApplication',
-        title: 'Bank Guarantee',
-        icon: <Circle size={20} />,
-        navLink: '/bga-list'
-      },
-      {
         id: 'WarehouseList',
         title: 'Warehouse',
         icon: <Circle size={20} />,
@@ -175,40 +169,54 @@ export default [
         navLink: '/badges-list'
       },
       {
+        id: 'badgeMapping',
+        title: 'Badge Mapping',
+        icon: <Circle size={20} />,
+        navLink: '/badge-mapping-list'
+      },
+      {
         id: 'ProductPage',
         title: 'Product',
         icon: <Circle size={20} />,
+        nanavLink: '/productDetails',
         children: [
                 {
-                  id: 'list',
-                  title: 'List',
+                  id: 'catalogue',
+                  title: 'Catalogue',
                   icon: <Circle size={20} />,
                   navLink: '/product-list'
                 },
                 {
-                  id: 'view',
-                  title: 'View',
+                  id: 'myProducts',
+                  title: 'My Products',
                   icon: <Circle size={20} />,
-                  navLink: '/productDetails'
+                  navLink: '/pending-product-list'
                 },
-                {
-                  id: 'edit',
-                  title: 'Edit',
-                  icon: <Circle size={20} />,
-                  navLink: '/edit-product'
-                },
+                // {
+                //   id: 'view',
+                //   title: 'View',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/productDetails'
+                // },
+                // {
+                //   id: 'edit',
+                //   title: 'Edit',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/edit-product'
+                // },
                 {
                   id: 'add',
                   title: 'Add',
                   icon: <Circle size={20} />,
                   navLink: '/add-product'
-                },
-                {
-                  id: 'productCategory',
-                  title: 'Product Category',
-                  icon: <Circle size={20} />,
-                  navLink: '/product-category'
                 }
+                // ,
+                // {
+                //   id: 'productCategory',
+                //   title: 'Product Category',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/product-category'
+                // }
                 
         ]
       },
@@ -268,6 +276,12 @@ export default [
                   navLink: '/corporateView'
                 },
                 {
+                  id: 'addCorporateAddress',
+                  title: 'Add Address',
+                  icon: <Circle size={20} />,
+                  navLink: '/add-corporate-address'
+                },
+                {
                   id: 'edit',
                   title: 'Edit',
                   icon: <Circle size={20} />,
@@ -312,11 +326,42 @@ export default [
                   navLink: '/user-edit'
                 },
                 {
+                  id: 'addUserAddress',
+                  title: 'Add Address',
+                  icon: <Circle size={20} />,
+                  navLink: '/add-user-address'
+                },
+                {
                   id: 'list',
                   title: 'list',
                   icon: <Circle size={20} />,
                   navLink: '/user-list'
                 }
+        ]
+      },
+      {
+        id: 'BankGuaranteeAppication',
+        title: 'Bank Guarantee',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'bankGuaranteeApplication',
+            title: 'List',
+            icon: <Circle size={20} />,
+            navLink: '/bga-list'
+          },
+          {
+            id: 'bankGuaranteePendingApplications',
+            title: 'Pending List',
+            icon: <Circle size={20} />,
+            navLink: '/bga-pending-list'
+          },
+          {
+            id: 'bankGuaranteeApplication',
+            title: 'Action',
+            icon: <Circle size={20} />,
+            navLink: '/bga-action'
+          }
         ]
       }
     ]
@@ -345,6 +390,12 @@ export default [
         navLink: '/report/emails-list'
       },
       {
+        id: 'orders',
+        title: 'Orders',
+        icon: <Circle size={20} />,
+        navLink: '/report/orders-list'
+      },
+      {
         id: 'purchaseIntent',
         title: 'Purchase Intent',
         icon: <Circle size={20} />,
@@ -361,6 +412,18 @@ export default [
         title: 'SMS History',
         icon: <Circle size={20} />,
         navLink: '/report/sms-history-list'
+      },
+      {
+        id: 'gstReport',
+        title: 'GST Report',
+        icon: <Circle size={20} />,
+        navLink: '/report/gst-report-list'
+      },
+      {
+        id: 'sampleRequest',
+        title: 'Sample Request',
+        icon: <Circle size={20} />,
+        navLink: '/report/sample-request-list'
       },
       {
         id: 'ticket',

@@ -53,8 +53,8 @@ const optionBidStatus = [
     {value: "overall", label: "Overall"}
   ]
 
-const RevenueList = () => {
-  const statusObj = {
+const OrdersList = () => {
+    const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
         approval: 'light-warning'
@@ -128,12 +128,12 @@ const RevenueList = () => {
       updatedData = data.filter(item => {
         const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.RevenueName.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.OrdersName.toLowerCase().startsWith(value.toLowerCase()) ||
           item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
           item.gst.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.RevenueName.toLowerCase().includes(value.toLowerCase()) ||
+          item.OrdersName.toLowerCase().includes(value.toLowerCase()) ||
           item.mrp.toLowerCase().includes(value.toLowerCase()) ||
           item.gst.toLowerCase().includes(value.toLowerCase()) 
           
@@ -253,7 +253,7 @@ const RevenueList = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Revenues</CardTitle>
+          <CardTitle tag='h4'>Orderss</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
@@ -322,4 +322,4 @@ const RevenueList = () => {
   )
 }
 
-export default RevenueList
+export default OrdersList

@@ -32,3 +32,41 @@ export const data1 = [
     }
   ]
   
+  export const data = [
+      {
+          employeeNumber : "EMP 1",
+          firstName : "Pravin",
+          lastName : "Poshmani",
+          email : "abc@xyz.com",
+          mobile : "2345",
+          role : "Intern",
+          lastLoginDate : "01-05-2021"
+      },
+      {
+        employeeNumber : "EMP 2",
+        firstName : "Tejas",
+        lastName : "Thakare",
+        email : "abcd@xyz.com",
+        mobile : "23465",
+        role : "Intern",
+        lastLoginDate : "02-05-2021"
+    },
+    {
+        employeeNumber : "EMP 3",
+        firstName : "Komal",
+        lastName : "Kamble",
+        email : "abc@xyz.com",
+        mobile : "2345",
+        role : "Ios Developer",
+        lastLoginDate : "03-05-2021"
+    },
+    {
+        employeeNumber : "EMP 4",
+        firstName : "Himanshu",
+        lastName : "Chanda",
+        email : "abc@xyz.com",
+        mobile : "24456",
+        role : "Admin",
+        lastLoginDate : "04-05-2021"
+    }
+  ]

@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { data1, columns } from './data'
+import { data, columns } from './data'
 import Avatar from '@components/avatar'
 import { Link } from 'react-router-dom'
 // ** Third Party Components
@@ -16,10 +16,10 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, Drop
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
-const TicketsList = () => {
+const BankGuaranteeApplPendingList = () => {
 
     //console.log(BankGuarranteApplsColumns)
-    console.log(data1)
+    console.log(data)
   // ** State
 //   const data = [
 //     {
@@ -104,40 +104,40 @@ const renderClient = row => {
 
 const columns = [
     {
-      name: 'Raised By',
-      selector: 'raisedBy',
+      name: 'User',
+      selector: 'user',
       sortable: true,
-      minWidth: '80px'
+      minWidth: '50px'
     },
     {
-      name: 'Date',
-      selector: 'date',
+      name: 'Corporate',
+      selector: 'corporate',
       sortable: true,
-      minWidth: '80px'
+      minWidth: '50px'
     },
     {
-        name: 'Issues',
-        selector: 'issues',
+        name: 'Amount Requested',
+        selector: 'amountRequested',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '50px'
     },
     {
-        name: 'Status',
-        selector: 'status',
+        name: 'Documents',
+        selector: 'documents',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '50px'
     },
     {
-        name: 'Assigned to',
-        selector: 'assignedTo',
+        name: 'Created Time',
+        selector: 'createdTime',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '50px'
     },
     {
-        name: 'Comment',
-        selector: 'comment',
+        name: 'Updated Time',
+        selector: 'updatedTime',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '50px'
     },
     {
       name: 'Actions',
@@ -150,65 +150,21 @@ const columns = [
                 <Trash size={15} onClick={e => { handleDelete(row) }} />
               </DropdownToggle>
             </UncontrolledDropdown>
-            <Link  to={`/report/add-Ticket`}><Edit  
+            <Edit  
                   size={15} 
                   onClick={ () => { 
+                            e.prevenDefault()
                                     //setCurrentId(row.id)
                                     //setModal(true)
                                      } }>
-                                       <Link to='/report/add-Ticket'/>
-                                     </Edit></Link>
+                                      
+                                     </Edit>
           </div>
         )
       }
     }
   ]
   
-  // ** Function to handle filter
-  // const handleFilter = e => {
-  //   const value = e.target.value
-  //   let updatedData = []
-  //   setSearchValue(value)
-
-  //   const status = {
-  //     1: { title: 'Current', color: 'light-primary' },
-  //     2: { title: 'Professional', color: 'light-success' },
-  //     3: { title: 'Rejected', color: 'light-danger' },
-  //     4: { title: 'Resigned', color: 'light-warning' },
-  //     5: { title: 'Applied', color: 'light-info' }
-  //   }
-
-  //   if (value.length) {
-  //     updatedData = data.filter(item => {
-  //       const startsWith =
-  //         item.full_name.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.post.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.Ticket.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.age.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.salary.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.start_date.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         status[item.status].title.toLowerCase().startsWith(value.toLowerCase())
-
-  //       const includes =
-  //         item.full_name.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.post.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.Ticket.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.age.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.salary.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.start_date.toLowerCase().includes(value.toLowerCase()) ||
-  //         status[item.status].title.toLowerCase().includes(value.toLowerCase())
-
-  //       if (startsWith) {
-  //         return startsWith
-  //       } else if (!startsWith && includes) {
-  //         return includes
-  //       } else return null
-  //     })
-  //     setFilteredData(updatedData)
-  //     setSearchValue(value)
-  //   }
-  // }
-
   // ** Pagination Previous Component
   const Previous = () => {
     return (
@@ -238,7 +194,7 @@ const columns = [
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data1.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -259,13 +215,7 @@ const columns = [
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Tickets List</CardTitle>
-        {/* <Link  to={`/report/add-Ticket`}>
-            <Button className='ml-2' color='primary'>
-              <Plus size={15} />
-              <span className='align-middle ml-50'>Add Ticket</span>
-            </Button>
-            </Link> */}
+        <CardTitle tag='h4'>Bank Guarantee Applications Pending List</CardTitle>
       </CardHeader>
       {/* {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
       {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null} */}
@@ -294,7 +244,7 @@ const columns = [
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={data1}
+        data={data}
       />
       {/* <CardFooter>
         <CardText className='mb-0'>
@@ -307,4 +257,4 @@ const columns = [
   )
 }
 
-export default TicketsList
+export default BankGuaranteeApplPendingList

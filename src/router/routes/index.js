@@ -61,8 +61,16 @@ const Routes = [
     component: lazy(() => import('../../views/master/category/CategoryList'))
   },
   {
+    path: '/employee-list',
+    component: lazy(() => import('../../views/master/employee/employeeList'))
+  },
+  {
     path: '/corporateView',
     component: lazy(() => import('../../views/master/corporate/corporateView'))
+  },
+  {
+    path: '/employeeView',
+    component: lazy(() => import('../../views/master/employee/employeeView'))
   },
   {
     path: '/city-list',
@@ -95,6 +103,14 @@ const Routes = [
   {
     path: '/bga-list',
     component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaList'))
+  },
+  {
+    path: '/bga-action',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaActionForm'))
+  },
+  {
+    path: '/bga-pending-list',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaPendingList'))
   },
   {
     path: '/edit-bank-guarrante-appl',
@@ -137,6 +153,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/ProductList'))
   },
   {
+    path: '/badge-mapping-list',
+    component: lazy(() => import('../../views/master/badgeMapping/badgeMappingList'))
+  },
+  {
+    path: '/pending-product-list',
+    component: lazy(() => import('../../views/master/product/pendingProductsList'))
+  },
+  {
     path: '/financialPartner-list',
     component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
   },
@@ -157,12 +181,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/corporate/editCorporate'))
   },
   {
+    path: '/add-corporate-address',
+    component: lazy(() => import('../../views/master/corporate/corporateAddressAdd'))
+  },
+  {
     path: '/corporate-list',
     component: lazy(() => import('../../views/master/corporate/CorporateList'))
   },
   {
     path: '/user-list',
     component: lazy(() => import('../../views/master/user/users'))
+  },
+  {
+    path: '/add-user-address',
+    component: lazy(() => import('../../views/master/user/userAddressAdd'))
   },
   {
     path: '/report/ticket-list',
@@ -174,7 +206,7 @@ const Routes = [
   },
   {
     path: '/user-edit',
-    component: lazy(() => import('../../views/master/user/edit'))
+    component: lazy(() => import('../../views/master/user/add'))
   },
   {
     path: '/master/attribute',
@@ -197,8 +229,16 @@ const Routes = [
     component: lazy(() => import('../../views/report/emails/emailsList'))
   },
   {
+    path: '/report/sample-request-list',
+    component: lazy(() => import('../../views/report/sampleRequest/sampleRequestList'))
+  },
+  {
     path: '/report/revenue-list',
     component: lazy(() => import('../../views/report/revenue/revenueList'))
+  },
+  {
+    path: '/report/orders-list',
+    component: lazy(() => import('../../views/report/Orders/orderList'))
   },
   {
     path: '/report/purchase-intent-list',
@@ -209,8 +249,16 @@ const Routes = [
     component: lazy(() => import('../../views/report/smsHistory/smsHistoryList'))
   },
   {
+    path: '/report/gst-report-list',
+    component: lazy(() => import('../../views/report/gstReport/gstReportList'))
+  },
+  {
     path: '/report/add-email',
     component: lazy(() => import('../../views/report/emails/addEmail'))
+  },
+  {
+    path: '/report/add-sample-request',
+    component: lazy(() => import('../../views/report/sampleRequest/addSampleRequest'))
   },
   {
     path: '/report/Invoice',

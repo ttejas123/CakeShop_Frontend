@@ -51,6 +51,8 @@ const renderClient = row => {
     return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
   }
 }
+
+
 //expot data
 export const data = [
       {
@@ -63,6 +65,7 @@ export const data = [
         hsnCode : 231,
         gstNumber : 2345,
         mrp : 234,
+        status: [{value: "approved", label: "approved"}],
         description : "dfsghjfhsjhe",
         avatar : pravin
       },
@@ -74,6 +77,7 @@ export const data = [
         subCategory : "subClothing",
         productCategory : "cat2",
         hsnCode : 2310,
+        status: [{value: "pending", label: "pending"}],
         gstNumber : 23456,
         mrp : 2314,
         description : "dfsghjfhfgbf",
@@ -86,6 +90,7 @@ export const data = [
         category : "Clothing",
         subCategory : "subClothing",
         productCategory : "cat3",
+        status: [{value: "approved", label: "approved"}],
         hsnCode : 21,
         gstNumber : 245,
         mrp : 23,
@@ -99,6 +104,7 @@ export const data = [
         category : "Clothing",
         subCategory : "subClothing",
         productCategory : "cat4",
+        status: [{value: "pending", label: "pending"}],
         hsnCode : 2310,
         gstNumber : 21345,
         mrp : 2134,
@@ -262,12 +268,111 @@ export const columns = [
           <Link  to={`/edit-product/${row.id}`}><Edit  
             size={15} 
             onClick={ () => { 
-                              setCurrentId(row.id)
-                              setModal(true)
-                               } }>
+                             
+                             } }>
                                  <Link to='/edit-product'/>
                                </Edit></Link>
         </div>
+      )
+    }
+  }
+]
+
+
+export const pendingColumns = [
+  {
+    name: 'Id',
+    selector: 'id',
+    sortable: true,
+    minWidth: '50px'
+  },
+  {
+    name: 'Product Name',
+    selector: 'productName',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'EAN UPC Code',
+    selector: 'ean_upc_code',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Category',
+    selector: 'category',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Sub Category',
+    selector: 'subCategory',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Product Category',
+    selector: 'productCategory',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Hsn Code',
+    selector: 'hsnCode',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'gst(Number)%',
+    selector: 'gstNumber',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'MRP',
+    selector: 'mrp',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Description',
+    selector: 'description',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+      name: 'User',
+      minWidth: '150px',
+      selector: 'Name',
+      sortable: true,
+      cell: row => (
+        <div className='d-flex justify-content-left align-items-center'>
+          {renderClient(row)}
+        </div>
+      )
+    },
+  {
+    name: 'Actions',
+    allowOverflow: true,
+    cell: row => {
+      return (
+        <div className='d-flex'>
+        <UncontrolledDropdown>
+          <DropdownToggle className='pr-1' tag='span'>
+            <MoreVertical size={15} />
+          </DropdownToggle>
+          <DropdownMenu right>
+            <DropdownItem>
+              <FileText size={15} />
+              <span className='align-middle ml-50'>Approve</span>
+            </DropdownItem>
+            <DropdownItem>
+              <Archive size={15} />
+              <span className='align-middle ml-50'>Reject</span>
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </div>
       )
     }
   }

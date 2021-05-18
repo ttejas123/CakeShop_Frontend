@@ -3,23 +3,23 @@ import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { data1, columns } from './data'
+import { data } from './data'
 import Avatar from '@components/avatar'
 import { Link } from 'react-router-dom'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
-import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
+import { MoreVertical, Edit, FileText, Archive, Share, Printer, File, Grid, Copy, Trash, ChevronDown, Plus} from 'react-feather'
+import { Card, CardHeader, CardTitle, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap'
 //import InputBasic from './AddBadges'
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
-const TicketsList = () => {
+const GstReportsList = () => {
 
     //console.log(BankGuarranteApplsColumns)
-    console.log(data1)
+    console.log(data)
   // ** State
 //   const data = [
 //     {
@@ -104,64 +104,58 @@ const renderClient = row => {
 
 const columns = [
     {
-      name: 'Raised By',
-      selector: 'raisedBy',
+      name: 'GST Amount Payable',
+      selector: 'gstAmountPayable',
       sortable: true,
       minWidth: '80px'
     },
     {
-      name: 'Date',
-      selector: 'date',
+      name: 'User Id',
+      selector: 'userId',
       sortable: true,
       minWidth: '80px'
     },
     {
-        name: 'Issues',
-        selector: 'issues',
+        name: 'Bid Date',
+        selector: 'bidDate',
         sortable: true,
         minWidth: '80px'
     },
     {
-        name: 'Status',
-        selector: 'status',
+        name: 'Actual Amount',
+        selector: 'actualAmount',
         sortable: true,
         minWidth: '80px'
     },
     {
-        name: 'Assigned to',
-        selector: 'assignedTo',
+        name: 'GST (%)',
+        selector: 'gst',
         sortable: true,
         minWidth: '80px'
-    },
-    {
-        name: 'Comment',
-        selector: 'comment',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-      name: 'Actions',
-      allowOverflow: true,
-      cell: row => {
-        return (
-          <div className='d-flex'>
-            <UncontrolledDropdown>
-              <DropdownToggle className='pr-1' tag='span'>
-                <Trash size={15} onClick={e => { handleDelete(row) }} />
-              </DropdownToggle>
-            </UncontrolledDropdown>
-            <Link  to={`/report/add-Ticket`}><Edit  
-                  size={15} 
-                  onClick={ () => { 
-                                    //setCurrentId(row.id)
-                                    //setModal(true)
-                                     } }>
-                                       <Link to='/report/add-Ticket'/>
-                                     </Edit></Link>
-          </div>
-        )
-      }
     }
+    // ,
+    // {
+    //   name: 'Actions',
+    //   allowOverflow: true,
+    //   cell: row => {
+    //     return (
+    //       <div className='d-flex'>
+    //         <UncontrolledDropdown>
+    //           <DropdownToggle className='pr-1' tag='span'>
+    //             <Trash size={15} onClick={e => { handleDelete(row) }} />
+    //           </DropdownToggle>
+    //         </UncontrolledDropdown>
+    //         <Link  to={`/report/add-GstReport`}><Edit  
+    //               size={15} 
+    //               onClick={ () => { 
+    //                                 //setCurrentId(row.id)
+    //                                 //setModal(true)
+    //                                  } }>
+    //                                    <Link to='/report/add-GstReport'/>
+    //                                  </Edit></Link>
+    //       </div>
+    //     )
+    //   }
   ]
   
   // ** Function to handle filter
@@ -183,7 +177,7 @@ const columns = [
   //       const startsWith =
   //         item.full_name.toLowerCase().startsWith(value.toLowerCase()) ||
   //         item.post.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.Ticket.toLowerCase().startsWith(value.toLowerCase()) ||
+  //         item.GstReport.toLowerCase().startsWith(value.toLowerCase()) ||
   //         item.age.toLowerCase().startsWith(value.toLowerCase()) ||
   //         item.salary.toLowerCase().startsWith(value.toLowerCase()) ||
   //         item.start_date.toLowerCase().startsWith(value.toLowerCase()) ||
@@ -192,7 +186,7 @@ const columns = [
   //       const includes =
   //         item.full_name.toLowerCase().includes(value.toLowerCase()) ||
   //         item.post.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.Ticket.toLowerCase().includes(value.toLowerCase()) ||
+  //         item.GstReport.toLowerCase().includes(value.toLowerCase()) ||
   //         item.age.toLowerCase().includes(value.toLowerCase()) ||
   //         item.salary.toLowerCase().includes(value.toLowerCase()) ||
   //         item.start_date.toLowerCase().includes(value.toLowerCase()) ||
@@ -238,7 +232,7 @@ const columns = [
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data1.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -255,17 +249,87 @@ const columns = [
     />
   )
 
+   
+  // ** Converts table to CSV
+  function convertArrayOfObjectsToCSV(array) {
+    let result
+
+    const columnDelimiter = ','
+    const lineDelimiter = '\n'
+    const keys = Object.keys(data[0])
+
+    result = ''
+    result += keys.join(columnDelimiter)
+    result += lineDelimiter
+
+    array.forEach(item => {
+      let ctr = 0
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter
+
+        result += item[key]
+
+        ctr++
+      })
+      result += lineDelimiter
+    })
+
+    return result
+  }
+
+  // ** Downloads CSV
+  function downloadCSV(array) {
+    const link = document.createElement('a')
+    let csv = convertArrayOfObjectsToCSV(array)
+    if (csv === null) return
+
+    const filename = 'export.csv'
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`
+    }
+
+    link.setAttribute('href', encodeURI(csv))
+    link.setAttribute('download', filename)
+    link.click()
+  }
+
+
   return (
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Tickets List</CardTitle>
-        {/* <Link  to={`/report/add-Ticket`}>
-            <Button className='ml-2' color='primary'>
-              <Plus size={15} />
-              <span className='align-middle ml-50'>Add Ticket</span>
-            </Button>
-            </Link> */}
+        <CardTitle tag='h4'>Gst Reports</CardTitle>
+        <div className='d-flex mt-md-0 mt-1'>
+            <UncontrolledButtonDropdown>
+              <DropdownToggle color='secondary' caret outline>
+                <Share size={15} />
+                <span className='align-middle ml-50'>Export</span>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem className='w-100'>
+                  <Printer size={15} />
+                  <span className='align-middle ml-50'>Print</span>
+                </DropdownItem>
+                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
+                  <FileText size={15} />
+                  <span className='align-middle ml-50'>CSV</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <Grid size={15} />
+                  <span className='align-middle ml-50'>Excel</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <File size={15} />
+                  <span className='align-middle ml-50'>PDF</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <Copy size={15} />
+                  <span className='align-middle ml-50'>Copy</span>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledButtonDropdown>
+          </div>
       </CardHeader>
       {/* {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
       {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null} */}
@@ -294,7 +358,7 @@ const columns = [
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={data1}
+        data={data}
       />
       {/* <CardFooter>
         <CardText className='mb-0'>
@@ -307,4 +371,4 @@ const columns = [
   )
 }
 
-export default TicketsList
+export default GstReportsList

@@ -1,4 +1,4 @@
-export const data1 = [
+export const data = [
     {
       toEmail : "Pravin Poshmani",
       emailName : "name1",
