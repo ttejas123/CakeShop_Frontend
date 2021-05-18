@@ -1,5 +1,6 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
+import Rating from 'react-rating'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
@@ -18,7 +19,7 @@ import FormModel from './formModel'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye, Star  } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -122,7 +123,19 @@ const DataTableWithButtons = () => {
           name: 'Rating',
           selector: 'rating',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className='d-flex flex-column'>
+                <Rating
+                    emptySymbol={<Star size={15} fill='#babfc7' stroke='#babfc7' />}
+                    fullSymbol={<Star size={15} fill='#ff9933' stroke='#ff8000' />}
+                    initialRating={row.rating}
+                    readonly
+                  />  
+              </div>
+            </div>
+          )
         },
         {
           name: 'Review',
@@ -195,6 +208,52 @@ const DataTableWithButtons = () => {
     setCurrentPage(page.selected)
   }
 
+
+  // ** Converts table to CSV
+  function convertArrayOfObjectsToCSV(array) {
+    let result
+
+    const columnDelimiter = ','
+    const lineDelimiter = '\n'
+    const keys = Object.keys(data[0])
+
+    result = ''
+    result += keys.join(columnDelimiter)
+    result += lineDelimiter
+
+    array.forEach(item => {
+      let ctr = 0
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter
+
+        result += item[key]
+
+        ctr++
+      })
+      result += lineDelimiter
+    })
+
+    return result
+  }
+
+  // ** Downloads CSV
+  function downloadCSV(array) {
+    const link = document.createElement('a')
+    let csv = convertArrayOfObjectsToCSV(array)
+    if (csv === null) return
+
+    const filename = 'export.csv'
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`
+    }
+
+    link.setAttribute('href', encodeURI(csv))
+    link.setAttribute('download', filename)
+    link.click()
+  }
+
+
   // ** Custom Pagination
   const CustomPagination = () => (
     <ReactPaginate
@@ -230,7 +289,35 @@ const DataTableWithButtons = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Reviews</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+              
+            <UncontrolledButtonDropdown>
+              <DropdownToggle color='secondary' caret outline>
+                <Share size={15} />
+                <span className='align-middle ml-50'>Export</span>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem className='w-100'>
+                  <Printer size={15} />
+                  <span className='align-middle ml-50'>Print</span>
+                </DropdownItem>
+                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
+                  <FileText size={15} />
+                  <span className='align-middle ml-50'>CSV</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <Grid size={15} />
+                  <span className='align-middle ml-50'>Excel</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <File size={15} />
+                  <span className='align-middle ml-50'>PDF</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <Copy size={15} />
+                  <span className='align-middle ml-50'>Copy</span>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledButtonDropdown>
           </div>
         </CardHeader>
 

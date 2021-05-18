@@ -129,7 +129,7 @@ const columns = [
     },
     {
         name: 'Assigned to',
-        selector: 'assigneTo',
+        selector: 'assignedTo',
         sortable: true,
         minWidth: '80px'
     },
@@ -260,12 +260,12 @@ const columns = [
     <Card>
       <CardHeader className='border-bottom'>
         <CardTitle tag='h4'>Tickets List</CardTitle>
-        <Link  to={`/report/add-Ticket`}>
+        {/* <Link  to={`/report/add-Ticket`}>
             <Button className='ml-2' color='primary'>
               <Plus size={15} />
               <span className='align-middle ml-50'>Add Ticket</span>
             </Button>
-            </Link>
+            </Link> */}
       </CardHeader>
       {/* {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
       {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null} */}

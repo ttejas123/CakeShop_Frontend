@@ -36,6 +36,7 @@ const UserInfoCard = (props) => {
   const [statesArr, setstatesArr] = useState(init)
   console.log(props.userId)
   useEffect(() => {
+    console.log(data[props.userId - 1])
     setstatesArr({
       ...data[props.userId - 1]
     })

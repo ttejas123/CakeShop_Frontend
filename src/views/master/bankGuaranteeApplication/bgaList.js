@@ -16,7 +16,7 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, Drop
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
-const BankGuaranteeApplList = () => {
+const BankGuaranteeApplPendingList = () => {
 
     //console.log(BankGuarranteApplsColumns)
     console.log(data1)
@@ -313,4 +313,4 @@ const columns = [
   )
 }
 
-export default BankGuaranteeApplList
+export default BankGuaranteeApplPendingList

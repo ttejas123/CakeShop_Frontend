@@ -229,7 +229,7 @@ const EditEmployee = () => {
       </Col>
       <Col md='6' sm='12'>
       <FormGroup>
-            <label className='d-block mb-1'>Is OnGround</label>
+      <label className='d-block mb-1'>Is OnGround</label>
             <FormGroup>
               <Controller
                 name='isOnGround'
@@ -318,7 +318,6 @@ const EditEmployee = () => {
       <Col md='6' sm='12'>
       <FormGroup>
             <label className='d-block mb-1'>Role Assigned</label>
-            <FormGroup>
               <Controller
                 name='roleAssigned'
                 control={control}
@@ -356,7 +355,6 @@ const EditEmployee = () => {
                   )
                 }}
               />
-            </FormGroup>
           </FormGroup>
       </Col>
       <Col md='6' sm='12'> 

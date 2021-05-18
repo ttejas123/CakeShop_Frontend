@@ -33,6 +33,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productCategory'))
   },
   {
+    path: '/product-cat-add',
+    component: lazy(() => import('../../views/master/product/prodCatCom/addcat'))
+  },
+  {
+    path: '/product-cat-edit/:id',
+    component: lazy(() => import('../../views/master/product/prodCatCom/editCat'))
+  },
+  {
     path: '/edit',
     component: lazy(() => import('../../views/master/bids/edit'))
   },
@@ -61,8 +69,16 @@ const Routes = [
     component: lazy(() => import('../../views/master/category/CategoryList'))
   },
   {
+    path: '/employee-list',
+    component: lazy(() => import('../../views/master/employee/employeeList'))
+  },
+  {
     path: '/corporateView',
     component: lazy(() => import('../../views/master/corporate/corporateView'))
+  },
+  {
+    path: '/employeeView',
+    component: lazy(() => import('../../views/master/employee/employeeView'))
   },
   {
     path: '/city-list',
@@ -95,6 +111,14 @@ const Routes = [
   {
     path: '/bga-list',
     component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaList'))
+  },
+  {
+    path: '/bga-action',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaActionForm'))
+  },
+  {
+    path: '/bga-pending-list',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaPendingList'))
   },
   {
     path: '/edit-bank-guarrante-appl',
@@ -137,6 +161,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/ProductList'))
   },
   {
+    path: '/badge-mapping-list',
+    component: lazy(() => import('../../views/master/badgeMapping/badgeMappingList'))
+  },
+  {
+    path: '/pending-product-list',
+    component: lazy(() => import('../../views/master/product/pendingProductsList'))
+  },
+  {
     path: '/financialPartner-list',
     component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
   },
@@ -150,11 +182,15 @@ const Routes = [
   },
   {
     path: '/add-attribute',
-    component: lazy(() => import('../../views/master/Attribute/Attributes/add'))
+    component: lazy(() => import('../../views/master/subCat/Attributes/add'))
   },
   {
     path: '/edit-corporate',
     component: lazy(() => import('../../views/master/corporate/editCorporate'))
+  },
+  {
+    path: '/add-corporate-address',
+    component: lazy(() => import('../../views/master/corporate/corporateAddressAdd'))
   },
   {
     path: '/corporate-list',
@@ -163,6 +199,10 @@ const Routes = [
   {
     path: '/user-list',
     component: lazy(() => import('../../views/master/user/users'))
+  },
+  {
+    path: '/add-user-address',
+    component: lazy(() => import('../../views/master/user/userAddressAdd'))
   },
   {
     path: '/report/ticket-list',
@@ -174,15 +214,31 @@ const Routes = [
   },
   {
     path: '/user-edit',
-    component: lazy(() => import('../../views/master/user/edit'))
+    component: lazy(() => import('../../views/master/user/add'))
   },
   {
-    path: '/master/attribute',
-    component: lazy(() => import('../../views/master/Attribute/Attributes/Attributes'))
+    path: '/master/profileCompAdd',
+    component: lazy(() => import('../../views/master/profileCompAdd'))
   },
   {
     path: '/master/subattribute',
-    component: lazy(() => import('../../views/master/Attribute/SubAttributes/SubAttributes'))
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/SubAttributes'))
+  },
+  {
+    path: '/master/Sub/addE/:id',
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/addE'))
+  },
+  {
+    path: '/master/sms/add',
+    component: lazy(() => import('../../views/master/SMSAdd'))
+  },
+  {
+    path: '/master/Sub/add',
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
+  },
+  {
+    path: '/report/ProfileCmpltChklist',
+    component: lazy(() => import('../../views/report/ProfileCmpltChklist'))
   },
   {
     path: '/report/review',
@@ -193,12 +249,24 @@ const Routes = [
     component: lazy(() => import('../../views/report/Redressal/Redressal'))
   },
   {
+    path: '/report/productIssue',
+    component: lazy(() => import('../../views/report/productIssue'))
+  },
+  {
     path: '/report/emails-list',
     component: lazy(() => import('../../views/report/emails/emailsList'))
   },
   {
+    path: '/report/sample-request-list',
+    component: lazy(() => import('../../views/report/sampleRequest/sampleRequestList'))
+  },
+  {
     path: '/report/revenue-list',
     component: lazy(() => import('../../views/report/revenue/revenueList'))
+  },
+  {
+    path: '/report/orders-list',
+    component: lazy(() => import('../../views/report/Orders/orderList'))
   },
   {
     path: '/report/purchase-intent-list',
@@ -209,16 +277,48 @@ const Routes = [
     component: lazy(() => import('../../views/report/smsHistory/smsHistoryList'))
   },
   {
+    path: '/report/gst-report-list',
+    component: lazy(() => import('../../views/report/gstReport/gstReportList'))
+  },
+  {
     path: '/report/add-email',
     component: lazy(() => import('../../views/report/emails/addEmail'))
+  },
+  {
+    path: '/report/add-sample-request',
+    component: lazy(() => import('../../views/report/sampleRequest/addSampleRequest'))
   },
   {
     path: '/report/Invoice',
     component: lazy(() => import('../../views/report/Invoice/Invoice'))
   },
   {
-    path: '/Rfq7/rfqN',
-    component: lazy(() => import('../../views/Rfq7/rfqN'))
+    path: '/report/Cart',
+    component: lazy(() => import('../../views/report/Cart/cart'))
+  },
+  {
+    path: '/report/SrchKeyWHistory',
+    component: lazy(() => import('../../views/report/SrchKeyWHistory'))
+  },
+  {
+    path: '/report/bidCoin',
+    component: lazy(() => import('../../views/report/bidCoin'))
+  },
+  {
+    path: '/report/bidCoin-add',
+    component: lazy(() => import('../../views/report/bidCoin/add.js'))
+  },
+  {
+    path: '/report/bidCoin-edit/:id',
+    component: lazy(() => import('../../views/report/bidCoin/edit.js'))
+  },
+  {
+    path: '/report/bankGTransca',
+    component: lazy(() => import('../../views/report/bankGTransca'))
+  },
+  {
+    path: '/settings',
+    component: lazy(() => import('../../views/settings'))
   },
   {
     path: '/login',
@@ -239,6 +339,10 @@ const Routes = [
     layout: 'BlankLayout'
     // path: '/ccdashboard',
     // component: lazy(() => import('../../views/dashboards/call_center'))
+  },
+  {
+    path: '/adashboard',
+    component: lazy(() => import('../../views/dashboards/admin'))
   },
   {
     path: '/ogedashbaord',

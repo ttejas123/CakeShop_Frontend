@@ -1,8 +1,8 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
-import axios from 'axios'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
@@ -14,8 +14,7 @@ import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
-import FormModel from './addedit'
-import Response from './viewSubAttr'
+//import FormModel from './formModel'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -60,17 +59,14 @@ const renderClient = row => {
   }
 }
 
-const optionSubAttribute = [
+const optionBidStatus = [
     {value: "", label: "Filter Status"},
-    {value: "created", label: "created"},
-    {value: "live", label: "live"},
-    {value: "extended", label: "extended"},
-    {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"},
-    {value: "auto closed", label: "auto closed"}
+    {value: "intern", label: "Intern"},
+    {value: "fullTimeEmployee", label: "Full Time Employee"},
+    {value: "admin", label: "Admin"}
   ]
 
-const DataTableWithButtons = () => {
+const ProductList = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -78,8 +74,6 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
-   const [responseModel, setResponseModel] = useState(false)
-    const [reviewId, setreviewId] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
@@ -107,55 +101,47 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'Id',
-          selector: 'id',
+          name: 'Employee Number',
+          selector: 'employeeNumber',
           sortable: true,
-          minWidth: '50px',
-          maxWidth: '200px'
+          minWidth: '50px'
         },
         {
-          name: 'Attributes',
-          selector: 'subAttributes',
-          minWidth: '150px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center ml-2'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate d-flex '>
-                {row.subAttributes.map((val, index) => {
-                  if (index < 1) {
-                    return (
-                      <div className="mr-1">{val.value}</div>
-                      )
-                  }
-                })
-                }
-                {row.subAttributes.length > 1 ? (
-                                                  <u><a href="#" onClick={ () => { 
-                                                                   setreviewId(row.id)
-                                                                    setResponseModel(true)
-                                                                     } }>
-                                                      view
-                                                </a></u>
-                                                  ) : null}
-                </span>
-                
-              </div>
-            </div>
-          )
+          name: 'First Name',
+          selector: 'firstName',
+          sortable: true,
+          minWidth: '150px'
         },
         {
-          name: 'Sub Category',
-          selector: 'Attribute',
+            name: 'Last Name',
+            selector: 'lastName',
+            sortable: true,
+            minWidth: '150px'
+          },
+        {
+          name: 'Email',
+          selector: 'email',
           sortable: true,
-          minWidth: '130px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Attribute}</span>
-              </div>
-            </div>
-          )
+          minWidth: '150px'
         },
+        {
+          name: 'Mobile',
+          selector: 'mobile',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Role',
+          selector: 'role',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+            name: 'Last Login Date',
+            selector: 'lastLoginDate',
+            sortable: true,
+            minWidth: '150px'
+          },
         {
           name: 'Actions',
           allowOverflow: true,
@@ -170,11 +156,14 @@ const DataTableWithButtons = () => {
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-
-                <Edit size={15} onClick={ () => { 
+                <Link  to={`/edit-product/${row.id}`}><Edit  
+                  size={15} 
+                  onClick={ () => { 
                                     setCurrentId(row.id)
                                     setModal(true)
-                                     } }/>
+                                     } }>
+                                       <Link to='/edit-product'/>
+                                     </Edit></Link>
               </div>
             )
           }
@@ -186,10 +175,7 @@ const DataTableWithButtons = () => {
   const handleModal = () => {
     setModal(!modal)
   }
-  
-  const handleResponse = () => {
-    setResponseModel(!responseModel)
-  }
+
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
     let updatedData = []
@@ -228,21 +214,15 @@ const DataTableWithButtons = () => {
       updatedData = data.filter(item => {
         const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.BidCloseDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.BidApplicationDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.GoLive.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.CustomStatus[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.BidStatus[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          NoOfBidder.toLowerCase().startsWith(value.toLowerCase())
+          item.productName.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.BidCloseDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.BidApplicationDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.GoLive.toLowerCase().includes(value.toLowerCase()) ||
-          item.CustomStatus[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.BidStatus[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          NoOfBidder.toLowerCase().includes(value.toLowerCase())
-
+          item.productName.toLowerCase().includes(value.toLowerCase()) ||
+          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
+          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -289,14 +269,34 @@ const DataTableWithButtons = () => {
   return (
     <Fragment>
       <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionBidStatus}
+                value={Filter}
+                onChange={data => {
+                  handleFilterByDropDown(data)
+                }}
+              />
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+
+      <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Sub Category</CardTitle>
+          <CardTitle tag='h4'>Products</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <Button className='ml-2' color='primary' onClick={handleModal}>
-                                        <Plus size={15} />
-                                        <span className='align-middle ml-50'>Add Sub Category</span>
-                </Button>
+            
           </div>
         </CardHeader>
 
@@ -319,7 +319,7 @@ const DataTableWithButtons = () => {
         <DataTable
           noHeader
           pagination
-         
+          selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -327,14 +327,12 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          
+          selectableRowsComponent={BootstrapCheckbox}
         />
         
       </Card>
-          <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} />
-          <Response open={responseModel} handleModal={handleResponse} currentId={reviewId} data={data} />
     </Fragment>
   )
 }
 
-export default DataTableWithButtons
+export default ProductList

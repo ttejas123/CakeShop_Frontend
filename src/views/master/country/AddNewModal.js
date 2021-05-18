@@ -1,4 +1,7 @@
 // ** Custom Components
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import Avatar from '@components/avatar'
 import Select from 'react-select'
 // ** Third Party Components
@@ -10,12 +13,21 @@ import { useState, useEffect } from 'react'
 
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
-import { Button, Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, FormFeedback  } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const AddNewModal = (prop) => {
+  const SignupSchema = yup.object().shape({
+    code: yup.string().required(),
+    Initial: yup.string().required(),
+    Name: yup.string().required(),
+    password: yup.string().required()
+  })
+
+  const { register, errors, handleSubmit } = useForm({ mode: 'onChange', resolver: yupResolver(SignupSchema) })
+
   const option = [
   {value: "؋", label: "Afghan afghani"},
   {value: "€", label: "EUR"},
@@ -89,22 +101,32 @@ const AddNewModal = (prop) => {
                 <MapPin size={15} />
               </InputGroupText>
             </InputGroupAddon>
-            <Input name="Name" onChange={handleInputeChange} id='Name' placeholder='Afghanistan' value={values.Name} />
+            <Input name="Name"
+              innerRef={register({ required: true })}
+              invalid={errors.Name && true}
+              onChange={handleInputeChange} id='Name' placeholder='Afghanistan' value={values.Name} />
           </InputGroup>
+          {errors && errors.Name && <FormFeedback>{errors.Name.message}</FormFeedback>}
         </FormGroup>
 
         <FormGroup>
           <Label for='Initial'>Initial</Label>
           <InputGroup>
-            <Input name="Initial" onChange={handleInputeChange} id='Initial' placeholder='eg. Afghanistan : AF' value={values.Initial} />
+            <Input name="Initial"
+              innerRef={register({ required: true })}
+              invalid={errors.Initial && true} onChange={handleInputeChange} id='Initial' placeholder='eg. Afghanistan : AF' value={values.Initial} />
           </InputGroup>
+          {errors && errors.Initial && <FormFeedback>{errors.Initial.message}</FormFeedback>}
         </FormGroup>
 
         <FormGroup>
           <Label for='code'>Country code</Label>
           <InputGroup>
-            <Input name="code" onChange={handleInputeChange} id='post' placeholder='eg. Afghanistan : 004' value={values.code} />
+            <Input name="code"
+              innerRef={register({ required: true })}
+              invalid={errors.code && true} onChange={handleInputeChange} id='post' placeholder='eg. Afghanistan : 004' value={values.code} />
           </InputGroup>
+          {errors && errors.code && <FormFeedback>{errors.code.message}</FormFeedback>}
         </FormGroup>
 
         <FormGroup className='mb-4'>

@@ -1,5 +1,6 @@
 import Avatar from '@components/avatar'
 import Select from 'react-select'
+import { useForm } from 'react-hook-form'
 // ** Third Party Components
 import axios from 'axios'
 import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X  } from 'react-feather'
@@ -15,6 +16,7 @@ import { Button, Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGrou
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const AddNewModal = (prop) => {
+  const { register, errors, handleSubmit } = useForm()
   const optionDLocation = [
     {value: "Multiple", label: "Multiple"},
     {value: "Single", label: "Single"}

@@ -1,9 +1,10 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
 import Select from 'react-select'
+import Rating from 'react-rating'
 // ** Third Party Components
 import axios from 'axios'
-import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X  } from 'react-feather'
+import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X, Star  } from 'react-feather'
 //import Flatpickr from 'react-flatpickr'
 // ** React Imports
 import { useState, useEffect } from 'react'
@@ -84,7 +85,13 @@ const AddNewModal = (prop) => {
             </div>
             <div className="d-flex justify-content-between">
               <div className='font-small-2'>Rating : </div>
-              <h5 className='mb-1'> {values.rating}</h5>
+              <Rating
+                    className="mb-1"
+                    emptySymbol={<Star size={15} fill='#babfc7' stroke='#babfc7' />}
+                    fullSymbol={<Star size={15} fill='#ff9933' stroke='#ff8000' />}
+                    initialRating={values.rating}
+                    readonly
+              />
             </div>
             <div className="d-flex justify-content-between">
               <div className='font-small-2'>Review Date : </div>

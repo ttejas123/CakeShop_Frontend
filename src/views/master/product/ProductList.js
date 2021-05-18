@@ -47,17 +47,17 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 
 
 // ** Renders Client Columns
-// const renderClient = row => {
-//   const stateNum = Math.floor(Math.random() * 6),
-//     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-//     color = states[stateNum]
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
 
-//   if (row.avatar.length) {
-//     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
-//   } else {
-//     return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
-//   }
-// }
+  if (row.avatar.length) {
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+  }
+}
 
 const optionBidStatus = [
     {value: "", label: "Filter Status"},
