@@ -293,12 +293,12 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Sub Category</CardTitle>
+          <CardTitle tag='h4'>Category</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             <Link to={`/master/sub/add`}>
               <Button className='ml-2' color='primary' onClick={handleModal}>
                                           <Plus size={15} />
-                                          <span className='align-middle ml-50'>Add Sub Category</span>
+                                          <span className='align-middle ml-50'>Add Category</span>
               </Button>
             </Link>
           </div>

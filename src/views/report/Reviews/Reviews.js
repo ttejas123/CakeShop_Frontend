@@ -1,5 +1,6 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
+import Rating from 'react-rating'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
@@ -18,7 +19,7 @@ import FormModel from './formModel'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye, Star  } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -122,7 +123,19 @@ const DataTableWithButtons = () => {
           name: 'Rating',
           selector: 'rating',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className='d-flex flex-column'>
+                <Rating
+                    emptySymbol={<Star size={15} fill='#babfc7' stroke='#babfc7' />}
+                    fullSymbol={<Star size={15} fill='#ff9933' stroke='#ff8000' />}
+                    initialRating={row.rating}
+                    readonly
+                  />  
+              </div>
+            </div>
+          )
         },
         {
           name: 'Review',
