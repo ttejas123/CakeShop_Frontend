@@ -23,7 +23,7 @@ export default [
         id: 'Admin',
         title: 'Admin',
         icon: <Circle size={20} />,
-        navLink: '/admin'
+        navLink: '/adashboard'
       },
       {
         id: 'Finances',
@@ -75,20 +75,7 @@ export default [
         id: 'Sub Category',
         title: 'Sub Category',
         icon: <Circle size={20} />,
-        children: [
-          {
-            id: 'Sub_Category',
-            title: 'Sub Category',
-            icon: <Circle size={20} />,
-            navLink: '/master/subattribute'
-          },
-          {
-            id: 'Attributes',
-            title: 'Attributes',
-            icon: <Circle size={20} />,
-            navLink: '/master/attribute'
-          }
-        ]
+        navLink: '/master/subattribute'
       },   
       {
         id: 'CurrencyList',
@@ -173,6 +160,12 @@ export default [
         title: 'Badge Mapping',
         icon: <Circle size={20} />,
         navLink: '/badge-mapping-list'
+      },
+      {
+        id: 'SMS_Add',
+        title: 'SMS Add',
+        icon: <Circle size={20} />,
+        navLink: '/master/sms/add'
       },
       {
         id: 'ProductPage',
@@ -408,6 +401,12 @@ export default [
         navLink: '/report/revenue-list'
       },
       {
+        id: 'Bid_Coin',
+        title: 'Bid Coin',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCoin'
+      },
+      {
         id: 'smsHistory',
         title: 'SMS History',
         icon: <Circle size={20} />,
@@ -432,6 +431,18 @@ export default [
         navLink: '/report/ticket-List'
       },
       {
+        id: 'Search_keyWord_History',
+        title: 'Search keyWord History',
+        icon: <Circle size={20} />,
+        navLink: '/report/SrchKeyWHistory'
+      },
+      {
+        id: 'Cart',
+        title: 'Cart',
+        icon: <Circle size={20} />,
+        navLink: '/report/Cart'
+      },
+      {
         id: 'OnGround',
         title: 'Onground',
         id: 'Invoice',
@@ -452,10 +463,22 @@ export default [
         navLink: '/report/review'
       },
       {
-        id: 'RFQ_Nigotiation',
-        title: 'RFQ Nigotiation',
+        id: 'Bank_Guarantee_Transaction',
+        title: 'Bank Guarantee Transaction',
         icon: <Circle size={20} />,
-        navLink: '/Rfq7/rfqN'
+        navLink: '/report/bankGTransca'
+      },
+      {
+        id: 'Product Issue',
+        title: 'Product Issue',
+        icon: <Circle size={20} />,
+        navLink: '/report/productIssue'
+      },
+      {
+        id: 'Profile_Completion_Checklist',
+        title: 'Profile Completion Checklist',
+        icon: <Circle size={20} />,
+        navLink: '/report/ProfileCmpltChklist'
       }
     ]
   },

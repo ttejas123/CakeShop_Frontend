@@ -66,6 +66,10 @@ const UserDropdown = () => {
           <MessageSquare size={14} className='mr-75' />
           <span className='align-middle'>Status</span>
         </DropdownItem>
+        <DropdownItem tag={Link} to='/settings'>
+          <Settings size={14} className='mr-75' />
+          <span className='align-middle'>Settings</span>
+        </DropdownItem>
         <DropdownItem tag={Link} to='#'>
           <LogOut size={14} className='mr-75' />
           <span className='align-middle'>Logout</span>

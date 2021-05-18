@@ -36,6 +36,14 @@ const optionCity = [
     {value: "Pune", label: "Pune"}
 ]
 
+const optionCompany = [
+    {value: "", label: "Select Your Company"},
+    {value: "TCS", label: "TCS"},
+    {value: "Infosys", label: "Infosys"},
+    {value: "Google", label: "Google"},
+    {value: "Amezon", label: "Amezon"}
+]
+
 const optionState = [
     {value: "", label: "Select Your State"},
     {value: "Maharashtra", label: "Maharashtra"},
@@ -61,7 +69,6 @@ const optionUserType = [
     telephone_city_code : 0,
     landline : 0,
     extension : "",
-    corporate_id : 0,
     company_name : "",
     pan_card_type : "",
     pan_number : 0,
@@ -72,6 +79,8 @@ const optionUserType = [
     ifsc_code : 0,
     micr_code : 0,
     password : 0,
+    gstno: 0,
+    corporate : {value: "", label: "Select Your Corporate"},
     user_type: {value: "", label: "Select user Type"},
     country:  {value: "", label: "Search country"},
     State: {value: "", label: "Search State"},
@@ -350,11 +359,25 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>corporate_id</Label>
-              <InputGroup>
-                
-                <Input name="corporate_id" onChange={handleInputeChange} id='corporate_id' placeholder='' value={values.corporate_id} />
-              </InputGroup>
+              <Label for='corporate'>Company</Label>
+              <Select
+                id='corporate'
+                className='react-select'
+                classNamePrefix='select'
+                isClearable={false}
+                options={optionCompany}
+                theme={selectThemeColors}
+                value={values.corporate}
+                onChange={data => {
+                                   setValues(
+                                            {
+                                               ...values,
+                                               corporate : data
+                                            } 
+                                    )
+                                  }
+                          }
+              /> 
               </FormGroup>  
             </Col>
 
@@ -404,6 +427,16 @@ const optionUserType = [
               <InputGroup>
                 
                 <Input name="bank_name" onChange={handleInputeChange} id='bank_name' placeholder='ICICI Bank' value={values.bank_name} />
+              </InputGroup>
+              </FormGroup>  
+            </Col>
+
+            <Col md='4' sm='12'>
+              <FormGroup>
+              <Label for='Name'>GST Number</Label>
+              <InputGroup>
+                
+                <Input name="gstno" onChange={handleInputeChange} id='gstno' placeholder='' value={values.gstno} />
               </InputGroup>
               </FormGroup>  
             </Col>

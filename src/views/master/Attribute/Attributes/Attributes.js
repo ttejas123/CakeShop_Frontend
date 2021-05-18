@@ -182,23 +182,7 @@ const handleDelete = (data) => {
             </Button>
             </Link>
       </CardHeader>
-      {/* {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd}/> : null} */}
-      {/* {editClicked ? <EditForm data = {editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit}/> : null} */}
-      {/* <Row className='justify-content-end mx-0'>
-        <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-          <Label className='mr-1' for='search-input-1'>
-            <FormattedMessage id='Search' />
-          </Label>
-          <Input
-            className='dataTable-filter mb-50'
-            type='text'
-            bsSize='sm'
-            id='search-input-1'
-            value={searchValue}
-            onChange={handleFilter}
-          />
-        </Col>
-      </Row> */}
+      
       <DataTable
         noHeader
         pagination

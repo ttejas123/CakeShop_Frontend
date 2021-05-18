@@ -64,7 +64,7 @@ const AddNewModal = (prop) => {
                           {prop.data[prop.currentId - 1].subAttributes.map((val) => {
                              return (
                                 <Badge className='text-capitalize ml-1' color='primary' pill>
-                                    {val.value}
+                                    {val.title}
                                 </Badge>
                               )
                           })}

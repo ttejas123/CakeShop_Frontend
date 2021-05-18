@@ -174,7 +174,7 @@ const Routes = [
   },
   {
     path: '/add-attribute',
-    component: lazy(() => import('../../views/master/Attribute/Attributes/add'))
+    component: lazy(() => import('../../views/master/subCat/Attributes/add'))
   },
   {
     path: '/edit-corporate',
@@ -209,12 +209,24 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/add'))
   },
   {
-    path: '/master/attribute',
-    component: lazy(() => import('../../views/master/Attribute/Attributes/Attributes'))
+    path: '/master/subattribute',
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/SubAttributes'))
   },
   {
-    path: '/master/subattribute',
-    component: lazy(() => import('../../views/master/Attribute/SubAttributes/SubAttributes'))
+    path: '/master/Sub/addE/:id',
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/addE'))
+  },
+  {
+    path: '/master/sms/add',
+    component: lazy(() => import('../../views/master/SMSAdd'))
+  },
+  {
+    path: '/master/Sub/add',
+    component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
+  },
+  {
+    path: '/report/ProfileCmpltChklist',
+    component: lazy(() => import('../../views/report/ProfileCmpltChklist'))
   },
   {
     path: '/report/review',
@@ -223,6 +235,10 @@ const Routes = [
   {
     path: '/report/redressal',
     component: lazy(() => import('../../views/report/Redressal/Redressal'))
+  },
+  {
+    path: '/report/productIssue',
+    component: lazy(() => import('../../views/report/productIssue'))
   },
   {
     path: '/report/emails-list',
@@ -265,8 +281,32 @@ const Routes = [
     component: lazy(() => import('../../views/report/Invoice/Invoice'))
   },
   {
-    path: '/Rfq7/rfqN',
-    component: lazy(() => import('../../views/Rfq7/rfqN'))
+    path: '/report/Cart',
+    component: lazy(() => import('../../views/report/Cart/cart'))
+  },
+  {
+    path: '/report/SrchKeyWHistory',
+    component: lazy(() => import('../../views/report/SrchKeyWHistory'))
+  },
+  {
+    path: '/report/bidCoin',
+    component: lazy(() => import('../../views/report/bidCoin'))
+  },
+  {
+    path: '/report/bidCoin-add',
+    component: lazy(() => import('../../views/report/bidCoin/add.js'))
+  },
+  {
+    path: '/report/bidCoin-edit/:id',
+    component: lazy(() => import('../../views/report/bidCoin/edit.js'))
+  },
+  {
+    path: '/report/bankGTransca',
+    component: lazy(() => import('../../views/report/bankGTransca'))
+  },
+  {
+    path: '/settings',
+    component: lazy(() => import('../../views/settings'))
   },
   {
     path: '/login',
@@ -284,6 +324,10 @@ const Routes = [
   {
     path: '/ccdashboard',
     component: lazy(() => import('../../views/dashboards/call_center'))
+  },
+  {
+    path: '/adashboard',
+    component: lazy(() => import('../../views/dashboards/admin'))
   },
   {
     path: '/ogedashbaord',
