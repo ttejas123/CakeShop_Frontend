@@ -1,5 +1,6 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
@@ -148,10 +149,11 @@ const DataTableWithButtons = () => {
                   </DropdownToggle>
                 </UncontrolledDropdown>
 
-                <Edit size={15} onClick={ () => { 
+                <Link to={`/product-cat-edit/${row.id}`}>
+                  <Edit size={15} onClick={ () => { 
                                     setCurrentId(row.id)
-                                    setModal(true)
                                      } }/>
+                </Link>
               </div>
             )
           }
@@ -239,10 +241,12 @@ const DataTableWithButtons = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Product Category</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <Button className='ml-2' color='primary' onClick={handleModal}>
-              <Plus size={15} />
-              <span className='align-middle ml-50'>Add Your Product</span>
-            </Button>
+            <Link to={`/product-cat-add`}>
+              <Button className='ml-2' color='primary' onClick={handleModal}>
+                <Plus size={15} />
+                <span className='align-middle ml-50'>Add Your Product</span>
+              </Button>
+            </Link>
           </div>
         </CardHeader>
 
@@ -277,7 +281,7 @@ const DataTableWithButtons = () => {
         />
         
       </Card>
-      <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data1} />
+  
     </Fragment>
   )
 }
