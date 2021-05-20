@@ -30,7 +30,7 @@ export const data = [
         email: "tthakare73@gmail.com",
         designation:"job",
         DeliveryLocation:[{value:""}],
-        mobile : 321342,
+        mobile : 3213424362,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
        
@@ -52,7 +52,7 @@ export const data = [
         email: "pravinP@gmail.com",
         designation:"job",
         
-        mobile : 321342,
+        mobile : 3213424362,
         
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         
@@ -74,7 +74,7 @@ export const data = [
         CreatedDate :"13-10-2021",
         designation:"job",
         email: "komal@gmail.com",
-        mobile : 541342,
+        mobile : 9967443534,
         
         userType: [{value: "Both", label: "Both"}], //Buyer Seller
        
@@ -96,7 +96,7 @@ export const data = [
         email: "mehul@gmail.com",
         designation:"job",
         
-        mobile : 721342,
+        mobile : 7213422483,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
@@ -118,7 +118,7 @@ export const data = [
         email: "harpriya@gmail.com",
         designation:"job",
         
-        mobile : 2331342,
+        mobile : 2331342342,
         
         userType: [{value: "Both", label: "Both"}],  //Buyer Seller
         
@@ -140,7 +140,7 @@ export const data = [
         email: "reethika@gmail.com",
         designation:"job",
         
-        mobile : 771356,
+        mobile : 7713566574,
         
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         
@@ -162,7 +162,7 @@ export const data = [
         email: "himanshu@gmail.com",
         designation:"job",
         
-        mobile : 671356,
+        mobile : 6713564543,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
@@ -184,7 +184,7 @@ export const data = [
         email: "suryaDas@gmail.com",
         designation:"job",
         
-        mobile : 921345,
+        mobile : 9213454354,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
@@ -206,7 +206,7 @@ export const data = [
         email: "avinash@gmail.com",
         designation:"job",
         
-        mobile : 3421332,
+        mobile : 3421332353,
        
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         

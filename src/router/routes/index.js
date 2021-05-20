@@ -53,6 +53,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/employee/backupAccount'))
   },
   {
+    path: '/master/backupA/add',
+    component: lazy(() => import('../../views/master/employee/badd'))
+  },
+  {
+    path: '/master/backupA/edit/:id',
+    component: lazy(() => import('../../views/master/employee/bedit'))
+  },
+  {
     path: '/right-assignment',
     component: lazy(() => import('../../views/master/employee/rightAssignment.js'))
   },
@@ -119,6 +127,10 @@ const Routes = [
   {
     path: '/membership-list',
     component: lazy(() => import('../../views/master/membership/membershipList'))
+  },
+  {
+    path: '/master/membership/view',
+    component: lazy(() => import('../../views/master/membership/membershipView'))
   },
   {
     path: '/bga-list',
@@ -217,8 +229,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/userAddressAdd'))
   },
   {
-    path: '/master/payment',
-    component: lazy(() => import('../../views/master/payment'))
+    path: '/master/subscriptionplan',
+    component: lazy(() => import('../../views/master/subScrPlan/index'))
+  },
+  {
+    path: '/master/subscription/aveil/:id',
+    component: lazy(() => import('../../views/master/subScrPlan/aveil'))
+  },
+  {
+    path: '/master/commi',
+    component: lazy(() => import('../../views/master/comslb/index'))
+  },
+  {
+    path: '/master/cmmi/edit/:id',
+    component: lazy(() => import('../../views/master/comslb/edit'))
   },
   {
     path: '/master/permissions/:id',

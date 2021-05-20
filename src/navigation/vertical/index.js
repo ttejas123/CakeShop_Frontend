@@ -174,6 +174,12 @@ export default [
            navLink: '/master/sms/add'
       },
       {
+           id: 'Commission_Slab',
+           title: 'Commission Slab',
+           icon: <Circle size={20} />,
+           navLink: '/master/commi'
+      },
+      {
         id: 'ProductPage',
         title: 'Product',
         icon: <Circle size={20} />,
