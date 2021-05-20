@@ -3,23 +3,23 @@ import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { data1 } from './data'
-import { Link } from 'react-router-dom'
+import { data } from './data'
 import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
-import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
-//import InputBasic from './AddBackUp'
-// import HorizontalForm from './AddBackUp'
-// import EditForm from './EditBackUp'
+import { MoreVertical, Edit, FileText, Archive, Share, Printer, File, Grid, Copy, Trash, ChevronDown, Plus} from 'react-feather'
+import { Card, CardHeader, CardTitle, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap'
+//import InputBasic from './AddBadges'
+// import HorizontalForm from './AddCurrency'
+// import EditForm from './EditCurrency'
 
-const BackUpAccounts = () => {
+const BuyerKycList = () => {
 
-    //console.log(BackUpColumns)
-    console.log(data1)
+    //console.log(BankGuarranteApplsColumns)
+    console.log(data)
   // ** State
 //   const data = [
 //     {
@@ -48,118 +48,108 @@ const BackUpAccounts = () => {
     setCurrentPage(page.selected)
   }
 
-//   const handleEditClick = (item) => {
-//       if (!addClicked) { 
-//         setEditClicked(!editClicked)
-//         setEditData(item)
-//       }
-//     //console.log(item)
-//   }
-
-//   const handleAddClick = () => {
-//       if (!editClicked) {
-//         setAddClicked(!addClicked)
-//       }
-//   }
-
-//   const handleCancelOfEdit = () => {
-//     console.log("in Cancel")
-//     setEditClicked(!editClicked)
-// }
-// const handleCancelOfAdd = () => {
-//     console.log("in Cancel")
-//     setAddClicked(!addClicked)
-// }
-// const handleSubmitOfAdd = (data) => {
-//     console.log("in submit", data)
-//     setAddClicked(!addClicked)
-// }
-
-// const handleSubmitOfEdit = (data) => {
-//     console.log("in submit of edit", data)
-//     setEditClicked(!editClicked)
-// }
-
-// const handleDelete = (data) => {
-//     const userselection = confirm("Are you sure you want to delete")
- 
-//       if (userselection === true) {
-//         console.log(" your record is deleted")
-//       } else {
-//       console.log("not deleted ")
-//       }
-// }
-
-const renderBackup = row => {
-  const stateNum = Math.floor(Math.random() * 6),
-    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-    color = states[stateNum]
-
-  if (row.img.length) {
-    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.img} width='32' height='32'  /> </Link>
-  } else {
-    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.backUp || 'John Doe'} initials  /> </Link>
+  const handleEditClick = (item) => {
+      if (!addClicked) { 
+        setEditClicked(!editClicked)
+        setEditData(item)
+      }
+    //console.log(item)
   }
+
+  const handleAddClick = () => {
+      if (!editClicked) {
+        setAddClicked(!addClicked)
+      }
+  }
+
+  const handleCancelOfEdit = () => {
+    console.log("in Cancel")
+    setEditClicked(!editClicked)
+}
+const handleCancelOfAdd = () => {
+    console.log("in Cancel")
+    setAddClicked(!addClicked)
+}
+const handleSubmitOfAdd = (data) => {
+    console.log("in submit", data)
+    setAddClicked(!addClicked)
 }
 
-  const BackUpColumns = [
+const handleSubmitOfEdit = (data) => {
+    console.log("in submit of edit", data)
+    setEditClicked(!editClicked)
+}
+
+const handleDelete = (data) => {
+    const userselection = confirm("Are you sure you want to delete")
+ 
+      if (userselection === true) {
+        console.log(" your record is deleted")
+      } else {
+      console.log("not deleted ")
+      }
+}
+
+const columns = [
     {
-      name: 'Out Of Office',
-      selector: 'outOfOffice',
+      name: 'Id',
+      selector: 'id',
       sortable: true,
-      minWidth: '250px'
+      minWidth: '80px'
     },
     {
-      name: 'From',
-      selector: 'from',
-      sortable: false,
-      minWidth: '250px'
-    },
-    {
-      name: 'To',
-      selector: 'to',
-      sortable: false,
-      minWidth: '250px'
-    },
-    {
-      name: 'Backup Name',
-      minWidth: '250px',
-      selector: 'backUp',
+      name: 'User Id',
+      selector: 'userId',
       sortable: true,
-      cell: row => (
-        <div className='d-flex justify-content-left align-items-center'>
-          {renderBackup(row)}
-          <div className=''>
-            {/* <Link to={`/bidDetails/${row.id}`}> */}
-              <div className='backup-info text-truncate d-flex flex-column'>
-                 <span className='font-weight-bold'>{row.backUp}</span>
-                 {/* <small className='text-truncate text-muted mb-0'>@{row.backupname}</small> */}
-              </div>
-            {/* </Link>   */}
+      minWidth: '80px'
+    },
+    {
+        name: 'Identity Proof',
+        selector: 'identityProof',
+        sortable: true,
+        minWidth: '80px'
+    },
+    {
+        name: 'Address Proof',
+        selector: 'addressProof',
+        sortable: true,
+        minWidth: '80px'
+    },
+    {
+        name: 'Approved By',
+        selector: 'approvedBy',
+        sortable: true,
+        minWidth: '80px'
+    },
+    {
+        name: 'Approved Time',
+        selector: 'approvedTime',
+        sortable: true,
+        minWidth: '80px'
+    },
+    {
+      name: 'Actions',
+      allowOverflow: true,
+      cell: row => {
+        return (
+          <div className='d-flex'>
+            <UncontrolledDropdown>
+              <DropdownToggle className='pr-1' tag='span'>
+                <Trash size={15} onClick={e => { handleDelete(row) }} />
+              </DropdownToggle>
+            </UncontrolledDropdown>
+            <Link  to={`/report/add-GstReport`}><Edit  
+                  size={15} 
+                  onClick={ () => { 
+                                    //setCurrentId(row.id)
+                                    //setModal(true)
+                                     } }>
+                                       <Link to='/report/add-GstReport'/>
+                                     </Edit></Link>
           </div>
-        </div>
-      )
+        )
+      }
     }
-    
-    // {
-    //   name: 'Actions',
-    //   allowOverflow: true,
-    //   cell: row => {
-    //     return (
-    //       <div className='d-flex'>
-    //         <UncontrolledDropdown>
-    //           <DropdownToggle className='pr-1' tag='span'>
-    //             <Trash size={15} onClick={e => { handleDelete(row) }} />
-    //           </DropdownToggle>
-    //         </UncontrolledDropdown>
-    //         <Edit size={15} onClick={ e => { 
-    //                                             e.preventDefault() 
-    //                                             handleEditClick(row) 
-    //                                             } } />
-    //       </div>
-    //     )
-    //   }
-    // }
   ]
   
   // ** Function to handle filter
@@ -181,7 +171,7 @@ const renderBackup = row => {
   //       const startsWith =
   //         item.full_name.toLowerCase().startsWith(value.toLowerCase()) ||
   //         item.post.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.email.toLowerCase().startsWith(value.toLowerCase()) ||
+  //         item.GstReport.toLowerCase().startsWith(value.toLowerCase()) ||
   //         item.age.toLowerCase().startsWith(value.toLowerCase()) ||
   //         item.salary.toLowerCase().startsWith(value.toLowerCase()) ||
   //         item.start_date.toLowerCase().startsWith(value.toLowerCase()) ||
@@ -190,7 +180,7 @@ const renderBackup = row => {
   //       const includes =
   //         item.full_name.toLowerCase().includes(value.toLowerCase()) ||
   //         item.post.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.email.toLowerCase().includes(value.toLowerCase()) ||
+  //         item.GstReport.toLowerCase().includes(value.toLowerCase()) ||
   //         item.age.toLowerCase().includes(value.toLowerCase()) ||
   //         item.salary.toLowerCase().includes(value.toLowerCase()) ||
   //         item.start_date.toLowerCase().includes(value.toLowerCase()) ||
@@ -236,7 +226,7 @@ const renderBackup = row => {
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data1.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -253,18 +243,18 @@ const renderBackup = row => {
     />
   )
 
+   
+  // ** Converts table to CSV
+  
+
   return (
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Backup Accounts</CardTitle>
-        {/* <Button className='ml-2' color='primary' onClick={handleAddClick}>
-              <Plus size={15} />
-              <span className='align-middle ml-50'>Add BackUp</span>
-            </Button> */}
+        <CardTitle tag='h4'>Buyers Kyc</CardTitle>
       </CardHeader>
-      {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
-      {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null}
+      {/* {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
+      {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null} */}
       {/* <Row className='justify-content-end mx-0'>
         <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
           <Label className='mr-1' for='search-input-1'>
@@ -284,13 +274,13 @@ const renderBackup = row => {
         noHeader
         pagination
         selectableRowsNoSelectAll
-        columns={BackUpColumns}
+        columns={columns}
         className='react-dataTable'
         paginationPerPage={7}
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={data1}
+        data={data}
       />
       {/* <CardFooter>
         <CardText className='mb-0'>
@@ -303,4 +293,4 @@ const renderBackup = row => {
   )
 }
 
-export default BackUpAccounts
+export default BuyerKycList

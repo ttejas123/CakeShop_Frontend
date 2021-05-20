@@ -181,7 +181,7 @@ const CorporateView = () => {
       </Row> 
 
       <Row className='match-height'>
-          <Col lg='6' md='6'>
+          <Col lg='8' md='6'>
           <Card className='card-statistics'>
            <CardHeader>  
               <CardTitle tag='h5'><h4>Kyc Submitted</h4></CardTitle>
@@ -195,7 +195,7 @@ const CorporateView = () => {
             </CardBody>  
           </Card>
         </Col>
-        <Col lg='6' md='6'>
+        <Col lg='4' md='6'>
          <CorporateBidStats colors={colors} trackBgColor={trackBgColor}/>
         </Col>
       </Row> 

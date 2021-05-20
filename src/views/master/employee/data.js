@@ -1,34 +1,44 @@
+import komal  from '../../../assets/images/logo/komal.jpg'
+import pravin  from '../../../assets/images/logo/pravin.jpg'
+import himanshu  from '../../../assets/images/logo/himanshu.jpg'
+import reethika  from '../../../assets/images/logo/reethika.jpg'
+
 export const data1 = [
     {
       outOfOffice : "Pravin Poshmani",
       from : "12-11-2020",
       to : "14-11-2020",
-      backUp : "Tejas Thakare"
+      backUp : "Tejas Thakare",
+      img : pravin
     
     },
     {
         outOfOffice : "Tejas Thakare",
         from : "05-05-2021",
         to : "11-05-2021",
-        backUp : "Pravin Poshmani"
+        backUp : "Pravin Poshmani",
+        img : pravin
     },
     {
         outOfOffice : "Komal Kamble",
         from : "12-10-2020",
         to : "14-12-2020",
-        backUp : "Himanshu Chanda"
+        backUp : "Himanshu Chanda",
+        img : himanshu
     },
     {
         outOfOffice : "Reethika",
         from : "10-11-2020",
         to : "19-11-2020",
-        backUp : "Daksh"
+        backUp : "Daksh",
+        img : ""
     },
     {
         outOfOffice : "Himanshu Chanda",
         from : "12-11-2020",
         to : "14-11-2020",
-        backUp : "Umang Shah"
+        backUp : "Umang Shah",
+        img : ""
     }
   ]
   

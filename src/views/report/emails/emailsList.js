@@ -309,6 +309,7 @@ const handleDelete = (data) => {
         <CardBody>
           <Row>
             <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -320,6 +321,7 @@ const handleDelete = (data) => {
                   handleFilterByDropDown(data)
                 }}
               />
+              </div>
             </Col>
           </Row>
         </CardBody>

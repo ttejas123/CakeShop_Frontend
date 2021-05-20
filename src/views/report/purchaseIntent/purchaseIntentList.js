@@ -233,6 +233,7 @@ const PurchaseIntentList = () => {
         <CardBody>
           <Row>
             <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -244,6 +245,7 @@ const PurchaseIntentList = () => {
                   handleFilterByDropDown(data)
                 }}
               />
+              </div>
             </Col>
           </Row>
         </CardBody>

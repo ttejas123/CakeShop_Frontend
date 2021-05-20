@@ -168,6 +168,12 @@ export default [
         navLink: '/master/sms/add'
       },
       {
+        id: 'billDiscounting',
+        title: 'Bill Discounting',
+        icon: <Circle size={20} />,
+        navLink: '/bill-discounting-list'
+      },
+      {
         id: 'ProductPage',
         title: 'Product',
         icon: <Circle size={20} />,
@@ -329,6 +335,31 @@ export default [
                   title: 'list',
                   icon: <Circle size={20} />,
                   navLink: '/user-list'
+                }
+        ]
+      },
+      {
+        id: 'credit',
+        title: 'Credit',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'corporateCredit',
+                  title: 'Corporate Credit',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporate-credit-list'
+                },
+                {
+                  id: 'creditLimit',
+                  title: 'Credit Limit',
+                  icon: <Circle size={20} />,
+                  navLink: '/credit-limit-list'
+                },
+                {
+                  id: 'creditTransactions',
+                  title: 'Credit Transactions',
+                  icon: <Circle size={20} />,
+                  navLink: '/credit-transactions-list'
                 }
         ]
       },

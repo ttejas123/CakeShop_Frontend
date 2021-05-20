@@ -69,7 +69,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/corporate/corporateView'))
   },
   {
-    path: '/employeeView',
+    path: '/employee-view',
     component: lazy(() => import('../../views/master/employee/employeeView'))
   },
   {
@@ -83,6 +83,14 @@ const Routes = [
   {
     path: '/kyc-document-list',
     component: lazy(() => import('../../views/master/kyc/kycList'))
+  },
+  {
+    path: '/buyer-kyc-list',
+    component: lazy(() => import('../../views/master/kyc/buyerKycList'))
+  },
+  {
+    path: '/seller-kyc-list',
+    component: lazy(() => import('../../views/master/kyc/sellerKycList'))
   },
   {
     path: '/bids',
@@ -103,6 +111,26 @@ const Routes = [
   {
     path: '/bga-list',
     component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaList'))
+  },
+  {
+    path: '/corporate-credit-list',
+    component: lazy(() => import('../../views/master/credit/corporateCreditRequest'))
+  },
+  {
+    path: '/credit-limit-list',
+    component: lazy(() => import('../../views/master/credit/creditLimitList'))
+  },
+  {
+    path: '/credit-transactions-list',
+    component: lazy(() => import('../../views/master/credit/creditTransactions'))
+  },
+  {
+    path: '/bill-discounting-list',
+    component: lazy(() => import('../../views/master/billDiscounting/billDiscountingList'))
+  },
+  {
+    path: '/add-bill-discounting',
+    component: lazy(() => import('../../views/master/billDiscounting/addBillDiscounting'))
   },
   {
     path: '/bga-action',

@@ -81,7 +81,7 @@ const renderBuyer = row => {
       states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
       color = states[stateNum]
   
-    if (row.sellerAvatar.length) {
+    if (row.buyerAvatar.length) {
       return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.buyerAvatar} width='32' height='32'  /> </Link>
     } else {
       return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
@@ -215,6 +215,48 @@ const columns = [
     )
   }
 
+  function convertArrayOfObjectsToCSV(array) {
+    let result
+
+    const columnDelimiter = ','
+    const lineDelimiter = '\n'
+    const keys = Object.keys(data[0])
+
+    result = ''
+    result += keys.join(columnDelimiter)
+    result += lineDelimiter
+
+    array.forEach(item => {
+      let ctr = 0
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter
+
+        result += item[key]
+
+        ctr++
+      })
+      result += lineDelimiter
+    })
+
+    return result
+  }
+
+  function downloadCSV(array) {
+    const link = document.createElement('a')
+    let csv = convertArrayOfObjectsToCSV(array)
+    if (csv === null) return
+
+    const filename = 'export.csv'
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`
+    }
+
+    link.setAttribute('href', encodeURI(csv))
+    link.setAttribute('download', filename)
+    link.click()
+  }
+  
   // ** Custom Pagination Component
   const CustomPagination = () => (
     <ReactPaginate
