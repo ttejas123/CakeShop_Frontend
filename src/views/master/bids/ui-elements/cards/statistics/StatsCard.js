@@ -6,7 +6,6 @@ import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col, Media, Badge
 import Earnings from '../analytics/Earnings'
 import { data } from '../../../data'
 
-import Products from './ProductTable'
 import komal  from '../../../../../../assets/images/logo/komal.jpg'
 const StatsCard = (props) => {
  const stateNum = Math.floor(Math.random() * 6),
@@ -128,23 +127,6 @@ const StatsCard = (props) => {
                 </Card>
               </Col>
         </Row>
-    </div>
-
-{ /* here we Have Product list*/ }
-    <div className='match-height'>
-    <Card className='card-statistics'>
-       <CardHeader>  
-          <CardTitle tag='h4'><h2>Products</h2></CardTitle>
-       </CardHeader>  
-        <CardBody>
-          <Row className='match-height'>
-            <Col lg='12' xs='12'>
-              <Products />
-            </Col>
-          </Row>
-        </CardBody>  
-      </Card>
-
     </div>
 
   </div>

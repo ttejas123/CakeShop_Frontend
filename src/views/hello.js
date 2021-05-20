@@ -20,3 +20,19 @@
 
 
 //docer contener devox
+
+
+
+//prduct approve
+//corporate kyc upload, approve
+//kyc upload, approve
+
+
+// 107 order report with filter 
+
+// 114 backup account list (add inside user View) similar to [master - employee - backup] = onclick row element show [assignment permission component in new screen] -- done
+// 116 rights view (permission component) -- Done
+// 123 payment list 
+// 149 Partner Financial Institute
+// 150 Preferred Partner list
+// 151 Preferred Partner add/edit  

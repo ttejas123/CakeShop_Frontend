@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col} from 'reactstrap'
 import UserProfileCard from "./profileComponets/userInfoCard.js"
+import BackupAcList from "./profileComponets/backupAcList.js"
 import StatusCard from "./profileComponets/statusCard.js"
 import KycSub from "./profileComponets/kycSub.js"
 import BidStatus from "./profileComponets/bidStatus.js"
@@ -89,6 +90,23 @@ const EcommerceDashboard = () => {
                 <Row className='match-height'>
                   <Col lg='12' xs='12'>
                     <BidHistory />
+                  </Col>
+                </Row>
+              </CardBody>  
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className='match-height'>
+        <Col xl='12' md='12' xs='12'>
+          <Card className='card-statistics'>
+             <CardHeader>  
+                <CardTitle tag='h4'><h4>Backup Account List</h4></CardTitle>
+             </CardHeader>  
+              <CardBody>
+                <Row className='match-height'>
+                  <Col lg='12' xs='12'>
+                    <BackupAcList />
                   </Col>
                 </Row>
               </CardBody>  

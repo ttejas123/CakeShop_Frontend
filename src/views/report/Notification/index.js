@@ -39,8 +39,8 @@ import {
 const DataTableWithButtons = () => {
   const statusObj = {
         pending: 'light-secondary',
-        approved: 'light-success',
-        approval: 'light-warning'
+        send: 'light-success',
+        failed: 'light-danger'
   }
   // ** States
   const [modal, setModal] = useState(false)
@@ -66,32 +66,48 @@ const DataTableWithButtons = () => {
           maxWidth: '150px'
         },
         {
-          name: 'Invoice Number',
-          selector: 'invoice_number',
+          name: 'Notification To',
+          selector: 'Notification_To',
           sortable: true,
           minWidth: '120px',
           maxWidth: '200px'
         },
         {
-          name: 'invoice_time',
-          selector: 'invoice_time',
+          name: 'Notification type',
+          selector: 'notification_type',
           sortable: true,
           minWidth: '120px',
           maxWidth: '200px'
         },
         {
-          name: 'Order Amount',
-          selector: 'order_amount',
+          name: 'Description',
+          selector: 'description',
           sortable: true,
           minWidth: '120px',
           maxWidth: '200px'
         },
         {
-          name: 'Order Number',
-          selector: 'order_number',
+          name: 'Notification for',
+          selector: 'notification_for',
           sortable: true,
           minWidth: '120px',
           maxWidth: '200px'
+        },
+        {
+          name: 'Notification for',
+          selector: 'notification_for',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className='d-flex flex-column'>
+                <Badge className='text-capitalize' color={statusObj[row.Status[0].label]} pill>
+                        {row.Status[0].label}
+                </Badge>
+              </div>
+            </div>
+          )
         },
         {
           name: 'Actions',
