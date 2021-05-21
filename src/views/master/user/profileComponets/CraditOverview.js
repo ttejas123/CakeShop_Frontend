@@ -71,22 +71,22 @@ const GoalOverview = props => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle tag='h4'>Cradit Overview</CardTitle>
+        <CardTitle tag='h4'>Credit Overview</CardTitle>
       </CardHeader>
       <CardBody className='p-0'>
         <Chart options={options} series={series} type='radialBar' height={245} />
       </CardBody>
       <Row className='border-top text-center mx-0'>
         <Col xs='4' className='border-right py-1'>
-          <CardText className='text-muted mb-0'>Total Cradit</CardText>
+          <CardText className='text-muted mb-0'>Total Credit</CardText>
           <h3 className='font-weight-bolder mb-0'>125K</h3>
         </Col>
         <Col xs='4' className='border-right py-1'>
-          <CardText className='text-muted mb-0'>Cradit Utilize</CardText>
+          <CardText className='text-muted mb-0'>Credit Utilize</CardText>
           <h3 className='font-weight-bolder mb-0'>100K</h3>
         </Col>
         <Col xs='4' className='py-1'>
-          <CardText className='text-muted mb-0'>Cradit Balance</CardText>
+          <CardText className='text-muted mb-0'>Credit Balance</CardText>
           <h3 className='font-weight-bolder mb-0'>223K</h3>
         </Col>
       </Row>
