@@ -10,7 +10,6 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
@@ -47,17 +46,6 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 
 
 // ** Renders Client Columns
-const renderClient = row => {
-  const stateNum = Math.floor(Math.random() * 6),
-    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-    color = states[stateNum]
-
-  if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
-  } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
-  }
-}
 
 const optionBidStatus = [
     {value: "", label: "Filter Status"},
@@ -69,7 +57,7 @@ const optionBidStatus = [
     {value: "productCategory", label: "Product Category"}
   ]
 
-const DataTableWithButtons = () => {
+const CorporateBranch = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -101,41 +89,61 @@ const DataTableWithButtons = () => {
       console.log(val)
   }
 
+  const data = [
+    {
+      branchName : "Geeks",
+      address : "Block-1",
+      city : "Mumbai",
+      state : "Maharashtra",
+      country : "India",
+      isBidoyasWarehouse : "Yes",
+      createdDate : "22-04-2000"
+    },
+    {
+      branchName : "Techie",
+      address : "Block-2",
+      city : "Hyderabad",
+      state : "Telangana",
+      country : "India",
+      isBidoyasWarehouse : "No",
+      createdDate : "21-04-2000"
+    },
+    {branchName : "Intellects",
+    address : "Block-3",
+    city : "Bangalore",
+    state : "Karnataka",
+    country : "India",
+    isBidoyasWarehouse : "No",
+    createdDate : "31-04-3000"
+    },
+    {
+      branchName : "Wanderers",
+      address : "Block-4",
+      city : "Pune",
+      state : "Maharashtra",
+      country : "India",
+      isBidoyasWarehouse : "No",
+      createdDate : "41-04-4000"
+    }
+]
+
   //columns
   const columns = [
         {
-          name: 'Corporate Name',
-          selector: 'corporateName',
-          sortable: true,
+          name: 'Branch Name',
+          selector: 'branchName',
+          sortable: false,
+          minWidth: '50px'
+        },
+        {
+          name: 'Address',
+          selector: 'address',
+          sortable: false,
           minWidth: '150px'
         },
         {
-          name: 'Comapny Type',
-          selector: 'companyType',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Industry',
-          selector: 'industry',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Contact Email',
-          selector: 'email',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Country Code',
-          selector: 'countryCode',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Phone',
-          selector: 'phone',
+          name: 'City',
+          selector: 'city',
           sortable: true,
           minWidth: '150px'
         },
@@ -146,62 +154,50 @@ const DataTableWithButtons = () => {
           minWidth: '150px'
         },
         {
-          name: 'City',
-          selector: 'city',
+          name: 'Country',
+          selector: 'country',
           sortable: true,
           minWidth: '150px'
-        },
-        {
-            name: 'Is Verified',
-            selector: 'isVerified',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Has Subscription',
-            selector: 'hasSubscription',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Verified By',
-            selector: 'verifiedBy',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Created By',
-            selector: 'createdBy',
-            sortable: true,
-            minWidth: '150px'
-          },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                                                    e.preventDefault()
-                                                                                    deleteCountry(row.id)
-                                                                                  } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-
-                <Link  to={`/edit-corporate/${row.id}`}><Edit  
-                  size={15} 
-                  onClick={ () => { 
-                                    setCurrentId(row.id)
-                                    setModal(true)
-                                     } }>
-                                       <Link to='/edit-product'/>
-                                     </Edit></Link>
-              </div>
-            )
-          }
         }
+        // },
+        // {
+        //   name: `Bidoya's Warehouse`,
+        //   selector: 'isBidoyasWarehouse',
+        //   sortable: true,
+        //   minWidth: '150px'
+        // },
+        // {
+        //   name: 'Created Date',
+        //   selector: 'createdDate',
+        //   sortable: false,
+        //   minWidth: '150px'
+        // },
+        // {
+        //   name: 'Actions',
+        //   allowOverflow: true,
+        //   cell: row => {
+        //     return (
+        //       <div className='d-flex'>
+        //         <UncontrolledDropdown>
+        //           <DropdownToggle className='pr-1' tag='span'>
+        //             <Trash size={15} onClick={e => {
+        //                                                                             e.preventDefault()
+        //                                                                             deleteCountry(row.id)
+        //                                                                           } }/>
+        //           </DropdownToggle>
+        //         </UncontrolledDropdown>
+        //        <Edit  
+        //           size={15} 
+        //           onClick={ () => { 
+        //                             setCurrentId(row.id)
+        //                             setModal(true)
+        //                              } }>
+                                      
+        //                              </Edit>
+        //       </div>
+        //     )
+        //   }
+        // }
     ]
 
 
@@ -302,7 +298,7 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
-      <Card>
+      <Card className='mx-1'>
         <CardHeader>
           <CardTitle tag='h4'>Search Filter</CardTitle>
         </CardHeader>
@@ -323,15 +319,14 @@ const DataTableWithButtons = () => {
               />
               </div>
             </Col>
-            
           </Row>
         </CardBody>
       </Card>
 
-      <Card>
+      <Card className='mx-1'>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Corporate list</CardTitle>
+          <CardTitle tag='h4'>Branch List</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             
           </div>
@@ -373,4 +368,4 @@ const DataTableWithButtons = () => {
   )
 }
 
-export default DataTableWithButtons
+export default CorporateBranch

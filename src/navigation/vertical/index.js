@@ -337,22 +337,16 @@ export default [
         icon: <Circle size={20} />,
         children: [
                 {
-                  id: 'list',
-                  title: 'List',
+                  id: 'invoiceList',
+                  title: 'Invoice List',
                   icon: <Circle size={20} />,
-                  navLink: '/orders-list'
+                  navLink: '/invoice-list'
                 },
-                // {
-                //   id: 'view',
-                //   title: 'View',
-                //   icon: <Circle size={20} />,
-                //   navLink: '/ordersView'
-                // },
                 {
-                  id: 'add',
-                  title: 'Add',
+                  id: 'sampleOrders',
+                  title: 'Sample Orders',
                   icon: <Circle size={20} />,
-                  navLink: '/add-order'
+                  navLink: '/sampleOrder-list'
                 }
         ]
       },
@@ -440,6 +434,12 @@ export default [
             title: 'Action',
             icon: <Circle size={20} />,
             navLink: '/bga-action'
+          },
+          {
+            id: 'transactions',
+            title: 'Transactions',
+            icon: <Circle size={20} />,
+            navLink: '/bga-transactions-list'
           }
         ]
       }

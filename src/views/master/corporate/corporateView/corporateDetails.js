@@ -36,7 +36,7 @@ const CorporateDetails = () => {
     const [modalStyle] = useState(getModelStyle)
     const [open, setOpen] = useState(false)
   return (
-    <Card className='Details-card'>
+    <Card className='Details-card ' >
                       <Modal open = {open} onClose = {() => setOpen(false)} >
               
                           <div style={modalStyle} className={classes.paper}>

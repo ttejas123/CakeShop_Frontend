@@ -82,7 +82,7 @@ const Routes = [
   },
   {
     path: '/corporateView',
-    component: lazy(() => import('../../views/master/corporate/corporateView'))
+    component: lazy(() => import('../../views/master/corporate/corporateView/index'))
   },
   {
     path: '/employee-view',
@@ -181,6 +181,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaPendingList'))
   },
   {
+    path: '/bga-transactions-list',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/transactionsList'))
+  },
+  {
     path: '/edit-bank-guarrante-appl',
     component: lazy(() => import('../../views/master/bankGuaranteeApplication/editBga'))
   },
@@ -261,12 +265,16 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/users'))
   },
   {
-    path: '/orders-list',
-    component: lazy(() => import('../../views/master/orders/ordersList'))
+    path: '/invoice-list',
+    component: lazy(() => import('../../views/master/orders/invoiceList'))
   },
   {
-    path: '/add-order',
-    component: lazy(() => import('../../views/master/orders/addOrder'))
+    path: '/sampleOrder-list',
+    component: lazy(() => import('../../views/master/orders/sampleOrdersList'))
+  },
+  {
+    path: '/add-invoice',
+    component: lazy(() => import('../../views/master/orders/addInvoice'))
   },
   {
     path: '/add-user-address',
