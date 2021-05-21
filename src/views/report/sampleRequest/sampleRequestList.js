@@ -169,6 +169,12 @@ const columns = [
         )
       },
     {
+        name: 'Timing',
+        selector: 'Notification_time',
+        sortable: true,
+        minWidth: '150px'
+      },
+    {
       name: 'Actions',
       allowOverflow: true,
       cell: row => {

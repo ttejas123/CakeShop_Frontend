@@ -3,14 +3,14 @@ import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { data1 } from './data'
-import Avatar from '@components/avatar'
 import { Link } from 'react-router-dom'
+import { data1 } from './data'
+
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
-import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus} from 'react-feather'
+import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus, Eye} from 'react-feather'
 import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
 //import InputBasic from './AddBackUp'
 // import HorizontalForm from './AddBackUp'
@@ -90,18 +90,6 @@ const BackUpAccounts = () => {
 //       }
 // }
 
-const renderBackup = row => {
-  const stateNum = Math.floor(Math.random() * 6),
-    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-    color = states[stateNum]
-
-  if (row.img.length) {
-    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.img} width='32' height='32'  /> </Link>
-  } else {
-    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.backUp[0].label || 'John Doe'} initials  /> </Link>
-  }
-}
-
   const BackUpColumns = [
     {
       name: 'Out Of Office',
@@ -122,63 +110,24 @@ const renderBackup = row => {
       minWidth: '250px'
     },
     {
-      name: 'Backup Name',
-      minWidth: '250px',
+      name: 'Back Up',
       selector: 'backUp',
-      sortable: true,
-      cell: row => (
-        <div className='d-flex justify-content-left align-items-center'>
-          {renderBackup(row)}
-          <div className=''>
-            {/* <Link to={`/bidDetails/${row.id}`}> */}
-              <div className='backup-info text-truncate d-flex flex-column'>
-                 <span className='font-weight-bold'>{row.backUp[0].label}</span>
-                 {/* <small className='text-truncate text-muted mb-0'>@{row.backupname}</small> */}
-              </div>
-            {/* </Link>   */}
-          </div>
-        </div>
-      )
+      sortable: false,
+      minWidth: '250px'
     },
-    
-    // {
-    //   name: 'Actions',
-    //   allowOverflow: true,
-    //   cell: row => {
-    //     return (
-    //       <div className='d-flex'>
-    //         <UncontrolledDropdown>
-    //           <DropdownToggle className='pr-1' tag='span'>
-    //             <Trash size={15} onClick={e => { handleDelete(row) }} />
-    //           </DropdownToggle>
-    //         </UncontrolledDropdown>
-    //         <Edit size={15} onClick={ e => { 
-    //                                             e.preventDefault() 
-    //                                             handleEditClick(row) 
-    //                                             } } />
-    //       </div>
-    //     )
-    //   }
-    // 
     {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                           } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-                <Link to={`/master/backupA/edit/${row.id}`}>
-                  <Edit size={15} />
-                </Link>  
-              </div>
-            )
-          }
-        }
+      name: 'Permissions',
+      allowOverflow: true,
+      cell: row => {
+        return (
+          <div className='d-flex ml-2'>
+            <Link to={`/master/permissions/${row.id}`}>
+              <Eye size={15} />
+            </Link>
+          </div>
+        )
+      }
+    }
   ]
   
   // ** Function to handle filter
@@ -274,16 +223,8 @@ const renderBackup = row => {
 
   return (
       <Fragment>
-    <Card>
-      <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Backup Accounts</CardTitle>
-          <Link to={`/master/backupA/add`}>
-           <Button className='ml-2' color='primary' >
-              <Plus size={15} />
-              <span className='align-middle ml-50'>Add BackUp</span>
-            </Button> 
-          </Link>
-      </CardHeader>
+    
+      
       {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
       {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null}
       {/* <Row className='justify-content-end mx-0'>
@@ -319,7 +260,7 @@ const renderBackup = row => {
           <span>Use Intl Dropdown in Navbar to change table language</span>
         </CardText>
       </CardFooter> */}
-    </Card>
+    
     </Fragment>
   )
 }

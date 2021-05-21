@@ -9,36 +9,49 @@ export const data1 = [
       from : "12-11-2020",
       to : "14-11-2020",
       backUp : "Tejas Thakare",
-      img : pravin
+      img : pravin,
+        id: 1,
+        outOfOffice : "Pravin Poshmani",
+        from : "12-11-2020",
+        to : "14-11-2020",
+        backUp : [{value: "Tejas Thakare", label: "Tejas Thakare"}]
     
     },
     {
+        id:2,
         outOfOffice : "Tejas Thakare",
         from : "05-05-2021",
         to : "11-05-2021",
         backUp : "Pravin Poshmani",
-        img : pravin
+        img : pravin,
+        backUp : [{value: "Pravin Poshmani", label: "Pravin Poshmani"}]
     },
     {
+        id:3,
         outOfOffice : "Komal Kamble",
         from : "12-10-2020",
         to : "14-12-2020",
         backUp : "Himanshu Chanda",
-        img : himanshu
+        img : himanshu,
+        backUp : [{value: "Himanshu Chanda", label: "Himanshu Chanda"}]
     },
     {
+        id:4,
         outOfOffice : "Reethika",
         from : "10-11-2020",
         to : "19-11-2020",
         backUp : "Daksh",
-        img : ""
+        img : "",
+        backUp : [{value: "Daksh", label: "Daksh"}]
     },
     {
+        id:5,
         outOfOffice : "Himanshu Chanda",
         from : "12-11-2020",
         to : "14-11-2020",
         backUp : "Umang Shah",
-        img : ""
+        img : "",
+        backUp : [{value: "Umang Shah", label: "Umang Shah"}]
     }
   ]
   

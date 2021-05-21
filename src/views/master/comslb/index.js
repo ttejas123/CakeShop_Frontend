@@ -1,8 +1,12 @@
+// Type : Category, User, Transcation
+// default Commission %
+
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
@@ -14,11 +18,11 @@ import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
-import FormModel from './formModel'
+
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye, Trash  } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -36,12 +40,9 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
+
 const DataTableWithButtons = () => {
-  const statusObj = {
-        pending: 'light-secondary',
-        approved: 'light-success',
-        approval: 'light-warning'
-  }
+
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -50,10 +51,15 @@ const DataTableWithButtons = () => {
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-   //view
-  const view = (val) => {
+    const deleteCountry = (val) => {
     //here we passing id to delete this specific record
-   setModal(true)
+    const userselection = confirm("Are you sure you want to delete")
+ 
+      if (userselection === true) { 
+        console.log("Deleted")
+      } else {
+      console.log("not deleted ")
+      }
   }
 
   //columns
@@ -62,52 +68,44 @@ const DataTableWithButtons = () => {
           name: 'Id',
           selector: 'id',
           sortable: true,
-          minWidth: '120px',
-          maxWidth: '150px'
+          minWidth: '150px'
         },
         {
-          name: 'Invoice Number',
-          selector: 'invoice_number',
+          name: 'type',
+          selector: 'type',
           sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
+          minWidth: '150px'
         },
         {
-          name: 'invoice_time',
-          selector: 'invoice_time',
+          name: 'Default Commission',
+          selector: 'default_c',
           sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Order Amount',
-          selector: 'order_amount',
-          sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Order Number',
-          selector: 'order_number',
-          sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className='d-flex flex-column ml-2'>
+                
+                  <span className='font-weight-bold'>{row.default_c}%</span>
+                
+              </div>
+            </div>
+          )
         },
         {
           name: 'Actions',
           allowOverflow: true,
-          minWidth:"150px",
           cell: row => {
             return (
               <div className='d-flex'>
                 <UncontrolledDropdown>
-                  <DropdownToggle className='pl-1' tag='span'>
-                    <Eye size={15} onClick={e => {
-                                                                                    view(row)
-                                                                                    setCurrentId(row.id)
-                                                                                  } }/>
+                  <DropdownToggle className='pr-1' tag='span'>
+                    <Trash size={15} onClick={e => {
+                                                           } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
+                <Link to={`/master/cmmi/edit/${row.id}`}>
+                  <Edit size={15} />
+                </Link>  
               </div>
             )
           }
@@ -159,8 +157,7 @@ const DataTableWithButtons = () => {
     setCurrentPage(page.selected)
   }
 
-
-  // ** Converts table to CSV
+   // ** Converts table to CSV
   function convertArrayOfObjectsToCSV(array) {
     let result
 
@@ -238,43 +235,16 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Invoice</CardTitle>
+          <CardTitle tag='h4'>Commission Slab</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-              
-            <UncontrolledButtonDropdown>
-              <DropdownToggle color='secondary' caret outline>
-                <Share size={15} />
-                <span className='align-middle ml-50'>Export</span>
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem className='w-100'>
-                  <Printer size={15} />
-                  <span className='align-middle ml-50'>Print</span>
-                </DropdownItem>
-                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
-                  <FileText size={15} />
-                  <span className='align-middle ml-50'>CSV</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Grid size={15} />
-                  <span className='align-middle ml-50'>Excel</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <File size={15} />
-                  <span className='align-middle ml-50'>PDF</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Copy size={15} />
-                  <span className='align-middle ml-50'>Copy</span>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledButtonDropdown>
+            
           </div>
         </CardHeader>
 
         <DataTable
           noHeader
           pagination
+          
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -282,10 +252,11 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
+          
         />
         
       </Card>
-       <FormModel open={modal} handleModal={handleModal} currentId={currentId}  data={data} />
+      
     </Fragment>
   )
 }

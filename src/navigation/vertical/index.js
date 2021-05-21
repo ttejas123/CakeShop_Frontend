@@ -162,6 +162,12 @@ export default [
         navLink: '/master/profileCompAdd'
       },
       {
+           id: 'payment',
+           title: 'Payments',
+           icon: <Circle size={20} />,
+           navLink: '/master/payment'
+      },
+      {
            id: 'SMS_Add',
            title: 'SMS Add',
            icon: <Circle size={20} />,
@@ -172,6 +178,12 @@ export default [
         title: 'Bill Discounting',
         icon: <Circle size={20} />,
         navLink: '/bill-discounting-list'
+      },
+      {
+           id: 'Commission_Slab',
+           title: 'Commission Slab',
+           icon: <Circle size={20} />,
+           navLink: '/master/commi'
       },
       {
         id: 'ProductPage',
@@ -362,6 +374,12 @@ export default [
                   navLink: '/add-user-address'
                 },
                 {
+                  id: 'rights',
+                  title: 'Rights',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/rights'
+                },
+                {
                   id: 'list',
                   title: 'list',
                   icon: <Circle size={20} />,
@@ -475,6 +493,12 @@ export default [
         navLink: '/report/bidCoin'
       },
       {
+        id: 'Bid_Cash',
+        title: 'Bid Cash',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCash'
+      },
+      {
         id: 'smsHistory',
         title: 'SMS History',
         icon: <Circle size={20} />,
@@ -547,6 +571,12 @@ export default [
         title: 'Profile Completion Checklist',
         icon: <Circle size={20} />,
         navLink: '/report/ProfileCmpltChklist'
+      },
+      {
+        id: 'Block_User',
+        title: 'Block User',
+        icon: <Circle size={20} />,
+        navLink: '/report/BlockUsers'
       }
     ]
   },

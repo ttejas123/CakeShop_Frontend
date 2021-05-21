@@ -1,3 +1,12 @@
+// id
+// payment_mode : "Cradit",
+//     amount_paid : "200K",
+//     time : `${new Date().toGMTString()}`,
+//     Order_Id : 123,
+//     Invoice_Id : 234,
+//     Invoice_amount : "20K",
+//     payment_date : "23-10-2021"
+
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
@@ -14,7 +23,7 @@ import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
-import FormModel from './formModel'
+
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
@@ -37,13 +46,9 @@ import {
 } from 'reactstrap'
 
 const DataTableWithButtons = () => {
-  const statusObj = {
-        pending: 'light-secondary',
-        approved: 'light-success',
-        approval: 'light-warning'
-  }
+ 
   // ** States
-  const [modal, setModal] = useState(false)
+
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
@@ -66,93 +71,65 @@ const DataTableWithButtons = () => {
           maxWidth: '150px'
         },
         {
-          name: 'Invoice Number',
-          selector: 'invoice_number',
+          name: 'Payment Mode',
+          selector: 'payment_mode',
           sortable: true,
           minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'invoice_time',
-          selector: 'invoice_time',
-          sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Order Amount',
-          selector: 'order_amount',
-          sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Order Number',
-          selector: 'order_number',
-          sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          minWidth:"150px",
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pl-1' tag='span'>
-                    <Eye size={15} onClick={e => {
-                                                                                    view(row)
-                                                                                    setCurrentId(row.id)
-                                                                                  } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
+          maxWidth: '200px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+             
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.payment_mode}</span>
+               
               </div>
-            )
-          }
+            </div>
+          )
+        },
+        {
+          name: 'Amount Paid',
+          selector: 'amount_paid',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
+        },
+        {
+          name: 'Time',
+          selector: 'time',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
+        },
+        {
+          name: 'Order Id',
+          selector: 'Order_Id',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
+        },
+        {
+          name: 'Invoice Id',
+          selector: 'Invoice_Id',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
+        },
+        {
+          name: 'Invoice Amount',
+          selector: 'Invoice_amount',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
+        },
+        {
+          name: 'Payment Date',
+          selector: 'payment_date',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
         }
     ]
-
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
-  }
-
-  // ** Function to handle filter
-  const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        
-        const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
-        const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
-
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
-  }
 
   // ** Function to handle Pagination
   const handlePagination = page => {
@@ -238,37 +215,9 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Invoice</CardTitle>
+          <CardTitle tag='h4'>Payments</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-              
-            <UncontrolledButtonDropdown>
-              <DropdownToggle color='secondary' caret outline>
-                <Share size={15} />
-                <span className='align-middle ml-50'>Export</span>
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem className='w-100'>
-                  <Printer size={15} />
-                  <span className='align-middle ml-50'>Print</span>
-                </DropdownItem>
-                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
-                  <FileText size={15} />
-                  <span className='align-middle ml-50'>CSV</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Grid size={15} />
-                  <span className='align-middle ml-50'>Excel</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <File size={15} />
-                  <span className='align-middle ml-50'>PDF</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Copy size={15} />
-                  <span className='align-middle ml-50'>Copy</span>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledButtonDropdown>
+            
           </div>
         </CardHeader>
 
@@ -285,7 +234,7 @@ const DataTableWithButtons = () => {
         />
         
       </Card>
-       <FormModel open={modal} handleModal={handleModal} currentId={currentId}  data={data} />
+      
     </Fragment>
   )
 }

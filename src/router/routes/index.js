@@ -53,6 +53,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/employee/backupAccount'))
   },
   {
+    path: '/master/backupA/add',
+    component: lazy(() => import('../../views/master/employee/badd'))
+  },
+  {
+    path: '/master/backupA/edit/:id',
+    component: lazy(() => import('../../views/master/employee/bedit'))
+  },
+  {
     path: '/right-assignment',
     component: lazy(() => import('../../views/master/employee/rightAssignment.js'))
   },
@@ -105,8 +113,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/kyc/sellerKycList'))
   },
   {
+    path: '/master/bidDetails/preferredPart/edit/:id',
+    component: lazy(() => import('../../views/master/bids/ui-elements/addEPartner/edit'))
+  },
+  {
+    path: '/master/bidDetails/preferredPart/add',
+    component: lazy(() => import('../../views/master/bids/ui-elements/addEPartner/add'))
+  },
+  {
     path: '/bids',
     component: lazy(() => import('../../views/master/bids/bids'))
+  },
+  {
+    path: '/master/bids/bulk',
+    component: lazy(() => import('../../views/master/bids/bulkUpload'))
   },
   {
     path: '/company-list',
@@ -119,6 +139,10 @@ const Routes = [
   {
     path: '/membership-list',
     component: lazy(() => import('../../views/master/membership/membershipList'))
+  },
+  {
+    path: '/master/membership/view',
+    component: lazy(() => import('../../views/master/membership/membershipView'))
   },
   {
     path: '/bga-list',
@@ -249,6 +273,30 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/userAddressAdd'))
   },
   {
+    path: '/master/subscriptionplan',
+    component: lazy(() => import('../../views/master/subScrPlan/index'))
+  },
+  {
+    path: '/master/subscription/aveil/:id',
+    component: lazy(() => import('../../views/master/subScrPlan/aveil'))
+  },
+  {
+    path: '/master/commi',
+    component: lazy(() => import('../../views/master/comslb/index'))
+  },
+  {
+    path: '/master/cmmi/edit/:id',
+    component: lazy(() => import('../../views/master/comslb/edit'))
+  },
+  {
+    path: '/master/permissions/:id',
+    component: lazy(() => import('../../views/master/user/profileComponets/pemis'))
+  },
+  {
+    path: '/master/rights',
+    component: lazy(() => import('../../views/master/user/rightsView'))
+  },
+  {
     path: '/report/ticket-list',
     component: lazy(() => import('../../views/report/tickets/ticketsList'))
   },
@@ -279,6 +327,18 @@ const Routes = [
   {
     path: '/master/Sub/add',
     component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
+  },
+  {
+    path: '/report/BlockUsers',
+    component: lazy(() => import('../../views/report/BlockUser'))
+  },
+  {
+    path: '/report/bidCash',
+    component: lazy(() => import('../../views/report/bidCash'))
+  },
+  {
+    path: '/report/Notification',
+    component: lazy(() => import('../../views/report/Notification'))
   },
   {
     path: '/report/ProfileCmpltChklist',

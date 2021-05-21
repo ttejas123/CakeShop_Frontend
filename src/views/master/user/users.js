@@ -150,7 +150,7 @@ const DataTableWithButtons = () => {
           name: 'Email',
           selector: 'email',
           sortable: true,
-          minWidth: '250px',
+          minWidth: '200px',
            cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <Link to={`/PReviewsle/${row.id}`}>
@@ -185,13 +185,7 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Created Date',
-          selector: 'CreatedDate',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Verified',
+          name: 'KYC Verified',
           selector: 'isVerified[0].label',
           sortable: true,
           minWidth: '150px',
@@ -201,23 +195,6 @@ const DataTableWithButtons = () => {
                 <span className='d-block font-weight-bold text-truncate'>
                       
                           {row.isVerified[0].label}
-                      
-                </span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Country',
-          selector: 'country[0].label',
-          sortable: true,
-          minWidth: '150px',
-           cell: row => (
-            <div key={row.created} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      
-                          {row.country[0].label}
                       
                 </span>
               </div>
@@ -262,7 +239,18 @@ const DataTableWithButtons = () => {
           name: 'Profile Score',
           selector: 'profileScore',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+           cell: row => (
+            <div key={row.created} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>
+                      
+                          {row.profileScore}%
+                      
+                </span>
+              </div>
+            </div>
+          )
         },
         {
           name: 'Actions',

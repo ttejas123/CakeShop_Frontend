@@ -1,3 +1,10 @@
+// id
+// user id
+// transaction
+// transaction type
+// balance
+// created time
+
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
@@ -14,7 +21,7 @@ import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
-import FormModel from './formModel'
+
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
@@ -36,14 +43,23 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
-const DataTableWithButtons = () => {
-  const statusObj = {
-        pending: 'light-secondary',
-        approved: 'light-success',
-        approval: 'light-warning'
+// ** Renders Client Columns
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.avatar.length) {
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
   }
+}
+
+const DataTableWithButtons = () => {
+ 
   // ** States
-  const [modal, setModal] = useState(false)
+
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
@@ -62,97 +78,55 @@ const DataTableWithButtons = () => {
           name: 'Id',
           selector: 'id',
           sortable: true,
-          minWidth: '120px',
-          maxWidth: '150px'
+          minWidth: '100px',
+          maxWidth: '130px'
         },
         {
-          name: 'Invoice Number',
-          selector: 'invoice_number',
+          name: 'User',
+          selector: 'Name',
           sortable: true,
           minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'invoice_time',
-          selector: 'invoice_time',
-          sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Order Amount',
-          selector: 'order_amount',
-          sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Order Number',
-          selector: 'order_number',
-          sortable: true,
-          minWidth: '120px',
-          maxWidth: '200px'
-        },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          minWidth:"150px",
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pl-1' tag='span'>
-                    <Eye size={15} onClick={e => {
-                                                                                    view(row)
-                                                                                    setCurrentId(row.id)
-                                                                                  } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
+          maxWidth: '200px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderClient(row)}
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.Name}</span>
+                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
               </div>
-            )
-          }
+            </div>
+          )
+        },
+        {
+          name: 'BlockedBy',
+          selector: 'BlockedBy',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
+        },
+        {
+          name: 'Reason',
+          selector: 'Reason',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
+        },
+        {
+          name: 'Comment',
+          selector: 'Comment',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
+        },
+        {
+          name: 'Time',
+          selector: 'Time',
+          sortable: true,
+          minWidth: '120px',
+          maxWidth: '200px'
         }
     ]
-
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
-  }
-
-  // ** Function to handle filter
-  const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        
-        const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
-        const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
-
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
-  }
 
   // ** Function to handle Pagination
   const handlePagination = page => {
@@ -238,7 +212,7 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Invoice</CardTitle>
+          <CardTitle tag='h4'>Blocked User List</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
               
             <UncontrolledButtonDropdown>
@@ -285,7 +259,7 @@ const DataTableWithButtons = () => {
         />
         
       </Card>
-       <FormModel open={modal} handleModal={handleModal} currentId={currentId}  data={data} />
+      
     </Fragment>
   )
 }

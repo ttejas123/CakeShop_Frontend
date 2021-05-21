@@ -7,6 +7,7 @@ import { selectThemeColors, isObjEmpty } from '@utils'
 import { useState, useEffect } from 'react'
 import Flatpickr from 'react-flatpickr'
 import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X, Plus  } from 'react-feather'
+import { data } from './data'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -18,16 +19,24 @@ import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, InputGro
   CardTitle, CustomInput } from 'reactstrap'
 
 const UserAccountTab = (prop) => {
-
+   const { id } = useParams()
   const initialvalues = {
     id:0,
-    user: '',
-    reciverType: '',
-    number: '',
-    content: ''
+    type: 'Category',
+    default_c: 10
   }
-
+  const [selectedOption, setselectedOption] = useState()
   const [values, setValues] = useState(initialvalues)
+  const [allDay, setAllDay] = useState(false)
+  const [endPicker, setEndPicker] = useState(new Date())  
+
+   useEffect(() => {
+        console.log(data[id - 1])
+        setValues({
+          ...data[id - 1]
+        })
+    
+  }, [id])
 
   //for other input
   const handleInputeChange = (event) => {
@@ -62,7 +71,7 @@ const UserAccountTab = (prop) => {
     <Row>
       
         <Col sm='12' className="pl-5 pt-2">
-          <h2 className="mb-1">Add SMS</h2>
+          <h2 className="mb-1">Edit Commission Slab</h2>
         </Col>
       
       <CardBody className='pl-3 pt-2'>
@@ -72,40 +81,20 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='user'>User</Label>
+                <Label for='type'>Type</Label>
                 <InputGroup>
                   
-                  <Input name="user" onChange={handleInputeChange} id='user' placeholder='Ravi' value={values.user} />
+                  <Input name="type" disabled onChange={handleInputeChange} id='type' value={values.type} />
                 </InputGroup>
               </FormGroup>
             </Col>
             
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='reciverType'>ReciverType</Label>
+                <Label for='default_c'>Default Commission in %</Label>
                 <InputGroup>
                   
-                  <Input name="reciverType" onChange={handleInputeChange} id='reciverType' placeholder='' value={values.reciverType} />
-                </InputGroup>
-              </FormGroup>
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-                <Label for='content'>Content</Label>
-                <InputGroup>
-                  
-                  <Input name="content" type="textarea" row="5" onChange={handleInputeChange} id='content' placeholder='Write your msg here !!!' value={values.content} />
-                </InputGroup>
-              </FormGroup>
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-                <Label for='number'>Number</Label>
-                <InputGroup>
-                  
-                  <Input name="number" type="number" onChange={handleInputeChange} id='number' placeholder='989211***' value={values.number} />
+                  <Input name="default_c" type="number" onChange={handleInputeChange} id='default_c' value={values.default_c} />
                 </InputGroup>
               </FormGroup>
             </Col>
