@@ -93,6 +93,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/kyc/kycList'))
   },
   {
+    path: '/upload-kyc',
+    component: lazy(() => import('../../views/master/kyc/uploadKyc'))
+  },
+  {
     path: '/buyer-kyc-list',
     component: lazy(() => import('../../views/master/kyc/buyerKycList'))
   },
@@ -131,6 +135,10 @@ const Routes = [
   {
     path: '/credit-transactions-list',
     component: lazy(() => import('../../views/master/credit/creditTransactions'))
+  },
+  {
+    path: '/corporate-credit-history',
+    component: lazy(() => import('../../views/master/credit/creditHistoryCorporate'))
   },
   {
     path: '/bill-discounting-list',
@@ -229,6 +237,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/users'))
   },
   {
+    path: '/orders-list',
+    component: lazy(() => import('../../views/master/orders/ordersList'))
+  },
+  {
+    path: '/add-order',
+    component: lazy(() => import('../../views/master/orders/addOrder'))
+  },
+  {
     path: '/add-user-address',
     component: lazy(() => import('../../views/master/user/userAddressAdd'))
   },
@@ -291,6 +307,14 @@ const Routes = [
   {
     path: '/report/revenue-list',
     component: lazy(() => import('../../views/report/revenue/revenueList'))
+  },
+  {
+    path: '/report/corporate-team-list',
+    component: lazy(() => import('../../views/report/corporate/corporateTeam'))
+  },
+  {
+    path: '/report/inspections-list',
+    component: lazy(() => import('../../views/report/inspections/inspectionsList'))
   },
   {
     path: '/report/orders-list',

@@ -52,7 +52,8 @@ export const creditLimitData = [
      creditLimit : 1000,
      currency : "INR",
      rateOfInterest : "21%",
-     approvedTime : "01-05-2021"
+     approvedTime : "01-05-2021",
+     img : pravin
     },
     {
         corporateName : "Corporate2",
@@ -60,7 +61,8 @@ export const creditLimitData = [
      creditLimit : 2000,
      currency : "INR",
      rateOfInterest : "22%",
-     approvedTime : "02-05-2021"
+     approvedTime : "02-05-2021",
+     img : komal
     },
     {
         corporateName : "Corporate3",
@@ -68,7 +70,8 @@ export const creditLimitData = [
      creditLimit : 3000,
      currency : "INR",
      rateOfInterest : "23%",
-     approvedTime : "03-05-2021"
+     approvedTime : "03-05-2021",
+     img : pravin
     },
     {
         corporateName : "Corporate4",
@@ -76,7 +79,8 @@ export const creditLimitData = [
         creditLimit : 4000,
         currency : "INR",
         rateOfInterest : "24%",
-        approvedTime : "04-05-2021"
+        approvedTime : "04-05-2021",
+        img : himanshu
     }
 ]
 

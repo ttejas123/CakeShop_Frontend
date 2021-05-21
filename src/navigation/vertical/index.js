@@ -320,6 +320,31 @@ export default [
         ]
       },
       {
+        id: 'OrdersPage',
+        title: 'Orders',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/orders-list'
+                },
+                // {
+                //   id: 'view',
+                //   title: 'View',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/ordersView'
+                // },
+                {
+                  id: 'add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/add-order'
+                }
+        ]
+      },
+      {
         id: 'UserPage',
         title: 'User',
         icon: <Circle size={20} />,
@@ -366,6 +391,12 @@ export default [
                   title: 'Credit Transactions',
                   icon: <Circle size={20} />,
                   navLink: '/credit-transactions-list'
+                },
+                {
+                  id: 'corporateCreditHistory',
+                  title: 'Credit History Corporate',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporate-credit-history'
                 }
         ]
       },

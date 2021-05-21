@@ -16,7 +16,7 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, Drop
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
-const CreditLimitList = () => {
+const CreditHistoryCorporate = () => {
 
     //console.log(BankGuarranteApplsColumns)
     //console.log(creditLimitData)
@@ -227,7 +227,7 @@ const columns = [
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Credit Limit List</CardTitle>
+        <CardTitle tag='h4'>Corporate Credit History List</CardTitle>
         {/* <Link  to={`/add-bill-discounting`}>
             <Button className='ml-2' color='primary'>
               <Plus size={15} />
@@ -275,4 +275,4 @@ const columns = [
   )
 }
 
-export default CreditLimitList
+export default CreditHistoryCorporate

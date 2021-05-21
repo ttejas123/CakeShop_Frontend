@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { creditLimitData, columns } from './data'
+import { data1, columns } from './data'
 import Avatar from '@components/avatar'
 import { Link } from 'react-router-dom'
 // ** Third Party Components
@@ -16,26 +16,7 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, Drop
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
-const CreditLimitList = () => {
-
-    //console.log(BankGuarranteApplsColumns)
-    //console.log(creditLimitData)
-  // ** State
-//   const data = [
-//     {
-//       name: "US Dollar",
-//       symbol: "$"
-//     },
-//     {
-//       name: "Canadian Dollar",
-//       symbol: "$"
-//     },
-//     {
-//       name: "Euro",
-//       symbol: "€"
-//     }
-// ]
-// console.log(data)
+const OrdersList = () => {
 
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -90,65 +71,34 @@ const handleDelete = (data) => {
       }
 }
 
-const renderCorporateName = row => {
+const renderClient = row => {
     const stateNum = Math.floor(Math.random() * 6),
       states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
       color = states[stateNum]
   
-    if (row.img.length) {
-      return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.img} width='32' height='32'  /> </Link>
+    if (row.icon.length) {
+      return <Avatar className='mr-1' img={row.icon} width='32' height='32'  />
     } else {
-      return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.corporateName || 'John Doe'} initials /> </Link>
+      return <Avatar color={color || 'primary'} className='mr-1' content={row.name || 'John Doe'} initials status="online" />
     }
   }
 
 const columns = [
     {
-        name: 'Corporate Name',
-        minWidth: '250px',
-        selector: 'corporateName',
-        sortable: true,
-        cell: row => (
-          <div className='d-flex justify-content-left align-items-center'>
-            {renderCorporateName(row)}
-            <div className=''>
-              {/* <Link to={`/bidDetails/${row.id}`}> */}
-                <div className='user-info text-truncate d-flex flex-column'>
-                   <span className='font-weight-bold'>{row.corporateName}</span>
-                   {/* <small className='text-truncate text-muted mb-0'>@{row.corporateName}</small> */}
-                </div>
-              {/* </Link>   */}
-            </div>
-          </div>
-        )
+      name: 'Invoice Id',
+      selector: 'invoiceId',
+      sortable: true,
+      minWidth: '100px'
     },
     {
-        name: 'Financial Partner',
-        selector: 'financialPartner',
-        sortable: true,
-        minWidth: '100px'
-      },
-    {
-        name: 'Credit Limit',
-        selector: 'creditLimit',
+        name: 'Date',
+        selector: 'date',
         sortable: true,
         minWidth: '100px'
     },
     {
-        name: 'Currency',
-        selector: 'currency',
-        sortable: true,
-        minWidth: '100px'
-    },
-    {
-        name: 'Rate Of Interest',
-        selector: 'rateOfInterest',
-        sortable: true,
-        minWidth: '100px'
-    },
-    {
-        name: 'Approved Time',
-        selector: 'approvedTime',
+        name: 'Status',
+        selector: 'status',
         sortable: true,
         minWidth: '100px'
     },
@@ -163,14 +113,14 @@ const columns = [
                 <Trash size={15} onClick={e => { handleDelete(row) }} />
               </DropdownToggle>
             </UncontrolledDropdown>
-            <Edit  
+            <Link  to={`/add-order`}><Edit  
                   size={15} 
                   onClick={ () => { 
                                     //setCurrentId(row.id)
                                     //setModal(true)
                                      } }>
-                                       
-                                     </Edit>
+                                       <Link to='/add-order'/>
+                                     </Edit></Link>
           </div>
         )
       }
@@ -206,7 +156,7 @@ const columns = [
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : creditLimitData.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : data1.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -227,13 +177,13 @@ const columns = [
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Credit Limit List</CardTitle>
-        {/* <Link  to={`/add-bill-discounting`}>
+        <CardTitle tag='h4'>Orders List</CardTitle>
+        <Link  to={`/add-order`}>
             <Button className='ml-2' color='primary'>
               <Plus size={15} />
-              <span className='align-middle ml-50'>Add Application</span>
+              <span className='align-middle ml-50'>Add Order</span>
             </Button>
-            </Link> */}
+            </Link>
       </CardHeader>
       {/* {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
       {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null} */}
@@ -262,7 +212,7 @@ const columns = [
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={creditLimitData}
+        data={data1}
       />
       {/* <CardFooter>
         <CardText className='mb-0'>
@@ -275,4 +225,4 @@ const columns = [
   )
 }
 
-export default CreditLimitList
+export default OrdersList
