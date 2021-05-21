@@ -117,7 +117,7 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'First-Name',
+          name: 'First Name',
           selector: 'first_name',
           sortable: true,
           minWidth: '150px',
@@ -132,7 +132,7 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Last-Name',
+          name: 'Last Name',
           minWidth: '150px',
           selector: 'last_name',
           sortable: true,

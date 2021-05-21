@@ -7,28 +7,28 @@ const CardTransactions = () => {
     {
       title: 'Bid Created',
       color: 'light-info',
-      subtitle: 'No Created Bids',
+      subtitle: '250 Bids are Created',
       amount: '250',
       Icon: Icon['Package']
     },
     {
       title: 'Bid Participents',
       color: 'light-success',
-      subtitle: 'Participents',
+      subtitle: '74 Participents',
       amount: '74',
       Icon: Icon['Users']
     },
     {
       title: 'Bid Live',
       color: 'light-success',
-      subtitle: 'No live Bids',
+      subtitle: '18 live Bids',
       amount: '18',
       Icon: Icon['Check']
     },
     {
       title: 'Bid Closed',
       color: 'light-danger',
-      subtitle: 'No Closed Bids',
+      subtitle: '21 Bids are Closed',
       amount: '21',
       Icon: Icon['AlertTriangle']
     }
