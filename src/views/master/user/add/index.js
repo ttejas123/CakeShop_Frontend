@@ -47,19 +47,19 @@ const AddProduct = () => {
               </NavItem>
               <NavItem>
                 <NavLink active={activeTab === '2'} onClick={() => toggle('2')}>
-                  
+                   <User size={14} />
                   <span className='align-middle d-none d-sm-block'>Company Details</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink active={activeTab === '3'} onClick={() => toggle('3')}>
-                  
+                   <User size={14} />
                   <span className='align-middle d-none d-sm-block'>Bank Details</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink active={activeTab === '4'} onClick={() => toggle('4')}>
-                  
+                   <User size={14} />
                   <span className='align-middle d-none d-sm-block'>KYC</span>
                 </NavLink>
               </NavItem>

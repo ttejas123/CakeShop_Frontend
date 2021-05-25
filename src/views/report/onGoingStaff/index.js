@@ -1,14 +1,8 @@
-//order id
-//seller id
-//amount 
-//balance
-//transaction time
-
 // ** Custom Components
 import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
-import axios from 'axios'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
@@ -16,13 +10,16 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data } from './data'
+import { data, columns } from './data'
 import Select from 'react-select'
+
+// ** Add New Modal Component
+//import FormModel from './formModel'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Eye, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash, Check, X  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -40,16 +37,39 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
-const optionStatus = [
+// ** Bootstrap Checkbox Component
+const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
+  <div className='custom-control custom-checkbox'>
+    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
+    <label className='custom-control-label' onClick={onClick} />
+  </div>
+))
+
+
+// ** Renders Client Columns
+// const renderClient = row => {
+//   const stateNum = Math.floor(Math.random() * 6),
+//     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+//     color = states[stateNum]
+
+//   if (row.avatar.length) {
+//     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+//   } else {
+//     return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+//   }
+// }
+
+const optionBidStatus = [
     {value: "", label: "Filter Status"},
-    {value: "created", label: "created"},
-    {value: "live", label: "live"},
-    {value: "extended", label: "extended"},
-    {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"}
+    {value: "UserName", label: "User Name"},
+    {value: "mrp", label: "MRP"},
+    {value: "gst", label: "GSt"},
+    {value: "category", label: "Category"},
+    {value: "subCategory", label: "Sub Category"},
+    {value: "UserCategory", label: "User Category"}
   ]
 
-const DataTableWithButtons = () => {
+const UserTable = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -57,9 +77,7 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
-  const [responseModel, setResponseModel] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
-  const [reviewId, setreviewId] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
@@ -83,142 +101,7 @@ const DataTableWithButtons = () => {
       console.log(val)
   }
 
-  //add or edit response
-  const responseADDEDIT = (val) => {
-     setreviewId("")
-     console.log(val)
-  }
-
-  //columns
-  const columns = [
-        {
-          name: 'Bid id',
-          minWidth: '200px',
-          selector: 'Bid_Id',
-          sortable: true,
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              <div className='d-flex flex-column'>
-                  <span className='font-weight-bold'>{row.Bid_Id}</span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Type',
-          selector: 'type',
-          sortable: true,
-          minWidth: '130px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.type}</span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'percent',
-          selector: 'percent',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.percent}%</span>
-              </div>
-            </div>
-          )  
-        },
-        {
-          name: 'Amount',
-          selector: 'amount',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>${row.amount}</span>
-              </div>
-            </div>
-          )
-        }
-    ]
-
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
-  }
-
-  const handleResponse = () => {
-    setResponseModel(!responseModel)
-  }
-
-  // handle drop down filter
-  const handleFilterByDropDown = (value) => {
-    let updatedData = []
-    setFilter(value)
-    console.log(value.value)
-    let search = "l"
-    search = value.value
-    setSearchValue(search)
-      if (search.length) {
-          updatedData = data.filter(item => {
-            const startsWith =
-              item.Status[0].value.toLowerCase().startsWith(search.toLowerCase()) 
-              
-            const includes =
-              item.Status[0].value.toLowerCase().includes(search.toLowerCase())
-    
-            if (startsWith) {
-              return startsWith
-            } else if (!startsWith && includes) {
-              return includes
-            } else return null
-           })
-        
-      setFilteredData(updatedData)
-      // setSearchValue(search)
-      setFilter(value)
-    }
-  }
-  // ** Function to handle filter
-  const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
-        const startsWith =
-          item.To.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
-        const includes =
-          item.To.toLowerCase().includes(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
-         
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
-  }
-
-  // ** Function to handle Pagination
-  const handlePagination = page => {
-    setCurrentPage(page.selected)
-  }
-
-   // ** Converts table to CSV
+  // ** Converts table to CSV
   function convertArrayOfObjectsToCSV(array) {
     let result
 
@@ -262,6 +145,10 @@ const DataTableWithButtons = () => {
     link.click()
   }
 
+  // ** Function to handle Pagination
+  const handlePagination = page => {
+    setCurrentPage(page.selected)
+  }
 
   // ** Custom Pagination
   const CustomPagination = () => (
@@ -270,7 +157,7 @@ const DataTableWithButtons = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 5 : data.length / 5 || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -292,13 +179,35 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
-
-      <Card>
+      {/* <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionBidStatus}
+                value={Filter}
+                onChange={data => {
+                  handleFilterByDropDown(data)
+                }}
+              />
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+ */}
+      <Card className='mb-0'>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Commission</CardTitle>
+          <CardTitle tag='h4'>On Ground Staff</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-             <UncontrolledButtonDropdown>
+            <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
                 <Share size={15} />
                 <span className='align-middle ml-50'>Export</span>
@@ -332,20 +241,21 @@ const DataTableWithButtons = () => {
         <DataTable
           noHeader
           pagination
-          
+          selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={5}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          
+          selectableRowsComponent={BootstrapCheckbox}
         />
         
       </Card>
+            {/* <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} /> */}
     </Fragment>
   )
 }
 
-export default DataTableWithButtons
+export default UserTable

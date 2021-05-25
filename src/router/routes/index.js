@@ -257,6 +257,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
   },
   {
+    path: '/master/financialPartners/add',
+    component: lazy(() => import('../../views/master/financialPartner/add'))
+  },
+  {
+    path: '/master/financialPartners/edit/:id',
+    component: lazy(() => import('../../views/master/financialPartner/edit'))
+  },
+  {
     path: '/edit-product',
     component: lazy(() => import('../../views/master/product/editProduct'))
   },
@@ -367,6 +375,18 @@ const Routes = [
   {
     path: '/master/Sub/add',
     component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
+  },
+  {
+    path: '/report/customer',
+    component: lazy(() => import('../../views/report/customer'))
+  },
+  {
+    path: '/report/onGoingStaff',
+    component: lazy(() => import('../../views/report/onGoingStaff'))
+  },
+  {
+    path: '/report/corporate',
+    component: lazy(() => import('../../views/report/corpolist'))
   },
   {
     path: '/report/commision',

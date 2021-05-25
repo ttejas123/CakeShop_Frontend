@@ -28,11 +28,25 @@
 //kyc upload, approve
 
 
-// 107 order report with filter 
+// List of Total Screens 15 
 
-// 114 backup account list (add inside user View) similar to [master - employee - backup] = onclick row element show [assignment permission component in new screen] -- done
-// 116 rights view (permission component) -- Done
-// 123 payment list 
-// 149 Partner Financial Institute
-// 150 Preferred Partner list
-// 151 Preferred Partner add/edit  
+// 3 Views 
+// 1. 58 On Ground staff View (taken by Tejas) 25-05-2020
+// 2. 120 Order Invoice view (taken by pravin) 25-05-2020
+// 3. 121 Order Details View (taken by pravin) 25-05-2020
+
+// 8 Reports
+// 1. 106 Shippment report  (taken by pravin)  -- Today
+// 2. 126 Commission Reports  (Tejas) -- Today
+// 3. 127 Customer Reports  (Tejas) -- Today
+// 4. 128 On Ground Staff Report  (Tejas) -- Today
+// 5. 129 Corporate Report  (Tejas) -- Today
+// 6. 132 Transaction Report (taken by pravin)  -- Today
+// 7. 152 Credit limit exhausted Corporate report (taken by pravin)  -- Today
+// 8. 154 Inspections report (taken by pravin)  -- Today
+
+// 4 Master screens and some of them are not Specified
+// 1. 122 Order Details List (taken by pravin)  -- Today
+// 3. 147 Bill Discounting Transaction (taken by pravin)  -- Today
+// 4. 148 Work Flow History   (Tejas) -- Today
+// 5. 149 Partner Financial Institute  (Tejas) -- Today

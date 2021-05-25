@@ -53,15 +53,15 @@ import {
                 Status
               </Label>
               <Col sm='8'>
-              <CustomInput
-            type='switch'
-            className='ml-1 py-1'
-            id='statusSwitch'
-            name='statusSwitch'
-            label='Approved'
-            inline
-            onChange={handleInputeChange}
-          />
+                <CustomInput
+                  type='switch'
+                  className='ml-1 py-1'
+                  id='statusSwitch'
+                  name='statusSwitch'
+                  label='Approved'
+                  inline
+                  onChange={handleInputeChange}
+                />
               </Col>
             </FormGroup>
             </Col>

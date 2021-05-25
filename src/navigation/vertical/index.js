@@ -589,6 +589,18 @@ export default [
         title: 'Commission',
         icon: <Circle size={20} />,
         navLink: '/report/commision'
+      },
+      {
+        id: 'Corporate',
+        title: 'Corporate',
+        icon: <Circle size={20} />,
+        navLink: '/report/corporate'
+      },
+      {
+        id: 'Customer',
+        title: 'Customer',
+        icon: <Circle size={20} />,
+        navLink: '/report/customer'
       }
     ]
   },
