@@ -145,8 +145,28 @@ const Routes = [
     component: lazy(() => import('../../views/master/membership/membershipList'))
   },
   {
+    path: '/master/corporate/corpmanag',
+    component: lazy(() => import('../../views/master/corporate/corpmanag'))
+  },
+  {
+    path: '/master/payment',
+    component: lazy(() => import('../../views/master/payment'))
+  },
+  {
+    path: '/master/order',
+    component: lazy(() => import('../../views/master/order'))
+  },
+  {
+    path: '/master/orders/add',
+    component: lazy(() => import('../../views/master/order/add'))
+  },
+  {
     path: '/master/membership/view',
     component: lazy(() => import('../../views/master/membership/membershipView'))
+  },
+  {
+    path: '/master/membershps/views',
+    component: lazy(() => import('../../views/master/membership/memViewE'))
   },
   {
     path: '/bga-list',
@@ -249,6 +269,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
   },
   {
+    path: '/master/financialPartners/add',
+    component: lazy(() => import('../../views/master/financialPartner/add'))
+  },
+  {
+    path: '/master/financialPartners/edit/:id',
+    component: lazy(() => import('../../views/master/financialPartner/edit'))
+  },
+  {
     path: '/edit-product',
     component: lazy(() => import('../../views/master/product/editProduct'))
   },
@@ -259,6 +287,18 @@ const Routes = [
   {
     path: '/add-attribute',
     component: lazy(() => import('../../views/master/subCat/Attributes/add'))
+  },
+  {
+    path: '/master/corporateRole',
+    component: lazy(() => import('../../views/master/corporate/corpmanag'))
+  },
+  {
+    path: '/master/corporateRoles/add',
+    component: lazy(() => import('../../views/master/corporate/corpmanag/add'))
+  },
+  {
+    path: '/master/corporateRoles/edit/:id',
+    component: lazy(() => import('../../views/master/corporate/corpmanag/edit'))
   },
   {
     path: '/edit-corporate',
@@ -347,6 +387,22 @@ const Routes = [
   {
     path: '/master/Sub/add',
     component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
+  },
+  {
+    path: '/report/customer',
+    component: lazy(() => import('../../views/report/customer'))
+  },
+  {
+    path: '/report/onGoingStaff',
+    component: lazy(() => import('../../views/report/onGoingStaff'))
+  },
+  {
+    path: '/report/corporate',
+    component: lazy(() => import('../../views/report/corpolist'))
+  },
+  {
+    path: '/report/commision',
+    component: lazy(() => import('../../views/report/commission'))
   },
   {
     path: '/report/BlockUsers',

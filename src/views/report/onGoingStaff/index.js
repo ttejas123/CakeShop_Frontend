@@ -45,16 +45,32 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
+
+// ** Renders Client Columns
+// const renderClient = row => {
+//   const stateNum = Math.floor(Math.random() * 6),
+//     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+//     color = states[stateNum]
+
+//   if (row.avatar.length) {
+//     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+//   } else {
+//     return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+//   }
+// }
+
 const optionBidStatus = [
-    {value: "7days", label: "7 Days"},
-    {value: "1month", label: "1 Month"},
-    {value: "3months", label: "3 Months"},
-    {value: "today", label: "Today"},
-    {value: "overall", label: "Overall"}
+    {value: "", label: "Filter Status"},
+    {value: "UserName", label: "User Name"},
+    {value: "mrp", label: "MRP"},
+    {value: "gst", label: "GSt"},
+    {value: "category", label: "Category"},
+    {value: "subCategory", label: "Sub Category"},
+    {value: "UserCategory", label: "User Category"}
   ]
 
-const OrdersList = () => {
-    const statusObj = {
+const UserTable = () => {
+  const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
         approval: 'light-warning'
@@ -85,101 +101,6 @@ const OrdersList = () => {
       console.log(val)
   }
 
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
-  }
-
-  // handle drop down filter
-  const handleFilterByDropDown = (value) => {
-    let updatedData = []
-    setFilter(value)
-    console.log(value.value)
-    let search = "l"
-    search = value.value
-    setSearchValue(search)
-      if (search.length) {
-          updatedData = data.filter(item => {
-            const startsWith =
-              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
-              
-            const includes =
-              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
-    
-            if (startsWith) {
-              return startsWith
-            } else if (!startsWith && includes) {
-              return includes
-            } else return null
-           })
-        
-      setFilteredData(updatedData)
-      // setSearchValue(search)
-      setFilter(value)
-    }
-  }
-  // ** Function to handle filter
-  const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
-        const startsWith =
-          item.OrdersName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
-          console.log(startsWith)
-        const includes =
-          item.OrdersName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
-          
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
-  }
-
-  // ** Function to handle Pagination
-  const handlePagination = page => {
-    setCurrentPage(page.selected)
-  }
-
-  // ** Custom Pagination
-  const CustomPagination = () => (
-    <ReactPaginate
-      previousLabel=''
-      nextLabel=''
-      forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
-      breakLabel='...'
-      pageRangeDisplayed={2}
-      marginPagesDisplayed={2}
-      activeClassName='active'
-      pageClassName='page-item'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      nextLinkClassName='page-link'
-      nextClassName='page-item next'
-      previousClassName='page-item prev'
-      previousLinkClassName='page-link'
-      pageLinkClassName='page-link'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
-    />
-  )
-
-  
   // ** Converts table to CSV
   function convertArrayOfObjectsToCSV(array) {
     let result
@@ -224,10 +145,41 @@ const OrdersList = () => {
     link.click()
   }
 
+  // ** Function to handle Pagination
+  const handlePagination = page => {
+    setCurrentPage(page.selected)
+  }
+
+  // ** Custom Pagination
+  const CustomPagination = () => (
+    <ReactPaginate
+      previousLabel=''
+      nextLabel=''
+      forcePage={currentPage}
+      onPageChange={page => handlePagination(page)}
+      pageCount={searchValue.length ? filteredData.length / 5 : data.length / 5 || 1}
+      breakLabel='...'
+      pageRangeDisplayed={2}
+      marginPagesDisplayed={2}
+      activeClassName='active'
+      pageClassName='page-item'
+      breakClassName='page-item'
+      breakLinkClassName='page-link'
+      nextLinkClassName='page-link'
+      nextClassName='page-item next'
+      previousClassName='page-item prev'
+      previousLinkClassName='page-link'
+      pageLinkClassName='page-link'
+      breakClassName='page-item'
+      breakLinkClassName='page-link'
+      containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
+    />
+  )
+
 
   return (
     <Fragment>
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle tag='h4'>Search Filter</CardTitle>
         </CardHeader>
@@ -249,11 +201,11 @@ const OrdersList = () => {
           </Row>
         </CardBody>
       </Card>
-
-      <Card>
+ */}
+      <Card className='mb-0'>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Orders Report</CardTitle>
+          <CardTitle tag='h4'>On Ground Staff</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
@@ -286,28 +238,12 @@ const OrdersList = () => {
           </div>
         </CardHeader>
 
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
-
         <DataTable
           noHeader
           pagination
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={5}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
@@ -322,4 +258,4 @@ const OrdersList = () => {
   )
 }
 
-export default OrdersList
+export default UserTable

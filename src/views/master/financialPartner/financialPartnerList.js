@@ -4,7 +4,8 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
 import { data1 } from './data'
-
+import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { FormattedMessage } from 'react-intl'
@@ -15,6 +16,17 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, Drop
 import AddFinancialPartner from './addFinancialPartner'
 import EditForm from './editFinancialPartner'
 
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.logo.length) {
+    return <Avatar className='mr-1' img={row.logo} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.name || 'John Doe'} initials status="online" />
+  }
+}
 const FinancialPartnerList = () => {
 
     const statusObj = {
@@ -95,46 +107,89 @@ const handleDelete = (data) => {
 
   const FinancialPartnerColumns = [
     {
-      name: 'FinancialPartner Name',
-      selector: 'name',
-      sortable: true,
-      minWidth: '250px'
-    },
-    {
-        name: 'Status',
-        selector: 'status',
-        sortable: true,
-        minWidth: '150px',
-        cell: row => (
-          <div key={row.id} className='d-flex align-items-center'>
-            <div className='user-info text-truncate'>
-              <span className='d-block font-weight-bold text-truncate'>
-                    <Badge className='text-capitalize' color={statusObj[row.status[0].label]} pill>
-                        {row.status[0].label}
-                    </Badge>
-              </span>
+          name: 'Name',
+          minWidth: '250px',
+          selector: 'name',
+          sortable: true,
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderClient(row)}
+              <div className=''>
+                <Link to={`/bidDetails/${row.id}`}>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.name}</span>
+                     <small className='text-truncate text-muted mb-0'>@{row.name}</small>
+                  </div>
+                </Link>  
+              </div>
             </div>
-          </div>
-        )
-      },
-    {
-      name: 'Actions',
-      allowOverflow: true,
-      cell: row => {
-        return (
-          <div className='d-flex'>
-            <UncontrolledDropdown>
-              <DropdownToggle className='pr-1' tag='span'>
-                <Trash size={15} onClick={e => { handleDelete(row) }} />
-              </DropdownToggle>
-            </UncontrolledDropdown>
-            <Edit size={15} onClick={ e => { 
-                                                e.preventDefault() 
-                                                handleEditClick(row) 
-                                                } } />
-          </div>
-        )
-      }
+          )
+        },
+        {
+          name: 'Address',
+          selector: 'Address',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+          name: 'pincode',
+          selector: 'pincode',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+          name: 'landmark',
+          selector: 'landmark',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+          name: 'City',
+          selector: 'City',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+          name: 'state',
+          selector: 'state',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+            name: 'Status',
+            selector: 'status',
+            sortable: true,
+            minWidth: '150px',
+            cell: row => (
+              <div key={row.id} className='d-flex align-items-center'>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>
+                        <Badge className='text-capitalize' color={statusObj[row.status[0].label]} pill>
+                            {row.status[0].label}
+                        </Badge>
+                  </span>
+                </div>
+              </div>
+            )
+          },
+        {
+          name: 'Actions',
+          allowOverflow: true,
+          cell: row => {
+            return (
+              <div className='d-flex'>
+                <UncontrolledDropdown>
+                  <DropdownToggle className='pr-1' tag='span'>
+                    <Trash size={15} onClick={e => { handleDelete(row) }} />
+                  </DropdownToggle>
+                </UncontrolledDropdown>
+
+                <Link to={`/master/financialPartners/edit/${row.id}`}>
+                    <Edit size={15} />
+                </Link>
+              </div>
+            )
+          }
     }
   ]
   
@@ -233,11 +288,14 @@ const handleDelete = (data) => {
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>FinancialPartner List</CardTitle>
-        <Button className='ml-2' color='primary' onClick={handleAddClick}>
+        <CardTitle tag='h4'>FinancialPartner</CardTitle>
+
+        <Link to={`/master/financialPartners/add`}>
+          <Button className='ml-2' color='primary'>
               <Plus size={15} />
               <span className='align-middle ml-50'>Add Financial Partner</span>
-            </Button>
+          </Button>
+        </Link>
       </CardHeader>
       {addClicked ? <AddFinancialPartner handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null}
       {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null}

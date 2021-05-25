@@ -179,6 +179,12 @@ export default [
            icon: <Circle size={20} />,
            navLink: '/master/commi'
       },
+          {
+            id: 'Orders',
+            title: 'Orders',
+            icon: <Circle size={20} />,
+            navLink: '/master/order'
+          },
       {
         id: 'ProductPage',
         title: 'Product',
@@ -330,6 +336,12 @@ export default [
                   navLink: '/add-corporate-address'
                 },
                 {
+                  id: 'Corporate_Role',
+                  title: 'Role Management',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/corporateRole'
+                },
+                {
                   id: 'edit',
                   title: 'Edit',
                   icon: <Circle size={20} />,
@@ -352,7 +364,7 @@ export default [
                   id: 'view',
                   title: 'View',
                   icon: <Circle size={20} />,
-                  navLink: '/membershipView'
+                  navLink: '/master/membershps/views'
                 },
                 {
                   id: 'edit',
@@ -397,12 +409,6 @@ export default [
                   title: 'Add Address',
                   icon: <Circle size={20} />,
                   navLink: '/add-user-address'
-                },
-                {
-                  id: 'rights',
-                  title: 'Rights',
-                  icon: <Circle size={20} />,
-                  navLink: '/master/rights'
                 },
                 {
                   id: 'list',
@@ -626,6 +632,24 @@ export default [
         title: 'Block User',
         icon: <Circle size={20} />,
         navLink: '/report/BlockUsers'
+      },
+      {
+        id: 'Commission',
+        title: 'Commission',
+        icon: <Circle size={20} />,
+        navLink: '/report/commision'
+      },
+      {
+        id: 'Corporate',
+        title: 'Corporate',
+        icon: <Circle size={20} />,
+        navLink: '/report/corporate'
+      },
+      {
+        id: 'Customer',
+        title: 'Customer',
+        icon: <Circle size={20} />,
+        navLink: '/report/customer'
       }
     ]
   },
