@@ -113,6 +113,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/kyc/sellerKycList'))
   },
   {
+    path: '/corporate-kyc-list',
+    component: lazy(() => import('../../views/master/kyc/corporateKycList'))
+  },
+  {
     path: '/master/bidDetails/preferredPart/edit/:id',
     component: lazy(() => import('../../views/master/bids/ui-elements/addEPartner/edit'))
   },
@@ -173,6 +177,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/billDiscounting/addBillDiscounting'))
   },
   {
+    path: '/bill-discounting-transactions',
+    component: lazy(() => import('../../views/master/billDiscounting/transactions'))
+  },
+  {
     path: '/bga-action',
     component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaActionForm'))
   },
@@ -207,6 +215,10 @@ const Routes = [
   {
     path: '/on-ground-staff',
     component: lazy(() => import('../../views/master/onGroundStaff/OnGroundStaff'))
+  },
+  {
+    path: '/on-ground-staff-view',
+    component: lazy(() => import('../../views/master/onGroundStaff/view/onGroundStaffView'))
   },
   {
     path: '/industry-list',
@@ -361,6 +373,10 @@ const Routes = [
     component: lazy(() => import('../../views/report/Redressal/Redressal'))
   },
   {
+    path: '/report/transactions',
+    component: lazy(() => import('../../views/report/transactions/transactionsList'))
+  },
+  {
     path: '/report/productIssue',
     component: lazy(() => import('../../views/report/productIssue'))
   },
@@ -377,12 +393,24 @@ const Routes = [
     component: lazy(() => import('../../views/report/revenue/revenueList'))
   },
   {
+    path: '/report/vas-list',
+    component: lazy(() => import('../../views/report/vas/vasList'))
+  },
+  {
     path: '/report/corporate-team-list',
     component: lazy(() => import('../../views/report/corporate/corporateTeam'))
   },
   {
     path: '/report/inspections-list',
     component: lazy(() => import('../../views/report/inspections/inspectionsList'))
+  },
+  {
+    path: '/report/ccl-exhausted-list',
+    component: lazy(() => import('../../views/report/corporateCreditLimit/corporateCreditLimitExhaust'))
+  },
+  {
+    path: '/report/customization-list',
+    component: lazy(() => import('../../views/report/customizationRequest/crList'))
   },
   {
     path: '/report/orders-list',

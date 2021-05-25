@@ -12,11 +12,8 @@ import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
 import { MoreVertical, Edit, FileText, Archive, Share, Printer, File, Grid, Copy, Trash, ChevronDown, Plus} from 'react-feather'
 import { Card, CardHeader, CardTitle, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap'
-//import InputBasic from './AddBadges'
-// import HorizontalForm from './AddCurrency'
-// import EditForm from './EditCurrency'
 
-const InspectionsList = () => {
+const CCLExhausted = () => {
 
     const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -71,7 +68,7 @@ const handleDelete = (data) => {
       }
 }
 
-const renderUser = row => {
+const renderCorporate = row => {
     const stateNum = Math.floor(Math.random() * 6),
       states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
       color = states[stateNum]
@@ -85,17 +82,17 @@ const renderUser = row => {
 
 const columns = [
     {
-        name: 'User Name',
+        name: 'Corporate Name',
         minWidth: '250px',
-        selector: 'userName',
+        selector: 'corporateName',
         sortable: true,
         cell: row => (
           <div className='d-flex justify-content-left align-items-center'>
-            {renderUser(row)}
+            {renderCorporate(row)}
             <div className=''>
               {/* <Link to={`/bidDetails/${row.id}`}> */}
                 <div className='user-info text-truncate d-flex flex-column'>
-                   <span className='font-weight-bold'>{row.userName}</span>
+                   <span className='font-weight-bold'>{row.corporateName}</span>
                    {/* <small className='text-truncate text-muted mb-0'>@{row.corporateName}</small> */}
                 </div>
               {/* </Link>   */}
@@ -104,38 +101,14 @@ const columns = [
         )
     },
     {
-      name: 'Order Id',
-      selector: 'orderId',
+      name: 'Amount',
+      selector: 'amount',
       sortable: true,
       minWidth: '80px'
     },
     {
-        name: 'Inspection Done BY',
-        selector: 'inspectionDoneBy',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'Inspection Date',
-        selector: 'inspectionDate',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'Comment',
-        selector: 'comment',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'File',
-        selector: 'file',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'Status',
-        selector: 'status',
+        name: 'Balance',
+        selector: 'balance',
         sortable: true,
         minWidth: '80px'
     }
@@ -305,7 +278,7 @@ const columns = [
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Inspections</CardTitle>
+        <CardTitle tag='h4'>Corporate Credit Limit</CardTitle>
         <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
@@ -355,4 +328,4 @@ const columns = [
   )
 }
 
-export default InspectionsList
+export default CCLExhausted

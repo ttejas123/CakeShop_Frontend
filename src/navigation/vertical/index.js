@@ -78,12 +78,6 @@ export default [
         navLink: '/currency-list'
       },
       {
-        id: 'KYC',
-        title: 'KYC',
-        icon: <Circle size={20} />,
-        navLink: '/kyc-document-list'
-      },
-      {
         id: 'CompanyList',
         title: 'Company',
         icon: <Circle size={20} />,
@@ -236,6 +230,43 @@ export default [
                   title: 'Product Category',
                   icon: <Circle size={20} />,
                   navLink: '/product-category'
+      },
+      {
+        id: 'KycPage',
+        title: 'KYC',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'kycList',
+                  title: 'KYC List',
+                  icon: <Circle size={20} />,
+                  navLink: '/kyc-document-list'
+                },
+               {
+                  id: 'uploadKyc',
+                  title: 'Upload Kyc',
+                  icon: <Circle size={20} />,
+                  navLink: '/upload-kyc'
+                },
+                {
+                  id: 'buyerKyc',
+                  title: 'Buyer Kyc',
+                  icon: <Circle size={20} />,
+                  navLink: '/buyer-kyc-list'
+                },
+                {
+                  id: 'sellerKyc',
+                  title: 'Seller Kyc',
+                  icon: <Circle size={20} />,
+                  navLink: '/seller-kyc-list'
+                },
+                {
+                  id: 'corporateKyc',
+                  title: 'Corporate Kyc',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporate-kyc-list'
+                }
+        ]
       },
       {
         id: 'EmployeePage',
@@ -454,7 +485,7 @@ export default [
         id: 'Transaction',
         title: 'Transaction',
         icon: <Circle size={20} />,
-        navLink: '/transaction'
+        navLink: '/report/transactions'
       },
       {
         id: 'Approval',
@@ -493,6 +524,18 @@ export default [
         navLink: '/report/bidCoin'
       },
       {
+        id: 'inspection',
+        title: 'Inspection',
+        icon: <Circle size={20} />,
+        navLink: '/report/inspections-list'
+      },
+      {
+        id: 'cclExhaust',
+        title: 'Corporate Credit Limit Exhaust',
+        icon: <Circle size={20} />,
+        navLink: '/report/ccl-exhausted-list'
+      },
+      {
         id: 'Bid_Cash',
         title: 'Bid Cash',
         icon: <Circle size={20} />,
@@ -509,6 +552,12 @@ export default [
         title: 'GST Report',
         icon: <Circle size={20} />,
         navLink: '/report/gst-report-list'
+      },
+      {
+        id: 'vas',
+        title: 'VAS',
+        icon: <Circle size={20} />,
+        navLink: '/report/vas-list'
       },
       {
         id: 'sampleRequest',

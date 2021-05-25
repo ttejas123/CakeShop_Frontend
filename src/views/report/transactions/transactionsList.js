@@ -1,3 +1,4 @@
+
 // ** Custom Components
 import Avatar from '@components/avatar'
 import { Link } from 'react-router-dom'
@@ -10,6 +11,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
+import { data, columns } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
@@ -44,20 +46,15 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
-
-// ** Renders Client Columns
-
 const optionBidStatus = [
-    {value: "", label: "Filter Status"},
-    {value: "productName", label: "Product Name"},
-    {value: "mrp", label: "MRP"},
-    {value: "gst", label: "GSt"},
-    {value: "category", label: "Category"},
-    {value: "subCategory", label: "Sub Category"},
-    {value: "productCategory", label: "Product Category"}
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
   ]
 
-const CorporateBranch = () => {
+const TransactionsList = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -68,142 +65,85 @@ const CorporateBranch = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
+  const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
-   //deleteCountry
-  const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
-    //edit action
-   const AddeditEvent = (val) => {
-     //here we hande event which comming from addNewModel.js (Form for add and edit)
-      setCurrentId("")
-      console.log(val)
-  }
-
-  const data = [
-    {
-      branchName : "Geeks",
-      address : "Block-1",
-      city : "Mumbai",
-      state : "Maharashtra",
-      country : "India",
-      isBidoyasWarehouse : "Yes",
-      createdDate : "22-04-2000"
-    },
-    {
-      branchName : "Techie",
-      address : "Block-2",
-      city : "Hyderabad",
-      state : "Telangana",
-      country : "India",
-      isBidoyasWarehouse : "No",
-      createdDate : "21-04-2000"
-    },
-    {branchName : "Intellects",
-    address : "Block-3",
-    city : "Bangalore",
-    state : "Karnataka",
-    country : "India",
-    isBidoyasWarehouse : "No",
-    createdDate : "31-04-3000"
-    },
-    {
-      branchName : "Wanderers",
-      address : "Block-4",
-      city : "Pune",
-      state : "Maharashtra",
-      country : "India",
-      isBidoyasWarehouse : "No",
-      createdDate : "41-04-4000"
+  
+const renderUser = row => {
+    const stateNum = Math.floor(Math.random() * 6),
+      states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+      color = states[stateNum]
+  
+    if (row.img.length) {
+      return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.img} width='32' height='32'  /> </Link>
+    } else {
+      return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.userName || 'John Doe'} initials status="online" /> </Link>
     }
-]
-
-  //columns
-  const columns = [
-        {
-          name: 'Branch Name',
-          selector: 'branchName',
-          sortable: false,
-          minWidth: '50px'
-        },
-        {
-          name: 'Address',
-          selector: 'address',
-          sortable: false,
-          minWidth: '150px'
-        },
-        {
-          name: 'City',
-          selector: 'city',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'State',
-          selector: 'state',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Country',
-          selector: 'country',
-          sortable: true,
-          minWidth: '150px'
-        }
-        // },
-        // {
-        //   name: `Bidoya's Warehouse`,
-        //   selector: 'isBidoyasWarehouse',
-        //   sortable: true,
-        //   minWidth: '150px'
-        // },
-        // {
-        //   name: 'Created Date',
-        //   selector: 'createdDate',
-        //   sortable: false,
-        //   minWidth: '150px'
-        // },
-        // {
-        //   name: 'Actions',
-        //   allowOverflow: true,
-        //   cell: row => {
-        //     return (
-        //       <div className='d-flex'>
-        //         <UncontrolledDropdown>
-        //           <DropdownToggle className='pr-1' tag='span'>
-        //             <Trash size={15} onClick={e => {
-        //                                                                             e.preventDefault()
-        //                                                                             deleteCountry(row.id)
-        //                                                                           } }/>
-        //           </DropdownToggle>
-        //         </UncontrolledDropdown>
-        //        <Edit  
-        //           size={15} 
-        //           onClick={ () => { 
-        //                             setCurrentId(row.id)
-        //                             setModal(true)
-        //                              } }>
-                                      
-        //                              </Edit>
-        //       </div>
-        //     )
-        //   }
-        // }
-    ]
-
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
   }
+
+
+  const columns = [
+    {
+        name: 'User Name',
+        minWidth: '250px',
+        selector: 'user',
+        sortable: true,
+        cell: row => (
+          <div className='d-flex justify-content-left align-items-center'>
+            {renderUser(row)}
+            <div className=''>
+              {/* <Link to={`/bidDetails/${row.id}`}> */}
+                <div className='user-info text-truncate d-flex flex-column'>
+                   <span className='font-weight-bold'>{row.userName}</span>
+                   {/* <small className='text-truncate text-muted mb-0'>@{row.username}</small> */}
+                </div>
+              {/* </Link>   */}
+            </div>
+          </div>
+        )
+      },
+    {
+        name: 'Amount Used',
+        selector: 'amountUsed',
+        sortable: true,
+        minWidth: '100px'
+      },
+    {
+        name: 'Balance',
+        selector: 'balance',
+        sortable: true,
+        minWidth: '100px'
+    },
+    {
+        name: 'Last Transaction',
+        selector: 'lastTransaction',
+        sortable: true,
+        minWidth: '100px'
+    },
+    {
+      name: 'Actions',
+      allowOverflow: true,
+      cell: row => {
+        return (
+          <div className='d-flex'>
+            <UncontrolledDropdown>
+              <DropdownToggle className='pr-1' tag='span'>
+                <Trash size={15} onClick={e => { handleDelete(row) }} />
+              </DropdownToggle>
+            </UncontrolledDropdown>
+            <Edit  
+                  size={15} 
+                  onClick={ () => { 
+                                    //setCurrentId(row.id)
+                                    //setModal(true)
+                                     } }>
+                                       
+                                     </Edit>
+          </div>
+        )
+      }
+    }
+  ]
+  
 
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
@@ -243,12 +183,12 @@ const CorporateBranch = () => {
       updatedData = data.filter(item => {
         const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.productName.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.PurchaseIntentName.toLowerCase().startsWith(value.toLowerCase()) ||
           item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
           item.gst.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.productName.toLowerCase().includes(value.toLowerCase()) ||
+          item.PurchaseIntentName.toLowerCase().includes(value.toLowerCase()) ||
           item.mrp.toLowerCase().includes(value.toLowerCase()) ||
           item.gst.toLowerCase().includes(value.toLowerCase()) 
           
@@ -294,17 +234,61 @@ const CorporateBranch = () => {
     />
   )
 
+   
+  // ** Converts table to CSV
+  function convertArrayOfObjectsToCSV(array) {
+    let result
+
+    const columnDelimiter = ','
+    const lineDelimiter = '\n'
+    const keys = Object.keys(data[0])
+
+    result = ''
+    result += keys.join(columnDelimiter)
+    result += lineDelimiter
+
+    array.forEach(item => {
+      let ctr = 0
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter
+
+        result += item[key]
+
+        ctr++
+      })
+      result += lineDelimiter
+    })
+
+    return result
+  }
+
+  // ** Downloads CSV
+  function downloadCSV(array) {
+    const link = document.createElement('a')
+    let csv = convertArrayOfObjectsToCSV(array)
+    if (csv === null) return
+
+    const filename = 'export.csv'
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`
+    }
+
+    link.setAttribute('href', encodeURI(csv))
+    link.setAttribute('download', filename)
+    link.click()
+  }
 
   return (
     <Fragment>
-      <Card className='mx-1'>
+      <Card>
         <CardHeader>
           <CardTitle tag='h4'>Search Filter</CardTitle>
         </CardHeader>
         <CardBody>
           <Row>
             <Col md='4'>
-            <div style={{zIndex:997, position:'relative'}}>
+            <div style={{zIndex:1000, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -322,12 +306,39 @@ const CorporateBranch = () => {
         </CardBody>
       </Card>
 
-      <Card className='mx-1'>
+      <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Branch List</CardTitle>
+          <CardTitle tag='h4'>Purchase Intent</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+            <UncontrolledButtonDropdown>
+              <DropdownToggle color='secondary' caret outline>
+                <Share size={15} />
+                <span className='align-middle ml-50'>Export</span>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem className='w-100'>
+                  <Printer size={15} />
+                  <span className='align-middle ml-50'>Print</span>
+                </DropdownItem>
+                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
+                  <FileText size={15} />
+                  <span className='align-middle ml-50'>CSV</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <Grid size={15} />
+                  <span className='align-middle ml-50'>Excel</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <File size={15} />
+                  <span className='align-middle ml-50'>PDF</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <Copy size={15} />
+                  <span className='align-middle ml-50'>Copy</span>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledButtonDropdown>
           </div>
         </CardHeader>
 
@@ -367,4 +378,4 @@ const CorporateBranch = () => {
   )
 }
 
-export default CorporateBranch
+export default TransactionsList

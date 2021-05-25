@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { data } from './data'
+import { data1 } from './data'
 import Avatar from '@components/avatar'
 import { Link } from 'react-router-dom'
 // ** Third Party Components
@@ -16,9 +16,9 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, UncontrolledButtonDr
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
-const InspectionsList = () => {
+const SellerKycList = () => {
 
-    const [currentPage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [addClicked, setAddClicked] = useState(0)
@@ -71,97 +71,120 @@ const handleDelete = (data) => {
       }
 }
 
-const renderUser = row => {
-    const stateNum = Math.floor(Math.random() * 6),
-      states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-      color = states[stateNum]
-  
-    if (row.img.length) {
-      return <Avatar className='mr-1' img={row.img} width='32' height='32'  />
-    } else {
-      return <Avatar color={color || 'primary'} className='mr-1' content={row.userName || 'John Doe'} initials />
-    }
-  }
-
 const columns = [
     {
-        name: 'User Name',
-        minWidth: '250px',
-        selector: 'userName',
+      name: 'Id',
+      selector: 'id',
+      sortable: true,
+      minWidth: '150px'
+    },
+    {
+      name: 'User Id',
+      selector: 'userId',
+      sortable: true,
+      minWidth: '150px'
+    },
+    {
+        name: 'Identity Proof',
+        selector: 'identityProof',
         sortable: true,
-        cell: row => (
-          <div className='d-flex justify-content-left align-items-center'>
-            {renderUser(row)}
-            <div className=''>
-              {/* <Link to={`/bidDetails/${row.id}`}> */}
-                <div className='user-info text-truncate d-flex flex-column'>
-                   <span className='font-weight-bold'>{row.userName}</span>
-                   {/* <small className='text-truncate text-muted mb-0'>@{row.corporateName}</small> */}
-                </div>
-              {/* </Link>   */}
-            </div>
+        minWidth: '150px'
+    },
+    {
+        name: 'Address Proof',
+        selector: 'addressProof',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'Pan Card',
+        selector: 'panCard',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'MOA',
+        selector: 'moa',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'AOA',
+        selector: 'aoa',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'CIN',
+        selector: 'cin',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'CIN Cert',
+        selector: 'cinCert',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'TAN',
+        selector: 'tan',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'TAN Cert',
+        selector: 'tanCert',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'GST',
+        selector: 'gst',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'GST Cert',
+        selector: 'gstCert',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'Approved By',
+        selector: 'approvedBy',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+        name: 'Approved Time',
+        selector: 'approvedTime',
+        sortable: true,
+        minWidth: '150px'
+    },
+    {
+      name: 'Actions',
+      allowOverflow: true,
+      cell: row => {
+        return (
+          <div className='d-flex'>
+            <UncontrolledDropdown>
+              <DropdownToggle className='pr-1' tag='span'>
+                <Trash size={15} onClick={e => { handleDelete(row) }} />
+              </DropdownToggle>
+            </UncontrolledDropdown>
+            <Link  to={`/report/add-GstReport`}><Edit  
+                  size={15} 
+                  onClick={ () => { 
+                                    //setCurrentId(row.id)
+                                    //setModal(true)
+                                     } }>
+                                       <Link to='/report/add-GstReport'/>
+                                     </Edit></Link>
           </div>
         )
-    },
-    {
-      name: 'Order Id',
-      selector: 'orderId',
-      sortable: true,
-      minWidth: '80px'
-    },
-    {
-        name: 'Inspection Done BY',
-        selector: 'inspectionDoneBy',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'Inspection Date',
-        selector: 'inspectionDate',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'Comment',
-        selector: 'comment',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'File',
-        selector: 'file',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'Status',
-        selector: 'status',
-        sortable: true,
-        minWidth: '80px'
+      }
     }
-    // ,
-    // {
-    //   name: 'Actions',
-    //   allowOverflow: true,
-    //   cell: row => {
-    //     return (
-    //       <div className='d-flex'>
-    //         <UncontrolledDropdown>
-    //           <DropdownToggle className='pr-1' tag='span'>
-    //             <Trash size={15} onClick={e => { handleDelete(row) }} />
-    //           </DropdownToggle>
-    //         </UncontrolledDropdown>
-    //         <Link  to={`/report/add-GstReport`}><Edit  
-    //               size={15} 
-    //               onClick={ () => { 
-    //                                 //setCurrentId(row.id)
-    //                                 //setModal(true)
-    //                                  } }>
-    //                                    <Link to='/report/add-GstReport'/>
-    //                                  </Edit></Link>
-    //       </div>
-    //     )
-    //   }
   ]
   
   // ** Function to handle filter
@@ -238,7 +261,7 @@ const columns = [
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : data1.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -257,85 +280,13 @@ const columns = [
 
    
   // ** Converts table to CSV
-  function convertArrayOfObjectsToCSV(array) {
-    let result
-
-    const columnDelimiter = ','
-    const lineDelimiter = '\n'
-    const keys = Object.keys(data[0])
-
-    result = ''
-    result += keys.join(columnDelimiter)
-    result += lineDelimiter
-
-    array.forEach(item => {
-      let ctr = 0
-      keys.forEach(key => {
-        if (ctr > 0) result += columnDelimiter
-
-        result += item[key]
-
-        ctr++
-      })
-      result += lineDelimiter
-    })
-
-    return result
-  }
-
-  // ** Downloads CSV
-  function downloadCSV(array) {
-    const link = document.createElement('a')
-    let csv = convertArrayOfObjectsToCSV(array)
-    if (csv === null) return
-
-    const filename = 'export.csv'
-
-    if (!csv.match(/^data:text\/csv/i)) {
-      csv = `data:text/csv;charset=utf-8,${csv}`
-    }
-
-    link.setAttribute('href', encodeURI(csv))
-    link.setAttribute('download', filename)
-    link.click()
-  }
-
+  
 
   return (
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Inspections</CardTitle>
-        <div className='d-flex mt-md-0 mt-1'>
-            <UncontrolledButtonDropdown>
-              <DropdownToggle color='secondary' caret outline>
-                <Share size={15} />
-                <span className='align-middle ml-50'>Export</span>
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem className='w-100'>
-                  <Printer size={15} />
-                  <span className='align-middle ml-50'>Print</span>
-                </DropdownItem>
-                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
-                  <FileText size={15} />
-                  <span className='align-middle ml-50'>CSV</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Grid size={15} />
-                  <span className='align-middle ml-50'>Excel</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <File size={15} />
-                  <span className='align-middle ml-50'>PDF</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Copy size={15} />
-                  <span className='align-middle ml-50'>Copy</span>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledButtonDropdown>
-          </div>
+        <CardTitle tag='h4'>Seller Kyc</CardTitle>
       </CardHeader>
       <DataTable
         noHeader
@@ -347,12 +298,12 @@ const columns = [
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={data}
+        data={data1}
       />
-     
+      
     </Card>
     </Fragment>
   )
 }
 
-export default InspectionsList
+export default SellerKycList

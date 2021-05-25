@@ -1,22 +1,3 @@
-//expot data
-// Bid id
-// User Name
-//username:"",// Bid S
-//tatus - created,live,extended,closed,rejected,auto closed
-// Requested Customization
-// Customization Status : pending, approval, approved, 
-// catalogue id
-// Req Quantity
-// created time
-// Go Live date
-// Bid Close Date
-// Bid Application Date
-// Nos of bidder
-// Delivery date
-// Buyer Budget
-// Delivery Location : Multiple Or Single location
-// finalize seller id
-//expot data
 import komal  from '../../../assets/images/logo/komal.jpg'
 import pravin  from '../../../assets/images/logo/pravin.jpg'
 import himanshu  from '../../../assets/images/logo/himanshu.jpg'

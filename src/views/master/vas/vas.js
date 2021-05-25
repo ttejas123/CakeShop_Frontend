@@ -98,6 +98,24 @@ const DataTableWithButtons = () => {
           }
         },
         {
+          name: 'Rate',
+          selector: 'rate',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+          name: 'Quantity',
+          selector: 'quantity',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+          name: 'Unit',
+          selector: 'unit',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
           name: 'Actions',
           allowOverflow: true,
           cell: row => {
