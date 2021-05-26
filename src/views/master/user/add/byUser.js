@@ -419,6 +419,16 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
+              <Label for='pinCode'>Pin Code</Label>
+              <InputGroup>
+                
+                <Input name="pinCode" onChange={handleInputeChange} id='pinCode' placeholder='Ravi' value={values.pinCode} />
+              </InputGroup>
+              </FormGroup>  
+            </Col>
+
+            <Col md='4' sm='12'>
+              <FormGroup>
               <Label for='Name'>Address</Label>
               <InputGroup>
                 

@@ -39,6 +39,12 @@ const optionUserType = [
     {value: "Both", label: "Both"}
   ]
 
+const optionPanCardType = [
+    {value: "Individual", label: "Individual"},
+    {value: "Compnay", label: "Compnay"}
+    
+]
+
   const initialvalues = {
     
     aadhar : 0,
@@ -230,11 +236,25 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Pan Card Type</Label>
-              <InputGroup>
-                
-                <Input name="pan_card_type" onChange={handleInputeChange} id='pan_card_type' placeholder='49A' value={values.pan_card_type} />
-              </InputGroup>
+              <Label for='pan_card'>Pan Card Type</Label>
+              <Select
+                id='user_type'
+                className='react-select'
+                classNamePrefix='select'
+                isClearable={false}
+                options={optionPanCardType}
+                theme={selectThemeColors}
+                value={values.pan_card_type}
+                onChange={data => {
+                                   setValues(
+                                            {
+                                               ...values,
+                                               pan_card_type : data
+                                            } 
+                                    )
+                                  }
+                          }
+              /> 
               </FormGroup>  
             </Col>
 

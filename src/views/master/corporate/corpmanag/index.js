@@ -115,7 +115,7 @@ const DataTableWithButtons = () => {
               <div className='d-flex flex-column'>
                 
                   <span className='font-weight-bold'>{row.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
+                <small className='text-truncate text-muted mb-0'>@{row.Name}</small>
               </div>
             </div>
           )
@@ -144,6 +144,39 @@ const DataTableWithButtons = () => {
           selector: 'Created',
           sortable: true,
           minWidth: '150px'
+        },
+        {
+          name: 'username',
+          selector: 'username',
+          sortable: true,
+          minWidth: '180px',
+          maxWidth: '300px',
+          cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate d-flex '>
+                {row.username.map((val, index) => {
+                  if (index < 1) {
+                    return (
+                      <div className="mr-1">{val.value}</div>
+                      )
+                  }
+                })
+                }
+
+                {row.username.length > 1 ? (
+                                                  <u><a href="#" onClick={ () => { 
+                                                                   setreviewId(row.id)
+                                                                    setResponseModel(true)
+                                                                     } }>
+                                                      view
+                                                </a></u>
+                                                  ) : null}
+                </span>
+                
+              </div>
+            </div>
+          )
         },
         {
           name: 'Rights',

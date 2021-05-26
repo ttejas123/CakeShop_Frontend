@@ -30,7 +30,7 @@ const EcommerceDashboard = () => {
           <UserProfileCard userId = {id}/>
         </Col>
         <Col xl='4' md='6' xs='12'>
-              <StatusCard header="Your Details"  created="Created Date" date="21-jan-2012" three="Email :" threeData="komal@gmail.com" Name="userName :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />
+              <StatusCard header="Your Details"  created="Created Date" date="21-jan-2012" three="Email :" threeData="komal@gmail.com" Name="User Name :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />
         </Col>
         <Col xl='4' md='6' xs='12'>
           <StatusCard header="Organization" three="#WareHouse :"  created="Created Date" date="21-jan-2012" threeData="Navi Mumbai" Name="Name :" secName="No. Members :" thrName="Headquarters :" thrNameData="Navi mumbai" NameData="Coense" secNameData="12"/>

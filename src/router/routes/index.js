@@ -25,7 +25,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
   {
-    path: '/PReviewsle/:id',
+    path: '/master/userProfile/:id',
     component: lazy(() => import('../../views/master/user/userProfile'))
   },
   {

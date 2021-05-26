@@ -380,8 +380,8 @@ export default [
                   navLink: '/add-user-address'
                 },
                 {
-                  id: 'list',
-                  title: 'list',
+                  id: 'List',
+                  title: 'List',
                   icon: <Circle size={20} />,
                   navLink: '/user-list'
                 }

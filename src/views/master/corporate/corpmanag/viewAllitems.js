@@ -57,7 +57,7 @@ const AddNewModal = (prop) => {
       contentClassName='pt-0'
     >
       <ModalHeader className='mb-1' toggle={prop.handleModal} close={CloseBtn} tag='div'>
-        <h5 className='modal-title'>View All Rights</h5>
+        <h5 className='modal-title'>View All Rights to users</h5>
       </ModalHeader>
       <ModalBody className='flex-grow-1'>
         <Row>
@@ -78,6 +78,23 @@ const AddNewModal = (prop) => {
                              return (
                                 <Badge className='text-capitalize ml-1' color='primary' pill>
                                     {val}
+                                </Badge>
+                              )
+                          })}
+                        </div>
+                        ) : null}
+                          
+                </span>
+            </div>
+            
+            <div className='d-flex justify-content-between mb-2'>
+                <span className='font-small-2'>Users :
+                      {prop.data[prop.currentId - 1] ? (
+                        <div className="mt-1">
+                          {prop.data[prop.currentId - 1].username.map((val) => {
+                             return (
+                                <Badge className='text-capitalize ml-1' color='primary'>
+                                    {val.value}
                                 </Badge>
                               )
                           })}
