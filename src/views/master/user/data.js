@@ -2,7 +2,7 @@
 // User
 //tatus - created,Japan,USA,closed,rejected,India
 // Requested Customization
-// Customization Status : pending, approval, approved, 
+// Customization Status : Pending, Approval, Approved, 
 // catalogue id
 // Req Quantity
 // created time
@@ -28,13 +28,13 @@ export const data = [
         avatar:"",
         CreatedDate :"30-10-2021",
         email: "tthakare73@gmail.com",
-        designation:"job",
+        designation:"Job",
         DeliveryLocation:[{value:""}],
-        mobile : 321342,
+        mobile : 3213424362,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
        
-        isVerified : [{value: "approval", label: "approval"}],
+        isVerified : [{value: "Approval", label: "Approval"}],
         profileScore: 1,
 
         created : "04-10-2021",
@@ -50,15 +50,15 @@ export const data = [
         avatar:pravin,
         CreatedDate :"23-10-2021",
         email: "pravinP@gmail.com",
-        designation:"job",
+        designation:"Job",
         
-        mobile : 321342,
+        mobile : 3213424362,
         
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         
-        isVerified : [{value: "pending", label: "pending"}],
+        isVerified : [{value: "Pending", label: "Pending"}],
         profileScore: 2,
-        ReqCustomization :"differnt Color",
+        ReqCustomization :"Differnt Color",
         created : "07-10-2021",
         country : [{value: "Japan", label: "Japan"}],
         state : [{value: "Osaka", label: "Osaka"}],
@@ -72,21 +72,21 @@ export const data = [
         last_login : "04-10-2021",
         avatar:komal,
         CreatedDate :"13-10-2021",
-        designation:"job",
+        designation:"Job",
         email: "komal@gmail.com",
-        mobile : 541342,
+        mobile : 9967443534,
         
         userType: [{value: "Both", label: "Both"}], //Buyer Seller
        
-        isVerified : [{value: "approved", label: "approved"}],
+        isVerified : [{value: "Approved", label: "Approved"}],
         profileScore: 1,
         ReqCustomization :"Company WaterMark",
         created : "04-10-2021",
         country : [{value: "India", label: "India"}],
         state : [{value: "kerla", label: "kerla"}],
-        city : [{value: "sharana", label: "sharana"}],
+        city : [{value: "Sharana", label: "Sharana"}],
         last_name: "Kamble",
-        first_name: "komal"
+        first_name: "Komal"
       },
       {
         id:4,
@@ -94,20 +94,20 @@ export const data = [
         avatar:"",
         CreatedDate :"21-10-2021",
         email: "mehul@gmail.com",
-        designation:"job",
+        designation:"Job",
         
-        mobile : 721342,
+        mobile : 7213422483,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
-        isVerified : [{value: "approval", label: "approval"}],
+        isVerified : [{value: "Approval", label: "Approval"}],
         profileScore: 3,
 
         created : "11-10-2021",
         country : [{value: "Viatnam", label: "Viatnam"}],
-        state : [{value: "nakoi", label: "nakoi"}],
-        city : [{value: "noki", label: "noki"}],
-        last_name: "B",
+        state : [{value: "Nakoi", label: "Nakoi"}],
+        city : [{value: "Noki", label: "Noki"}],
+        last_name: "Bindra",
         first_name: "Mehul"
       },
       {
@@ -116,20 +116,20 @@ export const data = [
         avatar:"",
         CreatedDate :"30-10-2021",
         email: "harpriya@gmail.com",
-        designation:"job",
+        designation:"Job",
         
-        mobile : 2331342,
+        mobile : 2331342342,
         
         userType: [{value: "Both", label: "Both"}],  //Buyer Seller
         
-        isVerified : [{value: "pending", label: "pending"}],
+        isVerified : [{value: "Pending", label: "Pending"}],
         profileScore: 1,
 
         created : "31-10-2021",
         country : [{value: "Sweedan", label: "Sweedan"}],
-        state : [{value: "seedon", label: "seedon"}],
-        city : [{value: "nipu", label: "nipu"}],
-        last_name: "H",
+        state : [{value: "Seedon", label: "Seedon"}],
+        city : [{value: "Nipu", label: "Nipu"}],
+        last_name: "Thakur",
         first_name: "Harpriya"
       },
       {
@@ -138,20 +138,20 @@ export const data = [
         avatar:reethika,
         CreatedDate :"22-10-2021",
         email: "reethika@gmail.com",
-        designation:"job",
+        designation:"Job",
         
-        mobile : 771356,
+        mobile : 7713566574,
         
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         
-        isVerified : [{value: "approved", label: "approved"}],
+        isVerified : [{value: "Approved", label: "Approved"}],
        profileScore: 4,
 
         created : "30-10-2021",
         country : [{value: "India", label: "India"}],
         state : [{value: "UtterPradesh", label: "UtterPradesh"}],
-        city : [{value: "lihipur", label: "lihipur"}],
-        last_name: "R",
+        city : [{value: "Lihipur", label: "Lihipur"}],
+        last_name: "Sangavkar",
         first_name: "Reethika"
       },
       {
@@ -162,18 +162,18 @@ export const data = [
         email: "himanshu@gmail.com",
         designation:"job",
         
-        mobile : 671356,
+        mobile : 6713564543,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
-        isVerified : [{value: "pending", label: "pending"}],
+        isVerified : [{value: "Pending", label: "Pending"}],
         profileScore: 1,
 
         created : "12-10-2021",
         country : [{value: "Japan", label: "Japan"}],
         state : [{value: "Osaka", label: "Osaka"}],
-        city : [{value: "lipi", label: "lipi"}],
-        last_name: "H",
+        city : [{value: "Lipi", label: "Lipi"}],
+        last_name: "Chanda",
         first_name: "Himanshu"
       },
       {
@@ -184,11 +184,11 @@ export const data = [
         email: "suryaDas@gmail.com",
         designation:"job",
         
-        mobile : 921345,
+        mobile : 9213454354,
         
         userType: [{value: "Seller", label: "Seller"}],  //Buyer Seller
         
-        isVerified : [{value: "approved", label: "approved"}],
+        isVerified : [{value: "Approved", label: "Approved"}],
         profileScore: 5,
 
         created : "22-10-2021",
@@ -204,20 +204,20 @@ export const data = [
         avatar:"",
         CreatedDate :"03-10-2021",
         email: "avinash@gmail.com",
-        designation:"job",
+        designation:"Job",
         
-        mobile : 3421332,
+        mobile : 3421332353,
        
         userType: [{value: "Buyer", label: "Buyer"}],  //Buyer Seller
         
-        isVerified : [{value: "approval", label: "approval"}],
+        isVerified : [{value: "Approval", label: "Approval"}],
         profileScore: 1,
 
         created : "04-10-2021",
         country : [{value: "USA", label: "USA"}],
-        state : [{value: "pencilVenia", label: "pencilVenia"}],
-        city : [{value: "created", label: "created"}],
-        last_name: "A",
+        state : [{value: "PencilVenia", label: "PencilVenia"}],
+        city : [{value: "Created", label: "Created"}],
+        last_name: "Koli",
         first_name: "Avinash"
       }
 ]

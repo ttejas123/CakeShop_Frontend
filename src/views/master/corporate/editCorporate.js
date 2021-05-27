@@ -181,6 +181,7 @@ const EditCorporate = () => {
       <Col md='6' sm='12'>
       <FormGroup>
               <Label for='Country'>Country</Label>
+              <div style={{zIndex:1000, position:'relative'}}>
             <Select
               id='Country'
               className='react-select'
@@ -201,6 +202,7 @@ const EditCorporate = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
       </Col>
       <Col md='6' sm='12'>
@@ -212,6 +214,7 @@ const EditCorporate = () => {
       <Col md='6' sm='12'>
       <FormGroup>
               <Label for='State'>State</Label>
+              <div style={{zIndex:999, position:'relative'}}>
             <Select
               id='State'
               className='react-select'
@@ -232,11 +235,13 @@ const EditCorporate = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
       </Col>
       <Col md='6' sm='12'>
       <FormGroup>
               <Label for='City'>City</Label>
+              <div style={{zIndex:998, position:'relative'}}>
             <Select
               id='City'
               className='react-select'
@@ -257,11 +262,13 @@ const EditCorporate = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
       </Col>
       <Col md='6' sm='12'>
       <FormGroup>
               <Label for='Currency'>Currency</Label>
+              <div style={{zIndex:997, position:'relative'}}>
             <Select
               id='Currency'
               className='react-select'
@@ -282,6 +289,7 @@ const EditCorporate = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
       </Col>
       <Col md='6' sm='12'>

@@ -60,30 +60,6 @@ const CompanyTable = () => {
         time: '1 week',
         Status: 'OnGoing',
         sales: '16'
-      },
-      {
-        img: require('@src/assets/images/icons/rocket.svg').default,
-        Activity: 'KYC Submitted',
-        email: 'bipri@cawiw.com',
-        icon: <Watch size={18} />,
-        Date: `${new Date().toGMTString()}`,
-        ParticipatedAs: 'Buyer',
-        time: '1 month',
-        Status: 'OnGoing',
-        sales: '78',
-        salesUp: true
-      },
-      {
-        img: require('@src/assets/images/icons/speaker.svg').default,
-        Activity: 'profile Update',
-        email: 'luk@izug.io',
-        icon: <Watch size={18} />,
-        Date: `${new Date().toGMTString()}`,
-        ParticipatedAs: 'Buyer',
-        time: '12 hours',
-        Status: 'OnGoing',
-        sales: '42',
-        salesUp: true
       }
     ]
 

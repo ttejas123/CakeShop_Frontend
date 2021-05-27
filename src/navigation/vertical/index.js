@@ -78,12 +78,6 @@ export default [
         navLink: '/currency-list'
       },
       {
-        id: 'KYC',
-        title: 'KYC',
-        icon: <Circle size={20} />,
-        navLink: '/kyc-document-list'
-      },
-      {
         id: 'CompanyList',
         title: 'Company',
         icon: <Circle size={20} />,
@@ -138,12 +132,6 @@ export default [
         navLink: '/warehouse-list'
       },
       {
-        id: 'onGroundStaff',
-        title: 'On Ground Staff',
-        icon: <Circle size={20} />,
-        navLink: '/on-ground-staff'
-      },
-      {
         id: 'badges',
         title: 'Badges',
         icon: <Circle size={20} />,
@@ -156,10 +144,22 @@ export default [
         navLink: '/badge-mapping-list'
       },
       {
+        id: 'workFlowHistory',
+        title: 'Work Flow History',
+        icon: <Circle size={20} />,
+        navLink: '/work-flow-history-list'
+      },
+      {
         id: 'profileCompAdd',
         title: 'profile Completion Add',
         icon: <Circle size={20} />,
         navLink: '/master/profileCompAdd'
+      },
+      {
+           id: 'payment',
+           title: 'Payments',
+           icon: <Circle size={20} />,
+           navLink: '/master/payment'
       },
       {
            id: 'SMS_Add',
@@ -167,6 +167,24 @@ export default [
            icon: <Circle size={20} />,
            navLink: '/master/sms/add'
       },
+      {
+        id: 'billDiscounting',
+        title: 'Bill Discounting',
+        icon: <Circle size={20} />,
+        navLink: '/bill-discounting-list'
+      },
+      {
+           id: 'Commission_Slab',
+           title: 'Commission Slab',
+           icon: <Circle size={20} />,
+           navLink: '/master/commi'
+      },
+          {
+            id: 'Orders',
+            title: 'Orders',
+            icon: <Circle size={20} />,
+            navLink: '/master/order'
+          },
       {
         id: 'ProductPage',
         title: 'Product',
@@ -214,10 +232,67 @@ export default [
         ]
       },
       {
+        id: 'onGroundStaffPage',
+        title: 'On Ground Staff',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/on-ground-staff'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/on-ground-staff-view'
+                }
+                
+        ]
+      },
+      {
                   id: 'productCategory',
                   title: 'Product Category',
                   icon: <Circle size={20} />,
                   navLink: '/product-category'
+      },
+      {
+        id: 'KycPage',
+        title: 'KYC',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'kycList',
+                  title: 'KYC List',
+                  icon: <Circle size={20} />,
+                  navLink: '/kyc-document-list'
+                },
+               {
+                  id: 'uploadKyc',
+                  title: 'Upload Kyc',
+                  icon: <Circle size={20} />,
+                  navLink: '/upload-kyc'
+                },
+                {
+                  id: 'buyerKyc',
+                  title: 'Buyer Kyc',
+                  icon: <Circle size={20} />,
+                  navLink: '/buyer-kyc-list'
+                },
+                {
+                  id: 'sellerKyc',
+                  title: 'Seller Kyc',
+                  icon: <Circle size={20} />,
+                  navLink: '/seller-kyc-list'
+                },
+                {
+                  id: 'corporateKyc',
+                  title: 'Corporate Kyc',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporate-kyc-list'
+                }
+        ]
       },
       {
         id: 'EmployeePage',
@@ -281,10 +356,22 @@ export default [
                   navLink: '/add-corporate-address'
                 },
                 {
+                  id: 'Corporate_Role',
+                  title: 'Role Management',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/corporateRole'
+                },
+                {
                   id: 'edit',
                   title: 'Edit',
                   icon: <Circle size={20} />,
                   navLink: '/edit-corporate'
+                },
+                {
+                  id: 'add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/add-corporate'
                 }
         ]
       },
@@ -303,13 +390,32 @@ export default [
                   id: 'view',
                   title: 'View',
                   icon: <Circle size={20} />,
-                  navLink: '/membershipView'
+                  navLink: '/master/membershps/views'
                 },
                 {
                   id: 'edit',
                   title: 'Edit',
                   icon: <Circle size={20} />,
                   navLink: '/edit-membership'
+                }
+        ]
+      },
+      {
+        id: 'OrdersPage',
+        title: 'Orders',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'invoiceList',
+                  title: 'Invoice List',
+                  icon: <Circle size={20} />,
+                  navLink: '/invoice-list'
+                },
+                {
+                  id: 'sampleOrders',
+                  title: 'Sample Orders',
+                  icon: <Circle size={20} />,
+                  navLink: '/sampleOrder-list'
                 }
         ]
       },
@@ -331,10 +437,41 @@ export default [
                   navLink: '/add-user-address'
                 },
                 {
-                  id: 'list',
-                  title: 'list',
+                  id: 'List',
+                  title: 'List',
                   icon: <Circle size={20} />,
                   navLink: '/user-list'
+                }
+        ]
+      },
+      {
+        id: 'credit',
+        title: 'Credit',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'corporateCredit',
+                  title: 'Corporate Credit',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporate-credit-list'
+                },
+                {
+                  id: 'creditLimit',
+                  title: 'Credit Limit',
+                  icon: <Circle size={20} />,
+                  navLink: '/credit-limit-list'
+                },
+                {
+                  id: 'creditTransactions',
+                  title: 'Credit Transactions',
+                  icon: <Circle size={20} />,
+                  navLink: '/credit-transactions-list'
+                },
+                {
+                  id: 'corporateCreditHistory',
+                  title: 'Credit History Corporate',
+                  icon: <Circle size={20} />,
+                  navLink: '/corporate-credit-history'
                 }
         ]
       },
@@ -360,6 +497,56 @@ export default [
             title: 'Action',
             icon: <Circle size={20} />,
             navLink: '/bga-action'
+          },
+          {
+            id: 'transactions',
+            title: 'Transactions',
+            icon: <Circle size={20} />,
+            navLink: '/bga-transactions-list'
+          }
+        ]
+      },
+      {
+        id: 'Lead',
+        title: 'Lead',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'Lead',
+            title: 'List',
+            icon: <Circle size={20} />,
+            navLink: '/master/Lead'
+          },
+          {
+            id: 'Create',
+            title: 'Create',
+            icon: <Circle size={20} />,
+            navLink: '/master/Leads/add'
+          }
+        ]
+      },
+      {
+        id: 'Invoice',
+        title: 'Invoice',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'Invoice',
+            title: 'List',
+            icon: <Circle size={20} />,
+            navLink: '/master/Invoice/List'
+          },
+          {
+            id: 'View',
+            title: 'View',
+            icon: <Circle size={20} />,
+            navLink: '/master/Invoice/view'
+          },
+          {
+            id: 'Add',
+            title: 'Add',
+            icon: <Circle size={20} />,
+            navLink: '/master/Invoice/add'
           }
         ]
       }
@@ -374,7 +561,7 @@ export default [
         id: 'Transaction',
         title: 'Transaction',
         icon: <Circle size={20} />,
-        navLink: '/transaction'
+        navLink: '/report/transactions'
       },
       {
         id: 'Approval',
@@ -413,6 +600,24 @@ export default [
         navLink: '/report/bidCoin'
       },
       {
+        id: 'inspection',
+        title: 'Inspection',
+        icon: <Circle size={20} />,
+        navLink: '/report/inspections-list'
+      },
+      {
+        id: 'cclExhaust',
+        title: 'Corporate Credit Limit Exhaust',
+        icon: <Circle size={20} />,
+        navLink: '/report/ccl-exhausted-list'
+      },
+      {
+        id: 'Bid_Cash',
+        title: 'Bid Cash',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCash'
+      },
+      {
         id: 'smsHistory',
         title: 'SMS History',
         icon: <Circle size={20} />,
@@ -425,6 +630,12 @@ export default [
         navLink: '/report/gst-report-list'
       },
       {
+        id: 'vas',
+        title: 'VAS',
+        icon: <Circle size={20} />,
+        navLink: '/report/vas-list'
+      },
+      {
         id: 'sampleRequest',
         title: 'Sample Request',
         icon: <Circle size={20} />,
@@ -435,6 +646,12 @@ export default [
         title: 'Tickets',
         icon: <Circle size={20} />,
         navLink: '/report/ticket-List'
+      },
+      {
+        id: 'shipment',
+        title: 'Shipment',
+        icon: <Circle size={20} />,
+        navLink: '/report/shipment'
       },
       {
         id: 'Search_keyWord_History',
@@ -485,6 +702,30 @@ export default [
         title: 'Profile Completion Checklist',
         icon: <Circle size={20} />,
         navLink: '/report/ProfileCmpltChklist'
+      },
+      {
+        id: 'Block_User',
+        title: 'Block User',
+        icon: <Circle size={20} />,
+        navLink: '/report/BlockUsers'
+      },
+      {
+        id: 'Commission',
+        title: 'Commission',
+        icon: <Circle size={20} />,
+        navLink: '/report/commision'
+      },
+      {
+        id: 'Corporate',
+        title: 'Corporate',
+        icon: <Circle size={20} />,
+        navLink: '/report/corporate'
+      },
+      {
+        id: 'Customer',
+        title: 'Customer',
+        icon: <Circle size={20} />,
+        navLink: '/report/customer'
       }
     ]
   },

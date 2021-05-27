@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col} from 'reactstrap'
 import UserProfileCard from "./profileComponets/userInfoCard.js"
+import BackupAcList from "./profileComponets/backupAcList.js"
 import StatusCard from "./profileComponets/statusCard.js"
 import KycSub from "./profileComponets/kycSub.js"
 import BidStatus from "./profileComponets/bidStatus.js"
@@ -29,7 +30,7 @@ const EcommerceDashboard = () => {
           <UserProfileCard userId = {id}/>
         </Col>
         <Col xl='4' md='6' xs='12'>
-              <StatusCard header="Your Details"  created="Created Date" date="21-jan-2012" three="Email :" threeData="komal@gmail.com" Name="userName :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />
+              <StatusCard header="Your Details"  created="Created Date" date="21-jan-2012" three="Email :" threeData="komal@gmail.com" Name="User Name :" secName="Contact :" thrName="Address :" NameData="@komal" secNameData="7777777777" thrNameData={Address} />
         </Col>
         <Col xl='4' md='6' xs='12'>
           <StatusCard header="Organization" three="#WareHouse :"  created="Created Date" date="21-jan-2012" threeData="Navi Mumbai" Name="Name :" secName="No. Members :" thrName="Headquarters :" thrNameData="Navi mumbai" NameData="Coense" secNameData="12"/>
@@ -40,7 +41,7 @@ const EcommerceDashboard = () => {
         <Col xl='8' md='6' xs='12'>
           <Card className='card-statistics'>
            <CardHeader>  
-              <CardTitle tag='h5'><h4>Documents Submitted</h4></CardTitle>
+              <CardTitle tag='h5'><h4>KYC Submitted</h4></CardTitle>
            </CardHeader>  
             <CardBody>
               <Row className='match-height'>
@@ -89,6 +90,23 @@ const EcommerceDashboard = () => {
                 <Row className='match-height'>
                   <Col lg='12' xs='12'>
                     <BidHistory />
+                  </Col>
+                </Row>
+              </CardBody>  
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className='match-height'>
+        <Col xl='12' md='12' xs='12'>
+          <Card className='card-statistics'>
+             <CardHeader>  
+                <CardTitle tag='h4'><h4>Backup Account List</h4></CardTitle>
+             </CardHeader>  
+              <CardBody>
+                <Row className='match-height'>
+                  <Col lg='12' xs='12'>
+                    <BackupAcList />
                   </Col>
                 </Row>
               </CardBody>  

@@ -380,7 +380,7 @@ const EditEmployee = () => {
             </FormGroup>
           </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
+      {/* <Col md='6' sm='12'>
       <FormGroup>
             <label className='d-block mb-1'>Is Verified</label>
             <FormGroup>
@@ -441,7 +441,7 @@ const EditEmployee = () => {
           <Label for='updatedTime'>Updated Time</Label>
           <Input type='text' id='updatedTime' placeholder='Updated Time' defaultValue={userData && userData.updatedTime} />
         </FormGroup>
-      </Col>
+      </Col> */}
       <Col md='6' sm='12'>
         <FormGroup>
               <Label for='VerifiedBy'>Verified By</Label>

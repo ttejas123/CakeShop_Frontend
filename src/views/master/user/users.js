@@ -117,13 +117,13 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'First-Name',
+          name: 'First Name',
           selector: 'first_name',
           sortable: true,
           minWidth: '150px',
            cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
-              <Link to={`/PReviewsle/${row.id}`}>
+              <Link to={`/master/userProfile/${row.id}`}>
                 <div className='user-info text-truncate'>
                   <span className='d-block font-weight-bold text-truncate'>{row.first_name}</span>
                 </div>
@@ -132,13 +132,13 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Last-Name',
+          name: 'Last Name',
           minWidth: '150px',
           selector: 'last_name',
           sortable: true,
            cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
-              <Link to={`/PReviewsle/${row.id}`}>
+              <Link to={`/master/userProfile/${row.id}`}>
                 <div className='user-info text-truncate'>
                   <span className='d-block font-weight-bold text-truncate'>{row.last_name}</span>
                 </div>
@@ -150,10 +150,10 @@ const DataTableWithButtons = () => {
           name: 'Email',
           selector: 'email',
           sortable: true,
-          minWidth: '250px',
+          minWidth: '200px',
            cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
-              <Link to={`/PReviewsle/${row.id}`}>
+              <Link to={`/master/userProfile/${row.id}`}>
                 <div className='user-info text-truncate'>
                   <span className='d-block font-weight-bold text-truncate'>{row.email}</span>
                 </div>
@@ -185,13 +185,7 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Created Date',
-          selector: 'CreatedDate',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Verified',
+          name: 'KYC verified',
           selector: 'isVerified[0].label',
           sortable: true,
           minWidth: '150px',
@@ -201,23 +195,6 @@ const DataTableWithButtons = () => {
                 <span className='d-block font-weight-bold text-truncate'>
                       
                           {row.isVerified[0].label}
-                      
-                </span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Country',
-          selector: 'country[0].label',
-          sortable: true,
-          minWidth: '150px',
-           cell: row => (
-            <div key={row.created} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      
-                          {row.country[0].label}
                       
                 </span>
               </div>
@@ -262,7 +239,18 @@ const DataTableWithButtons = () => {
           name: 'Profile Score',
           selector: 'profileScore',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+           cell: row => (
+            <div key={row.created} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>
+                      
+                          {row.profileScore}%
+                      
+                </span>
+              </div>
+            </div>
+          )
         },
         {
           name: 'Actions',
@@ -440,10 +428,12 @@ const DataTableWithButtons = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Users</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-              <Button className='ml-2' color='primary' onClick={handleModal}>
-                  <Plus size={15} />
-                  <span className='align-middle ml-50'>Add New</span>
-              </Button>
+              <Link to={`/user-edit`}>
+                  <Button className='ml-2' color='primary'>
+                      <Plus size={15} />
+                      <span className='align-middle ml-50'>Add New</span>
+                  </Button>
+               </Link>
           </div>
         </CardHeader>
 

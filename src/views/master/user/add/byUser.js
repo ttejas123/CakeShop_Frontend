@@ -30,6 +30,14 @@ const optionCountry = [
     {value: "Japan", label: "Japan"}
 ]
 
+const optionCompany = [
+    {value: "", label: "Select Your Company"},
+    {value: "TCS", label: "TCS"},
+    {value: "Infosys", label: "Infosys"},
+    {value: "Google", label: "Google"},
+    {value: "Amezon", label: "Amezon"}
+]
+
 const optionCity = [
     {value: "", label: "Select Your City"},
     {value: "Mumbai", label: "Mumbai"},
@@ -242,7 +250,6 @@ const optionUserType = [
               <FormGroup>
               <Label for='Name'>First Name</Label>
               <InputGroup>
-                
                 <Input name="first_name" onChange={handleInputeChange} id='first_name' placeholder='Ravi' value={values.first_name} />
               </InputGroup>
               </FormGroup>  
@@ -280,6 +287,26 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
+              <Label for='Name'>Telephone City Code</Label>
+              <InputGroup>
+                
+                <Input name="telephone_city_code" type="number" onChange={handleInputeChange} id='telephone_city_code' placeholder='+91' value={values.telephone_city_code} />
+              </InputGroup>
+              </FormGroup>  
+            </Col>
+
+            <Col md='4' sm='12'>
+              <FormGroup>
+              <Label for='Name'>Landline</Label>
+              <InputGroup>
+                
+                <Input name="landline" type="number" onChange={handleInputeChange} id='landline' placeholder='7777***53' value={values.landline} />
+              </InputGroup>
+              </FormGroup>  
+            </Col>
+
+            <Col md='4' sm='12'>
+              <FormGroup>
               <Label for='Name'>Designation</Label>
               <InputGroup>
                 
@@ -310,134 +337,11 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Currency_id</Label>
-              <InputGroup>
-                
-                <Input name="currency_id" onChange={handleInputeChange} id='currency_id' placeholder='$' value={values.currency_id} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Telephone City Code</Label>
-              <InputGroup>
-                
-                <Input name="telephone_city_code" onChange={handleInputeChange} id='telephone_city_code' placeholder='+91' value={values.telephone_city_code} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Landline</Label>
-              <InputGroup>
-                
-                <Input name="landline" onChange={handleInputeChange} id='landline' placeholder='7777***53' value={values.landline} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
               <Label for='Name'>Extension</Label>
               <InputGroup>
                 
                 <Input name="extension" onChange={handleInputeChange} id='extension' placeholder='Ravi' value={values.extension} />
               </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>corporate_id</Label>
-              <InputGroup>
-                
-                <Input name="corporate_id" onChange={handleInputeChange} id='corporate_id' placeholder='' value={values.corporate_id} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Company Name</Label>
-              <InputGroup>
-                
-                <Input name="company_name" onChange={handleInputeChange} id='company_name' placeholder='Coence' value={values.company_name} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Pan Card Type</Label>
-              <InputGroup>
-                
-                <Input name="pan_card_type" onChange={handleInputeChange} id='pan_card_type' placeholder='49A' value={values.pan_card_type} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Pan Number</Label>
-              <InputGroup>
-                
-                <Input name="pan_number" onChange={handleInputeChange} id='pan_number' placeholder='AIQP224***' value={values.pan_number} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Exim Details</Label>
-              <InputGroup>
-                
-                <Input name="exim_details" onChange={handleInputeChange} id='exim_details' placeholder='' value={values.exim_details} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Bank Name</Label>
-              <InputGroup>
-                
-                <Input name="bank_name" onChange={handleInputeChange} id='bank_name' placeholder='ICICI Bank' value={values.bank_name} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Bank Branch</Label>
-              <InputGroup>
-                <Input name="bank_branch" onChange={handleInputeChange} id='bank_branch' placeholder='Airoli' value={values.bank_branch} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='user_type'>User Type</Label>
-              <Select
-                id='user_type'
-                className='react-select'
-                classNamePrefix='select'
-                isClearable={false}
-                options={optionUserType}
-                theme={selectThemeColors}
-                value={values.user_type}
-                onChange={data => {
-                                   setValues(
-                                            {
-                                               ...values,
-                                               user_type : data
-                                            } 
-                                    )
-                                  }
-                          }
-              /> 
               </FormGroup>  
             </Col>
 
@@ -515,68 +419,21 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Bank Account</Label>
+              <Label for='pinCode'>Pin Code</Label>
               <InputGroup>
                 
-                <Input name="bank_account" onChange={handleInputeChange} id='bank_account' placeholder='Ravi' value={values.bank_account} />
+                <Input name="pinCode" onChange={handleInputeChange} id='pinCode' placeholder='Ravi' value={values.pinCode} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Ifsc Code</Label>
+              <Label for='Name'>Address</Label>
               <InputGroup>
                 
-                <Input name="ifsc_code" onChange={handleInputeChange} id='ifsc_code' placeholder='Ravi' value={values.ifsc_code} />
+                <Input name="Address" type="textarea" onChange={handleInputeChange} id='Address' placeholder='Enter Your Address...' value={values.Address} />
               </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>micr Code</Label>
-              <InputGroup>
-                
-                <Input name="micr_code" onChange={handleInputeChange} id='micr_code' placeholder='Ravi' value={values.micr_code} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Password</Label>
-              <InputGroup>         
-                <Input name="password" onChange={handleInputeChange} id='password' placeholder='Ravi' value={values.password} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-              <Card>
-                <CardHeader>
-                  <CardTitle tag='h4'> Company Logo </CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <DragDrop uppy={uppy1} />
-                  {company_logo !== null ? <img className='rounded mt-2' src={company_logo} alt='avatar' /> : null}
-                </CardBody>
-              </Card>
-              </FormGroup>  
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-              <Card>
-                <CardHeader>
-                  <CardTitle tag='h4'> Pan Card Proof </CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <DragDrop uppy={uppy2} />
-                  {company_logo !== null ? <img className='rounded mt-2' src={pan_card_proof} alt='avatar' /> : null}
-                </CardBody>
-              </Card>
               </FormGroup>  
             </Col>
 

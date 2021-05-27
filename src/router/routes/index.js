@@ -25,7 +25,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
   {
-    path: '/PReviewsle/:id',
+    path: '/master/userProfile/:id',
     component: lazy(() => import('../../views/master/user/userProfile'))
   },
   {
@@ -53,6 +53,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/employee/backupAccount'))
   },
   {
+    path: '/master/backupA/add',
+    component: lazy(() => import('../../views/master/employee/badd'))
+  },
+  {
+    path: '/master/backupA/edit/:id',
+    component: lazy(() => import('../../views/master/employee/bedit'))
+  },
+  {
     path: '/right-assignment',
     component: lazy(() => import('../../views/master/employee/rightAssignment.js'))
   },
@@ -74,10 +82,10 @@ const Routes = [
   },
   {
     path: '/corporateView',
-    component: lazy(() => import('../../views/master/corporate/corporateView'))
+    component: lazy(() => import('../../views/master/corporate/corporateView/index'))
   },
   {
-    path: '/employeeView',
+    path: '/employee-view',
     component: lazy(() => import('../../views/master/employee/employeeView'))
   },
   {
@@ -93,8 +101,36 @@ const Routes = [
     component: lazy(() => import('../../views/master/kyc/kycList'))
   },
   {
+    path: '/upload-kyc',
+    component: lazy(() => import('../../views/master/kyc/uploadKyc'))
+  },
+  {
+    path: '/buyer-kyc-list',
+    component: lazy(() => import('../../views/master/kyc/buyerKycList'))
+  },
+  {
+    path: '/seller-kyc-list',
+    component: lazy(() => import('../../views/master/kyc/sellerKycList'))
+  },
+  {
+    path: '/corporate-kyc-list',
+    component: lazy(() => import('../../views/master/kyc/corporateKycList'))
+  },
+  {
+    path: '/master/bidDetails/preferredPart/edit/:id',
+    component: lazy(() => import('../../views/master/bids/ui-elements/addEPartner/edit'))
+  },
+  {
+    path: '/master/bidDetails/preferredPart/add',
+    component: lazy(() => import('../../views/master/bids/ui-elements/addEPartner/add'))
+  },
+  {
     path: '/bids',
     component: lazy(() => import('../../views/master/bids/bids'))
+  },
+  {
+    path: '/master/bids/bulk',
+    component: lazy(() => import('../../views/master/bids/bulkUpload'))
   },
   {
     path: '/company-list',
@@ -109,8 +145,60 @@ const Routes = [
     component: lazy(() => import('../../views/master/membership/membershipList'))
   },
   {
+    path: '/master/corporate/corpmanag',
+    component: lazy(() => import('../../views/master/corporate/corpmanag'))
+  },
+  {
+    path: '/master/payment',
+    component: lazy(() => import('../../views/master/payment'))
+  },
+  {
+    path: '/master/order',
+    component: lazy(() => import('../../views/master/order'))
+  },
+  {
+    path: '/master/orders/add',
+    component: lazy(() => import('../../views/master/order/add'))
+  },
+  {
+    path: '/master/membership/view',
+    component: lazy(() => import('../../views/master/membership/membershipView'))
+  },
+  {
+    path: '/master/membershps/views',
+    component: lazy(() => import('../../views/master/membership/memViewE'))
+  },
+  {
     path: '/bga-list',
     component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaList'))
+  },
+  {
+    path: '/corporate-credit-list',
+    component: lazy(() => import('../../views/master/credit/corporateCreditRequest'))
+  },
+  {
+    path: '/credit-limit-list',
+    component: lazy(() => import('../../views/master/credit/creditLimitList'))
+  },
+  {
+    path: '/credit-transactions-list',
+    component: lazy(() => import('../../views/master/credit/creditTransactions'))
+  },
+  {
+    path: '/corporate-credit-history',
+    component: lazy(() => import('../../views/master/credit/creditHistoryCorporate'))
+  },
+  {
+    path: '/bill-discounting-list',
+    component: lazy(() => import('../../views/master/billDiscounting/billDiscountingList'))
+  },
+  {
+    path: '/add-bill-discounting',
+    component: lazy(() => import('../../views/master/billDiscounting/addBillDiscounting'))
+  },
+  {
+    path: '/bill-discounting-transactions',
+    component: lazy(() => import('../../views/master/billDiscounting/transactions'))
   },
   {
     path: '/bga-action',
@@ -119,6 +207,10 @@ const Routes = [
   {
     path: '/bga-pending-list',
     component: lazy(() => import('../../views/master/bankGuaranteeApplication/bgaPendingList'))
+  },
+  {
+    path: '/bga-transactions-list',
+    component: lazy(() => import('../../views/master/bankGuaranteeApplication/transactionsList'))
   },
   {
     path: '/edit-bank-guarrante-appl',
@@ -145,6 +237,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/onGroundStaff/OnGroundStaff'))
   },
   {
+    path: '/on-ground-staff-view',
+    component: lazy(() => import('../../views/master/onGroundStaff/view/onGroundStaffView'))
+  },
+  {
     path: '/industry-list',
     component: lazy(() => import('../../views/master/industry/IndustryList'))
   },
@@ -169,8 +265,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/pendingProductsList'))
   },
   {
+    path: '/work-flow-history-list',
+    component: lazy(() => import('../../views/master/workFlowHistory/workFlowHistoryList'))
+  },
+  {
     path: '/financialPartner-list',
     component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
+  },
+  {
+    path: '/master/financialPartners/add',
+    component: lazy(() => import('../../views/master/financialPartner/add'))
+  },
+  {
+    path: '/master/financialPartners/edit/:id',
+    component: lazy(() => import('../../views/master/financialPartner/edit'))
   },
   {
     path: '/edit-product',
@@ -185,8 +293,48 @@ const Routes = [
     component: lazy(() => import('../../views/master/subCat/Attributes/add'))
   },
   {
+    path: '/master/Lead',
+    component: lazy(() => import('../../views/master/Lead'))
+  },
+  {
+    path: '/master/Invoice/List',
+    component: lazy(() => import('../../views/master/InvoiceL/List'))
+  },
+  {
+    path: '/master/Invoice/add',
+    component: lazy(() => import('../../views/master/InvoiceL/add'))
+  },
+  {
+    path: '/master/Invoice/view',
+    component: lazy(() => import('../../views/master/InvoiceL/view'))
+  },
+  {
+    path: '/master/Leads/add',
+    component: lazy(() => import('../../views/master/Lead/leadAdd/add'))
+  },
+  {
+    path: '/master/Leads/edit/:id',
+    component: lazy(() => import('../../views/master/Lead/edit'))
+  },
+  {
+    path: '/master/corporateRole',
+    component: lazy(() => import('../../views/master/corporate/corpmanag'))
+  },
+  {
+    path: '/master/corporateRoles/add',
+    component: lazy(() => import('../../views/master/corporate/corpmanag/add'))
+  },
+  {
+    path: '/master/corporateRoles/edit/:id',
+    component: lazy(() => import('../../views/master/corporate/corpmanag/edit'))
+  },
+  {
     path: '/edit-corporate',
     component: lazy(() => import('../../views/master/corporate/editCorporate'))
+  },
+  {
+    path: '/add-corporate',
+    component: lazy(() => import('../../views/master/corporate/add'))
   },
   {
     path: '/add-corporate-address',
@@ -201,8 +349,44 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/users'))
   },
   {
+    path: '/invoice-list',
+    component: lazy(() => import('../../views/master/orders/invoiceList'))
+  },
+  {
+    path: '/sampleOrder-list',
+    component: lazy(() => import('../../views/master/orders/sampleOrdersList'))
+  },
+  {
+    path: '/add-invoice',
+    component: lazy(() => import('../../views/master/orders/addInvoice'))
+  },
+  {
     path: '/add-user-address',
     component: lazy(() => import('../../views/master/user/userAddressAdd'))
+  },
+  {
+    path: '/master/subscriptionplan',
+    component: lazy(() => import('../../views/master/subScrPlan/index'))
+  },
+  {
+    path: '/master/subscription/aveil/:id',
+    component: lazy(() => import('../../views/master/subScrPlan/aveil'))
+  },
+  {
+    path: '/master/commi',
+    component: lazy(() => import('../../views/master/comslb/index'))
+  },
+  {
+    path: '/master/cmmi/edit/:id',
+    component: lazy(() => import('../../views/master/comslb/edit'))
+  },
+  {
+    path: '/master/permissions/:id',
+    component: lazy(() => import('../../views/master/user/profileComponets/pemis'))
+  },
+  {
+    path: '/master/rights',
+    component: lazy(() => import('../../views/master/user/rightsView'))
   },
   {
     path: '/report/ticket-list',
@@ -237,6 +421,34 @@ const Routes = [
     component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
   },
   {
+    path: '/report/customer',
+    component: lazy(() => import('../../views/report/customer'))
+  },
+  {
+    path: '/report/onGoingStaff',
+    component: lazy(() => import('../../views/report/onGoingStaff'))
+  },
+  {
+    path: '/report/corporate',
+    component: lazy(() => import('../../views/report/corpolist'))
+  },
+  {
+    path: '/report/commision',
+    component: lazy(() => import('../../views/report/commission'))
+  },
+  {
+    path: '/report/BlockUsers',
+    component: lazy(() => import('../../views/report/BlockUser'))
+  },
+  {
+    path: '/report/bidCash',
+    component: lazy(() => import('../../views/report/bidCash'))
+  },
+  {
+    path: '/report/Notification',
+    component: lazy(() => import('../../views/report/Notification'))
+  },
+  {
     path: '/report/ProfileCmpltChklist',
     component: lazy(() => import('../../views/report/ProfileCmpltChklist'))
   },
@@ -247,6 +459,10 @@ const Routes = [
   {
     path: '/report/redressal',
     component: lazy(() => import('../../views/report/Redressal/Redressal'))
+  },
+  {
+    path: '/report/transactions',
+    component: lazy(() => import('../../views/report/transactions/transactionsList'))
   },
   {
     path: '/report/productIssue',
@@ -263,6 +479,26 @@ const Routes = [
   {
     path: '/report/revenue-list',
     component: lazy(() => import('../../views/report/revenue/revenueList'))
+  },
+  {
+    path: '/report/vas-list',
+    component: lazy(() => import('../../views/report/vas/vasList'))
+  },
+  {
+    path: '/report/corporate-team-list',
+    component: lazy(() => import('../../views/report/corporate/corporateTeam'))
+  },
+  {
+    path: '/report/inspections-list',
+    component: lazy(() => import('../../views/report/inspections/inspectionsList'))
+  },
+  {
+    path: '/report/ccl-exhausted-list',
+    component: lazy(() => import('../../views/report/corporateCreditLimit/corporateCreditLimitExhaust'))
+  },
+  {
+    path: '/report/customization-list',
+    component: lazy(() => import('../../views/report/customizationRequest/crList'))
   },
   {
     path: '/report/orders-list',
@@ -293,8 +529,16 @@ const Routes = [
     component: lazy(() => import('../../views/report/Invoice/Invoice'))
   },
   {
+    path: '/report/bid-notification',
+    component: lazy(() => import('../../views/report/bidNotification/bidNotificationReport'))
+  },
+  {
     path: '/report/Cart',
     component: lazy(() => import('../../views/report/Cart/cart'))
+  },
+  {
+    path: '/report/shipment',
+    component: lazy(() => import('../../views/report/shipment/shipmentList'))
   },
   {
     path: '/report/SrchKeyWHistory',

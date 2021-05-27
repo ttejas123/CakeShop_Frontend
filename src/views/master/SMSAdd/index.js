@@ -82,7 +82,7 @@ const UserAccountTab = (prop) => {
             
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='reciverType'>reciverType</Label>
+                <Label for='reciverType'>ReciverType</Label>
                 <InputGroup>
                   
                   <Input name="reciverType" onChange={handleInputeChange} id='reciverType' placeholder='' value={values.reciverType} />
@@ -92,7 +92,7 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='content'>content</Label>
+                <Label for='content'>Content</Label>
                 <InputGroup>
                   
                   <Input name="content" type="textarea" row="5" onChange={handleInputeChange} id='content' placeholder='Write your msg here !!!' value={values.content} />
@@ -102,7 +102,7 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='number'>number</Label>
+                <Label for='number'>Number</Label>
                 <InputGroup>
                   
                   <Input name="number" type="number" onChange={handleInputeChange} id='number' placeholder='989211***' value={values.number} />

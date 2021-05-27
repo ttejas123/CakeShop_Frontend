@@ -104,31 +104,25 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'Id',
-          selector: 'id',
-          sortable: false,
-          minWidth: '50px'
-        },
-        {
           name: 'Corporate Name',
           selector: 'corporateName',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Comapny Type Id',
-          selector: 'companyTypeId',
+          name: 'Comapny Type',
+          selector: 'companyType',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Industry Id',
-          selector: 'industryId',
+          name: 'Industry',
+          selector: 'industry',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Email',
+          name: 'Contact Email',
           selector: 'email',
           sortable: true,
           minWidth: '150px'
@@ -146,36 +140,18 @@ const DataTableWithButtons = () => {
           minWidth: '150px'
         },
         {
-          name: 'Country Id',
-          selector: 'countryId',
+          name: 'State',
+          selector: 'state',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'State Id',
-          selector: 'stateId',
+          name: 'City',
+          selector: 'city',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'City Id',
-          selector: 'cityId',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-            name: 'Currency Id',
-            selector: 'currencyId',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Pan Number',
-            selector: 'panNumber',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
             name: 'Is Verified',
             selector: 'isVerified',
             sortable: true,
@@ -188,23 +164,6 @@ const DataTableWithButtons = () => {
             minWidth: '150px'
           },
           {
-            name: 'Has Preferred Partner',
-            selector: 'hasPreferredPartner',
-            sortable: true,
-            minWidth: '150px'
-          },
-        {
-            name: 'Logo',
-            minWidth: '150px',
-            selector: 'logo',
-            sortable: true,
-            cell: row => (
-              <div className='d-flex justify-content-left align-items-center'>
-                {renderClient(row)}
-              </div>
-            )
-          },
-          {
             name: 'Verified By',
             selector: 'verifiedBy',
             sortable: true,
@@ -213,18 +172,6 @@ const DataTableWithButtons = () => {
           {
             name: 'Created By',
             selector: 'createdBy',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Created Time',
-            selector: 'createdTime',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Updated Time',
-            selector: 'updatedTime',
             sortable: true,
             minWidth: '150px'
           },
@@ -362,6 +309,7 @@ const DataTableWithButtons = () => {
         <CardBody>
           <Row>
             <Col md='4'>
+            <div style={{zIndex:997, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -373,7 +321,9 @@ const DataTableWithButtons = () => {
                   handleFilterByDropDown(data)
                 }}
               />
+              </div>
             </Col>
+            
           </Row>
         </CardBody>
       </Card>

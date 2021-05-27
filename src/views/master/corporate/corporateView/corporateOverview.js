@@ -1,14 +1,10 @@
 import { useContext, useState } from 'react'
 import Avatar from '@components/avatar'
-import { Row, Col, Card, CardTitle, CardBody, CardText, CardHeader, Badge, Media } from 'reactstrap'
+import { Row, Col, Card, CardTitle, CardBody, CardText, CardHeader, Badge, Media, Button } from 'reactstrap'
 import logo from '@src/assets/images/slider/coenseLogo.jpg'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 import {
-    Eye,
-    ShoppingCart,
-    Heart,
-    Circle,
-    TrendingUp, User, Box, DollarSign
+    Plus
   } from 'react-feather'
 import StatsVertical from '@components/widgets/stats/StatsVertical'
 import classnames from 'classnames'
@@ -30,11 +26,16 @@ import CorporateBidHistory from './corporateBidHistory'
 import ApplicationStatus from './applicationStatus'
 import CorporateTransactions from './corporateTransactions'
 import CorporateOffices from './corporateOffices'
+import CorporateBranch from './corporateBranch'
+import CorporateWarehouse from './corporateWarehouse'
+import WarehouseOverview from './warehouseOverview'
+import BranchOverview from './branchOverview'
+import BidHistoryOverview from './bidHistoryOverview'
 // import ProductCarousel from './productCarousel'
 // import RelatedProducts from './relatedProducts'
 // import ProductInfo from './productInfo'
 
-const CorporateView = () => {
+const CorporateOverview = (props) => {
   const cols = { md: '3', sm: '6' }
     const [selectedColor, setSelectedColor] = useState('primary')
     // ** Renders color options
@@ -77,6 +78,9 @@ const CorporateView = () => {
     }
   ]
 
+  const handleViewAllClick = (e) => {  
+    props.toggle('2')
+  }
   const renderData = () => {
     return data.map((item, index) => {
       const margin = Object.keys(cols)
@@ -181,7 +185,7 @@ const CorporateView = () => {
       </Row> 
 
       <Row className='match-height'>
-          <Col lg='6' md='6'>
+          <Col lg='12' md='6'>
           <Card className='card-statistics'>
            <CardHeader>  
               <CardTitle tag='h5'><h4>Kyc Submitted</h4></CardTitle>
@@ -195,105 +199,67 @@ const CorporateView = () => {
             </CardBody>  
           </Card>
         </Col>
+      </Row> 
+
+      <Row className='match-height'>
+          <Col lg='6' md='6'>
+          <Card>
+      <CardHeader className='border-bottom'>
+        <CardTitle tag='h4'>Branch List</CardTitle>
+        <Button className='ml-2' color='primary' onClick={ e => props.toggle('2')
+                                                            }>
+
+              <span className='align-middle ml-50'>View All</span>
+            </Button>
+      </CardHeader>
+      <BranchOverview/>
+      </Card>
+        </Col>
         <Col lg='6' md='6'>
+        <Card>
+      <CardHeader className='border-bottom'>
+        <CardTitle tag='h4'>Warehouse List</CardTitle>
+        <Button className='ml-2' color='primary' onClick={ e => props.toggle('3')
+                                                            }>
+              <span className='align-middle ml-50'>View All</span>
+            </Button>
+      </CardHeader>
+      <WarehouseOverview/>
+      </Card>
+        </Col>
+      </Row>
+
+       <Row className='match-height'>
+          <Col lg='6' md='6'>
+          <Card>
+      <CardHeader className='border-bottom'>
+        <CardTitle tag='h4'>Bid History</CardTitle>
+        <Button className='ml-2' color='primary' onClick={ e => props.toggle('4')
+                                                            }>
+
+              <span className='align-middle ml-50'>View All</span>
+            </Button>
+      </CardHeader>
+      <BidHistoryOverview/>
+      </Card>
+        </Col>
+        <Col lg='6' md='6'>
+        <CorporateTransactions/>
+        </Col>
+      </Row> 
+
+      <Row className='match-height'>
+          <Col lg='6' md='6'>
          <CorporateBidStats colors={colors} trackBgColor={trackBgColor}/>
         </Col>
-      </Row> 
-
-      <Row className='match-height'>
-          <Col lg='6' md='6'>
-          <Card className='card-statistics'>
-           <CardHeader>  
-              <CardTitle tag='h5'><h4>Team Acitivty Stats</h4></CardTitle>
-           </CardHeader>  
-            <CardBody>
-              <Row className='match-height'>
-                <Col lg='12' md='12'>
-                <TeamActivityStats/>
-                </Col>
-              </Row>
-            </CardBody>  
-          </Card>
-        </Col>
         <Col lg='6' md='6'>
-        <Card className='card-statistics'>
-           <CardHeader>  
-              <CardTitle tag='h5'><h4>Bid History</h4></CardTitle>
-           </CardHeader>  
-            <CardBody>
-              <Row className='match-height'>
-                <Col lg='12' md='12'>
-                <CorporateBidHistory/>
-                </Col>
-              </Row>
-            </CardBody>  
-          </Card>
+        
         </Col>
       </Row> 
 
-      <Row className='match-height'>
-          <Col lg='6' md='6'>
-          <Card className='card-statistics'>
-           <CardHeader>  
-              <CardTitle tag='h5'><h4>Team Acitivty Stats</h4></CardTitle>
-           </CardHeader>  
-            <CardBody>
-              <Row className='match-height'>
-                <Col lg='12' md='12'>
-                <ApplicationStatus/>
-                </Col>
-              </Row>
-            </CardBody>  
-          </Card>
-        </Col>
-        <Col lg='6' md='6'>
-         <CorporateTransactions/>
-        </Col>
-      </Row> 
-{/* 
-      <Row >
-        <Col lg='6' md='6'>
-            <ProductInfo cols={{ xl: '3', sm: '6' }}/>
-        </Col>
-        <Col lg='6' md='6'>
-        <Card >
-        <CardBody>
-            <CardTitle tag='h4'>Images</CardTitle>
-            <ProductCarousel cols={{ xl: '3', sm: '6' }}/>
-            <div className='product-color-options'>
-          <h6>Colors</h6>
-          <ul className='list-unstyled mb-0'>{renderColorOptions()}</ul>
-        </div>
-          </CardBody>
-          </Card>
-        </Col>
-      </Row> */}
-{/* 
-      <Row>
-          <Col lg='3' sm='6'>
-          <StatsVertical icon={<Circle size={21} />} color='primary' stats='5+' statTitle='Variants' />
-        </Col>
-        <Col lg='3' sm='6'>
-          <StatsVertical icon={<ShoppingCart size={21} />} color='danger' stats='150' statTitle='Carts' />
-        </Col>
-        <Col lg='3' sm='6'>
-          <StatsVertical icon={<Heart size={21} />} color='danger' stats='200' statTitle='Wishlist' />
-        </Col>
-        <Col lg='3' sm='6'>
-          <StatsVertical icon={<Circle size={21} />} color='primary' stats='20+' statTitle='Vendors' />
-        </Col>
-      </Row> */}
-
-      {/* <Row className='app-ecommerce-details'>
-          <Card>
-              <CardBody>
-              <RelatedProducts/>
-              </CardBody>
-          </Card>
-      </Row> */}
       </Col>
     </div>
   )
 }
 
-export default CorporateView
+export default CorporateOverview

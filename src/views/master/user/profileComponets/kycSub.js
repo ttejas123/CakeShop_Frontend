@@ -10,6 +10,9 @@ import panCard from '@src/assets/images/slider/pan-card.jpg'
 import aadharCard from '@src/assets/images/slider/aadhar-card.jpg'
 import drivingLicense from '@src/assets/images/slider/driving-license.jpg'
 
+import 'uppy/dist/uppy.css'
+import '@uppy/status-bar/dist/style.css'
+import '@styles/react/libs/file-uploader/file-uploader.scss'
 
 const CompanyTable = () => {
   const initvalue = {

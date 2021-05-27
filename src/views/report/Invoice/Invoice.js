@@ -272,22 +272,6 @@ const DataTableWithButtons = () => {
           </div>
         </CardHeader>
 
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
-
         <DataTable
           noHeader
           pagination

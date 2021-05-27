@@ -205,6 +205,7 @@ const EditEmployee = () => {
       <Col md='6' sm='12'>
       <FormGroup>
               <Label for='Role'>Role</Label>
+              <div style={{zIndex:1000, position:'relative'}}>
             <Select
               id='Role'
               className='react-select'
@@ -225,6 +226,7 @@ const EditEmployee = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
       </Col>
       <Col md='6' sm='12'>

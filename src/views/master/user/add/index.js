@@ -6,6 +6,9 @@ import { useParams, Link } from 'react-router-dom'
 // import FromOtherSitesTab from './fromOtherSites'
 import ByUserTab from './byUser'
 import FromExcelSheetTab from './fromExcelSheet'
+import Bank from './bank.js'
+import Company from './company.js'
+import Kyc from './kyc.js'
 
 // ** Third Party Components
 import { User, Info, Share2, FileText, ShoppingCart } from 'react-feather'
@@ -39,11 +42,29 @@ const AddProduct = () => {
               <NavItem>
                 <NavLink active={activeTab === '1'} onClick={() => toggle('1')}>
                   <User size={14} />
-                  <span className='align-middle d-none d-sm-block'>By User</span>
+                  <span className='align-middle d-none d-sm-block'>General</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink active={activeTab === '2'} onClick={() => toggle('2')}>
+                   <User size={14} />
+                  <span className='align-middle d-none d-sm-block'>Company Details</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink active={activeTab === '3'} onClick={() => toggle('3')}>
+                   <User size={14} />
+                  <span className='align-middle d-none d-sm-block'>Bank Details</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink active={activeTab === '4'} onClick={() => toggle('4')}>
+                   <User size={14} />
+                  <span className='align-middle d-none d-sm-block'>KYC</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink active={activeTab === '5'} onClick={() => toggle('5')}>
                   <FileText size={14} />
                   <span className='align-middle d-none d-sm-block'>From Excel Sheet</span>
                 </NavLink>
@@ -60,6 +81,15 @@ const AddProduct = () => {
                 <ByUserTab/>
               </TabPane>
               <TabPane tabId='2'>
+                <Company />
+              </TabPane>
+              <TabPane tabId='3'>
+                <Bank />
+              </TabPane>
+              <TabPane tabId='4'>
+                <Kyc />
+              </TabPane>
+              <TabPane tabId='5'>
                 <FromExcelSheetTab />
               </TabPane>
               {/* <TabPane tabId='3'>

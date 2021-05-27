@@ -1,8 +1,10 @@
 import { useContext } from 'react'
-import { useParams } from 'react-router-dom'
-import { Row, Col } from 'reactstrap'
+import { useParams, Link } from 'react-router-dom'
+import { Plus} from 'react-feather'
+import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col, Media, Badge, Button } from 'reactstrap'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
-
+import Products from './ui-elements/cards/statistics/ProductTable'
+import PrefPartner from './ui-elements/cards/statistics/prefPart'
 import StatsCard from './ui-elements/cards/statistics/StatsCard'
 import CardBrowserStates from './ui-elements/cards/advance/CardBrowserState'
 import Comments from './ui-elements/cards/advance/Comments.js'
@@ -37,7 +39,7 @@ const EcommerceDashboard = () => {
 
   return (
     <div id='dashboard-ecommerce'>
-      <Row >
+      <Row className='match-height' >
         <Col xl='8' md='6' xs='12'>
           <StatsCard userId = {id} cols={{ xl: '3', sm: '6' }} />
           {/* <Timeline /> */}
@@ -47,6 +49,51 @@ const EcommerceDashboard = () => {
           <ApprovedCostom colors={colors} trackBgColor={trackBgColor} />
           <Address title="Shipping Address" Address={ShoopingAddre}/>
           <Address title="Billing Address" Address={BillAddre}/>
+        </Col>
+        <Col xl='12' md='12' xs='12'>
+
+        { /* here we Have Product list*/ }
+
+          <Card className='card-statistics'>
+           <CardHeader>  
+              <CardTitle tag='h4'><h2>Products</h2></CardTitle>
+           </CardHeader>  
+            <CardBody>
+              <Row className='match-height'>
+                <Col lg='12' xs='12'>
+                  <Products />
+                </Col>
+              </Row>
+            </CardBody>  
+          </Card>
+
+        </Col>
+
+        <Col xl='12' md='12' xs='12'>
+
+        { /* here we Have prefered partners list*/ }
+
+          <Card className='card-statistics'>
+            <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
+              <CardTitle tag='h4'>prefered partners</CardTitle>
+              <div className='d-flex mt-md-0 mt-1'>
+                <Link to={`/master/bidDetails/preferredPart/add`}>
+                  <Button className='ml-2' color='primary' >
+                                              <Plus size={15} />
+                                              <span className='align-middle ml-50'>Add Partner</span>
+                  </Button>
+                </Link>
+              </div>
+            </CardHeader>  
+            <CardBody>
+              <Row className='match-height'>
+                <Col lg='12' xs='12'>
+                  <PrefPartner />
+                </Col>
+              </Row>
+            </CardBody>  
+          </Card>
+
         </Col>
       </Row>
       

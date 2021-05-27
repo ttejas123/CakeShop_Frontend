@@ -32,6 +32,10 @@ const Headquarter = () => {
             <div className="d-flex justify-content-between">
               <div className='font-small-2'>Country : </div>
               <h5 className='mb-1'> India</h5>
+            </div>  
+            <div className="d-flex justify-content-between">
+              <div className='font-small-2'>Contact Number : </div>
+              <h5 className='mb-1'> 9876543244</h5>
             </div>   
           </Col>
         </Row>

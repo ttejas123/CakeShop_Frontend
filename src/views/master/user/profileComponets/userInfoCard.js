@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Avatar from '@components/avatar'
 import { data } from '../data.js'
 // ** Third Party Components
-import { DollarSign, TrendingUp, User, Check, Star, Flag, Phone } from 'react-feather'
+import { DollarSign, TrendingUp, User, Check, Star, Flag, Phone, CheckCircle } from 'react-feather'
 import {
   Row, Col,
   Card,
@@ -21,6 +21,7 @@ import {
   Button,
   Badge
 } from 'reactstrap'
+
 import komal  from '../../../../assets/images/logo/komal.jpg'
 import pravin  from '../../../../assets/images/logo/pravin.jpg'
 import himanshu  from '../../../../assets/images/logo/himanshu.jpg'
@@ -52,7 +53,7 @@ const UserInfoCard = (props) => {
         <div key={statesArr.id} className='browser-states'>
           <Media>
             { statesArr.avatar ? (
-              <img src={statesArr.avatar} width='80' height='60' className='mr-2 mb-3 h-25 w-10' />
+              <img src={statesArr.avatar} width='80' height='60' className='h-25 w-10' />
               ) : (
                 <Avatar
                   initials
@@ -99,17 +100,17 @@ const UserInfoCard = (props) => {
               </div>
             </div>
             <div>
-                 <div className="d-flex">
+                 <div className="d-flex mt-2">
                     <Badge className='card-text w-25 mr-25 mb-1' color="light-success" pill>
                           <h5 className='mb-0'> Buyer </h5>
                     </Badge>
-                    <div className='ml-1'>-Verified</div>
+                    <div className='ml-1'>- <img className='ml-1' src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
                   </div>
                  <div className="d-flex">
                     <Badge className='card-text w-25 mr-25 mb-0' color="light-success" pill>
                           <h5 className='mb-0'> Seller </h5>
                     </Badge>
-                    <div className='ml-1'>-Verified</div>
+                    <div className='ml-1'>- <img className='ml-1' src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
                   </div>
             </div>
           </Col>
