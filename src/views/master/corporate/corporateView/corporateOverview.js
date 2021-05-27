@@ -1,14 +1,10 @@
 import { useContext, useState } from 'react'
 import Avatar from '@components/avatar'
-import { Row, Col, Card, CardTitle, CardBody, CardText, CardHeader, Badge, Media } from 'reactstrap'
+import { Row, Col, Card, CardTitle, CardBody, CardText, CardHeader, Badge, Media, Button } from 'reactstrap'
 import logo from '@src/assets/images/slider/coenseLogo.jpg'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 import {
-    Eye,
-    ShoppingCart,
-    Heart,
-    Circle,
-    TrendingUp, User, Box, DollarSign
+    Plus
   } from 'react-feather'
 import StatsVertical from '@components/widgets/stats/StatsVertical'
 import classnames from 'classnames'
@@ -30,11 +26,16 @@ import CorporateBidHistory from './corporateBidHistory'
 import ApplicationStatus from './applicationStatus'
 import CorporateTransactions from './corporateTransactions'
 import CorporateOffices from './corporateOffices'
+import CorporateBranch from './corporateBranch'
+import CorporateWarehouse from './corporateWarehouse'
+import WarehouseOverview from './warehouseOverview'
+import BranchOverview from './branchOverview'
+import BidHistoryOverview from './bidHistoryOverview'
 // import ProductCarousel from './productCarousel'
 // import RelatedProducts from './relatedProducts'
 // import ProductInfo from './productInfo'
 
-const CorporateOverview = () => {
+const CorporateOverview = (props) => {
   const cols = { md: '3', sm: '6' }
     const [selectedColor, setSelectedColor] = useState('primary')
     // ** Renders color options
@@ -77,6 +78,9 @@ const CorporateOverview = () => {
     }
   ]
 
+  const handleViewAllClick = (e) => {  
+    props.toggle('2')
+  }
   const renderData = () => {
     return data.map((item, index) => {
       const margin = Object.keys(cols)
@@ -194,6 +198,62 @@ const CorporateOverview = () => {
               </Row>
             </CardBody>  
           </Card>
+        </Col>
+      </Row> 
+
+      <Row className='match-height'>
+          <Col lg='6' md='6'>
+          <Card>
+      <CardHeader className='border-bottom'>
+        <CardTitle tag='h4'>Branch List</CardTitle>
+        <Button className='ml-2' color='primary' onClick={ e => props.toggle('2')
+                                                            }>
+
+              <span className='align-middle ml-50'>View All</span>
+            </Button>
+      </CardHeader>
+      <BranchOverview/>
+      </Card>
+        </Col>
+        <Col lg='6' md='6'>
+        <Card>
+      <CardHeader className='border-bottom'>
+        <CardTitle tag='h4'>Warehouse List</CardTitle>
+        <Button className='ml-2' color='primary' onClick={ e => props.toggle('3')
+                                                            }>
+              <span className='align-middle ml-50'>View All</span>
+            </Button>
+      </CardHeader>
+      <WarehouseOverview/>
+      </Card>
+        </Col>
+      </Row>
+
+       <Row className='match-height'>
+          <Col lg='6' md='6'>
+          <Card>
+      <CardHeader className='border-bottom'>
+        <CardTitle tag='h4'>Bid History</CardTitle>
+        <Button className='ml-2' color='primary' onClick={ e => props.toggle('4')
+                                                            }>
+
+              <span className='align-middle ml-50'>View All</span>
+            </Button>
+      </CardHeader>
+      <BidHistoryOverview/>
+      </Card>
+        </Col>
+        <Col lg='6' md='6'>
+        <CorporateTransactions/>
+        </Col>
+      </Row> 
+
+      <Row className='match-height'>
+          <Col lg='6' md='6'>
+         <CorporateBidStats colors={colors} trackBgColor={trackBgColor}/>
+        </Col>
+        <Col lg='6' md='6'>
+        
         </Col>
       </Row> 
 

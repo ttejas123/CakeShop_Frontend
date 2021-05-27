@@ -21,6 +21,9 @@ import '@styles/base/pages/dashboard-ecommerce.scss'
 import '@styles/base/pages/app-ecommerce-details.scss'
 import UserInfoCard from './userInfoCard'
 import CorporateAssignedCard from './corporateAssignedCard'
+import MeetingCard from './meetingCard'
+import ActivityCard from './activityCard'
+
 // import ProductCarousel from './productCarousel'
 // import RelatedProducts from './relatedProducts'
 // import ProductInfo from './productInfo'
@@ -106,6 +109,29 @@ const CorporateView = () => {
         <Row className='match-height'>
           <Col lg='12' md='12'>
          <CorporateAssignedCard/>
+        </Col>
+      </Row> 
+
+      <Row className='match-height'>
+          <Col lg='12' md='12'>
+         <MeetingCard/>
+        </Col>
+      </Row>
+
+       <Row className='match-height'>
+          <Col lg='12' md='12'>
+          <Card className='card-statistics'>
+           <CardHeader>  
+              <CardTitle tag='h5'><h4>Activity</h4></CardTitle>
+           </CardHeader>  
+            <CardBody>
+              <Row className='match-height'>
+                <Col lg='12' md='12'>
+                <ActivityCard/>
+                </Col>
+              </Row>
+            </CardBody>  
+          </Card>
         </Col>
       </Row> 
 

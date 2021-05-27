@@ -1,20 +1,21 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
+
 // ** Custom Components
 import Avatar from '@components/avatar'
-import classnames from 'classnames'
+
 // ** Third Party Components
-import { Lock, Edit, Trash2, MapPin } from 'react-feather'
+import { Lock, Edit, Trash2, User } from 'react-feather'
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, CardHeader, CardBody, Card, CardTitle } from 'reactstrap'
 import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
 
-const EditEmployee = () => {
+const GeneralInformation = () => {
 
   const [data, setData] = useState(null)
-  const { register, errors, control, setValue } = useForm({
-    defaultValues: { isRegisteredOffice: 'No' }
+  const { control, setValue } = useForm({
+    defaultValues: { hasSubscription: 'No' }
   })
 
   const optionCountry = [
@@ -25,12 +26,6 @@ const EditEmployee = () => {
     {value: "China", label: "China"},
     {value: "Russia", label: "Russia"}
   ]
-  const optionRole = [
-    {value: "Admin", label: "Admin"},
-    {value: "Intern", label: "Intern"},
-    {value: "Full-time Employee", label: "Full-time Employee"}
-  ]
-
   const optionState = [
     {value: "Maharashtra", label: "Maharashtra"},
     {value: "Andhra Pradesh", label: "Andhra Pradesh"},
@@ -46,11 +41,6 @@ const EditEmployee = () => {
     {value: "Nashik", label: "Nashik"},
     {value: "Solapur", label: "Solapur"}
   ]
-  const optionVerifiedBy = [
-    {value: "Pravin Poshmani", label: "Pravin Poshmani"},
-    {value: "Tejas Thakare", label: "Tejas Thakare"},
-    {value: "Komal Kamble", label: "Komal Kamble"}
-  ]
   const optionCurrency = [
     {value: "Indian Rupee", label: "Indian Rupee"},
     {value: "Us Dollar", label: "Us Dollar"},
@@ -62,16 +52,15 @@ const EditEmployee = () => {
     id:1,
     name: "",
     email: "",
-    isRegisteredOffice: "",
+    hasSubscription: "",
     isVerified: "",
     logo : "",
     phone : "",
     panNumber: "",
-    VerifiedBy:  [{value: "Pravin Poshmani", label: "Pravin Poshmani"}],
+    Currency:  [{value: "currency", label: "Indian Rupee"}],
     City:  [{value: "city", label: "Mumbai"}], 
     State:  [{value: "state", label: "Maharashtra"}],
-    Country: [{value: "country", label: "India"}],
-    Role: [{value: "role", label: "Intern"}]
+    Country: [{value: "country", label: "India"}]
   }
   const [values, setValues] = useState(initialvalues)
   const handleInputeChange = (event) => {
@@ -99,7 +88,7 @@ const EditEmployee = () => {
     fullName: "Coense Solution",
     id: 1,
     role: "editor",
-    status: "inVerified",
+    status: "inactive",
     username: "gslixby0"
       }
   //console.log(selectedUser)
@@ -168,135 +157,39 @@ const EditEmployee = () => {
   return (
  
 <Card>
-<CardHeader>
-  <CardTitle tag='h1'>Add Corporate Address</CardTitle>
-</CardHeader>
-
 <CardBody>
 <Row>
 <Col sm='12'>
   <Form onSubmit={e => e.preventDefault()}>
     <Row>
-    <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='id'>Corporate Id</Label>
-          <Input type='text' Number='id' placeholder='Corporate Id' defaultValue={userData && userData.EmployeeNumber} />
-        </FormGroup>
-      </Col>
-    <Col md='6' sm='12'>
+      <Col md='4' sm='12'>
         <FormGroup>
           <Label for='corporateName'>Corporate Name</Label>
-          <Input type='text' id='corporateName' placeholder='Corporate Name' defaultValue={userData && userData.corporateName} />
+          <Input type='text' id='corporateName' placeholder='TCS' defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
-      <hr/>
-      <Col md='12' sm='12'>
-      <Row>
-        <Col sm='12'>
-          <h4 className='mb-1 mt-2'>
-            <MapPin size={20} className='mr-50' />
-            <span className='align-middle'>Address</span>
-          </h4>
-        </Col>
-        <Col md='4' sm='12'>
-          <FormGroup>
-            <Label for='addressName-1'>Address Name</Label>
-            <Input
-              id='addressName-1'
-              name='addressName-1'
-              defaultValue='Office'
-              innerRef={register({ required: true })}
-              className={classnames({
-                'is-invalid': errors.addressName1
-              })}
-            />
-          </FormGroup>
-          </Col>
-        <Col md='4' sm='12'>
-          <FormGroup>
-            <Label for='address-1'>Address Line 1</Label>
-            <Input
-              id='address-1'
-              name='address1'
-              defaultValue='A-1'
-              innerRef={register({ required: true })}
-              className={classnames({
-                'is-invalid': errors.address1
-              })}
-            />
-          </FormGroup>
-        </Col>
-        <Col md='4' sm='12'>
-          <FormGroup>
-            <Label for='address-2'>Address Line 2</Label>
-            <Input placeholder='A-1' id='address-2' name='address-2' />
-          </FormGroup>
-        </Col>
-        <Col md='4' sm='12'>
-          <FormGroup>
-            <Label for='landmark'>Landmark</Label>
-            <Input
-              id='landmark'
-              name='landmark'
-              placeholder='Temple'
-              innerRef={register({ required: true })}
-              invalid={errors.landmark && true}
-            />
-          </FormGroup>
-        </Col>
-        <Col md='4' sm='12'>
+      <Col md='4' sm='12'>
         <FormGroup>
-              <Label for='City'>City</Label>
-            <Select
-              id='City'
-              className='react-select'
-              classNamePrefix='select'
-              isClearable={false}
-              options={optionCity}
-              theme={selectThemeColors}
-              value={values.City[0]}
-              onChange={data => {
-
-
-                                 setValues(
-                                          {
-                                             ...values,
-                                             City : data
-                                          } 
-                                  )
-                                }
-                        }
-            />
-            </FormGroup> 
-        </Col>
-        <Col md='4' sm='12'>
+          <Label for='companyType'>Company Type</Label>
+          <Input type='text' id='companyType' placeholder='Pvt Ltd' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
         <FormGroup>
-              <Label for='State'>State</Label>
-            <Select
-              id='State'
-              className='react-select'
-              classNamePrefix='select'
-              isClearable={false}
-              options={optionState}
-              theme={selectThemeColors}
-              value={values.State[0]}
-              onChange={data => {
-
-
-                                 setValues(
-                                          {
-                                             ...values,
-                                             State : data
-                                          } 
-                                  )
-                                }
-                        }
-            />
-            </FormGroup> 
-        </Col>
-        <Col md='4' sm='12'>
+          <Label for='industry'>Industry</Label>
+          <Input type='text' id='industry' placeholder='IT' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
         <FormGroup>
+          <Label for='email'>Email</Label>
+          <Input type='text' id='email' placeholder='tcs@xyz.com' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+      <FormGroup>
               <Label for='Country'>Country</Label>
+              <div style={{zIndex:1000, position:'relative'}}>
             <Select
               id='Country'
               className='react-select'
@@ -317,31 +210,75 @@ const EditEmployee = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
-        </Col>
-        <Col md='4' sm='12'>
-          <FormGroup>
-            <Label for='addressProof'>Address Proof</Label>
-            <Input
-              id='addressProof'
-              name='addressProof'
-              defaultValue='Address Proof'
-              innerRef={register({ required: true })}
-              className={classnames({
-                'is-invalid': errors.addressName1
-              })}
-            />
-          </FormGroup>
-          </Col>
-      </Row>
-      </Col> 
-      <hr/>
-      <Col md='6' sm='12'>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='phone'>Phone</Label>
+          <Input type='text' id='phone' placeholder='Phone' defaultValue={userData && userData.phone} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
       <FormGroup>
-      <label className='d-block mb-1'>Is Registered Office</label>
+              <Label for='State'>State</Label>
+              <div style={{zIndex:999, position:'relative'}}>
+            <Select
+              id='State'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionState}
+              theme={selectThemeColors}
+              value={values.State[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             State : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </div>
+            </FormGroup> 
+      </Col>
+      <Col md='4' sm='12'>
+      <FormGroup>
+              <Label for='City'>City</Label>
+              <div style={{zIndex:998, position:'relative'}}>
+            <Select
+              id='City'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionCity}
+              theme={selectThemeColors}
+              value={values.City[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             City : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </div>
+            </FormGroup> 
+      </Col>
+      <Col md='4' sm='12'>
+      <FormGroup>
+            <label className='d-block mb-1'>Has Subscription</label>
             <FormGroup>
               <Controller
-                name='isRegisteredOffice'
+                name='hasSubscription'
                 control={control}
                 render={props => {
                   return (
@@ -352,14 +289,14 @@ const EditEmployee = () => {
                       value='Yes'
                       id='Yes'
                       name={props.name}
-                      invalid={data !== null && (data.isRegisteredOffice === undefined || data.isRegisteredOffice === null)}
-                      onChange={() => setValue('isRegisteredOffice', 'Yes')}
+                      invalid={data !== null && (data.hasSubscription === undefined || data.hasSubscription === null)}
+                      onChange={() => setValue('hasSubscription', 'Yes')}
                     />
                   )
                 }}
               />
               <Controller
-                name='isRegisteredOffice'
+                name='hasSubscription'
                 control={control}
                 render={props => {
                   return (
@@ -371,8 +308,8 @@ const EditEmployee = () => {
                       id='No'
                       name={props.name}
                       defaultChecked
-                      invalid={data !== null && (data.isRegisteredOffice === undefined || data.isRegisteredOffice === null)}
-                      onChange={() => setValue('isRegisteredOffice', 'No')}
+                      invalid={data !== null && (data.hasSubscription === undefined || data.hasSubscription === null)}
+                      onChange={() => setValue('hasSubscription', 'No')}
                     />
                   )
                 }}
@@ -380,7 +317,7 @@ const EditEmployee = () => {
             </FormGroup>
           </FormGroup>
       </Col>
-      {/* <Col md='6' sm='12'>
+      <Col md='4' sm='12'>
       <FormGroup>
             <label className='d-block mb-1'>Is Verified</label>
             <FormGroup>
@@ -424,49 +361,67 @@ const EditEmployee = () => {
             </FormGroup>
           </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
+      <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='verifiedTime'>Verified Time</Label>
-          <Input type='text' id='verifiedTime' placeholder='Verified Time' defaultValue={userData && userData.verifiedTime} />
+          <Label for='verifiedBy'>Verified By</Label>
+          <Input type='text' id='verifiedBy' placeholder='Pravin Poshmani' defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
+      <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='createdTime'>Created Time</Label>
-          <Input type='text' id='createdTime' placeholder='Created Time' defaultValue={userData && userData.createdTime} />
+          <Label for='createdBy'>Created By</Label>
+          <Input type='text' id='createdBy' placeholder='XYZ' defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='updatedTime'>Updated Time</Label>
-          <Input type='text' id='updatedTime' placeholder='Updated Time' defaultValue={userData && userData.updatedTime} />
-        </FormGroup>
-      </Col> */}
-      <Col md='6' sm='12'>
-        <FormGroup>
-              <Label for='VerifiedBy'>Verified By</Label>
-            <Select
-              id='VerifiedBy'
-              className='react-select'
-              classNamePrefix='select'
-              isClearable={false}
-              options={optionVerifiedBy}
-              theme={selectThemeColors}
-              value={values.VerifiedBy[0]}
-              onChange={data => {
-
-
-                                 setValues(
-                                          {
-                                             ...values,
-                                             VerifiedBy : data
-                                          } 
-                                  )
-                                }
-                        }
-            />
-            </FormGroup> 
+      <Col md='4' sm='12'>
+  <Media className='mb-2'>
+    {renderUserAvatar()}
+    <Media className='mt-50' body>
+      <h4> Logo </h4>
+      <div className='d-flex flex-wrap mt-1 px-0'>
+        <Button.Ripple id='change-img' tag={Label} className='mr-75 mb-0' color='primary'>
+          <span className='d-none d-sm-block'>Change</span>
+          <span className='d-block d-sm-none'>
+            <Edit size={14} />
+          </span>
+          <input type='file' hidden id='change-img' onChange={onChange} accept='image/*' />
+        </Button.Ripple>
+        <Button.Ripple color='secondary' outline>
+          <span className='d-none d-sm-block'>Remove</span>
+          <span className='d-block d-sm-none'>
+            <Trash2 size={14} />
+          </span>
+        </Button.Ripple>
+      </div>
+    </Media>
+  </Media>
+</Col>
+    
+        <Col sm='12'>
+          <h4 className='mb-1 mt-1'>
+            <User size={20} className='mr-50' />
+            <span className='align-middle'>Admin Information</span>
+          </h4>
         </Col>
+        <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='name'>Name</Label>
+          <Input type='text' id='name' placeholder='Pravin Poshmani' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='email'>Email</Label>
+          <Input type='text' id='email' placeholder='tcs@xyz.com' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='phone'>Phone</Label>
+          <Input type='text' id='phone' placeholder='9876765432' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+        
       <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
         <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary'>
           Save Changes
@@ -483,4 +438,4 @@ const EditEmployee = () => {
 </Card>
   )
 }
-export default EditEmployee
+export default GeneralInformation

@@ -206,7 +206,7 @@ export const data = [
       }
 ]
 
-export const cityData = [
+export const cpaData = [
     {
       corporate: "TCS",
       assignDate: "01-05-2021",
@@ -226,6 +226,38 @@ export const cityData = [
         corporate: "Coense",
         assignDate: "04-05-2021",
         status : "Converted"
+      }
+]
+  
+
+export const meetingData = [
+    {
+      contactPersonName: "Himanshu Chanda",
+      date: "01-05-2021",
+      email : "himanshuc@xyz.com",
+      designation : "CEO of Coense",
+      mobile : 9876543210
+    },
+    {
+        contactPersonName: "Sali Parekh",
+        date: "02-05-2021",
+        email : "sparekh@xyz.com",
+        designation : "CEO of Infosys",
+        mobile : 9876456451
+      },
+      {
+        contactPersonName: "Sundar Pichai",
+        date: "03-05-2021",
+        email : "psundar@xyz.com",
+        designation : "CEO of Google",
+        mobile : 9876543234
+      },
+      {
+        contactPersonName: "Satya Nadella",
+        date: "04-05-2021",
+        email : "snadella@xyz.com",
+        designation : "CEO of Microsoft",
+        mobile : 9876541233
       }
 ]
   

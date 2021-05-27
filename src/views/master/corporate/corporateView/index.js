@@ -19,6 +19,7 @@ import CorporateActivity from './corporateActivity'
 import WarehouseList from '../../warehouse/warehouseList'
 import CorporateWarehouse from './corporateWarehouse'
 import CorporateBranch from './corporateBranch'
+import CorporateTeam from './corporateTeam'
 
 const AddProduct = () => {
   // ** States & Vars
@@ -43,39 +44,39 @@ const AddProduct = () => {
             <Nav pills className='mb-0'>
               <NavItem>
                 <NavLink className='ml-2 my-2' active={activeTab === '1'} onClick={() => toggle('1')}>
-                  <User size={14} />
                   <span className='align-middle d-none d-sm-block'>OverView</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className='ml-2 my-2' active={activeTab === '2'} onClick={() => toggle('2')}>
-                  <FileText size={14} />
                   <span className='align-middle d-none d-sm-block'>Branch</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className='ml-2 my-2' active={activeTab === '3'} onClick={() => toggle('3')}>
-                  <ShoppingCart size={14} />
                   <span className='align-middle d-none d-sm-block'>Warehouse</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className='ml-2 my-2' active={activeTab === '4'} onClick={() => toggle('4')}>
-                  <ShoppingCart size={14} />
                   <span className='align-middle d-none d-sm-block'>Bid</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className='ml-2 my-2' active={activeTab === '5'} onClick={() => toggle('5')}>
-                  <ShoppingCart size={14} />
                   <span className='align-middle d-none d-sm-block'>Activity</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className='ml-2 my-2' active={activeTab === '6'} onClick={() => toggle('6')}>
+                  <span className='align-middle d-none d-sm-block'>Team</span>
                 </NavLink>
               </NavItem>
             </Nav>
         </Card>
             <TabContent activeTab={activeTab}>
               <TabPane tabId='1'>
-                <CorporateOverview/>
+                <CorporateOverview toggle={toggle} />
               </TabPane>
               <TabPane tabId='2'>
               <CorporateBranch/>
@@ -88,6 +89,9 @@ const AddProduct = () => {
               </TabPane>
               <TabPane tabId='5'>
                 <CorporateActivity/>
+              </TabPane>
+              <TabPane tabId='6'>
+                <CorporateTeam/>
               </TabPane>
             </TabContent>
          

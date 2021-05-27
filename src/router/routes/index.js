@@ -265,6 +265,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/pendingProductsList'))
   },
   {
+    path: '/work-flow-history-list',
+    component: lazy(() => import('../../views/master/workFlowHistory/workFlowHistoryList'))
+  },
+  {
     path: '/financialPartner-list',
     component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
   },
@@ -303,6 +307,10 @@ const Routes = [
   {
     path: '/edit-corporate',
     component: lazy(() => import('../../views/master/corporate/editCorporate'))
+  },
+  {
+    path: '/add-corporate',
+    component: lazy(() => import('../../views/master/corporate/add'))
   },
   {
     path: '/add-corporate-address',
@@ -499,6 +507,10 @@ const Routes = [
   {
     path: '/report/Cart',
     component: lazy(() => import('../../views/report/Cart/cart'))
+  },
+  {
+    path: '/report/shipment',
+    component: lazy(() => import('../../views/report/shipment/shipmentList'))
   },
   {
     path: '/report/SrchKeyWHistory',

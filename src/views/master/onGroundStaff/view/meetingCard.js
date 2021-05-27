@@ -5,7 +5,7 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** Table Columns
-import { cpaData } from './data'
+import { meetingData } from './data'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -14,7 +14,7 @@ import DataTable from 'react-data-table-component'
 import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus} from 'react-feather'
 import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
 
-const CorporateAssignedCard = () => {
+const MeetingCard = () => {
 
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -72,20 +72,36 @@ const handleDelete = (data) => {
 
   const cityColumns = [
     {
-        name: 'Corporate',
-        selector: 'corporate',
+        name: 'Contact Person Name',
+        selector: 'contactPersonName',
         sortable: false,
-        minWidth: '250px'
+        minWidth: '250px',
+        cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className=''>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.contactPersonName}</span>
+                     <small className='text-truncate text-muted mb-0'>{row.designation}</small>
+                  </div>
+              </div>
+            </div>
+          )
       },
       {
-        name: 'Assign Date',
-        selector: 'assignDate',
+        name: 'Email',
+        selector: 'email',
         sortable: true,
         minWidth: '250px'
       },
       {
-        name: 'Status',
-        selector: 'status',
+        name: 'Mobile',
+        selector: 'mobile',
+        sortable: true,
+        minWidth: '250px'
+      },
+      {
+        name: 'Date',
+        selector: 'date',
         sortable: true,
         minWidth: '250px'
       },
@@ -102,15 +118,15 @@ const handleDelete = (data) => {
               <DropdownMenu right>
                 <DropdownItem>
                   <FileText size={15} />
-                  <span className='align-middle ml-50'>Converted</span>
+                  <span className='align-middle ml-50'>Update</span>
                 </DropdownItem>
-                <DropdownItem onClick={e => {
+                {/* <DropdownItem onClick={e => {
                                                                                 e.preventDefault()
                                                                                 handleConverted(row.id)
                                                                               } }>
                   <Archive size={15} />
                   <span className='align-middle ml-50'>Pending</span>
-                </DropdownItem>
+                </DropdownItem> */}
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
@@ -148,7 +164,7 @@ const handleDelete = (data) => {
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : cpaData.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : meetingData.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -169,7 +185,7 @@ const handleDelete = (data) => {
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Corporate Assigned</CardTitle>
+        <CardTitle tag='h4'>Meeting</CardTitle>
       </CardHeader>   
       <DataTable
         noHeader
@@ -181,11 +197,11 @@ const handleDelete = (data) => {
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={cpaData}
+        data={meetingData}
       />
     </Card>
     </Fragment>
   )
 }
 
-export default CorporateAssignedCard
+export default MeetingCard

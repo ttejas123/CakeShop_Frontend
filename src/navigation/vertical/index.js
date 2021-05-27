@@ -132,12 +132,6 @@ export default [
         navLink: '/warehouse-list'
       },
       {
-        id: 'onGroundStaff',
-        title: 'On Ground Staff',
-        icon: <Circle size={20} />,
-        navLink: '/on-ground-staff'
-      },
-      {
         id: 'badges',
         title: 'Badges',
         icon: <Circle size={20} />,
@@ -148,6 +142,12 @@ export default [
         title: 'Badge Mapping',
         icon: <Circle size={20} />,
         navLink: '/badge-mapping-list'
+      },
+      {
+        id: 'workFlowHistory',
+        title: 'Work Flow History',
+        icon: <Circle size={20} />,
+        navLink: '/work-flow-history-list'
       },
       {
         id: 'profileCompAdd',
@@ -228,6 +228,26 @@ export default [
                 //   icon: <Circle size={20} />,
                 //   navLink: '/product-category'
                 // }
+                
+        ]
+      },
+      {
+        id: 'onGroundStaffPage',
+        title: 'On Ground Staff',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/on-ground-staff'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/on-ground-staff-view'
+                }
                 
         ]
       },
@@ -346,6 +366,12 @@ export default [
                   title: 'Edit',
                   icon: <Circle size={20} />,
                   navLink: '/edit-corporate'
+                },
+                {
+                  id: 'add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/add-corporate'
                 }
         ]
       },
@@ -576,6 +602,12 @@ export default [
         title: 'Tickets',
         icon: <Circle size={20} />,
         navLink: '/report/ticket-List'
+      },
+      {
+        id: 'shipment',
+        title: 'Shipment',
+        icon: <Circle size={20} />,
+        navLink: '/report/shipment'
       },
       {
         id: 'Search_keyWord_History',

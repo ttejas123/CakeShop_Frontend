@@ -10,7 +10,6 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data, columns } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
@@ -45,13 +44,20 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
-const optionCorporateNames = [
-    {value: "Corporate1", label: "Corporate1"},
-    {value: "Corporate2", label: "Corporate2"},
-    {value: "Corporate3", label: "Corporate3"}
+
+// ** Renders Client Columns
+
+const optionBidStatus = [
+    {value: "", label: "Filter Status"},
+    {value: "productName", label: "Product Name"},
+    {value: "mrp", label: "MRP"},
+    {value: "gst", label: "GSt"},
+    {value: "category", label: "Category"},
+    {value: "subCategory", label: "Sub Category"},
+    {value: "productCategory", label: "Product Category"}
   ]
 
-const CorporateTeam = () => {
+const BranchOverview = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -62,7 +68,6 @@ const CorporateTeam = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
-  const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
    //deleteCountry
@@ -82,6 +87,118 @@ const CorporateTeam = () => {
       setCurrentId("")
       console.log(val)
   }
+
+  const data = [
+    {
+      branchName : "Geeks",
+      address : "Block-1",
+      city : "Mumbai",
+      state : "Maharashtra",
+      country : "India",
+      isBidoyasWarehouse : "Yes",
+      createdDate : "22-04-2000"
+    },
+    {
+      branchName : "Techie",
+      address : "Block-2",
+      city : "Hyderabad",
+      state : "Telangana",
+      country : "India",
+      isBidoyasWarehouse : "No",
+      createdDate : "21-04-2000"
+    },
+    {branchName : "Intellects",
+    address : "Block-3",
+    city : "Bangalore",
+    state : "Karnataka",
+    country : "India",
+    isBidoyasWarehouse : "No",
+    createdDate : "31-04-3000"
+    },
+    {
+      branchName : "Wanderers",
+      address : "Block-4",
+      city : "Pune",
+      state : "Maharashtra",
+      country : "India",
+      isBidoyasWarehouse : "No",
+      createdDate : "41-04-4000"
+    }
+]
+
+  //columns
+  const columns = [
+        {
+          name: 'Branch Name',
+          selector: 'branchName',
+          sortable: false,
+          minWidth: '50px'
+        },
+        {
+          name: 'Address',
+          selector: 'address',
+          sortable: false,
+          minWidth: '150px'
+        },
+        {
+          name: 'City',
+          selector: 'city',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'State',
+          selector: 'state',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Country',
+          selector: 'country',
+          sortable: true,
+          minWidth: '150px'
+        }
+        // },
+        // {
+        //   name: `Bidoya's Warehouse`,
+        //   selector: 'isBidoyasWarehouse',
+        //   sortable: true,
+        //   minWidth: '150px'
+        // },
+        // {
+        //   name: 'Created Date',
+        //   selector: 'createdDate',
+        //   sortable: false,
+        //   minWidth: '150px'
+        // },
+        // {
+        //   name: 'Actions',
+        //   allowOverflow: true,
+        //   cell: row => {
+        //     return (
+        //       <div className='d-flex'>
+        //         <UncontrolledDropdown>
+        //           <DropdownToggle className='pr-1' tag='span'>
+        //             <Trash size={15} onClick={e => {
+        //                                                                             e.preventDefault()
+        //                                                                             deleteCountry(row.id)
+        //                                                                           } }/>
+        //           </DropdownToggle>
+        //         </UncontrolledDropdown>
+        //        <Edit  
+        //           size={15} 
+        //           onClick={ () => { 
+        //                             setCurrentId(row.id)
+        //                             setModal(true)
+        //                              } }>
+                                      
+        //                              </Edit>
+        //       </div>
+        //     )
+        //   }
+        // }
+    ]
+
 
   // ** Function to handle Modal toggle
   const handleModal = () => {
@@ -126,12 +243,12 @@ const CorporateTeam = () => {
       updatedData = data.filter(item => {
         const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.PurchaseIntentName.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.productName.toLowerCase().startsWith(value.toLowerCase()) ||
           item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
           item.gst.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.PurchaseIntentName.toLowerCase().includes(value.toLowerCase()) ||
+          item.productName.toLowerCase().includes(value.toLowerCase()) ||
           item.mrp.toLowerCase().includes(value.toLowerCase()) ||
           item.gst.toLowerCase().includes(value.toLowerCase()) 
           
@@ -177,147 +294,19 @@ const CorporateTeam = () => {
     />
   )
 
-   
-  // ** Converts table to CSV
-  function convertArrayOfObjectsToCSV(array) {
-    let result
-
-    const columnDelimiter = ','
-    const lineDelimiter = '\n'
-    const keys = Object.keys(data[0])
-
-    result = ''
-    result += keys.join(columnDelimiter)
-    result += lineDelimiter
-
-    array.forEach(item => {
-      let ctr = 0
-      keys.forEach(key => {
-        if (ctr > 0) result += columnDelimiter
-
-        result += item[key]
-
-        ctr++
-      })
-      result += lineDelimiter
-    })
-
-    return result
-  }
-
-  // ** Downloads CSV
-  function downloadCSV(array) {
-    const link = document.createElement('a')
-    let csv = convertArrayOfObjectsToCSV(array)
-    if (csv === null) return
-
-    const filename = 'export.csv'
-
-    if (!csv.match(/^data:text\/csv/i)) {
-      csv = `data:text/csv;charset=utf-8,${csv}`
-    }
-
-    link.setAttribute('href', encodeURI(csv))
-    link.setAttribute('download', filename)
-    link.click()
-  }
 
   return (
     <Fragment>
-      <Card>
-        <CardHeader>
-          <CardTitle tag='h4'>Search Filter</CardTitle>
-        </CardHeader>
-        <CardBody>
-          <Row>
-            <Col md='4'>
-            <div style={{zIndex:1000, position:'relative'}}>
-              <Select
-                isClearable={false}
-                theme={selectThemeColors}
-                className='react-select'
-                classNamePrefix='select'
-                options={optionCorporateNames}
-                value={Filter}
-                onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
-              />
-              </div>
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
-
-      <Card>
-
-        <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Corporate Team</CardTitle>
-          <div className='d-flex mt-md-0 mt-1'>
-            <UncontrolledButtonDropdown>
-              <DropdownToggle color='secondary' caret outline>
-                <Share size={15} />
-                <span className='align-middle ml-50'>Export</span>
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem className='w-100'>
-                  <Printer size={15} />
-                  <span className='align-middle ml-50'>Print</span>
-                </DropdownItem>
-                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
-                  <FileText size={15} />
-                  <span className='align-middle ml-50'>CSV</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Grid size={15} />
-                  <span className='align-middle ml-50'>Excel</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <File size={15} />
-                  <span className='align-middle ml-50'>PDF</span>
-                </DropdownItem>
-                <DropdownItem className='w-100'>
-                  <Copy size={15} />
-                  <span className='align-middle ml-50'>Copy</span>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledButtonDropdown>
-          </div>
-        </CardHeader>
-
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
-
         <DataTable
           noHeader
-          pagination
-          selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
-          paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          selectableRowsComponent={BootstrapCheckbox}
         />
-        
-      </Card>
     </Fragment>
   )
 }
 
-export default CorporateTeam
+export default BranchOverview
