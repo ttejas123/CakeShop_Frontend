@@ -1,5 +1,14 @@
 //Hello
 
+// 1. WishList => filter = user, Product
+// User Info, SKU, Product Name, MRP, MOQ, Image, added Date
+
+//2. SKU List => 3. SKU add/update
+//Lead Time, SKU ID, MOQ, Customization available, Inspection, sampling, Added time, approved by, no of seller
+
+//4. SKU seller List => 
+// sku Id, seller list
+
 // steps
 
 // 1. add working files

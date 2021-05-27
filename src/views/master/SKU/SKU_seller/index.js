@@ -1,6 +1,4 @@
-// Type : Category, User, Transcation
-// default Commission %
-
+//Lead Time, SKU ID, MOQ, Customization available, Inspection, sampling, Added time, approved by, no of seller
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
@@ -16,7 +14,8 @@ import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
 import { data } from './data'
 import Select from 'react-select'
-
+import Response from './viewAllUsers'
+ 
 // ** Add New Modal Component
 
 // ** Third Party Components
@@ -40,9 +39,20 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
+// ** Bootstrap Checkbox Component
+const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
+  <div className='custom-control custom-checkbox'>
+    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
+    <label className='custom-control-label' onClick={onClick} />
+  </div>
+))
 
 const DataTableWithButtons = () => {
-
+  const statusObj = {
+        pending: 'light-secondary',
+        approved: 'light-success',
+        approval: 'light-warning'
+  }
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -50,8 +60,10 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
-    const deleteCountry = (val) => {
+  const [responseModel, setResponseModel] = useState(false)
+  const [reviewId, setreviewId] = useState(0)
+ 
+    const deleteData = (val) => {
     //here we passing id to delete this specific record
     const userselection = confirm("Are you sure you want to delete")
  
@@ -64,49 +76,44 @@ const DataTableWithButtons = () => {
 
   //columns
   const columns = [
-    {
-      name: 'Name',
-      selector: 'name',
-      sortable: true,
-      minWidth: '200px',
-      maxWidth: '200px'
-    },
-    {
-        name: 'Benefit',
-        selector: 'benefit',
-        sortable: false,
-        minWidth: '250px',
-        maxWidth: '350px'
-      },
-      {
-        name: 'Cost',
-        selector: 'cost',
-        sortable: false,
-        minWidth: '250px',
-        maxWidth: '300px'
-      },
-      {
-        name: 'Active',
-        selector: 'active',
-        sortable: false,
-        minWidth: '250px'
-      },
-      {
-        name: 'No user Availed',
-        selector: 'aveil',
-        sortable: false,
-        minWidth: '250px',
+        {
+          name: 'SKU ID',
+          selector: 'SKU_ID',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'seller list',
+          selector: 'seller_list',
+          sortable: true,
+          minWidth: '150px',
           cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              
-              <div className='d-flex flex-column'>
-                <Link to={`/master/subscription/aveil/${row.id}`}>
-                  <span className='font-weight-bold'>{row.aveil}</span>
-                </Link>
+            <div key={row.id} className='d-flex align-items-center ml-2'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate d-flex '>
+                {row.seller_list.map((val, index) => {
+                  if (index < 1) {
+                    return (
+                      <div className="mr-1">{val.name}</div>
+                      )
+                  }
+                })
+                }
+
+                {row.seller_list.length > 1 ? (
+                                                  <u><a href="#" onClick={ () => { 
+                                                                   setreviewId(row.id)
+                                                                    setResponseModel(true)
+                                                                     } }>
+                                                      view
+                                                </a></u>
+                                                  ) : null}
+                </span>
+                
               </div>
             </div>
           )
-      }
+        }
     ]
 
 
@@ -114,6 +121,15 @@ const DataTableWithButtons = () => {
   const handleModal = () => {
     setModal(!modal)
   }
+
+   const responseADDEDIT = (val) => {
+     setreviewId("")
+     console.log(val)
+  }
+  const handleResponse = () => {
+      setResponseModel(!responseModel)
+    }
+ 
 
   // ** Function to handle filter
   const handleFilter = e => {
@@ -187,7 +203,7 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Subscription Plan</CardTitle>
+          <CardTitle tag='h4'>SKU Sellers</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             
           </div>
@@ -196,7 +212,7 @@ const DataTableWithButtons = () => {
         <DataTable
           noHeader
           pagination
-          
+          selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -204,11 +220,11 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          
+          selectableRowsComponent={BootstrapCheckbox}
         />
         
       </Card>
-      
+      <Response open={responseModel} handleModal={handleResponse} currentId={reviewId} data={data} />
     </Fragment>
   )
 }
