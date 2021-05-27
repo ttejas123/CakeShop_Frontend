@@ -578,11 +578,11 @@ const Routes = [
     layout: 'BlankLayout'
   },
   {
-    path: '/user',
-    component: lazy(() => import('../../views/user/list')),
-    layout: 'BlankLayout'
-    // path: '/ccdashboard',
-    // component: lazy(() => import('../../views/dashboards/call_center'))
+    // path: '/user',
+    // component: lazy(() => import('../../views/user/list')),
+    // layout: 'BlankLayout'
+    path: '/ccdashboard',
+    component: lazy(() => import('../../views/dashboards/call_center'))
   },
   {
     path: '/adashboard',
