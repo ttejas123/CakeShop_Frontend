@@ -529,6 +529,10 @@ const Routes = [
     component: lazy(() => import('../../views/report/Invoice/Invoice'))
   },
   {
+    path: '/report/bid-notification',
+    component: lazy(() => import('../../views/report/bidNotification/bidNotificationReport'))
+  },
+  {
     path: '/report/Cart',
     component: lazy(() => import('../../views/report/Cart/cart'))
   },
