@@ -1,6 +1,4 @@
-// Type : Category, User, Transcation
-// default Commission %
-
+//Lead Time, SKU ID, MOQ, Customization available, Inspection, sampling, Added time, approved by, no of seller
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
@@ -40,9 +38,34 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
+// ** Bootstrap Checkbox Component
+const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
+  <div className='custom-control custom-checkbox'>
+    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
+    <label className='custom-control-label' onClick={onClick} />
+  </div>
+))
+
+
+// ** Renders Client Columns
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.avatar.length) {
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+  }
+}
 
 const DataTableWithButtons = () => {
-
+  const statusObj = {
+        pending: 'light-secondary',
+        approved: 'light-success',
+        approval: 'light-warning'
+  }
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -51,7 +74,7 @@ const DataTableWithButtons = () => {
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-    const deleteCountry = (val) => {
+    const deleteData = (val) => {
     //here we passing id to delete this specific record
     const userselection = confirm("Are you sure you want to delete")
  
@@ -64,49 +87,82 @@ const DataTableWithButtons = () => {
 
   //columns
   const columns = [
-    {
-      name: 'Name',
-      selector: 'name',
-      sortable: true,
-      minWidth: '200px',
-      maxWidth: '200px'
-    },
-    {
-        name: 'Benefit',
-        selector: 'benefit',
-        sortable: false,
-        minWidth: '250px',
-        maxWidth: '350px'
-      },
-      {
-        name: 'Cost',
-        selector: 'cost',
-        sortable: false,
-        minWidth: '250px',
-        maxWidth: '300px'
-      },
-      {
-        name: 'Active',
-        selector: 'active',
-        sortable: false,
-        minWidth: '250px'
-      },
-      {
-        name: 'No user Availed',
-        selector: 'aveil',
-        sortable: false,
-        minWidth: '250px',
+        {
+          name: 'approved by',
+          minWidth: '250px',
+          selector: 'approved_by[0].value',
+          sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
-              
+              {renderClient(row)}
               <div className='d-flex flex-column'>
-                <Link to={`/master/subscription/aveil/${row.id}`}>
-                  <span className='font-weight-bold'>{row.aveil}</span>
-                </Link>
+                
+                  <span className='font-weight-bold'>{row.Name}</span>
+                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
               </div>
             </div>
           )
-      }
+        },
+        {
+          name: 'SKU ID',
+          selector: 'SKU_ID',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'MOQ',
+          selector: 'MOQ',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Customization available',
+          selector: 'Customization_available[0].value',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Inspection',
+          selector: 'Inspection[0].value',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'sampling',
+          selector: 'sampling[0].value',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'no of seller',
+          selector: 'no_of_seller',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Lead Time',
+          selector: 'Lead_Time',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Actions',
+          allowOverflow: true,
+          cell: row => {
+            return (
+              <div className='d-flex'>
+                <UncontrolledDropdown>
+                  <DropdownToggle className='pr-1' tag='span'>
+                    <Trash size={15} onClick={ deleteData }/>
+                  </DropdownToggle>
+                </UncontrolledDropdown>
+                <Link to={`/master/SKUs/edit/${row.id}`}>
+                  <Edit size={15} />
+                </Link>  
+              </div>
+            )
+          }
+        }
     ]
 
 
@@ -187,16 +243,21 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Subscription Plan</CardTitle>
+          <CardTitle tag='h4'>SKU</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+            <Link to={`/master/SKUs/add`}>
+              <Button className='ml-2' color='primary'>
+                  <Plus size={15} />
+                  <span className='align-middle ml-50'>Add New</span>
+              </Button>
+            </Link>
           </div>
         </CardHeader>
 
         <DataTable
           noHeader
           pagination
-          
+          selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -204,7 +265,7 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          
+          selectableRowsComponent={BootstrapCheckbox}
         />
         
       </Card>

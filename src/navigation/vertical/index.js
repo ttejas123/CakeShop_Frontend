@@ -185,12 +185,24 @@ export default [
            icon: <Circle size={20} />,
            navLink: '/master/commi'
       },
-          {
+      {
             id: 'Orders',
             title: 'Orders',
             icon: <Circle size={20} />,
             navLink: '/master/order'
-          },
+      },
+      {
+           id: 'WishList',
+           title: 'Wishlist',
+           icon: <Circle size={20} />,
+           navLink: '/master/wishlist'
+      },
+      {
+           id: 'Subscription_Plan',
+           title: 'Subscription Plan',
+           icon: <Circle size={20} />,
+           navLink: '/master/subscriptionplan'
+      },
       {
         id: 'ProductPage',
         title: 'Product',
@@ -490,6 +502,31 @@ export default [
             title: 'Add',
             icon: <Circle size={20} />,
             navLink: '/master/Invoice/add'
+          }
+        ]
+      },
+      {
+        id: 'SKU',
+        title: 'SKU',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'SKU_List',
+            title: 'SKU List',
+            icon: <Circle size={20} />,
+            navLink: '/master/SKU'
+          },
+          {
+            id: 'SKU_Add',
+            title: 'SKU Add',
+            icon: <Circle size={20} />,
+            navLink: '/master/SKUs/add'
+          },
+          {
+            id: 'SKU_Seller_List',
+            title: 'Sellers List',
+            icon: <Circle size={20} />,
+            navLink: '/master/SKUs/sellers'
           }
         ]
       }
