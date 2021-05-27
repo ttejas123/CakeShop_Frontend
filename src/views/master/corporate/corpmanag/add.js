@@ -34,6 +34,14 @@ const UserAccountTab = (prop) => {
     transaction: 0,
     balance: 0
   }
+
+  const optionsUser = [
+    {value: "", label: "Select sub-Category"},
+    {value: "Tejas", label: "Tejas"},
+    {value: "Komal", label: "Komal"},
+    {value: "Pravin", label: "Pravin"}
+  ]
+
   const [selectedOption, setselectedOption] = useState()
   const [values, setValues] = useState(initialvalues)
   const [allDay, setAllDay] = useState(false)
@@ -92,7 +100,7 @@ const UserAccountTab = (prop) => {
           <h2 className="mb-1">Add Corporate Role</h2>
         </Col>
       
-      <CardBody className='pl-3 pt-2'>
+      <CardBody className=''>
       <Col sm='12'>
         <Form onSubmit={e => e.preventDefault()}>
           <Row>
@@ -145,6 +153,33 @@ const UserAccountTab = (prop) => {
                 </InputGroup>
               </FormGroup>
             </Col>
+
+            <Col md='6' sm='12'>
+                    <FormGroup>
+                    <Label for='optionsUser'>Users</Label>
+                    <Select
+                      isMulti
+                      isClearable
+                      isSearchable
+                      id='optionsUser'
+                      className='react-select'
+                      classNamePrefix='select'
+                      
+                      options={optionsUser}
+                      theme={selectThemeColors}
+                      value={values.username}
+                      onChange={data => {
+                                         setValues(
+                                                  {
+                                                     ...values,
+                                                     username : data
+                                                  } 
+                                          )
+                                        }
+                                }
+                    /> 
+                    </FormGroup>
+            </Col>   
 
             <Col md='12' sm='12'>
               <label className='d-block mb-1'>Rights</label>

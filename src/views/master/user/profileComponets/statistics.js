@@ -5,28 +5,28 @@ import { Card, CardHeader, CardTitle, CardBody, Media, Truck, Users, Package } f
 const CardTransactions = () => {
   const transactionsArr = [
     {
-      title: 'Bid Created',
+      title: 'Bids Created',
       color: 'light-info',
       subtitle: '250 Bids are Created',
       amount: '250',
       Icon: Icon['Package']
     },
     {
-      title: 'Bid Participents',
+      title: 'Bids Participents',
       color: 'light-success',
       subtitle: '74 Participents',
       amount: '74',
       Icon: Icon['Users']
     },
     {
-      title: 'Bid Live',
+      title: 'Bids Live',
       color: 'light-success',
       subtitle: '18 live Bids',
       amount: '18',
       Icon: Icon['Check']
     },
     {
-      title: 'Bid Closed',
+      title: 'Bids Closed',
       color: 'light-danger',
       subtitle: '21 Bids are Closed',
       amount: '21',

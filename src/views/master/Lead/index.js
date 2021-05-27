@@ -1,3 +1,5 @@
+//Name,Email, Designation(CEO of TCS),phone
+
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
@@ -13,7 +15,6 @@ import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
 import { data } from './data'
 import Select from 'react-select'
-import Response from './viewAllitems'
 
 // ** Add New Modal Component
 
@@ -38,15 +39,6 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
-// ** Bootstrap Checkbox Component
-const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
-  <div className='custom-control custom-checkbox'>
-    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
-    <label className='custom-control-label' onClick={onClick} />
-  </div>
-))
-
-
 // ** Renders Client Columns
 const renderClient = row => {
   const stateNum = Math.floor(Math.random() * 6),
@@ -54,32 +46,15 @@ const renderClient = row => {
     color = states[stateNum]
 
   if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
   }
 }
 
-const optionBidStatus = [
-    {value: "", label: "Filter Status"},
-    {value: "created", label: "created"},
-    {value: "live", label: "live"},
-    {value: "extended", label: "extended"},
-    {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"},
-    {value: "auto closed", label: "auto closed"}
-  ]
-
 const DataTableWithButtons = () => {
-  const statusObj = {
-        pending: 'light-secondary',
-        approved: 'light-success',
-        approval: 'light-warning'
-  }
+
   // ** States
-  const [responseModel, setResponseModel] = useState(false)
- 
-  const [reviewId, setreviewId] = useState(0)
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -98,118 +73,44 @@ const DataTableWithButtons = () => {
       }
   }
 
-  const handleResponse = () => {
-    setResponseModel(!responseModel)
-  }
-
   //columns
   const columns = [
         {
-          name: 'Corporate Name',
+          name: 'Name',
           minWidth: '250px',
           selector: 'Name',
           sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
               {renderClient(row)}
-              <div className='d-flex flex-column'>
-                
-                  <span className='font-weight-bold'>{row.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.Name}</small>
+              <div className=''>
+                <Link to={`/bidDetails/${row.id}`}>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.Name}</span>
+                     <small className='text-truncate text-muted mb-0'>@{row.Email}</small>
+                  </div>
+                </Link>  
               </div>
             </div>
           )
         },
         {
-          name: 'Role',
-          selector: 'Role',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-             
-              <div className='d-flex flex-column'>
-                
-                  <a className='font-weight-bold'  onClick={ () => { 
-                                                                   setreviewId(row.id)
-                                                                    setResponseModel(true)
-                                                                     } }>{row.Role}</a>
-                
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Created Date',
-          selector: 'Created',
+          name: 'Email',
+          selector: 'Email',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'username',
-          selector: 'username',
+          name: 'Designation',
+          selector: 'Designation',
           sortable: true,
-          minWidth: '180px',
-          maxWidth: '300px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate d-flex '>
-                {row.username.map((val, index) => {
-                  if (index < 1) {
-                    return (
-                      <div className="mr-1">{val.value}</div>
-                      )
-                  }
-                })
-                }
-
-                {row.username.length > 1 ? (
-                                                  <u><a href="#" onClick={ () => { 
-                                                                   setreviewId(row.id)
-                                                                    setResponseModel(true)
-                                                                     } }>
-                                                      view
-                                                </a></u>
-                                                  ) : null}
-                </span>
-                
-              </div>
-            </div>
-          )
+          minWidth: '150px'
         },
         {
-          name: 'Rights',
-          selector: 'Rights',
+          name: 'phone',
+          selector: 'phone',
           sortable: true,
-          minWidth: '180px',
-          maxWidth: '300px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate d-flex '>
-                {row.Rights.map((val, index) => {
-                  if (index < 1) {
-                    return (
-                      <div className="mr-1">{val}</div>
-                      )
-                  }
-                })
-                }
-
-                {row.Rights.length > 1 ? (
-                                                  <u><a href="#" onClick={ () => { 
-                                                                   setreviewId(row.id)
-                                                                    setResponseModel(true)
-                                                                     } }>
-                                                      view
-                                                </a></u>
-                                                  ) : null}
-                </span>
-                
-              </div>
-            </div>
-          )
+          minWidth: '150px'
         },
         {
           name: 'Actions',
@@ -223,7 +124,7 @@ const DataTableWithButtons = () => {
                                                            } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link to={`/master/corporateRoles/edit/${row.id}`}>
+                <Link to={`/master/Leads/edit/${row.id}`}>
                   <Edit size={15} />
                 </Link>  
               </div>
@@ -355,22 +256,16 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Role Management</CardTitle>
+          <CardTitle tag='h4'>Lead</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             
-            <Link to={`/master/corporateRoles/add`}>
-              <Button className='ml-2' color='primary'>
-                  <Plus size={15} />
-                  <span className='align-middle ml-50'>Add New</span>
-              </Button>
-            </Link>
           </div>
         </CardHeader>
 
         <DataTable
           noHeader
           pagination
-          selectableRows
+          
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -378,11 +273,11 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          selectableRowsComponent={BootstrapCheckbox}
+          
         />
         
       </Card>
-      <Response open={responseModel} handleModal={handleResponse} currentId={reviewId} data={data} />
+      
     </Fragment>
   )
 }

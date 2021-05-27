@@ -437,8 +437,8 @@ export default [
                   navLink: '/add-user-address'
                 },
                 {
-                  id: 'list',
-                  title: 'list',
+                  id: 'List',
+                  title: 'List',
                   icon: <Circle size={20} />,
                   navLink: '/user-list'
                 }
@@ -503,6 +503,50 @@ export default [
             title: 'Transactions',
             icon: <Circle size={20} />,
             navLink: '/bga-transactions-list'
+          }
+        ]
+      },
+      {
+        id: 'Lead',
+        title: 'Lead',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'Lead',
+            title: 'List',
+            icon: <Circle size={20} />,
+            navLink: '/master/Lead'
+          },
+          {
+            id: 'Create',
+            title: 'Create',
+            icon: <Circle size={20} />,
+            navLink: '/master/Leads/add'
+          }
+        ]
+      },
+      {
+        id: 'Invoice',
+        title: 'Invoice',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'Invoice',
+            title: 'List',
+            icon: <Circle size={20} />,
+            navLink: '/master/Invoice/List'
+          },
+          {
+            id: 'View',
+            title: 'View',
+            icon: <Circle size={20} />,
+            navLink: '/master/Invoice/view'
+          },
+          {
+            id: 'Add',
+            title: 'Add',
+            icon: <Circle size={20} />,
+            navLink: '/master/Invoice/add'
           }
         ]
       }

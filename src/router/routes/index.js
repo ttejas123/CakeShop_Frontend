@@ -25,7 +25,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
   {
-    path: '/PReviewsle/:id',
+    path: '/master/userProfile/:id',
     component: lazy(() => import('../../views/master/user/userProfile'))
   },
   {
@@ -291,6 +291,30 @@ const Routes = [
   {
     path: '/add-attribute',
     component: lazy(() => import('../../views/master/subCat/Attributes/add'))
+  },
+  {
+    path: '/master/Lead',
+    component: lazy(() => import('../../views/master/Lead'))
+  },
+  {
+    path: '/master/Invoice/List',
+    component: lazy(() => import('../../views/master/InvoiceL/List'))
+  },
+  {
+    path: '/master/Invoice/add',
+    component: lazy(() => import('../../views/master/InvoiceL/add'))
+  },
+  {
+    path: '/master/Invoice/view',
+    component: lazy(() => import('../../views/master/InvoiceL/view'))
+  },
+  {
+    path: '/master/Leads/add',
+    component: lazy(() => import('../../views/master/Lead/leadAdd/add'))
+  },
+  {
+    path: '/master/Leads/edit/:id',
+    component: lazy(() => import('../../views/master/Lead/edit'))
   },
   {
     path: '/master/corporateRole',

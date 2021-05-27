@@ -16,10 +16,9 @@ export const data = [
         avatar:'',
         Role: "admin",
         Created: "12-02-2021",
-        Rights: ["Creaat bids", "update Bids"],
-        review:"Your product is really good but still it's out of price range and also we can't add much customizations",
-        customizations :"Logo of team",
-        username:"TCS",
+        Rights: ["Created bids", "update Bids"],
+        username: [{value: "Tejas", label: "Tejas"}, {value: "Pravin", label: "Pravin"}],
+
         Name:"TCS"
       },
       {
@@ -27,10 +26,10 @@ export const data = [
         avatar:pravin,
         Role: "admin",
         Created: "12-02-2021",
-        Rights: ["Creaat bids", "update Bids"],
+        Rights: ["Created bids", "update Bids"],
         review:"Your product is really good but still it's out of price range and also we can't add much customizations",
         customizations :"differnt Color",
-        username:"Infosys",
+        username: [{value: "Tejas", label: "Tejas"}, {value: "Pravin", label: "Pravin"}],
         Name:"Infosys"
       },
       {
@@ -38,10 +37,10 @@ export const data = [
         avatar:komal,
         Role: "admin",
         Created: "12-02-2021",
-        Rights: ["Creaat bids", "update Bids"],
+        Rights: ["Created bids", "update Bids"],
         review:"Your product is really good but still it's out of price range and also we can't add much customizations",
         customizations :"Company WaterMark",
-        username:"JBL",
+        username: [{value: "Tejas", label: "Tejas"}, {value: "Pravin", label: "Pravin"}],
         Name:"JBL"
       },
       {
@@ -49,10 +48,10 @@ export const data = [
         avatar:'',
         Role: "admin",
         Created: "12-02-2021",
-        Rights: ["Creaat bids", "update Bids"],
+        Rights: ["Created bids", "update Bids"],
         review:"Your product is really good but still it's out of price range and also we can't add much customizations",
         customizations :"Logo of team",
-         username:"Tata",
+        username: [{value: "Tejas", label: "Tejas"}, {value: "Pravin", label: "Pravin"}],
        Name:"Tata"
       },
       {
@@ -60,10 +59,10 @@ export const data = [
         avatar:"",
         Role: "admin",
         Created: "12-02-2021",
-        Rights: ["Creaat bids", "update Bids"],
+        Rights: ["Created bids", "update Bids"],
         review:"Your product is really good but still it's out of price range and also we can't add much customizations",
         customizations :"differnt Color",
-        username:"Honda",
+        username: [{value: "Tejas", label: "Tejas"}, {value: "Pravin", label: "Pravin"}],
         Name:"Honda"
       },
       {
@@ -71,10 +70,10 @@ export const data = [
         avatar:reethika,
         Role: "admin",
         Created: "12-02-2021",
-        Rights: ["Creaat bids", "update Bids"],
+        Rights: ["Created bids", "update Bids"],
         review:"Your product is really good but still it's out of price range and also we can't add much customizations",
         customizations :"Company WaterMark",
-        username:"SSD",
+        username: [{value: "Tejas", label: "Tejas"}, {value: "Pravin", label: "Pravin"}],
         Name:"SSD7"
       }
 ]
