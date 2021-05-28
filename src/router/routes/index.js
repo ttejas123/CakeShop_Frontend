@@ -533,6 +533,14 @@ const Routes = [
     component: lazy(() => import('../../views/report/bidNotification/bidNotificationReport'))
   },
   {
+    path: '/report/seller-response-denial',
+    component: lazy(() => import('../../views/report/seller/sellerResponseDenial'))
+  },
+  {
+    path: '/report/seller-sale-denial',
+    component: lazy(() => import('../../views/report/seller/sellerSaleDenial'))
+  },
+  {
     path: '/report/Cart',
     component: lazy(() => import('../../views/report/Cart/cart'))
   },

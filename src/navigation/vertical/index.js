@@ -654,6 +654,24 @@ export default [
         navLink: '/report/shipment'
       },
       {
+        id: 'sellerResponse',
+        title: 'Seller Response Denial',
+        icon: <Circle size={20} />,
+        navLink: '/report/seller-response-denial'
+      },
+      {
+        id: 'sellerSale',
+        title: 'Seller Sale Denial',
+        icon: <Circle size={20} />,
+        navLink: '/report/seller-sale-denial'
+      },
+      {
+        id: 'bidNotification',
+        title: 'Bid Notification',
+        icon: <Circle size={20} />,
+        navLink: '/report/bid-notification'
+      },
+      {
         id: 'Search_keyWord_History',
         title: 'Search keyWord History',
         icon: <Circle size={20} />,

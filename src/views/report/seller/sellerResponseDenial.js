@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { data } from './data'
+import { srData } from './data'
 import Avatar from '@components/avatar'
 import { Link } from 'react-router-dom'
 // ** Third Party Components
@@ -16,26 +16,7 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, UncontrolledButtonDr
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
-const BidNotification = () => {
-
-    //console.log(BankGuarranteApplsColumns)
-    console.log(data)
-  // ** State
-//   const data = [
-//     {
-//       name: "US Dollar",
-//       symbol: "$"
-//     },
-//     {
-//       name: "Canadian Dollar",
-//       symbol: "$"
-//     },
-//     {
-//       name: "Euro",
-//       symbol: "€"
-//     }
-// ]
-// console.log(data)
+const SellerResponseDenial = () => {
 
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -90,22 +71,10 @@ const handleDelete = (data) => {
       }
 }
 
-const renderClient = row => {
-    const stateNum = Math.floor(Math.random() * 6),
-      states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-      color = states[stateNum]
-  
-    if (row.icon.length) {
-      return <Avatar className='mr-1' img={row.icon} width='32' height='32'  />
-    } else {
-      return <Avatar color={color || 'primary'} className='mr-1' content={row.name || 'John Doe'} initials status="online" />
-    }
-  }
-
 const columns = [
     {
-      name: 'RFQ Id',
-      selector: 'rfqId',
+      name: 'Bid Id',
+      selector: 'bidId',
       sortable: true,
       minWidth: '80px'
     },
@@ -116,26 +85,20 @@ const columns = [
       minWidth: '80px'
     },
     {
-        name: 'Sent Time',
-        selector: 'sentTime',
+        name: 'Request Send Date',
+        selector: 'requestSendDate',
         sortable: true,
         minWidth: '80px'
     },
     {
-        name: 'Notification Type',
-        selector: 'notificationType',
+        name: 'Denial Date',
+        selector: 'denialDate',
         sortable: true,
         minWidth: '80px'
     },
     {
-        name: 'Response',
-        selector: 'response',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'Response Time',
-        selector: 'responseTime',
+        name: 'Reason',
+        selector: 'reason',
         sortable: true,
         minWidth: '80px'
     }
@@ -169,7 +132,7 @@ const columns = [
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : srData.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -193,7 +156,7 @@ const columns = [
 
     const columnDelimiter = ','
     const lineDelimiter = '\n'
-    const keys = Object.keys(data[0])
+    const keys = Object.keys(srData[0])
 
     result = ''
     result += keys.join(columnDelimiter)
@@ -236,7 +199,7 @@ const columns = [
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Bid Notification Reports</CardTitle>
+        <CardTitle tag='h4'>Seller Response Denial Reports</CardTitle>
         <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
@@ -248,7 +211,7 @@ const columns = [
                   <Printer size={15} />
                   <span className='align-middle ml-50'>Print</span>
                 </DropdownItem>
-                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
+                <DropdownItem className='w-100' onClick={() => downloadCSV(srData)}>
                   <FileText size={15} />
                   <span className='align-middle ml-50'>CSV</span>
                 </DropdownItem>
@@ -278,11 +241,11 @@ const columns = [
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={data}
+        data={srData}
       />
     </Card>
     </Fragment>
   )
 }
 
-export default BidNotification
+export default SellerResponseDenial

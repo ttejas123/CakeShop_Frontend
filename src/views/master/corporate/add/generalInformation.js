@@ -14,8 +14,9 @@ import { useForm, Controller } from 'react-hook-form'
 const GeneralInformation = () => {
 
   const [data, setData] = useState(null)
+
   const { control, setValue } = useForm({
-    defaultValues: { hasSubscription: 'No' }
+    defaultValues: { isVerified : 'No'}
   })
 
   const optionCountry = [
@@ -53,6 +54,7 @@ const GeneralInformation = () => {
     name: "",
     email: "",
     hasSubscription: "",
+    adminInfo: "",
     isVerified: "",
     logo : "",
     phone : "",
@@ -309,7 +311,7 @@ const GeneralInformation = () => {
                       name={props.name}
                       defaultChecked
                       invalid={data !== null && (data.hasSubscription === undefined || data.hasSubscription === null)}
-                      onChange={() => setValue('hasSubscription', 'No')}
+                      onChange={() => setValue(...'hasSubscription', 'No')}
                     />
                   )
                 }}
@@ -334,7 +336,7 @@ const GeneralInformation = () => {
                       id='Yes'
                       name={props.name}
                       invalid={data !== null && (data.isVerified === undefined || data.isVerified === null)}
-                      onChange={() => setValue('isVerified', 'Yes')}
+                      onChange={() => setVerifyValue('isVerified', 'Yes')}
                     />
                   )
                 }}
@@ -353,7 +355,7 @@ const GeneralInformation = () => {
                       name={props.name}
                       defaultChecked
                       invalid={data !== null && (data.isVerified === undefined || data.isVerified === null)}
-                      onChange={() => setValue('isVerified', 'No')}
+                      onChange={() => setVerifyValue('isVerified', 'No')}
                     />
                   )
                 }}
@@ -403,6 +405,52 @@ const GeneralInformation = () => {
             <span className='align-middle'>Admin Information</span>
           </h4>
         </Col>
+        <Col md='12' sm='12'>
+        <Col md='4' sm='12'>
+      <FormGroup>
+            <label className='d-block mb-1'>Add</label>
+            <FormGroup>
+              <Controller
+                name='adminInfo'
+                control={control}
+                render={props => {
+                  return (
+                    <CustomInput
+                      inline
+                      type='radio'
+                      label='Existing'
+                      value='Yes'
+                      id='Yes'
+                      name={props.name}
+                      invalid={data !== null && (data.adminInfo === undefined || data.adminInfo === null)}
+                      onChange={() => setValue('adminInfo', 'Yes')}
+                    />
+                  )
+                }}
+              />
+              <Controller
+                name='adminInfo'
+                control={control}
+                render={props => {
+                  return (
+                    <CustomInput
+                      inline
+                      type='radio'
+                      label='New'
+                      value='No'
+                      id='No'
+                      name={props.name}
+                      defaultChecked
+                      invalid={data !== null && (data.adminInfo === undefined || data.adminInfo === null)}
+                      onChange={() => setValue('adminInfo', 'No')}
+                    />
+                  )
+                }}
+              />
+            </FormGroup>
+          </FormGroup>
+      </Col>
+      </Col>
         <Col md='4' sm='12'>
         <FormGroup>
           <Label for='name'>Name</Label>
