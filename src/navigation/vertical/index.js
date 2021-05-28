@@ -549,8 +549,24 @@ export default [
             navLink: '/master/Invoice/add'
           }
         ]
+      },
+      {
+        id: 'Keyword',
+        title: 'Keyword',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'Keyword',
+            title: 'List',
+            icon: <Circle size={20} />,
+            navLink: '/master/Keyword/List'
+          }
+        ]
       }
+
+      
     ]
+    
   },
   {
     id: 'Report',

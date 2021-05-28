@@ -595,6 +595,10 @@ const Routes = [
   {
     path: '/comingSoon',
     component: lazy(() => import('../../views/pages/comingSoon'))
+  },
+  {
+    path: '/master/Keyword/List',
+    component: lazy(() => import('../../views/master/sponsoredKeyword/List'))
   }
   
 
