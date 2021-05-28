@@ -273,6 +273,26 @@ const Routes = [
     component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
   },
   {
+    path: '/master/wishlist',
+    component: lazy(() => import('../../views/master/WishList'))
+  },
+  {
+    path: '/master/SKU',
+    component: lazy(() => import('../../views/master/SKU'))
+  },
+  {
+    path: '/master/SKUs/add',
+    component: lazy(() => import('../../views/master/SKU/add'))
+  },
+  {
+    path: '/master/SKUs/edit/:id',
+    component: lazy(() => import('../../views/master/SKU/edit'))
+  },
+  {
+    path: '/master/SKUs/sellers',
+    component: lazy(() => import('../../views/master/SKU/SKU_seller'))
+  },
+  {
     path: '/master/financialPartners/add',
     component: lazy(() => import('../../views/master/financialPartner/add'))
   },
