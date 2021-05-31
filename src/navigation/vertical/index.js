@@ -661,10 +661,34 @@ export default [
         navLink: '/report/sms-history-list'
       },
       {
+        id: 'gstCalculation',
+        title: 'GST Calculation',
+        icon: <Circle size={20} />,
+        navLink: '/report/gst-calculation'
+      },
+      {
         id: 'gstReport',
         title: 'GST Report',
         icon: <Circle size={20} />,
         navLink: '/report/gst-report-list'
+      },
+      {
+        id: 'userActivity',
+        title: 'User Activity',
+        icon: <Circle size={20} />,
+        navLink: '/report/user-activity'
+      },
+      {
+        id: 'samplingStatus',
+        title: 'Sampling Status',
+        icon: <Circle size={20} />,
+        navLink: '/report/sample-status'
+      },
+      {
+        id: 'paidCorporate',
+        title: 'Paid Corporate',
+        icon: <Circle size={20} />,
+        navLink: '/report/paid-corporate'
       },
       {
         id: 'vas',
