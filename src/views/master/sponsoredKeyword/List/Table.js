@@ -54,7 +54,10 @@ const renderClient = row => {
 }
 
 const DataTableWithButtons = () => {
-
+  const statusObj = {
+    inactive: 'light-secondary',
+    active: 'light-success'
+}
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -77,26 +80,9 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'Invoice No',
-          minWidth: '150px',
-          selector: 'InvoiceNo',
-          sortable: true,
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              <div className=''>
-                
-                  <div className='user-info text-truncate d-flex flex-column'>
-                     <span className='font-weight-bold'>{row.InvoiceNo}</span>
-                  </div>
-                
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'User',
+          name: 'Corporate',
           minWidth: '250px',
-          selector: 'Name',
+          selector: 'Corporate',
           sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
@@ -104,8 +90,8 @@ const DataTableWithButtons = () => {
               <div className=''>
                 
                   <div className='user-info text-truncate d-flex flex-column'>
-                     <span className='font-weight-bold'>{row.Name}</span>
-                     <small className='text-truncate text-muted mb-0'>@{row.Email}</small>
+                    <span className='font-weight-bold'>{row.Corporate}</span>
+                    <small className='text-truncate text-muted mb-0'>@{row.Email}</small>
                   </div>
                 
               </div>
@@ -113,23 +99,54 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'GST',
-          selector: 'GST',
+          name: 'Keyword',
+          // minWidth: '150px',
+          selector: 'Keyword',
           sortable: true,
-          minWidth: '150px'
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className=''>
+                
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.Keyword}</span>
+                  </div>
+                
+              </div>
+            </div>
+          )
         },
         {
-          name: 'commission',
-          selector: 'commission',
+          name: 'Product',
+          selector: 'ProductTitle',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          maxWidth: '500px',
+
+          cell: row =>   <div className='d-flex justify-content-left align-items-center'>
+            {/* <div className='text-truncate d-flex flex-column'> */}
+            <div className='text-truncate'>
+
+            <span>₹ {row.ProductTitle}</span>
+
+            </div>
+            </div>
+        //    <div className='d-flex justify-content-left align-items-center'>
+        //   <div className=''>
+            
+        //       <div className='user-info text-truncate d-flex flex-column'>
+        //          <span className='font-weight-bold'>{row.ProductTitle}</span>
+        //       </div>
+            
+        //   </div>
+        // </div>
+          
+
+          // cell: row => <span>{row.ProductTitle }</span>
+          // cell: row => <Link to={`/productDetails/1`}><span className='font-weight-bold'>{`${row.ProductTitle}`}</span></Link>
+          // <Link  to={`/productDetails/${row.id}`}>
+
         },
-        {
-          name: 'Order Number',
-          selector: 'OrderNumber',
-          sortable: true,
-          minWidth: '150px'
-        },
+       
         {
           name: 'Date',
           selector: 'Date',
@@ -140,7 +157,27 @@ const DataTableWithButtons = () => {
           name: 'Amount',
           selector: 'Amount',
           sortable: true,
-          minWidth: '150px'
+          // minWidth: '150px',
+          cell: row => <span>₹ {row.Amount || 0}</span>
+
+        },
+       
+        {
+          name: 'Status',
+          selector: 'status',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>         
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>
+                      <Badge className='text-capitalize' color={statusObj[row.Status]} pill>
+                          {row.Status}
+                      </Badge>
+                </span>
+              </div>
+            </div>
+          )
         },
         {
           name: 'Actions',
@@ -207,51 +244,6 @@ const DataTableWithButtons = () => {
   const handlePagination = page => {
     setCurrentPage(page.selected)
   }
-
-   // ** Converts table to CSV
-  function convertArrayOfObjectsToCSV(array) {
-    let result
-
-    const columnDelimiter = ','
-    const lineDelimiter = '\n'
-    const keys = Object.keys(data[0])
-
-    result = ''
-    result += keys.join(columnDelimiter)
-    result += lineDelimiter
-
-    array.forEach(item => {
-      let ctr = 0
-      keys.forEach(key => {
-        if (ctr > 0) result += columnDelimiter
-
-        result += item[key]
-
-        ctr++
-      })
-      result += lineDelimiter
-    })
-
-    return result
-  }
-
-  // ** Downloads CSV
-  function downloadCSV(array) {
-    const link = document.createElement('a')
-    let csv = convertArrayOfObjectsToCSV(array)
-    if (csv === null) return
-
-    const filename = 'export.csv'
-
-    if (!csv.match(/^data:text\/csv/i)) {
-      csv = `data:text/csv;charset=utf-8,${csv}`
-    }
-
-    link.setAttribute('href', encodeURI(csv))
-    link.setAttribute('download', filename)
-    link.click()
-  }
-
 
   // ** Custom Pagination
   const CustomPagination = () => (
