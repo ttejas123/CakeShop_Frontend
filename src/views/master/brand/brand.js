@@ -1,6 +1,6 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
-
+import { Link } from 'react-router-dom'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** React Imports
@@ -130,11 +130,9 @@ const DataTableWithButtons = () => {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-
-                <Edit size={15} onClick={ () => { 
-                                    setCurrentId(row.id)
-                                    handleModal()
-                                     } }/>
+                <Link to={`/master/branda/edit/${row.id}`}>
+                    <Edit size={15} />
+                </Link>
               </div>
             )
           }
@@ -214,15 +212,12 @@ const DataTableWithButtons = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Brand List</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            {addClicked === 0 ? (
+            <Link to={`/master/branda/add`}>
                 <Button className='ml-2' color='primary' onClick={handleModal}>
                                         <Plus size={15} />
                                         <span className='align-middle ml-50'>Add Your Brand</span>
                 </Button>
-                ) : (
-                <span></span>
-                )
-            }
+            </Link>   
           </div>
         </CardHeader>
         {addClicked ? <ModelForm handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} /> : null}

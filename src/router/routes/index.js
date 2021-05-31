@@ -29,6 +29,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/userProfile'))
   },
   {
+    path: '/master/bidcommissionchange',
+    component: lazy(() => import('../../views/master/Bidcomchange'))
+  },
+  {
     path: '/product-category',
     component: lazy(() => import('../../views/master/product/productCategory'))
   },
@@ -65,12 +69,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/employee/rightAssignment.js'))
   },
   {
-    path: '/vas',
+    path: '/master/vas',
     component: lazy(() => import('../../views/master/vas/vas'))
   },
   {
     path: '/brand',
     component: lazy(() => import('../../views/master/brand/brand'))
+  },
+  {
+    path: '/master/branda/add',
+    component: lazy(() => import('../../views/master/brand/add'))
+  },
+  {
+    path: '/master/branda/edit/:id',
+    component: lazy(() => import('../../views/master/brand/edit'))
   },
   {
     path: '/category-list',
@@ -115,6 +127,18 @@ const Routes = [
   {
     path: '/corporate-kyc-list',
     component: lazy(() => import('../../views/master/kyc/corporateKycList'))
+  },
+  {
+    path: '/master/Charges',
+    component: lazy(() => import('../../views/master/Charges'))
+  },
+  {
+    path: '/master/Charge/add',
+    component: lazy(() => import('../../views/master/Charges/add'))
+  },
+  {
+    path: '/master/Charge/edit/:id',
+    component: lazy(() => import('../../views/master/Charges/edit'))
   },
   {
     path: '/master/bidDetails/preferredPart/edit/:id',
@@ -463,6 +487,14 @@ const Routes = [
   {
     path: '/report/bidCash',
     component: lazy(() => import('../../views/report/bidCash'))
+  },
+  {
+    path: '/report/bidCashUtiliz',
+    component: lazy(() => import('../../views/report/BidcashUti'))
+  },
+  {
+    path: '/report/bidCoinUtiliz',
+    component: lazy(() => import('../../views/report/BidcoinUti'))
   },
   {
     path: '/report/Notification',

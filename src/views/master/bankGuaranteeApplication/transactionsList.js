@@ -91,7 +91,7 @@ const columns = [
         selector: 'user',
         sortable: true,
         cell: row => (
-          <div className='d-flex justify-content-left align-items-center'>
+          <div key={row.user} className='d-flex justify-content-left align-items-center'>
             {renderUser(row)}
             <div className=''>
               {/* <Link to={`/bidDetails/${row.id}`}> */}
