@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
-import { paidCorporateData } from './data'
+import { sampleData } from './data'
 import Avatar from '@components/avatar'
 import { Link } from 'react-router-dom'
 // ** Third Party Components
@@ -16,7 +16,7 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, UncontrolledButtonDr
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
-const PaidCorporate = () => {
+const SamplingStatus = () => {
 
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -73,20 +73,38 @@ const handleDelete = (data) => {
 
 const columns = [
     {
-      name: 'Amount',
-      selector: 'amount',
+      name: 'Status',
+      selector: 'status',
       sortable: true,
       minWidth: '80px'
     },
     {
-      name: 'Corporate',
-      selector: 'corporate',
+      name: 'Sample Product Name',
+      selector: 'sampleProductName',
       sortable: true,
       minWidth: '80px'
     },
     {
-        name: 'Validity',
-        selector: 'validity',
+        name: 'Sample Prize',
+        selector: 'samplePrize',
+        sortable: true,
+        minWidth: '80px'
+    },
+    {
+        name: 'Requested Date',
+        selector: 'requestedDate',
+        sortable: true,
+        minWidth: '80px'
+    },
+    {
+        name: 'Requester Name',
+        selector: 'requesterName',
+        sortable: true,
+        minWidth: '80px'
+    },
+    {
+        name: 'Requesting From',
+        selector: 'requestingFrom',
         sortable: true,
         minWidth: '80px'
     }
@@ -120,7 +138,7 @@ const columns = [
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : paidCorporateData.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : sampleData.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -144,7 +162,7 @@ const columns = [
 
     const columnDelimiter = ','
     const lineDelimiter = '\n'
-    const keys = Object.keys(paidCorporateData[0])
+    const keys = Object.keys(sampleData[0])
 
     result = ''
     result += keys.join(columnDelimiter)
@@ -187,7 +205,7 @@ const columns = [
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Paid Corporate Reports</CardTitle>
+        <CardTitle tag='h4'>Sampling Status Report</CardTitle>
         <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
@@ -199,7 +217,7 @@ const columns = [
                   <Printer size={15} />
                   <span className='align-middle ml-50'>Print</span>
                 </DropdownItem>
-                <DropdownItem className='w-100' onClick={() => downloadCSV(paidCorporateData)}>
+                <DropdownItem className='w-100' onClick={() => downloadCSV(sampleData)}>
                   <FileText size={15} />
                   <span className='align-middle ml-50'>CSV</span>
                 </DropdownItem>
@@ -229,11 +247,11 @@ const columns = [
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={paidCorporateData}
+        data={sampleData}
       />
     </Card>
     </Fragment>
   )
 }
 
-export default PaidCorporate
+export default SamplingStatus

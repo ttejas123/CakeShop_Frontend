@@ -79,6 +79,29 @@ export const data = [
       }
 ]
 
+export const paidCorporateData = [
+  {
+  amount : 2000,
+  corporate : "TCS",
+  validity : "01-06-2021"
+  },
+  {
+    amount : 3000,
+  corporate : "Infosys",
+  validity : "03-06-2021"
+  },
+  {
+    amount : 4000,
+  corporate : "Accenture",
+  validity : "04-06-2021"
+  },
+  {
+    amount : 5000,
+  corporate : "Coense",
+  validity : "05-06-2021"
+  }
+]
+
 export const data1 = [
       {
         Category: "Convenience",
