@@ -150,7 +150,7 @@ const columns = [
       allowOverflow: true,
       cell: row => {
         return (
-          <div className='d-flex'>
+          <div key = {row.financialInstitute} className='d-flex'>
             <UncontrolledDropdown>
               <DropdownToggle className='pr-1' tag='span'>
                 <Trash size={15} onClick={e => { handleDelete(row) }} />

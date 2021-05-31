@@ -102,12 +102,6 @@ export default [
         navLink: '/brand'
       },
       {
-        id: 'ValueAddedServices',
-        title: 'VAS',
-        icon: <Circle size={20} />,
-        navLink: '/vas'
-      },
-      {
         id: 'RFQ',
         title: 'RFQ',
         icon: <Circle size={20} />,
@@ -196,6 +190,43 @@ export default [
            title: 'Subscription Plan',
            icon: <Circle size={20} />,
            navLink: '/master/subscriptionplan'
+      },
+      {
+           id: 'Charges',
+           title: 'Charges',
+           icon: <Circle size={20} />,
+           navLink: '/master/Charges'
+      },
+      {
+           id: 'Bid_commision_change',
+           title: 'Bid commision change',
+           icon: <Circle size={20} />,
+           navLink: '/master/bidcommissionchange'
+      },
+      {
+        id: 'ValueAddedServices',
+        title: 'VAS',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'catalogue',
+                  title: 'VAS',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/vas'
+                },
+                {
+                  id: 'myProducts',
+                  title: 'Transaction',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/Transaction'
+                },
+                {
+                  id: 'add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/ Order List'
+                }            
+        ]
       },
       {
         id: 'ProductPage',
@@ -637,6 +668,24 @@ export default [
         navLink: '/report/bidCoin'
       },
       {
+        id: 'Bid_Coin_Utiliz',
+        title: 'Bid Coin Utiliz',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCoinUtiliz'
+      },
+      {
+        id: 'Bid_Cash',
+        title: 'Bid Cash',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCash'
+      },
+      {
+        id: 'Bid_Cash_Utiliz',
+        title: 'Bid Cash Utiliz',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCashUtiliz'
+      },
+      {
         id: 'inspection',
         title: 'Inspection',
         icon: <Circle size={20} />,
@@ -647,12 +696,6 @@ export default [
         title: 'Corporate Credit Limit Exhaust',
         icon: <Circle size={20} />,
         navLink: '/report/ccl-exhausted-list'
-      },
-      {
-        id: 'Bid_Cash',
-        title: 'Bid Cash',
-        icon: <Circle size={20} />,
-        navLink: '/report/bidCash'
       },
       {
         id: 'smsHistory',
