@@ -49,6 +49,7 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 
 // ** Renders Client Columns
 const renderClient = row => {
+
   const stateNum = Math.floor(Math.random() * 6),
     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
     color = states[stateNum]
@@ -81,6 +82,7 @@ const optionState = [
 ]
 
 const DataTableWithButtons = () => {
+  
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
