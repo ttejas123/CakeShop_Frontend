@@ -102,12 +102,6 @@ export default [
         navLink: '/brand'
       },
       {
-        id: 'ValueAddedServices',
-        title: 'VAS',
-        icon: <Circle size={20} />,
-        navLink: '/vas'
-      },
-      {
         id: 'RFQ',
         title: 'RFQ',
         icon: <Circle size={20} />,
@@ -179,12 +173,61 @@ export default [
            icon: <Circle size={20} />,
            navLink: '/master/commi'
       },
-          {
+      {
             id: 'Orders',
             title: 'Orders',
             icon: <Circle size={20} />,
             navLink: '/master/order'
-          },
+      },
+      {
+           id: 'WishList',
+           title: 'Wishlist',
+           icon: <Circle size={20} />,
+           navLink: '/master/wishlist'
+      },
+      {
+           id: 'Subscription_Plan',
+           title: 'Subscription Plan',
+           icon: <Circle size={20} />,
+           navLink: '/master/subscriptionplan'
+      },
+      {
+           id: 'Charges',
+           title: 'Charges',
+           icon: <Circle size={20} />,
+           navLink: '/master/Charges'
+      },
+      {
+           id: 'Bid_commision_change',
+           title: 'Bid commision change',
+           icon: <Circle size={20} />,
+           navLink: '/master/bidcommissionchange'
+      },
+      {
+        id: 'ValueAddedServices',
+        title: 'VAS',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'catalogue',
+                  title: 'VAS',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/vas'
+                },
+                {
+                  id: 'myProducts',
+                  title: 'Transaction',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/Transaction'
+                },
+                {
+                  id: 'add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/ Order List'
+                }            
+        ]
+      },
       {
         id: 'ProductPage',
         title: 'Product',
@@ -562,9 +605,32 @@ export default [
             navLink: '/master/Keyword/List'
           }
         ]
-      }
-
-      
+        },
+        {      
+        id: 'SKU',
+        title: 'SKU',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'SKU_List',
+            title: 'SKU List',
+            icon: <Circle size={20} />,
+            navLink: '/master/SKU'
+          },
+          {
+            id: 'SKU_Add',
+            title: 'SKU Add',
+            icon: <Circle size={20} />,
+            navLink: '/master/SKUs/add'
+          },
+          {
+            id: 'SKU_Seller_List',
+            title: 'Sellers List',
+            icon: <Circle size={20} />,
+            navLink: '/master/SKUs/sellers'
+          }
+        ]
+      }  
     ]
     
   },
@@ -616,6 +682,24 @@ export default [
         navLink: '/report/bidCoin'
       },
       {
+        id: 'Bid_Coin_Utiliz',
+        title: 'Bid Coin Utiliz',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCoinUtiliz'
+      },
+      {
+        id: 'Bid_Cash',
+        title: 'Bid Cash',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCash'
+      },
+      {
+        id: 'Bid_Cash_Utiliz',
+        title: 'Bid Cash Utiliz',
+        icon: <Circle size={20} />,
+        navLink: '/report/bidCashUtiliz'
+      },
+      {
         id: 'inspection',
         title: 'Inspection',
         icon: <Circle size={20} />,
@@ -628,22 +712,40 @@ export default [
         navLink: '/report/ccl-exhausted-list'
       },
       {
-        id: 'Bid_Cash',
-        title: 'Bid Cash',
-        icon: <Circle size={20} />,
-        navLink: '/report/bidCash'
-      },
-      {
         id: 'smsHistory',
         title: 'SMS History',
         icon: <Circle size={20} />,
         navLink: '/report/sms-history-list'
       },
       {
+        id: 'gstCalculation',
+        title: 'GST Calculation',
+        icon: <Circle size={20} />,
+        navLink: '/report/gst-calculation'
+      },
+      {
         id: 'gstReport',
         title: 'GST Report',
         icon: <Circle size={20} />,
         navLink: '/report/gst-report-list'
+      },
+      {
+        id: 'userActivity',
+        title: 'User Activity',
+        icon: <Circle size={20} />,
+        navLink: '/report/user-activity'
+      },
+      {
+        id: 'samplingStatus',
+        title: 'Sampling Status',
+        icon: <Circle size={20} />,
+        navLink: '/report/sample-status'
+      },
+      {
+        id: 'paidCorporate',
+        title: 'Paid Corporate',
+        icon: <Circle size={20} />,
+        navLink: '/report/paid-corporate'
       },
       {
         id: 'vas',
@@ -668,6 +770,24 @@ export default [
         title: 'Shipment',
         icon: <Circle size={20} />,
         navLink: '/report/shipment'
+      },
+      {
+        id: 'sellerResponse',
+        title: 'Seller Response Denial',
+        icon: <Circle size={20} />,
+        navLink: '/report/seller-response-denial'
+      },
+      {
+        id: 'sellerSale',
+        title: 'Seller Sale Denial',
+        icon: <Circle size={20} />,
+        navLink: '/report/seller-sale-denial'
+      },
+      {
+        id: 'bidNotification',
+        title: 'Bid Notification',
+        icon: <Circle size={20} />,
+        navLink: '/report/bid-notification'
       },
       {
         id: 'Search_keyWord_History',

@@ -28,3 +28,22 @@ export const data = [
       gst : 18
     }
 ]
+
+export const gstCalcData = [
+  {
+    amountPaid : 1000,
+    gstApplied : 180
+  },
+  {
+    amountPaid : 10000,
+    gstApplied : 1800
+  },
+  {
+    amountPaid : 2000,
+    gstApplied : 360
+  },
+  {
+    amountPaid : 3000,
+    gstApplied : 540
+  }
+]

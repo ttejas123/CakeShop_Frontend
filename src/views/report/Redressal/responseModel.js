@@ -108,7 +108,11 @@ const AddNewModal = (prop) => {
             </div>
             <div className="d-flex justify-content-between">
               <div className='font-small-2'>Issue Type : </div>
-              <h5 className='mb-1'> {values.Issue_Type ? (<div> {values.Issue_Type[0].label} </div>) : null }</h5> 
+              <h5 className='mb-1'>
+               {values.Issue_Type ? (
+                <div> {values.Issue_Type[0].label} </div>
+                ) : null }
+              </h5> 
             </div>
             <div className="justify-content-between">
               <div className='font-small-2'>Message : </div><br />

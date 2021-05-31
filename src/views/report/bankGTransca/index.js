@@ -117,7 +117,7 @@ const DataTableWithButtons = () => {
           selector: 'Order_Id',
           sortable: true,
           cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
+            <div key={row.id} className='d-flex justify-content-left align-items-center'>
               <div className='d-flex flex-column'>
                   <span className='font-weight-bold'>{row.Order_Id}</span>
               </div>

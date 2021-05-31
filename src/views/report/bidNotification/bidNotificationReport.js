@@ -236,7 +236,7 @@ const columns = [
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Gst Reports</CardTitle>
+        <CardTitle tag='h4'>Bid Notification Reports</CardTitle>
         <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>

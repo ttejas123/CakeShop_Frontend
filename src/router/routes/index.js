@@ -29,6 +29,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/user/userProfile'))
   },
   {
+    path: '/master/bidcommissionchange',
+    component: lazy(() => import('../../views/master/Bidcomchange'))
+  },
+  {
     path: '/product-category',
     component: lazy(() => import('../../views/master/product/productCategory'))
   },
@@ -65,12 +69,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/employee/rightAssignment.js'))
   },
   {
-    path: '/vas',
+    path: '/master/vas',
     component: lazy(() => import('../../views/master/vas/vas'))
   },
   {
     path: '/brand',
     component: lazy(() => import('../../views/master/brand/brand'))
+  },
+  {
+    path: '/master/branda/add',
+    component: lazy(() => import('../../views/master/brand/add'))
+  },
+  {
+    path: '/master/branda/edit/:id',
+    component: lazy(() => import('../../views/master/brand/edit'))
   },
   {
     path: '/category-list',
@@ -115,6 +127,18 @@ const Routes = [
   {
     path: '/corporate-kyc-list',
     component: lazy(() => import('../../views/master/kyc/corporateKycList'))
+  },
+  {
+    path: '/master/Charges',
+    component: lazy(() => import('../../views/master/Charges'))
+  },
+  {
+    path: '/master/Charge/add',
+    component: lazy(() => import('../../views/master/Charges/add'))
+  },
+  {
+    path: '/master/Charge/edit/:id',
+    component: lazy(() => import('../../views/master/Charges/edit'))
   },
   {
     path: '/master/bidDetails/preferredPart/edit/:id',
@@ -271,6 +295,26 @@ const Routes = [
   {
     path: '/financialPartner-list',
     component: lazy(() => import('../../views/master/financialPartner/financialPartnerList'))
+  },
+  {
+    path: '/master/wishlist',
+    component: lazy(() => import('../../views/master/WishList'))
+  },
+  {
+    path: '/master/SKU',
+    component: lazy(() => import('../../views/master/SKU'))
+  },
+  {
+    path: '/master/SKUs/add',
+    component: lazy(() => import('../../views/master/SKU/add'))
+  },
+  {
+    path: '/master/SKUs/edit/:id',
+    component: lazy(() => import('../../views/master/SKU/edit'))
+  },
+  {
+    path: '/master/SKUs/sellers',
+    component: lazy(() => import('../../views/master/SKU/SKU_seller'))
   },
   {
     path: '/master/financialPartners/add',
@@ -445,6 +489,14 @@ const Routes = [
     component: lazy(() => import('../../views/report/bidCash'))
   },
   {
+    path: '/report/bidCashUtiliz',
+    component: lazy(() => import('../../views/report/BidcashUti'))
+  },
+  {
+    path: '/report/bidCoinUtiliz',
+    component: lazy(() => import('../../views/report/BidcoinUti'))
+  },
+  {
     path: '/report/Notification',
     component: lazy(() => import('../../views/report/Notification'))
   },
@@ -531,6 +583,30 @@ const Routes = [
   {
     path: '/report/bid-notification',
     component: lazy(() => import('../../views/report/bidNotification/bidNotificationReport'))
+  },
+  {
+    path: '/report/sample-status',
+    component: lazy(() => import('../../views/report/sampleRequest/samplingStatus'))
+  },
+  {
+    path: '/report/gst-calculation',
+    component: lazy(() => import('../../views/report/gstReport/gstCalculation'))
+  },
+  {
+    path: '/report/user-activity',
+    component: lazy(() => import('../../views/report/user/userActivity'))
+  },
+  {
+    path: '/report/seller-response-denial',
+    component: lazy(() => import('../../views/report/seller/sellerResponseDenial'))
+  },
+  {
+    path: '/report/seller-sale-denial',
+    component: lazy(() => import('../../views/report/seller/sellerSaleDenial'))
+  },
+  {
+    path: '/report/paid-corporate',
+    component: lazy(() => import('../../views/report/corporate/paidCorporate'))
   },
   {
     path: '/report/Cart',
