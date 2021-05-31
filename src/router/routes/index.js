@@ -599,6 +599,10 @@ const Routes = [
   {
     path: '/master/Keyword/List',
     component: lazy(() => import('../../views/master/sponsoredKeyword/List'))
+  },
+  {
+    path: '/add-sponsored_keyword',
+    component: lazy(() => import('../../views/master/sponsoredKeyword/Add'))
   }
   
 

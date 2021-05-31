@@ -270,6 +270,10 @@ const DataTableWithButtons = () => {
       containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
     />
   )
+  const handleAddClick = () => {
+    // setAddClicked(!addClicked)
+
+  }
 
 
   return (
@@ -279,9 +283,17 @@ const DataTableWithButtons = () => {
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Sponsored Keywords</CardTitle>
-          <div className='d-flex mt-md-0 mt-1'>
+          {/* <div className='d-flex mt-md-0 mt-1'>
             
-          </div>
+          </div> */}
+          <Link to={`/add-sponsored_keyword`}>
+            <Button className='ml-2' color='primary'  >
+              <Plus size={15} />
+              <span className='align-middle ml-50'>Add Sponsored Keywords</span>
+            </Button>
+
+          </Link>
+           
         </CardHeader>
         <Row className='justify-content-end mx-0'>
           <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
