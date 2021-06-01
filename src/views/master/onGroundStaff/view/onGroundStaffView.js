@@ -1,14 +1,10 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, Fragment } from 'react'
 import Avatar from '@components/avatar'
-import { Row, Col, Card, CardTitle, CardBody, CardText, CardHeader, Badge, Media } from 'reactstrap'
+import { Row, Col, Form, Card, CardTitle, CardBody, CardText, CardHeader, Button, Media, Modal, ModalHeader, ModalBody, ModalFooter,  Label, FormGroup, Input } from 'reactstrap'
 import logo from '@src/assets/images/slider/coenseLogo.jpg'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 import {
-    Eye,
-    ShoppingCart,
-    Heart,
-    Circle,
-    TrendingUp, User, Box, DollarSign
+   Plus
   } from 'react-feather'
 import classnames from 'classnames'
 //import Comments from './productUiElements/cards/advance/Comments.js'
@@ -23,14 +19,20 @@ import UserInfoCard from './userInfoCard'
 import CorporateAssignedCard from './corporateAssignedCard'
 import MeetingCard from './meetingCard'
 import ActivityCard from './activityCard'
+import Flatpickr from 'react-flatpickr'
 
 // import ProductCarousel from './productCarousel'
 // import RelatedProducts from './relatedProducts'
 // import ProductInfo from './productInfo'
+import '@styles/react/libs/flatpickr/flatpickr.scss'
+
 
 const CorporateView = () => {
-  const cols = { md: '3', sm: '6' }
+  const cols = { md: '3', sm: '6' } 
     const [selectedColor, setSelectedColor] = useState('primary')
+    const [picker, setPicker] = useState(new Date())
+  const [formModal, setFormModal] = useState(false)
+
     // ** Renders color options
        const colorOptions = ["primary", "success", "waring", "danger", "info"]
   const renderColorOptions = () => {
@@ -123,6 +125,10 @@ const CorporateView = () => {
           <Card className='card-statistics'>
            <CardHeader>  
               <CardTitle tag='h5'><h4>Activity</h4></CardTitle>
+              <Button className='ml-2' color='primary'onClick={() => setFormModal(!formModal)} >
+              <Plus size={15} />
+              <span className='align-middle ml-50'>Add Activity</span>
+            </Button>
            </CardHeader>  
             <CardBody>
               <Row className='match-height'>
@@ -134,7 +140,56 @@ const CorporateView = () => {
           </Card>
         </Col>
       </Row> 
-
+      <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered modal-lg'>
+          <ModalHeader toggle={() => setFormModal(!formModal)}>Add Activity</ModalHeader>
+          <ModalBody>
+          <Row>
+            <Col sm='12'>
+                <Form onSubmit={e => e.preventDefault()}>
+                 <Row>
+                 <Col md='6' sm='12'>
+              <FormGroup>
+            <Fragment>
+              <Label for='default-picker'>Date</Label>
+            <Flatpickr className='form-control' value={picker} onChange={date => setPicker(date)} id='default-picker' />
+              </Fragment>
+                  </FormGroup> 
+            </Col>
+                <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='task'>Task</Label>
+              <Input type='task' id='task' placeholder='Task' />
+            </FormGroup>
+            </Col>
+            <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='personalInformation'>Personal Information</Label>
+              <Input type='personalInformation' id='personalInformation' placeholder='Personal Information' />
+            </FormGroup>
+            </Col>
+            <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='status'>Status</Label>
+              <Input type='status' id='status' placeholder='Status' />
+            </FormGroup>
+            </Col>
+            <Col md='12' sm='12'>
+            <FormGroup>
+              <Label for='comment'>Comment</Label>
+              <Input type='textarea' id='comment' placeholder='Comment' />
+            </FormGroup>
+            </Col>
+            </Row>
+            </Form>
+            </Col>
+            </Row>
+          </ModalBody>
+          <ModalFooter>
+            <Button color='primary' onClick={() => setFormModal(!formModal)}>
+              Add
+            </Button>{' '}
+          </ModalFooter>
+        </Modal>
       </Col>
     </div>
   )
