@@ -1,14 +1,10 @@
 import { useContext, useState } from 'react'
 import Avatar from '@components/avatar'
-import { Row, Col, Card, CardTitle, CardBody, CardText, CardHeader, Badge, Media } from 'reactstrap'
+import { Row, Col, Card, CardTitle, CardBody, Form, CardHeader, Button, Media,  Modal, ModalHeader, ModalBody, ModalFooter,  Label, FormGroup, Input  } from 'reactstrap'
 import logo from '@src/assets/images/slider/coenseLogo.jpg'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 import {
-    Eye,
-    ShoppingCart,
-    Heart,
-    Circle,
-    TrendingUp, User, Box, DollarSign
+    Plus
   } from 'react-feather'
 import StatsVertical from '@components/widgets/stats/StatsVertical'
 import classnames from 'classnames'
@@ -35,6 +31,8 @@ import CorporateOffices from './corporateOffices'
 // import ProductInfo from './productInfo'
 
 const CorporateTeam = () => {
+
+  const [formModal, setFormModal] = useState(false)
  
   return (
     <div id='dashboard-ecommerce'>
@@ -45,6 +43,10 @@ const CorporateTeam = () => {
         <Card className='card-statistics'>
        <CardHeader>  
           <CardTitle tag='h4'><h4>Team</h4></CardTitle>
+          <Button className='ml-2' color='primary'onClick={() => setFormModal(!formModal)} >
+              <Plus size={15} />
+              <span className='align-middle ml-50'>Add Team</span>
+            </Button>
        </CardHeader>  
         <CardBody>
           <Row className='match-height'>
@@ -71,6 +73,37 @@ const CorporateTeam = () => {
         </Col>
       </Row> 
       </Col>
+      <Modal isOpen={formModal} toggle={() => setFormModal(!formModal)} className='modal-dialog-centered'>
+          <ModalHeader toggle={() => setFormModal(!formModal)}>Add Activity</ModalHeader>
+          <ModalBody>
+          <Row>
+            <Col sm='12'>
+                <Form onSubmit={e => e.preventDefault()}>
+                 <Row>
+                <Col md='12' sm='12'>
+            <FormGroup>
+              <Label for='name'>Name</Label>
+              <Input type='text' id='name' placeholder='Name' />
+            </FormGroup>
+            </Col>
+            <Col md='12' sm='12'>
+            <FormGroup>
+              <Label for='role'>Role</Label>
+              <Input type='text' id='role' placeholder='Role' />
+            </FormGroup>
+            </Col>
+            </Row>
+            </Form>
+            </Col>
+            </Row>
+          </ModalBody>
+          <ModalFooter>
+            <Button color='primary' onClick={() => setFormModal(!formModal)}>
+              Add
+            </Button>{' '}
+          </ModalFooter>
+        </Modal>
+
     </div>
   )
 }

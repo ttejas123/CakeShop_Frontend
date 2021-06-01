@@ -41,6 +41,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/prodCatCom/addcat'))
   },
   {
+    path: '/bid-mapping',
+    component: lazy(() => import('../../views/master/bids/bidMapping/bidMapping'))
+  },
+  {
     path: '/product-cat-edit/:id',
     component: lazy(() => import('../../views/master/product/prodCatCom/editCat'))
   },
@@ -539,6 +543,10 @@ const Routes = [
   {
     path: '/report/productIssue',
     component: lazy(() => import('../../views/report/productIssue'))
+  },
+  {
+    path: '/report/defective-goods',
+    component: lazy(() => import('../../views/report/defectiveGoods/defectiveGoodsList'))
   },
   {
     path: '/report/emails-list',
