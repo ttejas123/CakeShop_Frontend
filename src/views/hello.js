@@ -1,17 +1,47 @@
 //Hello
 
-//1. Vas Provider :- Name, email , address, service - completed
-//2. Vas Transaction :- Amout paid, date, Provider Info, Provided to, Service name
-//                      Status - (a.receive service), (b.service pending), (c.completed...)
-//3. VAS Transcation Add :- Amout, date, Allocate to, On behalf
-//4. VAS Order List :- vas_id, name,  amount_paid, paid_start, start_date, end_date
-//5. Critical Junction Report :- (a. Raised PI 24 hrs past) (b. PO not fulfeel) (c. no action on customization)
-	//Activity , by, Bid id, date
+//189 2. Nodal Transcation Add/edit :- 
+			//1. Transcation type(Pay, Receive)
+			//2. On Bid(Drop Down of Bid) 
+			//3. Amout 
+			//4. User
+
+
+//190 3. Nodal TranscationList
+			// Date,
+			// Type
+			// Recieved from
+			// Paid to
+			// Bid Info
+			// Additinal Info
+			// Comment
+			// Total amout
+			// Amount paid
+			// Balance
+
+//191 4. Receipt and Payment report
+			// Date,
+			// Type
+			// Recieved from
+			// Paid to
+			// Bid Info
+			// Additinal Info
+			// Comment
+			// Total amout
+			// Amount paid
+			// Balance
+
+//192 5. Pending Receipt
+			//User,
+			//Bid, 
+			//Amount Paid,
+			//comment,
+			//date
 
 // 1. add working files
 // 2. npm install and run after that 
 
-// //every time after new changes
+//every time after new changes
 
 // 3. git add .
 // 4. git commit 

@@ -884,6 +884,37 @@ export default [
     ]
   },
   {
+    id: 'Nodal',
+    title: 'Nodal',
+    icon: <Share size={20} />,
+    children: [
+      {
+        id: 'Nodal_Transcation',
+        title: 'Transcation',
+        icon: <Circle size={20} />,
+        navLink: '/Nodal/transcation'
+      },
+      {
+        id: 'Receipt_and_Payment_report',
+        title: 'Receipt And Payment Report',
+        icon: <Circle size={20} />,
+        navLink: '/Nodal/ReceiptPayment'
+      },
+      {
+        id: 'Pending_Receipt',
+        title: 'Pending Receipt',
+        icon: <Circle size={20} />,
+        navLink: '/Nodal/pendingreceipt'
+      },
+      {
+        id: 'Pending_Payments',
+        title: 'Pending Payments',
+        icon: <Circle size={20} />,
+        navLink: '/Nodal/pendingpayment'
+      }
+    ]
+  },
+  {
     id: 'Transaction',
     title: 'Transaction',
     icon: <Share size={20} />,

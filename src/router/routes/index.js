@@ -657,6 +657,30 @@ const Routes = [
     component: lazy(() => import('../../views/report/bankGTransca'))
   },
   {
+    path: '/Nodal/transcation',
+    component: lazy(() => import('../../views/Nodal/Transcation'))
+  },
+  {
+    path: '/Nodal/transcations/add',
+    component: lazy(() => import('../../views/Nodal/Transcation/add'))
+  },
+  {
+    path: '/Nodal/transcations/edit/:id',
+    component: lazy(() => import('../../views/Nodal/Transcation/edit'))
+  },
+  {
+    path: '/Nodal/ReceiptPayment',
+    component: lazy(() => import('../../views/Nodal/RcptPayreport'))
+  },
+  // {
+  //   path: '/Nodal/pendingreceipt',
+  //   component: lazy(() => import('../../views/Nodal/PendingRecip'))
+  // },
+  // {
+  //   path: '/Nodal/pendingpayment',
+  //   component: lazy(() => import('../../views/Nodal/PendingPayment'))
+  // },
+  {
     path: '/settings',
     component: lazy(() => import('../../views/settings'))
   },
