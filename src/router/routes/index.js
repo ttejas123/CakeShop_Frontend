@@ -73,6 +73,26 @@ const Routes = [
     component: lazy(() => import('../../views/master/vas/vas'))
   },
   {
+    path: '/master/vass/Provider',
+    component: lazy(() => import('../../views/master/vas/provider'))
+  },
+  {
+    path: '/master/vass/Transaction',
+    component: lazy(() => import('../../views/master/vas/transaction'))
+  },
+  {
+    path: '/master/vass/orderlist',
+    component: lazy(() => import('../../views/master/vas/orderlist'))
+  },
+  {
+    path: '/master/vass/trans/add',
+    component: lazy(() => import('../../views/master/vas/trascAdd'))
+  },
+  {
+    path: '/master/CritJunReport',
+    component: lazy(() => import('../../views/master/CritJunRep'))
+  },
+  {
     path: '/brand',
     component: lazy(() => import('../../views/master/brand/brand'))
   },
