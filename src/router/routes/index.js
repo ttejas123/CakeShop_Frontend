@@ -662,6 +662,9 @@ const Routes = [
     layout: 'BlankLayout'
   },
   {
+    // path: '/user',
+    // component: lazy(() => import('../../views/user/list')),
+    // layout: 'BlankLayout'
     path: '/ccdashboard',
     component: lazy(() => import('../../views/dashboards/call_center'))
   },
@@ -676,7 +679,18 @@ const Routes = [
   {
     path: '/comingSoon',
     component: lazy(() => import('../../views/pages/comingSoon'))
+  },
+  {
+    path: '/master/Keyword/List',
+    component: lazy(() => import('../../views/master/sponsoredKeyword/List'))
+  },
+  {
+    path: '/add-sponsored_keyword',
+    component: lazy(() => import('../../views/master/sponsoredKeyword/Add'))
   }
+  
+
+  // 
 ]
 
 export { DefaultRoute, TemplateTitle, Routes }

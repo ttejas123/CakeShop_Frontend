@@ -594,6 +594,19 @@ export default [
         ]
       },
       {
+        id: 'Keyword',
+        title: 'Keyword',
+        icon: <Circle size={20} />,
+        children: [
+          {
+            id: 'Keyword',
+            title: 'List',
+            icon: <Circle size={20} />,
+            navLink: '/master/Keyword/List'
+          }
+        ]
+        },
+        {      
         id: 'SKU',
         title: 'SKU',
         icon: <Circle size={20} />,
@@ -617,8 +630,9 @@ export default [
             navLink: '/master/SKUs/sellers'
           }
         ]
-      }
+      }  
     ]
+    
   },
   {
     id: 'Report',
@@ -988,7 +1002,19 @@ export default [
       }
     ]
   },
+  // {
+  //   id: 'BrandPage',
+  //   title: 'Brand',
+  //   icon: <AtSign size={20} />,
+  //   navLink: '/brand'
+  // },
   {
+    id: 'UserList',
+    title: 'KOMALTest',
+    icon: <AtSign size={20} />,
+    navLink: '/usertest'
+  },
+    {
         id: 'LOGOUT',
         title: 'LOGOUT',
         icon: <LogOut size={20} />,
