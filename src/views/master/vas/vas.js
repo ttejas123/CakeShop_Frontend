@@ -91,7 +91,7 @@ const DataTableWithButtons = () => {
             return (
                 <div className='d-flex align-items-center'>
                   <div className='user-info text-truncate'>
-                    <span className='d-block font-weight-bold text-truncate'>${row.Cost}</span>
+                    <span className='d-block font-weight-bold text-truncate'>₹{row.Cost}</span>
                   </div>
                 </div>
             )

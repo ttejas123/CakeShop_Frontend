@@ -204,28 +204,46 @@ export default [
            navLink: '/master/bidcommissionchange'
       },
       {
+           id: 'Critical_Junction_Report',
+           title: 'Critical Junction Report',
+           icon: <Circle size={20} />,
+           navLink: '/master/CritJunReport'
+      },
+      {
         id: 'ValueAddedServices',
         title: 'VAS',
         icon: <Circle size={20} />,
         children: [
                 {
-                  id: 'catalogue',
+                  id: 'vas',
                   title: 'VAS',
                   icon: <Circle size={20} />,
                   navLink: '/master/vas'
                 },
                 {
-                  id: 'myProducts',
-                  title: 'Transaction',
+                  id: 'Provider',
+                  title: 'Provider',
                   icon: <Circle size={20} />,
-                  navLink: '/master/Transaction'
+                  navLink: '/master/vass/Provider'
                 },
                 {
-                  id: 'add',
-                  title: 'Add',
+                  id: 'vas_transac',
+                  title: 'Transaction',
                   icon: <Circle size={20} />,
-                  navLink: '/master/ Order List'
-                }            
+                  navLink: '/master/vass/Transaction'
+                },
+                {
+                  id: 'vas_transc_add',
+                  title: 'Transaction Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/vass/trans/add'
+                },
+                {
+                  id: 'Order_List',
+                  title: 'Order List',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/vass/orderlist'
+                }
         ]
       },
       {
