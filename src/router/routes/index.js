@@ -680,14 +680,14 @@ const Routes = [
     path: '/Nodal/ReceiptPayment',
     component: lazy(() => import('../../views/Nodal/RcptPayreport'))
   },
-  // {
-  //   path: '/Nodal/pendingreceipt',
-  //   component: lazy(() => import('../../views/Nodal/PendingRecip'))
-  // },
-  // {
-  //   path: '/Nodal/pendingpayment',
-  //   component: lazy(() => import('../../views/Nodal/PendingPayment'))
-  // },
+  {
+    path: '/Nodal/pendingreceipt',
+    component: lazy(() => import('../../views/Nodal/PendingRecip'))
+  },
+  {
+    path: '/Nodal/pendingpayment',
+    component: lazy(() => import('../../views/Nodal/PendingPayment'))
+  },
   {
     path: '/settings',
     component: lazy(() => import('../../views/settings'))
@@ -731,9 +731,12 @@ const Routes = [
   {
     path: '/add-sponsored_keyword',
     component: lazy(() => import('../../views/master/sponsoredKeyword/Add'))
+  },
+  {
+    path: '/report/pinbaseactivity',
+    component: lazy(() => import('../../views/report/pinActivity/list'))
   }
   
-
   // 
 ]
 

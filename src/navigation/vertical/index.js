@@ -880,7 +880,14 @@ export default [
         title: 'Customer',
         icon: <Circle size={20} />,
         navLink: '/report/customer'
+      },
+      {
+        id: 'PIN Activity',
+        title: 'PIN Activity',
+        icon: <Circle size={20} />,
+        navLink: '/report/pinbaseactivity'
       }
+    
     ]
   },
   {
