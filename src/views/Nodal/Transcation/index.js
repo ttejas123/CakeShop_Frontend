@@ -119,20 +119,63 @@ const DataTableWithButtons = () => {
           name: 'Type',
           selector: 'Type[0].value',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className='d-flex flex-column'>
+                { row.Type[0].value === "Recieved from" ? (
+                                  
+                                  <img src="https://img.icons8.com/wired/25/000000/coin-in-hand.png"/>
+                                  ) : (
+                                  <img src="https://img.icons8.com/ios-filled/25/000000/payment-processed.png"/>
+                                  )
+                }
+                
+              </div>
+            </div>
+          )
         },
-        // {
-        //   name: 'Customization available',
-        //   selector: 'Customization_available[0].value',
-        //   sortable: true,
-        //   minWidth: '150px'
-        // },
-        // {
-        //   name: 'Inspection',
-        //   selector: 'Inspection[0].value',
-        //   sortable: true,
-        //   minWidth: '150px'
-        // },
+        {
+          name: 'Recieved',
+          selector: 'Recieved',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className='d-flex flex-column'>
+                { row.Type[0].value === "Recieved from" ? (
+                                  <span className='font-weight-bold'>Yes</span>
+                                  ) : (
+                                  <span className='font-weight-bold'></span>
+                                  )
+                }
+                
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'Paid',
+          selector: 'Paid',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className='d-flex flex-column'>
+                { row.Type[0].value === "Paid To" ? (
+                                  <span className='font-weight-bold'>Yes</span>
+                                  ) : (
+                                  <span className='font-weight-bold'></span>
+                                  )
+                }
+                
+              </div>
+            </div>
+          )
+        },
         {
           name: 'Total Amount',
           selector: 'Total_amout',

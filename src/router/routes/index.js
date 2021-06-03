@@ -209,6 +209,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/order/add'))
   },
   {
+    path: '/master/calculator',
+    component: lazy(() => import('../../views/master/claculator'))
+  },
+  {
     path: '/master/membership/view',
     component: lazy(() => import('../../views/master/membership/membershipView'))
   },
@@ -665,6 +669,10 @@ const Routes = [
     component: lazy(() => import('../../views/report/bankGTransca'))
   },
   {
+    path: '/report/orderclancel',
+    component: lazy(() => import('../../views/report/Order_Cancel'))
+  },
+  {
     path: '/Nodal/transcation',
     component: lazy(() => import('../../views/Nodal/Transcation'))
   },
@@ -680,14 +688,14 @@ const Routes = [
     path: '/Nodal/ReceiptPayment',
     component: lazy(() => import('../../views/Nodal/RcptPayreport'))
   },
-  // {
-  //   path: '/Nodal/pendingreceipt',
-  //   component: lazy(() => import('../../views/Nodal/PendingRecip'))
-  // },
-  // {
-  //   path: '/Nodal/pendingpayment',
-  //   component: lazy(() => import('../../views/Nodal/PendingPayment'))
-  // },
+  {
+    path: '/Nodal/pendingreceipt',
+    component: lazy(() => import('../../views/Nodal/PendingRecip'))
+  },
+  {
+    path: '/Nodal/pendingpayment',
+    component: lazy(() => import('../../views/Nodal/PendingPayment'))
+  },
   {
     path: '/settings',
     component: lazy(() => import('../../views/settings'))

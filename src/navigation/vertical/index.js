@@ -207,7 +207,13 @@ export default [
            id: 'Critical_Junction_Report',
            title: 'Critical Junction Report',
            icon: <Circle size={20} />,
-           navLink: '/master/CritJunReport'
+           navLink: '/master/calculator'
+      },
+      {
+           id: 'Calculator',
+           title: 'Calculator',
+           icon: <Circle size={20} />,
+           navLink: '/master/calculator'
       },
       {
         id: 'ValueAddedServices',
@@ -880,6 +886,12 @@ export default [
         title: 'Customer',
         icon: <Circle size={20} />,
         navLink: '/report/customer'
+      },
+      {
+        id: 'Order_Cancel',
+        title: 'Order Cancel',
+        icon: <Circle size={20} />,
+        navLink: '/report/orderclancel'
       }
     ]
   },
