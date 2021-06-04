@@ -44,6 +44,7 @@ export const data1 = [
 
         id:1,
         avatar:'',
+        samount: "₹3400",
         rating: 1,
         transaction: 200000,
         balance: 30000,
@@ -60,6 +61,7 @@ export const data1 = [
       {
         id:2,
         avatar:pravin,
+        samount: "₹3400",
         rating: 7.85,
         transaction: 200000,
         balance: 30000,
@@ -75,6 +77,7 @@ export const data1 = [
       {
         id:3,
         avatar:komal,
+        samount: "₹3400",
         rating: 6.75,
         transaction: 200000,
         balance: 30000,
@@ -90,6 +93,7 @@ export const data1 = [
       {
         id:4,
         avatar:'',
+        samount: "₹3400",
         rating: 6.5,
         transaction: 200000,
         balance: 30000,
@@ -105,6 +109,7 @@ export const data1 = [
       {
         id:5,
         avatar:"",
+        samount: "₹3400",
         rating: 2,
         transaction: 200000,
         balance: 30000,
@@ -120,6 +125,7 @@ export const data1 = [
       {
         id:6,
         avatar:reethika,
+        samount: "₹3400",
         rating: 9,
         transaction: 200000,
         balance: 30000,
@@ -135,6 +141,7 @@ export const data1 = [
       {
         id:7,
         avatar:"",
+        samount: "₹3400",
         rating: 10,
         transaction: 200000,
         balance: 30000,
@@ -150,6 +157,7 @@ export const data1 = [
       {
         id:8,
         avatar:"",
+        samount: "₹3400",
         rating: 2,
         transaction: 200000,
         balance: 30000,
@@ -165,6 +173,7 @@ export const data1 = [
       {
         id:9,
         avatar:"",
+        samount: "₹3400",
         rating: 2.0,
         transaction: 200000,
         balance: 30000,

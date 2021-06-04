@@ -1,5 +1,6 @@
 import Chart from 'react-apexcharts'
 import Avatar from '@components/avatar'
+import { Link } from 'react-router-dom'
 import { MoreVertical } from 'react-feather'
 import {
   Card,
@@ -11,7 +12,8 @@ import {
   UncontrolledDropdown,
   DropdownMenu,
   DropdownItem,
-  DropdownToggle
+  DropdownToggle,
+  Button
 } from 'reactstrap'
 import komal  from '../../../../../../assets/images/logo/komal.jpg'
 import pravin  from '../../../../../../assets/images/logo/pravin.jpg'
@@ -73,6 +75,13 @@ const CardBrowserState = ({ colors, trackBgColor }) => {
       <CardHeader>
         <div>
           <CardTitle tag='h4'>Participants</CardTitle>
+        </div>
+        <div color='' className='bg-transparent border-0' >
+          <Link to={`/bidDetail/communication`}>
+              <Button>
+                View Chats
+              </Button>
+          </Link>
         </div>
       </CardHeader>
       <CardBody>{renderStates()}</CardBody>

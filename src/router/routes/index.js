@@ -21,6 +21,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/bids/bidDetails'))
   },
   {
+    path: '/bidDetail/communication',
+    component: lazy(() => import('../../views/master/bids/ui-elements/newCards/Comnicatn.js'))
+  },
+  {
     path: '/productDetails',
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
@@ -207,6 +211,10 @@ const Routes = [
   {
     path: '/membership-list',
     component: lazy(() => import('../../views/master/membership/membershipList'))
+  },
+  {
+    path: '/master/membershipavail/edit',
+    component: lazy(() => import('../../views/master/membership/membershipComp/edits.js'))
   },
   {
     path: '/master/corporate/corpmanag',
