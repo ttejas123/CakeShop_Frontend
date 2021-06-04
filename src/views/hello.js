@@ -1,42 +1,17 @@
-//Hello
+// 1. SKU selection
+// 2. Order Cancel :- a. Order_Id, 
+				//	  b. Products(All Info),
+				//    c. Amount_Paid , 
+				//    d. Seller_Info, 
+				//    e. buyer_Info
+				//    f. Cancle_date, 
+				//    g. cancle_resoson
 
-//189 2. Nodal Transcation Add/edit :- 
-			//1. Transcation type(Pay, Receive)
-			//2. On Bid(Drop Down of Bid) 
-			//3. Amout 
-			//4. User
 
-
-//190 3. Nodal TranscationList
-			// Date,
-			// Type
-			// Recieved from
-			// Paid to
-			// Bid Info
-			// Additinal Info
-			// Comment
-			// Total amout
-			// Amount paid
-			// Balance
-
-//191 4. Receipt and Payment report
-			// Date,
-			// Type
-			// Recieved from
-			// Paid to
-			// Bid Info
-			// Additinal Info
-			// Comment
-			// Total amout
-			// Amount paid
-			// Balance
-
-//192 5. Pending Receipt
-			//User,
-			//Bid, 
-			//Amount Paid,
-			//comment,
-			//date
+// calculator 
+//  	1. textbox => base amunt 
+//  	2. gst slider => 
+//  	3. bidoya slider => 
 
 // 1. add working files
 // 2. npm install and run after that 

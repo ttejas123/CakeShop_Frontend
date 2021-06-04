@@ -207,7 +207,13 @@ export default [
            id: 'Critical_Junction_Report',
            title: 'Critical Junction Report',
            icon: <Circle size={20} />,
-           navLink: '/master/CritJunReport'
+           navLink: '/master/calculator'
+      },
+      {
+           id: 'Calculator',
+           title: 'Calculator',
+           icon: <Circle size={20} />,
+           navLink: '/master/calculator'
       },
       {
         id: 'ValueAddedServices',
@@ -886,6 +892,18 @@ export default [
         title: 'PIN Activity',
         icon: <Circle size={20} />,
         navLink: '/report/pinbaseactivity'
+        },
+        {
+          id: 'PIN Access',
+          title: 'PIN Access',
+          icon: <Circle size={20} />,
+          navLink: '/report/pinaccess'
+          },
+        {
+        id: 'Order_Cancel',
+        title: 'Order Cancel',
+        icon: <Circle size={20} />,
+        navLink: '/report/orderclancel'
       }
     
     ]

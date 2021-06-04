@@ -1,14 +1,8 @@
-      //User,
-      //Bid, 
-      //Amount Paid,
-      //comment,
-      //date
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
@@ -19,12 +13,10 @@ import { selectThemeColors } from '@utils'
 import { data } from './data'
 import Select from 'react-select'
 
-// ** Add New Modal Component
-
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye, Trash  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye  } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -42,33 +34,37 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
-// ** Bootstrap Checkbox Component
-const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
-  <div className='custom-control custom-checkbox'>
-    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
-    <label className='custom-control-label' onClick={onClick} />
-  </div>
-))
-
-
 // ** Renders Client Columns
-const renderClient = row => {
+const renderSeller = row => {
   const stateNum = Math.floor(Math.random() * 6),
     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
     color = states[stateNum]
 
-  if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  if (row.sellers_avatar.length) {
+    return <Avatar className='mr-1' img={row.sellers_avatar} width='32' height='32'  />
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.User.value || 'John Doe'} initials status="online" />
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Seller_Info || 'John Doe'} initials status="online" />
+  }
+}
+
+// ** Renders Client Columns
+const renderBuyer = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.buyer_avatar.length) {
+    return <Avatar className='mr-1' img={row.buyer_avatar} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.buyer_Info || 'John Doe'} initials status="online" />
   }
 }
 
 const DataTableWithButtons = () => {
   const statusObj = {
         pending: 'light-secondary',
-        approved: 'light-success',
-        approval: 'light-warning'
+        send: 'light-success',
+        failed: 'light-danger'
   }
   // ** States
   const [modal, setModal] = useState(false)
@@ -78,66 +74,79 @@ const DataTableWithButtons = () => {
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-    const deleteData = (val) => {
+   //view
+  const view = (val) => {
     //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
+   setModal(true)
   }
 
   //columns
   const columns = [
         {
-          name: 'User',
-          minWidth: '250px',
-          selector: 'User.value',
+          name: 'Order_Id',
+          selector: 'Order_Id',
           sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Seller ',
+          selector: 'Seller_Info',
+          sortable: true,
+          minWidth: '150px',
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(row)}
-              <div className='d-flex flex-column'>
+              {renderSeller(row)}
+              <div className=''>
                 
-                  <span className='font-weight-bold'>{row.User.value}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.Seller_Info}</span>
+                     <small className='text-truncate text-muted mb-0'>@{row.sellers_userName}</small>
+                  </div>
+                  
               </div>
             </div>
           )
         },
         {
-          name: 'Bid',
-          selector: 'Bid[0].value',
+          name: 'Buyer ',
+          selector: 'buyer_Info',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderBuyer(row)}
+              <div className=''>
+                
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.buyer_Info}</span>
+                     <small className='text-truncate text-muted mb-0'>@{row.buyers_userName}</small>
+                  </div>
+                  
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'Products',
+          selector: 'Products_name',
           sortable: true,
           minWidth: '150px'
         },
         {
           name: 'Amount Paid',
-          selector: 'Amount_paid',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              
-              <div className='d-flex flex-column'>
-                
-                  <span className='font-weight-bold'>₹{row.Amount_paid}</span>
-                
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Comment',
-          selector: 'Comment',
+          selector: 'Amount_Paid',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Date',
-          selector: 'Date',
+          name: 'Cancle Resoson',
+          selector: 'cancle_resoson',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Cancel Date',
+          selector: 'Cancle_date',
           sortable: true,
           minWidth: '150px'
         }
@@ -149,7 +158,13 @@ const DataTableWithButtons = () => {
     setModal(!modal)
   }
 
-    // ** Converts table to CSV
+  // ** Function to handle Pagination
+  const handlePagination = page => {
+    setCurrentPage(page.selected)
+  }
+
+
+  // ** Converts table to CSV
   function convertArrayOfObjectsToCSV(array) {
     let result
 
@@ -193,44 +208,6 @@ const DataTableWithButtons = () => {
     link.click()
   }
 
-  // ** Function to handle filter
-  const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        
-        const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
-        const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
-
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
-  }
-
-  // ** Function to handle Pagination
-  const handlePagination = page => {
-    setCurrentPage(page.selected)
-  }
 
   // ** Custom Pagination
   const CustomPagination = () => (
@@ -265,8 +242,9 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Nodal Pending Receipt</CardTitle>
+          <CardTitle tag='h4'>Order Cancel</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
+              
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
                 <Share size={15} />
@@ -301,7 +279,6 @@ const DataTableWithButtons = () => {
         <DataTable
           noHeader
           pagination
-          selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
@@ -309,11 +286,10 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
-          selectableRowsComponent={BootstrapCheckbox}
         />
         
       </Card>
-      
+       
     </Fragment>
   )
 }

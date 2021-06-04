@@ -40,6 +40,9 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
+import GeneratePin from './generatePIN'
+
+
 // ** Renders EMployee Columns
 const renderEmployee = row => {
   const stateNum = Math.floor(Math.random() * 6),
@@ -78,17 +81,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
-    const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
+  const [addClicked, setAddClicked] = useState(0) 
 
   //columns
   const columns = [
@@ -130,20 +123,20 @@ const DataTableWithButtons = () => {
             </div>
           )
         },
-        {
-          name: 'Activity',
-          selector: 'Activity',
-          minWidth: '150px',
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
+        // {
+        //   name: 'Activity',
+        //   selector: 'Activity',
+        //   minWidth: '150px',
+        //   cell: row => (
+        //     <div className='d-flex justify-content-left align-items-center'>
 
-              <div className='d-flex flex-column'>
+        //       <div className='d-flex flex-column'>
                 
-                  <span className='font-weight-bold'>{row.Activity[0]}</span>
-              </div>
-            </div>
-          )
-        },
+        //           <span className='font-weight-bold'>{row.Activity[0]}</span>
+        //       </div>
+        //     </div>
+        //   )
+        // },
         
         {
           name: 'PIN',
@@ -152,12 +145,45 @@ const DataTableWithButtons = () => {
           minWidth: '150px'
         },
         {
-          name: 'Activiy Time',
-          selector: 'Activiy_Time',
+          name: 'PIN ID',
+          selector: 'PIN_ID',
           sortable: true,
           minWidth: '150px'
         },
+        {
+          name: 'Reason',
+          selector: 'Reason',
+          sortable: true,
+          // minWidth: '150px'.
+               cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.Reason}</span>
+              </div>
+            </div>
+          )
+        },
        
+        {
+          name: 'PIN Generate Time',
+          selector: 'PIN_Generate_Time',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Login Time',
+          selector: 'Login_Time',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Logout Time',
+          selector: 'Logout_Time',
+          sortable: true,
+          minWidth: '150px'
+        },
         {
           name: 'Duration',
           selector: 'Duration',
@@ -237,8 +263,9 @@ const DataTableWithButtons = () => {
       containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
     />
   )
+
   const handleAddClick = () => {
-    // setAddClicked(!addClicked)
+    setAddClicked(!addClicked)
 
   }
 
@@ -253,42 +280,51 @@ const DataTableWithButtons = () => {
           {/* <div className='d-flex mt-md-0 mt-1'>
              
           </div> */}
-        
+          {/* <Link to={`/add-sponsored_keyword`}> */}
+            <Button className='ml-2' color='primary' onClick={handleAddClick} >
+              <Plus size={15} />
+              <span className='align-middle ml-50'>Access Customer Portal</span>
+            </Button>
+
+          {/* </Link> */}
            
         </CardHeader>
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
+        {addClicked ? <GeneratePin /> : null}
+        <CardBody>
+          <Row className='justify-content-end mx-0'>
+            <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+              <Label className='mr-1' for='search-input'>
+                Search
             </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
-        <DataTable
-          noHeader
-          pagination
-          responsive={true}
-          paginationServer
-            
-          className='react-dataTable'
-          defaultSortField='invoiceId'
-          columns={columns}
-          paginationPerPage={7}
-          className='react-dataTable'
-          sortIcon={<ChevronDown size={10} />}
-          paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
-          
-        />
-        
+              <Input
+                className='dataTable-filter mb-50'
+                type='text'
+                bsSize='sm'
+                id='search-input'
+                value={searchValue}
+                onChange={handleFilter}
+              />
+            </Col>
+          </Row>
+          <DataTable
+            noHeader
+            pagination
+            responsive={true}
+            paginationServer
+
+            className='react-dataTable'
+            defaultSortField='invoiceId'
+            columns={columns}
+            paginationPerPage={7}
+            className='react-dataTable'
+            sortIcon={<ChevronDown size={10} />}
+            paginationDefaultPage={currentPage + 1}
+            paginationComponent={CustomPagination}
+            data={searchValue.length ? filteredData : data}
+
+          />
+        </CardBody>
+
       </Card>
       
     </Fragment>
