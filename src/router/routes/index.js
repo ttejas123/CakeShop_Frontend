@@ -783,9 +783,16 @@ const Routes = [
   {
     path: '/add-sponsored_keyword',
     component: lazy(() => import('../../views/master/sponsoredKeyword/Add'))
+  },
+  {
+    path: '/report/pinbaseactivity',
+    component: lazy(() => import('../../views/report/pinActivity/list'))
+  },
+  {
+    path: '/report/pinaccess',
+    component: lazy(() => import('../../views/report/pinActivity/pinAccess/index'))
   }
   
-
   // 
 ]
 
