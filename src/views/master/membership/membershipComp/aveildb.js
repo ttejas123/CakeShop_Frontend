@@ -1,3 +1,5 @@
+//  Users
+// Start_date, expiry_date, status()
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
@@ -59,16 +61,6 @@ const renderClient = row => {
   }
 }
 
-const optionBidStatus = [
-    {value: "", label: "Filter Status"},
-    {value: "created", label: "created"},
-    {value: "live", label: "live"},
-    {value: "extended", label: "extended"},
-    {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"},
-    {value: "auto closed", label: "auto closed"}
-  ]
-
 const DataTableWithButtons = () => {
   const statusObj = {
         pending: 'light-secondary',
@@ -82,17 +74,6 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
-    const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
 
   //columns
   const columns = [
@@ -113,13 +94,25 @@ const DataTableWithButtons = () => {
           )
         },
         {
+          name: 'Start_date',
+          selector: 'Start_date',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'expiry_date',
+          selector: 'end_Date',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
           name: 'Date OF Aveiled',
           selector: 'date',
           sortable: true,
           minWidth: '150px'
         },
         {
-          name: 'Active',
+          name: 'Status',
           selector: 'active',
           sortable: true,
           minWidth: '150px'

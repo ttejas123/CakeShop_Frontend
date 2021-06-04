@@ -81,6 +81,12 @@ const optionState = [
     {value: "Up", label: "Up"}
 ]
 
+const optionUserType = [
+    {value: "Buyer", label: "Buyer"},
+    {value: "Seller", label: "Seller"},
+    {value: "Both", label: "Both"}
+]
+
 const DataTableWithButtons = () => {
   
   const statusObj = {
@@ -95,6 +101,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [FilterCity, setFilterCity] = useState('')
+  const [Filteruser, setFilteruser] = useState('')
   const [FilterState, setFilterState] = useState('')
   const [FilterCountry, setFilterCountry] = useState('')
 
@@ -292,6 +299,8 @@ const DataTableWithButtons = () => {
       setFilterState(value)
    } else if (name === 'city') {
       setFilterCity(value)
+   } else if (name === 'user') {
+      setFilteruser(value)
    }
   }
   // ** Function to handle filter
@@ -370,7 +379,24 @@ const DataTableWithButtons = () => {
         </CardHeader>
         <CardBody>
           <Row>
-            <Col md='4'>
+            <Col md='3'>
+              <Label className='mr-1' for='search-input'>
+                Filter User Type
+              </Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionUserType}
+                value={Filteruser}
+                onChange={data => {
+                  handleFilterByDropDown("user", data)
+                }}
+              />
+            </Col>
+
+            <Col md='3'>
               <Label className='mr-1' for='search-input'>
                 Filter Country
               </Label>
@@ -387,7 +413,7 @@ const DataTableWithButtons = () => {
                 }}
               />
             </Col>
-            <Col md='4'>
+            <Col md='3'>
               <Label className='mr-1' for='search-input'>
                 Filter State
               </Label>
@@ -403,7 +429,7 @@ const DataTableWithButtons = () => {
                 }}
               />
             </Col>
-            <Col md='4'>
+            <Col md='3'>
               <Label className='mr-1' for='search-input'>
                 Filter City
               </Label>

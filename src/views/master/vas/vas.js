@@ -2,12 +2,10 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
+import { Link } from 'react-router-dom'
 
 // ** Table Data & Columns
 import { data } from './data'
-
-// ** Add New Modal Component
-import ModelForm from './formModel'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -59,13 +57,6 @@ const DataTableWithButtons = () => {
       console.log("not deleted ")
       }
   }
-    //edit action
-   const AddeditEvent = (val) => {
-     //here we hande event which comming from addNewModel.js (Form for add and edit)
-     console.log(currentId)
-      setCurrentId("")
-      console.log(val)
-  }
 
   //columns
   const columns = [
@@ -83,25 +74,17 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Cost',
-          selector: 'Cost',
-          sortable: true,
-          minWidth: '250px',
-          cell: row => {
-            return (
-                <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate'>
-                    <span className='d-block font-weight-bold text-truncate'>₹{row.Cost}</span>
-                  </div>
-                </div>
-            )
-          }
-        },
-        {
           name: 'Rate',
           selector: 'rate',
           sortable: true,
-          minWidth: '250px'
+          minWidth: '250px',
+          cell: row => (
+            <div className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>{row.unit === "Hours" ? (<>₹{row.rate}/hr</>) : (<>₹{row.rate}/min</>) }</span>
+              </div>
+            </div>
+          )
         },
         {
           name: 'Quantity',
@@ -129,26 +112,15 @@ const DataTableWithButtons = () => {
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-
-                <Edit size={15} onClick={ () => { 
-                                    setCurrentId(row.id)
-                                     setAddClicked(!addClicked)
-                                     } }/>
+                <Link to={`/master/vass/edit/${row.id}`}>
+                    <Edit size={15} />
+                </Link>
               </div>
             )
           }
         }
     ]
 
-
-  // ** Function to handle toggle
-  const handleModal = () => {
-    if (addClicked === 1) {
-     setAddClicked(0)
-    } else {
-      setAddClicked(1)
-    }
-  }
 
   // ** Function to handle filter
   const handleFilter = e => {
@@ -217,18 +189,17 @@ const DataTableWithButtons = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>VAS List</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            {addClicked === 0 ? (
-                <Button className='ml-2' color='primary' onClick={handleModal}>
+              <Link to={`/master/vass/add`}>
+                <Button className='ml-2' color='primary' >
                                         <Plus size={15} />
+                                        
                                         <span className='align-middle ml-50'>Add Your Service</span>
                 </Button>
-                ) : (
-                <span></span>
-                )
-            }
+              </Link>
+                
           </div>
         </CardHeader>
-        {addClicked ? <ModelForm handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} /> : null}
+        
         <Row className='justify-content-end mx-0'>
           <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
             <Label className='mr-1' for='search-input'>

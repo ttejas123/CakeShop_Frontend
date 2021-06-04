@@ -51,8 +51,10 @@ export const data1 = [
         customizations :"Logo of team",
         username:"tejas",
         Name:"Tejas",
+        Start_date: `${new Date().toGMTString()}`,
+        end_Date: `${new Date().toGMTString()}`,
         date: '04-09-2021',
-        active : "Yes"
+        active : "Ongoing"
 
       },
       {
@@ -65,8 +67,10 @@ export const data1 = [
         customizations :"differnt Color",
         username:"pravinn2",
         Name:"Pravin",
+        Start_date: `${new Date().toGMTString()}`,
+        end_Date: `${new Date().toGMTString()}`,
         date: '04-09-2021',
-        active : "Yes"
+        active : "Ongoing"
       },
       {
         id:3,
@@ -78,8 +82,10 @@ export const data1 = [
         customizations :"Company WaterMark",
         username:"komal12",
         Name:"Komal",
+        Start_date: `${new Date().toGMTString()}`,
+        end_Date: `${new Date().toGMTString()}`,
         date: '04-09-2021',
-        active : "Yes"
+        active : "Ongoing"
       },
       {
         id:4,
@@ -91,8 +97,10 @@ export const data1 = [
         customizations :"Logo of team",
          username:"mehulq1",
        Name:"Mehul",
+       Start_date: `${new Date().toGMTString()}`,
+       end_Date: `${new Date().toGMTString()}`,
        date: '04-09-2021',
-       active : "No"
+       active : "Completed"
       },
       {
         id:5,
@@ -104,8 +112,10 @@ export const data1 = [
         customizations :"differnt Color",
         username:"harpriya23",
         Name:"Harpriya",
+        Start_date: `${new Date().toGMTString()}`,
+        end_Date: `${new Date().toGMTString()}`,
         date: '04-09-2021',
-        active : "Yes"
+        active : "Ongoing"
       },
       {
         id:6,
@@ -117,8 +127,10 @@ export const data1 = [
         customizations :"Company WaterMark",
         username:"Reethika45",
         Name:"Reethika",
+        Start_date: `${new Date().toGMTString()}`,
+        end_Date: `${new Date().toGMTString()}`,
         date: '04-09-2021',
-        active : "Yes"
+        active : "Ongoing"
       },
       {
         id:7,
@@ -130,8 +142,10 @@ export const data1 = [
         customizations :"Company WaterMark",
         username:"himanshu23",
         Name:"Himanshu",
+        Start_date: `${new Date().toGMTString()}`,
+        end_Date: `${new Date().toGMTString()}`,
         date: '04-09-2021',
-        active : "Yes"
+        active : "Ongoing"
       },
       {
         id:8,
@@ -143,8 +157,10 @@ export const data1 = [
         customizations :"Logo of team",
         username:"suryadas",
         Name:"Surya_Das",
+        Start_date: `${new Date().toGMTString()}`,
+        end_Date: `${new Date().toGMTString()}`,
         date: '04-09-2021',
-        active : "No"
+        active : "Completed"
       },
       {
         id:9,
@@ -156,8 +172,10 @@ export const data1 = [
         customizations :"Company WaterMark",
         username:"avinash",
         Name:"Avinash",
+        Start_date: `${new Date().toGMTString()}`,
+        end_Date: `${new Date().toGMTString()}`,
         date: '04-09-2021',
-        active : "No"
+        active : "Completed"
       }
 ]
 

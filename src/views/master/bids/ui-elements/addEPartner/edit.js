@@ -92,12 +92,9 @@ const UserAccountTab = (prop) => {
         console.log(data[id - 1])
         setValues({
           ...data[id - 1],
-          extra : {value: "user1212", label: part(data[0])}
+          extra : [{value: "user1212", label: part(data[id - 1])}]
         })
-        console.log({
-          ...data[id - 1],
-          extra : [{value: "user1212", label: part(data[0])}]
-        })
+        
     
   }, [id])
 
@@ -157,7 +154,7 @@ const UserAccountTab = (prop) => {
                                      setValues(
                                               {
                                                  ...values,
-                                                 BidStatus : data
+                                                 extra : data
                                               } 
                                       )
                                     }

@@ -48,8 +48,8 @@ export default [
     icon: <Codesandbox size={20} />,
     children: [
       {
-        id: 'Bids',
-        title: 'Bids',
+        id: 'RFQ',
+        title: 'RFQ',
         icon: <Circle size={20} />,
         navLink: '/bids'
       },
@@ -219,7 +219,7 @@ export default [
            id: 'Critical_Junction_Report',
            title: 'Critical Junction Report',
            icon: <Circle size={20} />,
-           navLink: '/master/calculator'
+           navLink: '/master/CritJunReport'
       },
       {
            id: 'Calculator',
@@ -954,7 +954,7 @@ export default [
   {
     id: 'Nodal',
     title: 'Nodal',
-    icon: <Share size={20} />,
+    icon: <img src="https://img.icons8.com/metro/21/000000/refund-2.png" className="pr-1"/>,
     children: [
       {
         id: 'Nodal_Transcation',
@@ -965,7 +965,7 @@ export default [
       {
         id: 'Receipt_and_Payment_report',
         title: 'Receipt And Payment Report',
-        icon: <Circle size={20} />,
+        icon: <Circle size={32} />,
         navLink: '/Nodal/ReceiptPayment'
       },
       {
