@@ -258,7 +258,12 @@ const DataTableWithButtons = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Lead</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+              <Link to={`/master/Leads/fileupload`}>
+                  <Button className='ml-2' color='primary' >
+                                              <Plus size={15} />
+                                              <span className='align-middle ml-50'>Import From File</span>
+                  </Button>
+            </Link>
           </div>
         </CardHeader>
 

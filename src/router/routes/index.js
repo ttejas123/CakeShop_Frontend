@@ -93,6 +93,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/vas/trascAdd'))
   },
   {
+    path: '/master/vass/add',
+    component: lazy(() => import('../../views/master/vas/add'))
+  },
+  {
+    path: '/master/vass/edit/:id',
+    component: lazy(() => import('../../views/master/vas/edit'))
+  },
+  {
     path: '/master/CritJunReport',
     component: lazy(() => import('../../views/master/CritJunRep'))
   },
@@ -369,6 +377,18 @@ const Routes = [
     component: lazy(() => import('../../views/master/Lead'))
   },
   {
+    path: '/master/Leads/add',
+    component: lazy(() => import('../../views/master/Lead/leadAdd/add'))
+  },
+  {
+    path: '/master/Leads/edit/:id',
+    component: lazy(() => import('../../views/master/Lead/edit'))
+  },
+  {
+    path: '/master/Leads/fileupload',
+    component: lazy(() => import('../../views/master/Lead/fileupload'))
+  },
+  {
     path: '/master/Invoice/List',
     component: lazy(() => import('../../views/master/InvoiceL/List'))
   },
@@ -379,14 +399,6 @@ const Routes = [
   {
     path: '/master/Invoice/view',
     component: lazy(() => import('../../views/master/InvoiceL/view'))
-  },
-  {
-    path: '/master/Leads/add',
-    component: lazy(() => import('../../views/master/Lead/leadAdd/add'))
-  },
-  {
-    path: '/master/Leads/edit/:id',
-    component: lazy(() => import('../../views/master/Lead/edit'))
   },
   {
     path: '/master/corporateRole',

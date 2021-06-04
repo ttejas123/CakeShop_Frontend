@@ -147,7 +147,7 @@ const UserAccountTab = (prop) => {
                                      setValues(
                                               {
                                                  ...values,
-                                                 BidStatus : data
+                                                 extra : data
                                               } 
                                       )
                                     }

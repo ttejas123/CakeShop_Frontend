@@ -10,84 +10,84 @@ export const data = [
         Name: "instagram manager",
         Cost: 800,
         id: 1,
-        rate : 1000,
-        quantity : 100,
+        rate : 250,
+        quantity : "10hr",
         D_Name : "Komal Kamble",
         username: "pravin",
         avatar: komal,
-        unit : "units"
+        unit : "Hours"
       },
       {
         behalf:"",
         Name: "editor",
         Cost: 400,
         id: 2,
-        rate : 2000,
-        quantity : 200,
+        rate : 700,
+        quantity : "20hr",
         D_Name : "Pravin Poshmani",
         username: "komal",
         avatar: pravin,
-        unit : "units"
+        unit : "Minutes"
       },
       {
         behalf:"",
         Name: "Keyword finder",
         Cost: 200,
         id: 3,
-        rate : 3000,
-        quantity : 300,
+        rate : 700,
+        quantity : "30hr",
         D_Name : "Pravin Poshmani",
         username: "pravin",
         avatar: "",
-        unit : "units"
+        unit : "Minutes"
       },
       {
         behalf:"",
         Name: "Web devlopment",
         Cost: 300,
         id: 4,
-        rate : 4000,
-        quantity : 400,
+        rate : 650,
+        quantity : "40hr",
         D_Name : "Pravin Poshmani",
         username: "pravin",
         avatar: "",
-        unit : "units"
+        unit : "Minutes"
       },
       {
         behalf:"",
         Name: "instagram manager",
         Cost: 750,
         id: 5,
-        rate : 5000,
-        quantity : 500,
+        rate : 700,
+        quantity : "50hr",
         D_Name : "Pravin Poshmani",
         username: "pravin",
         avatar: "",
-        unit : "units"
+        unit : "Hours"
       },
       {
         behalf:"",
         Name: "editor",
         Cost: 400,
         id: 6,
-        rate : 6000,
-        quantity : 600,
+        rate : 340,
+        quantity : "60hr",
         D_Name : "Pravin Poshmani",
         username: "pravin",
         avatar: "",
-        unit : "units"
+        unit : "Hours"
       },
       {
         behalf:"",
         Name: "Keyword finder",
         Cost: 200,
         id: 7,
-        rate : 7000,
-        quantity : 700,
+        rate : 700,
+        quantity : "70hr",
         D_Name : "Pravin Poshmani",
         username: "pravin",
         avatar: "",
-        unit : "units"
+        unit : "Hours"
       }
       // {
       //   Name: "Web devlopment",

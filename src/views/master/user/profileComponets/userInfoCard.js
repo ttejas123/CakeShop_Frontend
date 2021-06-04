@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Avatar from '@components/avatar'
 import { data } from '../data.js'
 // ** Third Party Components
-import { DollarSign, TrendingUp, User, Check, Star, Flag, Phone, CheckCircle } from 'react-feather'
+import { DollarSign, TrendingUp, User, Check, Star, Flag, Phone, CheckCircle, XCircle } from 'react-feather'
 import {
   Row, Col,
   Card,
@@ -35,9 +35,9 @@ const UserInfoCard = (props) => {
       lastLogin: ''
     }
   const [statesArr, setstatesArr] = useState(init)
-  console.log(props.userId)
+  
   useEffect(() => {
-    console.log(data[props.userId - 1])
+    
     setstatesArr({
       ...data[props.userId - 1]
     })
@@ -100,19 +100,60 @@ const UserInfoCard = (props) => {
               </div>
             </div>
             <div>
-                 <div className="d-flex mt-2">
-                    <Badge className='card-text w-25 mr-25 mb-1' color="light-success" pill>
+                <Row className='mt-1'>
+                    <Col xl='10' md='10' xs='10' >
+                      <Badge className='card-text mr-25 pr-1 pl-1' color="light-success" pill>
                           <h5 className='mb-0'> Buyer </h5>
-                    </Badge>
-                    <div className='ml-1'>- <img className='ml-1' src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
-                  </div>
-                 <div className="d-flex">
-                    <Badge className='card-text w-25 mr-25 mb-0' color="light-success" pill>
+                      </Badge>-
+                    </Col>
+                    <Col xl='2' md='2' xs='2'>
+                          <div ><img  src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
+                    </Col>
+                </Row>
+                <Row className='mt-1'>
+                    <Col xl='10' md='10' xs='10' >
+                      <Badge className='card-text mr-25  pr-1 pl-1' color="light-success" pill>
                           <h5 className='mb-0'> Seller </h5>
-                    </Badge>
-                    <div className='ml-1'>- <img className='ml-1' src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
-                  </div>
+                      </Badge>-
+                    </Col>
+                    <Col xl='2' md='2' xs='2'>
+                          <div className=''> <img  src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
+                    </Col>
+                </Row>
+                <Row className='mt-1'>
+                    <Col xl='10' md='10' xs='10' >
+                      <Badge className='card-text mr-25 pr-1 pl-1' color="light-success" pill>
+                          <h5 className='mb-0'>Bank Guarantee</h5>
+                    </Badge>-
+                    </Col>
+                    <Col xl='2' md='2' xs='2'>
+                          <div className=''>
+                                <XCircle  size={29} color="red"/>
+                          </div>
+                    </Col>
+                </Row>
+                <Row className='mt-1'>
+                    <Col xl='10' md='10' xs='10' >
+                      <Badge className='card-text mr-25 pr-1 pl-1' color="light-success" pill>
+                          <h5 className='mb-0'> Credit Available </h5>
+                    </Badge>-
+                    </Col>
+                    <Col xl='2' md='2' xs='2'>
+                          <div ><img  src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
+                    </Col>
+                </Row>
+                <Row className='mt-1'>
+                    <Col xl='10' md='10' xs='10' >
+                      <Badge className='card-text mr-25 pr-1 pl-1' color="light-success" pill>
+                           <h5 className='mb-0'> Bill Discount </h5>
+                    </Badge>-
+                    </Col>
+                    <Col xl='2' md='2' xs='2'>
+                          <div ><img  src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
+                    </Col>
+                </Row>
             </div>
+            
           </Col>
         </Row>
       </CardBody>

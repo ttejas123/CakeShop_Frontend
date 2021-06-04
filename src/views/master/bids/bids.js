@@ -412,7 +412,7 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Bids</CardTitle>
+          <CardTitle tag='h4'>RFQ</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             <Link to={`master/bids/bulk`}>
               <Button className='ml-2' color='primary' >
