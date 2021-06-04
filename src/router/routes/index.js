@@ -85,6 +85,26 @@ const Routes = [
     component: lazy(() => import('../../views/master/vas/vas'))
   },
   {
+    path: '/master/vass/Provider',
+    component: lazy(() => import('../../views/master/vas/provider'))
+  },
+  {
+    path: '/master/vass/Transaction',
+    component: lazy(() => import('../../views/master/vas/transaction'))
+  },
+  {
+    path: '/master/vass/orderlist',
+    component: lazy(() => import('../../views/master/vas/orderlist'))
+  },
+  {
+    path: '/master/vass/trans/add',
+    component: lazy(() => import('../../views/master/vas/trascAdd'))
+  },
+  {
+    path: '/master/CritJunReport',
+    component: lazy(() => import('../../views/master/CritJunRep'))
+  },
+  {
     path: '/brand',
     component: lazy(() => import('../../views/master/brand/brand'))
   },
@@ -195,6 +215,10 @@ const Routes = [
   {
     path: '/master/orders/add',
     component: lazy(() => import('../../views/master/order/add'))
+  },
+  {
+    path: '/master/calculator',
+    component: lazy(() => import('../../views/master/claculator'))
   },
   {
     path: '/master/membership/view',
@@ -667,6 +691,34 @@ const Routes = [
   {
     path: '/report/bankGTransca',
     component: lazy(() => import('../../views/report/bankGTransca'))
+  },
+  {
+    path: '/report/orderclancel',
+    component: lazy(() => import('../../views/report/Order_Cancel'))
+  },
+  {
+    path: '/Nodal/transcation',
+    component: lazy(() => import('../../views/Nodal/Transcation'))
+  },
+  {
+    path: '/Nodal/transcations/add',
+    component: lazy(() => import('../../views/Nodal/Transcation/add'))
+  },
+  {
+    path: '/Nodal/transcations/edit/:id',
+    component: lazy(() => import('../../views/Nodal/Transcation/edit'))
+  },
+  {
+    path: '/Nodal/ReceiptPayment',
+    component: lazy(() => import('../../views/Nodal/RcptPayreport'))
+  },
+  {
+    path: '/Nodal/pendingreceipt',
+    component: lazy(() => import('../../views/Nodal/PendingRecip'))
+  },
+  {
+    path: '/Nodal/pendingpayment',
+    component: lazy(() => import('../../views/Nodal/PendingPayment'))
   },
   {
     path: '/settings',

@@ -1,15 +1,22 @@
-//Hello
+// 1. SKU selection
+// 2. Order Cancel :- a. Order_Id, 
+				//	  b. Products(All Info),
+				//    c. Amount_Paid , 
+				//    d. Seller_Info, 
+				//    e. buyer_Info
+				//    f. Cancle_date, 
+				//    g. cancle_resoson
 
-//1. Vas Provider :- Name, email , address, service
-//2. Vas Transaction :- Amout paid, date, Provider Info, Provided to, Service name
-//                      Status - (a.receive service), (b.service pending), (c.completed...)
-//3. VAS Transcation Add :- Amout, date, Allocate to, On behalf
-//4. VAS Order List :- vas id, name, user info, amount paid, paid start, start date, end date
+
+// calculator 
+//  	1. textbox => base amunt 
+//  	2. gst slider => 
+//  	3. bidoya slider => 
 
 // 1. add working files
 // 2. npm install and run after that 
 
-// //every time after new changes
+//every time after new changes
 
 // 3. git add .
 // 4. git commit 
@@ -54,3 +61,28 @@
 // 3. 147 Bill Discounting Transaction (taken by pravin)  -- Today
 // 4. 148 Work Flow History   (Tejas) -- Today
 // 5. 149 Partner Financial Institute  (Tejas) -- Today
+
+
+// 1. Bid Cash utilize report
+// 2. Bid Coin utilize report 
+// 3. Charge List
+// 4. Charge List Add/edit
+// 5. Brand Add/edit screen
+// 6. Bid Commission Change Report
+// 7. Wishlist 
+// 8. Sku list
+// 9. Sku add/update  
+// 10. Sku seller list 
+// 11. Lead List
+// 12. Lead Create
+// 13. Lead Update
+// 14. Order Invoice 
+// 	a. view
+// 	b. add
+// 	c. list
+// 15. Partner Financial Institute
+// 16. Commission Reports
+// 17. Customer Reports
+// 18. On Ground Staff Report
+// 19. Corporate Report
+// 20. UI Changes in multiple screens

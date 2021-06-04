@@ -14,7 +14,7 @@ import '@uppy/status-bar/dist/style.css'
 import '@styles/react/libs/file-uploader/file-uploader.scss'
 
 // ** Third Party Components
-import { Box } from 'react-feather'
+import { Box,  AtSign } from 'react-feather'
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 
 const ByUserTab = () => {
@@ -23,6 +23,13 @@ const ByUserTab = () => {
         {value: "Clothing", label: "clothing", id:1},
         {value: "Footwear", label: "Footwear", id:2}
       ]
+    const optionSKU = [
+        {value: "Google", label: "Google"},
+        {value: "Amazon", label: "Amazon"},
+        {value: "Apple", label: "Apple"},
+        {value: "Microsoft", label: "Microsoft"},
+        {value: "Verizon", label: "Verizon"}
+    ]
       const optionSubCategory = [
           [   
                 {
@@ -311,7 +318,46 @@ const ByUserTab = () => {
           <Input type='textarea' id='description' placeholder='Description' defaultValue={userData && userData.description} />
         </FormGroup>
       </Col>
-            <Col sm='12'>
+      <Col sm='12'>
+          <h4 className='d-block mb-1'>
+            < AtSign size={20} className='mr-50' />
+            <span className='align-middle'>Brand</span>
+          </h4>
+          <Row>
+                <Col md='4' sm='12'>
+                    <FormGroup>
+                            <Label for='sku'>SKU</Label>
+                          <Select
+                            id='sku'
+                            className='react-select'
+                            classNamePrefix='select'
+                            isClearable={false}
+                            options={optionSKU}
+                            theme={selectThemeColors}
+                            value={values.sku}
+                            onChange={data => {
+                                               setValues(
+                                                        {
+                                                           ...values,
+                                                           sku : data
+                                                        } 
+                                                        //seller brand
+                                                )
+                                                
+                                              }
+                                      }
+                    />
+                    </FormGroup> 
+                </Col>
+                <Col md='4' sm='12'>
+                    <FormGroup >
+                            <Label for='Not in Brand'>Not in SKU</Label>
+                            <CustomInput  type='checkbox' id='exampleCustomCheckbox' label='Seller Brand' />
+                    </FormGroup> 
+                </Col>
+          </Row>
+      </Col> 
+          <Col sm='12'>
           <h4 className='d-block mb-1'>
             <Box size={20} className='mr-50' />
             <span className='align-middle'>Specifications</span>
@@ -330,6 +376,7 @@ const ByUserTab = () => {
               })
           }   
         <Col sm='12'>
+       
           <CardHeader>
         <CardTitle tag='h4'>Upload Images</CardTitle>
       </CardHeader>

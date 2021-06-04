@@ -268,11 +268,9 @@ const DataTableWithButtons = () => {
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-
-                <Edit size={15} onClick={ () => { 
-                                    setCurrentId(row.id)
-                                    setModal(true)
-                                     } }/>
+                 <Link to={`/user-edit`}>
+                    <Edit size={15} />
+                 </Link>   
               </div>
             )
           }
