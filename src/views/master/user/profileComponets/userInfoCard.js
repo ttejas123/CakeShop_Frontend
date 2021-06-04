@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Avatar from '@components/avatar'
 import { data } from '../data.js'
 // ** Third Party Components
-import { DollarSign, TrendingUp, User, Check, Star, Flag, Phone, CheckCircle } from 'react-feather'
+import { DollarSign, TrendingUp, User, Check, Star, Flag, Phone, CheckCircle, Settings } from 'react-feather'
 import {
   Row, Col,
   Card,
@@ -112,6 +112,13 @@ const UserInfoCard = (props) => {
                     </Badge>
                     <div className='ml-1'>- <img className='ml-1' src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
                   </div>
+            </div>
+            <div>
+              <CardBody>
+              <Link  to={`/user-notifications/${props.userId}`}>
+              <Settings size={30}/>
+              </Link>
+              </CardBody>
             </div>
           </Col>
         </Row>

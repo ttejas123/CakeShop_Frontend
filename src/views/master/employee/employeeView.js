@@ -116,6 +116,9 @@ const EcommerceDashboard = () => {
             <Media className='my-auto' body>
             </Media>
           </Media>
+          <Badge className='card-text font-small-2 mt-2' color="light-success" pill>
+                        <span className='mb-0 text-success' >Manager</span>
+                  </Badge>
           </CardBody>
                         </Col>
                         <Col lg='6' md='6' className='d-block'>

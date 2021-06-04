@@ -6,7 +6,7 @@ import { useParams, Link } from 'react-router-dom'
 
 // ** Third Party Components
 import { User, Info, Share2, FileText, ShoppingCart } from 'react-feather'
-import { Card, CardBody, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Alert } from 'reactstrap'
+import { Card, CardHeader, CardTitle, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Alert } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/apps/app-users.scss'
@@ -20,7 +20,10 @@ import WarehouseList from '../../warehouse/warehouseList'
 import CorporateWarehouse from './corporateWarehouse'
 import CorporateBranch from './corporateBranch'
 import CorporateTeam from './corporateTeam'
-
+import CorporateGallery from './corporateGallery'
+import '@styles/react/libs/swiper/swiper.scss'
+import { useRTL } from '@hooks/useRTL'
+import CorporateKyc from './corporateKyc'
 const AddProduct = () => {
   // ** States & Vars
   const [activeTab, setActiveTab] = useState('1')
@@ -31,6 +34,7 @@ const AddProduct = () => {
 
   // ** Function to toggle tabs
   const toggle = tab => setActiveTab(tab)
+  const [isRtl, setIsRtl] = useRTL()
 
   // ** Function to get user on mount
 //   useEffect(() => {
@@ -72,6 +76,16 @@ const AddProduct = () => {
                   <span className='align-middle d-none d-sm-block'>Team</span>
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink className='ml-2 my-2' active={activeTab === '7'} onClick={() => toggle('7')}>
+                  <span className='align-middle d-none d-sm-block'>Gallery</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className='ml-2 my-2' active={activeTab === '8'} onClick={() => toggle('8')}>
+                  <span className='align-middle d-none d-sm-block'>KYC</span>
+                </NavLink>
+              </NavItem>
             </Nav>
         </Card>
             <TabContent activeTab={activeTab}>
@@ -92,6 +106,12 @@ const AddProduct = () => {
               </TabPane>
               <TabPane tabId='6'>
                 <CorporateTeam/>
+              </TabPane>
+              <TabPane tabId='7'>
+                <CorporateGallery isRtl={isRtl}/>
+              </TabPane>
+              <TabPane tabId='8'>
+                <CorporateKyc/>
               </TabPane>
             </TabContent>
          

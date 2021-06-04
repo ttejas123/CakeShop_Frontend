@@ -31,6 +31,7 @@ import CorporateWarehouse from './corporateWarehouse'
 import WarehouseOverview from './warehouseOverview'
 import BranchOverview from './branchOverview'
 import BidHistoryOverview from './bidHistoryOverview'
+import CorporateOverviewKyc from './corporateOverviewKyc'
 // import ProductCarousel from './productCarousel'
 // import RelatedProducts from './relatedProducts'
 // import ProductInfo from './productInfo'
@@ -125,7 +126,12 @@ const CorporateOverview = (props) => {
         />
             <Media className='my-auto' body>
               <h4 className='font-weight-bolder text-center'>Coense Solutions pvt ltd</h4>
-              <CardText className='card-text font-small-2 mr-25 mb-0'>abc@gmail.com</CardText>
+              <CardText className='card-text font-small-2 mr-25 mb-0'>
+                <span>abc@gmail.com</span>
+                <Badge className='card-text font-small-2 ml-2' color="light-success" pill>
+                        <span className='mb-0 text-success' >Premium</span>
+                  </Badge>
+                </CardText>
             </Media>
           </Media>
           </CardTitle>
@@ -189,11 +195,16 @@ const CorporateOverview = (props) => {
           <Card className='card-statistics'>
            <CardHeader>  
               <CardTitle tag='h5'><h4>Kyc Submitted</h4></CardTitle>
+              <Button className='ml-2' color='primary' onClick={ e => props.toggle('8')
+                                                            }>
+
+              <span className='align-middle ml-50'>View All</span>
+            </Button>
            </CardHeader>  
             <CardBody>
               <Row className='match-height'>
                 <Col lg='12' md='12'>
-                <CorporateKyc/>
+                <CorporateOverviewKyc/>
                 </Col>
               </Row>
             </CardBody>  

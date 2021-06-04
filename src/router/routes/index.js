@@ -37,8 +37,16 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/productCategory'))
   },
   {
+    path: '/no-gst-corporate',
+    component: lazy(() => import('../../views/master/corporate/noGstCorporateList'))
+  },
+  {
     path: '/product-cat-add',
     component: lazy(() => import('../../views/master/product/prodCatCom/addcat'))
+  },
+  {
+    path: '/customization-timeline',
+    component: lazy(() => import('../../views/master/customization/custTimelineView'))
   },
   {
     path: '/bid-mapping',
@@ -293,6 +301,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/pendingProductsList'))
   },
   {
+    path: '/my-product-list',
+    component: lazy(() => import('../../views/master/product/myProductsList'))
+  },
+  {
     path: '/work-flow-history-list',
     component: lazy(() => import('../../views/master/workFlowHistory/workFlowHistoryList'))
   },
@@ -393,8 +405,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/corporate/CorporateList'))
   },
   {
+    path: '/order-details',
+    component: lazy(() => import('../../views/master/order/orderDetailsView/orderDetails'))
+  },
+  {
     path: '/user-list',
     component: lazy(() => import('../../views/master/user/users'))
+  },
+  {
+    path: '/users-comission-mapping',
+    component: lazy(() => import('../../views/master/user/userComissionMapping'))
+  },
+  {
+    path: '/user-notifications/:id',
+    component: lazy(() => import('../../views/master/user/userNotificationSetting'))
   },
   {
     path: '/invoice-list',

@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, CardTitle, UncontrolledDropdown, FormGroup, Label, Input, DropdownToggle, Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownMenu, DropdownItem} from 'reactstrap'
+import { Card, CardBody, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownMenu, DropdownItem} from 'reactstrap'
 import DataTable from 'react-data-table-component'
 import { Monitor, Coffee, Watch, Eye, ChevronDown, Trash, MoreVertical, Edit, FileText, Archive} from 'react-feather'
 import { Fragment, useState } from 'react'
@@ -11,15 +11,13 @@ import aadharCard from '@src/assets/images/slider/aadhar-card.jpg'
 import drivingLicense from '@src/assets/images/slider/driving-license.jpg'
 
 
-const CorporateKyc = () => {
+const CorporateOverviewKyc = () => {
   const initvalue = {
     name:""
   }
   const [selectedItem, setSelectedItem] = useState(initvalue)
   const [modalstatus, setModalStatus] = useState(false)
   const [reuploadForm, setReUploadForm] = useState(false)
-  const [approveComment, setApproveComment] = useState(false)
-  const [rejectComment, setRejectComment] = useState(false)
   const [img, setImg] = useState(null)
 
   const uppy = new Uppy({
@@ -35,11 +33,9 @@ const CorporateKyc = () => {
     setImg(preview)
   })
   const onDocumentApprove = (id) => {
-    setApproveComment(!approveComment)
-   // setModalStatus(!modalstatus)
+    setModalStatus(!modalstatus)
   }
   const onDocumentReject = (id) => {
-    setRejectComment(!rejectComment)
     setModalStatus(!modalstatus)
   }
   const onDocumentReupload = (id) => {
@@ -102,15 +98,6 @@ const CorporateKyc = () => {
       console.log(row)
     }
 
-    const handleApprove = () => {
-      const userResponse = confirm("Are you sure, do you want to approve all")
- 
-      if (userResponse === true) {
-        console.log("All docs approved")
-      } else {
-      console.log("Not approved")
-      }
-    }
     const docColumns = [
       {
         name: 'Document Name',
@@ -235,10 +222,6 @@ const CorporateKyc = () => {
        <DragDrop uppy={uppy} />
         {img !== null ? <img className='rounded mt-2' src={img} alt='avatar' /> : null}
         </div> : null}
-        {!approveComment ? <FormGroup>
-          <Label for='approveComment'>Comment</Label>
-          <Input type='textarea' id='approveComment' placeholder='Corporate Name'/>
-        </FormGroup> : null}
       </ModalBody>
       <ModalFooter>
         { !reuploadForm ? <><Button.Ripple color='primary' type='submit' onClick={() => onDocumentApprove(selectedItem.id)} >
@@ -268,15 +251,7 @@ const CorporateKyc = () => {
       </ModalFooter>
     </Modal>
   </Fragment>
-    <Card className='card-statistics'>
-           <CardHeader>  
-              <CardTitle tag='h5'><h4>Kyc Submitted</h4></CardTitle>
-              <Button className='ml-2' color='primary' onClick={ e => handleApprove()
-                                                            }>
-
-              <span className='align-middle ml-50'>Approve All</span>
-            </Button>
-           </CardHeader> 
+    <Card>
     <DataTable
       noHeader
       data={data}
@@ -289,4 +264,4 @@ const CorporateKyc = () => {
   )
 }
 
-export default CorporateKyc
+export default CorporateOverviewKyc

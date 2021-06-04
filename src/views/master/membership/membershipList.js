@@ -196,10 +196,12 @@ const handleDelete = (data) => {
     <Card>
       <CardHeader className='border-bottom'>
         <CardTitle tag='h4'>Membership List</CardTitle>
+        <Link  to={`/edit-membership`}>
         <Button className='ml-2' color='primary' onClick={handleAddClick}>
               <Plus size={15} />
               <span className='align-middle ml-50'>Add Membership</span>
             </Button>
+            </Link>
       </CardHeader>
       {/* {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} /> : null} */}
       {/* {editClicked ? <EditForm data ={editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit} /> : null} */}

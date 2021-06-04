@@ -221,3 +221,30 @@ export const data = [
         first_name: "Avinash"
       }
 ]
+
+export const usersComissionData = [
+  {
+    userId : 1,
+    productCategoryId : "PC1",
+    comissionRate : 10,
+    comissionGst : 18
+  },
+  {
+    userId : 2,
+    productCategoryId : "PC2",
+    comissionRate : 20,
+    comissionGst : 28
+  },
+  {
+    userId : 3,
+    productCategoryId : "PC3",
+    comissionRate : 10,
+    comissionGst : 18
+  },
+  {
+    userId : 4,
+    productCategoryId : "PC4",
+    comissionRate : 5,
+    comissionGst : 18
+  }
+]

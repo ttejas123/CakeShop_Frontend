@@ -13,7 +13,7 @@ import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
-const EditBadge = () => {
+const AddSponsoredKeywords = () => {
   const [picker, setPicker] = useState(new Date())
 
   const [data, setData] = useState(null)
@@ -144,7 +144,7 @@ const EditBadge = () => {
  
 <Card>
 <CardHeader>
-  <CardTitle tag='h1'>Add Sponsored Keywords</CardTitle>
+  <CardTitle tag='h1'>Add / Edit Sponsored Keywords</CardTitle>
 </CardHeader>
 
 <CardBody>
@@ -279,4 +279,4 @@ const EditBadge = () => {
 </Card>
   )
 }
-export default EditBadge
+export default AddSponsoredKeywords

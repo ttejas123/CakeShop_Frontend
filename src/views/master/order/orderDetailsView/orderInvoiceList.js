@@ -14,10 +14,14 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
+
+import komal  from '@src/assets/images/logo/komal.jpg'
+import pravin  from '@src/assets/images/logo/pravin.jpg'
+import himanshu  from '@src/assets/images/logo/himanshu.jpg'
+import reethika  from '@src/assets/images/logo/reethika.jpg'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -53,11 +57,76 @@ const renderClient = row => {
   }
 }
 
-const DataTableWithButtons = () => {
-  const statusObj = {
-    inactive: 'light-secondary',
-    active: 'light-success'
-}
+const OrderInvoice = () => {
+
+    const data = [
+        {
+  
+          id:1,
+          Name : "Tejas Thakare",
+          avatar: "",
+          commission: "12%",
+          Amount : 12200,
+          GST : "5%",
+          OrderNumber: 1211,
+          InvoiceNo: "#5234",
+          Date: "12-02-2021",
+          Email : "tthakare43@gmail.com",
+          Designation : "CEO Of TCS",
+          phone : 8433841610,
+          status : {value: "meeting done", label: "meeting done"}
+   
+        },
+        {
+          id:2,
+          Name : "Komal Jadhav",
+          avatar: komal,
+          commission: "12%",
+          Amount : 12200,
+          GST : "5%",
+          Date: "12-02-2021",
+          InvoiceNo: "#5234",
+          OrderNumber: 1211,
+          Email : "komalj@gmail.com",
+          Designation : "SCO Of Infosys",
+          phone : 9768936483,
+          status : {value: "meeting done", label: "meeting done"}
+   
+        },
+        {
+          id:3,
+          Name : "Pravin Poshmani",
+          avatar: pravin,
+          commission: "12%",
+          Amount : 12200,
+          GST : "5%",
+          Date: "12-02-2021",
+          InvoiceNo: "#5234",
+          OrderNumber: 1211,
+          Email : "pravinP@gmail.com",
+          Designation : "emplyee Of TCS",
+          phone : 8268771502,
+          status : {value: "meeting done", label: "meeting done"}
+   
+        },
+        {
+          id:4,
+          Name : "Komal Jadhav",
+          avatar: komal,
+          commission: "12%",
+          Amount : 12200,
+          GST : "5%",
+          Date: "12-02-2021",
+          InvoiceNo: "#5234",
+          OrderNumber: 1211,
+          Email : "komalj@gmail.com",
+          Designation : "SCO Of Infosys",
+          phone : 9768936483,
+          status : {value: "meeting done", label: "meeting done"}
+   
+        }
+  ]
+  
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -80,9 +149,26 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'Corporate',
+          name: 'Invoice No',
+          minWidth: '150px',
+          selector: 'InvoiceNo',
+          sortable: true,
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              <div className=''>
+                
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.InvoiceNo}</span>
+                  </div>
+                
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'User',
           minWidth: '250px',
-          selector: 'Corporate',
+          selector: 'Name',
           sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
@@ -90,8 +176,8 @@ const DataTableWithButtons = () => {
               <div className=''>
                 
                   <div className='user-info text-truncate d-flex flex-column'>
-                    <span className='font-weight-bold'>{row.Corporate}</span>
-                    <small className='text-truncate text-muted mb-0'>@{row.Email}</small>
+                     <span className='font-weight-bold'>{row.Name}</span>
+                     <small className='text-truncate text-muted mb-0'>@{row.Email}</small>
                   </div>
                 
               </div>
@@ -99,29 +185,23 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Keyword',
-          // minWidth: '150px',
-          selector: 'Keyword',
-          sortable: true,
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              <div className=''>
-                
-                  <div className='user-info text-truncate d-flex flex-column'>
-                     <span className='font-weight-bold'>{row.Keyword}</span>
-                  </div>
-                
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Product',
-          selector: 'ProductTitle',
+          name: 'GST',
+          selector: 'GST',
           sortable: true,
           minWidth: '150px'
         },
-       
+        {
+          name: 'commission',
+          selector: 'commission',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Order Number',
+          selector: 'OrderNumber',
+          sortable: true,
+          minWidth: '150px'
+        },
         {
           name: 'Date',
           selector: 'Date',
@@ -132,46 +212,7 @@ const DataTableWithButtons = () => {
           name: 'Amount',
           selector: 'Amount',
           sortable: true,
-          // minWidth: '150px',
-          cell: row => <span>₹ {row.Amount || 0}</span>
-
-        },
-       
-        {
-          name: 'Status',
-          selector: 'status',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>         
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>
-                      <Badge className='text-capitalize' color={statusObj[row.Status]} pill>
-                          {row.Status}
-                      </Badge>
-                </span>
-              </div>
-            </div>
-          )
-        },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                           } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-                <Link to={`/add-sponsored_keyword`}>
-                  <Edit size={15} />
-                </Link>  
-              </div>
-            )
-          }
+          minWidth: '150px'
         }
     ]
 
@@ -220,6 +261,51 @@ const DataTableWithButtons = () => {
     setCurrentPage(page.selected)
   }
 
+   // ** Converts table to CSV
+  function convertArrayOfObjectsToCSV(array) {
+    let result
+
+    const columnDelimiter = ','
+    const lineDelimiter = '\n'
+    const keys = Object.keys(data[0])
+
+    result = ''
+    result += keys.join(columnDelimiter)
+    result += lineDelimiter
+
+    array.forEach(item => {
+      let ctr = 0
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter
+
+        result += item[key]
+
+        ctr++
+      })
+      result += lineDelimiter
+    })
+
+    return result
+  }
+
+  // ** Downloads CSV
+  function downloadCSV(array) {
+    const link = document.createElement('a')
+    let csv = convertArrayOfObjectsToCSV(array)
+    if (csv === null) return
+
+    const filename = 'export.csv'
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`
+    }
+
+    link.setAttribute('href', encodeURI(csv))
+    link.setAttribute('download', filename)
+    link.click()
+  }
+
+
   // ** Custom Pagination
   const CustomPagination = () => (
     <ReactPaginate
@@ -227,7 +313,7 @@ const DataTableWithButtons = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 4 : data.length / 4 || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -245,10 +331,6 @@ const DataTableWithButtons = () => {
       containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
     />
   )
-  const handleAddClick = () => {
-    // setAddClicked(!addClicked)
-
-  }
 
 
   return (
@@ -257,44 +339,20 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Sponsored Keywords</CardTitle>
-          {/* <div className='d-flex mt-md-0 mt-1'>
+          <CardTitle tag='h4'>Invoice</CardTitle>
+          <div className='d-flex mt-md-0 mt-1'>
             
-          </div> */}
-          <Link to={`/add-sponsored_keyword`}>
-            <Button className='ml-2' color='primary'  >
-              <Plus size={15} />
-              <span className='align-middle ml-50'>Add Sponsored Keywords</span>
-            </Button>
-
-          </Link>
-           
+          </div>
         </CardHeader>
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
         <DataTable
           noHeader
           pagination
           responsive={true}
-          paginationServer
-            
+          paginationServer    
           className='react-dataTable'
           defaultSortField='invoiceId'
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={4}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
@@ -308,5 +366,4 @@ const DataTableWithButtons = () => {
     </Fragment>
   )
 }
-
-export default DataTableWithButtons
+export default OrderInvoice

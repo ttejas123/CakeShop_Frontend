@@ -72,7 +72,7 @@ const optionBidStatus = [
     {value: "productCategory", label: "Product Category"}
   ]
 
-const ProductList = () => {
+const PendingProductList = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success'
@@ -167,23 +167,23 @@ const ProductList = () => {
       sortable: true,
       minWidth: '150px'
     },
-    // {
-    //   name: 'Status',
-    //   selector: 'status',
-    //   sortable: true,
-    //   minWidth: '150px',
-    //   cell: row => (
-    //     <div key={row.id} className='d-flex align-items-center'>         
-    //       <div className='user-info text-truncate'>
-    //         <span className='d-block font-weight-bold text-truncate'>
-    //               <Badge className='text-capitalize' color={statusObj[row.status[0].label]} pill>
-    //                   {row.status[0].label}
-    //               </Badge>
-    //         </span>
-    //       </div>
-    //     </div>
-    //   )
-    // },
+    {
+      name: 'Status',
+      selector: 'status',
+      sortable: true,
+      minWidth: '150px',
+      cell: row => (
+        <div key={row.id} className='d-flex align-items-center'>         
+          <div className='user-info text-truncate'>
+            <span className='d-block font-weight-bold text-truncate'>
+                  <Badge className='text-capitalize' color={statusObj[row.status[0].label]} pill>
+                      {row.status[0].label}
+                  </Badge>
+            </span>
+          </div>
+        </div>
+      )
+    },
     {
       name: 'Hsn Code',
       selector: 'hsnCode',
@@ -428,4 +428,4 @@ const ProductList = () => {
   )
 }
 
-export default ProductList
+export default PendingProductList

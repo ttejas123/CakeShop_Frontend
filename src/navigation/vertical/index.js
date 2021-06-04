@@ -132,6 +132,12 @@ export default [
         navLink: '/badges-list'
       },
       {
+        id: 'customizationTimeline',
+        title: 'Customization Timeline',
+        icon: <Circle size={20} />,
+        navLink: '/customization-timeline'
+      },
+      {
         id: 'badgeMapping',
         title: 'Badge Mapping',
         icon: <Circle size={20} />,
@@ -142,6 +148,12 @@ export default [
         title: 'Work Flow History',
         icon: <Circle size={20} />,
         navLink: '/work-flow-history-list'
+      },
+      {
+        id: 'bidMapping',
+        title: 'Bid Mapping',
+        icon: <Circle size={20} />,
+        navLink: '/bid-mapping'
       },
       {
         id: 'profileCompAdd',
@@ -244,6 +256,12 @@ export default [
                   id: 'myProducts',
                   title: 'My Products',
                   icon: <Circle size={20} />,
+                  navLink: '/my-product-list'
+                },
+                {
+                  id: 'pendingProducts',
+                  title: 'Pending Products',
+                  icon: <Circle size={20} />,
                   navLink: '/pending-product-list'
                 },
                 // {
@@ -290,6 +308,26 @@ export default [
                   title: 'View',
                   icon: <Circle size={20} />,
                   navLink: '/on-ground-staff-view'
+                }
+                
+        ]
+      },
+      {
+        id: 'orders',
+        title: 'Orders',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'list',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/master-order'
+                },
+                {
+                  id: 'view',
+                  title: 'View',
+                  icon: <Circle size={20} />,
+                  navLink: '/order-details'
                 }
                 
         ]
@@ -385,6 +423,12 @@ export default [
                   title: 'List',
                   icon: <Circle size={20} />,
                   navLink: '/corporate-list'
+                },
+                {
+                  id: 'noGstCorporate',
+                  title: 'No Gst Corporate',
+                  icon: <Circle size={20} />,
+                  navLink: '/no-gst-corporate'
                 },
                 {
                   id: 'view',
@@ -484,6 +528,12 @@ export default [
                   title: 'List',
                   icon: <Circle size={20} />,
                   navLink: '/user-list'
+                },
+                {
+                  id: 'comissionMapping',
+                  title: 'Comission Mapping',
+                  icon: <Circle size={20} />,
+                  navLink: '/users-comission-mapping'
                 }
         ]
       },
@@ -728,6 +778,12 @@ export default [
         title: 'GST Report',
         icon: <Circle size={20} />,
         navLink: '/report/gst-report-list'
+      },
+      {
+        id: 'defectiveGoods',
+        title: 'Defective Goods',
+        icon: <Circle size={20} />,
+        navLink: '/report/defective-goods'
       },
       {
         id: 'userActivity',

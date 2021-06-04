@@ -51,12 +51,12 @@ const EditEmployee = () => {
     {value: "Tejas Thakare", label: "Tejas Thakare"},
     {value: "Komal Kamble", label: "Komal Kamble"}
   ]
-  const optionCurrency = [
-    {value: "Indian Rupee", label: "Indian Rupee"},
-    {value: "Us Dollar", label: "Us Dollar"},
-    {value: "Euro", label: "Euro"},
-    {value: "Armerian Dram", label: "Armerian Dram"},
-    {value: "Canadian Dollar", label: "Canadian Dollar"}
+  const optionCorporateId = [
+    {value: "CORP1", label: "CORP1"},
+    {value: "CORP2", label: "CORP2"},
+    {value: "CORP3", label: "CORP3"},
+    {value: "CORP4", label: "CORP4"},
+    {value: "CORP5", label: "CORP5"}
   ]
   const initialvalues = {
     id:1,
@@ -71,6 +71,7 @@ const EditEmployee = () => {
     City:  [{value: "city", label: "Mumbai"}], 
     State:  [{value: "state", label: "Maharashtra"}],
     Country: [{value: "country", label: "India"}],
+    CorporateId: [{value: "CORP1", label: "CORP1"}],
     Role: [{value: "role", label: "Intern"}]
   }
   const [values, setValues] = useState(initialvalues)
@@ -178,10 +179,29 @@ const EditEmployee = () => {
   <Form onSubmit={e => e.preventDefault()}>
     <Row>
     <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='id'>Corporate Id</Label>
-          <Input type='text' Number='id' placeholder='Corporate Id' defaultValue={userData && userData.EmployeeNumber} />
-        </FormGroup>
+    <FormGroup>
+              <Label for='CorporateId'>Corporate Id</Label>
+            <Select
+              id='CorporateId'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionCorporateId}
+              theme={selectThemeColors}
+              value={values.CorporateId[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             CorporateId : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </FormGroup> 
       </Col>
     <Col md='6' sm='12'>
         <FormGroup>
@@ -380,68 +400,6 @@ const EditEmployee = () => {
             </FormGroup>
           </FormGroup>
       </Col>
-      {/* <Col md='6' sm='12'>
-      <FormGroup>
-            <label className='d-block mb-1'>Is Verified</label>
-            <FormGroup>
-              <Controller
-                name='isVerified'
-                control={control}
-                render={props => {
-                  return (
-                    <CustomInput
-                      inline
-                      type='radio'
-                      label='Yes'
-                      value='Yes'
-                      id='Yes'
-                      name={props.name}
-                      invalid={data !== null && (data.isVerified === undefined || data.isVerified === null)}
-                      onChange={() => setValue('isVerified', 'Yes')}
-                    />
-                  )
-                }}
-              />
-              <Controller
-                name='isVerified'
-                control={control}
-                render={props => {
-                  return (
-                    <CustomInput
-                      inline
-                      type='radio'
-                      label='No'
-                      value='No'
-                      id='No'
-                      name={props.name}
-                      defaultChecked
-                      invalid={data !== null && (data.isVerified === undefined || data.isVerified === null)}
-                      onChange={() => setValue('isVerified', 'No')}
-                    />
-                  )
-                }}
-              />
-            </FormGroup>
-          </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='verifiedTime'>Verified Time</Label>
-          <Input type='text' id='verifiedTime' placeholder='Verified Time' defaultValue={userData && userData.verifiedTime} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='createdTime'>Created Time</Label>
-          <Input type='text' id='createdTime' placeholder='Created Time' defaultValue={userData && userData.createdTime} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='updatedTime'>Updated Time</Label>
-          <Input type='text' id='updatedTime' placeholder='Updated Time' defaultValue={userData && userData.updatedTime} />
-        </FormGroup>
-      </Col> */}
       <Col md='6' sm='12'>
         <FormGroup>
               <Label for='VerifiedBy'>Verified By</Label>
