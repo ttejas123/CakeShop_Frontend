@@ -19,7 +19,7 @@ import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, Drop
 const BackUpAccounts = () => {
 
     //console.log(BackUpColumns)
-    console.log(data1)
+    
   // ** State
 //   const data = [
 //     {

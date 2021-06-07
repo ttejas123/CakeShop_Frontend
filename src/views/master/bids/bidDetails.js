@@ -6,7 +6,10 @@ import { ThemeColors } from '@src/utility/context/ThemeColors'
 import Products from './ui-elements/cards/statistics/ProductTable'
 import PrefPartner from './ui-elements/cards/statistics/prefPart'
 import StatsCard from './ui-elements/cards/statistics/StatsCard'
-import CardBrowserStates from './ui-elements/cards/advance/CardBrowserState'
+import BillingDoc from './ui-elements/newCards/billingdoc.js'
+import Acceptrej from './ui-elements/newCards/bidAcptRejt.js'
+import Calculator from './ui-elements/newCards/calcu.js'
+import Participents from './ui-elements/cards/advance/CardBrowserState'
 import Comments from './ui-elements/cards/advance/Comments.js'
 import ApprovedCostom from './ui-elements/cards/advance/ApprovedCostom.js'
 import Address from './ui-elements/cards/analytics/Address'
@@ -45,12 +48,47 @@ const EcommerceDashboard = () => {
           {/* <Timeline /> */}
         </Col>
         <Col xl='4' md='2' xs='12'>
-          <CardBrowserStates colors={colors} trackBgColor={trackBgColor} />
+          <Participents colors={colors} trackBgColor={trackBgColor} />
           <ApprovedCostom colors={colors} trackBgColor={trackBgColor} />
           <Address title="Shipping Address" Address={ShoopingAddre}/>
           <Address title="Billing Address" Address={BillAddre}/>
         </Col>
-        <Col xl='12' md='12' xs='12'>
+
+        <Col xl='8' md='8' xs='12'>
+          <Card className='card-statistics'>
+           <CardHeader>  
+              <CardTitle tag='h4'><h2>Users Response On Bid</h2></CardTitle>
+           </CardHeader>  
+            <CardBody>
+              <Row className='match-height'>
+                <Col lg='12' xs='12'>
+                  <Acceptrej />
+                </Col>
+              </Row>
+            </CardBody>  
+          </Card>
+          
+          {/* <Timeline /> */}
+        </Col>
+
+        <Col xl='4' md='4' xs='12'>
+          <Card className='card-statistics'>
+           <CardHeader>  
+              <CardTitle tag='h4'><h2>Billing Documents</h2></CardTitle>
+           </CardHeader>  
+            <CardBody>
+              <Row className='match-height'>
+                <Col lg='12' xs='12'>
+                  <BillingDoc />
+                </Col>
+              </Row>
+            </CardBody>  
+          </Card>
+          
+          {/* <Timeline /> */}
+        </Col>
+
+        <Col xl='6' md='6' xs='12'>
 
         { /* here we Have Product list*/ }
 
@@ -67,6 +105,16 @@ const EcommerceDashboard = () => {
             </CardBody>  
           </Card>
 
+        </Col>
+
+        <Col xl='6' md='6' xs='12'>
+
+        { /* here we Have Product list*/ }
+              <Row className='match-height'>
+                <Col lg='12' xs='12'>
+                  <Calculator />
+                </Col>
+              </Row>
         </Col>
 
         <Col xl='12' md='12' xs='12'>
@@ -95,6 +143,7 @@ const EcommerceDashboard = () => {
           </Card>
 
         </Col>
+
       </Row>
       
     </div>

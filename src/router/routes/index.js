@@ -21,6 +21,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/bids/bidDetails'))
   },
   {
+    path: '/bidDetail/communication',
+    component: lazy(() => import('../../views/master/bids/ui-elements/newCards/Comnicatn.js'))
+  },
+  {
     path: '/productDetails',
     component: lazy(() => import('../../views/master/product/productDetails'))
   },
@@ -99,6 +103,14 @@ const Routes = [
   {
     path: '/master/vass/trans/add',
     component: lazy(() => import('../../views/master/vas/trascAdd'))
+  },
+  {
+    path: '/master/vass/add',
+    component: lazy(() => import('../../views/master/vas/add'))
+  },
+  {
+    path: '/master/vass/edit/:id',
+    component: lazy(() => import('../../views/master/vas/edit'))
   },
   {
     path: '/master/CritJunReport',
@@ -199,6 +211,10 @@ const Routes = [
   {
     path: '/membership-list',
     component: lazy(() => import('../../views/master/membership/membershipList'))
+  },
+  {
+    path: '/master/membershipavail/edit',
+    component: lazy(() => import('../../views/master/membership/membershipComp/edits.js'))
   },
   {
     path: '/master/corporate/corpmanag',
@@ -381,6 +397,18 @@ const Routes = [
     component: lazy(() => import('../../views/master/Lead'))
   },
   {
+    path: '/master/Leads/add',
+    component: lazy(() => import('../../views/master/Lead/leadAdd/add'))
+  },
+  {
+    path: '/master/Leads/edit/:id',
+    component: lazy(() => import('../../views/master/Lead/edit'))
+  },
+  {
+    path: '/master/Leads/fileupload',
+    component: lazy(() => import('../../views/master/Lead/fileupload'))
+  },
+  {
     path: '/master/Invoice/List',
     component: lazy(() => import('../../views/master/InvoiceL/List'))
   },
@@ -391,14 +419,6 @@ const Routes = [
   {
     path: '/master/Invoice/view',
     component: lazy(() => import('../../views/master/InvoiceL/view'))
-  },
-  {
-    path: '/master/Leads/add',
-    component: lazy(() => import('../../views/master/Lead/leadAdd/add'))
-  },
-  {
-    path: '/master/Leads/edit/:id',
-    component: lazy(() => import('../../views/master/Lead/edit'))
   },
   {
     path: '/master/corporateRole',
@@ -463,6 +483,14 @@ const Routes = [
   {
     path: '/master/subscriptionplan',
     component: lazy(() => import('../../views/master/subScrPlan/index'))
+  },
+  {
+    path: '/master/subscriptionplans/add',
+    component: lazy(() => import('../../views/master/subScrPlan/add'))
+  },
+  {
+    path: '/master/subscriptionplans/edit/:id',
+    component: lazy(() => import('../../views/master/subScrPlan/edit'))
   },
   {
     path: '/master/subscription/aveil/:id',
@@ -763,9 +791,16 @@ const Routes = [
   {
     path: '/add-sponsored_keyword',
     component: lazy(() => import('../../views/master/sponsoredKeyword/Add'))
+  },
+  {
+    path: '/report/pinbaseactivity',
+    component: lazy(() => import('../../views/report/pinActivity/list'))
+  },
+  {
+    path: '/report/pinaccess',
+    component: lazy(() => import('../../views/report/pinActivity/pinAccess/index'))
   }
   
-
   // 
 ]
 

@@ -1,19 +1,20 @@
-//Name,Email, Designation(),phone
-
-// Assigned to(any onground staff), status(meeting done, Coprorate converted,..)
-// Name,Email, Designation(),phone
-
 // ** React Imports
 import { ReactSortable } from 'react-sortablejs'
 import { useParams } from 'react-router-dom'
 import Repeater from '@components/repeater'
 import Select from 'react-select'
+import { DragDrop } from '@uppy/react'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useState, useEffect } from 'react'
 import Flatpickr from 'react-flatpickr'
 import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X, Plus  } from 'react-feather'
 import { data } from './data'
-
+import Uppy from '@uppy/core'
+import thumbnailGenerator from '@uppy/thumbnail-generator'
+import '@styles/react/apps/app-users.scss'
+import '@uppy/status-bar/dist/style.css'
+import '@styles/react/libs/file-uploader/file-uploader.scss'
+import 'uppy/dist/uppy.css'
 // ** Custom Components
 import Avatar from '@components/avatar'
 
@@ -24,30 +25,17 @@ import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, InputGro
   CardTitle, CustomInput } from 'reactstrap'
 
 const UserAccountTab = (prop) => {
-  const { id } = useParams()
+
   const initialvalues = {
-    id:0,
-    type: 'Category',
-    default_c: 10
+    id:0
   }
   const [selectedOption, setselectedOption] = useState()
   const [values, setValues] = useState(initialvalues)
   const [allDay, setAllDay] = useState(false)
   const [endPicker, setEndPicker] = useState(new Date())  
+  const [Brand, setBrand] = useState(null)
 
-  const optionStatus = [
-    {value: "meeting done", label: "meeting done"},
-    {value: "Coprorate converted", label: "Coprorate converted"}
-  ]
-
-   useEffect(() => {
-        console.log(data[id - 1])
-        setValues({
-          ...data[id - 1]
-        })
-    
-  }, [id])
-
+  
   //for other input
   const handleInputeChange = (event) => {
     const {name, value} = event.target
@@ -59,20 +47,30 @@ const UserAccountTab = (prop) => {
     )
   }
 
+    const { id } = useParams()
+   useEffect(() => {
+        console.log(data[id - 1])
+        setValues({
+          ...data[id - 1]
+        })
+        setBrand(data[id - 1].logo)
+    
+  }, [id])
 
   const submitHandle = (event) => {
     const { name, value } = event.target
     console.log({
       ...values,
-      [name] : values
+      logo : Brand
     })
-    setValues({
-      ...values,
-      [name] : values
-    })
-    //prop.editAction(values)
+    // setValues({
+    //   ...values,
+    //   [name] : values
+    // })
+    // //prop.editAction(values)
     
     setValues(initialvalues)
+    setBrand(null)
     alert("Data successfully inserted")
   }
 
@@ -81,7 +79,7 @@ const UserAccountTab = (prop) => {
     <Row>
       
         <Col sm='12' className="pl-5 pt-2">
-          <h2 className="mb-1">Add OnGround Lead</h2>
+          <h2 className="mb-1">Edit Your VAS</h2>
         </Col>
       
       <CardBody className='pl-3 pt-2'>
@@ -91,40 +89,40 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='Name'>Name</Label>
+                <Label for='Name'>Service Name</Label>
                 <InputGroup>
                   
-                  <Input name="Name" onChange={handleInputeChange} id='type' value={values.Name} />
+                  <Input name="Name" onChange={handleInputeChange} id='Name' type="text" value={values.Name} />
                 </InputGroup>
               </FormGroup>
             </Col>
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='Email'>Email</Label>
+                <Label for='rate'>rate</Label>
                 <InputGroup>
                   
-                  <Input name="Email" onChange={handleInputeChange} id='type' value={values.Email} />
+                  <Input name="rate" onChange={handleInputeChange} id='rate' type="text" value={values.rate} />
                 </InputGroup>
               </FormGroup>
             </Col>
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='Designation'>Designation</Label>
+                <Label for='quantity'>Quantity</Label>
                 <InputGroup>
                   
-                  <Input name="Designation" onChange={handleInputeChange} id='type' value={values.Designation} />
+                  <Input name="quantity" onChange={handleInputeChange} id='quantity' type="text" value={values.quantity} />
                 </InputGroup>
               </FormGroup>
             </Col>
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='phone'>phone</Label>
+                <Label for='unit'>Unit</Label>
                 <InputGroup>
                   
-                  <Input name="phone" onChange={handleInputeChange} id='type' value={values.phone} />
+                  <Input name="unit" onChange={handleInputeChange} id='unit' type="text" value={values.unit} />
                 </InputGroup>
               </FormGroup>
             </Col>
@@ -134,10 +132,10 @@ const UserAccountTab = (prop) => {
                                                           submitHandle(e)
                                                         }
                                                       } color='primary'>
-                Save Changes
+                    Save Changes
               </Button.Ripple>
               <Button.Ripple color='secondary' onClick={ () => setValues(initialvalues) } outline>
-                Reset
+                    Reset
               </Button.Ripple>
             </Col> 
           </Row>

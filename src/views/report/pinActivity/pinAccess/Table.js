@@ -2,6 +2,7 @@
 
 // ** Custom Components
 import Avatar from '@components/avatar'
+
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
 import axios from 'axios'
@@ -39,6 +40,22 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
+import GeneratePin from './generatePIN'
+
+
+// ** Renders EMployee Columns
+const renderEmployee = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.avatar.length) {
+    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
+  } else {
+    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Employee_Name || 'John Doe'} initials status="online" /> </Link>
+  }
+}
+
 // ** Renders Client Columns
 const renderClient = row => {
   const stateNum = Math.floor(Math.random() * 6),
@@ -48,12 +65,15 @@ const renderClient = row => {
   if (row.avatar.length) {
     return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
   } else {
-    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
+    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Client || 'John Doe'} initials status="online" /> </Link>
   }
 }
 
 const DataTableWithButtons = () => {
-
+  const statusObj = {
+    inactive: 'light-secondary',
+    active: 'light-success'
+}
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -61,76 +81,116 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
-    const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
+  const [addClicked, setAddClicked] = useState(0) 
 
   //columns
   const columns = [
         {
-          name: 'Name',
+          name: 'Employee',
           minWidth: '250px',
-          selector: 'Name',
+          selector: 'Employee_Name',
           sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(row)}
+              {renderEmployee(row)}
               <div className=''>
-                <Link to={`/bidDetails/${row.id}`}>
+                
                   <div className='user-info text-truncate d-flex flex-column'>
-                     <span className='font-weight-bold'>{row.Name}</span>
-                     <small className='text-truncate text-muted mb-0'>@{row.Email}</small>
+                    <span className='font-weight-bold'>{row.Employee_Name}</span>
+                    <small className='text-truncate text-muted mb-0'>{row.Employee_Email}</small>
                   </div>
-                </Link>  
+                
               </div>
             </div>
           )
         },
         {
-          name: 'Email',
-          selector: 'Email',
+          name: 'Client',
+          minWidth: '250px',
+          selector: 'Client',
           sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Designation',
-          selector: 'Designation',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'phone',
-          selector: 'phone',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                           } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-                <Link to={`/master/Leads/edit/${row.id}`}>
-                  <Edit size={15} />
-                </Link>  
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderClient(row)}
+              <div className=''>
+                
+                  <div className='user-info text-truncate d-flex flex-column'>
+                    <span className='font-weight-bold'>{row.Client}</span>
+                    <small className='text-truncate text-muted mb-0'>@{row.Client_Email}</small>
+                  </div>
+                
               </div>
-            )
-          }
+            </div>
+          )
+        },
+        // {
+        //   name: 'Activity',
+        //   selector: 'Activity',
+        //   minWidth: '150px',
+        //   cell: row => (
+        //     <div className='d-flex justify-content-left align-items-center'>
+
+        //       <div className='d-flex flex-column'>
+                
+        //           <span className='font-weight-bold'>{row.Activity[0]}</span>
+        //       </div>
+        //     </div>
+        //   )
+        // },
+        
+        {
+          name: 'PIN',
+          selector: 'PIN',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'PIN ID',
+          selector: 'PIN_ID',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Reason',
+          selector: 'Reason',
+          sortable: true,
+          // minWidth: '150px'.
+               cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.Reason}</span>
+              </div>
+            </div>
+          )
+        },
+       
+        {
+          name: 'PIN Generate Time',
+          selector: 'PIN_Generate_Time',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Login Time',
+          selector: 'Login_Time',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Logout Time',
+          selector: 'Logout_Time',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'Duration',
+          selector: 'Duration',
+          sortable: true,
+          minWidth: '150px'
         }
+        
     ]
 
 
@@ -178,51 +238,6 @@ const DataTableWithButtons = () => {
     setCurrentPage(page.selected)
   }
 
-   // ** Converts table to CSV
-  function convertArrayOfObjectsToCSV(array) {
-    let result
-
-    const columnDelimiter = ','
-    const lineDelimiter = '\n'
-    const keys = Object.keys(data[0])
-
-    result = ''
-    result += keys.join(columnDelimiter)
-    result += lineDelimiter
-
-    array.forEach(item => {
-      let ctr = 0
-      keys.forEach(key => {
-        if (ctr > 0) result += columnDelimiter
-
-        result += item[key]
-
-        ctr++
-      })
-      result += lineDelimiter
-    })
-
-    return result
-  }
-
-  // ** Downloads CSV
-  function downloadCSV(array) {
-    const link = document.createElement('a')
-    let csv = convertArrayOfObjectsToCSV(array)
-    if (csv === null) return
-
-    const filename = 'export.csv'
-
-    if (!csv.match(/^data:text\/csv/i)) {
-      csv = `data:text/csv;charset=utf-8,${csv}`
-    }
-
-    link.setAttribute('href', encodeURI(csv))
-    link.setAttribute('download', filename)
-    link.click()
-  }
-
-
   // ** Custom Pagination
   const CustomPagination = () => (
     <ReactPaginate
@@ -249,6 +264,11 @@ const DataTableWithButtons = () => {
     />
   )
 
+  const handleAddClick = () => {
+    setAddClicked(!addClicked)
+
+  }
+
 
   return (
     <Fragment>
@@ -256,31 +276,55 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Lead</CardTitle>
-          <div className='d-flex mt-md-0 mt-1'>
-              <Link to={`/master/Leads/fileupload`}>
-                  <Button className='ml-2' color='primary' >
-                                              <Plus size={15} />
-                                              <span className='align-middle ml-50'>Import From File</span>
-                  </Button>
-            </Link>
-          </div>
-        </CardHeader>
+          <CardTitle tag='h4'>PIN Access Report</CardTitle>
+          {/* <div className='d-flex mt-md-0 mt-1'>
+             
+          </div> */}
+          {/* <Link to={`/add-sponsored_keyword`}> */}
+            <Button className='ml-2' color='primary' onClick={handleAddClick} >
+              <Plus size={15} />
+              <span className='align-middle ml-50'>Access Customer Portal</span>
+            </Button>
 
-        <DataTable
-          noHeader
-          pagination
-          
-          columns={columns}
-          paginationPerPage={7}
-          className='react-dataTable'
-          sortIcon={<ChevronDown size={10} />}
-          paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
-          
-        />
-        
+          {/* </Link> */}
+           
+        </CardHeader>
+        {addClicked ? <GeneratePin /> : null}
+        <CardBody>
+          <Row className='justify-content-end mx-0'>
+            <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+              <Label className='mr-1' for='search-input'>
+                Search
+            </Label>
+              <Input
+                className='dataTable-filter mb-50'
+                type='text'
+                bsSize='sm'
+                id='search-input'
+                value={searchValue}
+                onChange={handleFilter}
+              />
+            </Col>
+          </Row>
+          <DataTable
+            noHeader
+            pagination
+            responsive={true}
+            paginationServer
+
+            className='react-dataTable'
+            defaultSortField='invoiceId'
+            columns={columns}
+            paginationPerPage={7}
+            className='react-dataTable'
+            sortIcon={<ChevronDown size={10} />}
+            paginationDefaultPage={currentPage + 1}
+            paginationComponent={CustomPagination}
+            data={searchValue.length ? filteredData : data}
+
+          />
+        </CardBody>
+
       </Card>
       
     </Fragment>

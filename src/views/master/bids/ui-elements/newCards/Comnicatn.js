@@ -1,31 +1,19 @@
-//  Users
-// Start_date, expiry_date, status()
-// ** Custom Components
-import Avatar from '@components/avatar'
-//import { DropDownList } from '@progress/kendo-react-dropdowns'
-// ** Third Party Components
-import axios from 'axios'
-import { Link } from 'react-router-dom'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
-import { selectThemeColors } from '@utils'
+import { Link } from 'react-router-dom'
+import Avatar from '@components/avatar'
 // ** Table Data & Columns
 import { data1 } from './data'
-import Select from 'react-select'
-
-// ** Add New Modal Component
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Eye, Trash  } from 'react-feather'
+import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
 import {
   Card,
   CardHeader,
-  CardBody,
   CardTitle,
   Button,
   UncontrolledButtonDropdown,
@@ -39,41 +27,27 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
-// ** Bootstrap Checkbox Component
-const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
-  <div className='custom-control custom-checkbox'>
-    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
-    <label className='custom-control-label' onClick={onClick} />
-  </div>
-))
-
-
-// ** Renders Client Columns
 const renderClient = row => {
   const stateNum = Math.floor(Math.random() * 6),
     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
     color = states[stateNum]
 
   if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
   }
 }
 
 const DataTableWithButtons = () => {
-  const statusObj = {
-        pending: 'light-secondary',
-        approved: 'light-success',
-        approval: 'light-warning'
-  }
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
-  const [Filter, setFilter] = useState('')
+
+  const [addClicked, setAddClicked] = useState(0)
 
   //columns
   const columns = [
@@ -85,75 +59,38 @@ const DataTableWithButtons = () => {
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
               {renderClient(row)}
-              <div className='d-flex flex-column'>
-                
-                  <span className='font-weight-bold'>{row.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
+              <div className=''>
+               
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.Name}</span>
+                     <small className='text-truncate text-muted mb-0'>@{row.username}</small>
+                  </div>
+               
               </div>
             </div>
           )
         },
         {
-          name: 'Start date',
-          selector: 'Start_date',
+          name: 'messages',
+          selector: 'msg',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '250px'
         },
         {
-          name: 'Expiry Date',
-          selector: 'end_Date',
+          name: 'Date',
+          selector: 'Date',
           sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Date OF Aveiled',
-          selector: 'date',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Save Amount',
-          selector: 'samount',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Status',
-          selector: 'active',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} />
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-                <Link to={`/master/membershipavail/edit`}>
-                  <Edit size={15} />
-                </Link>  
-              </div>
-            )
-          }
+          minWidth: '250px'
         }
     ]
 
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
-  }
 
   // ** Function to handle Pagination
   const handlePagination = page => {
     setCurrentPage(page.selected)
   }
-// ** Custom Pagination
+
+  // ** Custom Pagination
   const CustomPagination = () => (
     <ReactPaginate
       previousLabel=''
@@ -182,7 +119,8 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
-
+      <Card>
+        
         <DataTable
           noHeader
           pagination
@@ -194,9 +132,10 @@ const DataTableWithButtons = () => {
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data1}
-          selectableRowsComponent={BootstrapCheckbox}
+          
         />
-      
+        
+      </Card>
     </Fragment>
   )
 }

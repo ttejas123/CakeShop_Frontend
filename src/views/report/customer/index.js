@@ -39,6 +39,7 @@ import {
 const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   <div className='custom-control custom-checkbox'>
     <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
+    {console.log(onClick)}
     <label className='custom-control-label' onClick={onClick} />
   </div>
 ))
