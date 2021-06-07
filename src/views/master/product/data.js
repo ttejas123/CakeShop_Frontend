@@ -56,57 +56,57 @@ const renderClient = row => {
 //expot data
 export const data = [
       {
-        id : 1,
-        productName : "Shirt",
+        buin : 1,
+        name : "Shirt",
         ean_upc_code : 12334,
         category : "Clothing",
         subCategory : "subClothing",
         productCategory : "cat1",
         hsnCode : 231,
-        gstNumber : 2345,
+        gstNumber : "18 %",
         mrp : 234,
         status: [{value: "approved", label: "approved"}],
         description : "dfsghjfhsjhe",
         avatar : pravin
       },
       {
-        id : 2,
-        productName : "T-Shirt",
+        buin : 2,
+        name : "T-Shirt",
         ean_upc_code : 1233456,
         category : "Clothing",
         subCategory : "subClothing",
         productCategory : "cat2",
         hsnCode : 2310,
         status: [{value: "pending", label: "pending"}],
-        gstNumber : 23456,
+        gstNumber : "20 %",
         mrp : 2314,
         description : "dfsghjfhfgbf",
         avatar : komal
       },
       {
-        id : 3,
-        productName : "Denim",
+        buin : 3,
+        name : "Denim",
         ean_upc_code : 12,
         category : "Clothing",
         subCategory : "subClothing",
         productCategory : "cat3",
         status: [{value: "approved", label: "approved"}],
         hsnCode : 21,
-        gstNumber : 245,
+        gstNumber : "22 %",
         mrp : 23,
         description : "abcdsjhe",
         avatar : himanshu
       },
       {
-        id : 4,
-        productName : "Trusers",
+        buin : 4,
+        name : "Trusers",
         ean_upc_code : 12,
         category : "Clothing",
         subCategory : "subClothing",
         productCategory : "cat4",
         status: [{value: "pending", label: "pending"}],
         hsnCode : 2310,
-        gstNumber : 21345,
+        gstNumber : "18 %",
         mrp : 2134,
         description : "abcddfsghjfhsjhe",
         avatar : ""
@@ -181,14 +181,14 @@ export const data1 = [
 ]
 export const columns = [
   {
-    name: 'Id',
-    selector: 'id',
+    name: 'BUIN',
+    selector: 'buin',
     sortable: true,
     minWidth: '50px'
   },
   {
-    name: 'Product Name',
-    selector: 'productName',
+    name: 'Name',
+    selector: 'name',
     sortable: true,
     minWidth: '150px'
   },
@@ -223,13 +223,13 @@ export const columns = [
     minWidth: '150px'
   },
   {
-    name: 'gst(Number)%',
+    name: 'GST',
     selector: 'gstNumber',
     sortable: true,
     minWidth: '150px'
   },
   {
-    name: 'MRP',
+    name: 'MRP ₹',
     selector: 'mrp',
     sortable: true,
     minWidth: '150px'

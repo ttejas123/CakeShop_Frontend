@@ -4,29 +4,37 @@ export const data1 = [
     {
         name: "Platinum",
         membershipFor: "Himanshu Chanda",
-        benefit : "20%",
+        benefit : "No Commission on transactions,Get Third party VAS, reveal name",
+        membershipType : "Individual",
         cost : 12124,
-        active : "Yes"
+        active : "Yes",
+        duration : "12 Months"
     },
     {
         name: "Premium",
         membershipFor: "Tejas Thakare",
-        benefit : "10%",
+        benefit : "No Commission on transactions,Get Third party VAS, reveal name%",
+        membershipType : "Corporate",
         cost : 123,
-        active : "yes"
+        active : "yes",
+        duration : "6 Months"
     },
     {
         name: "Gold",
         membershipFor: "Pravin Poshmani",
-        benefit : "10%",
+        benefit : "No Commission on transactions,Get Third party VAS, reveal name%",
+        membershipType : "Individual",
         cost : 1234,
-        active : "yes"
+        active : "yes",
+        duration : "6 Months"
     },
     {
         name: "Silver",
         membershipFor: "Komal Kamble",
-        benefit : "20%",
+        benefit : "No Commission on transactions,Get Third party VAS, reveal name%",
+        membershipType : "Corporate",
         cost : 1212,
-        active : "No"
+        active : "No",
+        duration : "3 Months"
     }
 ]

@@ -59,14 +59,11 @@ const renderClient = row => {
   }
 }
 
-const optionBidStatus = [
+const optionState = [
     {value: "", label: "Filter Status"},
-    {value: "productName", label: "Product Name"},
-    {value: "mrp", label: "MRP"},
-    {value: "gst", label: "GSt"},
-    {value: "category", label: "Category"},
-    {value: "subCategory", label: "Sub Category"},
-    {value: "productCategory", label: "Product Category"}
+    {value: "Maharshtra", label: "Maharshtra"},
+    {value: "Telangana", label: "Telangana"},
+    {value: "Karnataka", label: "Karnataka"}
   ]
 
 const WarehouseList = () => {
@@ -284,17 +281,22 @@ const WarehouseList = () => {
         <CardBody>
           <Row>
             <Col md='4'>
+            <Label className='mr-1' for='search-input'>
+                Filter State
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
-                options={optionBidStatus}
+                options={optionState}
                 value={Filter}
                 onChange={data => {
                   handleFilterByDropDown(data)
                 }}
               />
+              </div>
             </Col>
           </Row>
         </CardBody>

@@ -32,6 +32,7 @@ import WarehouseOverview from './warehouseOverview'
 import BranchOverview from './branchOverview'
 import BidHistoryOverview from './bidHistoryOverview'
 import CorporateOverviewKyc from './corporateOverviewKyc'
+import SuperAdmin from './corporateSuperAdmin'
 // import ProductCarousel from './productCarousel'
 // import RelatedProducts from './relatedProducts'
 // import ProductInfo from './productInfo'
@@ -157,6 +158,7 @@ const CorporateOverview = (props) => {
         <Row>{renderData()}</Row>
       </CardBody>
         </Col>
+        
       {/* <CardBody className='mt-0'>
         <Row>{renderData()}</Row>
       </CardBody> */}
@@ -264,7 +266,7 @@ const CorporateOverview = (props) => {
          <CorporateBidStats colors={colors} trackBgColor={trackBgColor}/>
         </Col>
         <Col lg='6' md='6'>
-        
+        <SuperAdmin/>
         </Col>
       </Row> 
 

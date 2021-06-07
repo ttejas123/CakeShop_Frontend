@@ -1,6 +1,8 @@
-import { Card, CardBody, CardHeader, CardTitle, UncontrolledDropdown, FormGroup, Label, Input, DropdownToggle, Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownMenu, DropdownItem} from 'reactstrap'
+import { Card, CardBody, CardHeader, CardTitle, Form, FormGroup, Label, Input, DropdownToggle, Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col} from 'reactstrap'
 import DataTable from 'react-data-table-component'
-import { Monitor, Coffee, Watch, Eye, ChevronDown, Trash, MoreVertical, Edit, FileText, Archive} from 'react-feather'
+import Repeater from '@components/repeater'
+import { Monitor, Coffee, Watch, Eye, ChevronDown, Plus, X} from 'react-feather'
+import { SlideDown } from 'react-slidedown'
 import { Fragment, useState } from 'react'
 import Uppy from '@uppy/core'
 import thumbnailGenerator from '@uppy/thumbnail-generator'
@@ -12,10 +14,28 @@ import drivingLicense from '@src/assets/images/slider/driving-license.jpg'
 
 
 const CorporateKyc = () => {
+  const [count, setCount] = useState(1)
+
+  const increaseCount = () => {
+    setCount(count + 1)
+  }
+
+  const deleteForm = e => {
+    e.preventDefault()
+    const slideDownWrapper = e.target.closest('.react-slidedown'),
+      form = e.target.closest('form')
+    if (slideDownWrapper) {
+      slideDownWrapper.remove()
+    } else {
+      form.remove()
+    }
+  }
+
   const initvalue = {
     name:""
   }
   const [selectedItem, setSelectedItem] = useState(initvalue)
+  const [requestModalstatus, setRequestModalStatus] = useState(false)
   const [modalstatus, setModalStatus] = useState(false)
   const [reuploadForm, setReUploadForm] = useState(false)
   const [approveComment, setApproveComment] = useState(false)
@@ -111,6 +131,15 @@ const CorporateKyc = () => {
       console.log("Not approved")
       }
     }
+
+    const handleRequest = () => {
+      setRequestModalStatus(!requestModalstatus)
+    }
+
+    const handleRequestSubmit = () => {
+      setRequestModalStatus(!requestModalstatus)
+    }
+
     const docColumns = [
       {
         name: 'Document Name',
@@ -267,15 +296,77 @@ const CorporateKyc = () => {
         
       </ModalFooter>
     </Modal>
+
+    <Modal
+      isOpen={requestModalstatus}
+      // toggle={() => toggleModal(item.id)}
+      className={`modal-dialog-centered modal-lg`}
+      key={selectedItem.name}
+    >
+      <ModalHeader toggle={() => setRequestModalStatus(!requestModalstatus)}>
+        Request Documents
+      </ModalHeader>
+      <ModalBody>
+      <Repeater count={count}>
+          {i => {
+            const Tag = i === 0 ? 'div' : SlideDown
+            return (
+              <Tag key={i}>
+                <Form>
+                  <Row className='justify-content-between align-items-center'>
+                    <Col md={8}>
+                      <FormGroup>
+                        <Label for={`animation-item-name-${i}`}>Document Name</Label>
+                        <Input type='text' id={`animation-item-name-${i}`} placeholder='Document Name' />
+                      </FormGroup>
+                    </Col>
+                    <Col md={4}>
+                      <Button.Ripple color='danger' className='text-nowrap px-1 mt-1' onClick={deleteForm} outline>
+                        <X size={14} className='mr-50' />
+                        <span>Delete</span>
+                      </Button.Ripple>
+                    </Col>
+                    <Col sm={12}>
+                      <hr />
+                    </Col>
+                  </Row>
+                </Form>
+              </Tag>
+            )
+          }}
+        </Repeater>
+        <Button.Ripple className='btn-icon' color='primary' onClick={increaseCount}>
+          <Plus size={14} />
+          <span className='align-middle ml-25'>Add New</span>
+        </Button.Ripple>
+      </ModalBody>
+      <ModalFooter>
+         <Button.Ripple color='primary' type='submit' onClick={() => {
+         handleRequestSubmit()
+        }
+        }  >
+        Submit
+      </Button.Ripple>
+      </ModalFooter>
+    </Modal>
+
+
   </Fragment>
     <Card className='card-statistics'>
            <CardHeader>  
               <CardTitle tag='h5'><h4>Kyc Submitted</h4></CardTitle>
+              <div className='d-flex mt-md-0 mt-1'>
               <Button className='ml-2' color='primary' onClick={ e => handleApprove()
                                                             }>
 
-              <span className='align-middle ml-50'>Approve All</span>
+              <span className='align-right'>Approve All</span>
             </Button>
+            <Button className='ml-2' color='primary' onClick={ e => handleRequest()
+                                                            }>
+
+              <span className='align-middle'>Request Additional Documents</span>
+            </Button>
+            </div>
            </CardHeader> 
     <DataTable
       noHeader

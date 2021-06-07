@@ -6,7 +6,7 @@ import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useState, useEffect } from 'react'
 import Flatpickr from 'react-flatpickr'
-import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X, Plus  } from 'react-feather'
+import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X, Lock  } from 'react-feather'
 import { data } from './data'
 import { useForm, Controller } from 'react-hook-form'
 
@@ -32,7 +32,8 @@ const UserAccountTab = (prop) => {
     role:"",
     Company:"",
     transaction: 0,
-    balance: 0
+    balance: 0,
+    CorporateName: [{value: "TCS", label: "TCS"}]
   }
 
   const optionsUser = [
@@ -40,6 +41,14 @@ const UserAccountTab = (prop) => {
     {value: "Tejas", label: "Tejas"},
     {value: "Komal", label: "Komal"},
     {value: "Pravin", label: "Pravin"}
+  ]
+
+  const optionCorporateName = [
+    {value: "TCS", label: "TCS"},
+    {value: "Coense", label: "Coense"},
+    {value: "Accenture", label: "Accenture"},
+    {value: "Infosys", label: "Infosys"},
+    {value: "Cognizant", label: "Cognizant"}
   ]
 
   const [selectedOption, setselectedOption] = useState()
@@ -106,13 +115,38 @@ const UserAccountTab = (prop) => {
           <Row>
 
             <Col md='6' sm='12'>
-              <FormGroup>
+              {/* <FormGroup>
                 <Label for='Company'>Company Name</Label>
                 <InputGroup>
                   
                   <Input name="Company" onChange={handleInputeChange} id='Company' placeholder='TCS' value={values.Company} />
                 </InputGroup>
-              </FormGroup>
+              </FormGroup> */}
+              <FormGroup>
+              <Label for='CorporateName'>Corporate Name</Label>
+              <div style={{zIndex:1000, position:'relative'}}>
+            <Select
+              id='CorporateName'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionCorporateName}
+              theme={selectThemeColors}
+              value={values.CorporateName[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             CorporateName : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </div>
+            </FormGroup> 
             </Col>
             
             <Col md='6' sm='12'>
@@ -181,7 +215,7 @@ const UserAccountTab = (prop) => {
                     </FormGroup>
             </Col>   
 
-            <Col md='12' sm='12'>
+            {/* <Col md='12' sm='12'>
               <label className='d-block mb-1'>Rights</label>
               <Row>
                <Col md="4" sm="6">
@@ -204,6 +238,73 @@ const UserAccountTab = (prop) => {
                </Col>
               
               </Row> 
+            </Col> */}
+
+
+          <Col sm='12'>
+              <div className='permissions border mt-1'>
+                <h6 className='py-1 mx-1 mb-0 font-medium-2'>
+                  <span className='align-middle'>Rights</span>
+                </h6>
+                <Table borderless striped responsive>
+                  <thead className='thead-light'>
+                    <tr>
+                      <th>Rights</th>
+                      <th>Create</th>
+                      <th>Delete</th>
+                      <th>Update</th>
+                      <th>View</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Bids</td>
+                      <td>
+                        <CustomInput type='checkbox' id='master-1' label='' defaultChecked />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='master-2' label='' />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='master-3' label='' />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='master-4' label='' />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Profile</td>
+                      <td>
+                        <CustomInput type='checkbox' id='reports-1' label='' />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='reports-2' label='' defaultChecked />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='reports-3' label='' />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='reports-4' label='' />
+                      </td>
+                      </tr>
+                    <tr>
+                      <td>Products</td>
+                      <td>
+                        <CustomInput type='checkbox' id='user-1' label='' defaultChecked />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='user-2' label='' />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='user-3' label='' defaultChecked />
+                      </td>
+                      <td>
+                        <CustomInput type='checkbox' id='user-4' label='' />
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
             </Col>
 
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>

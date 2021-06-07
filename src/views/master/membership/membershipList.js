@@ -103,6 +103,12 @@ const handleDelete = (data) => {
       minWidth: '250px'
     },
     {
+      name: 'Membership Type',
+      selector: 'membershipType',
+      sortable: false,
+      minWidth: '250px'
+    },
+    {
         name: 'Benefit',
         selector: 'benefit',
         sortable: false,
@@ -111,6 +117,12 @@ const handleDelete = (data) => {
       {
         name: 'Cost',
         selector: 'cost',
+        sortable: false,
+        minWidth: '250px'
+      },
+      {
+        name: 'Duration',
+        selector: 'duration',
         sortable: false,
         minWidth: '250px'
       },

@@ -163,8 +163,14 @@ const CorporateView = () => {
             </Col>
             <Col md='6' sm='12'>
             <FormGroup>
-              <Label for='personalInformation'>Personal Information</Label>
-              <Input type='personalInformation' id='personalInformation' placeholder='Personal Information' />
+              <Label for='userName'>User Name</Label>
+              <Input type='userName' id='userName' placeholder='userName' />
+            </FormGroup>
+            </Col>
+            <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='email'>Email Id</Label>
+              <Input type='email' id='email' placeholder='Email' />
             </FormGroup>
             </Col>
             <Col md='6' sm='12'>

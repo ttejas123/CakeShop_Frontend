@@ -5,24 +5,35 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
 import { userData } from './data'
 import Avatar from '@components/avatar'
+import { selectThemeColors } from '@utils'
+
 import { Link } from 'react-router-dom'
 // ** Third Party Components
+import Select from 'react-select'
 import ReactPaginate from 'react-paginate'
 import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
 import { MoreVertical, Edit, FileText, Archive, Share, Printer, File, Grid, Copy, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Row, Col, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap'
 //import InputBasic from './AddBadges'
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './EditCurrency'
 
 const UserActivity = () => {
 
+  
+const optionBidStatus = [
+  {value: "Pravin Poshmani", label: "Pravin Poshmani"},
+  {value: "Tejas Thakare", label: "Tejas Thakare"},
+  {value: "Komal Kamble", label: "Komal Kamble"}
+]
+
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [addClicked, setAddClicked] = useState(0)
   const [editClicked, setEditClicked] = useState(0)
+  const [Filter, setFilter] = useState('')
   const [editData, setEditData] = useState({})
   
   const handlePagination = page => {
@@ -73,28 +84,16 @@ const handleDelete = (data) => {
 
 const columns = [
     {
-      name: 'Login Time',
-      selector: 'loginTime',
+      name: 'Activity',
+      selector: 'activity',
       sortable: true,
       minWidth: '80px'
     },
     {
-      name: 'Account Created',
-      selector: 'accountCreated',
+      name: 'Time',
+      selector: 'time',
       sortable: true,
       minWidth: '80px'
-    },
-    {
-        name: 'Bid Created',
-        selector: 'bidCreated',
-        sortable: true,
-        minWidth: '80px'
-    },
-    {
-        name: 'Log',
-        selector: 'log',
-        sortable: true,
-        minWidth: '80px'
     }
 ]
   // ** Pagination Previous Component
@@ -117,6 +116,63 @@ const columns = [
         </span>
       </Fragment>
     )
+  }
+
+  const handleFilterByDropDown = (value) => {
+    let updatedData = []
+    setFilter(value)
+    console.log(value.value)
+    let search = "l"
+    search = value.value
+    setSearchValue(search)
+      if (search.length) {
+          updatedData = data.filter(item => {
+            const startsWith =
+              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
+              
+            const includes =
+              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
+    
+            if (startsWith) {
+              return startsWith
+            } else if (!startsWith && includes) {
+              return includes
+            } else return null
+           })
+        
+      setFilteredData(updatedData)
+      // setSearchValue(search)
+      setFilter(value)
+    }
+  }
+  // ** Function to handle filter
+  const handleFilter = e => {
+    const value = e.target.value
+    let updatedData = []
+    setSearchValue(value)
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        const NoOfBidder = item.NoOfBidder.toString()
+        const startsWith =
+          item.PurchaseIntentName.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
+          console.log(startsWith)
+        const includes =
+          item.PurchaseIntentName.toLowerCase().includes(value.toLowerCase()) ||
+          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
+          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+      setSearchValue(value)
+    }
   }
 
   // ** Custom Pagination Component
@@ -191,6 +247,30 @@ const columns = [
 
   return (
       <Fragment>
+         <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionBidStatus}
+                value={Filter}
+                onChange={data => {
+                  handleFilterByDropDown(data)
+                }}
+              />
+              </div>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
     <Card>
       <CardHeader className='border-bottom'>
         <CardTitle tag='h4'>User Activity Report</CardTitle>
