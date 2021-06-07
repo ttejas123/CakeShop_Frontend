@@ -1,3 +1,5 @@
+//Name,Email, Designation(),phone
+
 // Assigned to(any onground staff), status(meeting done, Coprorate converted,..)
 // Name,Email, Designation(),phone
 
@@ -22,7 +24,7 @@ import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, InputGro
   CardTitle, CustomInput } from 'reactstrap'
 
 const UserAccountTab = (prop) => {
-   const { id } = useParams()
+  const { id } = useParams()
   const initialvalues = {
     id:0,
     type: 'Category',
@@ -37,6 +39,7 @@ const UserAccountTab = (prop) => {
     {value: "meeting done", label: "meeting done"},
     {value: "Coprorate converted", label: "Coprorate converted"}
   ]
+
    useEffect(() => {
         console.log(data[id - 1])
         setValues({
@@ -78,7 +81,7 @@ const UserAccountTab = (prop) => {
     <Row>
       
         <Col sm='12' className="pl-5 pt-2">
-          <h2 className="mb-1">Edit OnGround Lead</h2>
+          <h2 className="mb-1">Add OnGround Lead</h2>
         </Col>
       
       <CardBody className='pl-3 pt-2'>
@@ -88,7 +91,7 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='Name'>Assigned to</Label>
+                <Label for='Name'>Name</Label>
                 <InputGroup>
                   
                   <Input name="Name" onChange={handleInputeChange} id='type' value={values.Name} />
@@ -98,28 +101,34 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-              <Label for='status'>Status</Label>
-              <Select
-                id='status'
-                className='react-select'
-                classNamePrefix='select'
-                isClearable={false}
-                options={optionStatus}
-                theme={selectThemeColors}
-                value={values.status}
-                onChange={data => {
-                                   setValues(
-                                            {
-                                               ...values,
-                                               status : data
-                                            } 
-                                    )
-                                  }
-                          }
-              /> 
-              </FormGroup>  
+                <Label for='Email'>Email</Label>
+                <InputGroup>
+                  
+                  <Input name="Email" onChange={handleInputeChange} id='type' value={values.Email} />
+                </InputGroup>
+              </FormGroup>
             </Col>
-           
+
+            <Col md='6' sm='12'>
+              <FormGroup>
+                <Label for='Designation'>Designation</Label>
+                <InputGroup>
+                  
+                  <Input name="Designation" onChange={handleInputeChange} id='type' value={values.Designation} />
+                </InputGroup>
+              </FormGroup>
+            </Col>
+
+            <Col md='6' sm='12'>
+              <FormGroup>
+                <Label for='phone'>phone</Label>
+                <InputGroup>
+                  
+                  <Input name="phone" onChange={handleInputeChange} id='type' value={values.phone} />
+                </InputGroup>
+              </FormGroup>
+            </Col>
+
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
               <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' onClick={ e =>  {
                                                           submitHandle(e)

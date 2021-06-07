@@ -485,6 +485,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/subScrPlan/index'))
   },
   {
+    path: '/master/subscriptionplans/add',
+    component: lazy(() => import('../../views/master/subScrPlan/add'))
+  },
+  {
+    path: '/master/subscriptionplans/edit/:id',
+    component: lazy(() => import('../../views/master/subScrPlan/edit'))
+  },
+  {
     path: '/master/subscription/aveil/:id',
     component: lazy(() => import('../../views/master/subScrPlan/aveil'))
   },

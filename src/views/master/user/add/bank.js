@@ -27,9 +27,9 @@ const initialvalues = {
     exim_details : "",
     bank_name : "",
     bank_branch : "",
-    bank_account : 0,
-    ifsc_code : 0,
-    micr_code : 0
+    bank_account : "",
+    ifsc_code : "",
+    micr_code : ""
   }
   const [selectedOption, setselectedOption] = useState()
   const [values, setValues] = useState(initialvalues) 
@@ -121,10 +121,10 @@ const initialvalues = {
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Exim Details</Label>
+              <Label for='Name'>EXIM Details</Label>
               <InputGroup>
                 
-                <Input name="exim_details" onChange={handleInputeChange} id='exim_details' placeholder='' value={values.exim_details} />
+                <Input name="exim_details" onChange={handleInputeChange} id='exim_details' placeholder='324.23.24432' value={values.exim_details} />
               </InputGroup>
               </FormGroup>  
             </Col>
@@ -134,7 +134,7 @@ const initialvalues = {
               <Label for='Name'>Bank Account</Label>
               <InputGroup>
                 
-                <Input name="bank_account" onChange={handleInputeChange} id='bank_account' placeholder='Ravi' value={values.bank_account} />
+                <Input name="bank_account" onChange={handleInputeChange} id='bank_account' placeholder='8454****' value={values.bank_account} />
               </InputGroup>
               </FormGroup>  
             </Col>
@@ -144,7 +144,7 @@ const initialvalues = {
               <Label for='Name'>IFSC Code</Label>
               <InputGroup>
                 
-                <Input name="ifsc_code" onChange={handleInputeChange} id='ifsc_code' placeholder='Ravi' value={values.ifsc_code} />
+                <Input name="ifsc_code" onChange={handleInputeChange} id='ifsc_code' placeholder='BDO13232' value={values.ifsc_code} />
               </InputGroup>
               </FormGroup>  
             </Col>
@@ -154,7 +154,7 @@ const initialvalues = {
               <Label for='Name'>MICR Code</Label>
               <InputGroup>
                 
-                <Input name="micr_code" onChange={handleInputeChange} id='micr_code' placeholder='Ravi' value={values.micr_code} />
+                <Input name="micr_code" type="number" onChange={handleInputeChange} id='micr_code' placeholder='2628213344' value={values.micr_code} />
               </InputGroup>
               </FormGroup>  
             </Col>

@@ -340,7 +340,7 @@ const optionUserType = [
               <Label for='Name'>Extension</Label>
               <InputGroup>
                 
-                <Input name="extension" onChange={handleInputeChange} id='extension' placeholder='Ravi' value={values.extension} />
+                <Input name="extension" onChange={handleInputeChange} id='extension' placeholder='' value={values.extension} />
               </InputGroup>
               </FormGroup>  
             </Col>
@@ -422,7 +422,7 @@ const optionUserType = [
               <Label for='pinCode'>Pin Code</Label>
               <InputGroup>
                 
-                <Input name="pinCode" onChange={handleInputeChange} id='pinCode' placeholder='Ravi' value={values.pinCode} />
+                <Input name="pinCode" onChange={handleInputeChange} id='pinCode' placeholder='400708' value={values.pinCode} />
               </InputGroup>
               </FormGroup>  
             </Col>

@@ -10,36 +10,48 @@ import reethika  from '../../../assets/images/logo/reethika.jpg'
 //expot data
 export const data = [
     {   id:1,
-        name: "Platinum",
+        name: {value: "Platinum", label: "Platinum"},
         membershipFor: "Himanshu Chanda",
-        benefit : ["No Commission on transactions", "Get Third party VAS", "Reveal names of all bidders", "Reveal Contact Details of all bidders", "Allow ranking of sellers"],
+        benefit : [
+                    {value: "No Commission on transactions", label: "No Commission on transactions"},
+                    {value: "Get Third party VAS", label: "Get Third party VAS"},
+                    {value: "Reveal names of all bidders", label: "Reveal names of all bidders"},
+                    {value: "Reveal Contact Details of all bidders", label: "Reveal Contact Details of all bidders"}
+                  ],
         aveil: 10,
-        cost : 12124,
-        active : "Yes"
+        cost : 8000,
+        active : {value: "Yes", label: "Yes"}
     },
     {   id:2,
-        name: "Premium",
+        name: {value: "Premium", label: "Premium"},
         membershipFor: "Tejas Thakare",
-        benefit : ["Get Third party VAS", "Reveal names of all bidders", "Reveal Contact Details of all bidders"],
+        benefit : [
+                    {value: "No Commission on transactions", label: "No Commission on transactions"},
+                    {value: "Get Third party VAS", label: "Get Third party VAS"},
+                    {value: "Reveal names of all bidders", label: "Reveal names of all bidders"}
+                  ],
         aveil: 10,
-        cost : 123,
-        active : "yes"
+        cost : 5000,
+        active : {value: "Yes", label: "Yes"}
     },
     {   id:3,
-        name: "Gold",
+        name: {value: "Gold", label: "Gold"},
         membershipFor: "Pravin Poshmani",
-        benefit : ["Reveal Contact Details of all bidders", "Allow ranking of sellers"],
+        benefit : [
+                    {value: "No Commission on transactions", label: "No Commission on transactions"},
+                    {value: "Get Third party VAS", label: "Get Third party VAS"}
+                  ],
         aveil: 10,
-        cost : 1234,
-        active : "yes"
+        cost : 4500,
+        active : {value: "Yes", label: "Yes"}
     },
     {   id:4,
-        name: "Silver",
+        name: {value: "Silver", label: "Silver"},
         membershipFor: "Komal Kamble",
-        benefit : ["Get Third party VAS"],
+        benefit : [{value: "No Commission on transactions", label: "No Commission on transactions"}],
         aveil: 10,
-        cost : 1212,
-        active : "No"
+        cost : 2500,
+        active : {value: "Yes", label: "Yes"}
     }
 ]
 
