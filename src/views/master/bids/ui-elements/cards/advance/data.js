@@ -6,8 +6,6 @@ import pravin  from '@src/assets/images/logo/pravin.jpg'
 import himanshu  from '@src/assets/images/logo/himanshu.jpg'
 import reethika  from '@src/assets/images/logo/reethika.jpg'
 
-    
-
 //expot data
 export const data = [
 
