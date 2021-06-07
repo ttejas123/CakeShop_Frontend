@@ -43,11 +43,12 @@ const EcommerceDashboard = () => {
   return (
     <div id='dashboard-ecommerce'>
       <Row className='match-height' >
-        <Col xl='8' md='6' xs='12'>
+        <Col xl='8' md='6' xs='12' className='match-height'>
           <StatsCard userId = {id} cols={{ xl: '3', sm: '6' }} />
           {/* <Timeline /> */}
         </Col>
-        <Col xl='4' md='2' xs='12'>
+        
+        <Col xl='4' md='2' xs='12' className='match-height'>
           <Participents colors={colors} trackBgColor={trackBgColor} />
           <ApprovedCostom colors={colors} trackBgColor={trackBgColor} />
           <Address title="Shipping Address" Address={ShoopingAddre}/>

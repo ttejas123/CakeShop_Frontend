@@ -144,6 +144,7 @@ const UserInfoCard = (props) => {
                           <div ><img  src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
                     </Col>
                 </Row>
+               
                 <Row className='mt-1'>
                     <Col xl='10' md='10' xs='10' >
                       <Badge className='card-text mr-25 pr-1 pl-1' color="light-success" pill>
@@ -152,6 +153,16 @@ const UserInfoCard = (props) => {
                     </Col>
                     <Col xl='2' md='2' xs='2'>
                           <div ><img  src="https://img.icons8.com/color/30/000000/instagram-verification-badge.png"/></div>
+                    </Col>
+                </Row>
+                 <Row className='mt-1'>
+                    <Col xl='10' md='10' xs='10' >
+                      <Badge className='card-text mr-25 pr-1 pl-1' color="light-success" pill>
+                          <h5 className='mb-0'> Social Audit </h5>
+                    </Badge>-
+                    </Col>
+                    <Col xl='2' md='2' xs='2'>
+                          <div ><img src="https://img.icons8.com/offices/26/000000/checked-2--v2.png"/></div>
                     </Col>
                 </Row>
             </div>

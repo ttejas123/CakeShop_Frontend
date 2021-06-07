@@ -223,6 +223,14 @@ const UserAccountTab = (prop) => {
                   label='Is This A Parent Category'
                   inline
                 />
+                <CustomInput
+                  defaultChecked
+                  type='switch'
+                  id='exampleCustomAvail'
+                  name='customSwitch'
+                  label='Customization avalibale'
+                  inline
+                />
             </Col>
 
             <Col md='12' sm='12'>
@@ -274,6 +282,7 @@ const UserAccountTab = (prop) => {
 
               <hr />
             </Col>
+            
             <Col>
                 <h3 className="mb-2 mt-2"> Select Attributes </h3>
                 

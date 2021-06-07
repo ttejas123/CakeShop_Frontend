@@ -1,5 +1,8 @@
 // ** React Imports
 import Uppy from '@uppy/core'
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import thumbnailGenerator from '@uppy/thumbnail-generator'
 import { DragDrop } from '@uppy/react'
 import Avatar from '@components/avatar'
@@ -10,7 +13,7 @@ import Flatpickr from 'react-flatpickr'
 import { useState, useEffect } from 'react'
 import { selectThemeColors, isObjEmpty } from '@utils'
 
-import {  Media, Row, Col, Button, Form, Table, CustomInput,  Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardHeader, CardTitle, CardBody, MoreVertical  } from 'reactstrap'
+import {  Media, Row, Col, Button, Form, Table, CustomInput,  Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardHeader, CardTitle, CardBody, MoreVertical, FormFeedback  } from 'reactstrap'
 import Select from 'react-select'
 
 import komal  from '../../../../assets/images/logo/komal.jpg'
@@ -65,9 +68,9 @@ const optionUserType = [
     designation : "",
     department : "",
     specialization : "",
-    currency_id : 0,
-    telephone_city_code : 0,
-    landline : 0,
+    currency_id : "",
+    telephone_city_code : "",
+    landline : "",
     extension : "",
     corporate_id : 0,
     company_name : "",
@@ -116,7 +119,23 @@ const optionUserType = [
             })
   // ** Custom close btn
   const CloseBtn = <X className='cursor-pointer' size={15} onClick={prop.handleModal} />
-  
+
+  const SignupSchema = yup.object().shape({
+    email: yup.string().email().required(),
+    last_name: yup.string().min(3).required(),
+    mobile: yup.number().required(),
+    designation: yup.string().min(3).required(),
+    first_name: yup.string().min(3).required(),
+    pinCode: yup.number().required(),
+    Address: yup.string().min(3).required()
+   
+  })
+
+  const { register, errors, handleSubmit } = useForm({ mode: 'onChange', resolver: yupResolver(SignupSchema) })
+
+  const onSubmit = data => {
+    console.log(data)
+  }
   useEffect(() => {
     // if (prop.currentId === "") {
     //     setValues({...initialvalues})
@@ -243,74 +262,82 @@ const optionUserType = [
       </Col>
 
       <Col sm='16'>
-        <Form onSubmit={e => e.preventDefault()}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>First Name</Label>
+              <Label for='Name'>First Name  {errors && errors.first_name && <span style={{fontSize:"14px", color:"red"}}>*</span>} </Label>
               <InputGroup>
-                <Input name="first_name" onChange={handleInputeChange} id='first_name' placeholder='Ravi' value={values.first_name} />
+                <Input name="first_name"
+                  innerRef={register({ required: true })}
+                 invalid={errors.first_name && true}
+               onChange={handleInputeChange} id='first_name' placeholder='Ravi' value={values.first_name} />
+
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Last Name</Label>
+              <Label for='Name'>Last Name  {errors && errors.last_name && <span style={{fontSize:"14px", color:"red"}}>*</span>} </Label>
               <InputGroup>
                 
-                <Input name="last_name" onChange={handleInputeChange} id='last_name' placeholder='Kukreja' value={values.last_name} />
+                <Input name="last_name"
+                  innerRef={register({ required: true })}
+                 invalid={errors.last_name && true}
+                  onChange={handleInputeChange} id='last_name' placeholder='Kukreja' value={values.last_name} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Email</Label>
+              <Label for='Name'>Email  {errors && errors.email && <span style={{fontSize:"14px", color:"red"}}>*</span>} </Label>
               <InputGroup>
                 
-                <Input name="email" onChange={handleInputeChange} id='email' placeholder='ravi@gmail.com' value={values.email} />
+                <Input name="email"
+                innerRef={register({ required: true })}
+                 invalid={errors.email && true} onChange={handleInputeChange} id='email' placeholder='ravi@gmail.com' value={values.email} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Mobile Number</Label>
+              <Label for='Name'>Mobile Number  {errors && errors.mobile && <span style={{fontSize:"14px", color:"red"}}>*</span>} </Label>
               <InputGroup>
                 
-                <Input name="mobile" onChange={handleInputeChange} id='mobile' placeholder='9768*****3' value={values.mobile} />
+                <Input name="mobile"
+                innerRef={register({ required: true })}
+                 invalid={errors.mobile && true} onChange={handleInputeChange} id='mobile' placeholder='9768*****3' value={values.mobile} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Telephone City Code</Label>
+              <Label for='Name'>Landline </Label>
               <InputGroup>
                 
-                <Input name="telephone_city_code" type="number" onChange={handleInputeChange} id='telephone_city_code' placeholder='+91' value={values.telephone_city_code} />
+                
+              </InputGroup>
+              <InputGroup>
+                <Input style={{width: '15%'}} name="telephone_city_code" type="number" onChange={handleInputeChange} id='telephone_city_code' placeholder='+91' value={values.telephone_city_code} />
+                
+                <Input style={{width: '85%'}} name="landline" type="number" onChange={handleInputeChange} id='landline' placeholder='7777***53' value={values.landline} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Landline</Label>
+              <Label for='Name'>Designation  {errors && errors.designation && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="landline" type="number" onChange={handleInputeChange} id='landline' placeholder='7777***53' value={values.landline} />
-              </InputGroup>
-              </FormGroup>  
-            </Col>
-
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <Label for='Name'>Designation</Label>
-              <InputGroup>
-                
-                <Input name="designation" onChange={handleInputeChange} id='designation' placeholder='Web devloper' value={values.designation} />
+                <Input name="designation"
+                innerRef={register({ required: true })}
+                 invalid={errors.designation && true} onChange={handleInputeChange} id='designation' placeholder='Web devloper' value={values.designation} />
               </InputGroup>
               </FormGroup>  
             </Col>
@@ -419,33 +446,34 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='pinCode'>Pin Code</Label>
+              <Label for='pinCode'>Pin Code  {errors && errors.pinCode && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="pinCode" onChange={handleInputeChange} id='pinCode' placeholder='400708' value={values.pinCode} />
+                <Input name="pinCode"
+                 innerRef={register({ required: true })}
+                 invalid={errors.pinCode && true} onChange={handleInputeChange} id='pinCode' placeholder='400708' value={values.pinCode} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Address</Label>
+              <Label for='Name'>Address  {errors && errors.Address && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="Address" type="textarea" onChange={handleInputeChange} id='Address' placeholder='Enter Your Address...' value={values.Address} />
+                <Input name="Address" 
+                innerRef={register({ required: true })}
+                 invalid={errors.Address && true} type="textarea" onChange={handleInputeChange} id='Address' placeholder='Enter Your Address...' value={values.Address} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' color='primary' onClick={ e =>  {
-                                                          
-                                                          submitHandle()
-                                                        }
-                                                      }>
+              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' color='primary' 
+                                                      type='submit'>
                                     Submit
               </Button.Ripple>
-              <Button.Ripple color='secondary' onClick={() => setValues(initialvalues) } outline>
+              <Button.Ripple color='secondary'  outline>
                         Cancel
               </Button.Ripple>
             </Col>
@@ -456,173 +484,3 @@ const optionUserType = [
   )
 }
 export default UserAccountTab
-
-{ /*
-// ** React Imports
-import { useState, useEffect } from 'react'
-import Flatpickr from 'react-flatpickr'
-// ** Custom Components
-import Avatar from '@components/avatar'
-
-// ** Third Party Components
-import { Lock, Edit, Trash2, Calendar } from 'react-feather'
-import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap'
-
-const UserAccountTab = ({ selectedUser }) => {
-  // ** States
-  const [img, setImg] = useState(null)
-  const [userData, setUserData] = useState(null)
-
-  // ** Function to change user image
-  const onChange = e => {
-    const reader = new FileReader(),
-      files = e.target.files
-    reader.onload = function () {
-      setImg(reader.result)
-    }
-    reader.readAsDataURL(files[0])
-  }
-
-  // ** Update user image on mount or change
-  // useEffect(() => {
-  //   if (selectedUser !== null || (selectedUser !== null && userData !== null && selectedUser.id !== userData.id)) {
-  //     setUserData(selectedUser)
-  //     if (selectedUser.avatar.length) {
-  //       return setImg(selectedUser.avatar)
-  //     } else {
-  //       return setImg(null)
-  //     }
-  //   }
-  // }, [selectedUser])
-
-  // ** Renders User
-  const renderUserAvatar = () => {
-    if (img === null) {
-      const stateNum = Math.floor(Math.random() * 6),
-        states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-        color = states[stateNum]
-      return (
-        <h1></h1>
-      )
-    } else {
-      return (
-        <img
-          className='user-avatar rounded mr-2 my-25 cursor-pointer'
-          src={img}
-          alt='user profile avatar'
-          height='90'
-          width='90'
-        />
-      )
-    }
-  }
-
-  return (
-    <Row>
-      <Col sm='12'>
-        <Media className='mb-2'>
-          {renderUserAvatar()}
-          <Media className='mt-50' body>
-            <h4> </h4>
-            <div className='d-flex flex-wrap mt-1 px-0'>
-              <Button.Ripple id='change-img' tag={Label} className='mr-75 mb-0' color='primary'>
-                <span className='d-none d-sm-block'>Change</span>
-                <span className='d-block d-sm-none'>
-                  <Edit size={14} />
-                </span>
-                <input type='file' hidden id='change-img' onChange={onChange} accept='image/*' />
-              </Button.Ripple>
-              <Button.Ripple color='secondary' outline>
-                <span className='d-none d-sm-block'>Remove</span>
-                <span className='d-block d-sm-none'>
-                  <Trash2 size={14} />
-                </span>
-              </Button.Ripple>
-            </div>
-          </Media>
-        </Media>
-      </Col>
-      <Col sm='12'>
-        <Form onSubmit={e => e.preventDefault()}>
-          <Row>
-            <Col md='4' sm='12'>
-              <FormGroup>
-              <FormGroup>
-                <Label for='username'>Username</Label>
-                <Input type='text' id='username' placeholder='Username' defaultValue={userData && userData.username} />
-              </FormGroup>
-            </Col>
-            <Col md='4' sm='12'>
-              <FormGroup>
-                <Label for='name'>Name</Label>
-                <Input type='text' id='name' placeholder='Name' defaultValue={userData && userData.fullName} />
-              </FormGroup>
-            </Col>
-            <Col md='4' sm='12'>
-              <FormGroup>
-                <Label for='email'>Email</Label>
-                <Input type='text' id='email' placeholder='Email' defaultValue={userData && userData.email} />
-              </FormGroup>
-            </Col>
-            <Col md='4' sm='12'>
-              <FormGroup>
-                <Label for='status'>Status</Label>
-                <Input type='select' name='status' id='status' defaultValue={userData && userData.status}>
-                  <option value='pending'>Pending</option>
-                  <option value='active'>Active</option>
-                  <option value='inactive'>Inactive</option>
-                </Input>
-              </FormGroup>
-            </Col>
-            <Col md='4' sm='12'>
-              <FormGroup>
-                <Label for='BidCloseDate'>Bid Close Date</Label>
-                <InputGroup>
-                <InputGroupAddon addonType='prepend'>
-                  <InputGroupText>
-                    <Calendar size={15} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Flatpickr
-                 
-                  required
-                  id='endDate'
-                  name='BidCloseDate'
-                  className='form-control'
-                  
-                  options={{
-                    dateFormat: 'd-m-Y'
-                  }}
-                />
-              </InputGroup>
-              </FormGroup>
-            </Col>
-            <Col md='4' sm='12'>
-              <FormGroup>
-                <Label for='company'>Company</Label>
-                <Input
-                  type='text'
-                  id='company'
-                  defaultValue={userData && userData.company}
-                  placeholder='WinDon Technologies Pvt Ltd'
-                />
-              </FormGroup>
-            </Col>
-            
-            
-            <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary'>
-                Save Changes
-              </Button.Ripple>
-              <Button.Ripple color='secondary' outline>
-                Reset
-              </Button.Ripple>
-            </Col>
-          </Row>
-        </Form>
-      </Col>
-    </Row>
-  )
-}
-export default UserAccountTab
-*/ }

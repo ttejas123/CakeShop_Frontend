@@ -130,12 +130,24 @@ const CorporateOverview = (props) => {
                 <span>abc@gmail.com</span>
                 <Badge className='card-text font-small-2 ml-2' color="light-success" pill>
                         <span className='mb-0 text-success' >Premium</span>
-                  </Badge>
-                </CardText>
+                </Badge>
+              </CardText>
+
             </Media>
+            
           </Media>
+          
           </CardTitle>
-        
+          <Media className='float-left'>
+            <Row>
+              <Col>
+                <img src="https://img.icons8.com/material-outlined/26/000000/visible.png"/>
+              </Col>
+              <Col>
+                <img src="https://img.icons8.com/ios-glyphs/26/000000/--pocket-watch.png"/>
+              </Col>
+            </Row>
+          </Media>
       </CardHeader>
       <hr/>
       <CardHeader className='pb-0'> 

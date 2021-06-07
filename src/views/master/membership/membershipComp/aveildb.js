@@ -118,10 +118,26 @@ const DataTableWithButtons = () => {
           minWidth: '150px'
         },
         {
-          name: 'Status',
-          selector: 'active',
+          name: 'Benifits',
+          selector: 'samount',
           sortable: true,
           minWidth: '150px'
+        },
+        {
+          name: 'Status',
+          selector: 'benefit',
+          sortable: false,
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+             
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.benefit[0]}</span>
+                
+              </div>
+            </div>
+          )
         },
         {
           name: 'Actions',
@@ -148,6 +164,22 @@ const DataTableWithButtons = () => {
   const handleModal = () => {
     setModal(!modal)
   }
+
+  const ExpandableTable = ({ data }) => {
+  return (
+    <div className='expandable-content p-2'>
+      <p>
+        <span className='font-weight-bold'>Benifits:<br/></span> 
+        {
+          data.benefit.map((val, id) => {
+            return (<><span><b>{id + 1}</b>.{val}</span><br/></>)
+          })
+        }
+      </p>
+      
+    </div>
+  )
+}
 
   // ** Function to handle Pagination
   const handlePagination = page => {
@@ -186,12 +218,13 @@ const DataTableWithButtons = () => {
         <DataTable
           noHeader
           pagination
-          
+          expandableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
+          expandableRowsComponent={<ExpandableTable />}
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data1}
           selectableRowsComponent={BootstrapCheckbox}
