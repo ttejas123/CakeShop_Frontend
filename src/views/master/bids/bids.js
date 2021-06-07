@@ -202,6 +202,23 @@ const DataTableWithButtons = () => {
           minWidth: '150px'
         },
         {
+          name: 'PIN ID',
+          selector: 'pinid',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => {
+            
+            return (
+                <div key={row.id} className='d-flex align-items-center'>
+                  <div className='user-info text-truncate '>
+                  
+                    <span className='d-block font-weight-bold text-truncate'>{row.pinid}</span>
+                  </div>
+                </div>
+            )
+          }
+        },
+        {
           name: 'Requested Constomization',
           selector: 'ReqCustomization',
           sortable: true,

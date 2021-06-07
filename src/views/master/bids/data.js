@@ -25,6 +25,7 @@ import reethika  from '../../../assets/images/logo/reethika.jpg'
 export const data = [
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: "",
         BidApplicationDate : "03-09-2021",
         finalSellerId : 321342,
@@ -45,6 +46,7 @@ export const data = [
       },
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: pravin,
         BidApplicationDate : "03-09-2021",
         finalSellerId : 321342,
@@ -65,6 +67,7 @@ export const data = [
       },
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: komal,
         BidApplicationDate : "03-09-2021",
         finalSellerId : 541342,
@@ -85,6 +88,7 @@ export const data = [
       },
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: "",
         BidApplicationDate : "03-09-2021",
         finalSellerId : 721342,
@@ -105,6 +109,7 @@ export const data = [
       },
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: "",
         BidApplicationDate : "03-09-2021",
         finalSellerId : 2331342,
@@ -125,6 +130,7 @@ export const data = [
       },
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: reethika,
         BidApplicationDate : "03-09-2021",
         finalSellerId : 771356,
@@ -145,6 +151,7 @@ export const data = [
       },
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: himanshu,
         BidApplicationDate : "03-09-2021",
         finalSellerId : 671356,
@@ -165,6 +172,7 @@ export const data = [
       },
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: "",
         BidApplicationDate : "03-09-2021",
         finalSellerId : 921345,
@@ -185,6 +193,7 @@ export const data = [
       },
       {
         BidCloseDate :"23-10-2021",
+        pinid :5647,
         avatar: "",
         BidApplicationDate : "03-09-2021",
         finalSellerId : 3421332,

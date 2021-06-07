@@ -17,7 +17,7 @@ const EditCorporate = () => {
  
 <Card>
 <CardHeader>
-  <CardTitle tag='h1'>Add Membership</CardTitle>
+  <CardTitle tag='h1'>Edit Membership</CardTitle>
 </CardHeader>
 
 <CardBody>
@@ -68,7 +68,7 @@ const EditCorporate = () => {
       <Col md='6' sm='12'>
         <FormGroup>
           <Label for='cost'>Aveiler</Label>
-          <Input type='number' id='cost' placeholder='Cost'  />
+          <Input type='number' id='cost' placeholder='Tejas Thakare'  />
         </FormGroup>
       </Col>
       <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>

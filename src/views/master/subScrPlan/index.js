@@ -69,25 +69,60 @@ const DataTableWithButtons = () => {
       selector: 'name',
       sortable: true,
       minWidth: '200px',
-      maxWidth: '200px'
+      maxWidth: '200px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className='d-flex flex-column'>
+                <Link to={`/master/subscription/aveil/${row.id}`}>
+                  <span className='font-weight-bold'>{row.name.label}</span>
+                </Link>
+              </div>
+            </div>
+          )
     },
     {
         name: 'Benefit',
         selector: 'benefit',
         sortable: false,
         minWidth: '250px',
-        maxWidth: '350px'
+        maxWidth: '350px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className='d-flex flex-column'>
+                {
+                  row.benefit.map((val, index) => {
+                    return (
+                        <span className='font-weight-bold'>{val.label}</span>
+                    )
+                  })
+                }
+                
+              </div>
+            </div>
+          )
       },
       {
         name: 'Cost',
         selector: 'cost',
         sortable: false,
         minWidth: '250px',
-        maxWidth: '300px'
+        maxWidth: '300px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>₹{row.cost}</span>
+               
+              </div>
+            </div>
+          )
       },
       {
         name: 'Active',
-        selector: 'active',
+        selector: 'active.label',
         sortable: false,
         minWidth: '250px'
       },
@@ -106,7 +141,25 @@ const DataTableWithButtons = () => {
               </div>
             </div>
           )
-      }
+      },
+        {
+          name: 'Actions',
+          allowOverflow: true,
+          cell: row => {
+            return (
+              <div className='d-flex'>
+                <UncontrolledDropdown>
+                  <DropdownToggle className='pr-1' tag='span'>
+                    <Trash size={15} />
+                  </DropdownToggle>
+                </UncontrolledDropdown>
+                <Link to={`/master/subscriptionplans/edit/${row.id}`}>
+                  <Edit size={15} />
+                </Link>  
+              </div>
+            )
+          }
+        }
     ]
 
 
@@ -189,7 +242,12 @@ const DataTableWithButtons = () => {
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Subscription Plan</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+            <Link to={`/master/subscriptionplans/add`}>
+              <Button className='ml-2' color='primary'>
+                  <Plus size={15} />
+                  <span className='align-middle ml-50'>Add New</span>
+              </Button>
+            </Link>
           </div>
         </CardHeader>
 

@@ -102,12 +102,6 @@ export default [
         navLink: '/brand'
       },
       {
-        id: 'RFQ',
-        title: 'RFQ',
-        icon: <Circle size={20} />,
-        navLink: '/rfq'
-      },
-      {
         id: 'LogisticsPartners',
         title: 'Logistics Partners',
         icon: <Circle size={20} />,
