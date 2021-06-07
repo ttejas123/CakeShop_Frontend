@@ -211,8 +211,10 @@ const DataTableWithButtons = () => {
             return (
                 <div key={row.id} className='d-flex align-items-center'>
                   <div className='user-info text-truncate '>
+                    <Link to={`/report/pinbaseactivity`}>
                   
-                    <span className='d-block font-weight-bold text-truncate'>{row.pinid}</span>
+                      <span className='d-block font-weight-bold text-truncate'>{row.pinid}</span>
+                    </Link>
                   </div>
                 </div>
             )

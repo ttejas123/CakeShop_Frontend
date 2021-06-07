@@ -91,7 +91,7 @@ const UserAccountTab = (prop) => {
     <Row>
       
         <Col sm='12' className="pl-5 pt-2">
-          <h2 className="mb-1">Edit Subscription Plan</h2>
+          <h2 className="mb-1">Add New Subscription Plan</h2>
         </Col>
       
       <CardBody className='pl-3 pt-2'>

@@ -101,7 +101,7 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-              <Label for='Plan'>Subscription Plan</Label>
+              <Label for='Plan'>Edit Subscription Plan</Label>
               <Select
                 id='name'
                 className='react-select'

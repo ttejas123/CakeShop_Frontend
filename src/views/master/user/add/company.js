@@ -1,5 +1,8 @@
 // ** React Imports
 import Uppy from '@uppy/core'
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import thumbnailGenerator from '@uppy/thumbnail-generator'
 import { DragDrop } from '@uppy/react'
 import Avatar from '@components/avatar'
@@ -10,7 +13,7 @@ import Flatpickr from 'react-flatpickr'
 import { useState, useEffect } from 'react'
 import { selectThemeColors, isObjEmpty } from '@utils'
 
-import {  Media, Row, Col, Button, Form, Table, CustomInput,  Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardHeader, CardTitle, CardBody, MoreVertical  } from 'reactstrap'
+import {  Media, Row, Col, Button, Form, Table, CustomInput,  Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardHeader, CardTitle, CardBody, MoreVertical, FormFeedback  } from 'reactstrap'
 import Select from 'react-select'
 
 import komal  from '../../../../assets/images/logo/komal.jpg'
@@ -23,6 +26,22 @@ import komal  from '../../../../assets/images/logo/komal.jpg'
 
 const UserAccountTab = ({ selectedUser }, prop) => {
 
+  const SignupSchema = yup.object().shape({
+    email: yup.string().email().required(),
+    last_name: yup.string().min(3).required(),
+    mobile: yup.number().required(),
+    designation: yup.string().min(3).required(),
+    company_name: yup.string().min(3).required(),
+    pinCode: yup.number().required(),
+    Address: yup.string().min(3).required()
+   
+  })
+
+  const { register, errors, handleSubmit } = useForm({ mode: 'onChange', resolver: yupResolver(SignupSchema) })
+
+  const onSubmit = data => {
+    console.log(data)
+  }
 
 const optionCompany = [
     {value: "", label: "Select Your Company"},
@@ -173,15 +192,17 @@ const optionPanCardType = [
     <Row>
 
       <Col sm='16'>
-        <Form onSubmit={e => e.preventDefault()}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Company Name</Label>
+              <Label for='Name'>Company Name  {errors && errors.company_name && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="company_name" onChange={handleInputeChange} id='company_name' placeholder='Coence' value={values.company_name} />
+                <Input name="company_name"
+                 innerRef={register({ required: true })}
+                 invalid={errors.company_name && true} onChange={handleInputeChange} id='company_name' placeholder='Coence' value={values.company_name} />
               </InputGroup>
               </FormGroup>  
             </Col>
@@ -303,14 +324,10 @@ const optionPanCardType = [
             </Col>
 
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' color='primary' onClick={ e =>  {
-                                                          
-                                                          submitHandle()
-                                                        }
-                                                      }>
+              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' color='primary' >
                                     Submit
               </Button.Ripple>
-              <Button.Ripple color='secondary' onClick={() => setValues(initialvalues) } outline>
+              <Button.Ripple color='secondary'  outline>
                         Cancel
               </Button.Ripple>
             </Col>
