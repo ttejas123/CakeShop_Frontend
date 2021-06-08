@@ -62,98 +62,46 @@ const DataTableWithButtons = () => {
       }
   }
 
+  // ** Renders Client Columns
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.avatar.length) {
+    return  <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> 
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.name || 'John Doe'} initials status="online" />
+  }
+}
+
   //columns
   const columns = [
-    {
-      name: 'Name',
-      selector: 'name',
-      sortable: true,
-      minWidth: '200px',
-      maxWidth: '200px',
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              
-              <div className='d-flex flex-column'>
-                <Link to={`/master/subscription/aveil/${row.id}`}>
-                  <span className='font-weight-bold'>{row.name.label}</span>
-                </Link>
-              </div>
-            </div>
-          )
-    },
-    {
-        name: 'Benefit',
-        selector: 'benefit',
-        sortable: false,
-        minWidth: '250px',
-        maxWidth: '350px',
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              
-              <div className='d-flex flex-column'>
-                
-                        <span className='font-weight-bold'>{row.benefit[0].label}</span>
-                    
-              </div>
-            </div>
-          )
-      },
-      {
-        name: 'Cost',
-        selector: 'cost',
-        sortable: false,
-        minWidth: '250px',
-        maxWidth: '300px',
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              
-              <div className='d-flex flex-column'>
-                
-                  <span className='font-weight-bold'>₹{row.cost}</span>
-               
-              </div>
-            </div>
-          )
-      },
-      {
-        name: 'Active',
-        selector: 'active.label',
-        sortable: false,
-        minWidth: '250px'
-      },
-      {
-        name: 'No user Availed',
-        selector: 'aveil',
-        sortable: false,
-        minWidth: '250px',
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              
-              <div className='d-flex flex-column'>
-                <Link to={`/master/subscription/aveil/${row.id}`}>
-                  <span className='font-weight-bold'>{row.aveil}</span>
-                </Link>
-              </div>
-            </div>
-          )
-      },
+        
         {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} />
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-                <Link to={`/master/subscriptionplans/edit/${row.id}`}>
-                  <Edit size={15} />
+          name: 'Participant',
+          minWidth: '250px',
+          selector: 'name',
+          sortable: true,
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              {renderClient(row)}
+              <div className=''>
+                <Link to={`/bidDetails/${row.id}`}>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.name}</span>
+                     <small className='text-truncate text-muted mb-0'>@{row.name}</small>
+                  </div>
                 </Link>  
               </div>
-            )
-          }
+            </div>
+          )
+        },
+        {
+          name: 'value',
+          selector: 'value',
+          sortable: true,
+          minWidth: '150px'
         }
     ]
 
@@ -197,26 +145,55 @@ const DataTableWithButtons = () => {
     }
   }
 
-const ExpandableTable = ({ data }) => {
-  return (
-    <div className='expandable-content p-2'>
-      <p>
-        <span className='font-weight-bold'>Benifits:<br/></span> 
-        {
-          data.benefit.map((val, id) => {
-            return (<><span><b>{id + 1}</b>.{val.label}</span><br/></>)
-          })
-        }
-      </p>
-      
-    </div>
-  )
-}
-
   // ** Function to handle Pagination
   const handlePagination = page => {
     setCurrentPage(page.selected)
   }
+
+   // ** Converts table to CSV
+  function convertArrayOfObjectsToCSV(array) {
+    let result
+
+    const columnDelimiter = ','
+    const lineDelimiter = '\n'
+    const keys = Object.keys(data[0])
+
+    result = ''
+    result += keys.join(columnDelimiter)
+    result += lineDelimiter
+
+    array.forEach(item => {
+      let ctr = 0
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter
+
+        result += item[key]
+
+        ctr++
+      })
+      result += lineDelimiter
+    })
+
+    return result
+  }
+
+  // ** Downloads CSV
+  function downloadCSV(array) {
+    const link = document.createElement('a')
+    let csv = convertArrayOfObjectsToCSV(array)
+    if (csv === null) return
+
+    const filename = 'export.csv'
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`
+    }
+
+    link.setAttribute('href', encodeURI(csv))
+    link.setAttribute('download', filename)
+    link.click()
+  }
+
 
   // ** Custom Pagination
   const CustomPagination = () => (
@@ -251,13 +228,11 @@ const ExpandableTable = ({ data }) => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Subscription Plan</CardTitle>
+          <CardTitle tag='h4'>All Participant</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <Link to={`/master/subscriptionplans/add`}>
-              <Button className='ml-2' color='primary'>
-                  <Plus size={15} />
-                  <span className='align-middle ml-50'>Add New</span>
-              </Button>
+            
+            <Link to={`/master/customizations/add`}>
+             
             </Link>
           </div>
         </CardHeader>
@@ -265,8 +240,7 @@ const ExpandableTable = ({ data }) => {
         <DataTable
           noHeader
           pagination
-          expandableRows
-          expandableRowsComponent={<ExpandableTable />}
+          
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'

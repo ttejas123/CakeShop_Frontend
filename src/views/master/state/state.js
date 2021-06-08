@@ -236,28 +236,20 @@ const DataTableWithButtons = () => {
             />
           </Col>
         </Row>
-        {/* <DataTable
-          noHeader
-          pagination
-          selectableRows
-          columns={columns}
-          paginationPerPage={7}
-          className='react-dataTable'
-          sortIcon={<ChevronDown size={10} />}
-          paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
-          selectableRowsComponent={BootstrapCheckbox}
-        /> */}
-         <DataTable
+       <DataTable
         noHeader
         pagination
-        data={searchValue.length ? filteredData : data}
-        columns={basicColumns}
+        selectableRows
+        columns={columns}
+        paginationPerPage={7}
         className='react-dataTable'
         sortIcon={<ChevronDown size={10} />}
-        paginationRowsPerPageOptions={[10, 25, 50, 100]}
-      />
+        paginationDefaultPage={currentPage + 1}
+        paginationComponent={CustomPagination}
+        data={searchValue.length ? filteredData : data}
+        selectableRowsComponent={BootstrapCheckbox}
+      /> 
+         
         
       </Card>
     </Fragment>

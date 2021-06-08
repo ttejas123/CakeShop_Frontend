@@ -1,5 +1,8 @@
 // ** React Imports
 import Uppy from '@uppy/core'
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import thumbnailGenerator from '@uppy/thumbnail-generator'
 import { DragDrop } from '@uppy/react'
 import Avatar from '@components/avatar'
@@ -22,6 +25,24 @@ import komal  from '../../../../assets/images/logo/komal.jpg'
 // profile_pic
 
 const UserAccountTab = ({ selectedUser }, prop) => {
+
+    const SignupSchema = yup.object().shape({
+    bank_name: yup.string().email().required(),
+    bank_branch: yup.string().required(),
+    pinCode: yup.number().required(),
+    micr_code: yup.string().required(),
+    ifsc_code: yup.string().required(),
+    bank_account: yup.number().required(),
+    exim_details: yup.number().required(),
+    Address: yup.string().min(3).required()
+   
+  })
+
+  const { register, errors, handleSubmit } = useForm({ mode: 'onChange', resolver: yupResolver(SignupSchema) })
+
+  const onSubmit = data => {
+    console.log(data)
+  }
 
 const initialvalues = {
     exim_details : "",
@@ -66,6 +87,7 @@ const initialvalues = {
     setValues(initialvalues)
   }
 
+
   // ** States
   const [userData, setUserData] = useState(null)
 
@@ -97,77 +119,85 @@ const initialvalues = {
     <Row>
 
       <Col sm='16'>
-        <Form onSubmit={e => e.preventDefault()}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Bank Name</Label>
+              <Label for='Name'>Bank Name  {errors && errors.bank_name && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="bank_name" onChange={handleInputeChange} id='bank_name' placeholder='ICICI Bank' value={values.bank_name} />
+                <Input name="bank_name"
+                innerRef={register({ required: true })}
+                 invalid={errors.bank_name && true} onChange={handleInputeChange} id='bank_name' placeholder='ICICI Bank' value={values.bank_name} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Bank Branch</Label>
+              <Label for='Name'>Bank Branch  {errors && errors.bank_branch && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
-                <Input name="bank_branch" onChange={handleInputeChange} id='bank_branch' placeholder='Airoli' value={values.bank_branch} />
+                <Input name="bank_branch"
+                innerRef={register({ required: true })}
+                 invalid={errors.bank_branch && true} onChange={handleInputeChange} id='bank_branch' placeholder='Airoli' value={values.bank_branch} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>EXIM Details</Label>
+              <Label for='Name'>EXIM Details  {errors && errors.exim_details && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="exim_details" onChange={handleInputeChange} id='exim_details' placeholder='324.23.24432' value={values.exim_details} />
+                <Input name="exim_details"
+                innerRef={register({ required: true })}
+                 invalid={errors.exim_details && true} onChange={handleInputeChange} id='exim_details' placeholder='324.23.24432' value={values.exim_details} />
               </InputGroup>
               </FormGroup>  
             </Col>
             
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Bank Account</Label>
+              <Label for='Name'>Bank Account  {errors && errors.bank_account && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="bank_account" onChange={handleInputeChange} id='bank_account' placeholder='8454****' value={values.bank_account} />
+                <Input name="bank_account"
+                innerRef={register({ required: true })}
+                 invalid={errors.bank_account && true} onChange={handleInputeChange} id='bank_account' placeholder='8454****' value={values.bank_account} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>IFSC Code</Label>
+              <Label for='Name'>IFSC Code  {errors && errors.ifsc_code && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="ifsc_code" onChange={handleInputeChange} id='ifsc_code' placeholder='BDO13232' value={values.ifsc_code} />
+                <Input name="ifsc_code"
+                innerRef={register({ required: true })}
+                 invalid={errors.ifsc_code && true} onChange={handleInputeChange} id='ifsc_code' placeholder='BDO13232' value={values.ifsc_code} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>MICR Code</Label>
+              <Label for='Name'>MICR Code  {errors && errors.micr_code && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="micr_code" type="number" onChange={handleInputeChange} id='micr_code' placeholder='2628213344' value={values.micr_code} />
+                <Input name="micr_code"
+                innerRef={register({ required: true })}
+                 invalid={errors.micr_code && true} type="number" onChange={handleInputeChange} id='micr_code' placeholder='2628213344' value={values.micr_code} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' color='primary' onClick={ e =>  {
-                                                          
-                                                          submitHandle()
-                                                        }
-                                                      }>
+              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' color='primary' type='submit' >
                                     Submit
               </Button.Ripple>
-              <Button.Ripple color='secondary' onClick={() => setValues(initialvalues) } outline>
+              <Button.Ripple color='secondary' outline>
                         Cancel
               </Button.Ripple>
             </Col>

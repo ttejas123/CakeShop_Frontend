@@ -1,14 +1,4 @@
-// <input
-//                 className='custom-control-input'
-//                 type='checkSquarebox'
-//                 id="checkSquarebox"
-//                 checkSquareed={}
-//                 {  onChange={e => e.stopPropagation()}
-//                                 onClick={e => {
-//                                   e.stopPropagation()
-//                                 }} 
-//                                 }
-//               />
+
 import Chart from 'react-apexcharts'
 import { MoreVertical, CheckSquare } from 'react-feather'
 import {
@@ -64,12 +54,13 @@ const CardBrowserState = () => {
           <CardTitle tag='h4'>Approved Customization</CardTitle>
           <CardText className='font-small-2'>All Request</CardText>
         </div>
-        <div color='' className='bg-transparent btn-sm border-0 p-50'>
-            <MoreVertical size={18} className='cursor-pointer' />
-        </div>
+        {/*<div color='' className='bg-transparent btn-sm border-0 p-50'>
+                    <MoreVertical size={18} className='cursor-pointer' />
+                </div>*/}
       </CardHeader>
 
       <CardBody>{renderStates()}</CardBody>
+      
     </Card>
   )
 }

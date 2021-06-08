@@ -39,11 +39,6 @@ const CardBrowserState = ({ colors, trackBgColor }) => {
       avatar: reethika,
       name: 'Reethika john Deo',
       value: '200K'
-    },
-    {
-      avatar: himanshu,
-      name: 'himanshu Chanda',
-      value: '209K'
     }
   ]
 
@@ -85,6 +80,14 @@ const CardBrowserState = ({ colors, trackBgColor }) => {
         </div>
       </CardHeader>
       <CardBody>{renderStates()}</CardBody>
+     <CardBody className="pt-0">
+            <Link to={`/master/bidDetail/participents`}>
+                  <Button color='primary' block >
+                    View all Participants
+                  </Button>
+            </Link>
+            
+      </CardBody>
     </Card>
   )
 }

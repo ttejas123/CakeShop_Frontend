@@ -1,5 +1,8 @@
 // ** React Imports
 import Uppy from '@uppy/core'
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import thumbnailGenerator from '@uppy/thumbnail-generator'
 import { DragDrop } from '@uppy/react'
 import Avatar from '@components/avatar'
@@ -10,7 +13,7 @@ import Flatpickr from 'react-flatpickr'
 import { useState, useEffect } from 'react'
 import { selectThemeColors, isObjEmpty } from '@utils'
 
-import {  Media, Row, Col, Button, Form, Table, CustomInput,  Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardHeader, CardTitle, CardBody, MoreVertical  } from 'reactstrap'
+import {  Media, Row, Col, Button, Form, Table, CustomInput,  Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardHeader, CardTitle, CardBody, MoreVertical, FormFeedback  } from 'reactstrap'
 import Select from 'react-select'
 
 import komal  from '../../../../assets/images/logo/komal.jpg'
@@ -23,6 +26,24 @@ import komal  from '../../../../assets/images/logo/komal.jpg'
 
 const UserAccountTab = ({ selectedUser }, prop) => {
 
+  const SignupSchema = yup.object().shape({
+    email: yup.string().email().required(),
+    last_name: yup.string().min(3).required(),
+    pan_number: yup.string().required(),
+    aadhar: yup.number().min(3).required(),
+    gstno: yup.number().required(),
+    designation: yup.string().min(3).required(),
+    company_name: yup.string().min(3).required(),
+    pinCode: yup.number().required(),
+    Address: yup.string().min(3).required()
+   
+  })
+
+  const { register, errors, handleSubmit } = useForm({ mode: 'onChange', resolver: yupResolver(SignupSchema) })
+
+  const onSubmit = data => {
+    console.log(data)
+  }
 
 const optionCompany = [
     {value: "", label: "Select Your Company"},
@@ -173,15 +194,17 @@ const optionPanCardType = [
     <Row>
 
       <Col sm='16'>
-        <Form onSubmit={e => e.preventDefault()}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Company Name</Label>
+              <Label for='Name'>Company Name  {errors && errors.company_name && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="company_name" onChange={handleInputeChange} id='company_name' placeholder='Coence' value={values.company_name} />
+                <Input name="company_name"
+                 innerRef={register({ required: true })}
+                 invalid={errors.company_name && true} onChange={handleInputeChange} id='company_name' placeholder='Coence' value={values.company_name} />
               </InputGroup>
               </FormGroup>  
             </Col>
@@ -260,30 +283,36 @@ const optionPanCardType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Pan Number</Label>
+              <Label for='Name'>Pan Number  {errors && errors.pan_number && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="pan_number" onChange={handleInputeChange} id='pan_number' placeholder='AIQP224***' value={values.pan_number} />
+                <Input name="pan_number"
+                innerRef={register({ required: true })}
+                invalid={errors.pan_number && true} onChange={handleInputeChange} id='pan_number' placeholder='AIQP224***' value={values.pan_number} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>GST Number</Label>
+              <Label for='Name'>GST Number  {errors && errors.gstno && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="gstno" onChange={handleInputeChange} id='gstno' placeholder='' value={values.gstno} />
+                <Input name="gstno"
+                innerRef={register({ required: true })}
+                invalid={errors.gstno && true} onChange={handleInputeChange} id='gstno' placeholder='' value={values.gstno} />
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Aadhar Card Number</Label>
+              <Label for='Name'>Aadhar Card Number  {errors && errors.aadhar && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
               <InputGroup>
                 
-                <Input name="aadhar" type="number" onChange={handleInputeChange} id='aadhar' placeholder='3825****' value={values.aadhar} />
+                <Input name="aadhar"
+                innerRef={register({ required: true })}
+                invalid={errors.aadhar && true} type="number" onChange={handleInputeChange} id='aadhar' placeholder='3825****' value={values.aadhar} />
               </InputGroup>
               </FormGroup>  
             </Col>
@@ -303,14 +332,10 @@ const optionPanCardType = [
             </Col>
 
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' color='primary' onClick={ e =>  {
-                                                          
-                                                          submitHandle()
-                                                        }
-                                                      }>
+              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' color='primary' type='submit' >
                                     Submit
               </Button.Ripple>
-              <Button.Ripple color='secondary' onClick={() => setValues(initialvalues) } outline>
+              <Button.Ripple color='secondary'  outline>
                         Cancel
               </Button.Ripple>
             </Col>
