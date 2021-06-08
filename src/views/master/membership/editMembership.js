@@ -17,7 +17,7 @@ const EditCorporate = () => {
  
 <Card>
 <CardHeader>
-  <CardTitle tag='h1'>Edit / Add Membership</CardTitle>
+  <CardTitle tag='h1'>Edit Membership</CardTitle>
 </CardHeader>
 
 <CardBody>
@@ -40,7 +40,7 @@ const EditCorporate = () => {
       <Col md='6' sm='12'>
         <FormGroup>
           <Label for='benefit'>Benefit</Label>
-          <Input type='text' id='benefit' placeholder='Benefit'  />
+          <Input type='textarea' id='benefit' placeholder='Benefit'  />
         </FormGroup>
       </Col>
       <Col md='6' sm='12'>

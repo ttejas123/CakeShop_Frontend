@@ -56,18 +56,9 @@ const EcommerceDashboard = () => {
 
       <Row className='match-height' >
         <Col xl='8' md='6' xs='12'>
-          <Card className='card-statistics'>
-           <CardHeader>  
-              <CardTitle tag='h5'><h4>KYC Submitted</h4></CardTitle>
-           </CardHeader>  
-            <CardBody>
-              <Row className='match-height'>
-                <Col lg='12' xs='12'>
+         
                   <KycSub />
-                </Col>
-              </Row>
-            </CardBody>  
-          </Card>
+                
         </Col>
         <Col xl='4' md='6' xs='12'>
           <Statistics/>

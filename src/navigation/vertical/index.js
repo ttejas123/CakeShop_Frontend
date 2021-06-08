@@ -858,6 +858,12 @@ export default [
         navLink: '/report/sample-request-list'
       },
       {
+        id: 'creditApproved',
+        title: 'Credit Approved',
+        icon: <Circle size={20} />,
+        navLink: '/report/creditApproved'
+      },
+      {
         id: 'ticket',
         title: 'Tickets',
         icon: <Circle size={20} />,

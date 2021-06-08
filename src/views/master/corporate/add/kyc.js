@@ -14,12 +14,26 @@ import { selectThemeColors, isObjEmpty } from '@utils'
 import {  Media, Row, Col, Button, Form, Table, CustomInput,  Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardHeader, CardTitle, CardBody, MoreVertical  } from 'reactstrap'
 import Select from 'react-select'
 
-// company_logo
-// pan_card_proof
-// exim_doc
-// cancelled_cheque
-// profile_pic
-const UserAccountTab = ({ selectedUser }, prop) => {
+// ** Renders Client Columns
+const renderDoc = (DocName) => {
+    return (
+        <div className='d-flex justify-content-left align-items-center'>
+             <CustomInput inline type='checkbox' id='exampleCustomCheckbox2' onClick={() => {
+                                        setValues((preval) => {
+                                                     Doc : preval.Doc.push({value: "Aadhar", label: "Aadhar"})
+                                                  }
+                                                ) 
+                                      }} />
+              <div className='d-flex flex-column'>
+                  <span className='font-weight-bold'>{DocName}</span>
+                
+              </div>
+        </div>
+      )
+
+}
+
+const Kyc = ({ selectedUser }, prop) => {
   const optionDoc = [
     {value: "Aadhar", label: "Aadhar"},
     {value: "pan", label: "pan"},
@@ -198,11 +212,12 @@ const UserAccountTab = ({ selectedUser }, prop) => {
                       id='Doc'
                       className='react-select'
                       classNamePrefix='select'
-                      
+                      closeMenuOnSelect={false}
                       options={optionDoc}
                       theme={selectThemeColors}
                       value={values.Doc}
                       onChange={data => {
+                                        console.log(data)
                                          setValues(
                                                   {
                                                      ...values,
@@ -241,7 +256,7 @@ const UserAccountTab = ({ selectedUser }, prop) => {
     </Row>   
   )
 }
-export default UserAccountTab
+export default Kyc
 
 { /*
   <Col md='4' sm='12'>

@@ -241,14 +241,20 @@ const ByUserTab = () => {
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='gstNumber'>GST (Number)%</Label>
-          <Input type='text' id='gstNumber' placeholder='GST (Number)%' defaultValue={userData && userData.gstNumber} />
+          <Label for='sGstNumber'>SGST (%)</Label>
+          <Input type='text' id='sGstNumber' placeholder='SGST (%)' defaultValue={userData && userData.gstNumber} />
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='gstNumber'>GST (Number)%</Label>
-          <Input type='text' id='gstNumber' placeholder='GST (Number)%' defaultValue={userData && userData.gstNumber} />
+          <Label for='cGstNumber'>CGST (%)</Label>
+          <Input type='text' id='cGstNumber' placeholder='CGST (%)' defaultValue={userData && userData.gstNumber} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='iGstNumber'>IGST (%)</Label>
+          <Input type='text' id='iGstNumber' placeholder='IGST (%)' defaultValue={userData && userData.gstNumber} />
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>

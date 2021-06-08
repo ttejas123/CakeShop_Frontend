@@ -63,7 +63,9 @@ export const data = [
         subCategory : "subClothing",
         productCategory : "cat1",
         hsnCode : 231,
-        gstNumber : "18 %",
+        sGstNumber : "18 %",
+        iGstNumber : "10 %",
+        cGstNumber : "20 %",
         mrp : 234,
         status: [{value: "approved", label: "approved"}],
         description : "dfsghjfhsjhe",
@@ -78,8 +80,9 @@ export const data = [
         productCategory : "cat2",
         hsnCode : 2310,
         status: [{value: "pending", label: "pending"}],
-        gstNumber : "20 %",
-        mrp : 2314,
+        sGstNumber : "18 %",
+        iGstNumber : "10 %",
+        cGstNumber : "20 %",
         description : "dfsghjfhfgbf",
         avatar : komal
       },
@@ -92,7 +95,9 @@ export const data = [
         productCategory : "cat3",
         status: [{value: "approved", label: "approved"}],
         hsnCode : 21,
-        gstNumber : "22 %",
+        sGstNumber : "18 %",
+        iGstNumber : "10 %",
+        cGstNumber : "20 %",
         mrp : 23,
         description : "abcdsjhe",
         avatar : himanshu
@@ -106,7 +111,9 @@ export const data = [
         productCategory : "cat4",
         status: [{value: "pending", label: "pending"}],
         hsnCode : 2310,
-        gstNumber : "18 %",
+        sGstNumber : "18 %",
+        iGstNumber : "10 %",
+        cGstNumber : "20 %",
         mrp : 2134,
         description : "abcddfsghjfhsjhe",
         avatar : ""
@@ -223,8 +230,20 @@ export const columns = [
     minWidth: '150px'
   },
   {
-    name: 'GST',
-    selector: 'gstNumber',
+    name: 'SGST',
+    selector: 'sGstNumber',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'IGST',
+    selector: 'iGstNumber',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'CGST',
+    selector: 'cGstNumber',
     sortable: true,
     minWidth: '150px'
   },

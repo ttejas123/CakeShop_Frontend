@@ -33,6 +33,7 @@ import BranchOverview from './branchOverview'
 import BidHistoryOverview from './bidHistoryOverview'
 import CorporateOverviewKyc from './corporateOverviewKyc'
 import SuperAdmin from './corporateSuperAdmin'
+import CorporateCreditUtilization from './corporateCreditUtilization'
 // import ProductCarousel from './productCarousel'
 // import RelatedProducts from './relatedProducts'
 // import ProductInfo from './productInfo'
@@ -274,11 +275,14 @@ const CorporateOverview = (props) => {
       </Row> 
 
       <Row className='match-height'>
-          <Col lg='6' md='6'>
+          <Col lg='4' md='6'>
          <CorporateBidStats colors={colors} trackBgColor={trackBgColor}/>
         </Col>
-        <Col lg='6' md='6'>
+        <Col lg='4' md='6'>
         <SuperAdmin/>
+        </Col>
+        <Col lg='4' md='6'>
+        <CorporateCreditUtilization/>
         </Col>
       </Row> 
 

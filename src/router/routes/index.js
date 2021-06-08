@@ -217,6 +217,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/membership/membershipList'))
   },
   {
+    path: '/update-membership-plan',
+    component: lazy(() => import('../../views/master/membership/updateMembershipPlan'))
+  },
+  {
     path: '/master/membershipavail/edit',
     component: lazy(() => import('../../views/master/membership/membershipComp/edits.js'))
   },
@@ -603,6 +607,10 @@ const Routes = [
   {
     path: '/report/productIssue',
     component: lazy(() => import('../../views/report/productIssue'))
+  },
+  {
+    path: '/report/creditApproved',
+    component: lazy(() => import('../../views/report/credit/creditApproved'))
   },
   {
     path: '/report/defective-goods',
