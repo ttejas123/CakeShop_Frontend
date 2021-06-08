@@ -281,14 +281,14 @@ export const columns = [
 
 export const pendingColumns = [
   {
-    name: 'Id',
-    selector: 'id',
+    name: 'BUIN',
+    selector: 'buin',
     sortable: true,
     minWidth: '50px'
   },
   {
-    name: 'Product Name',
-    selector: 'productName',
+    name: 'Name',
+    selector: 'name',
     sortable: true,
     minWidth: '150px'
   },

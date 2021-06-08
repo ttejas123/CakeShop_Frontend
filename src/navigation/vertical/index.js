@@ -264,24 +264,24 @@ export default [
         icon: <Circle size={20} />,
         nanavLink: '/productDetails',
         children: [
-                {
-                  id: 'catalogue',
-                  title: 'Catalogue',
-                  icon: <Circle size={20} />,
-                  navLink: '/product-list'
-                },
-                {
-                  id: 'myProducts',
-                  title: 'My Products',
-                  icon: <Circle size={20} />,
-                  navLink: '/my-product-list'
-                },
-                {
-                  id: 'pendingProducts',
-                  title: 'Pending Products',
-                  icon: <Circle size={20} />,
-                  navLink: '/pending-product-list'
-                },
+                // {
+                //   id: 'catalogue',
+                //   title: 'Catalogue',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/product-list'
+                // },
+                // {
+                //   id: 'myProducts',
+                //   title: 'My Products',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/my-product-list'
+                // },
+                // {
+                //   id: 'pendingProducts',
+                //   title: 'Pending Products',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/pending-product-list'
+                // },
                 // {
                 //   id: 'view',
                 //   title: 'View',
@@ -295,10 +295,34 @@ export default [
                 //   navLink: '/edit-product'
                 // },
                 {
-                  id: 'add',
-                  title: 'Add',
+                  id: 'create',
+                  title: 'Create',
                   icon: <Circle size={20} />,
                   navLink: '/add-product'
+                },
+                {
+                  id: 'products',
+                  title: 'Products',
+                  icon: <Circle size={20} />,
+                  navLink: '/product-list'
+                },
+                {
+                  id: 'pendingProducts',
+                  title: 'Pending Products',
+                  icon: <Circle size={20} />,
+                  navLink: '/pending-product-list'
+                },
+                {
+                  id: 'createSku',
+                  title: 'Create Sku',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/SKUs/add'
+                },
+                {
+                  id: 'sku',
+                  title: 'Sku List',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/SKU'
                 }
                 // ,
                 // {

@@ -271,6 +271,7 @@ const ByUserTab = () => {
               onChange={data => {
 
                                 setSubCategoryOptions(data)
+                                setSpecificationsData(optionSubCategory[data.id][0].specs)
                                 //  setValues(
                                 //           {
                                 //              ...values,
@@ -284,7 +285,7 @@ const ByUserTab = () => {
       </Col>
       <Col md='4' sm='12'>
       <FormGroup>
-              <Label for='SubCategory'>SubCategory</Label>
+              <Label for='SubCategory'>Sub Category</Label>
             <Select
               id='SubCategory'
               className='react-select'

@@ -42,13 +42,19 @@ const GeneralInformation = () => {
     {value: "Nashik", label: "Nashik"},
     {value: "Solapur", label: "Solapur"}
   ]
-  const optionCurrency = [
-    {value: "Indian Rupee", label: "Indian Rupee"},
-    {value: "Us Dollar", label: "Us Dollar"},
-    {value: "Euro", label: "Euro"},
-    {value: "Armerian Dram", label: "Armerian Dram"},
-    {value: "Canadian Dollar", label: "Canadian Dollar"}
+  const optionCompanyType = [
+    {value: "Pvt Limited", label: "Pvt Limited"},
+    {value: "Public Company", label: "Public Company"},
+    {value: "Associate Company", label: "Associate Company"}
   ]
+
+  const optionIndustryType = [
+    {value: "IT", label: "IT"},
+    {value: "Food", label: "Food"},
+    {value: "Footwear", label: "Footwear"},
+    {value: "Clothing", label: "Clothing"}
+  ]
+
   const initialvalues = {
     id:1,
     name: "",
@@ -59,7 +65,8 @@ const GeneralInformation = () => {
     logo : "",
     phone : "",
     panNumber: "",
-    Currency:  [{value: "currency", label: "Indian Rupee"}],
+    CompanyType:  [{value: "Select Company Type", label: "Select Company Type"}],
+    IndustryType:  [{value: "Select Industry Type", label: "Select Industry Type"}],
     City:  [{value: "city", label: "Mumbai"}], 
     State:  [{value: "state", label: "Maharashtra"}],
     Country: [{value: "country", label: "India"}]
@@ -171,16 +178,58 @@ const GeneralInformation = () => {
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>
-        <FormGroup>
-          <Label for='companyType'>Company Type</Label>
-          <Input type='text' id='companyType' placeholder='Pvt Ltd' defaultValue={userData && userData.name} />
-        </FormGroup>
+      <FormGroup>
+              <Label for='CompanyType'>Company Type</Label>
+              <div style={{zIndex:1000, position:'relative'}}>
+            <Select
+              id='CompanyType'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionCompanyType}
+              theme={selectThemeColors}
+              value={values.CompanyType[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             CompanyType : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </div>
+            </FormGroup> 
       </Col>
       <Col md='4' sm='12'>
-        <FormGroup>
-          <Label for='industry'>Industry</Label>
-          <Input type='text' id='industry' placeholder='IT' defaultValue={userData && userData.name} />
-        </FormGroup>
+      <FormGroup>
+              <Label for='IndustryType'>Industry Type</Label>
+              <div style={{zIndex:1000, position:'relative'}}>
+            <Select
+              id='IndustryType'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionIndustryType}
+              theme={selectThemeColors}
+              value={values.IndustryType[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             IndustryType : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </div>
+            </FormGroup> 
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
@@ -191,7 +240,7 @@ const GeneralInformation = () => {
       <Col md='4' sm='12'>
       <FormGroup>
               <Label for='Country'>Country</Label>
-              <div style={{zIndex:1000, position:'relative'}}>
+              <div style={{zIndex:999, position:'relative'}}>
             <Select
               id='Country'
               className='react-select'
@@ -224,7 +273,7 @@ const GeneralInformation = () => {
       <Col md='4' sm='12'>
       <FormGroup>
               <Label for='State'>State</Label>
-              <div style={{zIndex:999, position:'relative'}}>
+              <div style={{zIndex:998, position:'relative'}}>
             <Select
               id='State'
               className='react-select'
@@ -251,7 +300,7 @@ const GeneralInformation = () => {
       <Col md='4' sm='12'>
       <FormGroup>
               <Label for='City'>City</Label>
-              <div style={{zIndex:998, position:'relative'}}>
+              <div style={{zIndex:997, position:'relative'}}>
             <Select
               id='City'
               className='react-select'
@@ -320,50 +369,6 @@ const GeneralInformation = () => {
           </FormGroup>
       </Col>
       <Col md='4' sm='12'>
-      <FormGroup>
-            <label className='d-block mb-1'>Is Verified</label>
-            <FormGroup>
-              <Controller
-                name='isVerified'
-                control={control}
-                render={props => {
-                  return (
-                    <CustomInput
-                      inline
-                      type='radio'
-                      label='Yes'
-                      value='Yes'
-                      id='Yes'
-                      name={props.name}
-                      invalid={data !== null && (data.isVerified === undefined || data.isVerified === null)}
-                      onChange={() => setVerifyValue('isVerified', 'Yes')}
-                    />
-                  )
-                }}
-              />
-              <Controller
-                name='isVerified'
-                control={control}
-                render={props => {
-                  return (
-                    <CustomInput
-                      inline
-                      type='radio'
-                      label='No'
-                      value='No'
-                      id='No'
-                      name={props.name}
-                      defaultChecked
-                      invalid={data !== null && (data.isVerified === undefined || data.isVerified === null)}
-                      onChange={() => setVerifyValue('isVerified', 'No')}
-                    />
-                  )
-                }}
-              />
-            </FormGroup>
-          </FormGroup>
-      </Col>
-      <Col md='4' sm='12'>
         <FormGroup>
           <Label for='verifiedBy'>Verified By</Label>
           <Input type='text' id='verifiedBy' placeholder='Pravin Poshmani' defaultValue={userData && userData.name} />
@@ -371,8 +376,26 @@ const GeneralInformation = () => {
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='createdBy'>Created By</Label>
-          <Input type='text' id='createdBy' placeholder='XYZ' defaultValue={userData && userData.name} />
+          <Label for='headOffice'>Head Office</Label>
+          <Input type='text' id='headOffice' placeholder='Mumbai' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='gstNumber'>GST Number</Label>
+          <Input type='text' id='gstNumber' placeholder='1234567' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='pancard'>pancard</Label>
+          <Input type='text' id='pancard' placeholder='BG4567' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='description'>Description</Label>
+          <Input type='textarea' id='description' defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>

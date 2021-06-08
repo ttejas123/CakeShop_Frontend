@@ -66,6 +66,12 @@ const optionState = [
     {value: "Karnataka", label: "Karnataka"}
   ]
 
+  const optionCorporate = [
+    {value: "", label: "Filter Status"},
+    {value: "Bidoya", label: "Bidoya"},
+    {value: "Other Corporate", label: "Other Corporate"}
+  ]
+
 const WarehouseList = () => {
   const statusObj = {
         pending: 'light-secondary',
@@ -291,6 +297,24 @@ const WarehouseList = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionState}
+                value={Filter}
+                onChange={data => {
+                  handleFilterByDropDown(data)
+                }}
+              />
+              </div>
+            </Col>
+            <Col md='4'>
+            <Label className='mr-1' for='search-input'>
+                Filter Corporate
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionCorporate}
                 value={Filter}
                 onChange={data => {
                   handleFilterByDropDown(data)
