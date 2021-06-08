@@ -526,6 +526,12 @@ export default [
                   title: 'Edit',
                   icon: <Circle size={20} />,
                   navLink: '/edit-membership'
+                },
+                {
+                  id: 'updateMembershipPlan',
+                  title: 'Update Membership Plan',
+                  icon: <Circle size={20} />,
+                  navLink: '/update-membership-plan'
                 }
         ]
       },

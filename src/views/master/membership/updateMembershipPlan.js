@@ -22,7 +22,7 @@ const corporateAddressAdd = () => {
   })
 
   const optionMembershipPlans = [
-    {value: "Platinum", label: "Platinum", benefits : ["No Commission on transactions", "Get Third party VAS", "reveal name%"]},
+    {value: "Platinum", label: "Platinum", benefits : ["No Commission on transactions", "Get Third party VAS", "reveal name"]},
     {value: "Gold", label: "Gold", benefits : ["No Commission on transactions", "Get Third party VAS"]},
     {value: "Silver", label: "Silver", benefits : ["No Commission on transactions"]}
   ]
