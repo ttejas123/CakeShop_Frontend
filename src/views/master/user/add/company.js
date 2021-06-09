@@ -199,7 +199,7 @@ const optionPanCardType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Company Name  {errors && errors.company_name && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>Company Name {errors && errors.company_name ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="company_name"
@@ -283,7 +283,7 @@ const optionPanCardType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Pan Number  {errors && errors.pan_number && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>Pan Number {errors && errors.pan_number ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="pan_number"
@@ -295,7 +295,7 @@ const optionPanCardType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>GST Number  {errors && errors.gstno && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>GST Number {errors && errors.gstno ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="gstno"
@@ -307,7 +307,7 @@ const optionPanCardType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Aadhar Card Number  {errors && errors.aadhar && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>Aadhar Card Number {errors && errors.aadhar ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="aadhar"

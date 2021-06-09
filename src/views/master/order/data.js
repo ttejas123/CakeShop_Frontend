@@ -374,7 +374,7 @@ export const columns = [
                                                                             } }/>
             </DropdownToggle>
           </UncontrolledDropdown>
-          <Link  to={`/master/orders/add/${row.id}`}><Edit  
+          <Link  to={`/master/orders/edit/${row.id}`}><Edit  
             size={15} 
             >
                                  <Link to='/edit-product'/>

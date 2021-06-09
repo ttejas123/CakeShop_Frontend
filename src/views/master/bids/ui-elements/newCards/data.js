@@ -185,3 +185,94 @@ export const data1 = [
         unit : "Hours"
       }
 ]
+
+export const data2 = [
+      {
+        Date: `${new Date().toGMTString()}`,
+        Name: "Tejas Thakare",
+        id: 1,
+        
+        msg : "I want to add Additional customization",
+        
+        username: "pravin",
+        avatar: "",
+        unit : "Hours"
+      },
+      {
+        Date: `${new Date().toGMTString()}`,
+        Name: "Pravin Poshmani",
+        id: 2,
+        
+        msg : "Thank you it's awasome bid",
+        
+        username: "komal",
+        avatar: pravin,
+        unit : "Minutes"
+      },
+      {
+        Date: `${new Date().toGMTString()}`,
+        Name: "Komal Jadhav",
+        id: 3,
+        
+        msg : "let's get official",
+        
+        username: "pravin",
+        avatar: komal,
+        unit : "Minutes"
+      },
+      {
+        Date: `${new Date().toGMTString()}`,
+        Name: "Himanshu Chanda",
+        id: 4,
+        
+        msg : "All right, i like that",
+        D_Name : "Pravin Poshmani",
+        username: "pravin",
+        avatar: himanshu,
+        unit : "Minutes"
+      },
+      {
+        Date: `${new Date().toGMTString()}`,
+        Name: "Harpriya Sharma",
+        id: 5,
+        
+        msg : "Accepted",
+        
+        username: "pravin",
+        avatar: "",
+        unit : "Hours"
+      },
+      {
+        Date: `${new Date().toGMTString()}`,
+        Name: "Avinash Gupta",
+        id: 6,
+        
+        msg : "Not intrested",
+        
+        username: "pravin",
+        avatar: "",
+        unit : "Hours"
+      },
+      {
+        Date: `${new Date().toGMTString()}`,
+        Name: "Prakhar Gupta",
+        id: 7,
+        
+        msg : "Accepted",
+        
+        username: "pravin",
+        avatar: "",
+        unit : "Hours"
+      },
+      {
+        Date: `${new Date().toGMTString()}`,
+        Name: "Shwetabh Rathod",
+        id: 8,
+        
+        msg : "Rejected",
+        
+        username: "pravin",
+        avatar: "",
+        unit : "Hours"
+      }
+]

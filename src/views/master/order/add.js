@@ -31,6 +31,12 @@ const EditEmployee = () => {
     {value: "China", label: "China"},
     {value: "Russia", label: "Russia"}
   ]
+
+  const optionpaymentMode = [
+    {value: "Credit Card", label: "Credit"},
+    {value: "Debit Card", label: "Debit Card"}
+  ]
+
   const optionCountry2 = [
     {value: "India", label: "India"},
     {value: "UK", label: "UK"},
@@ -95,11 +101,11 @@ const EditEmployee = () => {
     logo : "",
     phone : "",
     panNumber: "",
-    Currency:  [{value: "currency", label: "Indian Rupee"}],
-    City:  [{value: "city", label: "Mumbai"}], 
-    State:  [{value: "state", label: "Maharashtra"}],
-    Country: [{value: "country", label: "India"}],
-    Role: [{value: "role", label: "Intern"}]
+    Currency:  "",
+    City:  "", 
+    State: "",
+    Country: "",
+    Role: ""
   }
   const [values, setValues] = useState(initialvalues)
   const handleInputeChange = (event) => {
@@ -145,7 +151,7 @@ const EditEmployee = () => {
   }
 
   // ** Update user image on mount or change
-  useEffect(() => {
+  // useEffect(() => {
     // if (selectedUser !== null || (selectedUser !== null && userData !== null && selectedUser.id !== userData.id)) {
     //   setUserData(selectedUser)
     //   if (selectedUser.avatar.length) {
@@ -154,7 +160,7 @@ const EditEmployee = () => {
     //     return setImg(null)
     //   }
     // }
-  })
+  // })
 
   // ** Renders User
   const renderUserAvatar = () => {
@@ -197,7 +203,7 @@ const EditEmployee = () => {
  
 <Card>
 <CardHeader>
-  <CardTitle tag='h1'>Add / Edit Orders</CardTitle>
+  <CardTitle tag='h1'>Add Orders</CardTitle>
 </CardHeader>
 
 <CardBody>
@@ -207,7 +213,7 @@ const EditEmployee = () => {
     <Row>
     <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='orderNumber'>OrderNumber</Label>
+          <Label for='orderNumber'>Order Number</Label>
           <Input type='text' Number='orderNumber' placeholder='Employee Number' defaultValue={userData && userData.orderNumber} />
         </FormGroup>
       </Col>
@@ -231,25 +237,20 @@ const EditEmployee = () => {
       </Col>
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='sellerId'>SellerId</Label>
+          <Label for='sellerId'>Seller Id</Label>
           <Input type='text' id='sellerId' placeholder='sellerId' defaultValue={userData && userData.sellerId} />
         </FormGroup>
       </Col>
+     
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='bidRank'>bidRank</Label>
-          <Input type='text' id='bidRank' placeholder='bidRank' defaultValue={userData && userData.bidRank} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='firstName'>firstName</Label>
+          <Label for='firstName'>First Name</Label>
           <Input type='text' id='firstName' placeholder='firstName' defaultValue={userData && userData.firstName} />
         </FormGroup>
       </Col>
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='lastName'>lastName</Label>
+          <Label for='lastName'>Last Name</Label>
           <Input type='text' id='lastName' placeholder='lastName' defaultValue={userData && userData.lastName} />
         </FormGroup>
       </Col>
@@ -269,7 +270,7 @@ const EditEmployee = () => {
                     id='address-1'
                     name='address1'
                     type="textarea"
-                    defaultValue='A-45, Belvedere Streets'
+                    placeholder='A-45, Belvedere Streets'
                     innerRef={register({ required: true })}
                     className={classnames({
                       'is-invalid': errors.address1
@@ -280,15 +281,8 @@ const EditEmployee = () => {
 
               <Col md='4' sm='12'>
                 <FormGroup>
-                  <Label for='address-2'>Secound Seller Address</Label>
-                  <Input placeholder='A-45, Belvedere Streets' type="textarea" id='address-2' name='address-2' />
-                </FormGroup>
-              </Col>
-
-              <Col md='4' sm='12'>
-                <FormGroup>
                   <Label for='address-2'>Land Mark</Label>
-                  <Input placeholder='A-45, Belvedere Streets' id='address-2' name='address-2' />
+                  <Input placeholder='Belvedere Streets' id='address-2' name='address-2' />
                 </FormGroup>
               </Col>
 
@@ -302,7 +296,7 @@ const EditEmployee = () => {
                      isClearable={false}
                      options={optionCity2}
                      theme={selectThemeColors}
-                     value={values.City[0]}
+                     value={values.City}
                      onChange={data => {
        
        
@@ -322,23 +316,22 @@ const EditEmployee = () => {
                      <Label for='State'>State</Label>
                    <Select
                      id='State'
-                     className='react-select'
-                     classNamePrefix='select'
-                     isClearable={false}
-                     options={optionState2}
-                     theme={selectThemeColors}
-                     value={values.State[0]}
-                     onChange={data => {
-       
-       
-                                        setValues(
-                                                 {
-                                                    ...values,
-                                                    State : data
-                                                 } 
-                                         )
-                                       }
-                               }
+                    className='react-select'
+                    classNamePrefix='select'
+                    isClearable={false}
+                    options={optionState2}
+                    theme={selectThemeColors}
+                    value={values.State}
+                    onChange={data => {
+                                       setValues(
+                                                {
+                                                   ...values,
+                                                   State : data
+                                                } 
+                                        )
+                                      }
+                              }
+                     
                    />
                    </FormGroup> 
                </Col>
@@ -352,9 +345,8 @@ const EditEmployee = () => {
                      isClearable={false}
                      options={optionCountry2}
                      theme={selectThemeColors}
-                     value={values.Country[0]}
+                     value={values.Country}
                      onChange={data => {
-       
        
                                         setValues(
                                                  {
@@ -384,19 +376,8 @@ const EditEmployee = () => {
                     id='address-1'
                     name='address1'
                     type="textarea"
-                    defaultValue='A-45, Belvedere Streets'
-                    innerRef={register({ required: true })}
-                    className={classnames({
-                      'is-invalid': errors.address1
-                    })}
+                   
                   />
-                </FormGroup>
-              </Col>
-
-              <Col md='4' sm='12'>
-                <FormGroup>
-                  <Label for='address-2'>Secound Buyers Address</Label>
-                  <Input placeholder='A-45, Belvedere Streets' type="textarea" id='address-2' name='address-2' />
                 </FormGroup>
               </Col>
 
@@ -486,30 +467,42 @@ const EditEmployee = () => {
       </Col> 
 
       <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='paymentMode'>paymentMode</Label>
-          <Input type='text' id='paymentMode' placeholder='paymentMode' defaultValue={userData && userData.paymentMode} />
-        </FormGroup>
+               <FormGroup>
+                  <Label for='paymentMode'>Payment Mode</Label>
+                   <Select
+                     id='paymentMode'
+                     className='react-select'
+                     classNamePrefix='select'
+                     isClearable={false}
+                     options={optionpaymentMode}
+                     theme={selectThemeColors}
+                     value={values.paymentMode}
+                     onChange={data => {
+       
+       
+                                        setValues(
+                                                 {
+                                                    ...values,
+                                                    paymentMode : data
+                                                 } 
+                                         )
+                                       }
+                               }
+                   />
+                   </FormGroup> 
       </Col>
 
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='balanceAmount'>balanceAmount</Label>
+          <Label for='balanceAmount'>Balance Amount</Label>
           <Input type='text' id='balanceAmount' placeholder='balanceAmount' defaultValue={userData && userData.balanceAmount} />
         </FormGroup>
       </Col>
 
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='amountPaid'>amountPaid</Label>
+          <Label for='amountPaid'>Amount Paid</Label>
           <Input type='text' id='amountPaid' placeholder='amountPaid' defaultValue={userData && userData.amountPaid} />
-        </FormGroup>
-      </Col>
-
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='deliveryBefore'>deliveryBefore</Label>
-          <Input type='text' id='deliveryBefore' placeholder='deliveryBefore' defaultValue={userData && userData.deliveryBefore} />
         </FormGroup>
       </Col>
 
@@ -544,7 +537,7 @@ const EditEmployee = () => {
 
        <Col md='6' sm='12'>
                <FormGroup>
-                  <Label for='sellerConfirmation'>sellerConfirmation</Label>
+                  <Label for='sellerConfirmation'>Seller Conformation</Label>
                    <Select
                      id='sellerConfirmation'
                      className='react-select'

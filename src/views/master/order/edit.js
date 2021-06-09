@@ -1,6 +1,7 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
 // ** Styles
+import { useParams } from 'react-router-dom'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -13,12 +14,12 @@ import { Lock, Edit, Trash2, MapPin, Calendar } from 'react-feather'
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, InputGroup, InputGroupAddon, InputGroupText,  Card, CardHeader,
   CardBody, Badge, ListGroupItem,
   CardTitle, CustomInput } from 'reactstrap'
+import { data } from './data'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
 
 const EditEmployee = () => {
-
-  const [data, setData] = useState(null)
+  const { id } = useParams()
   const { register, errors, control, setValue } = useForm({
     defaultValues: { isOnGround: 'No' }
   })
@@ -30,6 +31,11 @@ const EditEmployee = () => {
     {value: "Australia", label: "Australia"},
     {value: "China", label: "China"},
     {value: "Russia", label: "Russia"}
+  ]
+
+    const optionpaymentMode = [
+    {value: "Credit Card", label: "Credit"},
+    {value: "Debit Card", label: "Debit Card"}
   ]
   const optionCountry2 = [
     {value: "India", label: "India"},
@@ -95,11 +101,11 @@ const EditEmployee = () => {
     logo : "",
     phone : "",
     panNumber: "",
-    Currency:  [{value: "currency", label: "Indian Rupee"}],
-    City:  [{value: "city", label: "Mumbai"}], 
-    State:  [{value: "state", label: "Maharashtra"}],
-    Country: [{value: "country", label: "India"}],
-    Role: [{value: "role", label: "Intern"}]
+    Currency:  "",
+    City:  "", 
+    State:  "",
+    Country: "",
+    Role: ""
   }
   const [values, setValues] = useState(initialvalues)
   const handleInputeChange = (event) => {
@@ -111,6 +117,13 @@ const EditEmployee = () => {
     }
     )
   }
+    useEffect(() => {
+        console.log(data[id - 1])
+        setValues({
+          ...data[id - 1]
+        })
+    
+  }, [id])
 
   const submitHandle = (event) => {
     console.log(values)
@@ -143,18 +156,6 @@ const EditEmployee = () => {
     }
     reader.readAsDataURL(files[0])
   }
-
-  // ** Update user image on mount or change
-  useEffect(() => {
-    // if (selectedUser !== null || (selectedUser !== null && userData !== null && selectedUser.id !== userData.id)) {
-    //   setUserData(selectedUser)
-    //   if (selectedUser.avatar.length) {
-    //     return setImg(selectedUser.avatar)
-    //   } else {
-    //     return setImg(null)
-    //   }
-    // }
-  })
 
   // ** Renders User
   const renderUserAvatar = () => {
@@ -197,7 +198,7 @@ const EditEmployee = () => {
  
 <Card>
 <CardHeader>
-  <CardTitle tag='h1'>Add / Edit Orders</CardTitle>
+  <CardTitle tag='h1'>Edit Orders</CardTitle>
 </CardHeader>
 
 <CardBody>
@@ -207,8 +208,8 @@ const EditEmployee = () => {
     <Row>
     <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='orderNumber'>OrderNumber</Label>
-          <Input type='text' Number='orderNumber' placeholder='Employee Number' defaultValue={userData && userData.orderNumber} />
+          <Label for='orderNumber'>Order Number</Label>
+          <Input type='text' disabled Number='orderNumber' placeholder='Employee Number' defaultValue={userData && userData.orderNumber} />
         </FormGroup>
       </Col>
     <Col md='6' sm='12'>
@@ -231,25 +232,20 @@ const EditEmployee = () => {
       </Col>
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='sellerId'>SellerId</Label>
+          <Label for='sellerId'>Seller Id</Label>
           <Input type='text' id='sellerId' placeholder='sellerId' defaultValue={userData && userData.sellerId} />
         </FormGroup>
       </Col>
+      
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='bidRank'>bidRank</Label>
-          <Input type='text' id='bidRank' placeholder='bidRank' defaultValue={userData && userData.bidRank} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='firstName'>firstName</Label>
+          <Label for='firstName'>First Name</Label>
           <Input type='text' id='firstName' placeholder='firstName' defaultValue={userData && userData.firstName} />
         </FormGroup>
       </Col>
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='lastName'>lastName</Label>
+          <Label for='lastName'>Last Name</Label>
           <Input type='text' id='lastName' placeholder='lastName' defaultValue={userData && userData.lastName} />
         </FormGroup>
       </Col>
@@ -269,19 +265,12 @@ const EditEmployee = () => {
                     id='address-1'
                     name='address1'
                     type="textarea"
-                    defaultValue='A-45, Belvedere Streets'
+                   
                     innerRef={register({ required: true })}
                     className={classnames({
                       'is-invalid': errors.address1
                     })}
                   />
-                </FormGroup>
-              </Col>
-
-              <Col md='4' sm='12'>
-                <FormGroup>
-                  <Label for='address-2'>Secound Seller Address</Label>
-                  <Input placeholder='A-45, Belvedere Streets' type="textarea" id='address-2' name='address-2' />
                 </FormGroup>
               </Col>
 
@@ -302,7 +291,7 @@ const EditEmployee = () => {
                      isClearable={false}
                      options={optionCity2}
                      theme={selectThemeColors}
-                     value={values.City[0]}
+                     value={values.City}
                      onChange={data => {
        
        
@@ -327,7 +316,7 @@ const EditEmployee = () => {
                      isClearable={false}
                      options={optionState2}
                      theme={selectThemeColors}
-                     value={values.State[0]}
+                     value={values.State}
                      onChange={data => {
        
        
@@ -352,7 +341,7 @@ const EditEmployee = () => {
                      isClearable={false}
                      options={optionCountry2}
                      theme={selectThemeColors}
-                     value={values.Country[0]}
+                     value={values.Country}
                      onChange={data => {
        
        
@@ -384,19 +373,12 @@ const EditEmployee = () => {
                     id='address-1'
                     name='address1'
                     type="textarea"
-                    defaultValue='A-45, Belvedere Streets'
+                    
                     innerRef={register({ required: true })}
                     className={classnames({
                       'is-invalid': errors.address1
                     })}
                   />
-                </FormGroup>
-              </Col>
-
-              <Col md='4' sm='12'>
-                <FormGroup>
-                  <Label for='address-2'>Secound Buyers Address</Label>
-                  <Input placeholder='A-45, Belvedere Streets' type="textarea" id='address-2' name='address-2' />
                 </FormGroup>
               </Col>
 
@@ -417,7 +399,7 @@ const EditEmployee = () => {
                      isClearable={false}
                      options={optionCity1}
                      theme={selectThemeColors}
-                     value={values.City[0]}
+                     value={values.City}
                      onChange={data => {
        
        
@@ -442,7 +424,7 @@ const EditEmployee = () => {
                      isClearable={false}
                      options={optionState1}
                      theme={selectThemeColors}
-                     value={values.State[0]}
+                     value={values.State}
                      onChange={data => {
        
        
@@ -467,7 +449,7 @@ const EditEmployee = () => {
                      isClearable={false}
                      options={optionCountry1}
                      theme={selectThemeColors}
-                     value={values.Country[0]}
+                     value={values.Country}
                      onChange={data => {
        
        
@@ -485,31 +467,44 @@ const EditEmployee = () => {
             </Row> 
       </Col> 
 
+      
       <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='paymentMode'>paymentMode</Label>
-          <Input type='text' id='paymentMode' placeholder='paymentMode' defaultValue={userData && userData.paymentMode} />
-        </FormGroup>
+               <FormGroup>
+                  <Label for='paymentMode'>Payment Mode</Label>
+                   <Select
+                     id='paymentMode'
+                     className='react-select'
+                     classNamePrefix='select'
+                     isClearable={false}
+                     options={optionpaymentMode}
+                     theme={selectThemeColors}
+                     value={values.paymentMode}
+                     onChange={data => {
+       
+       
+                                        setValues(
+                                                 {
+                                                    ...values,
+                                                    paymentMode : data
+                                                 } 
+                                         )
+                                       }
+                               }
+                   />
+                   </FormGroup> 
       </Col>
 
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='balanceAmount'>balanceAmount</Label>
+          <Label for='balanceAmount'>Balance Amount</Label>
           <Input type='text' id='balanceAmount' placeholder='balanceAmount' defaultValue={userData && userData.balanceAmount} />
         </FormGroup>
       </Col>
 
       <Col md='6' sm='12'>
         <FormGroup>
-          <Label for='amountPaid'>amountPaid</Label>
+          <Label for='amountPaid'>Amount Paid</Label>
           <Input type='text' id='amountPaid' placeholder='amountPaid' defaultValue={userData && userData.amountPaid} />
-        </FormGroup>
-      </Col>
-
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='deliveryBefore'>deliveryBefore</Label>
-          <Input type='text' id='deliveryBefore' placeholder='deliveryBefore' defaultValue={userData && userData.deliveryBefore} />
         </FormGroup>
       </Col>
 
@@ -530,7 +525,7 @@ const EditEmployee = () => {
                   onChange={(date) => setValues(
                                             {
                                                  ...values,
-                                                deliveryBefore  : date[0]
+                                                deliveryBefore  : date
                                             }
                                        )}
                   value={values.deliveryBefore }
@@ -544,7 +539,7 @@ const EditEmployee = () => {
 
        <Col md='6' sm='12'>
                <FormGroup>
-                  <Label for='sellerConfirmation'>sellerConfirmation</Label>
+                  <Label for='sellerConfirmation'>Seller conformation</Label>
                    <Select
                      id='sellerConfirmation'
                      className='react-select'
@@ -585,93 +580,3 @@ const EditEmployee = () => {
   )
 }
 export default EditEmployee
-
-
-{ /* <Col md='4' sm='12'>
-                 <FormGroup>
-                   <Label for='postcode'>Postcode</Label>
-                   <Input
-                     id='postcode'
-                     name='postcode'
-                     placeholder='597424'
-                     innerRef={register({ required: true })}
-                     invalid={errors.postcode && true}
-                   />
-                 </FormGroup>
-               </Col>
-               <Col md='4' sm='12'>
-               <FormGroup>
-                  <Label for='sellerConfirmation'>sellerConfirmation</Label>
-                   <Select
-                     id='sellerConfirmation'
-                     className='react-select'
-                     classNamePrefix='select'
-                     isClearable={false}
-                     options={optionsellerConfirmation1}
-                     theme={selectThemeColors}
-                     value={values.sellerConfirmation[0]}
-                     onChange={data => {
-       
-       
-                                        setValues(
-                                                 {
-                                                    ...values,
-                                                    sellerConfirmation : data
-                                                 } 
-                                         )
-                                       }
-                               }
-                   />
-                   </FormGroup> 
-               </Col>
-               <Col md='4' sm='12'>
-               <FormGroup>
-                     <Label for='State'>State</Label>
-                   <Select
-                     id='State'
-                     className='react-select'
-                     classNamePrefix='select'
-                     isClearable={false}
-                     options={optionState}
-                     theme={selectThemeColors}
-                     value={values.State[0]}
-                     onChange={data => {
-       
-       
-                                        setValues(
-                                                 {
-                                                    ...values,
-                                                    State : data
-                                                 } 
-                                         )
-                                       }
-                               }
-                   />
-                   </FormGroup> 
-               </Col>
-               <Col md='4' sm='12'>
-               <FormGroup>
-                     <Label for='Country'>Country</Label>
-                   <Select
-                     id='Country'
-                     className='react-select'
-                     classNamePrefix='select'
-                     isClearable={false}
-                     options={optionCountry}
-                     theme={selectThemeColors}
-                     value={values.Country[0]}
-                     onChange={data => {
-       
-       
-                                        setValues(
-                                                 {
-                                                    ...values,
-                                                    Country : data
-                                                 } 
-                                         )
-                                       }
-                               }
-                   />
-                   </FormGroup> 
-               </Col>
-             </Row> */ }

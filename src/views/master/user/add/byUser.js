@@ -33,6 +33,14 @@ const optionCountry = [
     {value: "Japan", label: "Japan"}
 ]
 
+const optionCode = [
+    {value: "91", label: "+91"},
+    {value: "+21", label: "+21"},
+    {value: "+32", label: "+32"},
+    {value: "+56", label: "+56"},
+    {value: "+67", label: "+67"}
+]
+
 const optionCompany = [
     {value: "", label: "Select Your Company"},
     {value: "TCS", label: "TCS"},
@@ -267,7 +275,7 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>First Name  {errors && errors.first_name && <span style={{fontSize:"14px", color:"red"}}>*</span>} </Label>
+              <Label for='Name'>First Name  {errors && errors.first_name ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 <Input name="first_name"
                   innerRef={register({ required: true })}
@@ -280,7 +288,7 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Last Name  {errors && errors.last_name && <span style={{fontSize:"14px", color:"red"}}>*</span>} </Label>
+              <Label for='Name'>Last Name {errors && errors.last_name ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="last_name"
@@ -293,7 +301,7 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Email  {errors && errors.email && <span style={{fontSize:"14px", color:"red"}}>*</span>} </Label>
+              <Label for='Name'>Email  {errors && errors.email ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="email"
@@ -303,21 +311,45 @@ const optionUserType = [
               </FormGroup>  
             </Col>
 
-            <Col md='4' sm='12'>
+             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Mobile Number  {errors && errors.mobile && <span style={{fontSize:"14px", color:"red"}}>*</span>} </Label>
+              <Label for='Name'>Mobile Number {errors && errors.mobile ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> }   </Label>
               <InputGroup>
                 
+                
+              </InputGroup>
+              <InputGroup>
+                <Select
+                id='country'
+                className='react-select'
+                style={{width: '45%'}} 
+                classNamePrefix='select'
+                isClearable={false}
+                options={optionCode}
+                theme={selectThemeColors}
+                value={values.country}
+                onChange={data => {
+                                   setValues(
+                                            {
+                                               ...values,
+                                               country : data
+                                            } 
+                                    )
+                                  }
+                          }
+              />
                 <Input name="mobile"
+                style={{width: '55%'}}
                 innerRef={register({ required: true })}
-                 invalid={errors.mobile && true} onChange={handleInputeChange} id='mobile' placeholder='9768*****3' value={values.mobile} />
+                invalid={errors.mobile && true} onChange={handleInputeChange} id='mobile' placeholder='9768*****3' value={values.mobile} />
+              
               </InputGroup>
               </FormGroup>  
             </Col>
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Landline </Label>
+              <Label for='Name'>Landline  </Label>
               <InputGroup>
                 
                 
@@ -332,7 +364,7 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Designation  {errors && errors.designation && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>Designation  {errors && errors.designation ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="designation"
@@ -446,7 +478,7 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='pinCode'>Pin Code  {errors && errors.pinCode && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='pinCode'>Pin Code  {errors && errors.pinCode ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="pinCode"
@@ -458,7 +490,7 @@ const optionUserType = [
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Address  {errors && errors.Address && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>Address  {errors && errors.Address ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="Address" 

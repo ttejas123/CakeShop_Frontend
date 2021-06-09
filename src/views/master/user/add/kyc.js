@@ -15,23 +15,23 @@ import {  Media, Row, Col, Button, Form, Table, CustomInput,  Modal, ModalHeader
 import Select from 'react-select'
 
 // ** Renders Client Columns
-const renderDoc = (DocName) => {
-    return (
-        <div className='d-flex justify-content-left align-items-center'>
-             <CustomInput inline type='checkbox' id='exampleCustomCheckbox2' onClick={() => {
-                                        setValues((preval) => {
-                                                     Doc : preval.Doc.push({value: "Aadhar", label: "Aadhar"})
-                                                  }
-                                                ) 
-                                      }} />
-              <div className='d-flex flex-column'>
-                  <span className='font-weight-bold'>{DocName}</span>
+// const renderDoc = (DocName) => {
+//     return (
+//         <div className='d-flex justify-content-left align-items-center'>
+//              <CustomInput inline type='checkbox' id='exampleCustomCheckbox2' onClick={() => {
+//                                         setValues((preval) => {
+//                                                      Doc : preval.Doc.push({value: "Aadhar", label: "Aadhar"})
+//                                                   }
+//                                                 ) 
+//                                       }} />
+//               <div className='d-flex flex-column'>
+//                   <span className='font-weight-bold'>{DocName}</span>
                 
-              </div>
-        </div>
-      )
+//               </div>
+//         </div>
+//       )
 
-}
+// }
 
 const UserAccountTab = ({ selectedUser }, prop) => {
   const optionDoc = [

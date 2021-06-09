@@ -124,7 +124,7 @@ const initialvalues = {
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Bank Name  {errors && errors.bank_name && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>Bank Name  {errors && errors.bank_name ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="bank_name"
@@ -136,7 +136,7 @@ const initialvalues = {
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Bank Branch  {errors && errors.bank_branch && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>Bank Branch  {errors && errors.bank_branch ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 <Input name="bank_branch"
                 innerRef={register({ required: true })}
@@ -147,7 +147,7 @@ const initialvalues = {
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>EXIM Details  {errors && errors.exim_details && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>EXIM Details {errors && errors.exim_details ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="exim_details"
@@ -159,7 +159,7 @@ const initialvalues = {
             
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>Bank Account  {errors && errors.bank_account && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>Bank Account {errors && errors.bank_account ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="bank_account"
@@ -171,7 +171,7 @@ const initialvalues = {
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>IFSC Code  {errors && errors.ifsc_code && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>IFSC Code {errors && errors.ifsc_code ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="ifsc_code"
@@ -183,7 +183,7 @@ const initialvalues = {
 
             <Col md='4' sm='12'>
               <FormGroup>
-              <Label for='Name'>MICR Code  {errors && errors.micr_code && <span style={{fontSize:"14px", color:"red"}}>*</span>}</Label>
+              <Label for='Name'>MICR Code {errors && errors.micr_code ? <span style={{fontSize:"14px", color:"red"}}>*</span> : <span style={{fontSize:"14px", color:"red"}}>*</span> } </Label>
               <InputGroup>
                 
                 <Input name="micr_code"
