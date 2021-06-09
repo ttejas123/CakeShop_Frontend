@@ -26,6 +26,17 @@ import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, InputGro
 
 const UserAccountTab = (prop) => {
 
+  const optionCity = [
+    {value: "", label: "Select Your City"},
+    {value: "Mumbai", label: "Mumbai"},
+    {value: "Pune", label: "Pune"}
+]
+
+const optionState = [
+    {value: "", label: "Select Your State"},
+    {value: "Maharashtra", label: "Maharashtra"},
+    {value: "Up", label: "Up"}
+]
   const { register, errors, control, setValue } = useForm({
     defaultValues: { isRegisteredOffice: 'No' }
   })
@@ -94,7 +105,7 @@ const UserAccountTab = (prop) => {
     <Row>
       
         <Col sm='12' className="pl-5 pt-2">
-          <h2 className="mb-1">Add Role</h2>
+          <h2 className="mb-1">Edit</h2>
         </Col>
       
       <CardBody className='pl-3 pt-2'>
@@ -113,23 +124,52 @@ const UserAccountTab = (prop) => {
             </Col>
 
             <Col md='6' sm='12'>
+              
               <FormGroup>
-                <Label for='state'>State</Label>
-                <InputGroup>
-                  
-                  <Input name="state" onChange={handleInputeChange} id='state' placeholder='Maharashtra' value={values.state} />
-                </InputGroup>
-              </FormGroup>
+              <Label for='State'>State</Label>
+              <Select
+                id='State'
+                className='react-select'
+                classNamePrefix='select'
+                isClearable={false}
+                options={optionState}
+                theme={selectThemeColors}
+                value={values.state}
+                onChange={data => {
+                                   setValues(
+                                            {
+                                               ...values,
+                                               state : data
+                                            } 
+                                    )
+                                  }
+                          }
+              /> 
+              </FormGroup>  
             </Col>
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='City'>City</Label>
-                <InputGroup>
-                  
-                  <Input name="City" onChange={handleInputeChange} id='City' placeholder='Navi Mumbai' value={values.City} />
-                </InputGroup>
-              </FormGroup>
+              <Label for='City'>City</Label>
+              <Select
+                id='City'
+                className='react-select'
+                classNamePrefix='select'
+                isClearable={false}
+                options={optionCity}
+                theme={selectThemeColors}
+                value={values.City}
+                onChange={data => {
+                                   setValues(
+                                            {
+                                               ...values,
+                                               City : data
+                                            } 
+                                    )
+                                  }
+                          }
+              /> 
+              </FormGroup>  
             </Col>
 
             <Col md='6' sm='12'>

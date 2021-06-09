@@ -40,7 +40,7 @@ const EditCorporate = () => {
       <Col md='6' sm='12'>
         <FormGroup>
           <Label for='benefit'>Benefit</Label>
-          <Input type='text' id='benefit' placeholder='Benefit'  />
+          <Input type='text' id='benefit' type="textarea" placeholder='Benefit'  />
         </FormGroup>
       </Col>
       <Col md='6' sm='12'>

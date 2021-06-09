@@ -241,6 +241,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/order/add'))
   },
   {
+    path: '/master/orders/edit/:id',
+    component: lazy(() => import('../../views/master/order/edit'))
+  },
+  {
     path: '/master/calculator',
     component: lazy(() => import('../../views/master/claculator'))
   },

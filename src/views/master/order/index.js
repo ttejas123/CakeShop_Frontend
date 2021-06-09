@@ -59,6 +59,19 @@ const OrdersList = () => {
         approved: 'light-success',
         approval: 'light-warning'
   }
+
+const optionCity = [
+    {value: "Navi Mumbai", label: "Navi Mumbai"},
+    {value: "Mumbai", label: "Mumbai"},
+    {value: "Pune", label: "Pune"}
+]
+
+const optionState = [
+    {value: "Bihar", label: "Bihar"},
+    {value: "Maharashtra", label: "Maharashtra"},
+    {value: "Up", label: "Up"}
+]
+
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -66,7 +79,10 @@ const OrdersList = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
+    const [FilterCity, setFilterCity] = useState('')
+ 
+  const [FilterState, setFilterState] = useState('')
+  
    //deleteCountry
   const deleteCountry = (val) => {
     //here we passing id to delete this specific record
@@ -88,6 +104,16 @@ const OrdersList = () => {
   // ** Function to handle Modal toggle
   const handleModal = () => {
     setModal(!modal)
+  }
+
+    // handle drop down filter
+  const handleFilterByDropDowns = (name, value) => {
+   const updatedData = []
+   if (name === 'state') {
+      setFilterState(value)
+   } else if (name === 'city') {
+      setFilterCity(value)
+   }
   }
 
   // handle drop down filter
@@ -181,7 +207,48 @@ const OrdersList = () => {
 
   return (
     <Fragment>
-
+      <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            
+            <Col md='4'>
+              <Label className='mr-1' for='search-input'>
+                Filter State
+              </Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionCity}
+                value={FilterState}
+                onChange={data => {
+                  handleFilterByDropDowns("state", data)
+                }}
+              />
+            </Col>
+            <Col md='4'>
+              <Label className='mr-1' for='search-input'>
+                Filter City
+              </Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionState}
+                value={FilterCity}
+                onChange={data => {
+                  handleFilterByDropDowns("city", data)
+                }}
+              />
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
@@ -190,7 +257,7 @@ const OrdersList = () => {
             <Link  to={`/master/orders/add`}>
               <Button className='ml-2' color='primary' onClick={handleModal}>
                                           <Plus size={15} />
-                                          <span className='align-middle ml-50'>Add Your State</span>
+                                          <span className='align-middle ml-50'>Add New</span>
               </Button>
             </Link>
           </div>

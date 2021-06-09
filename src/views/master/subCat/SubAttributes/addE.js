@@ -228,7 +228,7 @@ const UserAccountTab = (prop) => {
                   type='switch'
                   id='exampleCustomAvail'
                   name='customSwitch'
-                  label='Customization avalibale'
+                  label='Customization Available'
                   inline
                 />
             </Col>
