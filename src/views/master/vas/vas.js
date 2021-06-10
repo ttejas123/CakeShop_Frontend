@@ -193,7 +193,7 @@ const DataTableWithButtons = () => {
                 <Button className='ml-2' color='primary' >
                                         <Plus size={15} />
                                         
-                                        <span className='align-middle ml-50'>Add Your Service</span>
+                                        <span className='align-middle ml-50'>Add New</span>
                 </Button>
               </Link>
                 

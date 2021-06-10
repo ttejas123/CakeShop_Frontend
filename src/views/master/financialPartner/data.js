@@ -12,8 +12,8 @@ export const data1 = [
       Address : "Shiv-Shakti so, A-35, 0/4, airoli, Navi Mumbai",
       pincode: 400708,
       landmark: "Aayapa Temple",
-      City : "Navi Mumbai",
-      state : "Maharashtra",
+      City : {value: "Mumbai", label: "Mumbai"},
+      state : {value: "Maharashtra", label: "Maharashtra"},
       id:1
 
     },
@@ -24,8 +24,8 @@ export const data1 = [
       Address : "Shiv-Shakti so, A-35, 0/4, airoli, Navi Mumbai",
       pincode: 400708,
       landmark: "Aayapa Temple",
-      City : "Navi Mumbai",
-      state : "Maharashtra",
+      City : {value: "Mumbai", label: "Mumbai"},
+      state : {value: "Maharashtra", label: "Maharashtra"},
       id:2
     },
     {
@@ -35,8 +35,8 @@ export const data1 = [
       Address : "Shiv-Shakti so, A-35, 0/4, airoli, Navi Mumbai",
       pincode: 400708,
       landmark: "Aayapa Temple",
-      City : "Navi Mumbai",
-      state : "Maharashtra",
+      City : {value: "Mumbai", label: "Mumbai"},
+      state : {value: "Maharashtra", label: "Maharashtra"},
       id:3
     },
     {
@@ -46,8 +46,8 @@ export const data1 = [
       Address : "Shiv-Shakti so, A-35, 0/4, airoli, Navi Mumbai",
       pincode: 400708,
       landmark: "Aayapa Temple",
-      City : "Navi Mumbai",
-      state : "Maharashtra",
+      City : {value: "Pune", label: "Pune"},
+      state : {value: "Maharashtra", label: "Maharashtra"},
       id:4
     },
     {
@@ -57,8 +57,8 @@ export const data1 = [
       Address : "Shiv-Shakti so, A-35, 0/4, airoli, Navi Mumbai",
       pincode: 400708,
       landmark: "Aayapa Temple",
-      City : "Navi Mumbai",
-      state : "Maharashtra",
+      City : {value: "Pune", label: "Pune"},
+      state : {value: "Maharashtra", label: "Maharashtra"},
       id:5
     },
     {
@@ -68,8 +68,8 @@ export const data1 = [
       Address : "Shiv-Shakti so, A-35, 0/4, airoli, Navi Mumbai",
       pincode: 400708,
       landmark: "Aayapa Temple",
-      City : "Navi Mumbai",
-      state : "Maharashtra",
+      City : {value: "Pune", label: "Pune"},
+      state : {value: "Maharashtra", label: "Maharashtra"},
       id:6
     }
 ]

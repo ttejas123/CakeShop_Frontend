@@ -145,13 +145,13 @@ const handleDelete = (data) => {
         },
         {
           name: 'City',
-          selector: 'City',
+          selector: 'City.label',
           sortable: true,
           minWidth: '250px'
         },
         {
           name: 'state',
-          selector: 'state',
+          selector: 'state.label',
           sortable: true,
           minWidth: '250px'
         },
@@ -288,7 +288,7 @@ const handleDelete = (data) => {
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>FinancialPartner</CardTitle>
+        <CardTitle tag='h4'>Financial Partner</CardTitle>
 
         <Link to={`/master/financialPartners/add`}>
           <Button className='ml-2' color='primary'>

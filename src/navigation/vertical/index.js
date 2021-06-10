@@ -180,10 +180,23 @@ export default [
            navLink: '/master/commi'
       },
       {
-            id: 'Orders',
-            title: 'Orders',
-            icon: <Circle size={20} />,
-            navLink: '/master/order'
+        id: 'Orders',
+        title: 'Orders',
+        icon: <Circle size={20} />,
+        children: [
+                {
+                  id: 'List',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/order'
+                },
+                {
+                  id: 'Add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/orders/add'
+                }
+        ]
       },
       {
            id: 'WishList',
