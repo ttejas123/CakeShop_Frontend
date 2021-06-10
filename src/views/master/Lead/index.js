@@ -46,9 +46,9 @@ const renderClient = row => {
     color = states[stateNum]
 
   if (row.avatar.length) {
-    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> 
   } else {
-    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> 
   }
 }
 

@@ -75,7 +75,7 @@ export default [
         id: 'Attributes',
         title: 'Attributes',
         icon: <Circle size={20} />,
-        navLink: '/master/attributes'
+        navLink: '/master/attribute'
       },   
       {
         id: 'CurrencyList',
@@ -184,25 +184,6 @@ export default [
            title: 'Commission Slab',
            icon: <Circle size={20} />,
            navLink: '/master/commi'
-      },
-      {
-        id: 'Orders',
-        title: 'Orders',
-        icon: <Circle size={20} />,
-        children: [
-                {
-                  id: 'List',
-                  title: 'List',
-                  icon: <Circle size={20} />,
-                  navLink: '/master/order'
-                },
-                {
-                  id: 'Add',
-                  title: 'Add',
-                  icon: <Circle size={20} />,
-                  navLink: '/master/orders/add'
-                }
-        ]
       },
       {
            id: 'WishList',
@@ -374,26 +355,6 @@ export default [
         ]
       },
       {
-        id: 'orders',
-        title: 'Orders',
-        icon: <Circle size={20} />,
-        children: [
-                {
-                  id: 'list',
-                  title: 'List',
-                  icon: <Circle size={20} />,
-                  navLink: '/master-order'
-                },
-                {
-                  id: 'view',
-                  title: 'View',
-                  icon: <Circle size={20} />,
-                  navLink: '/order-details'
-                }
-                
-        ]
-      },
-      {
                   id: 'productCategory',
                   title: 'Product Category',
                   icon: <Circle size={20} />,
@@ -553,6 +514,18 @@ export default [
         title: 'Orders',
         icon: <Circle size={20} />,
         children: [
+                {
+                  id: 'List',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/order'
+                },
+                {
+                  id: 'Add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/orders/add'
+                },
                 {
                   id: 'invoiceList',
                   title: 'Invoice List',
