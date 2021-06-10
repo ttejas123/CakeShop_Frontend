@@ -161,30 +161,30 @@ const columns = [
         selector: 'approvedTime',
         sortable: true,
         minWidth: '150px'
-    },
-    {
-      name: 'Actions',
-      allowOverflow: true,
-      cell: row => {
-        return (
-          <div className='d-flex'>
-            <UncontrolledDropdown>
-              <DropdownToggle className='pr-1' tag='span'>
-                <Trash size={15} onClick={e => { handleDelete(row) }} />
-              </DropdownToggle>
-            </UncontrolledDropdown>
-            <Link  to={`/report/add-GstReport`}><Edit  
-                  size={15} 
-                  onClick={ () => { 
-                                    //setCurrentId(row.id)
-                                    //setModal(true)
-                                     } }>
-                                       <Link to='/report/add-GstReport'/>
-                                     </Edit></Link>
-          </div>
-        )
-      }
     }
+    // {
+    //   name: 'Actions',
+    //   allowOverflow: true,
+    //   cell: row => {
+    //     return (
+    //       <div className='d-flex'>
+    //         <UncontrolledDropdown>
+    //           <DropdownToggle className='pr-1' tag='span'>
+    //             <Trash size={15} onClick={e => { handleDelete(row) }} />
+    //           </DropdownToggle>
+    //         </UncontrolledDropdown>
+    //         <Link  to={`/report/add-GstReport`}><Edit  
+    //               size={15} 
+    //               onClick={ () => { 
+    //                                 //setCurrentId(row.id)
+    //                                 //setModal(true)
+    //                                  } }>
+    //                                    <Link to='/report/add-GstReport'/>
+    //                                  </Edit></Link>
+    //       </div>
+    //     )
+    //   }
+    // }
   ]
   
   // ** Function to handle filter
@@ -286,7 +286,7 @@ const columns = [
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>Seller Kyc</CardTitle>
+        <CardTitle tag='h4'>Corporate Kyc</CardTitle>
       </CardHeader>
       <DataTable
         noHeader

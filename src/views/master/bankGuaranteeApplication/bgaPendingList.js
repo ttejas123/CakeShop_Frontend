@@ -152,7 +152,7 @@ const columns = [
             </UncontrolledDropdown>
             <Edit  
                   size={15} 
-                  onClick={ () => { 
+                  onClick={ (e) => { 
                             e.prevenDefault()
                                     //setCurrentId(row.id)
                                     //setModal(true)
