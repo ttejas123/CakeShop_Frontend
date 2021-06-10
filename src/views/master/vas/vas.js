@@ -68,7 +68,10 @@ const DataTableWithButtons = () => {
           cell: row => (
             <div className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
+              
+              <Link to={`/master/VasDetail`}>
                 <span className='d-block font-weight-bold text-truncate'>{row.Name}</span>
+              </Link>
               </div>
             </div>
           )
