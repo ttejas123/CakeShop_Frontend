@@ -213,6 +213,7 @@ const UserAccountTab = ({ selectedUser }, prop) => {
                       className='react-select'
                       classNamePrefix='select'
                       closeMenuOnSelect={false}
+                      
                       options={optionDoc}
                       theme={selectThemeColors}
                       value={values.Doc}

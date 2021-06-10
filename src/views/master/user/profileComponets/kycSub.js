@@ -256,7 +256,7 @@ const UserKyc = () => {
         {selectedItem.name}
       </ModalHeader>
       <ModalBody>
-       <img className='d-flex mx-auto' width="700" src={selectedItem.img}/>
+       <img className='img-fluid' src={selectedItem.img}/>
       {reuploadForm ?  <div>
         <h3 className='mt-4'>{`Re Ulpoad ${selectedItem.name}`}</h3>
        <DragDrop uppy={uppy} />
