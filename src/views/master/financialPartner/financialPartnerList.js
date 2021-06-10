@@ -115,12 +115,12 @@ const handleDelete = (data) => {
             <div className='d-flex justify-content-left align-items-center'>
               {renderClient(row)}
               <div className=''>
-                <Link to={`/bidDetails/${row.id}`}>
+                
                   <div className='user-info text-truncate d-flex flex-column'>
                      <span className='font-weight-bold'>{row.name}</span>
                      <small className='text-truncate text-muted mb-0'>@{row.name}</small>
                   </div>
-                </Link>  
+                  
               </div>
             </div>
           )
