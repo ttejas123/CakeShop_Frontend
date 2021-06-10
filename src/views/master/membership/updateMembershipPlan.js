@@ -88,7 +88,7 @@ const corporateAddressAdd = () => {
  
 <Card>
 <CardHeader>
-  <CardTitle tag='h1'>Update Membership Plam</CardTitle>
+  <CardTitle tag='h1'>Update Membership Plan</CardTitle>
 </CardHeader>
 
 <CardBody>

@@ -1,21 +1,19 @@
 // ** Custom Components
-import Avatar from '@components/avatar'
-import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
-
+import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data1 } from './data'
+import { data } from './data'
+import Select from 'react-select'
 
 // ** Add New Modal Component
-import FormModel from './formModel'
-
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
@@ -23,7 +21,9 @@ import DataTable from 'react-data-table-component'
 import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
 import {
   Card,
+  CardText,
   CardHeader,
+  CardBody,
   CardTitle,
   Button,
   UncontrolledButtonDropdown,
@@ -34,7 +34,8 @@ import {
   Label,
   Row,
   Col,
-  Badge, UncontrolledDropdown
+  Badge, UncontrolledDropdown,
+  UncontrolledTooltip  
 } from 'reactstrap'
 
 // ** Bootstrap Checkbox Component
@@ -45,13 +46,46 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
+
+// ** Renders Client Columns
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.avatar.length) {
+    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+  }
+}
+
+const optionSubAttribute = [
+    {value: "", label: "Filter Status"},
+    {value: "created", label: "created"},
+    {value: "live", label: "live"},
+    {value: "extended", label: "extended"},
+    {value: "closed", label: "closed"},
+    {value: "rejected", label: "rejected"},
+    {value: "auto closed", label: "auto closed"}
+  ]
+
 const DataTableWithButtons = () => {
+  const statusObj = {
+        pending: 'light-secondary',
+        approved: 'light-success',
+        approval: 'light-warning'
+  }
   // ** States
   const [modal, setModal] = useState(false)
+   const [responseModel, setResponseModel] = useState(false)
+    const [reviewId, setreviewId] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
+  const [Filter, setFilter] = useState('')
+  const [tooltipOpen, setTooltipOpen] = useState(false)
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -74,95 +108,50 @@ const DataTableWithButtons = () => {
   //columns
   const columns = [
         {
-          name: 'Id',
-          selector: 'id',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Name',
-          selector: 'Name',
-          sortable: true,
+          name: 'Attributes',
+          selector: 'subAttributes',
           minWidth: '150px',
           cell: row => (
-            <div className='d-flex align-items-center'>
+            <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Name}</span>
+                <span id="Attributess" className='d-block font-weight-bold text-truncate d-flex '>
+                {row.subAttributes.map((val, index) => {
+                  if (index < 1) {
+                    return (
+                      <div className="mr-1">{val.title} <a className="m-1 " href="#">view</a></div>
+                      )
+                  }
+                })
+                }
+                </span>
+                <UncontrolledTooltip className='d-block font-weight-bold text-truncate d-flex ' placement='top' target='Attributess'>
+                 
+                  {row.subAttributes.map((val, index) => {
+                   
+                      return (
+                        <><div className="">{val.title}</div><br/></>
+                        )
+                   
+                  })
+                  }
+                </UncontrolledTooltip>
+                
               </div>
             </div>
           )
         },
         {
-          name: 'Category Name',
-          selector: 'Category',
+          name: 'Sub Category',
+          selector: 'subCat',
           sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Sub-Category',
-          selector: 'SubCategory',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Default-Commission',
-          selector: 'DefaultCommission',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            return (
-                <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.DefaultCommission}%</span>
-                  </div>
-                </div>
-            )
-          }
-        },
-        {
-          name: 'SGST',
-          selector: 'SGST',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            return (
-                <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.SGST}%</span>
-                  </div>
-                </div>
-            )
-          }
-        },
-        {
-          name: 'CGST',
-          selector: 'CGST',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            return (
-                <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.CGST}%</span>
-                  </div>
-                </div>
-            )
-          }
-        },
-        {
-          name: 'IGST',
-          selector: 'IGST',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            return (
-                <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.IGST}%</span>
-                  </div>
-                </div>
-            )
-          }
+          minWidth: '130px',
+          cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>{row.subCat[0].value}</span>
+              </div>
+            </div>
+          )
         },
         {
           name: 'Actions',
@@ -178,12 +167,9 @@ const DataTableWithButtons = () => {
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-
-                <Link to={`/product-cat-edit/${row.id}`}>
-                  <Edit size={15} onClick={ () => { 
-                                    setCurrentId(row.id)
-                                     } }/>
-                </Link>
+                <Link to={`/add-attribute`}>
+                  <Edit size={15} />
+                </Link>  
               </div>
             )
           }
@@ -195,31 +181,53 @@ const DataTableWithButtons = () => {
   const handleModal = () => {
     setModal(!modal)
   }
-
+  
+  const handleResponse = () => {
+    setResponseModel(!responseModel)
+  }
+  // handle drop down filter
+  const handleFilterByDropDown = (value) => {
+    let updatedData = []
+    setFilter(value)
+    console.log(value.value)
+    let search = "l"
+    search = value.value
+    setSearchValue(search)
+      if (search.length) {
+          updatedData = data.filter(item => {
+            const startsWith =
+              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
+              
+            const includes =
+              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
+    
+            if (startsWith) {
+              return startsWith
+            } else if (!startsWith && includes) {
+              return includes
+            } else return null
+           })
+        
+      setFilteredData(updatedData)
+      // setSearchValue(search)
+      setFilter(value)
+    }
+  }
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
     let updatedData = []
     setSearchValue(value)
-
     if (value.length) {
-      updatedData = data1.filter(item => {
-        const GST = item.GST.toString()
-        const DefaultCommission = item.DefaultCommission.toString()
-        console.log(GST)
+      updatedData = data.filter(item => {
         const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.SubCategory.toLowerCase().startsWith(value.toLowerCase()) ||
-          GST.toLowerCase().startsWith(value.toLowerCase()) ||
-          DefaultCommission.toLowerCase().startsWith(value.toLowerCase())
-
+          item.subCat.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Cat.toLowerCase().startsWith(value.toLowerCase()) 
+          
         const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category.toLowerCase().includes(value.toLowerCase()) ||
-          item.SubCategory.toLowerCase().includes(value.toLowerCase()) ||
-          GST.toLowerCase().includes(value.toLowerCase()) ||
-          DefaultCommission.toLowerCase().includes(value.toLowerCase())
+          item.subCat.toLowerCase().includes(value.toLowerCase()) ||
+          item.Cat.toLowerCase().includes(value.toLowerCase()) 
+          
 
         if (startsWith) {
           return startsWith
@@ -244,7 +252,7 @@ const DataTableWithButtons = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data1.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -269,49 +277,32 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Product Category</CardTitle>
+          <CardTitle tag='h4'>Attributes</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            <Link to={`/product-cat-add`}>
+            <Link to={`/add-attribute`}>
               <Button className='ml-2' color='primary' onClick={handleModal}>
-                <Plus size={15} />
-                <span className='align-middle ml-50'>Add Your Product</span>
+                                          <Plus size={15} />
+                                          <span className='align-middle ml-50'>Add Attributes</span>
               </Button>
             </Link>
           </div>
         </CardHeader>
 
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
-              Search
-            </Label>
-            <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
-              value={searchValue}
-              onChange={handleFilter}
-            />
-          </Col>
-        </Row>
-
         <DataTable
           noHeader
           pagination
-          selectableRows
+         
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data1}
-          selectableRowsComponent={BootstrapCheckbox}
+          data={searchValue.length ? filteredData : data}
+          
         />
         
       </Card>
-  
     </Fragment>
   )
 }
