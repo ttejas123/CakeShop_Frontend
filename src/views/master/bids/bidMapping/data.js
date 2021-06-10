@@ -1,7 +1,31 @@
 
 import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import { MoreVertical, Edit, FileText, Archive, Trash } from 'react-feather'
+import DataTable from 'react-data-table-component'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
+import CardBody from 'reactstrap/lib/CardBody'
 
+
+const Sellerscolumns = [
+    {
+        name: 'Seller Name',
+        selector: 'name',
+        sortable: true,
+        minWidth: '250px'
+      },
+      {
+        name: 'Email',
+        selector: 'email',
+        sortable: false,
+        minWidth: '250px'
+      },
+      {
+        name: 'Phone',
+        selector: 'phone',
+        sortable: false,
+        minWidth: '250px'
+      }
+]
 export const data = [
     {
        rfqId : "RFQ1",
@@ -10,6 +34,7 @@ export const data = [
        requiredQuantity : 20,
        startTime : "01-05-2020",
        endTime : "01-05-2020",
+       acceptTime : "15-05-2020",
         sellers : [
         {
             name : "ReatilsNet",
@@ -35,6 +60,7 @@ export const data = [
         requiredQuantity : 30,
         startTime : "01-06-2020",
         endTime : "01-07-2020",
+       acceptTime : "15-06-2020",
         sellers : [
         {
             name : "Titan",
@@ -55,6 +81,7 @@ export const data = [
         requiredQuantity : 25,
         startTime : "01-07-2020",
         endTime : "01-08-2020",
+       acceptTime : "15-07-2020",
         sellers : [
         {
             name : "ReatilsNet",
@@ -79,7 +106,8 @@ export const data = [
        subCategory : "T-Shirt",
        requiredQuantity : 40,
        startTime : "04-05-2020",
-       endTime : "08-05-2020",
+       endTime : "08-06-2020",
+       acceptTime : "017-06-2020",
        sellers : [
            {
         name : "ReatilsNet",
@@ -95,22 +123,27 @@ export const data = [
     }
 ]
 const ExpandableTable = ({ data }) => {
-    return data.sellers.map(item => {
         return (
-            <ul>
-            <li>
-                <span>Seller Name :</span>
-                <span>{item.name}</span>
-                <span className='ml-3'>Email :</span>
-                <span>{item.email}</span>
-                <span className='ml-3'>Phone :</span>
-                <span>{item.phone}</span>
-            </li>
-            </ul>
-    
+            // <ul>
+            // <li>
+            //     <span>Seller Name :</span>
+            //     <span>{item.name}</span>
+            //     <span className='ml-3'>Email :</span>
+            //     <span>{item.email}</span>
+            //     <span className='ml-3'>Phone :</span>
+            //     <span>{item.phone}</span>
+            // </li>
+            // </ul>
+            <CardBody>
+            <DataTable
+        noHeader
+        columns={Sellerscolumns}
+        className='react-dataTable'
+        data={data.sellers}
+      />
+   </CardBody>
     )
-  
-  })
+
 }
 
 export const columns = [
@@ -148,6 +181,12 @@ export const columns = [
   {
     name: 'End Time',
     selector: 'endTime',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Accept Time',
+    selector: 'acceptTime',
     sortable: true,
     minWidth: '150px'
   }

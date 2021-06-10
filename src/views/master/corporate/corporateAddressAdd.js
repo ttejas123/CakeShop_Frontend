@@ -17,6 +17,7 @@ import 'uppy/dist/uppy.css'
 const corporateAddressAdd = () => {
 
   const [data, setData] = useState(null)
+  const [corporate, setCorporate] = useState("")
   const { register, errors, control, setValue } = useForm({
     defaultValues: { isRegisteredOffice: 'No' }
   })
@@ -55,12 +56,12 @@ const corporateAddressAdd = () => {
     {value: "Tejas Thakare", label: "Tejas Thakare"},
     {value: "Komal Kamble", label: "Komal Kamble"}
   ]
-  const optionCorporateName = [
-    {value: "TCS", label: "TCS"},
-    {value: "Coense", label: "Coense"},
-    {value: "Accenture", label: "Accenture"},
-    {value: "Infosys", label: "Infosys"},
-    {value: "Cognizant", label: "Cognizant"}
+  const optionCorporateId = [
+    {value: "CP001", label: "CP001", name : "Coense"},
+    {value: "CP002", label: "CP002", name : "Infosys"},
+    {value: "CP003", label: "CP003", name : "TCS"},
+    {value: "CP004", label: "CP004", name : "Accenture"},
+    {value: "CP005", label: "CP005", name : "Cognizant"}
   ]
   const initialvalues = {
     id:1,
@@ -75,7 +76,7 @@ const corporateAddressAdd = () => {
     City:  [{value: "city", label: "Mumbai"}], 
     State:  [{value: "state", label: "Maharashtra"}],
     Country: [{value: "country", label: "India"}],
-    CorporateName: [{value: "Select Corporate", label: "Select Corporate"}],
+    CorporateId: [{value: "Select Corporate", label: "Select Corporate"}],
     Role: [{value: "role", label: "Intern"}]
   }
   const [values, setValues] = useState(initialvalues)
@@ -198,37 +199,38 @@ setAddressProof(preview)
     <Row>
     <Col md='6' sm='12'>
     <FormGroup>
-              <Label for='CorporateId'>Corporate Id</Label>
+              <Label for='CorporateId'>Corporate</Label>
             <div style={{zIndex:1000, position:'relative'}}>
             <Select
               id='CorporateId'
               className='react-select'
               classNamePrefix='select'
               isClearable={false}
-              options={optionCorporateName}
+              options={optionCorporateId}
               theme={selectThemeColors}
-              value={values.CorporateName[0]}
+              value={values.CorporateId[0]}
               onChange={data => {
 
 
                                  setValues(
                                           {
                                              ...values,
-                                             CorporateName : data
+                                             CorporateId : data
                                           } 
                                   )
+                                  setCorporate(data.name)
                                 }
                         }
             />
             </div>
             </FormGroup> 
       </Col>
-    {/* <Col md='6' sm='12'>
+    <Col md='6' sm='12'>
         <FormGroup>
           <Label for='corporateName'>Corporate Name</Label>
-          <Input type='text' id='corporateName' placeholder='Corporate Name' defaultValue={userData && userData.corporateName} />
+          <Input type='text' id='corporateName' placeholder='Corporate Name' defaultValue={corporate} disabled />
         </FormGroup>
-      </Col> */}
+      </Col>
       <hr/>
       <Col md='12' sm='12'>
       <Row>

@@ -94,7 +94,16 @@ const handleDelete = (data) => {
       name: 'Membership Name',
       selector: 'name',
       sortable: true,
-      minWidth: '250px'
+      minWidth: '250px',
+      cell: row => (
+        <div key={row.name} className='d-flex align-items-center'>
+          <Link to={`/master/membershps/views`}>
+            <div className='user-info text-truncate'>
+              <span className='d-block font-weight-bold text-truncate'>{row.name}</span>
+            </div>
+          </Link>  
+        </div>
+      )
     },
     {
       name: 'Membership For',
