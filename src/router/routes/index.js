@@ -113,6 +113,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/vas/add'))
   },
   {
+    path: '/master/product/sku-list',
+    component: lazy(() => import('../../views/master/product/sku'))
+  },
+  {
+    path: '/master/product/create-sku',
+    component: lazy(() => import('../../views/master/product/createSku'))
+  },
+  {
     path: '/master/vass/edit/:id',
     component: lazy(() => import('../../views/master/vas/edit'))
   },

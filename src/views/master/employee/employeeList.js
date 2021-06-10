@@ -104,13 +104,31 @@ const ProductList = () => {
           name: 'Employee Number',
           selector: 'employeeNumber',
           sortable: true,
-          minWidth: '50px'
+          minWidth: '50px',
+          cell: row => (
+            <div key={row.employeeNumber} className='d-flex align-items-center'>
+              <Link to={`/employee-view`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.employeeNumber}</span>
+                </div>
+              </Link>  
+            </div>
+          )
         },
         {
           name: 'First Name',
           selector: 'firstName',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          cell: row => (
+            <div key={row.employeeNumber} className='d-flex align-items-center'>
+              <Link to={`/employee-view`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.firstName}</span>
+                </div>
+              </Link>  
+            </div>
+            )
         },
         {
             name: 'Last Name',

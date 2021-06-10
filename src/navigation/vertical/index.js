@@ -329,13 +329,13 @@ export default [
                   id: 'createSku',
                   title: 'Create Sku',
                   icon: <Circle size={20} />,
-                  navLink: '/master/SKUs/add'
+                  navLink: '/master/product/create-sku'
                 },
                 {
                   id: 'sku',
                   title: 'Sku List',
                   icon: <Circle size={20} />,
-                  navLink: '/master/SKU'
+                  navLink: '/master/product/sku-list'
                 }
                 // ,
                 // {
@@ -441,12 +441,12 @@ export default [
                   icon: <Circle size={20} />,
                   navLink: '/employee-list'
                 },
-                {
-                  id: 'view',
-                  title: 'View',
-                  icon: <Circle size={20} />,
-                  navLink: '/employee-view'
-                },
+                // {
+                //   id: 'view',
+                //   title: 'View',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/employee-view'
+                // },
                 {
                   id: 'edit',
                   title: 'Edit',
@@ -485,12 +485,12 @@ export default [
                   icon: <Circle size={20} />,
                   navLink: '/no-gst-corporate'
                 },
-                {
-                  id: 'view',
-                  title: 'View',
-                  icon: <Circle size={20} />,
-                  navLink: '/corporateView'
-                },
+                // {
+                //   id: 'view',
+                //   title: 'View',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/corporateView'
+                // },
                 {
                   id: 'addCorporateAddress',
                   title: 'Add Address',
@@ -528,12 +528,12 @@ export default [
                   icon: <Circle size={20} />,
                   navLink: '/membership-list'
                 },
-                {
-                  id: 'view',
-                  title: 'View',
-                  icon: <Circle size={20} />,
-                  navLink: '/master/membershps/views'
-                },
+                // {
+                //   id: 'view',
+                //   title: 'View',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/master/membershps/views'
+                // },
                 {
                   id: 'edit',
                   title: 'Edit',
