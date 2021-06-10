@@ -12,3 +12,4 @@ const initialState = {
             return { ...state, allData: action.data }
     }
 }
+export default users

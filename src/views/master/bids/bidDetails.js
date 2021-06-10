@@ -7,6 +7,7 @@ import Products from './ui-elements/cards/statistics/ProductTable'
 import PrefPartner from './ui-elements/cards/statistics/prefPart'
 import StatsCard from './ui-elements/cards/statistics/StatsCard'
 import BillingDoc from './ui-elements/newCards/billingdoc.js'
+import BidCriteria from './ui-elements/newCards/bidCriteria.js'
 import Approvecustomization from './ui-elements/newCards/aproalcustomization.js'
 import Acceptrej from './ui-elements/newCards/bidAcptRejt.js'
 import Calculator from './ui-elements/newCards/calcu.js'
@@ -89,12 +90,38 @@ const EcommerceDashboard = () => {
           
           {/* <Timeline /> */}
         </Col>
-
-        <Col xl='6' md='6' xs='12'>
+    </Row>
+    <Row>
+        <Col xl='6' md='6' xs='12' className='match-height'>
 
         { /* here we Have Product list*/ }
 
-          <Card className='card-statistics'>
+         
+              <Row >
+                <Col lg='12' xs='12'>
+                  <BidCriteria />
+                </Col>
+              </Row>
+
+        </Col>
+
+        <Col xl='6' md='6' xs='12' className='match-height'>
+
+        { /* here we Have Product list*/ }
+              <Row >
+                <Col lg='12' xs='12'>
+                  <Calculator />
+                </Col>
+              </Row>
+        </Col>
+    </Row>
+    <Row>
+
+         <Col xl='12' md='12' xs='12'>
+
+        { /* here we Have Product list*/ }
+
+          <Card className='card-statistics match-height'>
            <CardHeader>  
               <CardTitle tag='h4'>Approval of customization</CardTitle>
            </CardHeader>  
@@ -108,22 +135,13 @@ const EcommerceDashboard = () => {
           </Card>
 
         </Col>
-
-        <Col xl='6' md='6' xs='12'>
-
-        { /* here we Have Product list*/ }
-              <Row className='match-height'>
-                <Col lg='12' xs='12'>
-                  <Calculator />
-                </Col>
-              </Row>
-        </Col>
-
+    </Row>
+    <Row>
         <Col xl='12' md='12' xs='12'>
 
         { /* here we Have Product list*/ }
 
-          <Card className='card-statistics'>
+          <Card className='card-statistics match-height'>
            <CardHeader> 
                
               <CardTitle tag='h4'>Products</CardTitle>
@@ -138,7 +156,8 @@ const EcommerceDashboard = () => {
           </Card>
 
         </Col>
-
+    </Row>
+    <Row>
         <Col xl='12' md='12' xs='12'>
 
         { /* here we Have prefered partners list*/ }
