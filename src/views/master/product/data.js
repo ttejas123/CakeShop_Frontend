@@ -125,7 +125,9 @@ export const data1 = [
         Category: "Convenience",
         SubCategory: "Shopping",
         DefaultCommission: 14,
-        GST:12,
+        CGST: 12,
+        IGST: 8,
+        SGST:12,
         Name: "shoes",
         id: 1
       },
@@ -133,7 +135,9 @@ export const data1 = [
         Category: "Speciality",
         SubCategory: "Sports cars",
         DefaultCommission: 11,
-        GST:8,
+        CGST: 12,
+        IGST: 8,
+        SGST:8,
         Name: "BMW",
         id: 2
       },
@@ -141,7 +145,9 @@ export const data1 = [
         Category: "Shopping",
         SubCategory: "Clothes",
         DefaultCommission: 10,
-        GST:5,
+        CGST: 12,
+        IGST: 8,
+        SGST:5,
         Name: "T-shirt's",
         id: 3
       },
@@ -149,7 +155,9 @@ export const data1 = [
         Category: "Unsought",
         SubCategory: "Survival gears",
         DefaultCommission: 4,
-        GST:18,
+        CGST: 12,
+        IGST: 8,
+        SGST:18,
         Name: "J5 Tactical 300",
         id: 4
       },
@@ -157,7 +165,9 @@ export const data1 = [
         Category: "Commodity",
         SubCategory: "Metals",
         DefaultCommission: 20,
-        GST:22,
+        CGST: 12,
+        IGST: 8,
+        SGST:22,
         Name: "Gold",
         id: 5
       },
@@ -165,7 +175,9 @@ export const data1 = [
         Category: "Speciality",
         SubCategory: "designer clothing",
         DefaultCommission: 11,
-        GST:6,
+        CGST: 12,
+        IGST: 8,
+        SGST:6,
         Name: "Guccy",
         id: 6
       },
@@ -173,7 +185,9 @@ export const data1 = [
         Category: "Shopping",
         SubCategory: "furniture",
         DefaultCommission: 14,
-        GST:12,
+        CGST: 12,
+        IGST: 8,
+        SGST:12,
         Name: "Glass",
         id: 7
       },
@@ -181,7 +195,9 @@ export const data1 = [
         Category: "Convenience",
         SubCategory: "Print media",
         DefaultCommission: 7,
-        GST:11,
+        CGST: 12,
+        IGST: 8,
+        SGST:11,
         Name: "MasterCard",
         id: 8
       }

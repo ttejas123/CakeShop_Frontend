@@ -38,7 +38,7 @@ const EcommerceDashboard = () => {
 
           <Card className='card-statistics'>
             <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-              <CardTitle tag='h4'>Membership Availed Users</CardTitle>
+              <CardTitle tag='h4'>Users</CardTitle>
               <div className='d-flex mt-md-0 mt-1'>
                
               </div>

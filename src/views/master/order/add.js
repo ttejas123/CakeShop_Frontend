@@ -1,6 +1,9 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
 // ** Styles
+import { useParams, Link } from 'react-router-dom'
+// ** Custom Components
+
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -15,14 +18,52 @@ import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, InputGro
   CardTitle, CustomInput } from 'reactstrap'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
+import { data } from './data'
+
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.avatar.length) {
+    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
+  } else {
+    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
+  }
+}
+
+const part = (data2) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+          {renderClient(data2)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.Name}</span>
+              <small className='text-truncate text-muted mb-0'>@{data2.username}</small>
+          </div>
+                                         
+        </div>
+    </div>)
+}
 
 const EditEmployee = () => {
 
-  const [data, setData] = useState(null)
+  
   const { register, errors, control, setValue } = useForm({
     defaultValues: { isOnGround: 'No' }
   })
 
+    const optionPartners = [
+    {value: "user1212", label: part(data[0])},
+    {value: "user1231", label: part(data[1])},
+    {value: "user1234", label: part(data[2])},
+    {value: "user2345", label: part(data[3])}
+  ]
+
+    const optionBid = [
+    {value: "BID1212", label:"BID1212"},
+    {value: "BID2323", label:"BID2323"}
+    ]
   const optionCountry1 = [
     {value: "India", label: "India"},
     {value: "UK", label: "UK"},
@@ -224,22 +265,75 @@ const EditEmployee = () => {
         </FormGroup>
       </Col>
       <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='userId'>User Id</Label>
-          <Input type='text' id='userId' placeholder='Last Name' defaultValue={userData && userData.userId} />
-        </FormGroup>
+              <FormGroup>
+                <Label for='BidStatus'>User</Label>
+                <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionPartners}
+                  theme={selectThemeColors}
+                  value={values.user}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 user : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </FormGroup>
       </Col>
+      
       <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='bidId'>Bid Id</Label>
-          <Input type='bidId' id='bidId' placeholder='bidId' defaultValue={userData && userData.bidId} />
-        </FormGroup>
+              <FormGroup>
+                <Label for='BidStatus'>Bid</Label>
+                <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionBid}
+                  theme={selectThemeColors}
+                  value={values.bid}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 bid : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </FormGroup>
       </Col>
+      
       <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='sellerId'>Seller Id</Label>
-          <Input type='text' id='sellerId' placeholder='sellerId' defaultValue={userData && userData.sellerId} />
-        </FormGroup>
+              <FormGroup>
+                <Label for='BidStatus'>Seller</Label>
+                <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionPartners}
+                  theme={selectThemeColors}
+                  value={values.seller}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 seller : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </FormGroup>
       </Col>
      
       <Col md='6' sm='12'>
