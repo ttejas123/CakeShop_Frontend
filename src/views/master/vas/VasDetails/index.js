@@ -4,7 +4,7 @@ import { ThemeColors } from '@src/utility/context/ThemeColors'
 import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col} from 'reactstrap'
 
 import Avaied from "../orderlist"
-import Add from "../add.js"
+import Add from "./edit.js"
 import StatsVertical from '@components/widgets/stats/StatsVertical'
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
