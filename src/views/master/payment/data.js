@@ -7,7 +7,7 @@ import reethika  from '../../../assets/images/logo/reethika.jpg'
 
 //expot data
 // id:1,
-// payment_mode : "Cradit",
+// payment_mode : "Credit",
 // amount_paid : "200K",
 // time : `${new Date().toGMTString()}`,
 // Order_Id : 123,
@@ -18,7 +18,7 @@ export const data = [
       {
 
         id:1,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,
@@ -28,7 +28,7 @@ export const data = [
       },
       {
         id:2,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,
@@ -38,7 +38,7 @@ export const data = [
       },
       {
         id:3,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,
@@ -48,7 +48,7 @@ export const data = [
       },
       {
         id:4,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,
@@ -58,7 +58,7 @@ export const data = [
       },
       {
         id:5,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,
@@ -68,7 +68,7 @@ export const data = [
       },
       {
         id:6,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,
@@ -78,7 +78,7 @@ export const data = [
       },
       {
         id:7,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,
@@ -88,7 +88,7 @@ export const data = [
       },
       {
         id:8,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,
@@ -98,7 +98,7 @@ export const data = [
       },
       {
         id:9,
-        payment_mode : "Cradit",
+        payment_mode : "Credit",
         amount_paid : "200K",
         time : `${new Date().toGMTString()}`,
         Order_Id : 123,

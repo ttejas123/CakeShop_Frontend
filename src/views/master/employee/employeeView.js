@@ -174,7 +174,7 @@ const EcommerceDashboard = () => {
         <Col lg='5' sm='5' md='5'>
         <Card className=''>
            <CardHeader>  
-              <CardTitle tag='h5'><h4>Acitivty Stats</h4></CardTitle>
+              <CardTitle tag='h5'><h4>Activity Stats</h4></CardTitle>
            </CardHeader>  
             <CardBody>
                 <ActivityStats/>

@@ -1,21 +1,32 @@
 import Avatar from '@components/avatar'
 import Select from 'react-select'
 import { useForm } from 'react-hook-form'
+import Repeater from '@components/repeater'
 // ** Third Party Components
 import axios from 'axios'
-import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X  } from 'react-feather'
+import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X, Plus  } from 'react-feather'
 //import Flatpickr from 'react-flatpickr'
 // ** React Imports
 import { useState, useEffect } from 'react'
 import { selectThemeColors, isObjEmpty } from '@utils'
 // ** Third Party Components
 import Flatpickr from 'react-flatpickr'
-import { Button, Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, FormGroup, InputGroup, Form, InputGroupAddon, InputGroupText, Input, Label, Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Col, Row  } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const AddNewModal = (prop) => {
+    const [count, setCount] = useState(1)
+
+  const increaseCount = () => {
+    setCount(count + 1)
+  }
+
+  const deleteForm = e => {
+    e.preventDefault()
+    e.target.closest('form').remove()
+  }
   const { register, errors, handleSubmit } = useForm()
   const optionDLocation = [
     {value: "Multiple", label: "Multiple"},
@@ -225,6 +236,40 @@ const AddNewModal = (prop) => {
                                 }
                         }
             />
+          </FormGroup>
+          <FormGroup>
+           <Col>
+                      <Repeater count={count}>
+                        {i => (
+                          <Form key={i}>
+                            <Row className='justify-content-between align-itemss-center'>
+                              <Col md={6}>
+                                <FormGroup>
+                                  <Label for={`attribute-name-${i}`}>New Pin Code</Label>
+                                  <Input type='text' id={`attribute-name-${i}`} placeholder='Pin Code' />
+                                </FormGroup>
+                              </Col>
+                              
+                              <Col md={4} className='d-flex my-auto'>
+                                <Button.Ripple color='danger' className='text-nowrap px-1 mt-1' onClick={deleteForm} outline>
+                                  <X size={14} />
+                                  <span></span>
+                                </Button.Ripple>
+                              </Col>
+                              {/* <Col sm={12}>
+                                <hr />
+                              </Col> */}
+                            </Row>
+                          </Form>
+                        )}
+                      </Repeater>
+            </Col>
+            <Col md={6}>
+            <Button.Ripple className='d-flex btn-icon' color='primary' onClick={increaseCount}>
+              <Plus size={14} />
+              <span className='align-middle '>Add New</span>
+            </Button.Ripple>
+            </Col>
           </FormGroup>
 
         <FormGroup>

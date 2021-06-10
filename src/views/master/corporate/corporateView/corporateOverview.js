@@ -33,6 +33,7 @@ import BranchOverview from './branchOverview'
 import BidHistoryOverview from './bidHistoryOverview'
 import CorporateOverviewKyc from './corporateOverviewKyc'
 import SuperAdmin from './corporateSuperAdmin'
+import CorporateCreditUtilization from './corporateCreditUtilization'
 // import ProductCarousel from './productCarousel'
 // import RelatedProducts from './relatedProducts'
 // import ProductInfo from './productInfo'
@@ -132,23 +133,35 @@ const CorporateOverview = (props) => {
                 <Badge className='card-text font-small-2 ml-2' color="light-success" pill>
                         <span className='mb-0 text-success' >Premium</span>
                 </Badge>
+                <Row className='mt-1 '>
+                    
+                      <Badge className='card-text font-small-2 ml-1 mr-1 ' color="light-success" pill>
+                           <span className='mb-0 text-success' > Social Audit </span>
+                      </Badge>-
+                    
+                          <div className="ml-1" ><img src="https://img.icons8.com/offices/18/000000/checked-2--v2.png"/></div>
+                    
+                </Row>
               </CardText>
 
             </Media>
             
-          </Media>
+        </Media>
           
           </CardTitle>
-          <Media className='float-left'>
-            <Row>
-              <Col>
-                <img src="https://img.icons8.com/material-outlined/26/000000/visible.png"/>
-              </Col>
-              <Col>
-                <img src="https://img.icons8.com/ios-glyphs/26/000000/--pocket-watch.png"/>
-              </Col>
+          <div className='d-flex p-0 mt-md-0 w-25'>
+           
+              <Row>
+                <Col md={6}>
+                  <b classnames="d-flex"><>Bid Coin</> <img src="https://img.icons8.com/cotton/26/000000/rupee--v1.png"/></b>
+                </Col>
+                <Col md={6}>
+                  <b>Bid Cash <img src="https://img.icons8.com/ios-glyphs/26/000000/--pocket-watch.png"/></b>
+                </Col>
             </Row>
-          </Media>
+           
+          </div>
+          
       </CardHeader>
       <hr/>
       <CardHeader className='pb-0'> 
@@ -274,11 +287,14 @@ const CorporateOverview = (props) => {
       </Row> 
 
       <Row className='match-height'>
-          <Col lg='6' md='6'>
+          <Col lg='4' md='6'>
          <CorporateBidStats colors={colors} trackBgColor={trackBgColor}/>
         </Col>
-        <Col lg='6' md='6'>
+        <Col lg='4' md='6'>
         <SuperAdmin/>
+        </Col>
+        <Col lg='4' md='6'>
+        <CorporateCreditUtilization/>
         </Col>
       </Row> 
 

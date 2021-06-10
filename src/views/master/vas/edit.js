@@ -99,7 +99,7 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='rate'>rate</Label>
+                <Label for='rate'>Rate</Label>
                 <InputGroup>
                   
                   <Input name="rate" onChange={handleInputeChange} id='rate' type="text" value={values.rate} />

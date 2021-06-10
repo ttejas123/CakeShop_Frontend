@@ -76,7 +76,16 @@ const DataTableWithButtons = () => {
       name: 'Corporate Name',
       selector: 'corporateName',
       sortable: true,
-      minWidth: '150px'
+      minWidth: '150px',
+      cell: row => (
+        <div key={row.id} className='d-flex align-items-center'>
+          <Link to={`/corporateView`}>
+            <div className='user-info text-truncate'>
+              <span className='d-block font-weight-bold text-truncate'>{row.corporateName}</span>
+            </div>
+          </Link>  
+        </div>
+      )
     },
     {
       name: 'Comapny Type',

@@ -115,12 +115,12 @@ const handleDelete = (data) => {
             <div className='d-flex justify-content-left align-items-center'>
               {renderClient(row)}
               <div className=''>
-                <Link to={`/bidDetails/${row.id}`}>
+                
                   <div className='user-info text-truncate d-flex flex-column'>
                      <span className='font-weight-bold'>{row.name}</span>
                      <small className='text-truncate text-muted mb-0'>@{row.name}</small>
                   </div>
-                </Link>  
+                  
               </div>
             </div>
           )
@@ -145,13 +145,13 @@ const handleDelete = (data) => {
         },
         {
           name: 'City',
-          selector: 'City',
+          selector: 'City.label',
           sortable: true,
           minWidth: '250px'
         },
         {
           name: 'state',
-          selector: 'state',
+          selector: 'state.label',
           sortable: true,
           minWidth: '250px'
         },
@@ -288,7 +288,7 @@ const handleDelete = (data) => {
       <Fragment>
     <Card>
       <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>FinancialPartner</CardTitle>
+        <CardTitle tag='h4'>Financial Partner</CardTitle>
 
         <Link to={`/master/financialPartners/add`}>
           <Button className='ml-2' color='primary'>

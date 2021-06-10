@@ -55,11 +55,10 @@ const CorporateKyc = () => {
     setImg(preview)
   })
   const onDocumentApprove = (id) => {
-    setApproveComment(!approveComment)
+    setModalStatus(!modalstatus)
    // setModalStatus(!modalstatus)
   }
   const onDocumentReject = (id) => {
-    setRejectComment(!rejectComment)
     setModalStatus(!modalstatus)
   }
   const onDocumentReupload = (id) => {
@@ -86,7 +85,7 @@ const CorporateKyc = () => {
       },
       {
         img: aadharCard,
-        name: 'Adhar',
+        name: 'Aadhar',
         email: 'vecav@hodzi.co.uk',
         approvedBy : "Tejas",
         status : "Rejected",
@@ -255,7 +254,6 @@ const CorporateKyc = () => {
     >
       <ModalHeader toggle={() => setModalStatus(!modalstatus)}>
         {selectedItem.name}
-        {selectedItem.name}
       </ModalHeader>
       <ModalBody>
        <img className='d-flex mx-auto' width="700" src={selectedItem.img}/>
@@ -264,10 +262,10 @@ const CorporateKyc = () => {
        <DragDrop uppy={uppy} />
         {img !== null ? <img className='rounded mt-2' src={img} alt='avatar' /> : null}
         </div> : null}
-        {!approveComment ? <FormGroup>
-          <Label for='approveComment'>Comment</Label>
-          <Input type='textarea' id='approveComment' placeholder='Corporate Name'/>
-        </FormGroup> : null}
+        <FormGroup>
+          <Label for='comment'>Comment</Label>
+          <Input type='textarea' id='comment' placeholder='Comments...'/>
+        </FormGroup> 
       </ModalBody>
       <ModalFooter>
         { !reuploadForm ? <><Button.Ripple color='primary' type='submit' onClick={() => onDocumentApprove(selectedItem.id)} >

@@ -14,6 +14,9 @@ import { useForm, Controller } from 'react-hook-form'
 const GeneralInformation = () => {
 
   const [data, setData] = useState(null)
+  const [isExisting, setIsExisting] = useState(false)
+  const [defaultPlaceHolders, setDefaultPlaceHolders] = useState({name : "Name", email : "email", phone : "Phone"})
+
 
   const { control, setValue } = useForm({
     defaultValues: { isVerified : 'No'}
@@ -35,6 +38,14 @@ const GeneralInformation = () => {
     {value: "Karnataka", label: "Karnataka"},
     {value: "Gujarat", label: "Gujarat"}
   ]
+
+  const optionUsers = [
+    {value: "Pravin Poshmani", label: "Pravin Poshmani", name : "Pravin Poshmani", email : "PravinPoshmani@xyz.com", phone : "98765432"},
+    {value: "Tejas Thakare", label: "Tejas Thakare", name : "Tejas Thakare", email : "TejasThakare@xyz.com", phone : "9876543"},
+    {value: "Komal Kamble", label: "Komal Kamble", name : "Komal Kamble", email : "KomalKamble@xyz.com", phone : "87654323"},
+    {value: "Reethika", label: "Reethika", name : "Reethika", email : "Reethika@abc.com", phone : "875654344"}
+  ]
+
   const optionCity = [
     {value: "Pune", label: "Pune"},
     {value: "Mumbai", label: "Mumbai"},
@@ -42,13 +53,19 @@ const GeneralInformation = () => {
     {value: "Nashik", label: "Nashik"},
     {value: "Solapur", label: "Solapur"}
   ]
-  const optionCurrency = [
-    {value: "Indian Rupee", label: "Indian Rupee"},
-    {value: "Us Dollar", label: "Us Dollar"},
-    {value: "Euro", label: "Euro"},
-    {value: "Armerian Dram", label: "Armerian Dram"},
-    {value: "Canadian Dollar", label: "Canadian Dollar"}
+  const optionCompanyType = [
+    {value: "Pvt Limited", label: "Pvt Limited"},
+    {value: "Public Company", label: "Public Company"},
+    {value: "Associate Company", label: "Associate Company"}
   ]
+
+  const optionIndustryType = [
+    {value: "IT", label: "IT"},
+    {value: "Food", label: "Food"},
+    {value: "Footwear", label: "Footwear"},
+    {value: "Clothing", label: "Clothing"}
+  ]
+
   const initialvalues = {
     id:1,
     name: "",
@@ -59,10 +76,12 @@ const GeneralInformation = () => {
     logo : "",
     phone : "",
     panNumber: "",
-    Currency:  [{value: "currency", label: "Indian Rupee"}],
+    CompanyType:  [{value: "Select Company Type", label: "Select Company Type"}],
+    IndustryType:  [{value: "Select Industry Type", label: "Select Industry Type"}],
     City:  [{value: "city", label: "Mumbai"}], 
     State:  [{value: "state", label: "Maharashtra"}],
-    Country: [{value: "country", label: "India"}]
+    Country: [{value: "country", label: "India"}],
+    User: [{value: "Select User", label: "Select User"}]
   }
   const [values, setValues] = useState(initialvalues)
   const handleInputeChange = (event) => {
@@ -119,6 +138,11 @@ const GeneralInformation = () => {
     // }
   })
 
+
+  const setAdminAdd = (response) => {
+    setValue('Admin', response)
+    { response === 'Yes' ? setIsExisting(true) : setIsExisting(false) }
+  }
   // ** Renders User
   const renderUserAvatar = () => {
     if (img === null) {
@@ -156,6 +180,36 @@ const GeneralInformation = () => {
     }
   }
 
+  const renderUsers = () => {
+    return (
+      <FormGroup>
+              <Label for='user'>User</Label>
+              <div style={{zIndex:998, position:'relative'}}>
+            <Select
+              id='user'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionUsers}
+              theme={selectThemeColors}
+              value={values.User[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             User : data
+                                          } 
+                                  )
+                                  setDefaultPlaceHolders(data)
+                                }
+                        }
+            />
+            </div>
+            </FormGroup> 
+    )
+  }
   return (
  
 <Card>
@@ -171,16 +225,58 @@ const GeneralInformation = () => {
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>
-        <FormGroup>
-          <Label for='companyType'>Company Type</Label>
-          <Input type='text' id='companyType' placeholder='Pvt Ltd' defaultValue={userData && userData.name} />
-        </FormGroup>
+      <FormGroup>
+              <Label for='CompanyType'>Company Type</Label>
+              <div style={{zIndex:1000, position:'relative'}}>
+            <Select
+              id='CompanyType'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionCompanyType}
+              theme={selectThemeColors}
+              value={values.CompanyType[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             CompanyType : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </div>
+            </FormGroup> 
       </Col>
       <Col md='4' sm='12'>
-        <FormGroup>
-          <Label for='industry'>Industry</Label>
-          <Input type='text' id='industry' placeholder='IT' defaultValue={userData && userData.name} />
-        </FormGroup>
+      <FormGroup>
+              <Label for='IndustryType'>Industry Type</Label>
+              <div style={{zIndex:1000, position:'relative'}}>
+            <Select
+              id='IndustryType'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionIndustryType}
+              theme={selectThemeColors}
+              value={values.IndustryType[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             IndustryType : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </div>
+            </FormGroup> 
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
@@ -191,7 +287,7 @@ const GeneralInformation = () => {
       <Col md='4' sm='12'>
       <FormGroup>
               <Label for='Country'>Country</Label>
-              <div style={{zIndex:1000, position:'relative'}}>
+              <div style={{zIndex:999, position:'relative'}}>
             <Select
               id='Country'
               className='react-select'
@@ -224,7 +320,7 @@ const GeneralInformation = () => {
       <Col md='4' sm='12'>
       <FormGroup>
               <Label for='State'>State</Label>
-              <div style={{zIndex:999, position:'relative'}}>
+              <div style={{zIndex:998, position:'relative'}}>
             <Select
               id='State'
               className='react-select'
@@ -251,7 +347,7 @@ const GeneralInformation = () => {
       <Col md='4' sm='12'>
       <FormGroup>
               <Label for='City'>City</Label>
-              <div style={{zIndex:998, position:'relative'}}>
+              <div style={{zIndex:997, position:'relative'}}>
             <Select
               id='City'
               className='react-select'
@@ -289,7 +385,7 @@ const GeneralInformation = () => {
                       type='radio'
                       label='Yes'
                       value='Yes'
-                      id='Yes'
+                      id='HsYes'
                       name={props.name}
                       invalid={data !== null && (data.hasSubscription === undefined || data.hasSubscription === null)}
                       onChange={() => setValue('hasSubscription', 'Yes')}
@@ -307,55 +403,11 @@ const GeneralInformation = () => {
                       type='radio'
                       label='No'
                       value='No'
-                      id='No'
+                      id='HsNo'
                       name={props.name}
                       defaultChecked
                       invalid={data !== null && (data.hasSubscription === undefined || data.hasSubscription === null)}
-                      onChange={() => setValue(...'hasSubscription', 'No')}
-                    />
-                  )
-                }}
-              />
-            </FormGroup>
-          </FormGroup>
-      </Col>
-      <Col md='4' sm='12'>
-      <FormGroup>
-            <label className='d-block mb-1'>Is Verified</label>
-            <FormGroup>
-              <Controller
-                name='isVerified'
-                control={control}
-                render={props => {
-                  return (
-                    <CustomInput
-                      inline
-                      type='radio'
-                      label='Yes'
-                      value='Yes'
-                      id='Yes'
-                      name={props.name}
-                      invalid={data !== null && (data.isVerified === undefined || data.isVerified === null)}
-                      onChange={() => setVerifyValue('isVerified', 'Yes')}
-                    />
-                  )
-                }}
-              />
-              <Controller
-                name='isVerified'
-                control={control}
-                render={props => {
-                  return (
-                    <CustomInput
-                      inline
-                      type='radio'
-                      label='No'
-                      value='No'
-                      id='No'
-                      name={props.name}
-                      defaultChecked
-                      invalid={data !== null && (data.isVerified === undefined || data.isVerified === null)}
-                      onChange={() => setVerifyValue('isVerified', 'No')}
+                      onChange={() => setValue('hasSubscription', 'No')}
                     />
                   )
                 }}
@@ -371,8 +423,26 @@ const GeneralInformation = () => {
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='createdBy'>Created By</Label>
-          <Input type='text' id='createdBy' placeholder='XYZ' defaultValue={userData && userData.name} />
+          <Label for='headOffice'>Head Office</Label>
+          <Input type='text' id='headOffice' placeholder='Mumbai' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='gstNumber'>GST Number</Label>
+          <Input type='text' id='gstNumber' placeholder='1234567' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='pancard'>pancard</Label>
+          <Input type='text' id='pancard' placeholder='BG4567' defaultValue={userData && userData.name} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='description'>Description</Label>
+          <Input type='textarea' id='description' defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>
@@ -405,7 +475,6 @@ const GeneralInformation = () => {
             <span className='align-middle'>Admin Information</span>
           </h4>
         </Col>
-        <Col md='12' sm='12'>
         <Col md='4' sm='12'>
       <FormGroup>
             <label className='d-block mb-1'>Add</label>
@@ -420,10 +489,10 @@ const GeneralInformation = () => {
                       type='radio'
                       label='Existing'
                       value='Yes'
-                      id='Yes'
+                      id='AdYes'
                       name={props.name}
                       invalid={data !== null && (data.adminInfo === undefined || data.adminInfo === null)}
-                      onChange={() => setValue('adminInfo', 'Yes')}
+                      onChange={() => setAdminAdd('Yes')}
                     />
                   )
                 }}
@@ -438,11 +507,11 @@ const GeneralInformation = () => {
                       type='radio'
                       label='New'
                       value='No'
-                      id='No'
+                      id='AdNo'
                       name={props.name}
                       defaultChecked
                       invalid={data !== null && (data.adminInfo === undefined || data.adminInfo === null)}
-                      onChange={() => setValue('adminInfo', 'No')}
+                      onChange={() => setAdminAdd('No')}
                     />
                   )
                 }}
@@ -450,23 +519,27 @@ const GeneralInformation = () => {
             </FormGroup>
           </FormGroup>
       </Col>
+      <Col md='4' sm='12'>
+      { isExisting ? renderUsers() : null }
+      </Col>
+      <Col md='4' sm='12'>
       </Col>
         <Col md='4' sm='12'>
         <FormGroup>
           <Label for='name'>Name</Label>
-          <Input type='text' id='name' placeholder='Pravin Poshmani' defaultValue={userData && userData.name} />
+          <Input type='text' id='name' placeholder={defaultPlaceHolders.name} defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
           <Label for='email'>Email</Label>
-          <Input type='text' id='email' placeholder='tcs@xyz.com' defaultValue={userData && userData.name} />
+          <Input type='text' id='email' placeholder={defaultPlaceHolders.email} defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
           <Label for='phone'>Phone</Label>
-          <Input type='text' id='phone' placeholder='9876765432' defaultValue={userData && userData.name} />
+          <Input type='text' id='phone' placeholder={defaultPlaceHolders.phone} defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
         

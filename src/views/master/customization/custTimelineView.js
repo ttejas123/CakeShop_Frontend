@@ -55,6 +55,13 @@ const data = [
     color: 'danger',
     meta: '01-05-2021 03:00 PM',
     metaClassName: 'mr-1'
+  },
+  {
+    title: 'Approved By',
+    content: 'Pravin Poshmani',
+    color: 'warning',
+    meta: '01-05-2021 03:00 PM',
+    metaClassName: 'mr-1'
   }
 ]
 

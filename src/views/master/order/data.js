@@ -54,7 +54,9 @@ const renderClient = row => {
 //expot data
 export const data = [
       {
-       id : "Id1",
+       id : 0,
+       avatar:"",
+       Name:"Tejas Thakare",
        orderNumber : "Ord1",
        orderType : "Type1",
        userId : "User1",
@@ -85,7 +87,9 @@ export const data = [
        updatedTime : "01-05-2021"
       },
       {
-        id : "Id2",
+        id : 1,
+        avatar:"",
+        Name:"Pravin Poshmani",
         orderNumber : "Ord2",
         orderType : "Type2",
         userId : "User2",
@@ -116,7 +120,9 @@ export const data = [
         updatedTime : "02-05-2021"
       },
       {
-        id : "Id3",
+        id : 2,
+        avatar:"",
+        Name:"Komal Kamble",
         orderNumber : "Ord3",
         orderType : "Type3",
         userId : "User3",
@@ -147,7 +153,9 @@ export const data = [
         updatedTime : "03-05-2021"
       },
       {
-        id : "Id4",
+        id : 3,
+        avatar:"",
+        Name:" Tejas Jadhav",
         orderNumber : "Ord4",
         orderType : "Type1",
         userId : "User4",
@@ -180,17 +188,44 @@ export const data = [
 ]
 
 export const columns = [
+
   {
     name: 'Id',
     selector: 'id',
     sortable: true,
-    minWidth: '50px'
+    minWidth: '50px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className=''>
+                <Link to={`/order-details`}>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.id}</span>
+                     
+                  </div>
+                </Link>  
+              </div>
+            </div>
+          )
   },
   {
     name: 'Order Number',
     selector: 'orderNumber',
     sortable: true,
-    minWidth: '150px'
+    minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className=''>
+                <Link to={`/order-details`}>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.orderNumber}</span>
+                     
+                  </div>
+                </Link>  
+              </div>
+            </div>
+          )
   },
   {
     name: 'Order Type',
@@ -374,7 +409,7 @@ export const columns = [
                                                                             } }/>
             </DropdownToggle>
           </UncontrolledDropdown>
-          <Link  to={`/master/orders/add/${row.id}`}><Edit  
+          <Link  to={`/master/orders/edit/${row.id}`}><Edit  
             size={15} 
             >
                                  <Link to='/edit-product'/>

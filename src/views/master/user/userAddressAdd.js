@@ -3,6 +3,11 @@ import { useState, useEffect } from 'react'
 // ** Custom Components
 import Avatar from '@components/avatar'
 import classnames from 'classnames'
+import { DragDrop } from '@uppy/react'
+import Uppy from '@uppy/core'
+import thumbnailGenerator from '@uppy/thumbnail-generator'
+import '@styles/react/libs/file-uploader/file-uploader.scss'
+import 'uppy/dist/uppy.css'
 // ** Third Party Components
 import { Lock, Edit, Trash2, MapPin } from 'react-feather'
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, CardHeader, CardBody, Card, CardTitle } from 'reactstrap'
@@ -13,6 +18,23 @@ import { useForm, Controller } from 'react-hook-form'
 const EditEmployee = () => {
 
   const [data, setData] = useState(null)
+  const [user, setUser] = useState("")
+  const [AddressProof, setAddressProof] = useState(null)
+
+  const uppy1 = new Uppy({
+    meta: { type: 'avatar' },
+    restrictions: { maxNumberOfFiles: 1 },
+    autoProceed: true
+  })
+
+uppy1.use(thumbnailGenerator)
+
+uppy1.on('thumbnail:generated', (file, preview) => {
+console.log(file)
+setAddressProof(preview)
+})
+
+
   const { register, errors, control, setValue } = useForm({
     defaultValues: { isRegisteredOffice: 'No' }
   })
@@ -25,6 +47,16 @@ const EditEmployee = () => {
     {value: "China", label: "China"},
     {value: "Russia", label: "Russia"}
   ]
+
+  const optionUserId = [
+    {value: "ID001", label: "ID001", name : "Pravin Poshmani"},
+    {value: "ID002", label: "ID002", name : "Tejas Thakare"},
+    {value: "ID003", label: "ID003", name : "Komal Kamble"},
+    {value: "ID004", label: "ID004", name : "Salman Roshan"},
+    {value: "ID005", label: "ID005", name : "Hrithik Khan"},
+    {value: "ID006", label: "ID006", name : "The Ruler"}
+  ]
+
   const optionRole = [
     {value: "Admin", label: "Admin"},
     {value: "Intern", label: "Intern"},
@@ -71,6 +103,7 @@ const EditEmployee = () => {
     City:  [{value: "city", label: "Mumbai"}], 
     State:  [{value: "state", label: "Maharashtra"}],
     Country: [{value: "country", label: "India"}],
+    UserId: [{value: "Select User Id", label: "Select User Id"}],
     Role: [{value: "role", label: "Intern"}]
   }
   const [values, setValues] = useState(initialvalues)
@@ -178,15 +211,35 @@ const EditEmployee = () => {
   <Form onSubmit={e => e.preventDefault()}>
     <Row>
     <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='id'>User Id</Label>
-          <Input type='text' Number='id' placeholder='User Id' defaultValue={userData && userData.EmployeeNumber} />
-        </FormGroup>
+    <FormGroup>
+              <Label for='userId'>User Id</Label>
+            <Select
+              id='userId'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionUserId}
+              theme={selectThemeColors}
+              value={values.UserId[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             UserId : data
+                                          } 
+                                  )
+                                  setUser(data.name)
+                                }
+                        }
+            />
+            </FormGroup> 
       </Col>
     <Col md='6' sm='12'>
         <FormGroup>
           <Label for='userName'>User Name</Label>
-          <Input type='text' id='userName' placeholder='User Name' defaultValue={userData && userData.userName} />
+          <Input type='text' id='userName' placeholder='User Name' defaultValue={user}  disabled/>
         </FormGroup>
       </Col>
       <hr/>
@@ -204,7 +257,7 @@ const EditEmployee = () => {
             <Input
               id='addressName-1'
               name='addressName-1'
-              defaultValue='Home'
+              placeholder='Home'
               innerRef={register({ required: true })}
               className={classnames({
                 'is-invalid': errors.addressName1
@@ -218,7 +271,7 @@ const EditEmployee = () => {
             <Input
               id='address-1'
               name='address1'
-              defaultValue='A-1'
+              placeholder='A-1'
               innerRef={register({ required: true })}
               className={classnames({
                 'is-invalid': errors.address1
@@ -229,7 +282,7 @@ const EditEmployee = () => {
         <Col md='4' sm='12'>
           <FormGroup>
             <Label for='address-2'>Address Line 2</Label>
-            <Input placeholder='A-1' id='address-2' name='address-2' />
+            <Input placeholder='A-1' id='address-2' name='A-2' />
           </FormGroup>
         </Col>
         <Col md='4' sm='12'>
@@ -321,17 +374,27 @@ const EditEmployee = () => {
         </Col>
         <Col md='4' sm='12'>
           <FormGroup>
-            <Label for='addressProof'>Address Proof</Label>
+            <Label for='pincode'>Pincode</Label>
             <Input
-              id='addressProof'
-              name='addressProof'
-              defaultValue='Address Proof'
-              innerRef={register({ required: true })}
-              className={classnames({
-                'is-invalid': errors.addressName1
-              })}
+              id='pincode'
+              name='pincode'
+              placeholder='123456'
+             
             />
           </FormGroup>
+        </Col>
+        <Col md='12' sm='12'>
+        <FormGroup >
+                    <Card >
+                      <CardHeader >
+                        <CardTitle >Address Proof</CardTitle>
+                      </CardHeader>
+                      <CardBody>
+                        <DragDrop uppy={uppy1}  />
+                        { AddressProof !== null ? <img className='rounded mt-2 ml-1' src={AddressProof} alt='avatar' /> : null}
+                      </CardBody>
+                    </Card>
+                </FormGroup>
           </Col>
       </Row>
       </Col> 
@@ -423,24 +486,6 @@ const EditEmployee = () => {
               />
             </FormGroup>
           </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='verifiedTime'>Verified Time</Label>
-          <Input type='text' id='verifiedTime' placeholder='Verified Time' defaultValue={userData && userData.verifiedTime} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='createdTime'>Created Time</Label>
-          <Input type='text' id='createdTime' placeholder='Created Time' defaultValue={userData && userData.createdTime} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='updatedTime'>Updated Time</Label>
-          <Input type='text' id='updatedTime' placeholder='Updated Time' defaultValue={userData && userData.updatedTime} />
-        </FormGroup>
       </Col>
       <Col md='6' sm='12'>
         <FormGroup>

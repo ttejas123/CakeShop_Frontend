@@ -1,13 +1,5 @@
-// id
-// payment_mode : "Cradit",
-//     amount_paid : "200K",
-//     time : `${new Date().toGMTString()}`,
-//     Order_Id : 123,
-//     Invoice_Id : 234,
-//     Invoice_amount : "20K",
-//     payment_date : "23-10-2021"
-
 // ** Custom Components
+import { Link } from 'react-router-dom'
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** Third Party Components
@@ -106,14 +98,34 @@ const DataTableWithButtons = () => {
           selector: 'Order_Id',
           sortable: true,
           minWidth: '120px',
-          maxWidth: '200px'
+          maxWidth: '200px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+             
+              <div className='d-flex flex-column'>
+                <Link to={`/order-details`}>
+                  <span className='font-weight-bold'>{row.Order_Id}</span>
+                </Link>
+              </div>
+            </div>
+          )
         },
         {
           name: 'Invoice Id',
           selector: 'Invoice_Id',
           sortable: true,
           minWidth: '120px',
-          maxWidth: '200px'
+          maxWidth: '200px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+             
+              <div className='d-flex flex-column'>
+                <Link to={`/master/Invoice/view`}>
+                  <span className='font-weight-bold'>{row.Invoice_Id}</span>
+                </Link>
+              </div>
+            </div>
+          )
         },
         {
           name: 'Invoice Amount',

@@ -120,15 +120,45 @@ const DataTableWithButtons = () => {
           }
         },
         {
-          name: 'GST',
-          selector: 'GST',
+          name: 'SGST',
+          selector: 'SGST',
           sortable: true,
           minWidth: '150px',
           cell: row => {
             return (
                 <div className='d-flex align-items-center'>
                   <div className='user-info text-truncate '>
-                    <span className='d-block font-weight-bold text-truncate'>{row.GST}%</span>
+                    <span className='d-block font-weight-bold text-truncate'>{row.SGST}%</span>
+                  </div>
+                </div>
+            )
+          }
+        },
+        {
+          name: 'CGST',
+          selector: 'CGST',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => {
+            return (
+                <div className='d-flex align-items-center'>
+                  <div className='user-info text-truncate '>
+                    <span className='d-block font-weight-bold text-truncate'>{row.CGST}%</span>
+                  </div>
+                </div>
+            )
+          }
+        },
+        {
+          name: 'IGST',
+          selector: 'IGST',
+          sortable: true,
+          minWidth: '150px',
+          cell: row => {
+            return (
+                <div className='d-flex align-items-center'>
+                  <div className='user-info text-truncate '>
+                    <span className='d-block font-weight-bold text-truncate'>{row.IGST}%</span>
                   </div>
                 </div>
             )

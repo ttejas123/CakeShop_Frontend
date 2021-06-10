@@ -3,16 +3,21 @@ import { useState, useEffect } from 'react'
 // ** Custom Components
 import Avatar from '@components/avatar'
 import classnames from 'classnames'
+import { DragDrop } from '@uppy/react'
+import Uppy from '@uppy/core'
+import thumbnailGenerator from '@uppy/thumbnail-generator'
 // ** Third Party Components
 import { Lock, Edit, Trash2, MapPin } from 'react-feather'
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, CardHeader, CardBody, Card, CardTitle } from 'reactstrap'
 import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
-
-const EditEmployee = () => {
+import '@styles/react/libs/file-uploader/file-uploader.scss'
+import 'uppy/dist/uppy.css'
+const corporateAddressAdd = () => {
 
   const [data, setData] = useState(null)
+  const [corporate, setCorporate] = useState("")
   const { register, errors, control, setValue } = useForm({
     defaultValues: { isRegisteredOffice: 'No' }
   })
@@ -52,11 +57,11 @@ const EditEmployee = () => {
     {value: "Komal Kamble", label: "Komal Kamble"}
   ]
   const optionCorporateId = [
-    {value: "CORP1", label: "CORP1"},
-    {value: "CORP2", label: "CORP2"},
-    {value: "CORP3", label: "CORP3"},
-    {value: "CORP4", label: "CORP4"},
-    {value: "CORP5", label: "CORP5"}
+    {value: "CP001", label: "CP001", name : "Coense"},
+    {value: "CP002", label: "CP002", name : "Infosys"},
+    {value: "CP003", label: "CP003", name : "TCS"},
+    {value: "CP004", label: "CP004", name : "Accenture"},
+    {value: "CP005", label: "CP005", name : "Cognizant"}
   ]
   const initialvalues = {
     id:1,
@@ -71,10 +76,11 @@ const EditEmployee = () => {
     City:  [{value: "city", label: "Mumbai"}], 
     State:  [{value: "state", label: "Maharashtra"}],
     Country: [{value: "country", label: "India"}],
-    CorporateId: [{value: "CORP1", label: "CORP1"}],
+    CorporateId: [{value: "Select Corporate", label: "Select Corporate"}],
     Role: [{value: "role", label: "Intern"}]
   }
   const [values, setValues] = useState(initialvalues)
+  const [AddressProof, setAddressProof] = useState(null)
   const handleInputeChange = (event) => {
     const {name, value} = event.target
     setValues(
@@ -84,6 +90,19 @@ const EditEmployee = () => {
     }
     )
   }
+
+  const uppy1 = new Uppy({
+    meta: { type: 'avatar' },
+    restrictions: { maxNumberOfFiles: 1 },
+    autoProceed: true
+  })
+
+uppy1.use(thumbnailGenerator)
+
+uppy1.on('thumbnail:generated', (file, preview) => {
+console.log(file)
+setAddressProof(preview)
+})
 
   const submitHandle = (event) => {
     console.log(values)
@@ -180,7 +199,8 @@ const EditEmployee = () => {
     <Row>
     <Col md='6' sm='12'>
     <FormGroup>
-              <Label for='CorporateId'>Corporate Id</Label>
+              <Label for='CorporateId'>Corporate</Label>
+            <div style={{zIndex:1000, position:'relative'}}>
             <Select
               id='CorporateId'
               className='react-select'
@@ -198,15 +218,17 @@ const EditEmployee = () => {
                                              CorporateId : data
                                           } 
                                   )
+                                  setCorporate(data.name)
                                 }
                         }
             />
+            </div>
             </FormGroup> 
       </Col>
     <Col md='6' sm='12'>
         <FormGroup>
           <Label for='corporateName'>Corporate Name</Label>
-          <Input type='text' id='corporateName' placeholder='Corporate Name' defaultValue={userData && userData.corporateName} />
+          <Input type='text' id='corporateName' placeholder='Corporate Name' defaultValue={corporate} disabled />
         </FormGroup>
       </Col>
       <hr/>
@@ -224,7 +246,6 @@ const EditEmployee = () => {
             <Input
               id='addressName-1'
               name='addressName-1'
-              defaultValue='Office'
               innerRef={register({ required: true })}
               className={classnames({
                 'is-invalid': errors.addressName1
@@ -238,7 +259,6 @@ const EditEmployee = () => {
             <Input
               id='address-1'
               name='address1'
-              defaultValue='A-1'
               innerRef={register({ required: true })}
               className={classnames({
                 'is-invalid': errors.address1
@@ -249,7 +269,7 @@ const EditEmployee = () => {
         <Col md='4' sm='12'>
           <FormGroup>
             <Label for='address-2'>Address Line 2</Label>
-            <Input placeholder='A-1' id='address-2' name='address-2' />
+            <Input  id='address-2' name='address-2' />
           </FormGroup>
         </Col>
         <Col md='4' sm='12'>
@@ -258,7 +278,6 @@ const EditEmployee = () => {
             <Input
               id='landmark'
               name='landmark'
-              placeholder='Temple'
               innerRef={register({ required: true })}
               invalid={errors.landmark && true}
             />
@@ -267,6 +286,7 @@ const EditEmployee = () => {
         <Col md='4' sm='12'>
         <FormGroup>
               <Label for='City'>City</Label>
+            <div style={{zIndex:1000, position:'relative'}}>
             <Select
               id='City'
               className='react-select'
@@ -287,11 +307,13 @@ const EditEmployee = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
         </Col>
         <Col md='4' sm='12'>
         <FormGroup>
               <Label for='State'>State</Label>
+            <div style={{zIndex:1000, position:'relative'}}>
             <Select
               id='State'
               className='react-select'
@@ -312,11 +334,13 @@ const EditEmployee = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
         </Col>
         <Col md='4' sm='12'>
         <FormGroup>
               <Label for='Country'>Country</Label>
+            <div style={{zIndex:1000, position:'relative'}}>
             <Select
               id='Country'
               className='react-select'
@@ -337,21 +361,34 @@ const EditEmployee = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
         </Col>
-        <Col md='4' sm='12'>
-          <FormGroup>
-            <Label for='addressProof'>Address Proof</Label>
+        <Col  md='4' sm='12'>
+        <FormGroup>
+            <Label for='pinCode'>PinCode</Label>
             <Input
-              id='addressProof'
-              name='addressProof'
-              defaultValue='Address Proof'
+              id='pinCode'
+              name='pinCode'
               innerRef={register({ required: true })}
               className={classnames({
                 'is-invalid': errors.addressName1
               })}
             />
           </FormGroup>
+          </Col>
+        <Col md='12' sm='12'>
+        <FormGroup >
+                    <Card >
+                      <CardHeader >
+                        <CardTitle >Address Proof</CardTitle>
+                      </CardHeader>
+                      <CardBody>
+                        <DragDrop uppy={uppy1}  />
+                        { AddressProof !== null ? <img className='rounded mt-2 ml-1' src={AddressProof} alt='avatar' /> : null}
+                      </CardBody>
+                    </Card>
+                </FormGroup>
           </Col>
       </Row>
       </Col> 
@@ -403,6 +440,7 @@ const EditEmployee = () => {
       <Col md='6' sm='12'>
         <FormGroup>
               <Label for='VerifiedBy'>Verified By</Label>
+            <div style={{zIndex:999, position:'relative'}}>
             <Select
               id='VerifiedBy'
               className='react-select'
@@ -423,6 +461,7 @@ const EditEmployee = () => {
                                 }
                         }
             />
+            </div>
             </FormGroup> 
         </Col>
       <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
@@ -441,4 +480,4 @@ const EditEmployee = () => {
 </Card>
   )
 }
-export default EditEmployee
+export default corporateAddressAdd

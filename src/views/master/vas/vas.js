@@ -68,7 +68,10 @@ const DataTableWithButtons = () => {
           cell: row => (
             <div className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
+              
+              <Link to={`/master/VasDetail`}>
                 <span className='d-block font-weight-bold text-truncate'>{row.Name}</span>
+              </Link>
               </div>
             </div>
           )
@@ -193,7 +196,7 @@ const DataTableWithButtons = () => {
                 <Button className='ml-2' color='primary' >
                                         <Plus size={15} />
                                         
-                                        <span className='align-middle ml-50'>Add Your Service</span>
+                                        <span className='align-middle ml-50'>Add New</span>
                 </Button>
               </Link>
                 

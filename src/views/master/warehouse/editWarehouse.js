@@ -164,7 +164,7 @@ const EditEmployee = () => {
  
 <Card>
 <CardHeader>
-  <CardTitle tag='h1'>Add / Edit Warehouse</CardTitle>
+  <CardTitle tag='h1'>Add Warehouse</CardTitle>
 </CardHeader>
 
 <CardBody>
@@ -207,7 +207,7 @@ const EditEmployee = () => {
             <Input
               id='address-1'
               name='address1'
-              defaultValue='street 1'
+              placeholder='street 1'
               innerRef={register({ required: true })}
               className={classnames({
                 'is-invalid': errors.address1
@@ -223,13 +223,13 @@ const EditEmployee = () => {
         </Col>
         <Col md='4' sm='12'>
           <FormGroup>
-            <Label for='postcode'>Postcode</Label>
+            <Label for='pincode'>PinCode</Label>
             <Input
-              id='postcode'
-              name='postcode'
+              id='pincode'
+              name='pincode'
               placeholder='597424'
               innerRef={register({ required: true })}
-              invalid={errors.postcode && true}
+              invalid={errors.pincode && true}
             />
           </FormGroup>
         </Col>

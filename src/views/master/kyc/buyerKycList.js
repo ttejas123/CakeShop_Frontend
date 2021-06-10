@@ -126,30 +126,30 @@ const columns = [
         selector: 'approvedTime',
         sortable: true,
         minWidth: '80px'
-    },
-    {
-      name: 'Actions',
-      allowOverflow: true,
-      cell: row => {
-        return (
-          <div className='d-flex'>
-            <UncontrolledDropdown>
-              <DropdownToggle className='pr-1' tag='span'>
-                <Trash size={15} onClick={e => { handleDelete(row) }} />
-              </DropdownToggle>
-            </UncontrolledDropdown>
-            <Link  to={`/report/add-GstReport`}><Edit  
-                  size={15} 
-                  onClick={ () => { 
-                                    //setCurrentId(row.id)
-                                    //setModal(true)
-                                     } }>
-                                       <Link to='/report/add-GstReport'/>
-                                     </Edit></Link>
-          </div>
-        )
-      }
     }
+    // {
+    //   name: 'Actions',
+    //   allowOverflow: true,
+    //   cell: row => {
+    //     return (
+    //       <div className='d-flex'>
+    //         <UncontrolledDropdown>
+    //           <DropdownToggle className='pr-1' tag='span'>
+    //             <Trash size={15} onClick={e => { handleDelete(row) }} />
+    //           </DropdownToggle>
+    //         </UncontrolledDropdown>
+    //         <Link  to={`/report/add-GstReport`}><Edit  
+    //               size={15} 
+    //               onClick={ () => { 
+    //                                 //setCurrentId(row.id)
+    //                                 //setModal(true)
+    //                                  } }>
+    //                                    <Link to='/report/add-GstReport'/>
+    //                                  </Edit></Link>
+    //       </div>
+    //     )
+    //   }
+    // }
   ]
   
   // ** Function to handle filter

@@ -121,14 +121,14 @@ const ProductList = () => {
 
   const pendingColumns = [
     {
-      name: 'Id',
-      selector: 'id',
+      name: 'BUIN',
+      selector: 'buin',
       sortable: true,
       minWidth: '50px'
     },
     {
-      name: 'Product Name',
-      selector: 'productName',
+      name: 'Name',
+      selector: 'name',
       sortable: true,
       minWidth: '150px',
       cell: row => (
@@ -136,7 +136,7 @@ const ProductList = () => {
           <Link  to={`/productDetails/${row.id}`}>
           <div className='user-info text-truncate'>
             <span className='d-block font-weight-bold text-truncate'>
-                 {row.productName}
+                 {row.name}
             </span>
           </div>
           </Link>

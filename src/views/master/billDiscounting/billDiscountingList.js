@@ -107,55 +107,55 @@ const columns = [
       name: 'Id',
       selector: 'id',
       sortable: true,
-      minWidth: '100px'
+      minWidth: '150px'
     },
     {
-        name: 'User Id',
-        selector: 'userId',
+        name: 'User',
+        selector: 'user',
         sortable: true,
-        minWidth: '100px'
+        minWidth: '150px'
     },
     {
         name: 'Bill Discounting Application',
         selector: 'bdApplication',
         sortable: true,
-        minWidth: '100px'
+        minWidth: '150px'
     },
     {
       name: 'Financial Institute Id',
       selector: 'financialInstituteId',
       sortable: true,
-      minWidth: '100px'
+      minWidth: '150px'
     },
     {
-        name: 'Bill Amount',
+        name: 'Bill Amount ( ₹ )',
         selector: 'billAmount',
         sortable: true,
-        minWidth: '100px'
+        minWidth: '150px'
     },
     {
         name: 'Approved By',
         selector: 'approvedBy',
         sortable: true,
-        minWidth: '100px'
+        minWidth: '150px'
     },
     {
         name: 'Approved Time',
         selector: 'approvedTime',
         sortable: true,
-        minWidth: '100px'
+        minWidth: '150px'
     },
     {
         name: 'Created Time',
         selector: 'createdTime',
         sortable: true,
-        minWidth: '100px'
+        minWidth: '150px'
     },
     {
         name: 'Updated Time',
         selector: 'updatedTime',
         sortable: true,
-        minWidth: '100px'
+        minWidth: '150px'
     },
     {
       name: 'Actions',

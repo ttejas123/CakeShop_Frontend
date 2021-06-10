@@ -51,7 +51,7 @@ const EcommerceDashboard = () => {
 
           <Card className='card-statistics'>
             <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-              <CardTitle tag='h4'>MemberShip Aveiled Users</CardTitle>
+              <CardTitle tag='h4'>Users</CardTitle>
               <div className='d-flex mt-md-0 mt-1'>
                
               </div>
@@ -67,55 +67,6 @@ const EcommerceDashboard = () => {
 
         </Col>
       </Row>
-
-
-{ /*     <Row className='match-height'>
-        <Col xl='6' md='6' xs='12'>
-          <Card className='card-statistics'>
-             <CardHeader>  
-                <CardTitle tag='h4'><h4>Your Activities</h4></CardTitle>
-             </CardHeader>  
-              <CardBody>
-                <Row className='match-height'>
-                  <Col lg='12' xs='12'>
-                    <UserActivities />
-                  </Col>
-                </Row>
-              </CardBody>  
-          </Card>
-        </Col>
-        <Col xl='6' md='6' xs='12'>
-          <Card className='card-statistics'>
-             <CardHeader>  
-                <CardTitle tag='h4'><h4>Bid History</h4></CardTitle>
-             </CardHeader>  
-              <CardBody>
-                <Row className='match-height'>
-                  <Col lg='12' xs='12'>
-                    <BidHistory />
-                  </Col>
-                </Row>
-              </CardBody>  
-          </Card>
-        </Col>
-      </Row>
-
-      <Row className='match-height'>
-        <Col xl='12' md='12' xs='12'>
-          <Card className='card-statistics'>
-             <CardHeader>  
-                <CardTitle tag='h4'><h4>Backup Account List</h4></CardTitle>
-             </CardHeader>  
-              <CardBody>
-                <Row className='match-height'>
-                  <Col lg='12' xs='12'>
-                    <BackupAcList />
-                  </Col>
-                </Row>
-              </CardBody>  
-          </Card>
-        </Col>
-      </Row> */ }
       
     </div>
   )

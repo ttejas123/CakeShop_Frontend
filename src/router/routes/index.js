@@ -93,6 +93,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/vas/vas'))
   },
   {
+    path: '/master/VasDetail',
+    component: lazy(() => import('../../views/master/vas/VasDetails'))
+  },
+  {
     path: '/master/vass/Provider',
     component: lazy(() => import('../../views/master/vas/provider'))
   },
@@ -111,6 +115,14 @@ const Routes = [
   {
     path: '/master/vass/add',
     component: lazy(() => import('../../views/master/vas/add'))
+  },
+  {
+    path: '/master/product/sku-list',
+    component: lazy(() => import('../../views/master/product/sku'))
+  },
+  {
+    path: '/master/product/create-sku',
+    component: lazy(() => import('../../views/master/product/createSku'))
   },
   {
     path: '/master/vass/edit/:id',
@@ -217,6 +229,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/membership/membershipList'))
   },
   {
+    path: '/update-membership-plan',
+    component: lazy(() => import('../../views/master/membership/updateMembershipPlan'))
+  },
+  {
     path: '/master/membershipavail/edit',
     component: lazy(() => import('../../views/master/membership/membershipComp/edits.js'))
   },
@@ -235,6 +251,10 @@ const Routes = [
   {
     path: '/master/orders/add',
     component: lazy(() => import('../../views/master/order/add'))
+  },
+  {
+    path: '/master/orders/edit/:id',
+    component: lazy(() => import('../../views/master/order/edit'))
   },
   {
     path: '/master/calculator',
@@ -345,7 +365,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/pendingProductsList'))
   },
   {
-    path: '/my-product-list',
+    path: '/product-list',
     component: lazy(() => import('../../views/master/product/myProductsList'))
   },
   {
@@ -541,6 +561,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/subCat/SubAttributes/addE'))
   },
   {
+    path: '/master/attribute',
+    component: lazy(() => import('../../views/master/subCat/Attributes'))
+  },
+  {
     path: '/master/sms/add',
     component: lazy(() => import('../../views/master/SMSAdd'))
   },
@@ -603,6 +627,10 @@ const Routes = [
   {
     path: '/report/productIssue',
     component: lazy(() => import('../../views/report/productIssue'))
+  },
+  {
+    path: '/report/creditApproved',
+    component: lazy(() => import('../../views/report/credit/creditApproved'))
   },
   {
     path: '/report/defective-goods',

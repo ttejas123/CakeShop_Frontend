@@ -6,7 +6,7 @@ import reethika  from '../../../assets/images/logo/reethika.jpg'
 export const data1 = [
     {
       id  :1,
-      userId : "User1",
+      user : "User1",
       bdApplication : "Application1",
       financialInstituteId : "FI1",
       billAmount : 123,
@@ -17,7 +17,7 @@ export const data1 = [
     },
     {
       id  :2,
-      userId : "User2",
+      user : "User2",
       bdApplication : "Application2",
       financialInstituteId : "FI2",
       billAmount : 1234,
@@ -28,7 +28,7 @@ export const data1 = [
     },
     {
       id  :3,
-      userId : "User3",
+      user : "User3",
       bdApplication : "Application3",
       financialInstituteId : "FI3",
       billAmount : 1000,
@@ -39,7 +39,7 @@ export const data1 = [
     },
     {
       id  :4,
-      userId : "User4",
+      user : "User4",
       bdApplication : "Application4",
       financialInstituteId : "FI4",
       billAmount : 1230,

@@ -21,7 +21,7 @@ import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, InputGro
   CardBody, Badge, ListGroupItem,
   CardTitle, CustomInput } from 'reactstrap'
 
-const UserAccountTab = (prop) => {
+const AddSku = (prop) => {
   const optionApproveBy = [
     {value: "Reethika", label: "Reethika"},
     {value: "Himanshu Chanda", label: "Himanshu Chanda"},
@@ -321,4 +321,4 @@ const UserAccountTab = (prop) => {
     </Card>
   )
 }
-export default UserAccountTab
+export default AddSku

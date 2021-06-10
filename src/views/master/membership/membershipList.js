@@ -1,16 +1,17 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
 import { data1 } from './data'
 import { Link } from 'react-router-dom'
+import Prism from 'prismjs'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
 import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
+import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, UncontrolledTooltip, Button } from 'reactstrap'
 //import InputBasic from './AddMembership'
 // import HorizontalForm from './AddMembership'
 // import EditForm from './EditMembership'
@@ -46,6 +47,10 @@ const MembershipList = () => {
   const handlePagination = page => {
     setCurrentPage(page.selected)
   }
+
+  useEffect(() => {
+    Prism.highlightAll()
+  }, [])
 
   const handleEditClick = (item) => {
       if (!addClicked) { 
@@ -94,7 +99,17 @@ const handleDelete = (data) => {
       name: 'Membership Name',
       selector: 'name',
       sortable: true,
-      minWidth: '250px'
+      minWidth: '150px',
+           cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <Link to={`/master/membershps/views`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.name}</span>
+                </div>
+              </Link>  
+            </div>
+          )
+
     },
     {
       name: 'Membership For',
@@ -112,7 +127,15 @@ const handleDelete = (data) => {
         name: 'Benefit',
         selector: 'benefit',
         sortable: false,
-        minWidth: '250px'
+        minWidth: '250px',
+        cell: row => (
+          <div key={row.name} className='d-flex align-items-center'>
+            <span id='positionBottom' className='text-truncate' style={{maxWidth:200}} > {row.benefit} </span>
+            <UncontrolledTooltip placement='bottom' target='positionBottom'>
+          {row.benefit}
+            </UncontrolledTooltip> 
+          </div>
+        )
       },
       {
         name: 'Cost',
@@ -143,6 +166,7 @@ const handleDelete = (data) => {
                 <Trash size={15} onClick={e => { handleDelete(row) }} />
               </DropdownToggle>
             </UncontrolledDropdown>
+
              <Link  to={`/edit-membership`}><Edit  
                   size={15} 
                   onClick={ () => { 

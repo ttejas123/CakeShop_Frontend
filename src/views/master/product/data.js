@@ -63,7 +63,9 @@ export const data = [
         subCategory : "subClothing",
         productCategory : "cat1",
         hsnCode : 231,
-        gstNumber : "18 %",
+        sGstNumber : "18 %",
+        iGstNumber : "10 %",
+        cGstNumber : "20 %",
         mrp : 234,
         status: [{value: "approved", label: "approved"}],
         description : "dfsghjfhsjhe",
@@ -78,8 +80,9 @@ export const data = [
         productCategory : "cat2",
         hsnCode : 2310,
         status: [{value: "pending", label: "pending"}],
-        gstNumber : "20 %",
-        mrp : 2314,
+        sGstNumber : "18 %",
+        iGstNumber : "10 %",
+        cGstNumber : "20 %",
         description : "dfsghjfhfgbf",
         avatar : komal
       },
@@ -92,7 +95,9 @@ export const data = [
         productCategory : "cat3",
         status: [{value: "approved", label: "approved"}],
         hsnCode : 21,
-        gstNumber : "22 %",
+        sGstNumber : "18 %",
+        iGstNumber : "10 %",
+        cGstNumber : "20 %",
         mrp : 23,
         description : "abcdsjhe",
         avatar : himanshu
@@ -106,7 +111,9 @@ export const data = [
         productCategory : "cat4",
         status: [{value: "pending", label: "pending"}],
         hsnCode : 2310,
-        gstNumber : "18 %",
+        sGstNumber : "18 %",
+        iGstNumber : "10 %",
+        cGstNumber : "20 %",
         mrp : 2134,
         description : "abcddfsghjfhsjhe",
         avatar : ""
@@ -118,7 +125,9 @@ export const data1 = [
         Category: "Convenience",
         SubCategory: "Shopping",
         DefaultCommission: 14,
-        GST:12,
+        CGST: 12,
+        IGST: 8,
+        SGST:12,
         Name: "shoes",
         id: 1
       },
@@ -126,7 +135,9 @@ export const data1 = [
         Category: "Speciality",
         SubCategory: "Sports cars",
         DefaultCommission: 11,
-        GST:8,
+        CGST: 12,
+        IGST: 8,
+        SGST:8,
         Name: "BMW",
         id: 2
       },
@@ -134,7 +145,9 @@ export const data1 = [
         Category: "Shopping",
         SubCategory: "Clothes",
         DefaultCommission: 10,
-        GST:5,
+        CGST: 12,
+        IGST: 8,
+        SGST:5,
         Name: "T-shirt's",
         id: 3
       },
@@ -142,7 +155,9 @@ export const data1 = [
         Category: "Unsought",
         SubCategory: "Survival gears",
         DefaultCommission: 4,
-        GST:18,
+        CGST: 12,
+        IGST: 8,
+        SGST:18,
         Name: "J5 Tactical 300",
         id: 4
       },
@@ -150,7 +165,9 @@ export const data1 = [
         Category: "Commodity",
         SubCategory: "Metals",
         DefaultCommission: 20,
-        GST:22,
+        CGST: 12,
+        IGST: 8,
+        SGST:22,
         Name: "Gold",
         id: 5
       },
@@ -158,7 +175,9 @@ export const data1 = [
         Category: "Speciality",
         SubCategory: "designer clothing",
         DefaultCommission: 11,
-        GST:6,
+        CGST: 12,
+        IGST: 8,
+        SGST:6,
         Name: "Guccy",
         id: 6
       },
@@ -166,7 +185,9 @@ export const data1 = [
         Category: "Shopping",
         SubCategory: "furniture",
         DefaultCommission: 14,
-        GST:12,
+        CGST: 12,
+        IGST: 8,
+        SGST:12,
         Name: "Glass",
         id: 7
       },
@@ -174,7 +195,9 @@ export const data1 = [
         Category: "Convenience",
         SubCategory: "Print media",
         DefaultCommission: 7,
-        GST:11,
+        CGST: 12,
+        IGST: 8,
+        SGST:11,
         Name: "MasterCard",
         id: 8
       }
@@ -223,8 +246,20 @@ export const columns = [
     minWidth: '150px'
   },
   {
-    name: 'GST',
-    selector: 'gstNumber',
+    name: 'SGST',
+    selector: 'sGstNumber',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'IGST',
+    selector: 'iGstNumber',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'CGST',
+    selector: 'cGstNumber',
     sortable: true,
     minWidth: '150px'
   },
@@ -281,14 +316,14 @@ export const columns = [
 
 export const pendingColumns = [
   {
-    name: 'Id',
-    selector: 'id',
+    name: 'BUIN',
+    selector: 'buin',
     sortable: true,
     minWidth: '50px'
   },
   {
-    name: 'Product Name',
-    selector: 'productName',
+    name: 'Name',
+    selector: 'name',
     sortable: true,
     minWidth: '150px'
   },

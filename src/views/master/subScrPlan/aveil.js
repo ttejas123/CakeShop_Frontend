@@ -113,7 +113,7 @@ const DataTableWithButtons = () => {
           )
         },
         {
-          name: 'Date OF Aveiled',
+          name: 'Date OF Availed',
           selector: 'date',
           sortable: true,
           minWidth: '150px'
@@ -169,7 +169,7 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>SubScription Plan Aveiled</CardTitle>
+          <CardTitle tag='h4'>Subscription Plan Availed</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
            
           </div>

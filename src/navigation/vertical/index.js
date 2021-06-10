@@ -70,6 +70,12 @@ export default [
         title: 'Category',
         icon: <Circle size={20} />,
         navLink: '/master/subattribute'
+      },
+      {
+        id: 'Attributes',
+        title: 'Attributes',
+        icon: <Circle size={20} />,
+        navLink: '/master/attribute'
       },   
       {
         id: 'CurrencyList',
@@ -180,12 +186,6 @@ export default [
            navLink: '/master/commi'
       },
       {
-            id: 'Orders',
-            title: 'Orders',
-            icon: <Circle size={20} />,
-            navLink: '/master/order'
-      },
-      {
            id: 'WishList',
            title: 'Wishlist',
            icon: <Circle size={20} />,
@@ -264,24 +264,24 @@ export default [
         icon: <Circle size={20} />,
         nanavLink: '/productDetails',
         children: [
-                {
-                  id: 'catalogue',
-                  title: 'Catalogue',
-                  icon: <Circle size={20} />,
-                  navLink: '/product-list'
-                },
-                {
-                  id: 'myProducts',
-                  title: 'My Products',
-                  icon: <Circle size={20} />,
-                  navLink: '/my-product-list'
-                },
-                {
-                  id: 'pendingProducts',
-                  title: 'Pending Products',
-                  icon: <Circle size={20} />,
-                  navLink: '/pending-product-list'
-                },
+                // {
+                //   id: 'catalogue',
+                //   title: 'Catalogue',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/product-list'
+                // },
+                // {
+                //   id: 'myProducts',
+                //   title: 'My Products',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/my-product-list'
+                // },
+                // {
+                //   id: 'pendingProducts',
+                //   title: 'Pending Products',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/pending-product-list'
+                // },
                 // {
                 //   id: 'view',
                 //   title: 'View',
@@ -295,10 +295,34 @@ export default [
                 //   navLink: '/edit-product'
                 // },
                 {
-                  id: 'add',
-                  title: 'Add',
+                  id: 'create',
+                  title: 'Create',
                   icon: <Circle size={20} />,
                   navLink: '/add-product'
+                },
+                {
+                  id: 'products',
+                  title: 'Products',
+                  icon: <Circle size={20} />,
+                  navLink: '/product-list'
+                },
+                {
+                  id: 'pendingProducts',
+                  title: 'Pending Products',
+                  icon: <Circle size={20} />,
+                  navLink: '/pending-product-list'
+                },
+                {
+                  id: 'createSku',
+                  title: 'Create Sku',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/product/create-sku'
+                },
+                {
+                  id: 'sku',
+                  title: 'Sku List',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/product/sku-list'
                 }
                 // ,
                 // {
@@ -326,26 +350,6 @@ export default [
                   title: 'View',
                   icon: <Circle size={20} />,
                   navLink: '/on-ground-staff-view'
-                }
-                
-        ]
-      },
-      {
-        id: 'orders',
-        title: 'Orders',
-        icon: <Circle size={20} />,
-        children: [
-                {
-                  id: 'list',
-                  title: 'List',
-                  icon: <Circle size={20} />,
-                  navLink: '/master-order'
-                },
-                {
-                  id: 'view',
-                  title: 'View',
-                  icon: <Circle size={20} />,
-                  navLink: '/order-details'
                 }
                 
         ]
@@ -404,12 +408,12 @@ export default [
                   icon: <Circle size={20} />,
                   navLink: '/employee-list'
                 },
-                {
-                  id: 'view',
-                  title: 'View',
-                  icon: <Circle size={20} />,
-                  navLink: '/employee-view'
-                },
+                // {
+                //   id: 'view',
+                //   title: 'View',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/employee-view'
+                // },
                 {
                   id: 'edit',
                   title: 'Edit',
@@ -448,12 +452,12 @@ export default [
                   icon: <Circle size={20} />,
                   navLink: '/no-gst-corporate'
                 },
-                {
-                  id: 'view',
-                  title: 'View',
-                  icon: <Circle size={20} />,
-                  navLink: '/corporateView'
-                },
+                // {
+                //   id: 'view',
+                //   title: 'View',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/corporateView'
+                // },
                 {
                   id: 'addCorporateAddress',
                   title: 'Add Address',
@@ -491,17 +495,23 @@ export default [
                   icon: <Circle size={20} />,
                   navLink: '/membership-list'
                 },
-                {
-                  id: 'view',
-                  title: 'View',
-                  icon: <Circle size={20} />,
-                  navLink: '/master/membershps/views'
-                },
+                // {
+                //   id: 'view',
+                //   title: 'View',
+                //   icon: <Circle size={20} />,
+                //   navLink: '/master/membershps/views'
+                // },
                 {
                   id: 'edit',
                   title: 'Edit',
                   icon: <Circle size={20} />,
                   navLink: '/edit-membership'
+                },
+                {
+                  id: 'updateMembershipPlan',
+                  title: 'Update Membership Plan',
+                  icon: <Circle size={20} />,
+                  navLink: '/update-membership-plan'
                 }
         ]
       },
@@ -510,6 +520,18 @@ export default [
         title: 'Orders',
         icon: <Circle size={20} />,
         children: [
+                {
+                  id: 'List',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/order'
+                },
+                {
+                  id: 'Add',
+                  title: 'Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/orders/add'
+                },
                 {
                   id: 'invoiceList',
                   title: 'Invoice List',
@@ -646,12 +668,6 @@ export default [
             title: 'List',
             icon: <Circle size={20} />,
             navLink: '/master/Invoice/List'
-          },
-          {
-            id: 'View',
-            title: 'View',
-            icon: <Circle size={20} />,
-            navLink: '/master/Invoice/view'
           },
           {
             id: 'Add',
@@ -832,6 +848,12 @@ export default [
         title: 'Sample Request',
         icon: <Circle size={20} />,
         navLink: '/report/sample-request-list'
+      },
+      {
+        id: 'creditApproved',
+        title: 'Credit Approved',
+        icon: <Circle size={20} />,
+        navLink: '/report/creditApproved'
       },
       {
         id: 'ticket',

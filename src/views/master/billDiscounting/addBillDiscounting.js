@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
-
+import { DragDrop } from '@uppy/react'
+import Uppy from '@uppy/core'
+import thumbnailGenerator from '@uppy/thumbnail-generator'
+import '@styles/react/libs/file-uploader/file-uploader.scss'
+import 'uppy/dist/uppy.css'
 // ** Third Party Components
 import { Lock, Edit, Trash2 } from 'react-feather'
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, CustomInput, CardHeader, CardBody, Card, CardTitle } from 'reactstrap'
@@ -14,9 +18,28 @@ import { useForm, Controller } from 'react-hook-form'
 const AddBillDiscountingAppl = () => {
 
   const [data, setData] = useState(null)
+  const [addDocumnet, setaddDocumnet] = useState(null)
   const { control, setValue } = useForm({
     defaultValues: { hasSubscription: 'No' }
   })
+
+  const optionUserId = [
+    {value: "ID001", label: "ID001", name : "Pravin Poshmani"},
+    {value: "ID002", label: "ID002", name : "Tejas Thakare"},
+    {value: "ID003", label: "ID003", name : "Komal Kamble"},
+    {value: "ID004", label: "ID004", name : "Salman Roshan"},
+    {value: "ID005", label: "ID005", name : "Hrithik Khan"},
+    {value: "ID006", label: "ID006", name : "The Ruler"}
+  ]
+
+  const optionFiId = [
+    {value: "FI001", label: "FI001", name : "ICICI"},
+    {value: "FI002", label: "FI002", name : "SBI"},
+    {value: "FI003", label: "FI003", name : "UNION"},
+    {value: "FI004", label: "FI004", name : "Muthooth"},
+    {value: "FI005", label: "FI005", name : "BOI"},
+    {value: "FI006", label: "FI006", name : "Canara"}
+  ]
 
     const initialvalues = {
     id:1,
@@ -27,10 +50,8 @@ const AddBillDiscountingAppl = () => {
     icon : "",
     phone : "",
     panNumber: "",
-    Currency:  [{value: "currency", label: "Indian Rupee"}],
-    City:  [{value: "city", label: "Mumbai"}], 
-    State:  [{value: "state", label: "Maharashtra"}],
-    Country: [{value: "country", label: "India"}]
+    UserId: [{value: "Select User Id", label: "Select User Id"}],
+    FiId: [{value: "Select Financial Institute Id", label: "Select Financial Institute Id"}]
   }
   const [values, setValues] = useState(initialvalues)
   const handleInputeChange = (event) => {
@@ -42,6 +63,20 @@ const AddBillDiscountingAppl = () => {
     }
     )
   }
+
+  
+  const uppy1 = new Uppy({
+    meta: { type: 'avatar' },
+    restrictions: { maxNumberOfFiles: 1 },
+    autoProceed: true
+  })
+
+uppy1.use(thumbnailGenerator)
+
+uppy1.on('thumbnail:generated', (file, preview) => {
+console.log(file)
+setaddDocumnet(preview)
+})
 
   const submitHandle = (event) => {
     console.log(values)
@@ -137,10 +172,29 @@ const AddBillDiscountingAppl = () => {
   <Form onSubmit={e => e.preventDefault()}>
     <Row>
       <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='userId'>User Id</Label>
-          <Input type='text' id='userId' placeholder='User Id' defaultValue={userData && userData.userId} />
-        </FormGroup>
+      <FormGroup>
+              <Label for='userId'>User Id</Label>
+            <Select
+              id='userId'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionUserId}
+              theme={selectThemeColors}
+              value={values.UserId[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             UserId : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </FormGroup> 
       </Col>
       <Col md='6' sm='12'>
         <FormGroup>
@@ -149,10 +203,29 @@ const AddBillDiscountingAppl = () => {
         </FormGroup>
       </Col>
       <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='financialInstituteId'>Financial Institute Id</Label>
-          <Input type='text' id='financialInstituteId' placeholder='Financial Institute Id' defaultValue={userData && userData.financialInstituteId} />
-        </FormGroup>
+          <FormGroup>
+              <Label for='fiId'>Financial Institute Id</Label>
+            <Select
+              id='fiId'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+              options={optionFiId}
+              theme={selectThemeColors}
+              value={values.FiId[0]}
+              onChange={data => {
+
+
+                                 setValues(
+                                          {
+                                             ...values,
+                                             FiId : data
+                                          } 
+                                  )
+                                }
+                        }
+            />
+            </FormGroup> 
       </Col> 
       <Col md='6' sm='12'>
         <FormGroup>
@@ -165,7 +238,20 @@ const AddBillDiscountingAppl = () => {
           <Label for='settlementAmount'>Settlement Amount</Label>
           <Input type='text' id='settlementAmount' placeholder='Settlement Amount' defaultValue={userData && userData.settlementAmount} />
         </FormGroup>
-      </Col>     
+      </Col>    
+      <Col md='12' sm='12'>
+        <FormGroup >
+                    <Card >
+                      <CardHeader >
+                        <CardTitle >Add Document</CardTitle>
+                      </CardHeader>
+                      <CardBody>
+                        <DragDrop uppy={uppy1}  />
+                        { addDocumnet !== null ? <img className='rounded mt-2 ml-1' src={addDocumnet} alt='avatar' /> : null}
+                      </CardBody>
+                    </Card>
+                </FormGroup>
+          </Col> 
       <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
         <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary'>
           Save Changes

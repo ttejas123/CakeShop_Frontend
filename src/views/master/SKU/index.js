@@ -60,7 +60,7 @@ const renderClient = row => {
   }
 }
 
-const DataTableWithButtons = () => {
+const SkuList = () => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -274,4 +274,4 @@ const DataTableWithButtons = () => {
   )
 }
 
-export default DataTableWithButtons
+export default SkuList

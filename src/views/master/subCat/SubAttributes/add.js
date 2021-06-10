@@ -16,6 +16,7 @@ import Avatar from '@components/avatar'
 
 // ** Third Party Components
 
+
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, InputGroup, InputGroupAddon, InputGroupText,  Card, CardHeader,
   CardBody, Badge, ListGroupItem,
   CardTitle, CustomInput } from 'reactstrap'
@@ -216,7 +217,7 @@ const UserAccountTab = (prop) => {
                   type='switch'
                   id='exampleCustomAvail'
                   name='customSwitch'
-                  label='Customization avalibale'
+                  label='Customization Available'
                   inline
                 />
             </Col>

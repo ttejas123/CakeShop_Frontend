@@ -78,10 +78,11 @@ const UserAccountTab = (prop) => {
     <Row>
       
         <Col sm='12' className="pl-5 pt-2">
-          <h2 className="mb-1">Calculator</h2>
+          <CardTitle tag='h4'>Calculator</CardTitle>
+          
         </Col>
       
-      <CardBody className='pl-3 pt-2'>
+      <CardBody className='pl-3 pt-0'>
       <Col sm='12'>
         <Form onSubmit={e => e.preventDefault()}>
           <Row>
@@ -120,7 +121,7 @@ const UserAccountTab = (prop) => {
                  
                     <Row className="pt-2">
                       <Col md="8" sm='8'>
-                        <h5 for='bidoya'>Amount without GST in (₹):</h5>
+                        <h6 for='bidoya'>Amount without GST in (₹):</h6>
                       </Col>
                       <Col md="4" sm='4'>
                         <>₹{values.amount}</>
@@ -130,7 +131,7 @@ const UserAccountTab = (prop) => {
 
                     <Row>
                       <Col md="8" sm='8'>
-                        <h5 for='bidoya'>Seller GST in (%):</h5>
+                        <h6 for='bidoya'>Seller GST in (%):</h6>
                       </Col>
                       <Col md="4" sm='4'>
                         <>{values.gst}%</>
@@ -140,7 +141,7 @@ const UserAccountTab = (prop) => {
 
                     <Row>
                       <Col md="8" sm='8'>
-                        <h5 for='bidoya'>Seller GST in (%):</h5>
+                        <h6 for='bidoya'>Seller GST in (%):</h6>
                       </Col>
                       <Col md="4" sm='4'>
                         <>{values.bidoya}%</>
@@ -154,7 +155,7 @@ const UserAccountTab = (prop) => {
                   
                   <Row>
                       <Col md="8" sm='8'>
-                        <h4 for='bidoya'><b>Total Amount:</b></h4>
+                        <h5 for='bidoya'><b>Total Amount:</b></h5>
                       </Col>
                       <Col md="4" sm='4'>
                         <><b>₹{Total}</b></>

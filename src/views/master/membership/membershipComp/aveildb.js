@@ -119,14 +119,8 @@ const DataTableWithButtons = () => {
         },
         {
           name: 'Benifits',
-          selector: 'samount',
+          selector: 'benefit[0]',
           sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Status',
-          selector: 'benefit',
-          sortable: false,
           minWidth: '150px',
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
@@ -134,6 +128,22 @@ const DataTableWithButtons = () => {
               <div className='d-flex flex-column'>
                 
                   <span className='font-weight-bold'>{row.benefit[0]}</span>
+                
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'Status',
+          selector: 'active',
+          sortable: false,
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+             
+              <div className='d-flex flex-column'>
+                
+                  <span className='font-weight-bold'>{row.active}</span>
                 
               </div>
             </div>
@@ -150,7 +160,7 @@ const DataTableWithButtons = () => {
                     <Trash size={15} />
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link to={`/master/membershipavail/edit`}>
+                <Link to={`/update-membership-plan`}>
                   <Edit size={15} />
                 </Link>  
               </div>
