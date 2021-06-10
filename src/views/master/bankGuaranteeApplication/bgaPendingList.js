@@ -138,30 +138,6 @@ const columns = [
         selector: 'updatedTime',
         sortable: true,
         minWidth: '50px'
-    },
-    {
-      name: 'Actions',
-      allowOverflow: true,
-      cell: row => {
-        return (
-          <div key={row.user} className='d-flex'>
-            <UncontrolledDropdown>
-              <DropdownToggle className='pr-1' tag='span'>
-                <Trash size={15} onClick={e => { handleDelete(row) }} />
-              </DropdownToggle>
-            </UncontrolledDropdown>
-            <Edit  
-                  size={15} 
-                  onClick={ () => { 
-                            e.prevenDefault()
-                                    //setCurrentId(row.id)
-                                    //setModal(true)
-                                     } }>
-                                      
-                                     </Edit>
-          </div>
-        )
-      }
     }
   ]
   

@@ -95,7 +95,7 @@ const CompanyTable = () => {
         minWidth: '120px'
       },
       {
-        name: 'View',
+        name: 'Action',
         selector: 'symbol',
         minWidth: '90px',
         cell: row => {

@@ -160,9 +160,10 @@ const DataTableWithButtons = () => {
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link to={`/master/Sub/addE/${row.id}`}>
-                  <Edit size={15} />
-                </Link>  
+                <Edit size={15} />
+                {/*<Link to={`/master/Sub/addE/${row.id}`}>
+                                  
+                                </Link>  */}
               </div>
             )
           }
