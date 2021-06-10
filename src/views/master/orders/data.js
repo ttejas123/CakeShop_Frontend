@@ -91,7 +91,9 @@ export const data = [
        isCancelled : "Yes",
        createdDate : "01-05-2021",
        updatedTime : "01-05-2021",
-       companyName : "TCS"
+       companyName : "TCS",
+       requestedBy : "Pravin Poshmani",
+       requestedFrom : "Tejas Thakare"
       },
       {
         id : "Id2",
@@ -123,7 +125,9 @@ export const data = [
         isCancelled : "Yes",
         createdDate : "02-05-2021",
         updatedTime : "02-05-2021",
-        companyName : "Infosys"
+        companyName : "Infosys",
+        requestedBy : "Tejas Thakare",
+        requestedFrom : "Pravin Poshmani"
       },
       {
         id : "Id3",
@@ -155,7 +159,10 @@ export const data = [
         isCancelled : "Yes",
         createdDate : "03-05-2021",
         updatedTime : "03-05-2021",
-        companyName : "Accenture"
+        companyName : "Accenture",
+        requestedBy : "Tejas Thakare",
+        requestedFrom : "Himanshu Chanda"
+        
       },
       {
         id : "Id4",
@@ -187,7 +194,9 @@ export const data = [
         isCancelled : "Yes",
         createdDate : "04-05-2021",
         updatedTime : "04-05-2021",
-        companyName : "Google"
+        companyName : "Google",
+        requestedBy : "Pravin Poshmani",
+        requestedFrom : "Himanshu Chanda"
       }
 ]
 
@@ -369,6 +378,18 @@ export const columns = [
   {
     name: 'Updated Time',
     selector: 'updatedTime',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Requested By',
+    selector: 'requestedBy',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Requested From',
+    selector: 'requestedFrom',
     sortable: true,
     minWidth: '150px'
   },

@@ -10,7 +10,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data, columns } from './data'
+import { data } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
@@ -66,6 +66,229 @@ const OrdersList = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+
+  
+const columns = [
+  {
+    name: 'Id',
+    selector: 'id',
+    sortable: true,
+    minWidth: '50px'
+  },
+  {
+    name: 'Order Number',
+    selector: 'orderNumber',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Order Type',
+    selector: 'orderType',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'User Id',
+    selector: 'userId',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Bid Id',
+    selector: 'bidId',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Seller Id',
+    selector: 'sellerId',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Bid Rank',
+    selector: 'bidRank',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'First Name',
+    selector: 'firstName',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Last Name',
+    selector: 'lastName',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Seller Office Addres',
+    selector: 'sOfficeAddress',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Seller Office Addres 2',
+    selector: 'sOfficeAddress2',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Seller Office Landmark',
+    selector: 'sOfficeLandmark',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Seller Office City',
+    selector: 'sOfficeCity',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Seller Office State',
+    selector: 'sOfficeState',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Seller Office Country',
+    selector: 'sOfficeCountry',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Company Name',
+    selector: 'companyName',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Buyer Office Addres',
+    selector: 'bOfficeAddress',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Buyer Office Addres 2',
+    selector: 'bOfficeAddress2',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Buyer Office Landmark',
+    selector: 'bOfficeLandmark',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Buyer Office City',
+    selector: 'bOfficeCity',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Buyer Office State',
+    selector: 'bOfficeState',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Buyer Office Country',
+    selector: 'bOfficeCountry',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Payment Mode',
+    selector: 'paymentMode',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Amount Paid',
+    selector: 'amountPaid',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Balance Amount',
+    selector: 'balanceAmount',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Delivery before',
+    selector: 'deliveryBefore',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Seller Confirmation',
+    selector: 'sellerConfirmation',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Is Cancelled',
+    selector: 'isCancelled',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Created Date',
+    selector: 'createdDate',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Updated Time',
+    selector: 'updatedTime',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Requested By',
+    selector: 'requestedBy',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Requested From',
+    selector: 'requestedFrom',
+    sortable: true,
+    minWidth: '180px'
+  },
+  {
+    name: 'Actions',
+    allowOverflow: true,
+    cell: row => {
+      return (
+        <div className='d-flex'>
+          <UncontrolledDropdown>
+            <DropdownToggle className='pr-1' tag='span'>
+              <Trash size={15} onClick={e => {
+                                                                              e.preventDefault()
+                                                                              // deleteCountry(row.id)
+                                                                            } }/>
+            </DropdownToggle>
+          </UncontrolledDropdown>
+          <Link  to={`/edit-product/${row.id}`}><Edit  
+            size={15} 
+            onClick={ () => { 
+                              setCurrentId(row.id)
+                              setModal(true)
+                               } }>
+                                 <Link to='/edit-product'/>
+                               </Edit></Link>
+        </div>
+      )
+    }
+  }
+]
+
 
    //deleteCountry
   const deleteCountry = (val) => {
