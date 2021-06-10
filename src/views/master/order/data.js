@@ -188,17 +188,44 @@ export const data = [
 ]
 
 export const columns = [
+
   {
     name: 'Id',
     selector: 'id',
     sortable: true,
-    minWidth: '50px'
+    minWidth: '50px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className=''>
+                <Link to={`/order-details`}>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.id}</span>
+                     
+                  </div>
+                </Link>  
+              </div>
+            </div>
+          )
   },
   {
     name: 'Order Number',
     selector: 'orderNumber',
     sortable: true,
-    minWidth: '150px'
+    minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className=''>
+                <Link to={`/order-details`}>
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>{row.orderNumber}</span>
+                     
+                  </div>
+                </Link>  
+              </div>
+            </div>
+          )
   },
   {
     name: 'Order Type',
