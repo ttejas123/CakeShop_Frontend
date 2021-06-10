@@ -22,6 +22,7 @@ import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
 import '@styles/base/pages/app-ecommerce-details.scss'
 import OrderInfo from './orderInfo'
+import Doc from './Doc'
 import OrderPayment from './orderPayment'
 import Items from './orderItems'
 import OrderUsers from './orderUsersInfo'
@@ -130,6 +131,21 @@ const EcommerceDashboard = () => {
         </Col>
         <Col md='12' sm='12'>
         <OrderUsers/>
+        </Col>
+        <Col md='12' sm='12'>
+          <Card className='card-statistics'>
+           <CardHeader>  
+              <CardTitle tag='h4'>Order Detail Documents</CardTitle>
+           </CardHeader>  
+            <CardBody>
+              <Row className='match-height'>
+                <Col lg='12' xs='12'>
+                  <Doc/>
+                </Col>
+              </Row>
+            </CardBody>  
+          </Card>
+        
         </Col>
         <Col md='12' sm='12'>
         <OrderPayment/>
