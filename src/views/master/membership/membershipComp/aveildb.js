@@ -160,7 +160,7 @@ const DataTableWithButtons = () => {
                     <Trash size={15} />
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link to={`/master/membershipavail/edit`}>
+                <Link to={`/update-membership-plan`}>
                   <Edit size={15} />
                 </Link>  
               </div>

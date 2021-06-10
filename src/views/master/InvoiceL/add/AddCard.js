@@ -383,10 +383,30 @@ const AddCard = () => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='GST'>GST</Label>
+                <Label for='SGST'>SGST</Label>
                 <InputGroup>
                   
-                  <Input name="GST" onChange={handleInputeChange} id='type' value={values.GST} />
+                  <Input name="SGST" onChange={handleInputeChange} id='type' value={values.SGST} />
+                </InputGroup>
+              </FormGroup>
+            </Col>
+
+            <Col md='6' sm='12'>
+              <FormGroup>
+                <Label for='CGST'>CGST</Label>
+                <InputGroup>
+                  
+                  <Input name="CGST" onChange={handleInputeChange} id='type' value={values.CGST} />
+                </InputGroup>
+              </FormGroup>
+            </Col>
+
+            <Col md='6' sm='12'>
+              <FormGroup>
+                <Label for='IGST'>IGST</Label>
+                <InputGroup>
+                  
+                  <Input name="IGST" onChange={handleInputeChange} id='type' value={values.IGST} />
                 </InputGroup>
               </FormGroup>
             </Col>

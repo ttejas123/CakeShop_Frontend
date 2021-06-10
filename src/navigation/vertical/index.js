@@ -70,6 +70,12 @@ export default [
         title: 'Category',
         icon: <Circle size={20} />,
         navLink: '/master/subattribute'
+      },
+      {
+        id: 'Attributes',
+        title: 'Attributes',
+        icon: <Circle size={20} />,
+        navLink: '/master/attributes'
       },   
       {
         id: 'CurrencyList',
@@ -689,12 +695,6 @@ export default [
             title: 'List',
             icon: <Circle size={20} />,
             navLink: '/master/Invoice/List'
-          },
-          {
-            id: 'View',
-            title: 'View',
-            icon: <Circle size={20} />,
-            navLink: '/master/Invoice/view'
           },
           {
             id: 'Add',

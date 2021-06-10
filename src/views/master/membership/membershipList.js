@@ -99,16 +99,17 @@ const handleDelete = (data) => {
       name: 'Membership Name',
       selector: 'name',
       sortable: true,
-      minWidth: '250px',
-      cell: row => (
-        <div key={row.name} className='d-flex align-items-center'>
-          <Link to={`/master/membershps/views`}>
-            <div className='user-info text-truncate'>
-              <span className='d-block font-weight-bold text-truncate'>{row.name}</span>
+      minWidth: '150px',
+           cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <Link to={`/master/membershps/views`}>
+                <div className='user-info text-truncate'>
+                  <span className='d-block font-weight-bold text-truncate'>{row.name}</span>
+                </div>
+              </Link>  
             </div>
-          </Link>  
-        </div>
-      )
+          )
+
     },
     {
       name: 'Membership For',
@@ -165,6 +166,7 @@ const handleDelete = (data) => {
                 <Trash size={15} onClick={e => { handleDelete(row) }} />
               </DropdownToggle>
             </UncontrolledDropdown>
+
              <Link  to={`/edit-membership`}><Edit  
                   size={15} 
                   onClick={ () => { 

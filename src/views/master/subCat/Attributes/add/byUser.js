@@ -158,6 +158,12 @@ const ByUserTab = () => {
     }
     )
   }
+
+    const optionSubC = [
+    {value: "Men's Ware", label: "Men's Ware"},
+    {value: "T-shirt", label: "T-shirt"},
+    {value: "Sport's T-shirt", label: "Sport's T-shirt"}
+  ]
   // ** States
   const [img, setImg] = useState(null)
   const [userData, setUserData] = useState(null)
@@ -219,7 +225,30 @@ const ByUserTab = () => {
   return (
     <Row>
       <Col sm='12'>
-        <Col md={8}>
+        <Col md={6} className="mt-1">
+                              <FormGroup>
+                                <Label for={`item-name`}>Sub Category Name</Label>
+                                
+                                <Select
+                                    id='BidStatus'
+                                    className='react-select'
+                                    classNamePrefix='select'
+                                    isClearable={false}
+                                    options={optionSubC}
+                                    theme={selectThemeColors}
+                                    value={values.subCat}
+                                    onChange={data => {
+                                                        
+                                                        setValues({
+                                                          ...values,
+                                                          subCat : data
+                                                        })
+                                                      }
+                                              }
+                                  />
+                              </FormGroup>
+        </Col>
+        <Col md={6}>
       <Repeater count={count}>
           {i => (
             <Form key={i}>

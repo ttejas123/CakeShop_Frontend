@@ -47,9 +47,9 @@ const renderClient = row => {
     color = states[stateNum]
 
   if (row.avatar.length) {
-    return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
+    return <Link to={`/master/Invoice/view`}> <Avatar className='mr-1' img={row.avatar} width='32' height='32'  /> </Link>
   } else {
-    return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
+    return <Link to={`/master/Invoice/view`}><Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" /> </Link>
   }
 }
 
@@ -84,10 +84,11 @@ const DataTableWithButtons = () => {
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
               <div className=''>
-                
+                <Link to={`/master/Invoice/view`}>
                   <div className='user-info text-truncate d-flex flex-column'>
                      <span className='font-weight-bold'>{row.InvoiceNo}</span>
                   </div>
+                </Link>
                 
               </div>
             </div>
@@ -102,19 +103,32 @@ const DataTableWithButtons = () => {
             <div className='d-flex justify-content-left align-items-center'>
               {renderClient(row)}
               <div className=''>
-                
+                 <Link to={`/master/Invoice/view`}>
                   <div className='user-info text-truncate d-flex flex-column'>
                      <span className='font-weight-bold'>{row.Name}</span>
                      <small className='text-truncate text-muted mb-0'>@{row.Email}</small>
                   </div>
+                 </Link>
                 
               </div>
             </div>
           )
         },
         {
-          name: 'GST',
-          selector: 'GST',
+          name: 'SGST',
+          selector: 'SGST',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'IGST',
+          selector: 'IGST',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'CGST',
+          selector: 'CGST',
           sortable: true,
           minWidth: '150px'
         },
@@ -150,8 +164,7 @@ const DataTableWithButtons = () => {
               <div className='d-flex'>
                 <UncontrolledDropdown>
                   <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                           } }/>
+                    <Trash size={15} />
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <Link to={`/master/Invoice/add`}>

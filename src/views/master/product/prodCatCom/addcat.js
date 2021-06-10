@@ -63,7 +63,7 @@ const UserAccountTab = (prop) => {
     <Row>
       
         <Col sm='12' className="pl-5 pt-2">
-          <h2 className="mb-1">Add Product SubCategory</h2>
+          <h2 className="mb-1">Add Product Category</h2>
         </Col>
       
       <CardBody className='pl-3 pt-2'>
@@ -109,9 +109,27 @@ const UserAccountTab = (prop) => {
 
             <Col md='6' sm='12'>
               <FormGroup>
-                <Label for='GST'>GST %</Label>
+                <Label for='CGST'>CGST %</Label>
                 <InputGroup>
-                  <Input type="number" name="GST" onChange={handleInputeChange} id='post' value={values.GST} />
+                  <Input type="number" name="CGST" onChange={handleInputeChange} id='post' value={values.CGST} />
+                </InputGroup>
+              </FormGroup>
+            </Col>
+
+            <Col md='6' sm='12'>
+              <FormGroup>
+                <Label for='SGST'>SGST %</Label>
+                <InputGroup>
+                  <Input type="number" name="SGST" onChange={handleInputeChange} id='post' value={values.SGST} />
+                </InputGroup>
+              </FormGroup>
+            </Col>
+
+            <Col md='6' sm='12'>
+              <FormGroup>
+                <Label for='IGST'>IGST %</Label>
+                <InputGroup>
+                  <Input type="number" name="IGST" onChange={handleInputeChange} id='post' value={values.IGST} />
                 </InputGroup>
               </FormGroup>
             </Col>

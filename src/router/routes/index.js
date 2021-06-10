@@ -557,6 +557,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/subCat/SubAttributes/addE'))
   },
   {
+    path: '/master/attribute',
+    component: lazy(() => import('../../views/master/subCat/Attributes'))
+  },
+  {
     path: '/master/sms/add',
     component: lazy(() => import('../../views/master/SMSAdd'))
   },
