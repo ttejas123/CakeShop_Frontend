@@ -887,7 +887,7 @@ export default [
       },
       {
         id: 'Search_keyWord_History',
-        title: 'Search keyWord History',
+        title: 'Search Keyword History',
         icon: <Circle size={20} />,
         navLink: '/report/SrchKeyWHistory'
       },

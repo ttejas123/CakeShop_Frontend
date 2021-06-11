@@ -463,7 +463,9 @@ const DataTableWithButtons = () => {
           pagination
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={5}
+          paginationRowsPerPageOptions={[5, 15, 25, 50]}
+          
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}

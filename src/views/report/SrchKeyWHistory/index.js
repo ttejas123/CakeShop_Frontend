@@ -60,6 +60,20 @@ const renderClient = row => {
   }
 }
 
+const part = (data2) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+          {renderClient(data2)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.name}</span>
+              <small className='text-truncate text-muted mb-0'>@{data2.name}</small>
+          </div>
+                                         
+        </div>
+    </div>)
+}
+
 const optionStatus = [
     {value: "", label: "Filter Status"},
     {value: "created", label: "created"},
@@ -67,6 +81,27 @@ const optionStatus = [
     {value: "extended", label: "extended"},
     {value: "closed", label: "closed"},
     {value: "rejected", label: "rejected"}
+  ]
+
+const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
+  ]
+
+const optionFound = [
+    {value: "Yes", label: "Yes"},
+    {value: "No", label: "No"}
+  ]
+
+const optionPartners = [
+    {value: "user1212", label: part(data[0])},
+    {value: "user1231", label: part(data[1])},
+    {value: "user1234", label: part(data[2])},
+    {value: "user2345", label: part(data[3])},
+    {value: "user3456", label: part(data[4])}
   ]
 
 const DataTableWithButtons = () => {
@@ -85,6 +120,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -220,7 +256,8 @@ const DataTableWithButtons = () => {
       setFilter(value)
     }
   }
-  // ** Function to handle filter
+
+   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
     let updatedData = []
@@ -228,17 +265,17 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
+        
         const startsWith =
-          item.To.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
+          item.name.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Keyword.toLowerCase().startsWith(value.toLowerCase())
+          
+          console.log(startsWith)
         const includes =
-          item.To.toLowerCase().includes(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
-         
+          item.name.toLowerCase().includes(value.toLowerCase()) ||
+          item.Keyword.toLowerCase().includes(value.toLowerCase())
+          
+
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -255,6 +292,16 @@ const DataTableWithButtons = () => {
     setCurrentPage(page.selected)
   }
 
+    //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
    // ** Converts table to CSV
   function convertArrayOfObjectsToCSV(array) {
     let result
@@ -330,6 +377,84 @@ const DataTableWithButtons = () => {
   return (
     <Fragment>
       
+      <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>User</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionPartners}
+                  theme={selectThemeColors}
+                  value={values.user}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 user : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Result</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionFound}
+                  theme={selectThemeColors}
+                  value={values.found}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 found : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
 
       <Card>
 
@@ -366,6 +491,22 @@ const DataTableWithButtons = () => {
             </UncontrolledButtonDropdown> 
           </div>
         </CardHeader>
+
+         <Row className='justify-content-end mx-0'>
+          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter mb-50'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
 
         <DataTable
           noHeader

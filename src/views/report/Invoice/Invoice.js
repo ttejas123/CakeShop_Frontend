@@ -42,6 +42,16 @@ const DataTableWithButtons = () => {
         approved: 'light-success',
         approval: 'light-warning'
   }
+
+
+  const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
+  ]
+
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -49,6 +59,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //view
   const view = (val) => {
@@ -120,7 +131,23 @@ const DataTableWithButtons = () => {
     setModal(!modal)
   }
 
-  // ** Function to handle filter
+     //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
+  // ** Function to handle Pagination
+  const handlePagination = page => {
+    setCurrentPage(page.selected)
+  }
+
+     // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
     let updatedData = []
@@ -128,20 +155,15 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
+         const invoice_number = item.invoice_number.toString()
         
         const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
+          invoice_number.toLowerCase().startsWith(value.toLowerCase()) 
+          
+          console.log(startsWith)
         const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
+          invoice_number.toLowerCase().includes(value.toLowerCase()) 
+          
 
         if (startsWith) {
           return startsWith
@@ -152,11 +174,6 @@ const DataTableWithButtons = () => {
       setFilteredData(updatedData)
       setSearchValue(value)
     }
-  }
-
-  // ** Function to handle Pagination
-  const handlePagination = page => {
-    setCurrentPage(page.selected)
   }
 
 
@@ -236,6 +253,49 @@ const DataTableWithButtons = () => {
     <Fragment>
 
       <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+            
+            <Col md='4' sm='12'>
+                
+                  
+                    <Label for='tran'>Amount</Label>
+                    <Input type='range' onChange={handleInputeChange} name='tran'  min="1000" max="30000000" step="1000" value={values.tran} />
+                    <output id="output">₹{values.tran}</output>
+                  
+              
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+
+      <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
           <CardTitle tag='h4'>Invoice</CardTitle>
@@ -271,6 +331,22 @@ const DataTableWithButtons = () => {
             </UncontrolledButtonDropdown>
           </div>
         </CardHeader>
+
+         <Row className='justify-content-end mx-0'>
+          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter mb-50'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
 
         <DataTable
           noHeader
