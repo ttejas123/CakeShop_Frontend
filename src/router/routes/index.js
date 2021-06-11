@@ -93,7 +93,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/vas/vas'))
   },
   {
-    path: '/master/VasDetail',
+    path: '/master/VasDetail/:id',
     component: lazy(() => import('../../views/master/vas/VasDetails'))
   },
   {
