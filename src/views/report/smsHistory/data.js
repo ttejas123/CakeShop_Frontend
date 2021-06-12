@@ -1,7 +1,7 @@
 export const data = [
     {
       receiver : "Pravin Poshmani",
-      receiverNumber : "Rec1",
+      receiverNumber : 987654322,
       smsContent : "Content1",
       smsStatus : "Delivered",
       smsTransactionId : "Transaction1",
@@ -10,7 +10,7 @@ export const data = [
     },
     {
       receiver : "Tejas Thakare",
-      receiverNumber : "Rec2",
+      receiverNumber : 9876543234,
       smsContent : "Content2",
       smsStatus : "Pending",
       smsTransactionId : "Transaction2",
@@ -19,7 +19,7 @@ export const data = [
     },
     {
       receiver : "Komal Kamble",
-      receiverNumber : "Rec3",
+      receiverNumber : 987654234,
       smsContent : "Content3",
       smsStatus : "Delivered",
       smsTransactionId : "Transaction3",
@@ -28,7 +28,331 @@ export const data = [
     },
     {
         receiver : "Himanshu Chanda",
-        receiverNumber : "Rec4",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Stephen Sagaya",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Allu Arjun",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Rajesh Shekar",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Ram Reddy",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Pravin Poshmani",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Tejas Thakare",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Komal Kamble",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Himanshu Chanda",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Stephen Sagaya",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Allu Arjun",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Rajesh Shekar",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Ram Reddy",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Pravin Poshmani",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Tejas Thakare",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Komal Kamble",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Himanshu Chanda",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Stephen Sagaya",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Allu Arjun",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Rajesh Shekar",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Ram Reddy",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Pravin Poshmani",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Tejas Thakare",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Komal Kamble",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Himanshu Chanda",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Stephen Sagaya",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Allu Arjun",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Rajesh Shekar",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Ram Reddy",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Pravin Poshmani",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Tejas Thakare",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Komal Kamble",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Himanshu Chanda",
+        receiverNumber : 98765445,
+        smsContent : "Content4",
+        smsStatus : "Delivered",
+        smsTransactionId : "Transaction4",
+        errorId : "err4",
+        sentTime : "10-04-2021"
+    },
+    {
+      receiver : "Stephen Sagaya",
+      receiverNumber : 987654322,
+      smsContent : "Content1",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction1",
+      errorId : "err1",
+      sentTime : "11-02-2021"
+    },
+    {
+      receiver : "Allu Arjun",
+      receiverNumber : 9876543234,
+      smsContent : "Content2",
+      smsStatus : "Pending",
+      smsTransactionId : "Transaction2",
+      errorId : "err2",
+      sentTime : "22-02-2021"
+    },
+    {
+      receiver : "Rajesh Shekar",
+      receiverNumber : 987654234,
+      smsContent : "Content3",
+      smsStatus : "Delivered",
+      smsTransactionId : "Transaction3",
+      errorId : "err3",
+      sentTime : "30-03-2021"
+    },
+    {
+        receiver : "Ram Reddy",
+        receiverNumber : 98765445,
         smsContent : "Content4",
         smsStatus : "Delivered",
         smsTransactionId : "Transaction4",

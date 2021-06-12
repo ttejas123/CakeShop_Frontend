@@ -229,7 +229,7 @@ const handleDelete = (data) => {
     <Card>
       <CardHeader className='border-bottom'>
         <CardTitle tag='h4'>Company List</CardTitle>
-        <Button className='ml-2' color='primary' onClick={handleAddClick}>
+        <Button className='' color='primary' onClick={handleAddClick}>
               <Plus size={15} />
               <span className='align-middle ml-50'>Add Company</span>
             </Button>

@@ -157,7 +157,7 @@ const corporateAddressAdd = () => {
                   <Flatpickr
                     value={picker}
                     data-enable-time
-                    id='date-time-picker'
+                    id='start-date-time-picker'
                     className='form-control'
                     onChange={date => setPicker(date)}
                   />
@@ -167,7 +167,7 @@ const corporateAddressAdd = () => {
                   <Flatpickr
                     value={picker}
                     data-enable-time
-                    id='date-time-picker'
+                    id='end-date-time-picker'
                     className='form-control'
                     onChange={date => setPicker(date)}
                   />

@@ -491,6 +491,7 @@ const DataTableWithButtons = () => {
           paginationComponent={CustomPagination}
           data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
+          paginationRowsPerPageOptions={[10, 25, 50, 100]}
         />
         
       </Card>

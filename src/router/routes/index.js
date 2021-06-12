@@ -458,7 +458,7 @@ const Routes = [
   },
   {
     path: '/edit-corporate',
-    component: lazy(() => import('../../views/master/corporate/editCorporate'))
+    component: lazy(() => import('../../views/master/corporate/add'))
   },
   {
     path: '/add-corporate',

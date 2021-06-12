@@ -199,7 +199,7 @@ export const columns = [
     minWidth: '150px'
   },
   {
-    name: 'User Id',
+    name: 'Buyer',
     selector: 'userId',
     sortable: true,
     minWidth: '150px'
@@ -211,7 +211,7 @@ export const columns = [
     minWidth: '150px'
   },
   {
-    name: 'Seller Id',
+    name: 'Seller',
     selector: 'sellerId',
     sortable: true,
     minWidth: '150px'
