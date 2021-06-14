@@ -82,5 +82,437 @@ export const data = [
         percent: 16,
         
         id: 9
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 1
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 2
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 3
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 4
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 5
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 6
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 7
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 8
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 9
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 1
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 2
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 3
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 4
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 5
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 6
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 7
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 8
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 9
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 1
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 2
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 3
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 4
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 5
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 6
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 7
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 8
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 9
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 1
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 2
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 3
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 4
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 5
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 6
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 7
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 8
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 9
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 1
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 2
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 3
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 4
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 5
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 6
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 7
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 8
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 9
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 1
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 2
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 3
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 4
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'User',
+        amount: 16521,
+        percent: 16,
+        
+        id: 5
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 6
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 7
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Transcation',
+        amount: 16521,
+        percent: 16,
+        
+        id: 8
+      },
+      {
+        Bid_Id: "Bid23432",
+        type: 'Category',
+        amount: 16521,
+        percent: 16,
+        
+        id: 9
       }
 ]

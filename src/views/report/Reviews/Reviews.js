@@ -59,6 +59,41 @@ const renderClient = row => {
   }
 }
 
+const part = (data2) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+          {renderClient(data2)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.Name}</span>
+              <small className='text-truncate text-muted mb-0'>@{data2.username}</small>
+          </div>
+                                         
+        </div>
+    </div>)
+}
+
+const rateings = (data) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+              <div className='d-flex flex-column'>
+                <Rating
+                    emptySymbol={<Star size={15} fill='#babfc7' stroke='#babfc7' />}
+                    fullSymbol={<Star size={15} fill='#ff9933' stroke='#ff8000' />}
+                    initialRating={data}
+                    readonly
+                  />  
+              </div>
+            </div>)
+}
+
+const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
+  ]
+
 const optionBidStatus = [
     {value: "", label: "Filter Status"},
     {value: "created", label: "created"},
@@ -67,6 +102,24 @@ const optionBidStatus = [
     {value: "closed", label: "closed"},
     {value: "rejected", label: "rejected"},
     {value: "auto closed", label: "auto closed"}
+  ]
+
+const optionUser = [
+    {value: "Tejas", label: part(data[0])},
+    {value: "Pravin", label: part(data[1])},
+    {value: "Komal", label: part(data[2])},
+    {value: "Mehul", label: part(data[3])},
+    {value: "Harpriya", label: part(data[4])},
+    {value: "Rithika", label: part(data[5])}
+  ]
+
+const optionRating = [
+    {value: "user1212", label: rateings(0)},
+    {value: "user1231", label: rateings(1)},
+    {value: "user1234", label: rateings(2)},
+    {value: "user2345", label: rateings(3)},
+    {value: "user3456", label: rateings(4)},
+    {value: "user3452", label: rateings(5)}
   ]
 
 const DataTableWithButtons = () => {
@@ -82,6 +135,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //view
   const view = (val) => {
@@ -280,9 +334,101 @@ const DataTableWithButtons = () => {
     />
   )
 
+    //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
 
   return (
     <Fragment>
+
+      <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='Rateing'>Rating</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionRating}
+                value={values.rate}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 rate : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>User</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionUser}
+                  theme={selectThemeColors}
+                  value={values.user}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 user : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+            
+          </Row>
+        </CardBody>
+      </Card>
 
       <Card>
 

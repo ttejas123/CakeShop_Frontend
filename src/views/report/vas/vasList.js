@@ -13,7 +13,7 @@ import DataTable from 'react-data-table-component'
 import Select from 'react-select'
 import { selectThemeColors } from '@utils'
 import { MoreVertical, Edit, FileText, Archive,  Share, Printer, File, Grid, Copy, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, CardBody, Row, Col, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Badge } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Row, Col, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Badge, Label } from 'reactstrap'
 //import InputBasic from './AddBadges'
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './E
@@ -26,7 +26,7 @@ const VasList = () => {
     </div>
   ))
   
-  const optionBidStatus = [
+  const optionDate = [
     {value: "7days", label: "7 Days"},
     {value: "1month", label: "1 Month"},
     {value: "3months", label: "3 Months"},
@@ -40,6 +40,13 @@ const VasList = () => {
         shipped: 'light-success',
         accepted: 'light-warning'
   }
+
+  const optionUnit = [
+    {value: "Hours", label: "Hours"},
+    {value: "Minutes", label: "Minutes"}
+  ]
+
+ const [values, setValues] = useState('')
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
@@ -93,62 +100,57 @@ const handleDelete = (data) => {
       }
 }
 
+  //columns
   const columns = [
-    {
-        name: 'Service Name',
-        selector: 'name',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Cost',
-        selector: 'cost',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Rate',
-        selector: 'rate',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Quantity',
-        selector: 'quantity',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Unit',
-        selector: 'unit',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Actions',
-        allowOverflow: true,
-        cell: row => {
-          return (
-            <div className='d-flex'>
-              <UncontrolledDropdown>
-                <DropdownToggle className='pr-1' tag='span'>
-                  <Trash size={15} onClick={e => {
-                                                                                  e.preventDefault()
-                                                                                  deleteState(row.id)
-                                                                                } }/>
-                </DropdownToggle>
-              </UncontrolledDropdown>
-
-              <Edit size={15} onClick={ () => { 
-                                  setCurrentId(row.id)
-                                   setAddClicked(!addClicked)
-                                   } }/>
+        {
+          name: 'Service Name',
+          selector: 'Name',
+          sortable: true,
+          minWidth: '250px',
+          cell: row => (
+            <div className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+              
+              <Link to={`/master/VasDetail/${row.id}`}>
+                <span className='d-block font-weight-bold text-truncate'>{row.Name}</span>
+              </Link>
+              </div>
             </div>
           )
+        },
+        {
+          name: 'Rate',
+          selector: 'rate',
+          sortable: true,
+          minWidth: '250px',
+          cell: row => (
+            <div className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'>{row.unit === "Hours" ? (<>₹{row.rate}/hr</>) : (<>₹{row.rate}/min</>) }</span>
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'Quantity',
+          selector: 'quantity',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+          name: 'Unit',
+          selector: 'unit',
+          sortable: true,
+          minWidth: '250px'
+        },
+        {
+          name: 'Added Date',
+          selector: 'Date',
+          sortable: true,
+          minWidth: '250px'
         }
-      }
-      ]
- 
+    ]
+
   // ** Pagination Previous Component
   const Previous = () => {
     return (
@@ -172,31 +174,30 @@ const handleDelete = (data) => {
   }
   const handleFilterByDropDown = (value) => {
     let updatedData = []
-    setFilter(value)
-    console.log(value.value)
-    let search = "l"
-    search = value.value
-    setSearchValue(search)
-      if (search.length) {
-          updatedData = data.filter(item => {
-            const startsWith =
-              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
-              
-            const includes =
-              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
-    
-            if (startsWith) {
-              return startsWith
-            } else if (!startsWith && includes) {
-              return includes
-            } else return null
-           })
-        
+    setSearchValue(value.label)
+
+    if (value.label.length) {
+      updatedData = data.filter(item => {
+       
+        const startsWith =
+          item.unit.toLowerCase() === value.label.toLowerCase()
+          
+        const includes =
+          item.unit.toLowerCase() === value.label.toLowerCase()
+          
+        if (startsWith) {
+          
+          return item.unit.toLowerCase()
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+       console.log(updatedData)
       setFilteredData(updatedData)
-      // setSearchValue(search)
-      setFilter(value)
+      setSearchValue(value.label)
     }
   }
+
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
@@ -260,19 +261,53 @@ const handleDelete = (data) => {
         </CardHeader>
         <CardBody>
           <Row>
+            
             <Col md='4'>
             <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Unit</Label>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
-                options={optionBidStatus}
-                value={Filter}
-                onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
-              />
+                options={optionUnit}
+                value={values.Unit}
+                  onChange={data => {
+                                     handleFilterByDropDown(data)
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Unit : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='Date'>Date</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
               </div>
             </Col>
           </Row>

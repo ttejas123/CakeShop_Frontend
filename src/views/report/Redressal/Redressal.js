@@ -40,24 +40,38 @@ import {
 
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
-  <div className='custom-control custom-checkbox'>
-    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
+  <div className='custom-control custom-checkbox static'>
+    <input  type='checkbox' className='custom-control-input' ref={ref} {...rest} />
     <label className='custom-control-label' onClick={onClick} />
   </div>
 ))
 
 
 // ** Renders Client Columns
-const renderClient = row => {
+const renderClient = (avatarImag, Name) => {
   const stateNum = Math.floor(Math.random() * 6),
     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
     color = states[stateNum]
 
-  if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
+  if (avatarImag.length) {
+    return <Avatar className='mr-1' img={avatarImag} width='32' height='32'  />
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.To || 'John Doe'} initials status="online" />
+    return <Avatar color={color || 'primary'} className='mr-1' content={Name || 'John Doe'} initials status="online" />
   }
+}
+
+const part = (data2) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+          {renderClient(data2.avatar, data2.To)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.To}</span>
+              <small className='text-truncate text-muted mb-0'>@{data2.To}</small>
+          </div>
+                                         
+        </div>
+    </div>)
 }
 
 const optionStatus = [
@@ -68,6 +82,35 @@ const optionStatus = [
     {value: "closed", label: "closed"},
     {value: "rejected", label: "rejected"}
   ]
+
+const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
+  ]
+
+const optionRespoded = [
+    {value: "Responded ", label: "Responded "},
+    {value: "Not Responded", label: "Not Responded"}
+]
+
+const optionTo = [
+    {value: "user1212", label: part(data[0])},
+    {value: "user1231", label: part(data[1])},
+    {value: "user1234", label: part(data[2])},
+    {value: "user2345", label: part(data[3])},
+    {value: "user3456", label: part(data[4])}
+  ]
+
+const optionFrom = [
+    {value: "user1212", label: part(data[5])},
+    {value: "user1231", label: part(data[6])},
+    {value: "user1234", label: part(data[7])},
+    {value: "user2345", label: part(data[8])},
+    {value: "user3456", label: part(data[9])}
+]
 
 const DataTableWithButtons = () => {
   const statusObj = {
@@ -84,7 +127,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
+  const [values, setValues] = useState('')
    //deleteCountry
   const deleteCountry = (val) => {
     //here we passing id to delete this specific record
@@ -134,7 +177,7 @@ const DataTableWithButtons = () => {
           sortable: true,
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(row)}
+              {renderClient(row.avatar, row.To)}
               <div className='d-flex flex-column'>
                 
                   <span className='font-weight-bold'>{row.To}</span>
@@ -309,16 +352,18 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
+       const Order_Id = item.Order_Id.toString()
         const startsWith =
           item.To.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
+          item.Issue_Type[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
+          Order_Id.toLowerCase().startsWith(value.toLowerCase()) 
+ 
         const includes =
           item.To.toLowerCase().includes(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
+          item.Issue_Type[0].label.toLowerCase().includes(value.toLowerCase()) ||
+          item.Status[0].label.toLowerCase().includes(value.toLowerCase()) ||
+          Order_Id.toLowerCase().includes(value.toLowerCase())
          
         if (startsWith) {
           return startsWith
@@ -334,6 +379,17 @@ const DataTableWithButtons = () => {
   // ** Function to handle Pagination
   const handlePagination = page => {
     setCurrentPage(page.selected)
+  }
+
+    //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
   }
 
 
@@ -417,12 +473,90 @@ const DataTableWithButtons = () => {
         </CardHeader>
         <CardBody>
           <Row>
+
             <Col md='4'>
-              <label>Search label</label>
+            <div >
+              <Label for='BidStatus'>To</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionTo}
+                  theme={selectThemeColors}
+                  value={values.To}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 To : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+
+            <Col md='4'>
+            <div style={{ position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+
+            <Col md='4'>
+            <div style={{ position:'relative'}}>
+              <Label for='BidStatus'>Admin Response</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionRespoded}
+                value={values.resp}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 resp : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+        </Row>
+        <Row>
+
+            <Col md='4'>
+              <label>Status</label>
+              <Select
+                 style={{position:'relative', zIndex:1000}}
+                isClearable={false}
+                theme={selectThemeColors}
+
+                className='react-select '
+               
                 classNamePrefix='select'
                 options={optionStatus}
                 value={Filter}
@@ -431,6 +565,32 @@ const DataTableWithButtons = () => {
                 }}
               />
             </Col>
+            
+
+            <Col md='4'>
+            <div >
+              <Label for='BidStatus'>From</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionFrom}
+                  theme={selectThemeColors}
+                  value={values.from}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 from : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+
           </Row>
         </CardBody>
       </Card>

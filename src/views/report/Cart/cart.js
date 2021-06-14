@@ -56,18 +56,46 @@ const renderClient = row => {
   if (row.avatar.length) {
     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.To || 'John Doe'} initials status="online" />
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.name || 'John Doe'} initials status="online" />
   }
 }
 
-const optionStatus = [
-    {value: "", label: "Filter Status"},
-    {value: "created", label: "created"},
-    {value: "live", label: "live"},
-    {value: "extended", label: "extended"},
-    {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"}
-  ]
+
+const part = (data2) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+          {renderClient(data2)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.name}</span>
+              <small className='text-truncate text-muted mb-0'>@{data2.userName}</small>
+          </div>
+                                         
+        </div>
+    </div>)
+}
+
+
+const optionPartners = [
+    {value: "user1212", label: part(data[0])},
+    {value: "user1231", label: part(data[1])},
+    {value: "user1234", label: part(data[2])},
+    {value: "user2345", label: part(data[3])},
+    {value: "user3456", label: part(data[4])},
+    {value: "user245", label: part(data[5])},
+    {value: "user3456", label: part(data[6])},
+    {value: "user235", label: part(data[7])},
+    {value: "user3456", label: part(data[8])},
+    {value: "user345", label: part(data[9])},
+    {value: "user3456", label: part(data[10])}
+]
+
+const optionProduct = [
+    {value: "T-shirt", label: "T-shirt"},
+    {value: "Back-Cover", label: "Back-Cover"},
+    {value: "Glasses", label: "Glasses"},
+    {value: "T-Shirt", label: "T-Shirt"}
+]
 
 const DataTableWithButtons = () => {
   const statusObj = {
@@ -75,6 +103,8 @@ const DataTableWithButtons = () => {
         approved: 'light-success',
         approval: 'light-warning'
   }
+
+
   // ** States
   const [modal, setModal] = useState(false)
 
@@ -85,6 +115,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -262,7 +293,8 @@ const DataTableWithButtons = () => {
       setFilter(value)
     }
   }
-  // ** Function to handle filter
+
+    // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
     let updatedData = []
@@ -270,17 +302,18 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
+        const MOQ = item.MOQ_Units.toString()
         const startsWith =
-          item.To.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
+          item.name.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.userName.toLowerCase().startsWith(value.toLowerCase()) ||
+          MOQ.toLowerCase().startsWith(value.toLowerCase())
+          
         const includes =
-          item.To.toLowerCase().includes(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
-         
+          item.name.toLowerCase().includes(value.toLowerCase()) ||
+          item.userName.toLowerCase().includes(value.toLowerCase()) ||
+          MOQ.toLowerCase().includes(value.toLowerCase())
+          
+
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -295,6 +328,18 @@ const DataTableWithButtons = () => {
   // ** Function to handle Pagination
   const handlePagination = page => {
     setCurrentPage(page.selected)
+  }
+
+
+    //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
   }
 
     
@@ -373,6 +418,64 @@ const DataTableWithButtons = () => {
   return (
     <Fragment>
       
+      <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>User</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionPartners}
+                  theme={selectThemeColors}
+                  value={values.user}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 user : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='Product'>Product</Label>
+              <Select
+                  id='Product'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionProduct}
+                  theme={selectThemeColors}
+                  value={values.Product}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Product : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+            
+          </Row>
+        </CardBody>
+      </Card>
 
       <Card>
 
@@ -409,6 +512,22 @@ const DataTableWithButtons = () => {
             </UncontrolledButtonDropdown> 
           </div>
         </CardHeader>
+
+         <Row className='justify-content-end mx-0'>
+          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter mb-50'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
 
         <DataTable
           noHeader
