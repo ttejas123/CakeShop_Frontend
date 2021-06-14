@@ -97,11 +97,13 @@ const optionFound = [
   ]
 
 const optionPartners = [
-    {value: "user1212", label: part(data[0])},
-    {value: "user1231", label: part(data[1])},
-    {value: "user1234", label: part(data[2])},
-    {value: "user2345", label: part(data[3])},
-    {value: "user3456", label: part(data[4])}
+    {value: "Tejas Thakare", label: part(data[0])},
+    {value: "Pravin", label: part(data[1])},
+    {value: "Komal Kamble", label: part(data[2])},
+    {value: "Mehul", label: part(data[3])},
+    {value: "Harpriya", label: part(data[4])},
+    {value: "Reethika", label: part(data[5])},
+    {value: "Himanshu", label: part(data[6])}
   ]
 
 const DataTableWithButtons = () => {
@@ -117,10 +119,18 @@ const DataTableWithButtons = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [reviewId, setreviewId] = useState(0)
   const [searchValue, setSearchValue] = useState('')
-  const [filteredData, setFilteredData] = useState([])
+  const [filteredData, setFilteredData] = useState(data)
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-  const [values, setValues] = useState('')
+  const [values, setValues] = useState({
+    user: '',
+    found: ''
+  })
+  const [felt, setFelt] = useState({
+    date:false,
+    result:false,
+    user:false
+  })
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -228,33 +238,130 @@ const DataTableWithButtons = () => {
     setResponseModel(!responseModel)
   }
 
-  // handle drop down filter
-  const handleFilterByDropDown = (value) => {
-    let updatedData = []
-    setFilter(value)
-    console.log(value.value)
-    let search = "l"
-    search = value.value
-    setSearchValue(search)
-      if (search.length) {
-          updatedData = data.filter(item => {
-            const startsWith =
-              item.Status[0].value.toLowerCase().startsWith(search.toLowerCase()) 
-              
-            const includes =
-              item.Status[0].value.toLowerCase().includes(search.toLowerCase())
+  // // handle drop down filter
+  // const handleFilterByDropDown = (value) => {
+  //   let updatedData = []
+  //   setSearchValue(value.label)
+
+  //   if (value.label.length && felt.) {
+  //     updatedData = data.filter(item => {
+       
+  //       const startsWith =
+  //         item.Result_found.toLowerCase() === value.label.toLowerCase()
+          
+  //       const includes =
+  //         item.Result_found.toLowerCase() === value.label.toLowerCase()
+          
+  //       if (startsWith) {
+          
+  //         return startsWith
+  //       } else if (!startsWith && includes) {
+  //         return includes
+  //       } else return null
+  //      })
+  //     setFilteredData(updatedData)
+  //     setSearchValue(value.label)
+  //   }
     
-            if (startsWith) {
-              return startsWith
-            } else if (!startsWith && includes) {
-              return includes 
-            } else return null
-           })
+  // }
+
+//filter user
+const handleFiltuser = (value) => {
+    let updatedData = []
+    
+
+    if (value.value.length && values.found.label) {
+      
+        updatedData = data.filter(item => {
+         
+          const startsWith =
+            item.name.toLowerCase() === value.value.toLowerCase() && item.Result_found.toLowerCase() === values.found.label.toLowerCase()
+            
+          const includes =
+            item.name.toLowerCase() === value.value.toLowerCase() && item.Result_found.toLowerCase() === values.found.label.toLowerCase()
+            
+          if (startsWith) {
+            
+            return startsWith
+          } else if (!startsWith && includes) {
+            return includes
+          } else return null
+         })
         
+        setFilteredData(updatedData)
+      
+    
+    } else {
+
+      updatedData = data.filter(item => {
+       
+        const startsWith =
+          item.name.toLowerCase() === value.value.toLowerCase()
+          
+        const includes =
+          item.name.toLowerCase() === value.value.toLowerCase()
+          
+        if (startsWith) {
+          
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      
       setFilteredData(updatedData)
-      // setSearchValue(search)
-      setFilter(value)
+      
     }
+      
+  }
+
+//filter result
+  const handleFiltResult = (value) => {
+    let updatedData = []
+    
+
+    if (value.value.length && values.user.value) {
+      
+      updatedData = data.filter(item => {
+       
+        const startsWith =
+          item.name.toLowerCase() === values.user.value.toLowerCase() && item.Result_found.toLowerCase() === value.value.toLowerCase()
+          
+        const includes =
+          item.name.toLowerCase() === values.user.value.toLowerCase() && item.Result_found.toLowerCase() === value.value.toLowerCase()
+          
+        if (startsWith) {
+          
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      console.log(updatedData)
+      setFilteredData(updatedData)
+      
+    
+    } else {
+
+      updatedData = data.filter(item => {
+       
+        const startsWith =
+          item.Result_found.toLowerCase() === value.label.toLowerCase()
+          
+        const includes =
+          item.Result_found.toLowerCase() === value.label.toLowerCase()
+          
+        if (startsWith) {
+          
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+      
+    }
+      
   }
 
    // ** Function to handle filter
@@ -268,12 +375,13 @@ const DataTableWithButtons = () => {
         
         const startsWith =
           item.name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Keyword.toLowerCase().startsWith(value.toLowerCase())
-          
-          console.log(startsWith)
+          item.Keyword.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Result_found.toLowerCase().startsWith(value.toLowerCase())
+
         const includes =
           item.name.toLowerCase().includes(value.toLowerCase()) ||
-          item.Keyword.toLowerCase().includes(value.toLowerCase())
+          item.Keyword.toLowerCase().includes(value.toLowerCase()) ||
+          item.Result_found.toLowerCase().includes(value.toLowerCase())
           
 
         if (startsWith) {
@@ -354,7 +462,7 @@ const DataTableWithButtons = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={filteredData ? filteredData.length / 7 : data.length / 7 || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -418,6 +526,7 @@ const DataTableWithButtons = () => {
                   theme={selectThemeColors}
                   value={values.user}
                   onChange={data => {
+                                     handleFiltuser(data)
                                      setValues(
                                               {
                                                  ...values,
@@ -441,6 +550,7 @@ const DataTableWithButtons = () => {
                   theme={selectThemeColors}
                   value={values.found}
                   onChange={data => {
+                                     handleFiltResult(data)
                                      setValues(
                                               {
                                                  ...values,
@@ -518,7 +628,7 @@ const DataTableWithButtons = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
+          data={filteredData}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

@@ -45,6 +45,7 @@ const VasList = () => {
     {value: "Hours", label: "Hours"},
     {value: "Minutes", label: "Minutes"}
   ]
+
  const [values, setValues] = useState('')
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -173,31 +174,30 @@ const handleDelete = (data) => {
   }
   const handleFilterByDropDown = (value) => {
     let updatedData = []
-    setFilter(value)
-    console.log(value.value)
-    let search = "l"
-    search = value.value
-    setSearchValue(search)
-      if (search.length) {
-          updatedData = data.filter(item => {
-            const startsWith =
-              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
-              
-            const includes =
-              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
-    
-            if (startsWith) {
-              return startsWith
-            } else if (!startsWith && includes) {
-              return includes
-            } else return null
-           })
-        
+    setSearchValue(value.label)
+
+    if (value.label.length) {
+      updatedData = data.filter(item => {
+       
+        const startsWith =
+          item.unit.toLowerCase() === value.label.toLowerCase()
+          
+        const includes =
+          item.unit.toLowerCase() === value.label.toLowerCase()
+          
+        if (startsWith) {
+          
+          return item.unit.toLowerCase()
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+       console.log(updatedData)
       setFilteredData(updatedData)
-      // setSearchValue(search)
-      setFilter(value)
+      setSearchValue(value.label)
     }
   }
+
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
@@ -273,6 +273,7 @@ const handleDelete = (data) => {
                 options={optionUnit}
                 value={values.Unit}
                   onChange={data => {
+                                     handleFilterByDropDown(data)
                                      setValues(
                                               {
                                                  ...values,

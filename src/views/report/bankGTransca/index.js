@@ -58,6 +58,14 @@ const optionStatus = [
     {value: "rejected", label: "rejected"}
   ]
 
+const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
+  ]
+
 const DataTableWithButtons = () => {
   const statusObj = {
         pending: 'light-secondary',
@@ -73,6 +81,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+     const [values, setValues] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -130,9 +139,15 @@ const DataTableWithButtons = () => {
           sortable: true,
           minWidth: '130px',
           cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Seller_Id}</span>
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className=''>
+                
+                  <div className='user-info text-truncate d-flex flex-column'>
+                    <span className='font-weight-bold'>{row.name}</span>
+                    <small className='text-truncate text-muted mb-0'>{row.email}</small>
+                  </div>
+                
               </div>
             </div>
           )
@@ -141,7 +156,14 @@ const DataTableWithButtons = () => {
           name: 'amount',
           selector: 'amount',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate'> ₹{row.amount}</span>
+              </div>
+            </div>
+          )
         },
         {
           name: 'balance',
@@ -196,36 +218,6 @@ const DataTableWithButtons = () => {
       setFilter(value)
     }
   }
-  // ** Function to handle filter
-  const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
-        const startsWith =
-          item.To.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
-        const includes =
-          item.To.toLowerCase().includes(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
-         
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
-  }
-
   // ** Function to handle Pagination
   const handlePagination = page => {
     setCurrentPage(page.selected)
@@ -274,6 +266,48 @@ const DataTableWithButtons = () => {
     link.setAttribute('download', filename)
     link.click()
   }
+      //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
+      // ** Function to handle filter
+  const handleFilter = e => {
+    const value = e.target.value
+    let updatedData = []
+    setSearchValue(value)
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        const Order_Id = item.Order_Id.toString()
+        const startsWith =
+          Order_Id.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.name.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.email.toLowerCase().startsWith(value.toLowerCase())
+          
+          console.log(startsWith)
+        const includes =
+          Order_Id.toLowerCase().includes(value.toLowerCase()) ||
+          item.name.toLowerCase().includes(value.toLowerCase()) ||
+          item.email.toLowerCase().includes(value.toLowerCase())
+          
+
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+      setSearchValue(value)
+    }
+  }
 
 
   // ** Custom Pagination
@@ -305,6 +339,40 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
+
+      <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+            
+          </Row>
+        </CardBody>
+      </Card>
 
       <Card>
 
@@ -341,6 +409,22 @@ const DataTableWithButtons = () => {
             </UncontrolledButtonDropdown>
           </div>
         </CardHeader>
+
+                 <Row className='justify-content-end mx-0'>
+          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter mb-50'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
 
         <DataTable
           noHeader
