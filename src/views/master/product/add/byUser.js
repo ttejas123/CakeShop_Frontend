@@ -23,13 +23,19 @@ const ByUserTab = () => {
         {value: "Clothing", label: "clothing", id:1},
         {value: "Footwear", label: "Footwear", id:2}
       ]
-    const optionSKU = [
+    const optionBrandSelection = [
         {value: "Google", label: "Google"},
         {value: "Amazon", label: "Amazon"},
         {value: "Apple", label: "Apple"},
         {value: "Microsoft", label: "Microsoft"},
         {value: "Verizon", label: "Verizon"}
     ]
+
+    const optionProductCategory = [
+      {value: "T-shirt", label: "T-shirt"},
+      {value: "Full Shirt", label: "Full Shirt"},
+      {value: "Half Sleeves", label: "Half Sleeves"}
+  ]
       const optionSubCategory = [
           [   
                 {
@@ -259,7 +265,7 @@ const ByUserTab = () => {
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='mrp'>Mrp</Label>
+          <Label for='mrp'>MRP</Label>
           <Input type='text' id='mrp' placeholder='Mrp' defaultValue={userData && userData.mrp} />
         </FormGroup>
       </Col>
@@ -316,7 +322,28 @@ const ByUserTab = () => {
             <Col md='4' sm='12'>
         <FormGroup>
           <Label for='productCategory'>Product Category</Label>
-          <Input type='text' id='productCategory' placeholder='Product Category' defaultValue={userData && userData.productCategory} />
+          <div style={{zIndex:1000, position:'relative'}}>
+                          <Select
+                            id='productCategory'
+                            className='react-select'
+                            classNamePrefix='select'
+                            isClearable={false}
+                            options={optionProductCategory}
+                            theme={selectThemeColors}
+                            value={values.productCategory}
+                            onChange={data => {
+                                               setValues(
+                                                        {
+                                                           ...values,
+                                                           productCategory : data
+                                                        } 
+                                                        //seller brand
+                                                )
+                                                
+                                              }
+                                      }
+                    />
+                    </div>
         </FormGroup>
       </Col>
             <Col md='4' sm='12'>
@@ -333,20 +360,20 @@ const ByUserTab = () => {
           <Row>
                 <Col md='4' sm='12'>
                     <FormGroup>
-                            <Label for='sku'>SKU</Label>
+                            <Label for='sku'>Brand</Label>
                           <Select
-                            id='sku'
+                            id='brandSelection'
                             className='react-select'
                             classNamePrefix='select'
                             isClearable={false}
-                            options={optionSKU}
+                            options={optionBrandSelection}
                             theme={selectThemeColors}
-                            value={values.sku}
+                            value={values.brandSelection}
                             onChange={data => {
                                                setValues(
                                                         {
                                                            ...values,
-                                                           sku : data
+                                                           brandSelection : data
                                                         } 
                                                         //seller brand
                                                 )
@@ -358,7 +385,7 @@ const ByUserTab = () => {
                 </Col>
                 <Col md='4' sm='12'>
                     <FormGroup >
-                            <Label for='Not in Brand'>Not in SKU</Label>
+                            <Label for='Not in Brand'>No Brand Listed</Label>
                             <CustomInput  type='checkbox' id='exampleCustomCheckbox' label='Seller Brand' />
                     </FormGroup> 
                 </Col>

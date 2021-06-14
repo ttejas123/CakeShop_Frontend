@@ -74,7 +74,7 @@ const BidNotification = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
+  const [values, setValues] = useState('')
   
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
@@ -112,11 +112,10 @@ const BidNotification = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const orderId = item.orderId.toString()
         const startsWith =
-          item.orderId.toLowerCase().startsWith(value.toLowerCase())
+          item.sellerName.toLowerCase().startsWith(value.toLowerCase())
         const includes =
-          item.orderId.toLowerCase().includes(value.toLowerCase())
+          item.sellerName.toLowerCase().includes(value.toLowerCase())
           
         if (startsWith) {
           return startsWith
@@ -236,10 +235,16 @@ const BidNotification = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -254,10 +259,16 @@ const BidNotification = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionResponse}
-                value={Filter}
+                value={values.response}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              response : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -272,10 +283,16 @@ const BidNotification = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionNotificationType}
-                value={Filter}
+                value={values.notificationType}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              notificationType : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -365,7 +382,7 @@ const BidNotification = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={data}
+          data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

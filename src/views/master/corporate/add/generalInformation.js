@@ -6,7 +6,7 @@ import Avatar from '@components/avatar'
 
 // ** Third Party Components
 import { Lock, Edit, Trash2, User } from 'react-feather'
-import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, CardHeader, CardBody, Card, CardTitle } from 'reactstrap'
+import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, InputGroup, CardBody, Card, CardTitle } from 'reactstrap'
 import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
@@ -53,6 +53,14 @@ const GeneralInformation = () => {
     {value: "Nashik", label: "Nashik"},
     {value: "Solapur", label: "Solapur"}
   ]
+  const optionCode = [
+    {value: "91", label: "+91"},
+    {value: "+21", label: "+21"},
+    {value: "+32", label: "+32"},
+    {value: "+56", label: "+56"},
+    {value: "+67", label: "+67"}
+]
+
   const optionCompanyType = [
     {value: "Pvt Limited", label: "Pvt Limited"},
     {value: "Public Company", label: "Public Company"},
@@ -312,10 +320,38 @@ const GeneralInformation = () => {
             </FormGroup> 
       </Col>
       <Col md='4' sm='12'>
-        <FormGroup>
-          <Label for='phone'>Phone</Label>
-          <Input type='text' id='phone' placeholder='Phone' defaultValue={userData && userData.phone} />
-        </FormGroup>
+      <FormGroup>
+              <Label for='Name'>Mobile Number </Label>
+              <InputGroup>
+              </InputGroup>
+              <InputGroup>
+              <div style={{zIndex:998, position:'relative'}}>
+                <Select
+                id='country'
+                className='react-select'
+                style={{width: '45%'}} 
+                classNamePrefix='select'
+                isClearable={false}
+                options={optionCode}
+                theme={selectThemeColors}
+                value={values.country}
+                onChange={data => {
+                                   setValues(
+                                            {
+                                               ...values,
+                                               country : data
+                                            } 
+                                    )
+                                  }
+                          }
+              />
+              </div>
+                <Input name="mobile"
+                style={{width: '55%'}}
+                 onChange={handleInputeChange} id='mobile' placeholder='9768*****3' value={values.mobile} />
+              
+              </InputGroup>
+              </FormGroup>  
       </Col>
       <Col md='4' sm='12'>
       <FormGroup>
@@ -527,19 +563,47 @@ const GeneralInformation = () => {
         <Col md='4' sm='12'>
         <FormGroup>
           <Label for='name'>Name</Label>
-          <Input type='text' id='name' placeholder={defaultPlaceHolders.name} defaultValue={userData && userData.name} />
+          <Input type='text' id='readonlyInput' disabled={isExisting} placeholder={defaultPlaceHolders.name} defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
           <Label for='email'>Email</Label>
-          <Input type='text' id='email' placeholder={defaultPlaceHolders.email} defaultValue={userData && userData.name} />
+          <Input type='text' id='email' disabled={isExisting} placeholder={defaultPlaceHolders.email} defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
       <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='phone'>Phone</Label>
-          <Input type='text' id='phone' placeholder={defaultPlaceHolders.phone} defaultValue={userData && userData.name} />
+        <Label for='phone'>Phone Number</Label>
+        <InputGroup >
+              <div style={{zIndex:998, position:'relative'}} disabled={isExisting}>
+                <Select
+                id='country'
+                className='react-select'
+                style={{width: '45%'}} 
+                classNamePrefix='select'
+                isClearable={false}
+                options={optionCode}
+                theme={selectThemeColors}
+                value={values.country}
+                isDisabled={isExisting}
+                onChange={data => {
+                                   setValues(
+                                            {
+                                               ...values,
+                                               country : data
+                                            } 
+                                    )
+                                  }
+                          }
+              />
+              </div>
+                <Input name="mobile"
+                disabled={isExisting}
+                style={{width: '55%'}}
+                 onChange={handleInputeChange} id='mobile' placeholder='9768*****3' value={values.mobile} />
+              
+              </InputGroup>
         </FormGroup>
       </Col>
         

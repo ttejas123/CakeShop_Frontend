@@ -49,9 +49,11 @@ const optionDaysFilter = [
     {value: "overall", label: "Overall"}
   ]
 
-  const optionAccepted = [
-    {value: "Yes", label: "Yes"},
-    {value: "No", label: "No"}
+  const optionState = [
+    {value: "Maharshtra", label: "Maharshtra"},
+    {value: "Telangana", label: "Telangana"},
+    {value: "Karnataka", label: "Karnataka"},
+    {value: "Tamilnadu", label: "Tamilnadu"}
   ]
 
   const optionSeller = [
@@ -68,9 +70,11 @@ const optionDaysFilter = [
     {value: "Himanshu Chanda", label: "Himanshu Chanda"}
   ]
 
-  const optionNotificationType = [
-    {value: "Email", label: "Email"},
-    {value: "SMS", label: "SMS"}
+  const optionPaymentMode = [
+    {value: "Debit Card", label: "Debit Card"},
+    {value: "Internet Banking", label: "Internet Banking"},
+    {value: "UPI", label: "UPI"},
+    {value: "Credit Card", label: "Credit Card"}
   ]
 
 const Orders = () => {
@@ -88,7 +92,7 @@ const Orders = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
+  const [values, setValues] = useState('')
   
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
@@ -126,11 +130,10 @@ const Orders = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const orderId = item.orderId.toString()
         const startsWith =
-          item.orderId.toLowerCase().startsWith(value.toLowerCase())
+          item.orderNumber.toLowerCase().startsWith(value.toLowerCase())
         const includes =
-          item.orderId.toLowerCase().includes(value.toLowerCase())
+          item.orderNumber.toLowerCase().includes(value.toLowerCase())
           
         if (startsWith) {
           return startsWith
@@ -214,6 +217,16 @@ const Orders = () => {
     return result
   }
 
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
   // ** Downloads CSV
   function downloadCSV(array) {
     const link = document.createElement('a')
@@ -250,10 +263,16 @@ const Orders = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -268,10 +287,16 @@ const Orders = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionBuyer}
-                value={Filter}
+                value={values.buyer}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              buyer : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -286,12 +311,71 @@ const Orders = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionSeller}
-                value={Filter}
+                value={values.seller}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              seller : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
+            </Col>
+            <Col md='4'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter State
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionState}
+                value={values.state}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              state : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='4'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Payment Mode
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionPaymentMode}
+                value={values.paymentMode}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              paymentMode : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='4' sm='12' className=' mt-1'>              
+                    <Label for='tran'>Amount</Label>
+                    <Input type='range' onChange={handleInputeChange} name='tran'  min="1000" max="300000" step="1000" value={values.tran} />
+                    <output id="output">{values.tran}</output>
             </Col>
           </Row>
         </CardBody>
@@ -379,7 +463,7 @@ const Orders = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={data}
+          data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

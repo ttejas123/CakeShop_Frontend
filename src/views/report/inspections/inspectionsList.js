@@ -76,6 +76,7 @@ const optionDaysFilter = [
 
 const Inspections = () => {
   const [picker, setPicker] = useState(new Date())
+  const [values, setValues] = useState('')
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -122,17 +123,21 @@ const Inspections = () => {
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
+    console.log("value", value)
     let updatedData = []
     setSearchValue(value)
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const orderId = item.orderId.toString()
+        
         const startsWith =
-          item.orderId.toLowerCase().startsWith(value.toLowerCase())
-        const includes =
-          item.orderId.toLowerCase().includes(value.toLowerCase())
+          item.userName.toLowerCase().startsWith(value.toLowerCase())
           
+          console.log(startsWith)
+        const includes =
+          item.userName.toLowerCase().includes(value.toLowerCase())
+          
+
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -251,10 +256,16 @@ const Inspections = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -269,10 +280,16 @@ const Inspections = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionOrderId}
-                value={Filter}
+                value={values.orderId}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              orderId : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -287,10 +304,16 @@ const Inspections = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDoneBy}
-                value={Filter}
+                value={values.doneBy}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              doneBy : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -305,10 +328,16 @@ const Inspections = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionStatus}
-                value={Filter}
+                value={values.status}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              status : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -398,7 +427,7 @@ const Inspections = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={data}
+          data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

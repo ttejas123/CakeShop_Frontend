@@ -321,8 +321,12 @@ const Routes = [
     component: lazy(() => import('../../views/master/badges/badgesList'))
   },
   {
-    path: '/edit-warehouse',
+    path: '/edit-warehouse/:id',
     component: lazy(() => import('../../views/master/warehouse/editWarehouse'))
+  },
+  {
+    path: '/add-warehouse',
+    component: lazy(() => import('../../views/master/warehouse/addWarehouse'))
   },
   {
     path: '/edit-badge',

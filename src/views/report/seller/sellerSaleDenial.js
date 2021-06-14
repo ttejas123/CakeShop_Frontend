@@ -110,7 +110,7 @@ const columns = [
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
+  const [values, setValues] = useState('')
   
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
@@ -148,7 +148,6 @@ const columns = [
 
     if (value.length) {
       updatedData = ssData.filter(item => {
-        const orderId = item.orderId.toString()
         const startsWith =
           item.orderId.toLowerCase().startsWith(value.toLowerCase())
         const includes =
@@ -261,7 +260,7 @@ const columns = [
         </CardHeader>
         <CardBody>
           <Row>
-            <Col md='3'>
+            <Col md='4'>
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Period
               </Label>
@@ -272,14 +271,20 @@ const columns = [
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
-            <Col md='3'>
+            <Col md='4'>
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Seller
               </Label>
@@ -290,10 +295,16 @@ const columns = [
                 className='react-select'
                 classNamePrefix='select'
                 options={optionSeller}
-                value={Filter}
+                value={values.seller}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              seller : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -383,7 +394,7 @@ const columns = [
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={ssData}
+          data={searchValue.length ? filteredData : ssData}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

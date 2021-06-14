@@ -23,7 +23,7 @@ import reethika  from '../../../assets/images/logo/reethika.jpg'
 
 
 //expot data
-export const data = [
+export const wareHouseData = [
       {
         name : "Warehouse1",
         address : "address1",
@@ -31,6 +31,7 @@ export const data = [
         state : "Maharashtra",
         country : "India",
         isBidoyasWarehouse : "Yes",
+        id: 1,
         createdDate : "22-04-2000"
       },
       {
@@ -40,6 +41,7 @@ export const data = [
         state : "Telangana",
         country : "India",
         isBidoyasWarehouse : "No",
+        id: 2,
         createdDate : "21-04-2000"
       },
       {name : "Warehouse3",
@@ -48,6 +50,7 @@ export const data = [
       state : "Karnataka",
       country : "India",
       isBidoyasWarehouse : "No",
+      id: 3,
       createdDate : "31-04-3000"
       },
       {
@@ -57,6 +60,7 @@ export const data = [
         state : "Maharashtra",
         country : "India",
         isBidoyasWarehouse : "No",
+        id: 4,
         createdDate : "41-04-4000"
       }
 ]

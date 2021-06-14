@@ -92,6 +92,7 @@ const CreditApproved = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -152,16 +153,11 @@ const CreditApproved = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.SMSHistoryName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
+          item.name.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.SMSHistoryName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          item.name.toLowerCase().includes(value.toLowerCase()) 
           
         if (startsWith) {
           return startsWith
@@ -281,10 +277,16 @@ const CreditApproved = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -299,10 +301,16 @@ const CreditApproved = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionAmountRange}
-                value={Filter}
+                value={values.range}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              range : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -317,10 +325,16 @@ const CreditApproved = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionApprovedBy}
-                value={Filter}
+                value={values.approvedBy}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              approvedBy : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -335,10 +349,16 @@ const CreditApproved = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionFinancialInstitute}
-                value={Filter}
+                value={values.FI}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              FI : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -428,7 +448,7 @@ const CreditApproved = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={data}
+          data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

@@ -90,7 +90,7 @@ const TicketList = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
-
+  const [values, setValues] = useState('')
    //deleteCountry
   const deleteCountry = (val) => {
     //here we passing id to delete this specific record
@@ -150,16 +150,11 @@ const TicketList = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.SMSHistoryName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
+          item.raisedBy.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.SMSHistoryName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          item.raisedBy.toLowerCase().includes(value.toLowerCase()) 
           
         if (startsWith) {
           return startsWith
@@ -279,10 +274,16 @@ const TicketList = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -310,10 +311,16 @@ const TicketList = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionRaisedBy}
-                value={Filter}
+                value={values.assignedTo}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              assignedTo : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -328,10 +335,16 @@ const TicketList = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionAssignedTo}
-                value={Filter}
+                value={values.raisedBy}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              raisedBy : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -346,10 +359,16 @@ const TicketList = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionStatus}
-                value={Filter}
+                value={values.status}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              status : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -439,7 +458,7 @@ const TicketList = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={data}
+          data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

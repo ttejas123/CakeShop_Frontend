@@ -13,7 +13,7 @@ import DataTable from 'react-data-table-component'
 import Select from 'react-select'
 import { selectThemeColors } from '@utils'
 import { MoreVertical, Edit, FileText, Archive,  Share, Printer, File, Grid, Copy, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, CardBody, Row, Col, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Badge } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Row, Col, Label, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Badge } from 'reactstrap'
 //import InputBasic from './AddBadges'
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './E
@@ -26,7 +26,8 @@ const EmailsList = () => {
     </div>
   ))
   
-  const optionBidStatus = [
+  
+  const optionDaysFilter = [
     {value: "7days", label: "7 Days"},
     {value: "1month", label: "1 Month"},
     {value: "3months", label: "3 Months"},
@@ -34,6 +35,16 @@ const EmailsList = () => {
     {value: "overall", label: "Overall"}
   ]
 
+  const optionProiority = [
+    {value: "High", label: "High"},
+    {value: "Moderate", label: "Moderate"},
+    {value: "Low", label: "Low"}
+  ]
+
+  const optionType = [
+    {value: "Type1", label: "Type1"},
+    {value: "Type2 ", label:"Type2"}
+  ]
     //console.log(BankGuarranteApplsColumns)
     const statusObj = {
         processed: 'light-secondary',
@@ -46,7 +57,10 @@ const EmailsList = () => {
   const [addClicked, setAddClicked] = useState(0)
   const [editClicked, setEditClicked] = useState(0)
   const [editData, setEditData] = useState({})
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
+
   const handlePagination = page => {
     setCurrentPage(page.selected)
   }
@@ -98,103 +112,103 @@ const handleDelete = (data) => {
       name: 'To Email',
       selector: 'toEmail',
       sortable: true,
-      minWidth: '80px'
+      minWidth: '200px'
     },
     {
       name: 'Email Name',
       selector: 'emailName',
       sortable: true,
-      minWidth: '80px'
+      minWidth: '200px'
     },
     {
         name: 'Email Id',
         selector: 'emailId',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
         name: 'Cc Email',
         selector: 'ccEmail',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
         name: 'Bcc Email',
         selector: 'bccEmail',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
         name: 'From Email',
         selector: 'fromEmail',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
-        name: 'Sibject',
+        name: 'Subject',
         selector: 'subject',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
         name: 'Body',
         selector: 'body',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
         name: 'Priority',
         selector: 'priority',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
         name: 'Body',
         selector: 'body',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     }, 
     {
         name: 'Status',
         selector: 'status',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
         name: 'Type',
         selector: 'type',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '200px'
     },
     {
         name: 'Send Time',
         selector: 'sendTime',
         sortable: true,
-        minWidth: '80px'
-    },
-    {
-      name: 'Actions',
-      allowOverflow: true,
-      cell: row => {
-        return (
-          <div className='d-flex'>
-            <UncontrolledDropdown>
-              <DropdownToggle className='pr-1' tag='span'>
-                <Trash size={15} onClick={e => { handleDelete(row) }} />
-              </DropdownToggle>
-            </UncontrolledDropdown>
-            <Link  to={`/report/add-email`}><Edit  
-                  size={15} 
-                  onClick={ () => { 
-                                    //setCurrentId(row.id)
-                                    //setModal(true)
-                                     } }>
-                                       <Link to='/report/add-email'/>
-                                     </Edit></Link>
-          </div>
-        )
-      }
+        minWidth: '200px'
     }
+    // {
+    //   name: 'Actions',
+    //   allowOverflow: true,
+    //   cell: row => {
+    //     return (
+    //       <div className='d-flex'>
+    //         <UncontrolledDropdown>
+    //           <DropdownToggle className='pr-1' tag='span'>
+    //             <Trash size={15} onClick={e => { handleDelete(row) }} />
+    //           </DropdownToggle>
+    //         </UncontrolledDropdown>
+    //         <Link  to={`/report/add-email`}><Edit  
+    //               size={15} 
+    //               onClick={ () => { 
+    //                                 //setCurrentId(row.id)
+    //                                 //setModal(true)
+    //                                  } }>
+    //                                    <Link to='/report/add-email'/>
+    //                                  </Edit></Link>
+    //       </div>
+    //     )
+    //   }
+    // }
   ]
  
   // ** Pagination Previous Component
@@ -253,16 +267,11 @@ const handleDelete = (data) => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.SMSHistoryName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
+          item.toEmail.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.SMSHistoryName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          item.toEmail.toLowerCase().includes(value.toLowerCase()) 
           
         if (startsWith) {
           return startsWith
@@ -283,7 +292,7 @@ const handleDelete = (data) => {
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / rowsPerPage : data.length / rowsPerPage || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -309,21 +318,78 @@ const handleDelete = (data) => {
         <CardBody>
           <Row>
             <Col md='4'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Period
+              </Label>
             <div style={{zIndex:1000, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
-                options={optionBidStatus}
-                value={Filter}
+                options={optionDaysFilter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
-          </Row>
+            <Col md='4'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Priority
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionProiority}
+                value={values.priority}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              priority : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='4'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Type
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionType}
+                value={values.type}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              type : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+           </Row>
         </CardBody>
       </Card>
 
@@ -359,22 +425,57 @@ const handleDelete = (data) => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledButtonDropdown>
-            <Link  to={`/report/add-sample-request`}>
+            {/* <Link  to={`/report/add-sample-request`}>
             <Button className='ml-2' color='primary'>
               <Plus size={15} />
               <span className='align-middle ml-50'>Add Email</span>
             </Button>
-            </Link>
+            </Link> */}
           </div>
               
       </CardHeader>
     
+      <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                value={rowsPerPage}
+                onChange={e => handlePerPage(e)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
       <DataTable
           noHeader
           pagination
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={rowsPerPage}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}

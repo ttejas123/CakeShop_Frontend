@@ -102,6 +102,7 @@ const DefectiveGoods = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -162,16 +163,11 @@ const DefectiveGoods = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.SMSHistoryName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
+          item.product.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.SMSHistoryName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          item.product.toLowerCase().includes(value.toLowerCase()) 
           
         if (startsWith) {
           return startsWith
@@ -291,10 +287,16 @@ const DefectiveGoods = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -335,10 +337,16 @@ const DefectiveGoods = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionQuantityRange}
-                value={Filter}
+                value={values.quantityRange}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              quantityRange : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -353,10 +361,16 @@ const DefectiveGoods = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionStaff}
-                value={Filter}
+                value={values.staff}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              staff : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -371,10 +385,16 @@ const DefectiveGoods = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionBuyer}
-                value={Filter}
+                value={values.buyer}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              buyer : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -389,10 +409,16 @@ const DefectiveGoods = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionSeller}
-                value={Filter}
+                value={values.seller}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              seller : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -482,7 +508,7 @@ const DefectiveGoods = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={data}
+          data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

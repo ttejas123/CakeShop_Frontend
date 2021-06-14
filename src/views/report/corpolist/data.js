@@ -83,3 +83,105 @@ export const data = [
         createdBy: "John Cena"
       }
 ]
+
+export const columns = [
+  {
+    name: 'Corporate Name',
+    selector: 'corporateName',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Comapny Type',
+    selector: 'companyType',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Industry',
+    selector: 'industry',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Contact Email',
+    selector: 'email',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Country Code',
+    selector: 'countryCode',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Phone',
+    selector: 'phone',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'State',
+    selector: 'state',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'City',
+    selector: 'city',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+      name: 'Is Verified',
+      selector: 'isVerified',
+      sortable: true,
+      minWidth: '150px'
+    },
+    {
+      name: 'Has Subscription',
+      selector: 'hasSubscription',
+      sortable: true,
+      minWidth: '150px'
+    },
+    {
+      name: 'Verified By',
+      selector: 'verifiedBy',
+      sortable: true,
+      minWidth: '150px'
+    },
+    {
+      name: 'Created By',
+      selector: 'createdBy',
+      sortable: true,
+      minWidth: '150px'
+    }
+  // {
+  //   name: 'Actions',
+  //   allowOverflow: true,
+  //   cell: row => {
+  //     return (
+  //       <div className='d-flex'>
+  //         <UncontrolledDropdown>
+  //           <DropdownToggle className='pr-1' tag='span'>
+  //             <Trash size={15} onClick={e => {
+  //                                                                             e.preventDefault()
+  //                                                                             deleteCountry(row.id)
+  //                                                                           } }/>
+  //           </DropdownToggle>
+  //         </UncontrolledDropdown>
+
+  //         <Link  to={`/edit-corporate/${row.id}`}><Edit  
+  //           size={15} 
+  //           onClick={ () => { 
+  //                             setCurrentId(row.id)
+  //                             setModal(true)
+  //                              } }>
+  //                                <Link to='/edit-product'/>
+  //                              </Edit></Link>
+  //       </div>
+  //     )
+  //   }
+  // }
+]

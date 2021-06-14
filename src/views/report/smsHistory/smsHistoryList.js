@@ -89,8 +89,9 @@ const SMSHistory = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
-  
+
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
     let updatedData = []
@@ -127,11 +128,11 @@ const SMSHistory = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const orderId = item.orderId.toString()
+        const receiver = item.receiver.toString()
         const startsWith =
-          item.orderId.toLowerCase().startsWith(value.toLowerCase())
+          item.receiver.toLowerCase().startsWith(value.toLowerCase())
         const includes =
-          item.orderId.toLowerCase().includes(value.toLowerCase())
+          item.receiver.toLowerCase().includes(value.toLowerCase())
           
         if (startsWith) {
           return startsWith
@@ -251,10 +252,16 @@ const SMSHistory = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -269,10 +276,16 @@ const SMSHistory = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionMobileNumber}
-                value={Filter}
+                value={values.mobileNumber}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              mobileNumber : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -287,10 +300,16 @@ const SMSHistory = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionStatus}
-                value={Filter}
+                value={values.status}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              status : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -305,10 +324,16 @@ const SMSHistory = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionUser}
-                value={Filter}
+                value={values.user}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              user : data
+                           } 
+                   )
+                 }
+                }
               />
               </div>
             </Col>
@@ -398,7 +423,7 @@ const SMSHistory = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={data}
+          data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

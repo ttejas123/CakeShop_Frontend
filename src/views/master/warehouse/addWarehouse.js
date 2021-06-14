@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 // ** Custom Components
 import Avatar from '@components/avatar'
-import { useParams } from 'react-router-dom'
 import classnames from 'classnames'
 // ** Third Party Components
 import { Lock, Edit, Trash2, MapPin } from 'react-feather'
@@ -10,12 +9,10 @@ import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomIn
 import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
-import { wareHouseData } from './data'
 
-const EditWarehouse = () => {
+const EditEmployee = () => {
 
-  const { id } = useParams()
-  console.log(wareHouseData)
+  const [data, setData] = useState(null)
   const { register, errors, control, setValue } = useForm({
     defaultValues: { isOnGround: 'No' }
   })
@@ -64,10 +61,13 @@ const EditWarehouse = () => {
     isActive: "",
     logo : "",
     phone : "",
-    panNumber: ""
+    panNumber: "",
+    Currency:  [{value: "currency", label: "Indian Rupee"}],
+    City:  [{value: "city", label: "Mumbai"}], 
+    State:  [{value: "state", label: "Maharashtra"}],
+    Country: [{value: "country", label: "India"}],
+    Role: [{value: "role", label: "Intern"}]
   }
-
-  
   const [values, setValues] = useState(initialvalues)
   const handleInputeChange = (event) => {
     const {name, value} = event.target
@@ -78,15 +78,6 @@ const EditWarehouse = () => {
     }
     )
   }
-
-  useEffect(() => {
-    console.log(wareHouseData[id - 1])
-    setValues({
-      ...wareHouseData[id - 1]
-    })
-
-}, [id])
-
 
   const submitHandle = (event) => {
     console.log(values)
@@ -121,7 +112,16 @@ const EditWarehouse = () => {
   }
 
   // ** Update user image on mount or change
-  
+  useEffect(() => {
+    // if (selectedUser !== null || (selectedUser !== null && userData !== null && selectedUser.id !== userData.id)) {
+    //   setUserData(selectedUser)
+    //   if (selectedUser.avatar.length) {
+    //     return setImg(selectedUser.avatar)
+    //   } else {
+    //     return setImg(null)
+    //   }
+    // }
+  })
 
   // ** Renders User
   const renderUserAvatar = () => {
@@ -164,7 +164,7 @@ const EditWarehouse = () => {
  
 <Card>
 <CardHeader>
-  <CardTitle tag='h1'>Edit Warehouse</CardTitle>
+  <CardTitle tag='h1'>Add Warehouse</CardTitle>
 </CardHeader>
 
 <CardBody>
@@ -175,7 +175,7 @@ const EditWarehouse = () => {
     <Col md='6' sm='12'>
         <FormGroup>
           <Label for='warehouseName'>Name</Label>
-          <Input type='text' id='warehouseName' placeholder='Name'  value={values.name} />
+          <Input type='text' id='warehouseName' placeholder='Name' defaultValue={userData && userData.warehouseName} />
         </FormGroup>
       </Col>
       <Col md='6' sm='12'>
@@ -208,7 +208,6 @@ const EditWarehouse = () => {
               id='address-1'
               name='address1'
               placeholder='street 1'
-              value={values.address}
               innerRef={register({ required: true })}
               className={classnames({
                 'is-invalid': errors.address1
@@ -244,7 +243,7 @@ const EditWarehouse = () => {
               isClearable={false}
               options={optionCountry}
               theme={selectThemeColors}
-              value={values.Country}
+              value={values.Country[0]}
               onChange={data => {
 
 
@@ -269,7 +268,7 @@ const EditWarehouse = () => {
               isClearable={false}
               options={optionState}
               theme={selectThemeColors}
-              value={values.State}
+              value={values.State[0]}
               onChange={data => {
 
 
@@ -294,7 +293,7 @@ const EditWarehouse = () => {
               isClearable={false}
               options={optionCity}
               theme={selectThemeColors}
-              value={values.City}
+              value={values.City[0]}
               onChange={data => {
 
 
@@ -423,4 +422,4 @@ const EditWarehouse = () => {
 </Card>
   )
 }
-export default EditWarehouse
+export default EditEmployee

@@ -92,6 +92,7 @@ const SampleRequestList = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
  
 const renderBuyer = row => {
@@ -222,10 +223,10 @@ const columns = [
       if (search.length) {
           updatedData = data.filter(item => {
             const startsWith =
-              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
+              item.bidId[0].value.toLowerCase().startsWith(search.toLowerCase()) 
               
             const includes =
-              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
+              item.bidId[0].value.toLowerCase().includes(search.toLowerCase())
     
             if (startsWith) {
               return startsWith
@@ -247,16 +248,11 @@ const columns = [
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
         const startsWith =
-          item.SMSHistoryName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
+          item.bidId.toLowerCase().startsWith(value.toLowerCase()) 
           console.log(startsWith)
         const includes =
-          item.SMSHistoryName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          item.bidId.toLowerCase().includes(value.toLowerCase()) 
           
         if (startsWith) {
           return startsWith
@@ -376,10 +372,16 @@ const columns = [
                 className='react-select'
                 classNamePrefix='select'
                 options={optionDaysFilter}
-                value={Filter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -407,10 +409,16 @@ const columns = [
                 className='react-select'
                 classNamePrefix='select'
                 options={optionStatus}
-                value={Filter}
+                value={values.status}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              status : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -425,10 +433,16 @@ const columns = [
                 className='react-select'
                 classNamePrefix='select'
                 options={optionBuyer}
-                value={Filter}
+                value={values.buyer}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              buyer : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -443,10 +457,16 @@ const columns = [
                 className='react-select'
                 classNamePrefix='select'
                 options={optionSeller}
-                value={Filter}
+                value={values.seller}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              seller : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -536,7 +556,7 @@ const columns = [
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={data}
+          data={searchValue.length ? filteredData : data}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

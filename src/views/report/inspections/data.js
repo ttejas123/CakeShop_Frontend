@@ -40,37 +40,37 @@ export const columns = [
       name: 'Order Id',
       selector: 'orderId',
       sortable: true,
-      minWidth: '80px'
+      minWidth: '250px'
     },
     {
         name: 'Inspection Done BY',
         selector: 'inspectionDoneBy',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '250px'
     },
     {
         name: 'Inspection Date',
         selector: 'inspectionDate',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '250px'
     },
     {
         name: 'Comment',
         selector: 'comment',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '250px'
     },
     {
         name: 'File',
         selector: 'file',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '250px'
     },
     {
         name: 'Status',
         selector: 'status',
         sortable: true,
-        minWidth: '80px'
+        minWidth: '250px'
     }
     // ,
     // {

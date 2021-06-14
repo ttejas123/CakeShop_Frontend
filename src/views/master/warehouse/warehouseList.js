@@ -10,7 +10,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data } from './data'
+import { wareHouseData } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
@@ -85,6 +85,7 @@ const WarehouseList = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -162,13 +163,9 @@ const WarehouseList = () => {
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link  to={`/edit-warehouse/${row.id}`}><Edit  
-                  size={15} 
-                  onClick={ () => { 
-                                    setCurrentId(row.id)
-                                    setModal(true)
-                                     } }>
-                                       <Link to='/edit-warehouse'/>
+                <Link  to={`/edit-warehouse/${row.id}`}>
+                  <Edit size={15} >
+                 
                                      </Edit></Link>
               </div>
             )
@@ -252,7 +249,7 @@ const WarehouseList = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : wareHouseData.length / 7 || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -277,7 +274,7 @@ const WarehouseList = () => {
       <Card>
         <CardHeader>
           <CardTitle tag='h4'>Search Filter</CardTitle>
-          <Link  to={`/edit-warehouse`}>
+          <Link  to={`/add-warehouse`}>
           <Button className='ml-2' color='primary'>
               <Plus size={15} />
               <span className='align-middle ml-50'>Add Warehouse</span>
@@ -297,10 +294,16 @@ const WarehouseList = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionState}
-                value={Filter}
+                value={values.state}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              state : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -315,10 +318,16 @@ const WarehouseList = () => {
                 className='react-select'
                 classNamePrefix='select'
                 options={optionCorporate}
-                value={Filter}
+                value={values.corporate}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              corporate : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
@@ -361,7 +370,7 @@ const WarehouseList = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
+          data={searchValue.length ? filteredData : wareHouseData}
           selectableRowsComponent={BootstrapCheckbox}
         />
         

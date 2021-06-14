@@ -1,17 +1,14 @@
-// ** Custom Components
-import Avatar from '@components/avatar'
-import { Link } from 'react-router-dom'
-//import { DropDownList } from '@progress/kendo-react-dropdowns'
-// ** Third Party Components
-import '@styles/react/libs/react-select/_react-select.scss'
-import '@styles/react/libs/tables/react-dataTable-component.scss'
 
+//import { DropDownList } from '@progress/kendo-react-dropdowns'
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data } from './data'
+import { data, columns } from './data'
 import Select from 'react-select'
+// ** Third Party Components
+import '@styles/react/libs/react-select/_react-select.scss'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** Add New Modal Component
 //import FormModel from './formModel'
@@ -45,173 +42,67 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
-
-// ** Renders Client Columns
-const renderClient = row => {
-  const stateNum = Math.floor(Math.random() * 6),
-    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-    color = states[stateNum]
-
-  if (row.avatar.length) {
-    return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
-  } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
-  }
-}
-
-const optionBidStatus = [
-    {value: "", label: "Filter Status"},
-    {value: "productName", label: "Product Name"},
-    {value: "mrp", label: "MRP"},
-    {value: "gst", label: "GSt"},
-    {value: "category", label: "Category"},
-    {value: "subCategory", label: "Sub Category"},
-    {value: "productCategory", label: "Product Category"}
+const optionDaysFilter = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
   ]
 
-const DataTableWithButtons = () => {
+  const optionAccepted = [
+    {value: "Yes", label: "Yes"},
+    {value: "No", label: "No"}
+  ]
+
+  const optionIndustry = [
+    {value: "IT", label: "IT"},
+    {value: "Footwear", label: "Footwear"},
+    {value: "Clothing", label: "Clothing"},
+    {value: "Electronics", label: "Electronics"}
+  ]
+
+  const optionCompanyType = [
+    {value: "Private Limited", label: "Private Limited"},
+    {value: "Government", label: "Government"},
+    {value: "Public Private", label: "Public Private"}
+  ]
+
+  const optionCity = [
+    {value: "Mumbai", label: "Mumbai"},
+    {value: "Bermuda", label: "Bermuda"},
+    {value: "Hyderabad", label: "Hyderabad"}
+  ]
+
+  const optionVerified = [
+    {value: "Yes", label: "Yes"},
+    {value: "No", label: "No"}
+  ]
+
+  const optionSubscription = [
+    {value: "Yes", label: "Yes"},
+    {value: "No", label: "No"}
+  ]
+
+  
+const CorporateList = () => {
+  const [picker, setPicker] = useState(new Date())
+  const [values, setValues] = useState('')
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
         approval: 'light-warning'
   }
-
-
-  // ** States
+ 
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-   //deleteCountry
-  const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
-    //edit action
-   const AddeditEvent = (val) => {
-     //here we hande event which comming from addNewModel.js (Form for add and edit)
-      setCurrentId("")
-      console.log(val)
-  }
-
-  //columns
-  const columns = [
-        {
-          name: 'Corporate Name',
-          selector: 'corporateName',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Comapny Type',
-          selector: 'companyType',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Industry',
-          selector: 'industry',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Contact Email',
-          selector: 'email',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Country Code',
-          selector: 'countryCode',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'Phone',
-          selector: 'phone',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'State',
-          selector: 'state',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-          name: 'City',
-          selector: 'city',
-          sortable: true,
-          minWidth: '150px'
-        },
-        {
-            name: 'Is Verified',
-            selector: 'isVerified',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Has Subscription',
-            selector: 'hasSubscription',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Verified By',
-            selector: 'verifiedBy',
-            sortable: true,
-            minWidth: '150px'
-          },
-          {
-            name: 'Created By',
-            selector: 'createdBy',
-            sortable: true,
-            minWidth: '150px'
-          },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                                                    e.preventDefault()
-                                                                                    deleteCountry(row.id)
-                                                                                  } }/>
-                  </DropdownToggle>
-                </UncontrolledDropdown>
-
-                <Link  to={`/edit-corporate/${row.id}`}><Edit  
-                  size={15} 
-                  onClick={ () => { 
-                                    setCurrentId(row.id)
-                                    setModal(true)
-                                     } }>
-                                       <Link to='/edit-product'/>
-                                     </Edit></Link>
-              </div>
-            )
-          }
-        }
-    ]
-
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
-  }
-
+  
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
     let updatedData = []
@@ -243,22 +134,21 @@ const DataTableWithButtons = () => {
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
+    console.log("value", value)
     let updatedData = []
     setSearchValue(value)
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
+        
         const startsWith =
-          item.productName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
+          item.userName.toLowerCase().startsWith(value.toLowerCase())
+          
           console.log(startsWith)
         const includes =
-          item.productName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          item.userName.toLowerCase().includes(value.toLowerCase())
           
+
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -275,6 +165,18 @@ const DataTableWithButtons = () => {
     setCurrentPage(page.selected)
   }
 
+  const handlePerPage = e => {
+    setRowsPerPage(20)
+    console.log(e.target.value)
+    // dispatch(
+    //   getData({
+    //     page: currentPage,
+    //     perPage: parseInt(e.target.value),
+    //     q: searchValue
+    //   })
+    // )
+  }
+
   // ** Custom Pagination
   const CustomPagination = () => (
     <ReactPaginate
@@ -282,7 +184,7 @@ const DataTableWithButtons = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / rowsPerPage : data.length / rowsPerPage || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -301,6 +203,60 @@ const DataTableWithButtons = () => {
     />
   )
 
+   
+  // ** Converts table to CSV
+  function convertArrayOfObjectsToCSV(array) {
+    let result
+
+    const columnDelimiter = ','
+    const lineDelimiter = '\n'
+    const keys = Object.keys(data[0])
+
+    result = ''
+    result += keys.join(columnDelimiter)
+    result += lineDelimiter
+
+    array.forEach(item => {
+      let ctr = 0
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter
+
+        result += item[key]
+
+        ctr++
+      })
+      result += lineDelimiter
+    })
+
+    return result
+  }
+
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
+  // ** Downloads CSV
+  function downloadCSV(array) {
+    const link = document.createElement('a')
+    let csv = convertArrayOfObjectsToCSV(array)
+    if (csv === null) return
+
+    const filename = 'export.csv'
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`
+    }
+
+    link.setAttribute('href', encodeURI(csv))
+    link.setAttribute('download', filename)
+    link.click()
+  }
 
   return (
     <Fragment>
@@ -310,22 +266,156 @@ const DataTableWithButtons = () => {
         </CardHeader>
         <CardBody>
           <Row>
-            <Col md='4'>
-            <div style={{zIndex:997, position:'relative'}}>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Period
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
-                options={optionBidStatus}
-                value={Filter}
+                options={optionDaysFilter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
-            
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Company Type
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionCompanyType}
+                value={values.companyType}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              companyType : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Industry
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionIndustry}
+                value={values.industry}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              industry : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter City
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionCity}
+                value={values.city}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              city : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Verified
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionVerified}
+                value={values.verified}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              verified : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Subscription
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionSubscription}
+                value={values.subscription}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              subscription : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            {/* <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter PIN
+              </Label>
+              <Input name="pin" onChange={handleInputeChange} id='pin' placeholder='PIN' />
+            </Col> */}
           </Row>
         </CardBody>
       </Card>
@@ -333,18 +423,81 @@ const DataTableWithButtons = () => {
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Corporate</CardTitle>
+          <CardTitle tag='h4'>Corporates</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
-            
+            <UncontrolledButtonDropdown>
+              <DropdownToggle color='secondary' caret outline>
+                <Share size={15} />
+                <span className='align-middle ml-50'>Export</span>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem className='w-100'>
+                  <Printer size={15} />
+                  <span className='align-middle ml-50'>Print</span>
+                </DropdownItem>
+                <DropdownItem className='w-100' onClick={() => downloadCSV(data)}>
+                  <FileText size={15} />
+                  <span className='align-middle ml-50'>CSV</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <Grid size={15} />
+                  <span className='align-middle ml-50'>Excel</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <File size={15} />
+                  <span className='align-middle ml-50'>PDF</span>
+                </DropdownItem>
+                <DropdownItem className='w-100'>
+                  <Copy size={15} />
+                  <span className='align-middle ml-50'>Copy</span>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledButtonDropdown>
           </div>
         </CardHeader>
+
+        <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                value={rowsPerPage}
+                onChange={e => handlePerPage(e)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
 
         <DataTable
           noHeader
           pagination
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={rowsPerPage}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
@@ -359,4 +512,4 @@ const DataTableWithButtons = () => {
   )
 }
 
-export default DataTableWithButtons
+export default CorporateList
