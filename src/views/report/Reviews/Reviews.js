@@ -234,17 +234,15 @@ const DataTableWithButtons = () => {
         
         const startsWith =
           item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
+          item.username.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.review.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.GivenBy.toLowerCase().startsWith(value.toLowerCase()) 
 
         const includes =
           item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
+          item.username.toLowerCase().includes(value.toLowerCase()) ||
+          item.review.toLowerCase().includes(value.toLowerCase()) ||
+          item.GivenBy.toLowerCase().includes(value.toLowerCase()) 
 
         if (startsWith) {
           return startsWith

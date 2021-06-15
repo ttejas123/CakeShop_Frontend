@@ -72,22 +72,7 @@ const DataTableWithButtons = () => {
 
   //columns
   const columns = [
-//order id
-//product id
-//product quality
-//product cost
-//return
-//refund
-//replace
-//raised by
-// entity type
-//raised time
-        {
-          name: 'Id',
-          selector: 'id',
-          sortable: true,
-          minWidth: '50px'
-        },
+
         {
           name: 'Task',
           minWidth: '150px',
@@ -111,7 +96,7 @@ const DataTableWithButtons = () => {
           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
-                <span className='font-weight-bold'>{row.Score}</span>
+                <span className='font-weight-bold'>{row.Score}%</span>
                 
               </div>
             </div>

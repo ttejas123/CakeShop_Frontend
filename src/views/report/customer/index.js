@@ -164,11 +164,11 @@ const DataTableWithButtons = () => {
           minWidth: '200px',
            cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
-              <Link to={`/PReviewsle/${row.id}`}>
+              
                 <div className='user-info text-truncate'>
                   <span className='d-block font-weight-bold text-truncate'>{row.email}</span>
                 </div>
-              </Link>  
+             
             </div>
           )
         },

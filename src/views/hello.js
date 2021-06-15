@@ -32,57 +32,24 @@
 
 //docer contener devox
 
+// Page Not Found
+// 1. Approval
 
 
-//prduct approve
-//corporate kyc upload, approve
-//kyc upload, approve
+
+// Not Any Changes Mentioned
+// 1. transaction
+// 2. Revenue
+// 3. Bid Cash 
+// 4. Bid Cash Utiliz
+// 5. Corporate Cradit
+// 6. Gst Calculation
+// 7. Gst Report
+// 8. Paid Corporate
+// 9. Profile Completion
 
 
-// List of Total Screens 15 
 
-// 3 Views 
-// 1. 58 On Ground staff View (taken by Tejas) 25-05-2020
-// 2. 120 Order Invoice view (taken by pravin) 25-05-2020
-// 3. 121 Order Details View (taken by pravin) 25-05-2020
+// review search
 
-// 8 Reports
-// 1. 106 Shippment report  (taken by pravin)  -- Today
-// 2. 126 Commission Reports  (Tejas) -- Today
-// 3. 127 Customer Reports  (Tejas) -- Today
-// 4. 128 On Ground Staff Report  (Tejas) -- Today
-// 5. 129 Corporate Report  (Tejas) -- Today
-// 6. 132 Transaction Report (taken by pravin)  -- Today
-// 7. 152 Credit limit exhausted Corporate report (taken by pravin)  -- Today
-// 8. 154 Inspections report (taken by pravin)  -- Today
-
-// 4 Master screens and some of them are not Specified
-// 1. 122 Order Details List (taken by pravin)  -- Today
-// 3. 147 Bill Discounting Transaction (taken by pravin)  -- Today
-// 4. 148 Work Flow History   (Tejas) -- Today
-// 5. 149 Partner Financial Institute  (Tejas) -- Today
-
-
-// 1. Bid Cash utilize report
-// 2. Bid Coin utilize report 
-// 3. Charge List
-// 4. Charge List Add/edit
-// 5. Brand Add/edit screen
-// 6. Bid Commission Change Report
-// 7. Wishlist 
-// 8. Sku list
-// 9. Sku add/update  
-// 10. Sku seller list 
-// 11. Lead List
-// 12. Lead Create
-// 13. Lead Update
-// 14. Order Invoice 
-// 	a. view
-// 	b. add
-// 	c. list
-// 15. Partner Financial Institute
-// 16. Commission Reports
-// 17. Customer Reports
-// 18. On Ground Staff Report
-// 19. Corporate Report
-// 20. UI Changes in multiple screens
+//24. Bidoyas Msg

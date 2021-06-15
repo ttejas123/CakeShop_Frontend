@@ -46,13 +46,6 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
-const optionBidStatus = [
-    {value: "7days", label: "7 Days"},
-    {value: "1month", label: "1 Month"},
-    {value: "3months", label: "3 Months"},
-    {value: "today", label: "Today"},
-    {value: "overall", label: "Overall"}
-  ]
 
 const TransactionsList = () => {
   const statusObj = {
@@ -67,6 +60,7 @@ const TransactionsList = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
   
 const renderUser = row => {
     const stateNum = Math.floor(Math.random() * 6),
@@ -74,18 +68,47 @@ const renderUser = row => {
       color = states[stateNum]
   
     if (row.img.length) {
-      return <Link to={`/bidDetails/${row.id}`}> <Avatar className='mr-1' img={row.img} width='32' height='32'  /> </Link>
+      return <Avatar className='mr-1' img={row.img} width='32' height='32'  /> 
     } else {
-      return <Link to={`/bidDetails/${row.id}`}><Avatar color={color || 'primary'} className='mr-1' content={row.userName || 'John Doe'} initials status="online" /> </Link>
+      return <Avatar color={color || 'primary'} className='mr-1' content={row.userName || 'John Doe'} initials status="online" /> 
     }
-  }
+}
 
+const part = (data2) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+          {renderUser(data2)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.userName}</span>
+              <small className='text-truncate text-muted mb-0'>@{data2.userName}</small>
+          </div>
+                                         
+        </div>
+    </div>)
+}
+
+const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
+  ]
+
+const optionPartners = [
+    {value: "user1212", label: part(data[0])},
+    {value: "user1231", label: part(data[1])},
+    {value: "user1234", label: part(data[2])},
+    {value: "user2345", label: part(data[3])},
+    {value: "user3456", label: part(data[4])}
+  ]
 
   const columns = [
     {
         name: 'User Name',
         minWidth: '250px',
-        selector: 'user',
+        selector: 'userName',
         sortable: true,
         cell: row => (
           <div className='d-flex justify-content-left align-items-center'>
@@ -105,13 +128,39 @@ const renderUser = row => {
         name: 'Amount Used',
         selector: 'amountUsed',
         sortable: true,
-        minWidth: '100px'
-      },
+        minWidth: '100px',
+        cell: row => (
+          <div className='d-flex justify-content-left align-items-center'>
+           
+            <div className=''>
+              
+                <div className='user-info text-truncate d-flex flex-column'>
+                   <span className='font-weight-bold'>₹{row.amountUsed}</span>
+                  
+                </div>
+              
+            </div>
+          </div>
+        )
+    },
     {
         name: 'Balance',
         selector: 'balance',
         sortable: true,
-        minWidth: '100px'
+        minWidth: '100px',
+        cell: row => (
+          <div className='d-flex justify-content-left align-items-center'>
+           
+            <div className=''>
+              
+                <div className='user-info text-truncate d-flex flex-column'>
+                   <span className='font-weight-bold'>₹{row.balance}</span>
+                  
+                </div>
+              
+            </div>
+          </div>
+        )
     },
     {
         name: 'Last Transaction',
@@ -156,10 +205,12 @@ const renderUser = row => {
       if (search.length) {
           updatedData = data.filter(item => {
             const startsWith =
-              item.BidStatus[0].value.toLowerCase().startsWith(search.toLowerCase()) 
+              item.userName.toLowerCase().startsWith(search.toLowerCase())  ||
+              item.lastTransaction.toLowerCase().startsWith(search.toLowerCase())
               
             const includes =
-              item.BidStatus[0].value.toLowerCase().includes(search.toLowerCase())
+              item.userName.toLowerCase().includes(search.toLowerCase()) ||
+              item.lastTransaction.toLowerCase().includes(search.toLowerCase())
     
             if (startsWith) {
               return startsWith
@@ -181,16 +232,14 @@ const renderUser = row => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
-        const startsWith =
-          item.PurchaseIntentName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
-          console.log(startsWith)
-        const includes =
-          item.PurchaseIntentName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
+       
+       const startsWith =
+              item.userName.toLowerCase().startsWith(value.toLowerCase())  ||
+              item.lastTransaction.toLowerCase().startsWith(value.toLowerCase())
+              
+            const includes =
+              item.userName.toLowerCase().includes(value.toLowerCase()) ||
+              item.lastTransaction.toLowerCase().includes(value.toLowerCase())
           
         if (startsWith) {
           return startsWith
@@ -279,6 +328,17 @@ const renderUser = row => {
     link.click()
   }
 
+    //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
   return (
     <Fragment>
       <Card>
@@ -289,18 +349,58 @@ const renderUser = row => {
           <Row>
             <Col md='4'>
             <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
-                options={optionBidStatus}
-                value={Filter}
-                onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
-              />
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
               </div>
+            </Col>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>User</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionPartners}
+                  theme={selectThemeColors}
+                  value={values.user}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 user : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+            <Col md='4' sm='12'>
+                
+                  
+                    <Label for='amt'>Amount Used</Label>
+                    <Input type='range' onChange={handleInputeChange} name='amt'  min="1000" max="300000" step="1000" value={values.amt} />
+                    <output id="output">₹{values.amt}</output>
+                  
+              
             </Col>
           </Row>
         </CardBody>
@@ -342,13 +442,32 @@ const renderUser = row => {
           </div>
         </CardHeader>
 
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+        <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                onChange={e => console.log(e.target.value)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
             <Label className='mr-1' for='search-input'>
               Search
             </Label>
             <Input
-              className='dataTable-filter mb-50'
+              className='dataTable-filter'
               type='text'
               bsSize='sm'
               id='search-input'

@@ -195,12 +195,13 @@ const columns = [
       updatedData = data.filter(item => {
         const Order_Id = item.Order_Id.toString()
         const startsWith =
-          Order_Id.toLowerCase().startsWith(value.toLowerCase())
+          Order_Id.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Action.toLowerCase().startsWith(value.toLowerCase())
           
           console.log(startsWith)
         const includes =
           Order_Id.toLowerCase().includes(value.toLowerCase()) 
-          
+          item.Action.toLowerCase().includes(value.toLowerCase())
 
         if (startsWith) {
           return startsWith
