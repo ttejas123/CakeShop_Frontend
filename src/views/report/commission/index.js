@@ -2,7 +2,7 @@
 //seller id
 //amount 
 //balance
-//transaction time
+//percentsaction time
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -40,15 +40,20 @@ import {
   Badge, UncontrolledDropdown
 } from 'reactstrap'
 
-const optionStatus = [
-    {value: "", label: "Filter Status"},
-    {value: "created", label: "created"},
-    {value: "live", label: "live"},
-    {value: "extended", label: "extended"},
-    {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"}
+  const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
   ]
 
+  const optionType = [
+    {value: "Category", label: "Category"},
+    {value: "User", label: "User"},
+    {value: "Transcation", label: "Transcation"}
+  ]
+  
 const DataTableWithButtons = () => {
   const statusObj = {
         pending: 'light-secondary',
@@ -64,6 +69,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+   const [values, setValues] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -138,7 +144,7 @@ const DataTableWithButtons = () => {
           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>${row.amount}</span>
+                <span className='d-block font-weight-bold text-truncate'>₹{row.amount}</span>
               </div>
             </div>
           )
@@ -155,35 +161,7 @@ const DataTableWithButtons = () => {
     setResponseModel(!responseModel)
   }
 
-  // handle drop down filter
-  const handleFilterByDropDown = (value) => {
-    let updatedData = []
-    setFilter(value)
-    console.log(value.value)
-    let search = "l"
-    search = value.value
-    setSearchValue(search)
-      if (search.length) {
-          updatedData = data.filter(item => {
-            const startsWith =
-              item.Status[0].value.toLowerCase().startsWith(search.toLowerCase()) 
-              
-            const includes =
-              item.Status[0].value.toLowerCase().includes(search.toLowerCase())
-    
-            if (startsWith) {
-              return startsWith
-            } else if (!startsWith && includes) {
-              return includes
-            } else return null
-           })
-        
-      setFilteredData(updatedData)
-      // setSearchValue(search)
-      setFilter(value)
-    }
-  }
-  // ** Function to handle filter
+      // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
     let updatedData = []
@@ -191,17 +169,19 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
+        const percent = item.percent.toString()
         const startsWith =
-          item.To.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
+          item.type.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Bid_Id.toLowerCase().startsWith(value.toLowerCase()) ||
+          percent.toLowerCase().startsWith(value.toLowerCase())
+          
+          console.log(startsWith)
         const includes =
-          item.To.toLowerCase().includes(value.toLowerCase()) ||
-          item.Issue_Type.toLowerCase().includes(value.toLowerCase()) ||
-          item.Status[0].label.toLowerCase().includes(value.toLowerCase())
-         
+          item.type.toLowerCase().includes(value.toLowerCase()) ||
+          item.Bid_Id.toLowerCase().includes(value.toLowerCase()) ||
+          percent.toLowerCase().includes(value.toLowerCase())
+          
+
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -212,6 +192,7 @@ const DataTableWithButtons = () => {
       setSearchValue(value)
     }
   }
+
 
   // ** Function to handle Pagination
   const handlePagination = page => {
@@ -290,8 +271,85 @@ const DataTableWithButtons = () => {
   )
 
 
+    //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
+
   return (
     <Fragment>
+
+    <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+            
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Type</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionType}
+                value={values.Type}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Type : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+
+            <Col md='4' sm='12'>
+               
+                    <Label for='percent'>Percent</Label>
+                    <Input type='range' onChange={handleInputeChange} name='percent'  min="1" max="100" step="1" value={values.percent} />
+                    <output id="output">{values.percent}%</output>
+                 
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
 
       <Card>
 
@@ -328,6 +386,41 @@ const DataTableWithButtons = () => {
             </UncontrolledButtonDropdown>
           </div>
         </CardHeader>
+
+        <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                onChange={e => console.log(e.target.value)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
 
         <DataTable
           noHeader

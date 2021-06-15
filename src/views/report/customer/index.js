@@ -72,6 +72,18 @@ const optionCity = [
     {value: "Pune", label: "Pune"}
 ]
 
+const optionUserType = [
+    {value: "Buyer", label: "Buyer"},
+    {value: "Seller", label: "Seller"},
+    {value: "Both", label: "Both"}
+  ]
+
+const optionKyc = [
+    {value: "Approval", label: "Approval"},
+    {value: "Pending", label: "Pending"},
+    {value: "Approved", label: "Approved"}
+  ]
+
 const optionState = [
     {value: "", label: "Search State"},
     {value: "Maharashtra", label: "Maharashtra"},
@@ -93,6 +105,7 @@ const DataTableWithButtons = () => {
   const [FilterCity, setFilterCity] = useState('')
   const [FilterState, setFilterState] = useState('')
   const [FilterCountry, setFilterCountry] = useState('')
+  const [values, setValues] = useState('')
 
    //deleteCountry
   const deleteCountry = (val) => {
@@ -277,22 +290,20 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
+        const mobile = item.mobile.toString()
         const startsWith =
-          item.BidCloseDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.BidApplicationDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.GoLive.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.CustomStatus[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.BidStatus[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          NoOfBidder.toLowerCase().startsWith(value.toLowerCase())
+          item.userType[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.isVerified[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.first_name.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.last_name.toLowerCase().startsWith(value.toLowerCase()) ||
+          mobile.toLowerCase().startsWith(value.toLowerCase())
           console.log(startsWith)
         const includes =
-          item.BidCloseDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.BidApplicationDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.GoLive.toLowerCase().includes(value.toLowerCase()) ||
-          item.CustomStatus[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.BidStatus[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          NoOfBidder.toLowerCase().includes(value.toLowerCase())
+          item.userType[0].label.toLowerCase().includes(value.toLowerCase()) ||
+          item.isVerified[0].label.toLowerCase().includes(value.toLowerCase()) ||
+          item.first_name.toLowerCase().includes(value.toLowerCase()) ||
+          item.last_name.toLowerCase().includes(value.toLowerCase()) ||
+          mobile.toLowerCase().includes(value.toLowerCase())
 
         if (startsWith) {
           return startsWith
@@ -302,6 +313,8 @@ const DataTableWithButtons = () => {
        })
       setFilteredData(updatedData)
       setSearchValue(value)
+    } else {
+      setFilteredData(data)
     }
   }
 
@@ -348,7 +361,16 @@ const DataTableWithButtons = () => {
     link.click()
   }
 
-
+    //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
   // ** Function to handle Pagination
   const handlePagination = page => {
     setCurrentPage(page.selected)
@@ -390,6 +412,29 @@ const DataTableWithButtons = () => {
         <CardBody>
           <Row>
             <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>User Type</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionUserType}
+                value={values.user}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 user : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+            <Col md='4'>
               <Label className='mr-1' for='search-input'>
                 Filter Country
               </Label>
@@ -422,6 +467,31 @@ const DataTableWithButtons = () => {
                 }}
               />
             </Col>
+
+            <Col md='4'>
+            <div>
+              <Label for='BidStatus'>User KYC</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionKyc}
+                value={values.kyc}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 kyc : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+
             <Col md='4'>
               <Label className='mr-1' for='search-input'>
                 Filter City
@@ -478,13 +548,32 @@ const DataTableWithButtons = () => {
           </div>
         </CardHeader>
 
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+        <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                onChange={e => console.log(e.target.value)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
             <Label className='mr-1' for='search-input'>
               Search
             </Label>
             <Input
-              className='dataTable-filter mb-50'
+              className='dataTable-filter'
               type='text'
               bsSize='sm'
               id='search-input'

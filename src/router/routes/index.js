@@ -109,6 +109,10 @@ const Routes = [
     component: lazy(() => import('../../views/master/vas/orderlist'))
   },
   {
+    path: '/master/vass/orderlists/:id',
+    component: lazy(() => import('../../views/master/vas/orderlist/documentsVas.js'))
+  },
+  {
     path: '/master/vass/trans/add',
     component: lazy(() => import('../../views/master/vas/trascAdd'))
   },

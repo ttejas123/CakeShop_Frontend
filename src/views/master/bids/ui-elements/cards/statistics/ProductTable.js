@@ -93,7 +93,7 @@ const CompanyTable = () => {
           <tr>
             <th className="w-25">Name</th>
             <th className="w-25">category</th>
-            <th className="w-25">Required Quntity</th>
+            <th className="w-25">Required Quantity</th>
             <th className="w-25">Price</th>
           </tr>
         </thead>

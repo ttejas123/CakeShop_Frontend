@@ -142,7 +142,7 @@ const UserAccountTab = (prop) => {
                 <Label for='content'>Content</Label>
                 <InputGroup>
                   
-                  <Input name="content" type="textarea" row="5" onChange={handleInputeChange} id='content' placeholder='Write your msg here !!!' value={values.content} />
+                  <Input name="content" type="textarea" row="5" onChange={handleInputeChange} id='content' maxLength="100" placeholder='Write your msg here !!!' value={values.content} />
                 </InputGroup>
               </FormGroup>
             </Col>
