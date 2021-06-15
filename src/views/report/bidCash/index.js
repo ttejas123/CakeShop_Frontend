@@ -1,10 +1,3 @@
-// id
-// user id
-// transaction
-// transaction type
-// balance
-// created time
-
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
@@ -56,6 +49,41 @@ const renderClient = row => {
   }
 }
 
+const part = (data2) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+          {renderClient(data2)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.Name}</span>
+              <small className='text-truncate text-muted mb-0'>@{data2.username}</small>
+          </div>
+                                         
+        </div>
+    </div>)
+}
+
+const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
+  ]
+
+const optionPartners = [
+    {value: "user1212", label: part(data[0])},
+    {value: "user1231", label: part(data[1])},
+    {value: "user1234", label: part(data[2])},
+    {value: "user2345", label: part(data[3])},
+    {value: "user3456", label: part(data[4])}
+  ]
+
+const optiontransact = [
+    {value: "Debit Card", label: 'Debit Card'},
+    {value: "Credit Card", label: 'Credit Card'}
+  ]
+
 const DataTableWithButtons = () => {
  
   // ** States
@@ -65,6 +93,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //view
   const view = (val) => {
@@ -178,6 +207,36 @@ const DataTableWithButtons = () => {
     link.click()
   }
 
+      // ** Function to handle filter
+  const handleFilter = e => {
+    const value = e.target.value
+    let updatedData = []
+    setSearchValue(value)
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        
+        const startsWith =
+          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.username.toLowerCase().startsWith(value.toLowerCase())
+          
+          console.log(startsWith)
+        const includes =
+          item.Name.toLowerCase().includes(value.toLowerCase()) ||
+          item.username.toLowerCase().includes(value.toLowerCase())
+          
+
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+      setSearchValue(value)
+    }
+  }
+
 
   // ** Custom Pagination
   const CustomPagination = () => (
@@ -205,9 +264,99 @@ const DataTableWithButtons = () => {
     />
   )
 
+    //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
 
   return (
     <Fragment>
+
+    <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='Transaction'>Transaction Type</Label>
+              <Select
+                  id='Transaction'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optiontransact}
+                  theme={selectThemeColors}
+                  value={values.tran}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 tran : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>User</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionPartners}
+                  theme={selectThemeColors}
+                  value={values.user}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 user : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
 
       <Card>
 
@@ -245,6 +394,41 @@ const DataTableWithButtons = () => {
             </UncontrolledButtonDropdown>
           </div>
         </CardHeader>
+
+                <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                onChange={e => console.log(e.target.value)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
 
         <DataTable
           noHeader

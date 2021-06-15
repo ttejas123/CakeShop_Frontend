@@ -66,13 +66,22 @@ const DataTableWithButtons = () => {
         send: 'light-success',
         failed: 'light-danger'
   }
+
+  const optionDate = [
+    {value: "7days", label: "7 Days"},
+    {value: "1month", label: "1 Month"},
+    {value: "3months", label: "3 Months"},
+    {value: "today", label: "Today"},
+    {value: "overall", label: "Overall"}
+  ]
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
-  const [filteredData, setFilteredData] = useState([])
+  const [filteredData, setFilteredData] = useState(data)
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
    //view
   const view = (val) => {
@@ -136,7 +145,20 @@ const DataTableWithButtons = () => {
           name: 'Amount Paid',
           selector: 'Amount_Paid',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          cell: row => (
+            <div className='d-flex justify-content-left align-items-center'>
+              
+              <div className=''>
+                
+                  <div className='user-info text-truncate d-flex flex-column'>
+                     <span className='font-weight-bold'>₹{row.Amount_Paid}</span>
+                     
+                  </div>
+                  
+              </div>
+            </div>
+          )
         },
         {
           name: 'Cancle Resoson',
@@ -156,6 +178,125 @@ const DataTableWithButtons = () => {
   // ** Function to handle Modal toggle
   const handleModal = () => {
     setModal(!modal)
+  }
+
+  const handleBuyerFilter = e => {
+    const value = e.target.value
+    let updatedData = []
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        
+        const startsWith =
+         item.buyer_Info.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.buyers_userName.toLowerCase().startsWith(value.toLowerCase())
+          
+        const includes =
+          item.buyer_Info.toLowerCase().includes(value.toLowerCase()) ||
+          item.buyers_userName.toLowerCase().includes(value.toLowerCase())
+          
+
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+
+    } else { 
+      setFilteredData(data)
+    }
+  }
+
+  const handleSellerFilter = e => {
+    const value = e.target.value
+    let updatedData = []
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        
+        const startsWith =
+         item.Seller_Info.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.sellers_userName.toLowerCase().startsWith(value.toLowerCase())
+          
+        const includes =
+          item.Seller_Info.toLowerCase().includes(value.toLowerCase()) ||
+          item.sellers_userName.toLowerCase().includes(value.toLowerCase())
+          
+
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+
+    }
+  }
+
+  const handleProductFilter = e => {
+    const value = e.target.value
+    let updatedData = []
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        
+        const startsWith =
+         item.Products_name.toLowerCase().startsWith(value.toLowerCase()) 
+          
+        const includes =
+          item.Products_name.toLowerCase().includes(value.toLowerCase())
+          
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+
+    } else { 
+      setFilteredData(data)
+    }
+  }
+      // ** Function to handle filter
+  const handleFilter = e => {
+    const value = e.target.value
+    let updatedData = []
+    setSearchValue(value)
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        
+        const startsWith =
+          item.Seller_Info.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.buyers_userName.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.sellers_userName.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.buyer_Info.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.Amount_Paid.toLowerCase().startsWith(value.toLowerCase())
+          
+         
+        const includes =
+          item.Seller_Info.toLowerCase().includes(value.toLowerCase()) ||
+          item.buyers_userName.toLowerCase().includes(value.toLowerCase()) ||
+          item.sellers_userName.toLowerCase().includes(value.toLowerCase()) ||
+          item.buyer_Info.toLowerCase().includes(value.toLowerCase()) ||
+          item.Amount_Paid.toLowerCase().includes(value.toLowerCase())
+          
+
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+      setSearchValue(value)
+    } else { 
+      setFilteredData(data)
+    }
   }
 
   // ** Function to handle Pagination
@@ -208,6 +349,16 @@ const DataTableWithButtons = () => {
     link.click()
   }
 
+      //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
 
   // ** Custom Pagination
   const CustomPagination = () => (
@@ -216,7 +367,7 @@ const DataTableWithButtons = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={filteredData ? filteredData.length / 7 : data.length / 7 || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -238,6 +389,79 @@ const DataTableWithButtons = () => {
 
   return (
     <Fragment>
+
+       <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>Date</Label>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionDate}
+                value={values.Date}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 Date : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              
+              </div>
+            </Col>
+            
+            <Col md='4'>
+              <Label>
+                Buyer
+              </Label>
+              <Input
+               
+                type='text'
+                bsSize='sm'
+                id='search-input'
+                onChange={handleBuyerFilter}
+              />
+            </Col>
+
+             <Col md='4'>
+              <Label>
+                Seller
+              </Label>
+              <Input
+               
+                type='text'
+                bsSize='sm'
+                id='search-input'
+                onChange={handleSellerFilter}
+              />
+            </Col>
+
+             <Col md='4'>
+              <Label>
+                Product
+              </Label>
+              <Input
+               
+                type='text'
+                bsSize='sm'
+                id='search-input'
+                onChange={handleProductFilter}
+              />
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+
 
       <Card>
 
@@ -276,6 +500,41 @@ const DataTableWithButtons = () => {
           </div>
         </CardHeader>
 
+        <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                onChange={e => console.log(e.target.value)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
+
         <DataTable
           noHeader
           pagination
@@ -285,7 +544,8 @@ const DataTableWithButtons = () => {
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
+          data={filteredData}
+
         />
         
       </Card>
@@ -295,3 +555,4 @@ const DataTableWithButtons = () => {
 }
 
 export default DataTableWithButtons
+

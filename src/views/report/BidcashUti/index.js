@@ -59,14 +59,26 @@ const renderClient = row => {
   }
 }
 
-const optionBidStatus = [
-    {value: "", label: "Filter Status"},
-    {value: "created", label: "created"},
-    {value: "live", label: "live"},
-    {value: "extended", label: "extended"},
-    {value: "closed", label: "closed"},
-    {value: "rejected", label: "rejected"},
-    {value: "auto closed", label: "auto closed"}
+const part = (data2) => {
+  return (<div className='d-flex justify-content-left align-items-center'>
+          {renderClient(data2)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.utilized_by}</span>
+              <small className='text-truncate text-muted mb-0'>@{data2.utilized_by}</small>
+          </div>
+                                         
+        </div>
+    </div>)
+}
+
+const optionPartners = [
+    {value: "user1212", label: part(data[0])},
+    {value: "user1231", label: part(data[1])},
+    {value: "user1234", label: part(data[2])},
+    {value: "user2345", label: part(data[3])},
+    {value: "user3456", label: part(data[4])}
   ]
 
 const DataTableWithButtons = () => {
@@ -82,6 +94,7 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
 
     const deleteCountry = (val) => {
     //here we passing id to delete this specific record
@@ -161,20 +174,17 @@ const DataTableWithButtons = () => {
 
     if (value.length) {
       updatedData = data.filter(item => {
-        
+        const bid_id = item.bid_id.toString()
+        const cash_utilizated = item.cash_utilizated.toString()
         const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
+          bid_id.toLowerCase().startsWith(value.toLowerCase()) ||
+          item.utilized_by.toLowerCase().startsWith(value.toLowerCase()) ||
+          cash_utilizated.toLowerCase().startsWith(value.toLowerCase())
 
         const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
+          bid_id.toLowerCase().includes(value.toLowerCase()) ||
+          item.utilized_by.toLowerCase().includes(value.toLowerCase()) ||
+          cash_utilizated.toLowerCase().includes(value.toLowerCase())  
 
         if (startsWith) {
           return startsWith
@@ -184,6 +194,33 @@ const DataTableWithButtons = () => {
        })
       setFilteredData(updatedData)
       setSearchValue(value)
+    }
+  }
+
+    const handleBidIdFilter = e => {
+    const value = e.target.value
+    let updatedData = []
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        const bid_id = item.bid_id.toString()
+        const startsWith =
+        bid_id.toLowerCase().startsWith(value.toLowerCase()) 
+          
+        const includes =
+        bid_id.toLowerCase().includes(value.toLowerCase()) 
+          
+
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+
+    } else { 
+      setFilteredData(data)
     }
   }
 
@@ -263,9 +300,66 @@ const DataTableWithButtons = () => {
     />
   )
 
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
 
   return (
     <Fragment>
+
+    <Card>
+        <CardHeader>
+          <CardTitle tag='h4'>Search Filter</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <Row>
+            <Col md='4'>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Label for='BidStatus'>utilized By</Label>
+              <Select
+                  id='BidStatus'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={optionPartners}
+                  theme={selectThemeColors}
+                  value={values.user}
+                  onChange={data => {
+                                     setValues(
+                                              {
+                                                 ...values,
+                                                 user : data
+                                              } 
+                                      )
+                                    }
+                            }
+                />
+              </div>
+            </Col>
+            
+            <Col md='4'>
+              <Label>
+                Bid ID
+              </Label>
+              <Input
+               
+                type='text'
+                bsSize='sm'
+                id='search-input'
+                onChange={handleBidIdFilter}
+              />
+            </Col>
+
+          </Row>
+        </CardBody>
+      </Card>
 
       <Card>
 
@@ -302,6 +396,41 @@ const DataTableWithButtons = () => {
             </UncontrolledButtonDropdown>
           </div>
         </CardHeader>
+
+        <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                onChange={e => console.log(e.target.value)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
 
         <DataTable
           noHeader

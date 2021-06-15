@@ -173,6 +173,8 @@ const DataTableWithButtons = () => {
        })
       setFilteredData(updatedData)
       setSearchValue(value)
+    } else {
+      setFilteredData(data)
     }
   }
 
@@ -332,13 +334,32 @@ const DataTableWithButtons = () => {
           </div>
         </CardHeader>
 
-         <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+        <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                onChange={e => console.log(e.target.value)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
             <Label className='mr-1' for='search-input'>
               Search
             </Label>
             <Input
-              className='dataTable-filter mb-50'
+              className='dataTable-filter'
               type='text'
               bsSize='sm'
               id='search-input'

@@ -1,10 +1,3 @@
-//Order List :- vas_id, name,  amount_paid, paid_start, start_date, end_date
-
-//Provider :- Name, email , address, service
-
-// Type : Category, User, Transcation
-// default Commission %
-
 // ** Custom Components
 import Avatar from '@components/avatar'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
@@ -87,6 +80,12 @@ const DataTableWithButtons = () => {
           minWidth: '150px'
         },
         {
+          name: 'Service Name',
+          selector: 'service',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
           name: 'User',
           minWidth: '150px',
           selector: 'Name',
@@ -127,7 +126,7 @@ const DataTableWithButtons = () => {
           minWidth: '150px',
           cell: row => (
             <div className='d-flex justify-content-left align-items-center'>
-              <div className='d-flex flex-column ml-2'>
+              <div className='d-flex flex-column'>
                 
                   <span className='font-weight-bold'>{row.paid_start}</span>
                 
@@ -146,26 +145,20 @@ const DataTableWithButtons = () => {
           selector: 'end_date',
           sortable: true,
           minWidth: '150px'
+        },
+        {
+          name: 'Actions',
+          allowOverflow: true,
+          cell: row => {
+            return (
+              <div className='d-flex ml-1'>
+                <Link to={`/master/vass/orderlists/${row.id}`}>
+                  <Eye size={15} />
+                </Link>  
+              </div>
+            )
+          }
         }
-        // {
-        //   name: 'Actions',
-        //   allowOverflow: true,
-        //   cell: row => {
-        //     return (
-        //       <div className='d-flex'>
-        //         <UncontrolledDropdown>
-        //           <DropdownToggle className='pr-1' tag='span'>
-        //             <Trash size={15} onClick={e => {
-        //                                                    } }/>
-        //           </DropdownToggle>
-        //         </UncontrolledDropdown>
-        //         <Link to={`/master/cmmi/edit/${row.id}`}>
-        //           <Edit size={15} />
-        //         </Link>  
-        //       </div>
-        //     )
-        //   }
-        // }
     ]
 
 
