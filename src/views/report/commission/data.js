@@ -15,7 +15,7 @@ export const data = [
         Bid_Id: "Bid23432",
         type: 'Category',
         amount: 16521,
-        percent: 16,
+        percent: 13,
         
         id: 1
       },
@@ -23,7 +23,7 @@ export const data = [
         Bid_Id: "Bid23432",
         type: 'Category',
         amount: 16521,
-        percent: 16,
+        percent: 14,
         
         id: 2
       },
@@ -39,7 +39,7 @@ export const data = [
         Bid_Id: "Bid23432",
         type: 'User',
         amount: 16521,
-        percent: 16,
+        percent: 17,
         
         id: 4
       },
@@ -55,7 +55,7 @@ export const data = [
         Bid_Id: "Bid23432",
         type: 'Transcation',
         amount: 16521,
-        percent: 16,
+        percent: 12,
         
         id: 6
       },

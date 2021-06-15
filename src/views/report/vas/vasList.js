@@ -13,7 +13,7 @@ import DataTable from 'react-data-table-component'
 import Select from 'react-select'
 import { selectThemeColors } from '@utils'
 import { MoreVertical, Edit, FileText, Archive,  Share, Printer, File, Grid, Copy, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, CardBody, Row, Col, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Badge, Label } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, Row, Col, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Badge, Label, Input } from 'reactstrap'
 //import InputBasic from './AddBadges'
 // import HorizontalForm from './AddCurrency'
 // import EditForm from './E
@@ -253,6 +253,17 @@ const handleDelete = (data) => {
     />
   )
 
+      //for other input
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
+  }
+
   return (
       <Fragment>
         <Card>
@@ -310,6 +321,24 @@ const handleDelete = (data) => {
               
               </div>
             </Col>
+            <Col md='4' sm='12'>
+                
+                  
+                    <Label for='rate'>Rate</Label>
+                    <Input type='range' onChange={handleInputeChange} name='rate'  min="0" max="10000" step="10" value={values.rate} />
+                    <output id="output">₹{values.rate}</output>
+                  
+              
+            </Col>
+            <Col md='4' sm='12'>
+                
+                  
+                    <Label for='qut'>Quantity</Label>
+                    <Input type='range' onChange={handleInputeChange} name='qut'  min="0" max="100" step="1" value={values.qut} />
+                    <output id="output">{values.qut}hr</output>
+                  
+              
+            </Col>
           </Row>
         </CardBody>
       </Card>
@@ -355,6 +384,29 @@ const handleDelete = (data) => {
           </div>
               
       </CardHeader>
+
+      <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                onChange={e => console.log(e.target.value)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          
+        </Row>
     
       <DataTable
           noHeader

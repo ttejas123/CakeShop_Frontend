@@ -25,7 +25,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -40,7 +40,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -55,7 +55,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -70,7 +70,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -85,7 +85,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -100,7 +100,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -115,7 +115,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -130,7 +130,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -145,7 +145,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -160,7 +160,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -175,7 +175,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -190,7 +190,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -205,7 +205,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -220,7 +220,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -235,7 +235,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -250,7 +250,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -265,7 +265,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -280,7 +280,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -295,7 +295,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -310,7 +310,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -325,7 +325,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -340,7 +340,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -355,7 +355,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -370,7 +370,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -385,7 +385,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -400,7 +400,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -415,7 +415,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -430,7 +430,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -445,7 +445,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -460,7 +460,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -475,7 +475,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -490,7 +490,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -505,7 +505,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -520,7 +520,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -535,7 +535,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -550,7 +550,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -565,7 +565,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -580,7 +580,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -595,7 +595,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -610,7 +610,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -625,7 +625,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -640,7 +640,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -655,7 +655,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -670,7 +670,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -685,7 +685,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -700,7 +700,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -715,7 +715,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -730,7 +730,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -745,7 +745,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -760,7 +760,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -775,7 +775,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -790,7 +790,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -805,7 +805,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -820,7 +820,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -835,7 +835,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -850,7 +850,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -865,7 +865,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -880,7 +880,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -895,7 +895,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -910,7 +910,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -925,7 +925,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -940,7 +940,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -955,7 +955,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -970,7 +970,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -985,7 +985,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1000,7 +1000,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1015,7 +1015,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1030,7 +1030,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1045,7 +1045,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1060,7 +1060,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1075,7 +1075,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1090,7 +1090,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1105,7 +1105,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1120,7 +1120,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1135,7 +1135,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1150,7 +1150,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1165,7 +1165,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1180,7 +1180,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1195,7 +1195,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1210,7 +1210,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1225,7 +1225,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1240,7 +1240,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1255,7 +1255,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1270,7 +1270,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status:[{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1285,7 +1285,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1300,7 +1300,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "pending", label: "pending"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1315,7 +1315,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "failed", label: "failed"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1330,7 +1330,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1345,7 +1345,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       },
@@ -1360,7 +1360,7 @@ export const data = [
         Seller_Info : "Pravin Poshmani",
         sellers_avatar: pravin,
         sellers_userName: "pravin",
-        Amount_Paid: "₹20000",
+        Amount_Paid: "20000",
         Status: [{value: "send", label: "send"}],
         Cancle_date: `${new Date().toGMTString()}` 
       }

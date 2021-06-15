@@ -104,7 +104,7 @@ export const data = [
         Name:"Avinash"
       },
       {
-        id:1,
+        id:10,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -114,7 +114,7 @@ export const data = [
         Name:"Tejas" 
       },
       {
-        id:2,
+        id:11,
         BlockedBy : "Tejas",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -124,7 +124,7 @@ export const data = [
         Name:"Pravin"
       },
       {
-        id:3,
+        id:12,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -134,7 +134,7 @@ export const data = [
         Name:"Komal"
       },
       {
-        id:4,
+        id:13,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -144,7 +144,7 @@ export const data = [
        Name:"Mehul"
       },
       {
-        id:5,
+        id:14,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -154,7 +154,7 @@ export const data = [
         Name:"Harpriya"
       },
       {
-        id:6,
+        id:15,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -164,7 +164,7 @@ export const data = [
         Name:"Reethika"
       },
       {
-        id:7,
+        id:16,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -174,7 +174,7 @@ export const data = [
         Name:"Himanshu"
       },
       {
-        id:8,
+        id:17,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -184,7 +184,7 @@ export const data = [
         Name:"Surya_Das"
       },
       {
-        id:9,
+        id:18,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -194,7 +194,7 @@ export const data = [
         Name:"Avinash"
       },
       {
-        id:1,
+        id:19,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -204,7 +204,7 @@ export const data = [
         Name:"Tejas" 
       },
       {
-        id:2,
+        id:20,
         BlockedBy : "Tejas",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -214,7 +214,7 @@ export const data = [
         Name:"Pravin"
       },
       {
-        id:3,
+        id:21,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -224,7 +224,7 @@ export const data = [
         Name:"Komal"
       },
       {
-        id:4,
+        id:22,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -234,7 +234,7 @@ export const data = [
        Name:"Mehul"
       },
       {
-        id:5,
+        id:23,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -244,7 +244,7 @@ export const data = [
         Name:"Harpriya"
       },
       {
-        id:6,
+        id:24,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -254,7 +254,7 @@ export const data = [
         Name:"Reethika"
       },
       {
-        id:7,
+        id:25,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -264,7 +264,7 @@ export const data = [
         Name:"Himanshu"
       },
       {
-        id:8,
+        id:26,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -274,7 +274,7 @@ export const data = [
         Name:"Surya_Das"
       },
       {
-        id:9,
+        id:27,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -284,7 +284,7 @@ export const data = [
         Name:"Avinash"
       },
       {
-        id:1,
+        id:28,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -294,7 +294,7 @@ export const data = [
         Name:"Tejas" 
       },
       {
-        id:2,
+        id:29,
         BlockedBy : "Tejas",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -304,7 +304,7 @@ export const data = [
         Name:"Pravin"
       },
       {
-        id:3,
+        id:30,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -314,7 +314,7 @@ export const data = [
         Name:"Komal"
       },
       {
-        id:4,
+        id:31,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -324,7 +324,7 @@ export const data = [
        Name:"Mehul"
       },
       {
-        id:5,
+        id:32,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -334,7 +334,7 @@ export const data = [
         Name:"Harpriya"
       },
       {
-        id:6,
+        id:33,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -344,7 +344,7 @@ export const data = [
         Name:"Reethika"
       },
       {
-        id:7,
+        id:34,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -354,7 +354,7 @@ export const data = [
         Name:"Himanshu"
       },
       {
-        id:8,
+        id:35,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -364,7 +364,7 @@ export const data = [
         Name:"Surya_Das"
       },
       {
-        id:9,
+        id:36,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -374,7 +374,7 @@ export const data = [
         Name:"Avinash"
       },
       {
-        id:1,
+        id:37,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -384,7 +384,7 @@ export const data = [
         Name:"Tejas" 
       },
       {
-        id:2,
+        id:38,
         BlockedBy : "Tejas",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -394,7 +394,7 @@ export const data = [
         Name:"Pravin"
       },
       {
-        id:3,
+        id:39,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -404,7 +404,7 @@ export const data = [
         Name:"Komal"
       },
       {
-        id:4,
+        id:40,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -414,7 +414,7 @@ export const data = [
        Name:"Mehul"
       },
       {
-        id:5,
+        id:41,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -424,7 +424,7 @@ export const data = [
         Name:"Harpriya"
       },
       {
-        id:6,
+        id:42,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -434,7 +434,7 @@ export const data = [
         Name:"Reethika"
       },
       {
-        id:7,
+        id:43,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -444,7 +444,7 @@ export const data = [
         Name:"Himanshu"
       },
       {
-        id:8,
+        id:44,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -454,7 +454,7 @@ export const data = [
         Name:"Surya_Das"
       },
       {
-        id:9,
+        id:45,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -464,7 +464,7 @@ export const data = [
         Name:"Avinash"
       },
       {
-        id:1,
+        id:46,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -474,7 +474,7 @@ export const data = [
         Name:"Tejas" 
       },
       {
-        id:2,
+        id:47,
         BlockedBy : "Tejas",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -484,7 +484,7 @@ export const data = [
         Name:"Pravin"
       },
       {
-        id:3,
+        id:48,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -494,7 +494,7 @@ export const data = [
         Name:"Komal"
       },
       {
-        id:4,
+        id:49,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -504,7 +504,7 @@ export const data = [
        Name:"Mehul"
       },
       {
-        id:5,
+        id:50,
         BlockedBy : "Pravin",
         Reason : "False Claim",
         Comment : "provided False information",
@@ -512,135 +512,5 @@ export const data = [
         avatar:"",
         username:"harpriya23",
         Name:"Harpriya"
-      },
-      {
-        id:6,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:reethika,
-        username:"Reethika45",
-        Name:"Reethika"
-      },
-      {
-        id:7,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:himanshu,
-        username:"himanshu23",
-        Name:"Himanshu"
-      },
-      {
-        id:8,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:"",
-        username:"suryadas",
-        Name:"Surya_Das"
-      },
-      {
-        id:9,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:"",
-        username:"avinash",
-        Name:"Avinash"
-      },
-      {
-        id:1,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:'',
-        username:"tejas",
-        Name:"Tejas" 
-      },
-      {
-        id:2,
-        BlockedBy : "Tejas",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:pravin,
-        username:"pravinn2",
-        Name:"Pravin"
-      },
-      {
-        id:3,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:komal,
-        username:"komal12",
-        Name:"Komal"
-      },
-      {
-        id:4,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:'',
-        username:"mehulq1",
-       Name:"Mehul"
-      },
-      {
-        id:5,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:"",
-        username:"harpriya23",
-        Name:"Harpriya"
-      },
-      {
-        id:6,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:reethika,
-        username:"Reethika45",
-        Name:"Reethika"
-      },
-      {
-        id:7,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:himanshu,
-        username:"himanshu23",
-        Name:"Himanshu"
-      },
-      {
-        id:8,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:"",
-        username:"suryadas",
-        Name:"Surya_Das"
-      },
-      {
-        id:9,
-        BlockedBy : "Pravin",
-        Reason : "False Claim",
-        Comment : "provided False information",
-        Time : `${new Date().toGMTString()}`,
-        avatar:"",
-        username:"avinash",
-        Name:"Avinash"
       }
 ]
