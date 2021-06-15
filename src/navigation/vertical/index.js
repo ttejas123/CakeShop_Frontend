@@ -131,12 +131,12 @@ export default [
         icon: <Circle size={20} />,
         navLink: '/badges-list'
       },
-      {
-        id: 'customizationTimeline',
-        title: 'Customization Timeline',
-        icon: <Circle size={20} />,
-        navLink: '/customization-timeline'
-      },
+      // {
+      //   id: 'customizationTimeline',
+      //   title: 'Customization Timeline',
+      //   icon: <Circle size={20} />,
+      //   navLink: '/customization-timeline'
+      // },
       {
         id: 'badgeMapping',
         title: 'Badge Mapping',
@@ -887,7 +887,7 @@ export default [
       },
       {
         id: 'Search_keyWord_History',
-        title: 'Search Keyword History',
+        title: 'Search keyWord History',
         icon: <Circle size={20} />,
         navLink: '/report/SrchKeyWHistory'
       },

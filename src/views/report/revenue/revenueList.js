@@ -1,17 +1,13 @@
-// ** Custom Components
-import Avatar from '@components/avatar'
-import { Link } from 'react-router-dom'
 //import { DropDownList } from '@progress/kendo-react-dropdowns'
-// ** Third Party Components
-import '@styles/react/libs/react-select/_react-select.scss'
-import '@styles/react/libs/tables/react-dataTable-component.scss'
-
 // ** React Imports
 import { Fragment, useState, forwardRef } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
 import { data, columns } from './data'
 import Select from 'react-select'
+// ** Third Party Components
+import '@styles/react/libs/react-select/_react-select.scss'
+import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** Add New Modal Component
 //import FormModel from './formModel'
@@ -45,7 +41,7 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   </div>
 ))
 
-const optionBidStatus = [
+const optionDaysFilter = [
     {value: "7days", label: "7 Days"},
     {value: "1month", label: "1 Month"},
     {value: "3months", label: "3 Months"},
@@ -53,41 +49,57 @@ const optionBidStatus = [
     {value: "overall", label: "Overall"}
   ]
 
+  const optionAccepted = [
+    {value: "Yes", label: "Yes"},
+    {value: "No", label: "No"}
+  ]
+
+  const optionDoneBy = [
+    {value: "Pravin Poshmani", label: "Pravin Poshmani"},
+    {value: "Tekas Thakare", label: "Tekas Thakare"},
+    {value: "Komal Kamble", label: "Komal Kamble"},
+    {value: "Himanshu Chanda", label: "Himanshu Chanda"}
+  ]
+
+  const optionOrderType = [
+    {value: "Type1", label: "Type1"},
+    {value: "Type2", label: "Type2"},
+    {value: "Type3", label: "Type3"},
+    {value: "Type4", label: "Type4"}
+  ]
+
+  const optionStatus = [
+    {value: "Resolved", label: "Resolved"},
+    {value: "Under Review", label: "Under Review"},
+    {value: "Pending", label: "Pending"}
+  ]
+
 const RevenueList = () => {
+  const [picker, setPicker] = useState(new Date())
+  const [values, setValues] = useState('')
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
         approval: 'light-warning'
   }
-  // ** States
+ 
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-   //deleteCountry
-  const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
-    //edit action
-   const AddeditEvent = (val) => {
-     //here we hande event which comming from addNewModel.js (Form for add and edit)
-      setCurrentId("")
-      console.log(val)
-  }
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
+  
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues(
+    {
+      ...values,
+      [name] : value
+    }
+    )
   }
 
   // handle drop down filter
@@ -121,22 +133,21 @@ const RevenueList = () => {
   // ** Function to handle filter
   const handleFilter = e => {
     const value = e.target.value
+    console.log("value", value)
     let updatedData = []
     setSearchValue(value)
 
     if (value.length) {
       updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
+        
         const startsWith =
-          item.RevenueName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
+          item.orderId.toLowerCase().startsWith(value.toLowerCase())
+          
           console.log(startsWith)
         const includes =
-          item.RevenueName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
+          item.orderId.toLowerCase().includes(value.toLowerCase())
           
+
         if (startsWith) {
           return startsWith
         } else if (!startsWith && includes) {
@@ -153,6 +164,18 @@ const RevenueList = () => {
     setCurrentPage(page.selected)
   }
 
+  const handlePerPage = e => {
+    setRowsPerPage(20)
+    console.log(e.target.value)
+    // dispatch(
+    //   getData({
+    //     page: currentPage,
+    //     perPage: parseInt(e.target.value),
+    //     q: searchValue
+    //   })
+    // )
+  }
+
   // ** Custom Pagination
   const CustomPagination = () => (
     <ReactPaginate
@@ -160,7 +183,7 @@ const RevenueList = () => {
       nextLabel=''
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / rowsPerPage : data.length / rowsPerPage || 1}
       breakLabel='...'
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -179,7 +202,7 @@ const RevenueList = () => {
     />
   )
 
-  
+   
   // ** Converts table to CSV
   function convertArrayOfObjectsToCSV(array) {
     let result
@@ -224,7 +247,6 @@ const RevenueList = () => {
     link.click()
   }
 
-
   return (
     <Fragment>
       <Card>
@@ -234,26 +256,66 @@ const RevenueList = () => {
         <CardBody>
           <Row>
             <Col md='4'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Period
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
                 className='react-select'
                 classNamePrefix='select'
-                options={optionBidStatus}
-                value={Filter}
+                options={optionDaysFilter}
+                value={values.period}
                 onChange={data => {
-                  handleFilterByDropDown(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              period : data
+                           } 
+                   )
+                 }
+         }
               />
+              </div>
             </Col>
-          </Row>
+            <Col md='4' sm='12' className=' mt-1'>              
+                    <Label for='tran'>Amount Range</Label>
+                    <Input type='range' onChange={handleInputeChange} name='tran'  min="1000" max="300000" step="1000" value={values.tran} />
+                    <output id="output">{values.tran}</output>
+            </Col>
+            <Col md='4'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Order Type
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionOrderType}
+                value={values.orderType}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              orderType : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+           </Row>
         </CardBody>
       </Card>
 
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Revenues</CardTitle>
+          <CardTitle tag='h4'>Revenue </CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>
@@ -286,13 +348,33 @@ const RevenueList = () => {
           </div>
         </CardHeader>
 
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
+        <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                value={rowsPerPage}
+                onChange={e => handlePerPage(e)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
             <Label className='mr-1' for='search-input'>
               Search
             </Label>
             <Input
-              className='dataTable-filter mb-50'
+              className='dataTable-filter'
               type='text'
               bsSize='sm'
               id='search-input'
@@ -307,7 +389,7 @@ const RevenueList = () => {
           pagination
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={rowsPerPage}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}

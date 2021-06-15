@@ -142,11 +142,11 @@ const CorporateList = () => {
       updatedData = data.filter(item => {
         
         const startsWith =
-          item.userName.toLowerCase().startsWith(value.toLowerCase())
+          item.corporateName.toLowerCase().startsWith(value.toLowerCase())
           
           console.log(startsWith)
         const includes =
-          item.userName.toLowerCase().includes(value.toLowerCase())
+          item.corporateName.toLowerCase().includes(value.toLowerCase())
           
 
         if (startsWith) {

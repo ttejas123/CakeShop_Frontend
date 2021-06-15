@@ -304,7 +304,7 @@ const DefectiveGoods = () => {
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Delivered Date
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:999, position:'relative'}}>
             <Flatpickr
                     value={picker}
                     id='delivered-date-time-picker'
@@ -317,7 +317,7 @@ const DefectiveGoods = () => {
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Shipped Date
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:998, position:'relative'}}>
             <Flatpickr
                     value={picker}
                     id='shipped-date-time-picker'
@@ -330,7 +330,7 @@ const DefectiveGoods = () => {
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Defective Quantity Range
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:997, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -354,7 +354,7 @@ const DefectiveGoods = () => {
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Staff
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:996, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -378,7 +378,7 @@ const DefectiveGoods = () => {
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Buyer
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:995, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -402,7 +402,7 @@ const DefectiveGoods = () => {
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Seller
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:994, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}

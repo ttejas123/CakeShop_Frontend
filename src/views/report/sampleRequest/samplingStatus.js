@@ -343,7 +343,7 @@ const columns = [
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Requested Date
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:999, position:'relative'}}>
             <Flatpickr
                     value={picker}
                     id='delivered-date-time-picker'
@@ -357,7 +357,7 @@ const columns = [
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Status
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:998, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -381,7 +381,7 @@ const columns = [
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Product
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:997, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -405,7 +405,7 @@ const columns = [
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Buyer
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:996, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -429,7 +429,7 @@ const columns = [
             <Label className='mr-1 mt-1' for='search-input'>
                 Filter Seller
               </Label>
-            <div style={{zIndex:1000, position:'relative'}}>
+            <div style={{zIndex:995, position:'relative'}}>
               <Select
                 isClearable={false}
                 theme={selectThemeColors}
@@ -456,7 +456,7 @@ const columns = [
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Defective Goods</CardTitle>
+          <CardTitle tag='h4'>Sampling Status</CardTitle>
           <div className='d-flex mt-md-0 mt-1'>
             <UncontrolledButtonDropdown>
               <DropdownToggle color='secondary' caret outline>

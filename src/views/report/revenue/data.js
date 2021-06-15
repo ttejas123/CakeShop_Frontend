@@ -92,6 +92,286 @@ export const data = [
         gstRate : "18%",
         gstAmountPayable : "180",
         createdTime : "12-04-2020"
+      },
+      {
+        orderId : "ORD1",
+        orderType : "Type1",
+        revenueType : "RT1",
+        orderValue : "1000",
+        revenueAmount : "1000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-02-2020"
+      },
+      {
+        orderId : "ORD2",
+        orderType : "Type2",
+        revenueType : "RT2",
+        orderValue : "2000",
+        revenueAmount : "2000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-02-2020"
+      },
+      {
+        orderId : "ORD3",
+        orderType : "Type3",
+        revenueType : "RT3",
+        orderValue : "3000",
+        revenueAmount : "3000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-03-2020"
+      },
+      {
+        orderId : "ORD4",
+        orderType : "Type4",
+        revenueType : "RT4",
+        orderValue : "4000",
+        revenueAmount : "4000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-04-2020"
+      },
+      {
+        orderId : "ORD1",
+        orderType : "Type1",
+        revenueType : "RT1",
+        orderValue : "1000",
+        revenueAmount : "1000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-02-2020"
+      },
+      {
+        orderId : "ORD2",
+        orderType : "Type2",
+        revenueType : "RT2",
+        orderValue : "2000",
+        revenueAmount : "2000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-02-2020"
+      },
+      {
+        orderId : "ORD3",
+        orderType : "Type3",
+        revenueType : "RT3",
+        orderValue : "3000",
+        revenueAmount : "3000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-03-2020"
+      },
+      {
+        orderId : "ORD4",
+        orderType : "Type4",
+        revenueType : "RT4",
+        orderValue : "4000",
+        revenueAmount : "4000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-04-2020"
+      },
+      {
+        orderId : "ORD1",
+        orderType : "Type1",
+        revenueType : "RT1",
+        orderValue : "1000",
+        revenueAmount : "1000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-02-2020"
+      },
+      {
+        orderId : "ORD2",
+        orderType : "Type2",
+        revenueType : "RT2",
+        orderValue : "2000",
+        revenueAmount : "2000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-02-2020"
+      },
+      {
+        orderId : "ORD3",
+        orderType : "Type3",
+        revenueType : "RT3",
+        orderValue : "3000",
+        revenueAmount : "3000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-03-2020"
+      },
+      {
+        orderId : "ORD4",
+        orderType : "Type4",
+        revenueType : "RT4",
+        orderValue : "4000",
+        revenueAmount : "4000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-04-2020"
+      },
+      {
+        orderId : "ORD1",
+        orderType : "Type1",
+        revenueType : "RT1",
+        orderValue : "1000",
+        revenueAmount : "1000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-02-2020"
+      },
+      {
+        orderId : "ORD2",
+        orderType : "Type2",
+        revenueType : "RT2",
+        orderValue : "2000",
+        revenueAmount : "2000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-02-2020"
+      },
+      {
+        orderId : "ORD3",
+        orderType : "Type3",
+        revenueType : "RT3",
+        orderValue : "3000",
+        revenueAmount : "3000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-03-2020"
+      },
+      {
+        orderId : "ORD4",
+        orderType : "Type4",
+        revenueType : "RT4",
+        orderValue : "4000",
+        revenueAmount : "4000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-04-2020"
+      },
+      {
+        orderId : "ORD1",
+        orderType : "Type1",
+        revenueType : "RT1",
+        orderValue : "1000",
+        revenueAmount : "1000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-02-2020"
+      },
+      {
+        orderId : "ORD2",
+        orderType : "Type2",
+        revenueType : "RT2",
+        orderValue : "2000",
+        revenueAmount : "2000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-02-2020"
+      },
+      {
+        orderId : "ORD3",
+        orderType : "Type3",
+        revenueType : "RT3",
+        orderValue : "3000",
+        revenueAmount : "3000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-03-2020"
+      },
+      {
+        orderId : "ORD4",
+        orderType : "Type4",
+        revenueType : "RT4",
+        orderValue : "4000",
+        revenueAmount : "4000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-04-2020"
+      },
+      {
+        orderId : "ORD1",
+        orderType : "Type1",
+        revenueType : "RT1",
+        orderValue : "1000",
+        revenueAmount : "1000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-02-2020"
+      },
+      {
+        orderId : "ORD2",
+        orderType : "Type2",
+        revenueType : "RT2",
+        orderValue : "2000",
+        revenueAmount : "2000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-02-2020"
+      },
+      {
+        orderId : "ORD3",
+        orderType : "Type3",
+        revenueType : "RT3",
+        orderValue : "3000",
+        revenueAmount : "3000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-03-2020"
+      },
+      {
+        orderId : "ORD4",
+        orderType : "Type4",
+        revenueType : "RT4",
+        orderValue : "4000",
+        revenueAmount : "4000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-04-2020"
+      },
+      {
+        orderId : "ORD1",
+        orderType : "Type1",
+        revenueType : "RT1",
+        orderValue : "1000",
+        revenueAmount : "1000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-02-2020"
+      },
+      {
+        orderId : "ORD2",
+        orderType : "Type2",
+        revenueType : "RT2",
+        orderValue : "2000",
+        revenueAmount : "2000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-02-2020"
+      },
+      {
+        orderId : "ORD3",
+        orderType : "Type3",
+        revenueType : "RT3",
+        orderValue : "3000",
+        revenueAmount : "3000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "22-03-2020"
+      },
+      {
+        orderId : "ORD4",
+        orderType : "Type4",
+        revenueType : "RT4",
+        orderValue : "4000",
+        revenueAmount : "4000",
+        gstRate : "18%",
+        gstAmountPayable : "180",
+        createdTime : "12-04-2020"
       }
 ]
 

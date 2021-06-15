@@ -28,5 +28,197 @@ export const data = [
         img : reethika,
         amount : 100000,
         balance : 9000
-    }
+    },
+    {
+        corporateName : "TCS",
+        img : pravin,
+       amount : 100000,
+       balance : 9000
+       },
+       {
+           corporateName : "Infosys",
+           img : komal,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Accenture",
+           img : himanshu,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Coense",
+           img : reethika,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+        corporateName : "TCS",
+        img : pravin,
+       amount : 100000,
+       balance : 9000
+       },
+       {
+           corporateName : "Infosys",
+           img : komal,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Accenture",
+           img : himanshu,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Coense",
+           img : reethika,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+        corporateName : "TCS",
+        img : pravin,
+       amount : 100000,
+       balance : 9000
+       },
+       {
+           corporateName : "Infosys",
+           img : komal,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Accenture",
+           img : himanshu,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Coense",
+           img : reethika,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+        corporateName : "TCS",
+        img : pravin,
+       amount : 100000,
+       balance : 9000
+       },
+       {
+           corporateName : "Infosys",
+           img : komal,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Accenture",
+           img : himanshu,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Coense",
+           img : reethika,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+        corporateName : "TCS",
+        img : pravin,
+       amount : 100000,
+       balance : 9000
+       },
+       {
+           corporateName : "Infosys",
+           img : komal,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Accenture",
+           img : himanshu,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Coense",
+           img : reethika,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+        corporateName : "TCS",
+        img : pravin,
+       amount : 100000,
+       balance : 9000
+       },
+       {
+           corporateName : "Infosys",
+           img : komal,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Accenture",
+           img : himanshu,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Coense",
+           img : reethika,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+        corporateName : "TCS",
+        img : pravin,
+       amount : 100000,
+       balance : 9000
+       },
+       {
+           corporateName : "Infosys",
+           img : komal,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Accenture",
+           img : himanshu,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Coense",
+           img : reethika,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+        corporateName : "TCS",
+        img : pravin,
+       amount : 100000,
+       balance : 9000
+       },
+       {
+           corporateName : "Infosys",
+           img : komal,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Accenture",
+           img : himanshu,
+           amount : 100000,
+           balance : 9000
+       },
+       {
+           corporateName : "Coense",
+           img : reethika,
+           amount : 100000,
+           balance : 9000
+       }
 ]

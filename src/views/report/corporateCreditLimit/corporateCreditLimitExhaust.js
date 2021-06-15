@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment, useState, forwardRef } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** Table Columns
@@ -11,12 +11,20 @@ import ReactPaginate from 'react-paginate'
 import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
 import { MoreVertical, Edit, FileText, Archive, Share, Printer, File, Grid, Copy, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, UncontrolledDropdown, UncontrolledButtonDropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap'
+import { Card, CardHeader, CardTitle, Row, Col, UncontrolledButtonDropdown, DropdownItem, DropdownToggle, DropdownMenu, Label, Input } from 'reactstrap'
+
+const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
+  <div className='custom-control custom-checkbox'>
+    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
+    <label className='custom-control-label' onClick={onClick} />
+  </div>
+))
 
 const CCLExhausted = () => {
 
     const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const [filteredData, setFilteredData] = useState([])
   const [addClicked, setAddClicked] = useState(0)
   const [editClicked, setEditClicked] = useState(0)
@@ -211,7 +219,7 @@ const columns = [
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / rowsPerPage : data.length / rowsPerPage || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -228,7 +236,34 @@ const columns = [
     />
   )
 
-   
+  const handleFilter = e => {
+    const value = e.target.value
+    console.log("value", value)
+    let updatedData = []
+    setSearchValue(value)
+
+    if (value.length) {
+      updatedData = data.filter(item => {
+        
+        const startsWith =
+          item.corporateName.toLowerCase().startsWith(value.toLowerCase())
+          
+          console.log(startsWith)
+        const includes =
+          item.corporateName.toLowerCase().includes(value.toLowerCase())
+          
+
+        if (startsWith) {
+          return startsWith
+        } else if (!startsWith && includes) {
+          return includes
+        } else return null
+       })
+      setFilteredData(updatedData)
+      setSearchValue(value)
+    }
+  }
+
   // ** Converts table to CSV
   function convertArrayOfObjectsToCSV(array) {
     let result
@@ -310,18 +345,57 @@ const columns = [
             </UncontrolledButtonDropdown>
           </div>
       </CardHeader>
+
+      <Row className='mx-0 mt-1 mb-50'>
+          <Col sm='6'>
+            <div className='d-flex align-items-center'>
+              <Label for='sort-select'>show</Label>
+              <Input
+                className='dataTable-select'
+                type='select'
+                id='sort-select'
+                value={rowsPerPage}
+                onChange={e => handlePerPage(e)}
+              >
+                <option value={7}>7</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={75}>75</option>
+                <option value={100}>100</option>
+              </Input>
+              <Label for='sort-select'>entries</Label>
+            </div>
+          </Col>
+          <Col className='d-flex align-items-center justify-content-sm-end mt-sm-0 mt-1' sm='6'>
+            <Label className='mr-1' for='search-input'>
+              Search
+            </Label>
+            <Input
+              className='dataTable-filter'
+              type='text'
+              bsSize='sm'
+              id='search-input'
+              value={searchValue}
+              onChange={handleFilter}
+            />
+          </Col>
+        </Row>
+
+
       <DataTable
         noHeader
         pagination
         selectableRowsNoSelectAll
         columns={columns}
         className='react-dataTable'
-        paginationPerPage={7}
+        paginationPerPage={rowsPerPage}
         sortIcon={<ChevronDown size={10} />}
         paginationDefaultPage={currentPage + 1}
         paginationComponent={CustomPagination}
-        data={data}
-      />
+        data={searchValue.length ? filteredData : data}
+        selectableRowsComponent={BootstrapCheckbox}
+        />
      
     </Card>
     </Fragment>
