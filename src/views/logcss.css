@@ -1,0 +1,76 @@
+.sign_info {
+  border: 10px solid #fff;
+  background: #fbfbfd;
+  padding: 30px 0px;
+  box-shadow: 0px 50px 100px 0px rgba(12, 0, 46, 0.05);
+}
+
+.login_info {
+  padding-left: 30px;
+}
+.sign_info_content h2 {
+  font-size: 30px;
+  color: #677294;
+}
+.sign_info_content ul li {
+  font: 400 16px/34px 'Poppins', sans-serif;
+  color: #677294;
+}
+.sign_info_content ul li i {
+  color: #5e2ced;
+  margin-right: 10px;
+}
+
+.login-form .text_box {
+  margin-bottom: 25px;
+}
+.lead-text {
+  font: 400 14px/40px 'Poppins', sans-serif;
+  color: #677294;
+  padding-right: 20px;
+}
+.social_tag li {
+  display: inline-block;
+}
+.social_tag li a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: block;
+  line-height: 44px;
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+  margin-left: 7px;
+}
+.social_tag li:first-child a {
+  background: #4779de;
+}
+.social_tag li:nth-child(2) a {
+  background: #e43e30;
+}
+.social_tag li:nth-child(3) a {
+  background: #1da1f3;
+}
+.sign-in-form .btn_three {
+  width: auto;
+  margin-top: 0;
+}
+.sign-in-form .extra .forgotten-password a {
+  color: #161341;
+  font-weight: 400;
+}
+.sign-in-form .extra .forgotten-password a:hover {
+  color: #5e2ced;
+}
+
+.sign_btn_transparent {
+  display: inline-block;
+  background: #d9b38c;
+  color: black;
+  border-color: #5e2ced;
+}
+.sign_btn_transparent:hover {
+  background: #5e2ced;
+  color: #fff;
+}
