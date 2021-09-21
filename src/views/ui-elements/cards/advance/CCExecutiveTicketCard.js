@@ -7,7 +7,7 @@ const CCExecutiveTicketCard = () => {
   return (
     <Card className='card-congratulations-medal'>
       <CardBody>
-        <h5>Hi Ravi,</h5>
+        <h5>Hi Tejas,</h5>
         <CardText className='font-small-3'>You have 4 pending tickets</CardText>
         {/* <h3 className='mb-75 mt-2 pt-50'>
           <a href='/' onClick={e => e.preventDefault()}>
