@@ -51,6 +51,35 @@ const optionBidStatus = [
     {value: "nonKyc", label: "Non Kyc"}
   ]
 
+  const optionIndustry = [
+    {value: "IT", label: "IT"},
+    {value: "Footwear", label: "Footwear"},
+    {value: "Clothing", label: "Clothing"},
+    {value: "Electronics", label: "Electronics"}
+  ]
+
+  const optionCompanyType = [
+    {value: "Private Limited", label: "Private Limited"},
+    {value: "Government", label: "Government"},
+    {value: "Public Private", label: "Public Private"}
+  ]
+
+  const optionCity = [
+    {value: "Mumbai", label: "Mumbai"},
+    {value: "Bermuda", label: "Bermuda"},
+    {value: "Hyderabad", label: "Hyderabad"}
+  ]
+
+  const optionVerified = [
+    {value: "Yes", label: "Yes"},
+    {value: "No", label: "No"}
+  ]
+
+  const optionSubscription = [
+    {value: "Yes", label: "Yes"},
+    {value: "No", label: "No"}
+  ]
+
 const DataTableWithButtons = () => {
 
   const [modal, setModal] = useState(false)
@@ -59,6 +88,8 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [values, setValues] = useState('')
+
     //deleteCountry
     const deleteCountry = (val) => {
       //here we passing id to delete this specific record
@@ -305,12 +336,6 @@ const [columns, setColumns] = useState(kycColumns)
         approved: 'light-success',
         approval: 'light-warning'
   }
-
-  const initialValues = {
-    filter : [{value: "kyc", label: "KYC"}]
-  }
-  const [values, setValues] = useState(initialValues)
-
   const setInformation = (data) => {
     if (data.value === 'nonKyc') {
       setData(nonKycCorporateData)
@@ -438,7 +463,10 @@ const [columns, setColumns] = useState(kycColumns)
         </CardHeader>
         <CardBody>
           <Row>
-            <Col md='4'>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter KYC
+              </Label>
             <div style={{zIndex:997, position:'relative'}}>
               <Select
                 isClearable={false}
@@ -446,14 +474,139 @@ const [columns, setColumns] = useState(kycColumns)
                 className='react-select'
                 classNamePrefix='select'
                 options={optionBidStatus}
-                value={values.filter[0]}
+                value={values.filter}
                 onChange={data => {
-                  setInformation(data)
-                }}
+                  setValues(
+                           {
+                              ...values,
+                              filter : data
+                           } 
+                   )
+                 }
+         }
               />
               </div>
             </Col>
-            
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Company Type
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionCompanyType}
+                value={values.companyType}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              companyType : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Industry
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionIndustry}
+                value={values.industry}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              industry : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter City
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionCity}
+                value={values.city}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              city : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Verified
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionVerified}
+                value={values.verified}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              verified : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
+            <Col md='3'>
+            <Label className='mr-1 mt-1' for='search-input'>
+                Filter Subscription
+              </Label>
+            <div style={{zIndex:1000, position:'relative'}}>
+              <Select
+                isClearable={false}
+                theme={selectThemeColors}
+                className='react-select'
+                classNamePrefix='select'
+                options={optionSubscription}
+                value={values.subscription}
+                onChange={data => {
+                  setValues(
+                           {
+                              ...values,
+                              subscription : data
+                           } 
+                   )
+                 }
+         }
+              />
+              </div>
+            </Col>
           </Row>
         </CardBody>
       </Card>

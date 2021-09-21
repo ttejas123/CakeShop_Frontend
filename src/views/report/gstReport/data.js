@@ -1,32 +1,319 @@
 export const data = [
     {
       gstAmountPayable : 1000,
-      userId : "User1",
-      bidDate : "12-11-2021",
+      userName : "Pravin Poshmani",
+      transactionDate : "12-11-2021",
       actualAmount : 1000,
-      gst : 18
+      gst : "18%"
     },
     {
         gstAmountPayable : 2000,
-        userId : "User2",
-        bidDate : "22-11-2021",
+        userName : "Tejas Thakare",
+        transactionDate : "22-11-2021",
         actualAmount : 2000,
-      gst : 18
+      gst : "18%"
     },
     {
         gstAmountPayable : 3000,
-        userId : "User3",
-        bidDate : "13-11-2021",
+        userName : "Komal Kamble",
+        transactionDate : "13-11-2021",
         actualAmount : 3000,
-        gst : 18
+        gst : "18%"
     },
     {
         gstAmountPayable : 4000,
-      userId : "User4",
-      bidDate : "14-11-2021",
+      userName : "Himanshu Chanda",
+      transactionDate : "14-11-2021",
       actualAmount : 4000,
-      gst : 18
-    }
+      gst : "18%"
+    },
+    {
+      gstAmountPayable : 1000,
+      userName : "Pravin Poshmani",
+      transactionDate : "12-11-2021",
+      actualAmount : 1000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 2000,
+        userName : "Tejas Thakare",
+        transactionDate : "22-11-2021",
+        actualAmount : 2000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 3000,
+        userName : "Komal Kamble",
+        transactionDate : "13-11-2021",
+        actualAmount : 3000,
+        gst : "18%"
+    },
+    {
+        gstAmountPayable : 4000,
+      userName : "Himanshu Chanda",
+      transactionDate : "14-11-2021",
+      actualAmount : 4000,
+      gst : "18%"
+    },
+    {
+      gstAmountPayable : 1000,
+      userName : "Pravin Poshmani",
+      transactionDate : "12-11-2021",
+      actualAmount : 1000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 2000,
+        userName : "Tejas Thakare",
+        transactionDate : "22-11-2021",
+        actualAmount : 2000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 3000,
+        userName : "Komal Kamble",
+        transactionDate : "13-11-2021",
+        actualAmount : 3000,
+        gst : "18%"
+    },
+    {
+        gstAmountPayable : 4000,
+      userName : "Himanshu Chanda",
+      transactionDate : "14-11-2021",
+      actualAmount : 4000,
+      gst : "18%"
+    },
+    {
+      gstAmountPayable : 1000,
+      userName : "Pravin Poshmani",
+      transactionDate : "12-11-2021",
+      actualAmount : 1000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 2000,
+        userName : "Tejas Thakare",
+        transactionDate : "22-11-2021",
+        actualAmount : 2000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 3000,
+        userName : "Komal Kamble",
+        transactionDate : "13-11-2021",
+        actualAmount : 3000,
+        gst : "18%"
+    },
+    {
+        gstAmountPayable : 4000,
+      userName : "Himanshu Chanda",
+      transactionDate : "14-11-2021",
+      actualAmount : 4000,
+      gst : "18%"
+    },
+    {
+      gstAmountPayable : 1000,
+      userName : "Pravin Poshmani",
+      transactionDate : "12-11-2021",
+      actualAmount : 1000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 2000,
+        userName : "Tejas Thakare",
+        transactionDate : "22-11-2021",
+        actualAmount : 2000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 3000,
+        userName : "Komal Kamble",
+        transactionDate : "13-11-2021",
+        actualAmount : 3000,
+        gst : "18%"
+    },
+    {
+        gstAmountPayable : 4000,
+      userName : "Himanshu Chanda",
+      transactionDate : "14-11-2021",
+      actualAmount : 4000,
+      gst : "18%"
+    },
+    {
+      gstAmountPayable : 1000,
+      userName : "Pravin Poshmani",
+      transactionDate : "12-11-2021",
+      actualAmount : 1000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 2000,
+        userName : "Tejas Thakare",
+        transactionDate : "22-11-2021",
+        actualAmount : 2000,
+      gst : "18%"
+    },
+    {
+        gstAmountPayable : 3000,
+        userName : "Komal Kamble",
+        transactionDate : "13-11-2021",
+        actualAmount : 3000,
+        gst : "18%"
+    },
+    {
+        gstAmountPayable : 4000,
+      userName : "Himanshu Chanda",
+      transactionDate : "14-11-2021",
+      actualAmount : 4000,
+      gst : "18%"
+    },
+    {
+      gstAmountPayable : 4000,
+    userName : "Himanshu Chanda",
+    transactionDate : "14-11-2021",
+    actualAmount : 4000,
+    gst : "18%"
+  },
+  {
+    gstAmountPayable : 1000,
+    userName : "Pravin Poshmani",
+    transactionDate : "12-11-2021",
+    actualAmount : 1000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 2000,
+      userName : "Tejas Thakare",
+      transactionDate : "22-11-2021",
+      actualAmount : 2000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 3000,
+      userName : "Komal Kamble",
+      transactionDate : "13-11-2021",
+      actualAmount : 3000,
+      gst : "18%"
+  },
+  {
+      gstAmountPayable : 4000,
+    userName : "Himanshu Chanda",
+    transactionDate : "14-11-2021",
+    actualAmount : 4000,
+    gst : "18%"
+  },
+  {
+    gstAmountPayable : 1000,
+    userName : "Pravin Poshmani",
+    transactionDate : "12-11-2021",
+    actualAmount : 1000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 2000,
+      userName : "Tejas Thakare",
+      transactionDate : "22-11-2021",
+      actualAmount : 2000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 3000,
+      userName : "Komal Kamble",
+      transactionDate : "13-11-2021",
+      actualAmount : 3000,
+      gst : "18%"
+  },
+  {
+      gstAmountPayable : 4000,
+    userName : "Himanshu Chanda",
+    transactionDate : "14-11-2021",
+    actualAmount : 4000,
+    gst : "18%"
+  },
+  {
+    gstAmountPayable : 1000,
+    userName : "Pravin Poshmani",
+    transactionDate : "12-11-2021",
+    actualAmount : 1000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 2000,
+      userName : "Tejas Thakare",
+      transactionDate : "22-11-2021",
+      actualAmount : 2000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 3000,
+      userName : "Komal Kamble",
+      transactionDate : "13-11-2021",
+      actualAmount : 3000,
+      gst : "18%"
+  },
+  {
+      gstAmountPayable : 4000,
+    userName : "Himanshu Chanda",
+    transactionDate : "14-11-2021",
+    actualAmount : 4000,
+    gst : "18%"
+  },
+  {
+    gstAmountPayable : 1000,
+    userName : "Pravin Poshmani",
+    transactionDate : "12-11-2021",
+    actualAmount : 1000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 2000,
+      userName : "Tejas Thakare",
+      transactionDate : "22-11-2021",
+      actualAmount : 2000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 3000,
+      userName : "Komal Kamble",
+      transactionDate : "13-11-2021",
+      actualAmount : 3000,
+      gst : "18%"
+  },
+  {
+      gstAmountPayable : 4000,
+    userName : "Himanshu Chanda",
+    transactionDate : "14-11-2021",
+    actualAmount : 4000,
+    gst : "18%"
+  },
+  {
+    gstAmountPayable : 1000,
+    userName : "Pravin Poshmani",
+    transactionDate : "12-11-2021",
+    actualAmount : 1000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 2000,
+      userName : "Tejas Thakare",
+      transactionDate : "22-11-2021",
+      actualAmount : 2000,
+    gst : "18%"
+  },
+  {
+      gstAmountPayable : 3000,
+      userName : "Komal Kamble",
+      transactionDate : "13-11-2021",
+      actualAmount : 3000,
+      gst : "18%"
+  },
+  {
+      gstAmountPayable : 4000,
+    userName : "Himanshu Chanda",
+    transactionDate : "14-11-2021",
+    actualAmount : 4000,
+    gst : "18%"
+  }
 ]
 
 export const gstCalcData = [
@@ -46,4 +333,39 @@ export const gstCalcData = [
     amountPaid : 3000,
     gstApplied : 540
   }
+]
+
+
+export const columns = [
+  {
+    name: 'User',
+    selector: 'userName',
+    sortable: true,
+    minWidth: '80px'
+  },
+  {
+    name: 'Actual Amount',
+    selector: 'actualAmount',
+    sortable: true,
+    minWidth: '80px'
+},
+{
+    name: 'GST (%)',
+    selector: 'gst',
+    sortable: true,
+    minWidth: '80px'
+},
+  {
+    name: 'GST Amount Payable',
+    selector: 'gstAmountPayable',
+    sortable: true,
+    minWidth: '80px'
+  },
+  {
+      name: 'Transaction Date',
+      selector: 'transactionDate',
+      sortable: true,
+      minWidth: '80px'
+  }
+  
 ]

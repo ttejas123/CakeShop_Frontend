@@ -72,11 +72,23 @@ const columns = [
       minWidth: '80px'
     },
     {
-      name: 'Seller Information',
-      selector: 'sellerInformation',
+      name: 'Seller Name',
+      selector : "sellerName",
       sortable: true,
-      minWidth: '80px'
+      minWidth: '200px'
     },
+    {
+        name: 'Seller Email',
+        selector : "sellerEmail",
+        sortable: true,
+        minWidth: '200px'
+      },
+      {
+        name: 'Seller Mobile',
+        selector : "sellerMobile",
+        sortable: true,
+        minWidth: '200px'
+      },
     {
         name: 'PI Send Date',
         selector: 'piSendDate',

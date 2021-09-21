@@ -1,6 +1,7 @@
 
 import Chart from 'react-apexcharts'
-import { MoreVertical, CheckSquare } from 'react-feather'
+import { Link } from 'react-router-dom'
+import { MoreVertical, CheckSquare, Eye } from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -57,6 +58,13 @@ const CardBrowserState = () => {
         {/*<div color='' className='bg-transparent btn-sm border-0 p-50'>
                     <MoreVertical size={18} className='cursor-pointer' />
                 </div>*/}
+                 <div color='' className='' >
+          <Link to={`/customization-timeline`}>
+              <Button>
+               <Eye size={20} />
+              </Button>
+          </Link>
+        </div>
       </CardHeader>
 
       <CardBody>{renderStates()}</CardBody>

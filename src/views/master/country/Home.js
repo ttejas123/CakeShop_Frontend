@@ -6,9 +6,8 @@ import axios from 'axios'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
-
 // ** React Imports
-import { Fragment, useState, forwardRef } from 'react'
+import { Fragment, useState, useEffect, forwardRef } from 'react'
 
 // ** Table Data & Columns
 import { data } from './data'
@@ -16,11 +15,27 @@ import { data } from './data'
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
 
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { List } from '@store/actions/master/country'
 
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
-import { ChevronDown, Share, Printer, File, Grid, Copy, Plus, MoreVertical, Edit, FileText, Archive, Trash  } from 'react-feather'
+import {
+  ChevronDown,
+  Share,
+  Printer,
+  File,
+  Grid,
+  Copy,
+  Plus,
+  MoreVertical,
+  Edit,
+  FileText,
+  Archive,
+  Trash
+} from 'react-feather'
 import {
   Card,
   CardHeader,
@@ -34,14 +49,15 @@ import {
   Label,
   Row,
   Col,
-  Badge, UncontrolledDropdown
+  Badge,
+  UncontrolledDropdown
 } from 'reactstrap'
 
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
-  <div className='custom-control custom-checkbox'>
-    <input type='checkbox' className='custom-control-input' ref={ref} {...rest} />
-    <label className='custom-control-label' onClick={onClick} />
+  <div className="custom-control custom-checkbox">
+    <input type="checkbox" className="custom-control-input" ref={ref} {...rest} />
+    <label className="custom-control-label" onClick={onClick} />
   </div>
 ))
 
@@ -53,93 +69,108 @@ const DataTableWithButtons = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
 
-   //deleteCountry
+  const useDisplatch = useDispatch()
+
+  useEffect(() => {
+    useDisplatch(List(5, 0))
+  }, [useDisplatch])
+  const Country = useSelector((state) => {
+    console.log(state.country)
+    return state.country
+  })
+
+  //deleteCountry
   const deleteCountry = (val) => {
     //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) {
-        console.log(" your record is deleted")
-      } else {
-      console.log("not deleted ")
-      }
+    const userselection = confirm('Are you sure you want to delete')
+
+    if (userselection === true) {
+      console.log(' your record is deleted')
+    } else {
+      console.log('not deleted ')
+    }
   }
-    //edit action
-   const AddeditEvent = (val) => {
-     //here we hande event which comming from addNewModel.js (Form for add and edit)
-      setCurrentId("")
-      console.log(val)
+  //edit action
+  const AddeditEvent = (val) => {
+    //here we hande event which comming from addNewModel.js (Form for add and edit)
+    setCurrentId('')
+    console.log(val)
   }
 
   //columns
   const columns = [
-        {
-          name: 'Name',
-          selector: 'Name',
-          sortable: true,
-          minWidth: '250px',
-          cell: row => (
-            <div className='d-flex align-items-center'>
-              <div className='user-info text-truncate ml-1'>
-                <span className='d-block font-weight-bold text-truncate'>{row.Name}</span>
-              </div>
+    {
+      name: 'Name',
+      selector: 'name',
+      sortable: true,
+      minWidth: '250px',
+      cell: (row) => (
+        <div className="d-flex align-items-center">
+          <div className="user-info text-truncate ml-1">
+            <span className="d-block font-weight-bold text-truncate">{row.name}</span>
+          </div>
+        </div>
+      )
+    },
+    {
+      name: 'initial',
+      selector: 'country_initial',
+      sortable: true,
+      minWidth: '250px'
+    },
+    {
+      name: 'Code',
+      selector: 'country_code',
+      sortable: true,
+      minWidth: '150px'
+    },
+
+    {
+      name: 'Currency',
+      selector: 'currency',
+      sortable: true,
+      minWidth: '150px',
+      cell: (row) => {
+        const currency = row.currencies
+        return (
+          <div className="d-flex align-items-center">
+            <div className="user-info text-truncate ml-1">
+              <span className="d-block font-weight-bold text-truncate">{row.currency}</span>
             </div>
-          )
-        },
-        {
-          name: 'initial',
-          selector: 'Initial',
-          sortable: true,
-          minWidth: '250px'
-        },
-        {
-          name: 'Code',
-          selector: 'code',
-          sortable: true,
-          minWidth: '150px'
-        },
-
-        {
-          name: 'Currency',
-          selector: 'currencies',
-          sortable: true,
-          minWidth: '150px',
-          cell: row => {
-            const currency = row.currencies
-            return (
-                <div className='d-flex align-items-center'>
-                  <div className='user-info text-truncate ml-1'>
-                    <span className='d-block font-weight-bold text-truncate'>{currency}</span>
-                  </div>
-                </div>
-            )
-          }
-        },
-        {
-          name: 'Actions',
-          allowOverflow: true,
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                <UncontrolledDropdown>
-                  <div className='pr-1' tag='span'>
-                    <Trash size={15} onClick={e => {
-                                                   e.preventDefault()
-                                                   deleteCountry(row.id)
-                                           } }/>
-                  </div>
-                </UncontrolledDropdown>
-
-                <Edit size={15} onClick={ () => { 
-                                    setCurrentId(row.id)
-                                    setModal(true)
-                                     } }/>
+          </div>
+        )
+      }
+    },
+    {
+      name: 'Actions',
+      allowOverflow: true,
+      cell: (row) => {
+        return (
+          <div className="d-flex">
+            <UncontrolledDropdown>
+              <div className="pr-1" tag="span">
+                <Trash
+                  size={15}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    deleteCountry(row.id)
+                  }}
+                />
               </div>
-            )
-          }
-        }
-    ]
+            </UncontrolledDropdown>
 
+            <Edit
+              size={15}
+              onClick={() => {
+                setCurrentId(row.id)
+                setModal(true)
+              }}
+            />
+          </div>
+        )
+      }
+    }
+  ]
 
   // ** Function to handle Modal toggle
   const handleModal = () => {
@@ -147,7 +178,7 @@ const DataTableWithButtons = () => {
   }
 
   // ** Function to handle filter
-  const handleFilter = e => {
+  const handleFilter = (e) => {
     const value = e.target.value
     let updatedData = []
     console.log(data)
@@ -161,7 +192,7 @@ const DataTableWithButtons = () => {
     }
 
     if (value.length) {
-      updatedData = data.filter(item => {
+      updatedData = data.filter((item) => {
         const startsWith =
           item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
           item.Initial.toLowerCase().startsWith(value.toLowerCase()) ||
@@ -176,68 +207,66 @@ const DataTableWithButtons = () => {
         } else if (!startsWith && includes) {
           return includes
         } else return null
-       })
+      })
       setFilteredData(updatedData)
       setSearchValue(value)
     }
   }
 
   // ** Function to handle Pagination
-  const handlePagination = page => {
+  const handlePagination = (page) => {
     setCurrentPage(page.selected)
   }
 
   // ** Custom Pagination
   const CustomPagination = () => (
     <ReactPaginate
-      previousLabel=''
-      nextLabel=''
+      previousLabel=""
+      nextLabel=""
       forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
+      onPageChange={(page) => handlePagination(page)}
       pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
-      breakLabel='...'
+      breakLabel="..."
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
-      activeClassName='active'
-      pageClassName='page-item'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      nextLinkClassName='page-link'
-      nextClassName='page-item next'
-      previousClassName='page-item prev'
-      previousLinkClassName='page-link'
-      pageLinkClassName='page-link'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
+      activeClassName="active"
+      pageClassName="page-item"
+      breakClassName="page-item"
+      breakLinkClassName="page-link"
+      nextLinkClassName="page-link"
+      nextClassName="page-item next"
+      previousClassName="page-item prev"
+      previousLinkClassName="page-link"
+      pageLinkClassName="page-link"
+      breakClassName="page-item"
+      breakLinkClassName="page-link"
+      containerClassName="pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1"
     />
   )
-
 
   return (
     <Fragment>
       <Card>
-
-        <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>Countries List</CardTitle>
-          <div className='d-flex mt-md-0 mt-1'>
-            <Button className='ml-2' color='primary' onClick={handleModal}>
+        <CardHeader className="flex-md-row flex-column align-md-items-center align-items-start border-bottom">
+          <CardTitle tag="h4">Countries List</CardTitle>
+          <div className="d-flex mt-md-0 mt-1">
+            <Button className="ml-2" color="primary" onClick={handleModal}>
               <Plus size={15} />
-              <span className='align-middle ml-50'>Add Your Country</span>
+              <span className="align-middle ml-50">Add Your Country</span>
             </Button>
           </div>
         </CardHeader>
 
-        <Row className='justify-content-end mx-0'>
-          <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-            <Label className='mr-1' for='search-input'>
+        <Row className="justify-content-end mx-0">
+          <Col className="d-flex align-items-center justify-content-end mt-1" md="6" sm="12">
+            <Label className="mr-1" for="search-input">
               Search
             </Label>
             <Input
-              className='dataTable-filter mb-50'
-              type='text'
-              bsSize='sm'
-              id='search-input'
+              className="dataTable-filter mb-50"
+              type="text"
+              bsSize="sm"
+              id="search-input"
               value={searchValue}
               onChange={handleFilter}
             />
@@ -250,16 +279,21 @@ const DataTableWithButtons = () => {
           selectableRows
           columns={columns}
           paginationPerPage={7}
-          className='react-dataTable'
+          className="react-dataTable"
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
+          data={Country.data}
           selectableRowsComponent={BootstrapCheckbox}
         />
-        
       </Card>
-      <AddNewModal open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} />
+      <AddNewModal
+        open={modal}
+        handleModal={handleModal}
+        editAction={AddeditEvent}
+        currentId={currentId}
+        data={data}
+      />
     </Fragment>
   )
 }

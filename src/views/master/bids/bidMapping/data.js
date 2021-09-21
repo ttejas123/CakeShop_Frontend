@@ -24,6 +24,12 @@ const Sellerscolumns = [
         selector: 'phone',
         sortable: false,
         minWidth: '250px'
+      },
+      {
+        name: 'Accept Time',
+        selector: 'acceptTime',
+        sortable: true,
+        minWidth: '150px'
       }
 ]
 export const data = [
@@ -34,22 +40,24 @@ export const data = [
        requiredQuantity : 20,
        startTime : "01-05-2020",
        endTime : "01-05-2020",
-       acceptTime : "15-05-2020",
         sellers : [
         {
             name : "ReatilsNet",
             email : "abc@c.com",
-            phone : 98765432
+            phone : 98765432,
+            acceptTime : "15-05-2020"
         },
         {
             name : "Titan",
             email : "abc@bc.com",
-            phone : 98765432
+            phone : 98765432,
+            acceptTime : "15-05-2020"
         },
         {
             name : "Fossil",
             email : "abc@cfg.com",
-            phone : 98765432
+            phone : 98765432,
+            acceptTime : "16-05-2020"
         }
     ]
     },
@@ -65,12 +73,14 @@ export const data = [
         {
             name : "Titan",
             email : "abc@bc.com",
-            phone : 98765432
+            phone : 98765432,
+            acceptTime : "15-05-2020"
         },
         {
             name : "Fossil",
             email : "abc@cfg.com",
-            phone : 98765432
+            phone : 98765432,
+            acceptTime : "16-05-2020"
         }
     ]
     },
@@ -86,17 +96,20 @@ export const data = [
         {
             name : "ReatilsNet",
             email : "abc@c.com",
-            phone : 98765432
+            phone : 98765432,
+            acceptTime : "15-05-2020"
         },
         {
             name : "Titan",
             email : "abc@bc.com",
-            phone : 98765432
+            phone : 98765432,
+            acceptTime : "17-05-2020"
         },
         {
             name : "Fossil",
             email : "abc@cfg.com",
-            phone : 98765432
+            phone : 98765432,
+            acceptTime : "18-05-2020"
         }
     ]
     },
@@ -112,12 +125,14 @@ export const data = [
            {
         name : "ReatilsNet",
         email : "abc@c.com",
-        phone : 98765432
+        phone : 98765432,
+        acceptTime : "15-05-2020"
     },
     {
         name : "Fossil",
         email : "abc@cfg.com",
-        phone : 98765432
+        phone : 98765432,
+        acceptTime : "18-05-2020"
     }
 ]
     }
@@ -181,12 +196,6 @@ export const columns = [
   {
     name: 'End Time',
     selector: 'endTime',
-    sortable: true,
-    minWidth: '150px'
-  },
-  {
-    name: 'Accept Time',
-    selector: 'acceptTime',
     sortable: true,
     minWidth: '150px'
   }

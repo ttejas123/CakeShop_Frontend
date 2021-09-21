@@ -1,8 +1,11 @@
-
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
+
+// Redux imports
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCities, updateCity } from '@store/actions/master/city'
 
 // ** Table Columns
 import { cityData } from './data'
@@ -11,77 +14,98 @@ import { cityData } from './data'
 import ReactPaginate from 'react-paginate'
 import { FormattedMessage } from 'react-intl'
 import DataTable from 'react-data-table-component'
-import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus} from 'react-feather'
-import { Card, CardHeader, CardTitle, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap'
+import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus } from 'react-feather'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Button
+} from 'reactstrap'
 //import InputBasic from './AddCity'
 import HorizontalForm from './AddCity'
 import EditForm from './EditCity'
 
 const CityList = () => {
-
-    //console.log(cityColumns)
-    console.log(cityData)
+  const useDisplatch = useDispatch()
+  const start = useSelector((state) => {
+    return state.city.start
+  })
+  const firstTimeFetch = useSelector((state) => {
+    return state.city.firstTimeFetch
+  })
+  useEffect(() => {
+    if (firstTimeFetch) return
+    useDisplatch(fetchCities(start))
+  }, [useDisplatch, firstTimeFetch])
+  const City = useSelector((state) => {
+    return state.city.data
+  })
+  //console.log(cityColumns)
   // ** State
-//   const data = [
-//     {
-//       name: "US Dollar",
-//       symbol: "$"
-//     },
-//     {
-//       name: "Canadian Dollar",
-//       symbol: "$"
-//     },
-//     {
-//       name: "Euro",
-//       symbol: "€"
-//     }
-// ]
-// console.log(data)
+  //   const data = [
+  //     {
+  //       name: "US Dollar",
+  //       symbol: "$"
+  //     },
+  //     {
+  //       name: "Canadian Dollar",
+  //       symbol: "$"
+  //     },
+  //     {
+  //       name: "Euro",
+  //       symbol: "€"
+  //     }
+  // ]
+  // console.log(data)
 
-//   const cityColumns = [
-//     {
-//       name: 'city Name',
-//       selector: 'name',
-//       sortable: true,
-//       minWidth: '200px'
-//     },
-//     {
-//       name: 'Symbol',
-//       selector: 'symbol',
-//       sortable: false,
-//       minWidth: '250px'
-//     },
-//     {
-//       name: 'Actions',
-//       allowOverflow: true,
-//       cell: row => {
-//         return (
-//           <div className='d-flex'>
-//             <UncontrolledDropdown>
-//               <DropdownToggle className='pr-1' tag='span'>
-//                 <MoreVertical size={15} />
-//               </DropdownToggle>
-//               <DropdownMenu right>
-//                 <DropdownItem>
-//                   <FileText size={15} />
-//                   <span className='align-middle ml-50'>Details</span>
-//                 </DropdownItem>
-//                 <DropdownItem>
-//                   <Archive size={15} />
-//                   <span className='align-middle ml-50'>Archive</span>
-//                 </DropdownItem>
-//                 <DropdownItem>
-//                   <Trash size={15} />
-//                   <span className='align-middle ml-50'>Delete</span>
-//                 </DropdownItem>
-//               </DropdownMenu>
-//             </UncontrolledDropdown>
-//             <Edit size={15} />
-//           </div>
-//         )
-//       }
-//     }
-//   ]
+  //   const cityColumns = [
+  //     {
+  //       name: 'city Name',
+  //       selector: 'name',
+  //       sortable: true,
+  //       minWidth: '200px'
+  //     },
+  //     {
+  //       name: 'Symbol',
+  //       selector: 'symbol',
+  //       sortable: false,
+  //       minWidth: '250px'
+  //     },
+  //     {
+  //       name: 'Actions',
+  //       allowOverflow: true,
+  //       cell: row => {
+  //         return (
+  //           <div className='d-flex'>
+  //             <UncontrolledDropdown>
+  //               <DropdownToggle className='pr-1' tag='span'>
+  //                 <MoreVertical size={15} />
+  //               </DropdownToggle>
+  //               <DropdownMenu right>
+  //                 <DropdownItem>
+  //                   <FileText size={15} />
+  //                   <span className='align-middle ml-50'>Details</span>
+  //                 </DropdownItem>
+  //                 <DropdownItem>
+  //                   <Archive size={15} />
+  //                   <span className='align-middle ml-50'>Archive</span>
+  //                 </DropdownItem>
+  //                 <DropdownItem>
+  //                   <Trash size={15} />
+  //                   <span className='align-middle ml-50'>Delete</span>
+  //                 </DropdownItem>
+  //               </DropdownMenu>
+  //             </UncontrolledDropdown>
+  //             <Edit size={15} />
+  //           </div>
+  //         )
+  //       }
+  //     }
+  //   ]
 
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
@@ -91,7 +115,7 @@ const CityList = () => {
   const [editData, setEditData] = useState({})
 
   // ** Function to handle pagination
-  const handlePagination = page => {
+  const handlePagination = (page) => {
     setCurrentPage(page.selected)
   }
 
@@ -102,40 +126,44 @@ const CityList = () => {
   }
 
   const handleEditClick = (item) => {
-    if (!addClicked) { 
+    if (!addClicked) {
       setEditClicked(!editClicked)
       setEditData(item)
     }
-  //console.log(item)
-}
-const handleCancelOfEdit = () => {
-    console.log("in Cancel")
+    //console.log(item)
+  }
+  const handleCancelOfEdit = () => {
+    console.log('in Cancel')
     setEditClicked(!editClicked)
-}
-const handleCancelOfAdd = () => {
-    console.log("in Cancel")
+  }
+  const handleCancelOfAdd = () => {
+    console.log('in Cancel')
     setAddClicked(!addClicked)
-}
-const handleSubmitOfAdd = (data) => {
-  console.log("in submit", data)
-  setAddClicked(!addClicked)
-}
+  }
+  const handleSubmitOfAdd = (data) => {
+    console.log('in submit', data)
+    setAddClicked(!addClicked)
+  }
 
-const handleSubmitOfEdit = (data) => {
-  console.log("in submit of edit", data)
-  setEditClicked(!editClicked)
-}
+  const handleSubmitOfEdit = (data) => {
+    console.log(data)
+    if (!data.city) {
+      return setEditClicked(!editClicked)
+    }
+    const { city, stateId, whereId } = data
+    useDisplatch(updateCity(city, stateId, whereId))
+    console.log('here')
+  }
 
-const handleDelete = (data) => {
-  
-  const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) {
-        console.log(" your record is deleted")
-      } else {
-      console.log("not deleted ")
-      }
-}
+  const handleDelete = (data) => {
+    const userselection = confirm('Are you sure you want to delete')
+
+    if (userselection === true) {
+      console.log(' your record is deleted')
+    } else {
+      console.log('not deleted ')
+    }
+  }
   // ** Function to handle filter
   // const handleFilter = e => {
   //   const value = e.target.value
@@ -183,49 +211,57 @@ const handleDelete = (data) => {
 
   const cityColumns = [
     {
-        name: 'City Name',
-        selector: 'name',
-        sortable: false,
-        minWidth: '250px'
-      },
-      {
-        name: 'State',
-        selector: 'state',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Country',
-        selector: 'country',
-        sortable: true,
-        minWidth: '250px'
-      },
-      {
-        name: 'Actions',
-        allowOverflow: true,
-        cell: row => {
-          return (
-            <div className='d-flex'>
-              <UncontrolledDropdown>
-                <DropdownToggle className='pr-1' tag='span'>
-                  <Trash size={15} onClick={e => { handleDelete(row) }} />
-                </DropdownToggle>
-              </UncontrolledDropdown>
-              <Edit size={15} onClick={ e => { 
-                                                e.preventDefault() 
-                                                handleEditClick(row) 
-                                                } } />
-            </div>
-          )
-        }
+      name: 'City Name',
+      selector: 'name',
+      sortable: false,
+      minWidth: '250px'
+    },
+    {
+      name: 'State',
+      selector: 'state',
+      sortable: true,
+      minWidth: '250px'
+    },
+    {
+      name: 'Country',
+      selector: 'country',
+      sortable: true,
+      minWidth: '250px'
+    },
+    {
+      name: 'Actions',
+      allowOverflow: true,
+      cell: (row) => {
+        return (
+          <div className="d-flex">
+            <UncontrolledDropdown>
+              <DropdownToggle className="pr-1" tag="span">
+                <Trash
+                  size={15}
+                  onClick={(e) => {
+                    handleDelete(row)
+                  }}
+                />
+              </DropdownToggle>
+            </UncontrolledDropdown>
+            <Edit
+              size={15}
+              onClick={(e) => {
+                e.preventDefault()
+                handleEditClick(row)
+              }}
+            />
+          </div>
+        )
       }
-    ]
+    }
+  ]
 
   // ** Pagination Previous Component
   const Previous = () => {
     return (
       <Fragment>
-        <span className='align-middle d-none d-md-inline-block'>
+        <span className="align-middle d-none d-md-inline-block">
           {/* <FormattedMessage id='Prev' /> */}
         </span>
       </Fragment>
@@ -236,7 +272,7 @@ const handleDelete = (data) => {
   const Next = () => {
     return (
       <Fragment>
-        <span className='align-middle d-none d-md-inline-block'>
+        <span className="align-middle d-none d-md-inline-block">
           {/* <FormattedMessage id='Next' /> */}
         </span>
       </Fragment>
@@ -249,7 +285,7 @@ const handleDelete = (data) => {
       previousLabel={<Previous size={15} />}
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
+      onPageChange={(page) => handlePagination(page)}
       pageCount={searchValue.length ? filteredData.length / 7 : cityData.length / 7 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
@@ -261,25 +297,33 @@ const handleDelete = (data) => {
       previousClassName={'page-item prev'}
       previousLinkClassName={'page-link'}
       pageLinkClassName={'page-link'}
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
+      breakClassName="page-item"
+      breakLinkClassName="page-link"
       containerClassName={'pagination react-paginate pagination-sm justify-content-end pr-1 mt-1'}
     />
   )
 
   return (
-      <Fragment>
-    <Card>
-      <CardHeader className='border-bottom'>
-        <CardTitle tag='h4'>City List</CardTitle>
-        <Button className='ml-2' color='primary' onClick={handleAddClick} >
-              <Plus size={15} />
-              <span className='align-middle ml-50'>Add city</span>
-            </Button>
-      </CardHeader>
-      {addClicked ? <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd}/> : null}
-      {editClicked ? <EditForm data = {editData} handleCancel={handleCancelOfEdit} handleSubmit={handleSubmitOfEdit}/> : null}
-      {/* <Row className='justify-content-end mx-0'>
+    <Fragment>
+      <Card>
+        <CardHeader className="border-bottom">
+          <CardTitle tag="h4">City List</CardTitle>
+          <Button className="ml-2" color="primary" onClick={handleAddClick}>
+            <Plus size={15} />
+            <span className="align-middle ml-50">Add city</span>
+          </Button>
+        </CardHeader>
+        {addClicked ? (
+          <HorizontalForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} />
+        ) : null}
+        {editClicked ? (
+          <EditForm
+            data={editData}
+            handleCancel={handleCancelOfEdit}
+            handleSubmit={handleSubmitOfEdit}
+          />
+        ) : null}
+        {/* <Row className='justify-content-end mx-0'>
         <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
           <Label className='mr-1' for='search-input-1'>
             <FormattedMessage id='Search' />
@@ -294,25 +338,25 @@ const handleDelete = (data) => {
           />
         </Col>
       </Row> */}
-      <DataTable
-        noHeader
-        pagination
-        selectableRowsNoSelectAll
-        columns={cityColumns}
-        className='react-dataTable'
-        paginationPerPage={7}
-        sortIcon={<ChevronDown size={10} />}
-        paginationDefaultPage={currentPage + 1}
-        paginationComponent={CustomPagination}
-        data={cityData}
-      />
-      {/* <CardFooter>
+        <DataTable
+          noHeader
+          pagination
+          selectableRowsNoSelectAll
+          columns={cityColumns}
+          className="react-dataTable"
+          paginationPerPage={7}
+          sortIcon={<ChevronDown size={10} />}
+          paginationDefaultPage={currentPage + 1}
+          paginationComponent={CustomPagination}
+          data={City}
+        />
+        {/* <CardFooter>
         <CardText className='mb-0'>
           <span className='font-weight-bold'>Note:</span>{' '}
           <span>Use Intl Dropdown in Navbar to change table language</span>
         </CardText>
       </CardFooter> */}
-    </Card>
+      </Card>
     </Fragment>
   )
 }
