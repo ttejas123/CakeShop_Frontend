@@ -6,7 +6,12 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 // ** React Imports
 import { Fragment, useState, forwardRef, useEffect } from 'react'
 
-import { fetchStates } from '../../../redux/actions/master/state'
+import {
+  fetchStates,
+  addState,
+  editState,
+  delete__State
+} from '../../../redux/actions/master/state'
 
 // ** Table Data & Columns
 import { data } from './data'
@@ -58,12 +63,14 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 ))
 
 const DataTableWithButtons = () => {
-  const start = useSelector((state) => state.states.start)
   const states = useSelector((state) => state.states.states)
-  console.log(states)
+  const count = useSelector((state) => state.states.count)
   const usedispatch = useDispatch()
   useEffect(() => {
-    usedispatch(fetchStates(start))
+    usedispatch(fetchStates(count))
+  }, [usedispatch])
+  useEffect(() => {
+    return () => usedispatch({ type: 'states_reset_list_page' })
   }, [])
   // ** States
   const [modal, setModal] = useState(false)
@@ -74,23 +81,35 @@ const DataTableWithButtons = () => {
 
   const [addClicked, setAddClicked] = useState(0)
 
+  const handlePagination = (page) => {
+    console.log(page)
+    usedispatch(fetchStates(page.selected * 5))
+    setCurrentPage(page.selected)
+  }
   //deleteCountry
   const deleteState = (val) => {
     //here we passing id to delete this specific record
     const userselection = confirm('Are you sure you want to delete')
 
     if (userselection === true) {
-      console.log(' your record is deleted')
-    } else {
-      console.log('not deleted ')
+      usedispatch(delete__State(val)).then((action) => {
+        console.log(action)
+        if (currentPage > 0 && states.length === 1) {
+          handlePagination({ selected: currentPage - 1 })
+        }
+      })
     }
   }
   //edit action
   const AddeditEvent = (val) => {
     //here we hande event which comming from addNewModel.js (Form for add and edit)
-    console.log(currentId)
-    setCurrentId('')
-    console.log(val)
+    if (val.state === '') return setAddClicked(1)
+    if (val.whereId === '') {
+      usedispatch(addState(val.state, val.country)).then(() => setCurrentId(''))
+    } else {
+      usedispatch(editState(val.whereId, val.state, val.country)).then(() => setCurrentId(''))
+    }
+    setAddClicked(0)
   }
   const basicColumns = [
     {
@@ -175,7 +194,6 @@ const DataTableWithButtons = () => {
   const handleFilter = (e) => {
     const value = e.target.value
     let updatedData = []
-    console.log(data)
     setSearchValue(value)
 
     if (value.length) {
@@ -199,9 +217,6 @@ const DataTableWithButtons = () => {
   }
 
   // ** Function to handle Pagination
-  const handlePagination = (page) => {
-    setCurrentPage(page.selected)
-  }
 
   // ** Custom Pagination
   const CustomPagination = () => (
@@ -210,7 +225,7 @@ const DataTableWithButtons = () => {
       nextLabel=""
       forcePage={currentPage}
       onPageChange={(page) => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : states.length / 7 || 1}
+      pageCount={count / 5 || 1}
       breakLabel="..."
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -273,12 +288,12 @@ const DataTableWithButtons = () => {
           pagination
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={5}
           className="react-dataTable"
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : states}
+          data={states}
           selectableRowsComponent={BootstrapCheckbox}
         />
       </Card>

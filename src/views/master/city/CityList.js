@@ -5,7 +5,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // Redux imports
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCities, updateCity } from '@store/actions/master/city'
+import { fetchCities, updateCity, addCity, deleteCity } from '@store/actions/master/city'
 
 // ** Table Columns
 import { cityData } from './data'
@@ -31,19 +31,20 @@ import EditForm from './EditCity'
 
 const CityList = () => {
   const useDisplatch = useDispatch()
-  const start = useSelector((state) => {
-    return state.city.start
+  //** COUNT for getting total cities in database to handle pagination logic
+  const count = useSelector((state) => {
+    return state.city.count
   })
-  const firstTimeFetch = useSelector((state) => {
-    return state.city.firstTimeFetch
-  })
-  useEffect(() => {
-    if (firstTimeFetch) return
-    useDisplatch(fetchCities(start))
-  }, [useDisplatch, firstTimeFetch])
+  //** CITY DATA fetched from back end
   const City = useSelector((state) => {
     return state.city.data
   })
+  //** FETCHING cities on component load
+  useEffect(() => {
+    useDisplatch(fetchCities(count))
+    //** RESETTING state when component unmounts
+    return () => useDisplatch({ type: 'cities_reset_city_list' })
+  }, [useDisplatch])
   //console.log(cityColumns)
   // ** State
   //   const data = [
@@ -107,59 +108,82 @@ const CityList = () => {
   //     }
   //   ]
 
+  //** Pagination state
   const [currentPage, setCurrentPage] = useState(0)
+
+  //** state for search value
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
+
+  //** state when city is added or edited or cancelled editing or adding
   const [addClicked, setAddClicked] = useState(0)
   const [editClicked, setEditClicked] = useState(0)
+
+  //** state for sending props to edit component
   const [editData, setEditData] = useState({})
 
   // ** Function to handle pagination
   const handlePagination = (page) => {
+    useDisplatch(fetchCities(page.selected * 5))
     setCurrentPage(page.selected)
   }
 
+  //** Function to open add city component
   const handleAddClick = () => {
     if (!editClicked) {
       setAddClicked(!addClicked)
     }
   }
 
+  //** Function to open edit city component
   const handleEditClick = (item) => {
     if (!addClicked) {
       setEditClicked(!editClicked)
       setEditData(item)
     }
-    //console.log(item)
   }
+
+  //** Function to handle cancel of edit city
   const handleCancelOfEdit = () => {
-    console.log('in Cancel')
     setEditClicked(!editClicked)
   }
+
+  //** Function to handle cancel of add city
   const handleCancelOfAdd = () => {
-    console.log('in Cancel')
-    setAddClicked(!addClicked)
-  }
-  const handleSubmitOfAdd = (data) => {
-    console.log('in submit', data)
     setAddClicked(!addClicked)
   }
 
+  //** Function to handle submit of add data
+  const handleSubmitOfAdd = (data) => {
+    console.log('in submit', data)
+    if (data.name === '') {
+      return
+    }
+    const { name, state } = data
+    useDisplatch(addCity(name, state))
+    setAddClicked(!addClicked)
+  }
+
+  //** Function to handle submission of data
   const handleSubmitOfEdit = (data) => {
-    console.log(data)
     if (!data.city) {
       return setEditClicked(!editClicked)
     }
     const { city, stateId, whereId } = data
     useDisplatch(updateCity(city, stateId, whereId))
-    console.log('here')
+    setEditClicked(!editClicked)
   }
 
   const handleDelete = (data) => {
+    console.log(data)
     const userselection = confirm('Are you sure you want to delete')
 
     if (userselection === true) {
-      console.log(' your record is deleted')
+      useDisplatch(deleteCity(data.id)).then(() => {
+        if (currentPage > 0 && City.length === 1) {
+          handlePagination({ selected: currentPage - 1 })
+        }
+      })
     } else {
       console.log('not deleted ')
     }
@@ -286,7 +310,7 @@ const CityList = () => {
       nextLabel={<Next size={15} />}
       forcePage={currentPage}
       onPageChange={(page) => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : cityData.length / 7 || 1}
+      pageCount={count / 5 || 1}
       breakLabel={'...'}
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -344,7 +368,7 @@ const CityList = () => {
           selectableRowsNoSelectAll
           columns={cityColumns}
           className="react-dataTable"
-          paginationPerPage={7}
+          paginationPerPage={5}
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}

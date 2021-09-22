@@ -30,12 +30,16 @@ query{
   return async (dispatch) => {
     try {
       const res = await axios.post(BaseUrl, { query })
+      console.log(res.data.data)
       return dispatch({
-        type: 'cities_fetched',
-        payload: res.data.data.citiesConnection.values
+        type: 'cities_fetched_city_list',
+        payload: {
+          cities: res.data.data.citiesConnection.values,
+          count: res.data.data.citiesConnection.aggregate.count
+        }
       })
     } catch (error) {
-      console.log(error.response)
+      console.log(error)
     }
   }
 }
@@ -70,10 +74,56 @@ mutation {
   return async (dispatch) => {
     try {
       const res = await axios.post(BaseUrl, { query })
-      console.log(res.data)
-      return dispatch({ type: 'kasfjdhsfajhdsjfhdhfashfs' })
+      return dispatch({ type: 'city_edited', payload: res.data.data.updateCity.city })
     } catch (error) {
-      console.log(error.response)
+      console.log(error)
+    }
+  }
+}
+export const addCity = (name, state) => {
+  const query = `
+mutation {
+  createCity(input:{data:{name:"${name}",state:"${state}"}}) {
+    city {
+      name
+      id
+      state {
+        id
+        name
+        country {
+          id
+          country_name
+        }
+      }
+    }
+  }
+}
+`
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(BaseUrl, { query })
+      dispatch({ type: 'city_added', payload: res.data.data.createCity.city })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export const deleteCity = (id) => {
+  const query = `
+mutation{
+  deleteCity(input:{where:{id:"${id}"}}){
+    city{
+      id
+    }
+  }
+}
+`
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(BaseUrl, { query })
+      dispatch({ type: 'city_deleted', payload: res.data.data.deleteCity.city.id })
+    } catch (error) {
+      console.log(error)
     }
   }
 }

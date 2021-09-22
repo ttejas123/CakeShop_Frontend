@@ -10,7 +10,6 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Fragment, useState, useEffect, forwardRef } from 'react'
 
 // ** Table Data & Columns
-import { data } from './data'
 
 // ** Add New Modal Component
 import AddNewModal from './AddNewModal'
@@ -225,7 +224,7 @@ const DataTableWithButtons = () => {
       nextLabel=""
       forcePage={currentPage}
       onPageChange={(page) => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={searchValue.length ? filteredData.length / 7 : Country.length / 7 || 1}
       breakLabel="..."
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -292,7 +291,7 @@ const DataTableWithButtons = () => {
         handleModal={handleModal}
         editAction={AddeditEvent}
         currentId={currentId}
-        data={data}
+        data={Country}
       />
     </Fragment>
   )

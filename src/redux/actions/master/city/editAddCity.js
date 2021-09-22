@@ -15,7 +15,7 @@ query {
   return async (dispatch) => {
     const res = await axios.post(BaseUrl, { query })
     return dispatch({
-      type: 'countries_fetched',
+      type: 'countries_fetched_for_edit_add_city',
       payload: res.data.data
     })
   }
@@ -36,35 +36,8 @@ query{
   return async (dispatch) => {
     const res = await axios.post(BaseUrl, { query })
     return dispatch({
-      type: 'states_fetched',
+      type: 'states_fetched_for_edit_add_city',
       payload: res.data.data.statesConnection.values
     })
   }
 }
-
-//** FUNC for fetching cities
-export const findCities = (state_name) => {
-  const query = `
-query{
-  citiesConnection(where: {
-    state: {
-      name: "${state_name}"
-    }
-  }){
-    values{
-      id
-      name
-    
-    }
-  }
-}
-`
-  return async (dispatch) => {
-    const res = await axios.post(BaseUrl, { query })
-    return dispatch({
-      type: 'cities_fetched_for_edit',
-      payload: res.data.data.citiesConnection.values
-    })
-  }
-}
-

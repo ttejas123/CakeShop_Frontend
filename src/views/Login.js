@@ -87,7 +87,8 @@ const Login = () => {
           const data = { ...res.data.user, accessToken: res.data.jwt, refreshToken: res.data.jwt }
           console.log(data)
           usDispatch(handleLogin(data))
-          //window.location.assign("/city-list")
+          window.location.assign("/ccdashboard")
+          
           // window.location.reload(false)
           //ability.update(res.data.userData.ability)
           //historyLocation.push(getHomeRouteForLoggedInUser(data.role))

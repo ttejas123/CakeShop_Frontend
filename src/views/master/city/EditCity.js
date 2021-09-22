@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 //** Redux imports
 import { useDispatch, useSelector } from 'react-redux'
-import { findCountries, findStates, findCities } from '@store/actions/master/city/editCity'
+import { findCountries, findStates } from '@store/actions/master/city/editAddCity'
 
 //** Imports for UI
 import {
@@ -28,15 +28,13 @@ const EditForm = (props) => {
   useEffect(() => {
     usedispatch(findCountries())
     usedispatch(findStates(props.data.country))
-    usedispatch(findCities(props.data.state))
     //** If component unmounts reset redux state for this component
-    return () => usedispatch({ type: 'reset_edit_states' })
+    return () => usedispatch({ type: 'reset_edit_add_city' })
   }, [usedispatch])
 
   //** Setting values of countries, states, and cities fetched from api
-  const countries = useSelector((state) => state.editCity.countries)
-  const states = useSelector((state) => state.editCity.states)
-  const cities = useSelector((state) => state.editCity.cities)
+  const countries = useSelector((state) => state.editAddCity.countries)
+  const states = useSelector((state) => state.editAddCity.states)
 
   //** Local state for controlled input elements with
   //** default values set from previous component
@@ -47,27 +45,22 @@ const EditForm = (props) => {
   //** FUNC for handling input change
   const handleInputChange = (event) => {
     const { name, value } = event.target
-
     switch (name) {
       case 'country':
         //** If country is changed then fetch states
         //** and set value of state as the first element in states array fetched
-        //** and then do the same for cities
         setCountry(value)
         usedispatch(findStates(value)).then((action) => {
           setState(action.payload[0].name)
-          usedispatch(findCities(action.payload[0].name)).then((action) => {
-            setCity(action.payload[0].name)
-          })
+          setCity('')
         })
+        break
 
-      //** If state is changed then only fetch new cities
+      //** If state is changed then only change state value
       case 'state':
         setState(value)
-        usedispatch(findCities(value)).then((action) => {
-          if (action.payload.length > 0) setCity(action.payload[0].name)
-        })
-      //** If city is changed then only change controlled input value
+        setCity('')
+        break
       case 'name':
         setCity(value)
     }
@@ -75,20 +68,10 @@ const EditForm = (props) => {
 
   //** FUNC for submission of data
   const handleSubmit = () => {
-    let countryId, stateId, cityId
-    for (
-      let i = 0, j = 0, k = 0;
-      i < countries.length && j < states.length && k < cities.length;
-      i++, j++, k++
-    ) {
-      if (countries[i].country_name === country) countryId = countries[i].id
-      if (states[j].name === state) stateId = states[j].id
-      if (cities[k].name === city) cityId = cities[k].id
-      if (countryId && stateId && cityId) break
-    }
+    const stateId = states.findIndex((s) => s.name === state)
     props.handleSubmit({
       city: city !== props.data.name ? city : null,
-      stateId,
+      stateId: states[stateId].id,
       whereId: props.data.id
     })
   }
@@ -149,16 +132,14 @@ const EditForm = (props) => {
                 </Label>
                 <Col sm="8">
                   <Input
-                    type="select"
+                    type="text"
                     name="name"
+                    innerRef={{required:true}}
                     id="name"
                     value={city}
                     onChange={handleInputChange}
-                  >
-                    {cities.map((city) => (
-                      <option value={city.name}>{city.name}</option>
-                    ))}
-                  </Input>
+                    placeholder="Enter City Name"
+                  />
                 </Col>
               </FormGroup>
             </Col>

@@ -1,12 +1,11 @@
 const initialState = {
   data: [],
-  start: 0
+  count: 0
 }
 const SubAttributesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SubAttributes_fetched':
-      console.log(action.payload)
-      const dataArray = action.payload.map((category) => {
+    case 'SubAttributes_fetched_list':
+      const dataArray = action.payload.categories.map((category) => {
         return {
           id: category.id,
           Cat: category.category,
@@ -16,7 +15,9 @@ const SubAttributesReducer = (state = initialState, action) => {
           })
         }
       })
-      return { ...state, data: dataArray, start: state.start + 5 }
+      return { ...state, data: dataArray, count: action.payload.count }
+    case 'SubAttributes_reset_list':
+      return initialState
     default:
       return state
   }

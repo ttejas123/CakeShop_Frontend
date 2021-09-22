@@ -57,12 +57,15 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 
 const DataTableWithButtons = () => {
   const usedispatch = useDispatch()
-  const start = useSelector((state) => state.brands.start)
+  const count = useSelector((state) => state.brands.count)
   const brands = useSelector((state) => state.brands.brands)
-  console.log(brands)
+
   useEffect(() => {
-    usedispatch(fetchBrands(start))
+    usedispatch(fetchBrands(count))
   }, [usedispatch])
+  useEffect(() => {
+    return () => usedispatch({ type: 'brands_reset_list' })
+  }, [])
   // ** States
   const [modal, setModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -113,7 +116,7 @@ const DataTableWithButtons = () => {
         <div className="d-flex align-items-center">
           <div className="user-info text-truncate ml-1">
             <span className="d-block font-weight-bold text-truncate">
-              <img src={row.logo} alt={row.Name} />
+              <img height="40rem" src={row.logo} alt={row.Name} />
             </span>
           </div>
         </div>
@@ -172,7 +175,6 @@ const DataTableWithButtons = () => {
   const handleFilter = (e) => {
     const value = e.target.value
     let updatedData = []
-    console.log(data)
     setSearchValue(value)
     const status = {
       1: { title: 'Current', color: 'light-primary' },
@@ -201,6 +203,7 @@ const DataTableWithButtons = () => {
 
   // ** Function to handle Pagination
   const handlePagination = (page) => {
+    usedispatch(fetchBrands(page.selected * 5))
     setCurrentPage(page.selected)
   }
 
@@ -211,7 +214,7 @@ const DataTableWithButtons = () => {
       nextLabel=""
       forcePage={currentPage}
       onPageChange={(page) => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : brands.length / 7 || 1}
+      pageCount={count / 5 || 1}
       breakLabel="..."
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -272,12 +275,12 @@ const DataTableWithButtons = () => {
           pagination
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={5}
           className="react-dataTable"
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : brands}
+          data={brands}
           selectableRowsComponent={BootstrapCheckbox}
         />
       </Card>

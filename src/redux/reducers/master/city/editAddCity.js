@@ -6,22 +6,17 @@ const initialState = {
 
 const editCityReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'countries_fetched':
+    case 'countries_fetched_for_edit_add_city':
       return {
         ...state,
         countries: action.payload.countries
       }
-    case 'states_fetched':
+    case 'states_fetched_for_edit_add_city':
       return {
         ...state,
         states: action.payload
       }
-    case 'cities_fetched_for_edit':
-      return {
-        ...state,
-        cities: action.payload
-      }
-    case 'reset_edit_states':
+    case 'reset_edit_add_city':
       return initialState
     default:
       return state

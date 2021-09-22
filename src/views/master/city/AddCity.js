@@ -1,4 +1,5 @@
-import { useState } from 'react'
+//** React imports
+import { useEffect, useState } from 'react'
 import {
   Card,
   CardHeader,
@@ -15,23 +16,57 @@ import {
 } from 'reactstrap'
 import { useForm, Controller } from 'react-hook-form'
 
+//** Redux imports
+import { useSelector, useDispatch } from 'react-redux'
+import { findCountries, findStates } from '@store/actions/master/city/editAddCity.js'
+
 const HorizontalForm = (props) => {
-  console.log(props)
+  const countries = useSelector((state) => state.editAddCity.countries)
+  const states = useSelector((state) => state.editAddCity.states)
+  const [country, setCountry] = useState('')
+  const [state, setState] = useState('')
+  const usedispatch = useDispatch()
+  useEffect(() => {
+    usedispatch(findCountries()).then((action) => {
+      setCountry(action.payload.countries[0].country_name)
+      usedispatch(findStates(action.payload.countries[0].country_name)).then((action) => {
+        setState(action.payload[0].name)
+      })
+    })
+    return () => usedispatch({ type: 'reset_edit_add_city' })
+  }, [usedispatch])
   const { register, errors, control, setValue, trigger } = useForm({
     defaultValues: { gender: 'gender-female', dob: null }
   })
-  const [values, setValues] = useState('')
+  const [name, setName] = useState('')
   const handleInputeChange = (event) => {
     const { name, value } = event.target
-    setValues({
-      ...values,
-      [name]: value
-    })
+
+    switch (name) {
+      case 'country':
+        //** If country is changed then fetch states
+        //** and then do the same for cities
+        setCountry(value)
+        usedispatch(findStates(value)).then((action) => {
+          console.log(action.payload)
+          setState(action.payload[0].name)
+          setName('')
+        })
+        break
+
+      //** If state is changed then only change state value
+      case 'state':
+        setState(value)
+        setName('')
+        break
+      case 'name':
+        setName(value)
+    }
   }
 
   const handleSubmit = () => {
-    console.log(values)
-    props.handleSubmit(values)
+    const stateId = states.findIndex((s) => s.name === state)
+    props.handleSubmit({ name, state: states[stateId].id })
     //prop.editAction(values)
     //setValues(initialvalues)
   }
@@ -42,32 +77,40 @@ const HorizontalForm = (props) => {
           <Row>
             <Col className="d-flex" md={{ size: 9, offset: 1 }}>
               <FormGroup row>
-                <Label sm="4" size="lg" for="name">
-                  City
+                <Label sm="6" size="lg" for="name">
+                  Country
                 </Label>
-                <Col sm="8">
+                <Col sm="7">
                   <Input
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="City Name"
+                    type="select"
+                    name="country"
+                    value={country}
+                    id="country"
                     onChange={handleInputeChange}
-                  />
+                  >
+                    {countries.map((country) => (
+                      <option value={country.country_name}>{country.country_name}</option>
+                    ))}
+                  </Input>
                 </Col>
               </FormGroup>
 
               <FormGroup className="ml-3" row>
                 <Label sm="4" size="lg" for="Country">
-                  Country
+                  State
                 </Label>
                 <Col sm="8">
                   <Input
-                    type="text"
-                    name="Country"
-                    id="Country"
-                    placeholder="Country"
+                    type="select"
+                    name="state"
+                    id="state"
+                    value={state}
                     onChange={handleInputeChange}
-                  />
+                  >
+                    {states.map((state) => (
+                      <option value={state.name}>{state.name}</option>
+                    ))}
+                  </Input>
                 </Col>
               </FormGroup>
               {/* <FormGroup className='ml-3' row>
@@ -80,23 +123,17 @@ const HorizontalForm = (props) => {
             </FormGroup> */}
               <FormGroup className="ml-3" row>
                 <Label sm="5" size="lg" for="country">
-                  State
+                  City
                 </Label>
                 <Col sm="7">
                   <Input
-                    type="select"
-                    name="country"
-                    id="country"
-                    defaultValue="India"
+                    type="text"
+                    value={name}
+                    name="name"
+                    id="name"
                     onChange={handleInputeChange}
-                  >
-                    <option value="select">Select</option>
-                    <option value="maharshtra">Maharashtra</option>
-                    <option value="AP">AP</option>
-                    <option value="UP">UP</option>
-                    <option value="telangana">Telangana</option>
-                    <option value="karnataka">karnataka</option>
-                  </Input>
+                    placeholder="Enter City"
+                  />
                 </Col>
               </FormGroup>
             </Col>
@@ -125,4 +162,3 @@ const HorizontalForm = (props) => {
   )
 }
 export default HorizontalForm
-

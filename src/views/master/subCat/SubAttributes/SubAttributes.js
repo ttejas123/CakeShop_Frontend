@@ -103,11 +103,14 @@ const optionSubAttribute = [
 
 const DataTableWithButtons = () => {
   const usedispatch = useDispatch()
-  const start = useSelector((state) => state.SubAttributes.start)
+  const count = useSelector((state) => state.SubAttributes.count)
   const data = useSelector((state) => state.SubAttributes.data)
   useEffect(() => {
-    usedispatch(fetchAttributes(start))
+    usedispatch(fetchAttributes(count))
   }, [usedispatch])
+  useEffect(() => {
+    return () => usedispatch({ type: 'SubAttributes_reset_list' })
+  }, [])
   console.log(data)
   const statusObj = {
     pending: 'light-secondary',
@@ -296,6 +299,7 @@ const DataTableWithButtons = () => {
 
   // ** Function to handle Pagination
   const handlePagination = (page) => {
+    usedispatch(fetchAttributes(page.selected * 5))
     setCurrentPage(page.selected)
   }
 
@@ -306,7 +310,7 @@ const DataTableWithButtons = () => {
       nextLabel=""
       forcePage={currentPage}
       onPageChange={(page) => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
+      pageCount={count / 5 || 1}
       breakLabel="..."
       pageRangeDisplayed={2}
       marginPagesDisplayed={2}
@@ -360,12 +364,12 @@ const DataTableWithButtons = () => {
           noHeader
           pagination
           columns={columns}
-          paginationPerPage={7}
+          paginationPerPage={5}
           className="react-dataTable"
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
           paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
+          data={data}
         />
       </Card>
       <Response
@@ -379,4 +383,3 @@ const DataTableWithButtons = () => {
 }
 
 export default DataTableWithButtons
-
