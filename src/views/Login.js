@@ -4,11 +4,12 @@ import { handleLogin } from '@store/actions/auth'
 import { Link, Redirect, useHistory } from 'react-router-dom'
 import useJwt from '@src/auth/jwt/useJwt'
 import Avatar from '@components/avatar'
+import bgImaes from '@src/assets/images/logo/banner.png' 
 import { toast, Slide } from 'react-toastify'
 import { AbilityContext } from '@src/utility/context/Can'
 import { Facebook, Twitter, Mail, GitHub, Coffee } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
-import { Row, Col, CardTitle, CardText, Form, FormGroup, Label, Input, CustomInput, Button } from 'reactstrap'
+import { Row, Col, CardTitle, CardText, Form, FormGroup, Label, Input, CustomInput, Button, Card, CardBody } from 'reactstrap'
 import { authenticate } from '@src/redux/actions/authenticate/index.js'
 import { useSelector, useDispatch } from 'react-redux'
 import { getHomeRouteForLoggedInUser, isObjEmpty } from '@utils'
@@ -76,7 +77,7 @@ const Login = () => {
   const onSubmitData = data => {
     const identifier = values.identifier
     const password = values.password
-    console.log(values)
+    //console.log(values)
     usDispatch(authenticate(values))
     //editStatus('true')
     usDispatch(StatusBS(checked))
@@ -87,7 +88,7 @@ const Login = () => {
           const data = { ...res.data.user, accessToken: res.data.jwt, refreshToken: res.data.jwt }
           console.log(data)
           usDispatch(handleLogin(data))
-          //window.location.assign("/city-list")
+          window.location.assign("/")
           // window.location.reload(false)
           //ability.update(res.data.userData.ability)
           //historyLocation.push(getHomeRouteForLoggedInUser(data.role))
@@ -102,109 +103,112 @@ const Login = () => {
 
   return (
     <div
-
+    className='w-100 h-auto align-items-center'
     style={{
           backgroundImage: `url(${require('@src/assets/images/logo/banner.png').default})`,
-          height: '90vh',
           backgroundRepeat:'no-repeat',
-          backgroundSize:'cover',
-          marginTop:-25
+          backgroundSize:'cover'
         }}
   >
-      <Row className='auth-inner m-0 ' >
+ 
+         <div className='d-lg-flex align-items-center justify-content-center '>
 
-        <Col lg='1' sm='0'></Col>
-        <Col className=' align-items-center px-2 pt-lg-3 pb-lg-3' lg='10' sm='12'>
-         <Row className=' align-items-center  px-2 p-lg-2'>
+            <div className='mx-lg-5 px-lg-5 mx-1 py-5 py-lg-0'>
+                  <div className="">
+                    <h3 className="pb-1">First time here ?</h3>
+                    <h2 className="pb-1">Join now and get<br /> <span >20% OFF</span> for all <br /> products</h2>
+                    <ul className="list-unstyled mb-0 pb-1">
+                        <li><img src="https://img.icons8.com/material-sharp/16/000000/checkmark--v1.png" /> Premium Access to all Products</li>
+                        <li><img src="https://img.icons8.com/material-sharp/16/000000/checkmark--v1.png" /> Free Testing Tools</li>
+                        <li><img src="https://img.icons8.com/material-sharp/16/000000/checkmark--v1.png" /> Unlimited User Accounts</li>
+                    </ul>
+                    <Button.Ripple tag={Link} to='/register' color='primary'>
+                      Sign Up
+                    </Button.Ripple>
+                  </div>
+            </div>
 
-          <Col className='px-xl-1 mx-auto pt-lg-5 pt-lg-3 pb-5 pb-lg-5 ' md='4' xs='12'>
-                <div className="sign_info_content pt-2 pt-lg-5 pt-lg-0 pl-lg-5">
-                                    <h3 className="f_p f_600 f_size_24 t_color3 mb_40 pb-1">First time here ?</h3>
-                                    <h2 className="f_p f_400 f_size_30 mb-30 pb-1">Join now and get<br /> <span className="f_700">20% OFF</span> for all <br /> products</h2>
-                                    <ul className="list-unstyled mb-0 pb-1">
-                                        <li><img src="https://img.icons8.com/material-sharp/16/000000/checkmark--v1.png" /> Premium Access to all Products</li>
-                                        <li><img src="https://img.icons8.com/material-sharp/16/000000/checkmark--v1.png" /> Free Testing Tools</li>
-                                        <li><img src="https://img.icons8.com/material-sharp/16/000000/checkmark--v1.png" /> Unlimited User Accounts</li>
-                                    </ul>
+            <div style={{height: '100vh'}} className='px-lg-5 mx-1 mx-lg-0 align-items-center d-flex'>
+            <Card className='mx-lg-5 '>
+              <CardBody>
+                <CardTitle tag='h2' className='font-weight-bold mb-1'>
+                  Welcome to Bidoya!
+                </CardTitle>
 
-                                      <Button.Ripple tag={Link} to='/register' color='primary'>
-                                        Sign Up
-                                      </Button.Ripple>
+                {/* form to Add Data*/}
 
-                </div>
+                <Form  onSubmit={e => e.preventDefault()}>
+                    <FormGroup>
+                      <Label className='form-label' for='login-email'>
+                        UserName
+                      </Label>
+                      <Input type='text' onChange={(e) => setValues({
+                        ...values,
+                        identifier: e.target.value
+                      })} id='login-email' placeholder='john121' autoFocus />
+                    </FormGroup>
 
+                    <FormGroup>
+                      <div className='d-flex justify-content-between'>
+                        <Label className='form-label' for='login-password'>
+                          Password
+                        </Label>
+                        <Link to='/forgot'>
+                          <small>Forgot Password?</small>
+                        </Link>
+                      </div>
+                      <InputPasswordToggle onChange={(e) => setValues({
+                        ...values,
+                        password: e.target.value
+                      })} className='input-group-merge' id='login-password' />
+                    </FormGroup>
 
-          </Col>
+                    <FormGroup className='d-flex justify-content-between'>
+                      <CustomInput type='checkbox' className='custom-control-Primary' id='remember-me' label='Remember Me' />
+                      <CustomInput type='checkbox' onChange={(e) => setchecked(e.target.checked) } className='custom-control-Primar1' id='Seller' label='As Seller' />
+                    </FormGroup>
 
-          <Col className='px-xl-2 p-2 mx-auto sign_info' md='5' xs='12'>
-            <CardTitle tag='h2' className='font-weight-bold mb-1'>
-              Welcome to Bidoya!
-            </CardTitle>
-            <Form className='auth-login-form mt-2' onSubmit={e => e.preventDefault()}>
-              <FormGroup>
-                <Label className='form-label' for='login-email'>
-                  UserName
-                </Label>
-                <Input type='text' onChange={(e) => setValues({
-                  ...values,
-                  identifier: e.target.value
-                })} id='login-email' placeholder='john121' autoFocus />
-              </FormGroup>
-              <FormGroup>
-                <div className='d-flex justify-content-between'>
-                  <Label className='form-label' for='login-password'>
-                    Password
-                  </Label>
-                  <Link to='/forgot'>
-                    <small>Forgot Password?</small>
+                    <div className='d-flex justify-content-center'>
+                      <p className='text-center col-10'>Default Will be Buyer, To Login As Seller Please Check " As Seller".</p>
+                    </div>
+
+                    <Button.Ripple onClick={() => {
+                      onSubmitData()
+                    } } color='primary' block>
+
+                      Sign in
+                    </Button.Ripple>
+
+                </Form>
+
+                <p className='text-center mt-2'>
+                  <span>New on our Bidoya?</span>
+                  <Link to='/register'>
+                    <span>Create your account</span>
                   </Link>
+                </p>
+
+                <div className='divider '>
+                  <div className='divider-text'>Social Profiles</div>
                 </div>
-                <InputPasswordToggle onChange={(e) => setValues({
-                  ...values,
-                  password: e.target.value
-                })} className='input-group-merge' id='login-password' />
-              </FormGroup>
-              <FormGroup className='d-flex justify-content-between'>
-                <CustomInput type='checkbox' className='custom-control-Primary' id='remember-me' label='Remember Me' />
-                <CustomInput type='checkbox' onChange={(e) => setchecked(e.target.checked) } className='custom-control-Primar1' id='Seller' label='As Seller' />
-              </FormGroup>
-              <div className='d-flex justify-content-center'>
-              <p className='text-center col-10'>Default Will be Buyer, To Login As Seller Please Check "
-As Seller".</p>
-              </div>
 
-              <Button.Ripple onClick={() => {
-                onSubmitData()
-              } } color='primary' block>
-
-                Sign in
-              </Button.Ripple>
-            </Form>
-            <p className='text-center mt-2'>
-              <span className='mr-25'>New on our Bidoya?</span>
-              <Link to='/register'>
-                <span>Create your account</span>
-              </Link>
-            </p>
-            <div className='divider '>
-              <div className='divider-text'>Social Profiles</div>
+                <div className='auth-footer-btn d-flex justify-content-center '>
+                  <Button.Ripple className="mr-1 p-1"  color='facebook'>
+                    <Facebook size={14} />
+                  </Button.Ripple>
+                  <Button.Ripple className="mr-1 p-1" color='twitter'>
+                    <Twitter size={14} />
+                  </Button.Ripple>
+                  <Button.Ripple className=" p-1" color='google'>
+                    <Mail size={14} />
+                  </Button.Ripple>
+                </div>
+              </CardBody>
+            </Card>
             </div>
-            <div className='auth-footer-btn d-flex justify-content-center '>
-              <Button.Ripple className="mr-1 p-1"  color='facebook'>
-                <Facebook size={14} />
-              </Button.Ripple>
-              <Button.Ripple className="mr-1 p-1" color='twitter'>
-                <Twitter size={14} />
-              </Button.Ripple>
-              <Button.Ripple className=" p-1" color='google'>
-                <Mail size={14} />
-              </Button.Ripple>
-            </div>
-          </Col>
-         </Row>
-        </Col>
-
-      </Row>
+          
+         </div>
+        
     </div>
   )
 }

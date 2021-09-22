@@ -7,15 +7,17 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** React Imports
-import { Fragment, useState, forwardRef } from 'react'
+import { Fragment, useState, forwardRef, useEffect } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { wareHouseData } from './data'
+//import { wareHouseData } from './data'
 import Select from 'react-select'
 
 // ** Add New Modal Component
 //import FormModel from './formModel'
-
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { List, CreateWarehouse, DeleteWarehouse } from '@store/actions/master/warehouse'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
@@ -36,7 +38,9 @@ import {
   Col,
   Badge, UncontrolledDropdown
 } from 'reactstrap'
-
+import ReactPagination from '@src/views/ExCompUse/reactCustPagin'
+import DeletePop from '@src/views/ExCompUse/delepePop.js'
+//C:\Users\Tejas\Documents\react\bidoya\src\views\ExCompUse\delepePop.js
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
   <div className='custom-control custom-checkbox'>
@@ -87,16 +91,18 @@ const WarehouseList = () => {
   const [Filter, setFilter] = useState('')
   const [values, setValues] = useState('')
 
+  const useDisplatch = useDispatch()
+  useEffect(() => {
+    useDisplatch(List(5, 0))
+   
+  }, [useDisplatch])
+  const KycDocTypeListDrop = useSelector(state => {
+    console.log(state.warehouse)
+    return state.warehouse
+  })
    //deleteCountry
-  const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
+  const deleteCountry = (id) => {
+    DeletePop(DeleteWarehouse, id, useDisplatch)
   }
     //edit action
    const AddeditEvent = (val) => {
@@ -109,13 +115,13 @@ const WarehouseList = () => {
   const columns = [
         {
           name: 'Name',
-          selector: 'name',
+          selector: 'warehouse_name',
           sortable: false,
           minWidth: '50px'
         },
         {
           name: 'Address',
-          selector: 'address',
+          selector: 'address_1',
           sortable: false,
           minWidth: '150px'
         },
@@ -139,13 +145,22 @@ const WarehouseList = () => {
         },
         {
           name: `Bidoya's Warehouse`,
-          selector: 'isBidoyasWarehouse',
+          selector: 'is_bidoya_warehouse',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          cell: row => {
+                  return (
+                    
+                      <div>
+                        {row.is_bidoya_warehouse ? "Yes" : "No"}
+                      </div>
+                    
+                  )
+          }
         },
         {
           name: 'Created Date',
-          selector: 'createdDate',
+          selector: 'createdAt',
           sortable: false,
           minWidth: '150px'
         },
@@ -158,9 +173,9 @@ const WarehouseList = () => {
                 <UncontrolledDropdown>
                   <DropdownToggle className='pr-1' tag='span'>
                     <Trash size={15} onClick={e => {
-                                                                                    e.preventDefault()
-                                                                                    deleteCountry(row.id)
-                                                                                  } }/>
+                                                e.preventDefault()
+                                                deleteCountry(row.id)
+                                              } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <Link  to={`/edit-warehouse/${row.id}`}>
@@ -209,64 +224,14 @@ const WarehouseList = () => {
   }
   // ** Function to handle filter
   const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
-        const startsWith =
-          item.productName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
-          console.log(startsWith)
-        const includes =
-          item.productName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
-          
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
+    //console.log()
+    useDisplatch(List(5, 0, e.target.value))
   }
 
   // ** Function to handle Pagination
   const handlePagination = page => {
     setCurrentPage(page.selected)
   }
-
-  // ** Custom Pagination
-  const CustomPagination = () => (
-    <ReactPaginate
-      previousLabel=''
-      nextLabel=''
-      forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : wareHouseData.length / 7 || 1}
-      breakLabel='...'
-      pageRangeDisplayed={2}
-      marginPagesDisplayed={2}
-      activeClassName='active'
-      pageClassName='page-item'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      nextLinkClassName='page-link'
-      nextClassName='page-item next'
-      previousClassName='page-item prev'
-      previousLinkClassName='page-link'
-      pageLinkClassName='page-link'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
-    />
-  )
 
 
   return (
@@ -354,7 +319,6 @@ const WarehouseList = () => {
               type='text'
               bsSize='sm'
               id='search-input'
-              value={searchValue}
               onChange={handleFilter}
             />
           </Col>
@@ -362,18 +326,17 @@ const WarehouseList = () => {
 
         <DataTable
           noHeader
-          pagination
           selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : wareHouseData}
+          
+          data={KycDocTypeListDrop.data}
           selectableRowsComponent={BootstrapCheckbox}
         />
-        
+        <ReactPagination followData = {KycDocTypeListDrop} dispachReq={List} />
       </Card>
             {/* <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} /> */}
     </Fragment>

@@ -9,6 +9,11 @@ import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomIn
 import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
 import { useForm, Controller } from 'react-hook-form'
+import { useSelector, useDispatch } from 'react-redux'
+import { CreateWarehouse } from '@store/actions/master/warehouse'
+import { SelectedCityList } from '@store/actions/master/city'
+import { dropdcountryList } from '@store/actions/master/country'
+import { SelectedStateList } from '@store/actions/master/state'
 
 const EditEmployee = () => {
 
@@ -53,21 +58,7 @@ const EditEmployee = () => {
     {value: "Armerian Dram", label: "Armerian Dram"},
     {value: "Canadian Dollar", label: "Canadian Dollar"}
   ]
-  const initialvalues = {
-    id:1,
-    name: "",
-    email: "",
-    isOnGround: "",
-    isActive: "",
-    logo : "",
-    phone : "",
-    panNumber: "",
-    Currency:  [{value: "currency", label: "Indian Rupee"}],
-    City:  [{value: "city", label: "Mumbai"}], 
-    State:  [{value: "state", label: "Maharashtra"}],
-    Country: [{value: "country", label: "India"}],
-    Role: [{value: "role", label: "Intern"}]
-  }
+  const initialvalues = {is_bidoya_wareHouse: false}
   const [values, setValues] = useState(initialvalues)
   const handleInputeChange = (event) => {
     const {name, value} = event.target
@@ -111,17 +102,27 @@ const EditEmployee = () => {
     reader.readAsDataURL(files[0])
   }
 
-  // ** Update user image on mount or change
+  const useDisplatch = useDispatch()
   useEffect(() => {
-    // if (selectedUser !== null || (selectedUser !== null && userData !== null && selectedUser.id !== userData.id)) {
-    //   setUserData(selectedUser)
-    //   if (selectedUser.avatar.length) {
-    //     return setImg(selectedUser.avatar)
-    //   } else {
-    //     return setImg(null)
-    //   }
-    // }
+    //useDisplatch(SelectedStateList("India"))
+    //useDisplatch(SelectedCityList("Maharastra"))
+    useDisplatch(dropdcountryList())
+  }, [useDisplatch])
+  const countryDropdown = useSelector(state => {
+    //console.log(state.warehouse)
+    return state.country
   })
+
+  const stateDropdown = useSelector(state => {
+    //console.log(state.warehouse)
+    return state.states
+  })
+
+  const cityDropdown = useSelector(state => {
+    //console.log(state.warehouse)
+    return state.city
+  })
+
 
   // ** Renders User
   const renderUserAvatar = () => {
@@ -175,7 +176,7 @@ const EditEmployee = () => {
     <Col md='6' sm='12'>
         <FormGroup>
           <Label for='warehouseName'>Name</Label>
-          <Input type='text' id='warehouseName' placeholder='Name' defaultValue={userData && userData.warehouseName} />
+          <Input type='text' id='warehouseName' placeholder='Name' name='warehouse' onChange={handleInputeChange} defaultValue={userData && userData.warehouseName} />
         </FormGroup>
       </Col>
       <Col md='6' sm='12'>
@@ -186,6 +187,7 @@ const EditEmployee = () => {
                 inline
                 type='checkbox'
                 name='terms'
+                onClick={(e) => setValues({...values, is_bidoya_wareHouse: e.target.checked})}
                 id='emailTerms'
                 value='Is Bidoyas Warehouse'
                 label='Is Bidoyas Warehouse'
@@ -206,7 +208,7 @@ const EditEmployee = () => {
             <Label for='address-1'>Address Line 1</Label>
             <Input
               id='address-1'
-              name='address1'
+              name='address1' onChange={handleInputeChange}
               placeholder='street 1'
               innerRef={register({ required: true })}
               className={classnames({
@@ -226,7 +228,7 @@ const EditEmployee = () => {
             <Label for='pincode'>PinCode</Label>
             <Input
               id='pincode'
-              name='pincode'
+              name='pincode' onChange={handleInputeChange}
               placeholder='597424'
               innerRef={register({ required: true })}
               invalid={errors.pincode && true}
@@ -241,47 +243,32 @@ const EditEmployee = () => {
               className='react-select'
               classNamePrefix='select'
               isClearable={false}
-              options={optionCountry}
+              options={countryDropdown.data}
               theme={selectThemeColors}
-              value={values.Country[0]}
+              
               onChange={data => {
-
-
-                                 setValues(
-                                          {
-                                             ...values,
-                                             Country : data
-                                          } 
-                                  )
+                                 useDisplatch(SelectedStateList(data.label))
                                 }
                         }
             />
             </FormGroup> 
         </Col>
         <Col md='4' sm='12'>
-        <FormGroup>
-              <Label for='State'>State</Label>
-            <Select
-              id='State'
-              className='react-select'
-              classNamePrefix='select'
-              isClearable={false}
-              options={optionState}
-              theme={selectThemeColors}
-              value={values.State[0]}
-              onChange={data => {
-
-
-                                 setValues(
-                                          {
-                                             ...values,
-                                             State : data
-                                          } 
-                                  )
-                                }
-                        }
-            />
-            </FormGroup> 
+                      <FormGroup>
+                        <Label >State</Label>
+                        <Select
+                              isClearable={false}
+                              theme={selectThemeColors}
+                              className='react-select'
+                              classNamePrefix='select'
+                              options={stateDropdown.data}
+                              
+                              onChange={data => {
+                                useDisplatch(SelectedCityList(data.label))
+                               }
+                              }
+                      />
+                      </FormGroup>
         </Col>
         <Col md='4' sm='12'>
         <FormGroup>
@@ -291,16 +278,13 @@ const EditEmployee = () => {
               className='react-select'
               classNamePrefix='select'
               isClearable={false}
-              options={optionCity}
+              options={cityDropdown.data}
               theme={selectThemeColors}
-              value={values.City[0]}
               onChange={data => {
-
-
                                  setValues(
                                           {
                                              ...values,
-                                             City : data
+                                             City : data.id
                                           } 
                                   )
                                 }
@@ -310,104 +294,9 @@ const EditEmployee = () => {
         </Col>
       </Row>
       </Col> 
-      {/* <Col sm='12'>
-        <div className='permissions border mt-1'>
-          <h6 className='py-1 mx-1 mb-0 font-medium-2'>
-            <Lock size={18} className='mr-25' />
-            <span className='align-middle'>Permissions</span>
-          </h6>
-          <Table borderless striped responsive>
-            <thead className='thead-light'>
-              <tr>
-                <th>Module</th>
-                <th>Read</th>
-                <th>Write</th>
-                <th>Create</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Admin</td>
-                <td>
-                  <CustomInput type='checkbox' id='admin-1' label='' defaultChecked />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='admin-2' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='admin-3' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='admin-4' label='' />
-                </td>
-              </tr>
-              <tr>
-                <td>Staff</td>
-                <td>
-                  <CustomInput type='checkbox' id='staff-1' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='staff-2' label='' defaultChecked />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='staff-3' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='staff-4' label='' />
-                </td>
-              </tr>
-              <tr>
-                <td>Author</td>
-                <td>
-                  <CustomInput type='checkbox' id='author-1' label='' defaultChecked />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='author-2' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='author-3' label='' defaultChecked />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='author-4' label='' />
-                </td>
-              </tr>
-              <tr>
-                <td>Contributor</td>
-                <td>
-                  <CustomInput type='checkbox' id='contributor-1' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='contributor-2' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='contributor-3' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='contributor-4' label='' />
-                </td>
-              </tr>
-              <tr>
-                <td>User</td>
-                <td>
-                  <CustomInput type='checkbox' id='user-1' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='user-2' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='user-3' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='user-4' label='' defaultChecked />
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
-      </Col> */}
+      
       <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-        <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary'>
+        <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary' onClick={() => useDisplatch(CreateWarehouse(values))}>
           Save Changes
         </Button.Ripple>
         <Button.Ripple color='secondary' outline>
