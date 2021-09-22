@@ -12,6 +12,7 @@ import states from './master/state'
 import brands from './master/brand'
 import SubAttributes from './master/subCat/SubAttributes'
 // //import users from '@src/views/user/store/reducer'
+import warehouse from './master/warehouse'
 
 const rootReducer = combineReducers({
   auth,
@@ -22,8 +23,8 @@ const rootReducer = combineReducers({
   editCity,
   states,
   brands,
-  SubAttributes
-
+  SubAttributes,
+  warehouse
   //users
 })
 

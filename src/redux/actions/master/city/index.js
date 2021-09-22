@@ -77,3 +77,28 @@ mutation {
     }
   }
 }
+
+export const SelectedCityList = (data) => {
+    const query = `query{
+ citiesConnection(where: {state: {name: "${data}"}}){
+  values{
+    id
+    name
+    state{
+      name
+    }
+  }
+} 
+}`
+    return dispatch => {
+        //List
+        axios.post(BaseUrl, {query}).then(res => {
+            //console.log(res.data.data.countries)
+            return dispatch({
+                type: 'SELECTEDCITYLIST',
+                payload: res.data.data
+            })
+        })
+    }
+
+}

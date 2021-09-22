@@ -26,6 +26,26 @@ export const List = () => {
     }
 }
 
+export const dropdcountryList = () => {
+    const query = `query{
+                      countries{
+                        country_name
+                        id
+                      }
+                    }`
+
+    return dispatch => {
+        //List
+        axios.post(BaseUrl, {query}).then(res => {
+            //console.log(res.data.data.countries)
+            return dispatch({
+                type: 'DROPDCOUNTRYLIST',
+                payload: res.data.data.countries
+            })
+        })
+    }
+}
+
 
 export const Create = () => {
   

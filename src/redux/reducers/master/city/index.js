@@ -20,6 +20,16 @@ const cityReducer = (state = initialState, action) => {
         start: state.start + 5,
         firstTimeFetch: true
       }
+    case "SELECTEDCITYLIST": 
+            //console.log(action.payload)
+            const DataSelectArray = action.payload.citiesConnection.values.map((val) => {  
+                return {value: val.name, label: val.name, id: val.id}
+            })
+            //console.log(DataArray)
+            return {
+                ...state,
+                data: DataSelectArray
+            }
     default:
       return state
   }

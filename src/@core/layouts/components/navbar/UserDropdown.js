@@ -62,11 +62,11 @@ const UserDropdown = () => {
         onClick={(e) => e.preventDefault()}
       >
         <div className="user-nav d-sm-flex d-none">
-          <span className="user-name font-weight-bold"> Ravi Kukreja</span>
-          {/* {(userData && userData['username']) || 'Ravi Kukreja'} */}
+          <span className="user-name font-weight-bold"> {(userData && userData.username) || 'Ravi Kukreja'} </span>
+           {(userData && userData.email) || 'Ravi Kukreja'} 
           <span className="user-status">
             {" "}
-            {(userData && userData.role) || "Super Admin"}
+            
           </span>
         </div>
         <Avatar img={userAvatar} imgHeight="40" imgWidth="40" status="online" />
@@ -93,7 +93,7 @@ const UserDropdown = () => {
           <Settings size={14} className="mr-75" />
           <span className="align-middle">Settings</span>
         </DropdownItem>
-        <DropdownItem tag={Link} to="#">
+        <DropdownItem tag={Link}  onClick={() => dispatch(handleLogout())}>
           <LogOut size={14} className="mr-75" />
           <span className="align-middle">Logout</span>
         </DropdownItem>

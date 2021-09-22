@@ -57,6 +57,15 @@ const todoReducer = (state = initData, action) => {
                     data: [...state.data]
                 }
             }
+        case "DROPDCOUNTRYLIST": 
+            const DropDDataArray = action.payload.map((val) => {  
+                return {value: val.country_name, label: val.country_name, id: val.id}
+            })
+            //console.log(DataArray)
+            return {
+                ...state,
+                data: DropDDataArray
+            }
         default: return state
     } 
 }

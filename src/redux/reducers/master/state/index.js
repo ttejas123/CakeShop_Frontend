@@ -14,6 +14,16 @@ const stateReducer = (state = initialState, action) => {
         }
       })
       return { ...state, states: dataArray, start: state.start + 5 }
+    case "SELECTEDSTATELIST": 
+            //console.log(action.payload)
+            const DataSelectArray = action.payload.statesConnection.values.map((val) => {  
+                return {value: val.name, label: val.name, id: val.id}
+            })
+            //console.log(DataArray)
+            return {
+                ...state,
+                data: DataSelectArray
+            }
     default:
       return state
   }

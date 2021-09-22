@@ -66,7 +66,9 @@ const Router = () => {
    ** Final Route Component Checks for Login & User Role and then redirects to the route
    */
   const FinalRoute = props => {
+    //console.log(isUserLoggedIn())
     const route = props.route
+    
     let action, resource
 
     // ** Assign vars based on route meta
@@ -85,15 +87,13 @@ const Router = () => {
        ** If user is not Logged in & route.meta.authRoute, !route.meta.publicRoute are undefined
        ** Then redirect user to login
        */
-
       return <Redirect to='/login' />
     } else if (route.meta && route.meta.authRoute && isUserLoggedIn()) {
+      console.log(route.meta)
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
-      return <Redirect to='/' />
-    } else if (isUserLoggedIn() && !ability.can(action || 'read', resource)) {
-      // ** If user is Logged in and doesn't have ability to visit the page redirect the user to Not Authorized
-      return <Redirect to='/misc/not-authorized' />
+      return <Redirect to='/ccdashboard' />
     } else {
+      console.log(route.meta)
       // ** If none of the above render component
       return <route.component {...props} />
     }
@@ -168,8 +168,8 @@ const Router = () => {
                               : {})}
                             /*eslint-enable */
                           >
-                            <route.component {...props} />
-                            {/* <FinalRoute route={route} {...props} /> */}
+                            {/*<route.component {...props} />*/}
+                            <FinalRoute route={route} {...props} /> 
                           </LayoutWrapper>
                         </Suspense>
                       )
@@ -188,13 +188,13 @@ const Router = () => {
     <AppRouter basename={process.env.REACT_APP_BASENAME}>
       <Switch>
         {/* If user is logged in Redirect user to DefaultRoute else to login */}
-        {/* <Route
+         <Route
           exact
           path='/'
           render={() => {
             return isUserLoggedIn() ? <Redirect to={DefaultRoute} /> : <Redirect to='/login' />
           }}
-        /> */}
+        /> 
         <Route
           exact
           path='/'

@@ -26,3 +26,25 @@ query{
     }
   }
 }
+
+export const SelectedStateList = (data) => {
+    const query = `query{
+  statesConnection(where: {country: {country_name: "${data}"}}){
+    values{
+      id
+      name
+    }
+  }
+}`
+    return dispatch => {
+        //List
+        axios.post(BaseUrl, {query}).then(res => {
+            //console.log(res.data.data.countries)
+            return dispatch({
+                type: 'SELECTEDSTATELIST',
+                payload: res.data.data
+            })
+        })
+    }
+
+}
