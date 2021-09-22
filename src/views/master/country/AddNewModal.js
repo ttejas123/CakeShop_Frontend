@@ -19,6 +19,7 @@ import { Button, Modal, ModalHeader, ModalBody, FormGroup, InputGroup, InputGrou
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 const AddNewModal = (prop) => {
+  console.log(prop)
   const SignupSchema = yup.object().shape({
     code: yup.string().required(),
     Initial: yup.string().required(),

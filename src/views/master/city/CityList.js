@@ -7,6 +7,9 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCities, updateCity } from '@store/actions/master/city'
 
+import ReactPagination from '@src/views/ExCompUse/reactCustPagin'
+import DeletePop from '@src/views/ExCompUse/delepePop.js'
+
 // ** Table Columns
 import { cityData } from './data'
 

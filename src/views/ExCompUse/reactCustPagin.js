@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
     // ** Custom Pagination
 const CustomPagination = (props) => { 
+  console.log(props.followData.count)
     const [currentPage, setCurrentPage] = useState(0)
     const useDisplatch = useDispatch()
     if (props.SearchDetails) {

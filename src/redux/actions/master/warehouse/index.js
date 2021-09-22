@@ -5,9 +5,9 @@ import { BaseUrl } from '@store/baseUrl' //Base Url
 //const BaseUrl = `http://159.65.156.12:1337/graphql`
 
 export const userAddressDropd = (limit, start) => {
-    // const UserData = JSON.parse(localStorage.getItem('userData'))
-    // const UserName = UserData === null ? ("") : (UserData.username)
-    const query = `query{
+  // const UserData = JSON.parse(localStorage.getItem('userData'))
+  // const UserName = UserData === null ? ("") : (UserData.username)
+  const query = `query{
   userAddresses{
         id
       address_name
@@ -26,25 +26,26 @@ export const userAddressDropd = (limit, start) => {
   }
 }`
 
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query}).then(res => {
-            //console.log(res.data.data)
-            return dispatch({
-                type: 'USERADDRESSDROPDOWN',
-                payload: res.data.data
-            })
-        })
-    }
+  return (dispatch) => {
+    //List
+    axios.post(BaseUrl, { query }).then((res) => {
+      //console.log(res.data.data)
+      return dispatch({
+        type: 'USERADDRESSDROPDOWN',
+        payload: res.data.data
+      })
+    })
+  }
 }
 
 export const List = (limit, start, search) => {
-    const UserData = JSON.parse(localStorage.getItem('userData'))
-    const UserName = UserData === null ? ("") : (UserData.username)
-    const searchPro = search ? search : ""
-    const query = `query{
+  const UserData = JSON.parse(localStorage.getItem('userData'))
+  const UserName = UserData === null ? '' : UserData.username
+  const searchPro = search ? search : ''
+  const query = `query{
   userWarehousesConnection(limit: ${limit}, start: ${start}, where:{
         name_contains: "${searchPro}"
+        user:{username: "${UserName}"}
   }){
     values{
           id
@@ -70,22 +71,21 @@ export const List = (limit, start, search) => {
   }
 }`
 
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query}).then(res => {
-            //console.log(res.data.data)
-            return dispatch({
-                type: 'WAREHOUSELIST',
-                payload: res.data.data
-            })
-        })
-    }
+  return (dispatch) => {
+    //List
+    axios.post(BaseUrl, { query }).then((res) => {
+      //console.log(res.data.data)
+      return dispatch({
+        type: 'WAREHOUSELIST',
+        payload: res.data.data
+      })
+    })
+  }
 }
-
 
 export const CreateWarehouse = (data) => {
   console.log(data)
-    const createQ = `mutation{
+  const createQ = `mutation{
   createUserWarehouse(input:{data: {
     name:"${data.warehouse}"
     address_1: "${data.address1}"
@@ -113,22 +113,22 @@ export const CreateWarehouse = (data) => {
     }
   }
 }`
-    //Create
-  return dispatch => {
-        //List
-        axios.post(BaseUrl, {query: createQ}).then(res => {
-            console.log(res.data.data)
-            return dispatch({
-                type: 'CREATEWAREHOUSE',
-                payload: res.data.data
-            })
-        })
+  //Create
+  return (dispatch) => {
+    //List
+    axios.post(BaseUrl, { query: createQ }).then((res) => {
+      console.log(res.data.data)
+      return dispatch({
+        type: 'CREATEWAREHOUSE',
+        payload: res.data.data
+      })
+    })
   }
 }
 
 export const EditC = (data) => {
-    //console.log(data)
-    const updateQ = `mutation{
+  //console.log(data)
+  const updateQ = `mutation{
   updateUserAddress(input:{where: {id: "${data.id}"}, data:{address_name: "${data.area}", street_name: "${data.street_name}", area: "${data.area}", pincode: "${data.pincode}"}}){
     userAddress{
       id
@@ -149,35 +149,36 @@ export const EditC = (data) => {
     }
   }
 }`
-    
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query: updateQ}).then(res => {
-            //console.log(res.data.data)
-            return dispatch({
-                type: 'USERADDRESSEDIT',
-                payload: res.data.data
-            })
-        })
-    }
+
+  return (dispatch) => {
+    //List
+    axios.post(BaseUrl, { query: updateQ }).then((res) => {
+      //console.log(res.data.data)
+      return dispatch({
+        type: 'USERADDRESSEDIT',
+        payload: res.data.data
+      })
+    })
+  }
 }
 
 export const DeleteWarehouse = (id) => {
-    const deleteQ = `mutation{
+  const deleteQ = `mutation{
   deleteUserWarehouse(input:{where: {id: "${id}"}}){
     userWarehouse{
       id
     }
   }
 }`
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query: deleteQ}).then(res => {
-            //console.log(res.data.data)
-            return dispatch({
-                type: 'WAREHOUSEDELETE',
-                payload: res.data.data
-            })
-        })
-    }
+  return (dispatch) => {
+    //List
+    axios.post(BaseUrl, { query: deleteQ }).then((res) => {
+      //console.log(res.data.data)
+      return dispatch({
+        type: 'WAREHOUSEDELETE',
+        payload: res.data.data
+      })
+    })
+  }
 }
+
