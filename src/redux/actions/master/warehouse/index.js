@@ -45,6 +45,9 @@ export const List = (limit, start, search) => {
     const query = `query{
   userWarehousesConnection(limit: ${limit}, start: ${start}, where:{
         name_contains: "${searchPro}"
+        user: {
+            username: "${UserName}"
+        }
   }){
     values{
           id
@@ -162,7 +165,7 @@ export const EditC = (data) => {
     }
 }
 
-export const DeleteWarehouse = (id) => {
+export const DeleteWarehouse = (id, useDisplatch, List, currentPage) => {
     const deleteQ = `mutation{
   deleteUserWarehouse(input:{where: {id: "${id}"}}){
     userWarehouse{
@@ -174,6 +177,7 @@ export const DeleteWarehouse = (id) => {
         //List
         axios.post(BaseUrl, {query: deleteQ}).then(res => {
             //console.log(res.data.data)
+            useDisplatch(List(5, currentPage * 5))
             return dispatch({
                 type: 'WAREHOUSEDELETE',
                 payload: res.data.data

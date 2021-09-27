@@ -1,71 +1,135 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
-
+import Select from 'react-select'
+import thumbnailGenerator from '@uppy/thumbnail-generator'
 // ** Custom Components
+import { Link } from 'react-router-dom'
 import Avatar from '@components/avatar'
 import { data } from './data'
-
+import { DragDrop } from '@uppy/react'
+import { selectThemeColors, isObjEmpty } from '@utils'
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { SpecificProduct } from '@store/actions/master/product'
 // ** Third Party Components
-import { Lock, Edit, Trash2 } from 'react-feather'
+import { dropdownBrand } from '@store/actions/master/brand'
+import { fetchCategories } from '@store/actions/master/category'
+import { Lock, Edit, Trash2, AtSign } from 'react-feather'
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, CardHeader, CardBody, Card, CardTitle } from 'reactstrap'
 import { useParams } from 'react-router'
+import Uppy from '@uppy/core'
+import 'uppy/dist/uppy.css'
+import '@uppy/status-bar/dist/style.css'
 
 const UserAccountTab = () => {
-  console.log("number", useParams())
-  const selectedUser = {
-    avatar: "",
-    company: "Yotz PVT LTD",
-    contact: "(479) 232-9151",
-    country: "El Salvador",
-    currentPlan: "enterprise",
-    email: "gslixby0@abc.net.au",
-    fullName: "Coense Solutions",
-    id: 1,
-    role: "editor",
-    status: "inactive",
-    username: "gslixby0"
-      }
-  console.log(selectedUser)
+  const optionCategory = []
+    const optionBrandSelection = []
+
+    const optionProductCategory = []
+  const useDisplatch = useDispatch()
+    useEffect(() => {
+      useDisplatch(fetchCategories())
+      useDisplatch(dropdownBrand())
+    }, [useDisplatch])
+    const DataTableDC = useSelector(state => {
+      //console.log(state.category)
+      return state.category
+    })
+    const BrandDrop = useSelector(state => {
+      //console.log(state.category)
+      return state.brands
+    })
+  const {id} = useParams()
+  //const useDisplatch = useDispatch()
+  useEffect(() => {
+    useDisplatch(SpecificProduct(id))
+   
+  }, [id])
+  const DataTableD = useSelector(state => {
+    //console.log(state.product.specPro)
+    return state.product
+  })
+  
   // ** States
   const [img, setImg] = useState(null)
-  const [userData, setUserData] = useState(null)
+  const [userData, setUserData] = useState({})
+  const [values, setValues] = useState({})
+
+  // Image Upload section
+  const [previewArr, setPreviewArr] = useState([])
+  const [fileArr, setFileArr] = useState([])
+  const uppy = new Uppy({
+    meta: { type: 'avatar' },
+    autoProceed: true,
+    totalProgress: 0
+  })
+
+  uppy.use(thumbnailGenerator)
+
+  uppy.on('thumbnail:generated', (file, preview) => {
+    // console.log(file.data)
+    const arr = previewArr
+    arr.push(preview)
+    setPreviewArr([...arr])
+
+    const fileArrs = fileArr
+    fileArrs.push(file.data)
+    setFileArr([...fileArrs])
+  })
+
+  useEffect(() => {
+    if (DataTableD) {
+      //console.log(DataTableD.specPro)
+      setUserData(DataTableD.specPro)
+      setPreviewArr(DataTableD.specPro.images)
+    }
+  }, [DataTableD])
   // ** Function to change user image
   const onChange = e => {
     const reader = new FileReader(),
       files = e.target.files
+    setUserData({
+      ...userData,
+      imgID: null,
+      imgFile: files
+    })
     reader.onload = function () {
       setImg(reader.result)
     }
     reader.readAsDataURL(files[0])
   }
 
+  const onChangeHandle = e => {
+    const { name, value } = e.target
+    setUserData({
+      ...userData,
+      [name]: value
+    })
+  }
+
+  const handleInputeChange = (event) => {
+    const {name, value} = event.target
+    setValues({
+      ...values,
+      [name] : value
+    })
+  }
+
+  const renderPreview = () => {
+    //console.log(previewArr)
+    if (previewArr && previewArr.length) {
+      return previewArr.map((src, index) => <img key={index} className='rounded mt-2 mr-1' height='100rem' src={src} alt='avatar' />)
+    } else {
+      return null
+    }
+    return null
+  }
+
   // ** Update user image on mount or change
 
   // ** Renders User
   const renderUserAvatar = () => {
-    if (img === null) {
-      const stateNum = Math.floor(Math.random() * 6),
-        states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
-        color = states[stateNum]
-      return (
-        <Avatar
-          initials
-          color={color}
-          className='rounded mr-2 my-25'
-          content={selectedUser.fullName}
-          contentStyles={{
-            borderRadius: 0,
-            fontSize: 'calc(36px)',
-            width: '100%',
-            height: '100%'
-          }}
-          style={{
-            height: '90px',
-            width: '90px'
-          }}
-        />
-      )
-    } else {
+    
       return (
         <img
           className='user-avatar rounded mr-2 my-25 cursor-pointer'
@@ -75,7 +139,7 @@ const UserAccountTab = () => {
           width='90'
         />
       )
-    }
+
   }
 
   return (
@@ -87,215 +151,328 @@ const UserAccountTab = () => {
 
 <CardBody>
 <Row>
-{/* <Col sm='12'>
-  <Media className='mb-2'>
-    {renderUserAvatar()}
-    <Media className='mt-50' body>
-      <h4>{selectedUser.fullName} </h4>
-      <div className='d-flex flex-wrap mt-1 px-0'>
-        <Button.Ripple id='change-img' tag={Label} className='mr-75 mb-0' color='primary'>
-          <span className='d-none d-sm-block'>Change</span>
-          <span className='d-block d-sm-none'>
-            <Edit size={14} />
-          </span>
-          <input type='file' hidden id='change-img' onChange={onChange} accept='image/*' />
-        </Button.Ripple>
-        <Button.Ripple color='secondary' outline>
-          <span className='d-none d-sm-block'>Remove</span>
-          <span className='d-block d-sm-none'>
-            <Trash2 size={14} />
-          </span>
-        </Button.Ripple>
-      </div>
-    </Media>
-  </Media>
-</Col> */}
 <Col sm='12'>
   <Form onSubmit={e => e.preventDefault()}>
-    <Row>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='productId'>Product Id</Label>
-          <Input type='text' id='productId' placeholder='Product Id' defaultValue={userData && userData.productId} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
+    {/*<Row>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='productId'>Product Id</Label>
+              <Input type='text' name='id' onChange={onChangeHandle} disabled id='productId' placeholder='Product Id' defaultValue={userData && userData.id} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='name'>Name</Label>
+              <Input type='text' name='name' onChange={onChangeHandle} id='name' placeholder='Name' defaultValue={userData.name} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='ean_upc_code'>EAN UPC Code</Label>
+              <Input type='text' name='ean_upc_code' onChange={onChangeHandle} id='ean_upc_code' placeholder='EAN UPC Code' defaultValue={userData && userData.ean_upc_code} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='category'>Category</Label>
+              <Input type='text' name='category' onChange={onChangeHandle} id='category' placeholder='Category' defaultValue={userData && userData.category} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='subCategory'>Sub Category</Label>
+              <Input type='text' name='subCategory' onChange={onChangeHandle} id='subCategory' placeholder='Sub Category' defaultValue={userData && userData.subCategory} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='productCategory'>Product Category</Label>
+              <Input type='text' name='product_Cat' onChange={onChangeHandle} id='productCategory' placeholder='Product Category' defaultValue={userData && userData.product_Cat} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='hsnCode'>HSN COde</Label>
+              <Input type='text' name='hsn_code' onChange={onChangeHandle} id='hsnCode' placeholder='HSN COde' defaultValue={userData && userData.hsn_code} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='gstNumber'>GST (Number)%</Label>
+              <Input type='text' name='' onChange={onChangeHandle} id='gstNumber' placeholder='GST (Number)%' defaultValue={userData && userData.gst} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+            <FormGroup>
+              <Label for='description'>Description</Label>
+              <Input type='textarea' name='description' onChange={onChangeHandle} id='description' placeholder='Description' defaultValue={userData && userData.description} />
+            </FormGroup>
+          </Col>
+          <Col md='6' sm='12'>
+      <Media className='mb-2'>
+        {renderUserAvatar()}
+        <Media className='mt-50' body>
+          <h4> Edit Product Image </h4>
+          <div className='d-flex flex-wrap mt-1 px-0'>
+            <Button.Ripple id='change-img' tag={Label} className='mr-75 mb-0' color='primary'>
+              <span className='d-none d-sm-block'>Change</span>
+              <span className='d-block d-sm-none'>
+                <Edit size={14} />
+              </span>
+              <input type='file' hidden id='change-img' onChange={onChange} accept='image/*' />
+            </Button.Ripple>
+            <Button.Ripple color='secondary' outline>
+              <span className='d-none d-sm-block'>Remove</span>
+              <span className='d-block d-sm-none'>
+                <Trash2 size={14} />
+              </span>
+            </Button.Ripple>
+          </div>
+        </Media>
+      </Media>
+    </Col>
+          <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
+            <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary'>
+              Save Changes
+            </Button.Ripple>
+            <Button.Ripple color='secondary' outline>
+              Reset
+            </Button.Ripple>
+          </Col>
+        </Row>*/}
+        <Row>
+      <Col sm='12'>
+        <Form onSubmit={e => e.preventDefault()}>
+          <Row>
+
+      <Col md='4' sm='12'>
         <FormGroup>
           <Label for='name'>Name</Label>
-          <Input type='text' id='name' placeholder='Name' defaultValue={userData && userData.name} />
+          <Input type='text' name='name' onChange={handleInputeChange} id='name' placeholder='Name' defaultValue={userData && userData.name} />
         </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
+      <Col md='4' sm='12'>
         <FormGroup>
           <Label for='ean_upc_code'>EAN UPC Code</Label>
-          <Input type='text' id='ean_upc_code' placeholder='EAN UPC Code' defaultValue={userData && userData.ean_upc_code} />
+          <Input type='text' name='ean' onChange={handleInputeChange} id='ean_upc_code' placeholder='EAN UPC Code' defaultValue={userData && userData.ean_upc_code} />
         </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
+      <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='category'>Category</Label>
-          <Input type='text' id='category' placeholder='Category' defaultValue={userData && userData.category} />
+          <Label for='hsnCode'>HSN Code</Label>
+          <Input type='text' name='hsn' onChange={handleInputeChange} id='hsnCode' placeholder='HSN Code' defaultValue={userData && userData.hsn_code} />
         </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
+      <Col md='4' sm='12'>
         <FormGroup>
-          <Label for='subCategory'>Sub Category</Label>
-          <Input type='text' id='subCategory' placeholder='Sub Category' defaultValue={userData && userData.subCategory} />
+          <Label for='sGstNumber'>SGST (%)</Label>
+          <Input type='text' name='sgst' onChange={handleInputeChange} id='sGstNumber' placeholder='SGST (%)' defaultValue={userData && userData.sgst} />
         </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='cGstNumber'>CGST (%)</Label>
+          <Input type='text' name='cgst' onChange={handleInputeChange} id='cGstNumber' placeholder='CGST (%)' defaultValue={userData && userData.cgst} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='iGstNumber'>GST (%)</Label>
+          <Input type='text' name='gst' onChange={handleInputeChange} id='iGstNumber' placeholder='GST (%)' defaultValue={userData && userData.gst} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+        <FormGroup>
+          <Label for='mrp'>MRP</Label>
+          <Input type='text' name='mrp' onChange={handleInputeChange} id='mrp' placeholder='Mrp' defaultValue={userData && userData.mrp} />
+        </FormGroup>
+      </Col>
+      <Col md='4' sm='12'>
+      <FormGroup>
+              <Label for='Category'>Category</Label>
+            <Select
+              id='Category'
+              className='react-select'
+              classNamePrefix='select'
+              isClearable={false}
+
+              options={DataTableDC.data}
+              theme={selectThemeColors}
+              onChange={data => {
+                                setValues({
+                                  ...values,
+                                  category : data.id
+                                })
+                                // setSubCategoryOptions(data)
+                                // setSpecificationsData(optionSubCategory[data.id][0].specs)
+                                //  setValues(
+                                //           {
+                                //              ...values,
+                                //              Category : data
+                                //           } 
+                                //   )
+                                }
+                        }
+            />
+            </FormGroup> 
+      </Col>
+      <Col md='4' sm='12'>
+      <FormGroup>
+                     <Label for='SubCategory'>Sub Category</Label>
+                   <Select
+                     id='SubCategory'
+                     className='react-select'
+                     classNamePrefix='select'
+                     isClearable={false}
+                     options={[]}
+                     theme={selectThemeColors}
+                     onChange={data => {
+                                        setValues(
+                                                 {
+                                                    ...values,
+                                                    SubCategory : data
+                                                 } 
+                                         )
+                                         setSpecificationsData(data.specs)
+                                       }
+                               }
+                   />
+                   </FormGroup> 
+            </Col>
+            <Col md='4' sm='12'>
         <FormGroup>
           <Label for='productCategory'>Product Category</Label>
-          <Input type='text' id='productCategory' placeholder='Product Category' defaultValue={userData && userData.productCategory} />
+          <div style={{zIndex:1000, position:'relative'}}>
+                          <Select
+                            id='productCategory'
+                            className='react-select'
+                            classNamePrefix='select'
+                            isClearable={false}
+                            options={optionProductCategory}
+                            theme={selectThemeColors}
+                            value={values.productCategory}
+                            onChange={data => {
+                                               setValues(
+                                                        {
+                                                           ...values,
+                                                           productCategory : data
+                                                        } 
+                                                        //seller brand
+                                                )
+                                                
+                                              }
+                                      }
+                    />
+                    </div>
         </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='hsnCode'>HSN COde</Label>
-          <Input type='text' id='hsnCode' placeholder='HSN COde' defaultValue={userData && userData.hsnCode} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
-        <FormGroup>
-          <Label for='gstNumber'>GST (Number)%</Label>
-          <Input type='text' id='gstNumber' placeholder='GST (Number)%' defaultValue={userData && userData.gstNumber} />
-        </FormGroup>
-      </Col>
-      <Col md='6' sm='12'>
+            <Col md='4' sm='12'>
         <FormGroup>
           <Label for='description'>Description</Label>
-          <Input type='text' id='description' placeholder='Description' defaultValue={userData && userData.description} />
+          <Input type='textarea' name='description' onChange={handleInputeChange} id='description' placeholder='Description' defaultValue={userData && userData.description} />
         </FormGroup>
       </Col>
-      <Col md='6' sm='12'>
-  <Media className='mb-2'>
-    {renderUserAvatar()}
-    <Media className='mt-50' body>
-      <h4> Image </h4>
-      <div className='d-flex flex-wrap mt-1 px-0'>
-        <Button.Ripple id='change-img' tag={Label} className='mr-75 mb-0' color='primary'>
-          <span className='d-none d-sm-block'>Change</span>
-          <span className='d-block d-sm-none'>
-            <Edit size={14} />
-          </span>
-          <input type='file' hidden id='change-img' onChange={onChange} accept='image/*' />
-        </Button.Ripple>
-        <Button.Ripple color='secondary' outline>
-          <span className='d-none d-sm-block'>Remove</span>
-          <span className='d-block d-sm-none'>
-            <Trash2 size={14} />
-          </span>
-        </Button.Ripple>
-      </div>
-    </Media>
-  </Media>
-</Col>
-    
-      {/* <Col sm='12'>
-        <div className='permissions border mt-1'>
-          <h6 className='py-1 mx-1 mb-0 font-medium-2'>
-            <Lock size={18} className='mr-25' />
-            <span className='align-middle'>Permissions</span>
-          </h6>
-          <Table borderless striped responsive>
-            <thead className='thead-light'>
-              <tr>
-                <th>Module</th>
-                <th>Read</th>
-                <th>Write</th>
-                <th>Create</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Admin</td>
-                <td>
-                  <CustomInput type='checkbox' id='admin-1' label='' defaultChecked />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='admin-2' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='admin-3' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='admin-4' label='' />
-                </td>
-              </tr>
-              <tr>
-                <td>Staff</td>
-                <td>
-                  <CustomInput type='checkbox' id='staff-1' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='staff-2' label='' defaultChecked />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='staff-3' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='staff-4' label='' />
-                </td>
-              </tr>
-              <tr>
-                <td>Author</td>
-                <td>
-                  <CustomInput type='checkbox' id='author-1' label='' defaultChecked />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='author-2' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='author-3' label='' defaultChecked />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='author-4' label='' />
-                </td>
-              </tr>
-              <tr>
-                <td>Contributor</td>
-                <td>
-                  <CustomInput type='checkbox' id='contributor-1' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='contributor-2' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='contributor-3' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='contributor-4' label='' />
-                </td>
-              </tr>
-              <tr>
-                <td>User</td>
-                <td>
-                  <CustomInput type='checkbox' id='user-1' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='user-2' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='user-3' label='' />
-                </td>
-                <td>
-                  <CustomInput type='checkbox' id='user-4' label='' defaultChecked />
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
-      </Col> */}
-      <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-        <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary'>
-          Save Changes
-        </Button.Ripple>
-        <Button.Ripple color='secondary' outline>
-          Reset
-        </Button.Ripple>
+      <Col sm='12'>
+          <h4 className='d-block mb-1'>
+            < AtSign size={20} className='mr-50' />
+            <span className='align-middle'>Brand</span>
+          </h4>
+          <Row>
+                <Col md='4' sm='12'>
+                    <FormGroup>
+                            <Label for='sku'>Brand</Label>
+                          <Select
+                            id='brandSelection'
+                            className='react-select'
+                            classNamePrefix='select'
+                            isClearable={false}
+                            options={BrandDrop.brands}
+                            theme={selectThemeColors}
+                            
+                            onChange={data => {
+                                              setValues({
+                                                ...values,
+                                                brand: data.id
+                                              })
+                                              // setValues(
+                                              //          {
+                                              //             ...values,
+                                              //             brandSelection : data
+                                              //          } 
+                                              //          //seller brand
+                                              //  )
+                                                
+                                              }
+                                      }
+                    />
+                    </FormGroup> 
+                </Col>
+                <Col md='4' sm='12'>
+                    <FormGroup >
+                            <Label for='Not in Brand'>No Brand Listed</Label>
+                            <CustomInput  type='checkbox' id='exampleCustomCheckbox' label='Seller Brand' />
+                    </FormGroup> 
+                </Col>
+          </Row>
+      </Col> 
+          {/*<Col sm='12'>
+                    <h4 className='d-block mb-1'>
+                      <Box size={20} className='mr-50' />
+                      <span className='align-middle'>Specifications</span>
+                    </h4>
+                    </Col>
+                    {
+                        SpecificationsData.map(item => {
+                            return (
+                              <Col md='4' sm='12' key={item.id}>
+                              <FormGroup>
+                                <Label for={item.id}>{item.name}</Label>
+                                <Input type={item.name} id={item.id} placeholder={item.name}  />
+                              </FormGroup>
+                            </Col>
+                            )
+                        })
+                    }   */}
+        <Col sm='12'>
+       
+          <CardHeader>
+            <CardTitle tag='h4'>Upload Images</CardTitle>
+          </CardHeader>
+      <CardBody>
+        <DragDrop uppy={uppy} />
+        {renderPreview()}
+        <Button.Ripple className='d-block mb-1 mb-sm-0 mr-0 mr-sm-1 mt-2' type='submit' color='primary' onClick={e => {
+                                                                                    e.preventDefault()
+
+                                                                                    // uppy.totalProgress(0)
+                                                                                  } }>
+                Reset Images
+              </Button.Ripple>
+      </CardBody>
+      </Col>
+            <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
+              <Button.Ripple tag={Link} to='/product-list' className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary' onClick={() => { 
+                // console.log({
+                //   ...values,
+                //   img: fileArr
+                // })
+                useDisplatch(Add({
+                  ...values,
+                  img: fileArr
+                }))
+              }
+              }>
+                Save Changes
+              </Button.Ripple>
+              <Button.Ripple color='secondary' outline>
+                Reset
+              </Button.Ripple>
+            </Col>
+          </Row>
+        </Form>
       </Col>
     </Row>
+
   </Form>
 </Col>
 </Row>

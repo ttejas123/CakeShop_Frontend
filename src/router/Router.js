@@ -66,7 +66,7 @@ const Router = () => {
    ** Final Route Component Checks for Login & User Role and then redirects to the route
    */
   const FinalRoute = props => {
-    //console.log(isUserLoggedIn())
+    
     const route = props.route
     
     let action, resource
@@ -93,7 +93,7 @@ const Router = () => {
       // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
       return <Redirect to='/ccdashboard' />
     } else {
-      console.log(route.meta)
+      //console.log(route.meta)
       // ** If none of the above render component
       return <route.component {...props} />
     }

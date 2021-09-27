@@ -7,12 +7,16 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** React Imports
-import { Fragment, useState, forwardRef } from 'react'
+import { Fragment, useState, forwardRef, useEffect } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data, columns } from './data'
+//import { columns } from './data'
 import Select from 'react-select'
-
+import ReactPagination from '@src/views/ExCompUse/reactCustPagin'
+import DeletePop from '@src/views/ExCompUse/delepePop.js'
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { List, DeleteProduct, SpecificProduct } from '@store/actions/master/product'
 // ** Add New Modal Component
 //import FormModel from './formModel'
 
@@ -52,10 +56,10 @@ const renderClient = row => {
     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
     color = states[stateNum]
 
-  if (row.avatar.length) {
+  if (row.avatar) {
     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.name.substring(0, 4) || 'John Doe'} initials status="online" />
   }
 }
 
@@ -83,130 +87,153 @@ const ProductList = () => {
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-   //deleteCountry
-  const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
-    //edit action
-   const AddeditEvent = (val) => {
-     //here we hande event which comming from addNewModel.js (Form for add and edit)
-      setCurrentId("")
-      console.log(val)
+  const useDisplatch = useDispatch()
+  useEffect(() => {
+    useDisplatch(List(5, 0))
+   
+  }, [useDisplatch])
+  const DataTableD = useSelector(state => {
+    //console.log(state.warehouse)
+    return state.product
+  })
+
+  const deleteCountry = (id) => {
+    DeletePop(DeleteProduct, id, useDisplatch, currentPage, List)
   }
 
-  //columns
-  // const columns = [
-  //       {
-  //         name: 'Id',
-  //         selector: 'id',
-  //         sortable: true,
-  //         minWidth: '50px'
-  //       },
-  //       {
-  //         name: 'Product Name',
-  //         selector: 'productName',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'EAN UPC Code',
-  //         selector: 'ean_upc_code',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Category',
-  //         selector: 'category',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Sub Category',
-  //         selector: 'subCategory',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Product Category',
-  //         selector: 'productCategory',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Hsn Code',
-  //         selector: 'hsnCode',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'gst(Number)%',
-  //         selector: 'gstNumber',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'MRP',
-  //         selector: 'mrp',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //         name: 'Description',
-  //         selector: 'description',
-  //         sortable: true,
-  //         minWidth: '150px'
-  //       },
-  //       {
-  //           name: 'User',
-  //           minWidth: '150px',
-  //           selector: 'Name',
-  //           sortable: true,
-  //           cell: row => (
-  //             <div className='d-flex justify-content-left align-items-center'>
-  //               {renderClient(row)}
-  //             </div>
-  //           )
-  //         },
-  //       {
-  //         name: 'Actions',
-  //         allowOverflow: true,
-  //         cell: row => {
-  //           return (
-  //             <div className='d-flex'>
-  //               <UncontrolledDropdown>
-  //                 <DropdownToggle className='pr-1' tag='span'>
-  //                   <Trash size={15} onClick={e => {
-  //                                                                                   e.preventDefault()
-  //                                                                                   deleteCountry(row.id)
-  //                                                                                 } }/>
-  //                 </DropdownToggle>
-  //               </UncontrolledDropdown>
-  //               <Link  to={`/edit-product/${row.id}`}><Edit  
-  //                 size={15} 
-  //                 onClick={ () => { 
-  //                                   setCurrentId(row.id)
-  //                                   setModal(true)
-  //                                    } }>
-  //                                      <Link to='/edit-product'/>
-  //                                    </Edit></Link>
-  //             </div>
-  //           )
-  //         }
-  //       }
-  //   ]
-
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
+  const columns = [
+  {
+    name: 'BUIN',
+    selector: 'slug',
+    sortable: true,
+    maxWidth: '70px'
+  },
+  {
+      name: 'Product Image',
+      maxWidth: '150px',
+      selector: 'name',
+      sortable: true,
+      cell: row => (
+        <div className='d-flex justify-content-left align-items-center'>
+          <img src={row.img} className='w-100' height='40rem' />
+        </div>
+      )
+  },
+  {
+    name: 'Name',
+    selector: 'name',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'EAN UPC Code',
+    selector: 'ean_upc_code',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Product Category',
+    selector: 'product_Cat',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Category',
+    selector: 'category',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Sub Category',
+    selector: 'subCategory',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Hsn Code',
+    selector: 'hsn_code',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'SGST',
+    selector: 'sGstNumber',
+    sortable: true,
+    minWidth: '150px',
+    cell: row => (
+      <div className='d-flex justify-content-left align-items-center'>
+        {row.sgst}%
+      </div>
+    )
+  },
+  {
+    name: 'CGST',
+    selector: 'cGstNumber',
+    sortable: true,
+    minWidth: '150px',
+    cell: row => (
+      <div className='d-flex justify-content-left align-items-center'>
+        {row.cgst}%
+      </div>
+    )
+  },
+  {
+    name: 'GST',
+    selector: 'iGstNumber',
+    sortable: true,
+    minWidth: '150px',
+    cell: row => (
+      <div className='d-flex justify-content-left align-items-center'>
+        {row.gst}%
+      </div>
+    )
+  },
+  {
+    name: 'MRP ₹',
+    selector: 'mrp',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Description',
+    selector: 'description',
+    sortable: true,
+    minWidth: '150px'
+  },
+  // {
+  //     name: 'User',
+  //     minWidth: '150px',
+  //     selector: 'Name',
+  //     sortable: true,
+  //     cell: row => (
+  //       <div className='d-flex justify-content-left align-items-center'>
+  //         {renderClient(row)}
+  //       </div>
+  //     )
+  //   },
+  {
+    name: 'Actions',
+    allowOverflow: true,
+    cell: row => {
+      return (
+        <div className='d-flex'>
+          <UncontrolledDropdown>
+            <DropdownToggle className='pr-1' tag='span'>
+              <Trash size={15} onClick={e => {
+                                                                              e.preventDefault()
+                                                                              deleteCountry(row.id)
+                                                                            } }/>
+            </DropdownToggle>
+          </UncontrolledDropdown>
+          <Link  to={`/edit-product/${row.id}`}><Edit  
+            size={15} >
+                                 <Link to='/edit-product'/>
+                               </Edit></Link>
+        </div>
+      )
+    }
   }
+]
 
   // handle drop down filter
   const handleFilterByDropDown = (value) => {
@@ -238,64 +265,8 @@ const ProductList = () => {
   }
   // ** Function to handle filter
   const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        const NoOfBidder = item.NoOfBidder.toString()
-        const startsWith =
-          item.productName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.mrp.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.gst.toLowerCase().startsWith(value.toLowerCase()) 
-          console.log(startsWith)
-        const includes =
-          item.productName.toLowerCase().includes(value.toLowerCase()) ||
-          item.mrp.toLowerCase().includes(value.toLowerCase()) ||
-          item.gst.toLowerCase().includes(value.toLowerCase()) 
-          
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
+    useDisplatch(List(5, 0, e.target.value))
   }
-
-  // ** Function to handle Pagination
-  const handlePagination = page => {
-    setCurrentPage(page.selected)
-  }
-
-  // ** Custom Pagination
-  const CustomPagination = () => (
-    <ReactPaginate
-      previousLabel=''
-      nextLabel=''
-      forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
-      breakLabel='...'
-      pageRangeDisplayed={2}
-      marginPagesDisplayed={2}
-      activeClassName='active'
-      pageClassName='page-item'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      nextLinkClassName='page-link'
-      nextClassName='page-item next'
-      previousClassName='page-item prev'
-      previousLinkClassName='page-link'
-      pageLinkClassName='page-link'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
-    />
-  )
 
 
   return (
@@ -342,7 +313,6 @@ const ProductList = () => {
               type='text'
               bsSize='sm'
               id='search-input'
-              value={searchValue}
               onChange={handleFilter}
             />
           </Col>
@@ -350,20 +320,19 @@ const ProductList = () => {
 
         <DataTable
           noHeader
-          pagination
+          
           selectableRows
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
+          
+          data={DataTableD.data}
           selectableRowsComponent={BootstrapCheckbox}
         />
-        
+        <ReactPagination followData = {DataTableD} dispachReq={List} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </Card>
-            {/* <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} /> */}
     </Fragment>
   )
 }

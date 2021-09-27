@@ -1,21 +1,3 @@
-//expot data
-// Bid id
-// User Name
-//username:"",// Bid S
-//tatus - created,live,extended,closed,rejected,auto closed
-// Requested Customization
-// Customization Status : pending, approval, approved, 
-// catalogue id
-// Req Quantity
-// created time
-// Go Live date
-// Bid Close Date
-// Bid Application Date
-// Nos of bidder
-// Delivery date
-// Buyer Budget
-// Delivery Location : Multiple Or Single location
-// finalize seller id
 import komal  from '../../../assets/images/logo/komal.jpg'
 import pravin  from '../../../assets/images/logo/pravin.jpg'
 import himanshu  from '../../../assets/images/logo/himanshu.jpg'
@@ -45,13 +27,16 @@ const renderClient = row => {
     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
     color = states[stateNum]
 
-  if (row.avatar.length) {
+  if (row.user) {
     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.name.substring(0, 4) || 'John Doe'} initials status="online" />
   }
 }
 
+const deleteCountry = (id) => {
+    DeletePop(DeleteWarehouse, id, useDisplatch, currentPage, List)
+}
 
 //expot data
 export const data = [
@@ -205,9 +190,20 @@ export const data1 = [
 export const columns = [
   {
     name: 'BUIN',
-    selector: 'buin',
+    selector: 'slug',
     sortable: true,
-    minWidth: '50px'
+    maxWidth: '70px'
+  },
+  {
+      name: 'Product Image',
+      maxWidth: '150px',
+      selector: 'name',
+      sortable: true,
+      cell: row => (
+        <div className='d-flex justify-content-left align-items-center'>
+          <img src={row.img} className='w-100' height='40rem' />
+        </div>
+      )
   },
   {
     name: 'Name',
@@ -218,6 +214,12 @@ export const columns = [
   {
     name: 'EAN UPC Code',
     selector: 'ean_upc_code',
+    sortable: true,
+    minWidth: '150px'
+  },
+  {
+    name: 'Product Category',
+    selector: 'product_Cat',
     sortable: true,
     minWidth: '150px'
   },
@@ -234,14 +236,8 @@ export const columns = [
     minWidth: '150px'
   },
   {
-    name: 'Product Category',
-    selector: 'productCategory',
-    sortable: true,
-    minWidth: '150px'
-  },
-  {
     name: 'Hsn Code',
-    selector: 'hsnCode',
+    selector: 'hsn_code',
     sortable: true,
     minWidth: '150px'
   },
@@ -249,19 +245,34 @@ export const columns = [
     name: 'SGST',
     selector: 'sGstNumber',
     sortable: true,
-    minWidth: '150px'
-  },
-  {
-    name: 'IGST',
-    selector: 'iGstNumber',
-    sortable: true,
-    minWidth: '150px'
+    minWidth: '150px',
+    cell: row => (
+      <div className='d-flex justify-content-left align-items-center'>
+        {row.sgst}%
+      </div>
+    )
   },
   {
     name: 'CGST',
     selector: 'cGstNumber',
     sortable: true,
-    minWidth: '150px'
+    minWidth: '150px',
+    cell: row => (
+      <div className='d-flex justify-content-left align-items-center'>
+        {row.cgst}%
+      </div>
+    )
+  },
+  {
+    name: 'GST',
+    selector: 'iGstNumber',
+    sortable: true,
+    minWidth: '150px',
+    cell: row => (
+      <div className='d-flex justify-content-left align-items-center'>
+        {row.gst}%
+      </div>
+    )
   },
   {
     name: 'MRP ₹',

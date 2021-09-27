@@ -97,12 +97,12 @@ const WarehouseList = () => {
    
   }, [useDisplatch])
   const KycDocTypeListDrop = useSelector(state => {
-    console.log(state.warehouse)
+    //console.log(state.warehouse)
     return state.warehouse
   })
    //deleteCountry
   const deleteCountry = (id) => {
-    DeletePop(DeleteWarehouse, id, useDisplatch)
+    DeletePop(DeleteWarehouse, id, useDisplatch, currentPage, List)
   }
     //edit action
    const AddeditEvent = (val) => {
@@ -336,7 +336,7 @@ const WarehouseList = () => {
           data={KycDocTypeListDrop.data}
           selectableRowsComponent={BootstrapCheckbox}
         />
-        <ReactPagination followData = {KycDocTypeListDrop} dispachReq={List} />
+        <ReactPagination followData = {KycDocTypeListDrop} dispachReq={List} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </Card>
             {/* <FormModel open={modal} handleModal={handleModal} editAction={AddeditEvent} currentId={currentId} data={data} /> */}
     </Fragment>

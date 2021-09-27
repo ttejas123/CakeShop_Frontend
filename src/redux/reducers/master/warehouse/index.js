@@ -115,28 +115,28 @@ const todoReducer = (state = initData, action) => {
                     ...state
                 }
             }
-        case "USERADDRESSDROPDOWN":
-            try {
-                const DataDropDown = action.payload.userAddresses.map((val) => {  
-                    const CityName = val.city === null ? "" : val.city.name
-                    const StateName = val.city === null ? "" : val.city.state.name
-                    const CountryName = val.city === null ? "" : val.city.state.country.country_name
-                    return {
-                        label: `${val.address_name}, ${val.street_name}, ${CountryName}, ${StateName}, ${CityName}, ${val.pincode}`,
-                        value: `${val.address_name}, ${val.street_name}, ${CountryName}, ${StateName}, ${CityName}, ${val.pincode}`,  
-                        id: val.id
-                    }
-                })
-                //console.log(DataUserKyc)
-                return {
-                     ...state,
-                     dropdown: DataDropDown
-                }
-            } catch (e) {
-                return {
-                    ...state
-                }
-            }
+        // case "WAREHOUSEDELETE":
+        //     try {
+        //         const DataDropDown = action.payload.userAddresses.map((val) => {  
+        //             const CityName = val.city === null ? "" : val.city.name
+        //             const StateName = val.city === null ? "" : val.city.state.name
+        //             const CountryName = val.city === null ? "" : val.city.state.country.country_name
+        //             return {
+        //                 label: `${val.address_name}, ${val.street_name}, ${CountryName}, ${StateName}, ${CityName}, ${val.pincode}`,
+        //                 value: `${val.address_name}, ${val.street_name}, ${CountryName}, ${StateName}, ${CityName}, ${val.pincode}`,  
+        //                 id: val.id
+        //             }
+        //         })
+        //         //console.log(DataUserKyc)
+        //         return {
+        //              ...state,
+        //              dropdown: DataDropDown
+        //         }
+        //     } catch (e) {
+        //         return {
+        //             ...state
+        //         }
+        //     }
         default: return state
     } 
 }
