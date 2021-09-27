@@ -162,23 +162,42 @@ export const EditC = (data) => {
   }
 }
 
-export const DeleteWarehouse = (id) => {
-  const deleteQ = `mutation{
-  deleteUserWarehouse(input:{where: {id: "${id}"}}){
-    userWarehouse{
-      id
+// <<<<<<< HEAD
+// export const DeleteWarehouse = (id) => {
+//   const deleteQ = `mutation{
+// =======
+export const DeleteWarehouse = (id, useDisplatch, List, currentPage) => {
+    const deleteQ = `mutation{
+                        deleteUserWarehouse(input:{where: {id: "${id}"}}){
+                          userWarehouse{
+                            id
+                          }
+                        }
+                      }`
+// <<<<<<< HEAD
+//   return (dispatch) => {
+//     //List
+//     axios.post(BaseUrl, { query: deleteQ }).then((res) => {
+//       //console.log(res.data.data)
+//       return dispatch({
+//         type: 'WAREHOUSEDELETE',
+//         payload: res.data.data
+//       })
+//     })
+//   }
+// }
+
+// =======
+    return dispatch => {
+        //List
+        axios.post(BaseUrl, {query: deleteQ}).then(res => {
+            //console.log(res.data.data)
+            useDisplatch(List(5, currentPage * 5))
+            return dispatch({
+                type: 'WAREHOUSEDELETE',
+                payload: res.data.data
+            })
+        })
     }
-  }
-}`
-  return (dispatch) => {
-    //List
-    axios.post(BaseUrl, { query: deleteQ }).then((res) => {
-      //console.log(res.data.data)
-      return dispatch({
-        type: 'WAREHOUSEDELETE',
-        payload: res.data.data
-      })
-    })
-  }
 }
 

@@ -3,12 +3,27 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
     // ** Custom Pagination
 const CustomPagination = (props) => { 
-  console.log(props.followData.count)
-    const [currentPage, setCurrentPage] = useState(0)
+// <<<<<<< HEAD
+//   console.log(props.followData.count)
+//     const [currentPage, setCurrentPage] = useState(0)
+// =======
+
     const useDisplatch = useDispatch()
+    useEffect(() => {
+      if (props.followData.data.length === 0 && props.followData.count > 0 && props.currentPage > 0) {
+        useDisplatch(props.dispachReq(5, (props.currentPage - 1) * 5))
+        props.setCurrentPage(props.currentPage - 1)
+      }
+      if (props.followData.data.length === 0 && props.followData.count > 0 && props.currentPage === 0) {
+        useDisplatch(props.dispachReq(5, props.currentPage * 5))
+        props.setCurrentPage(props.currentPage)
+      }
+
+    }, [props.followData.data.length === 0])
+
     if (props.SearchDetails) {
       useEffect(() => {
-        setCurrentPage(0)
+        props.setCurrentPage(0)
       }, [props.SearchDetails])
     }
     const handlePagination = page => {
@@ -19,13 +34,13 @@ const CustomPagination = (props) => {
       } else {
         useDisplatch(props.dispachReq(5, start))
       }
-      setCurrentPage(page.selected)
+      props.setCurrentPage(page.selected)
     }
     return (
     <ReactPaginate
       previousLabel=''
       nextLabel=''
-      forcePage={currentPage}
+      forcePage={props.currentPage}
       onPageChange={page => handlePagination(page)}
       pageCount={props.followData.count / 5 || 1}
       breakLabel='...'

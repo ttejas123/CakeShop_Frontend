@@ -11,9 +11,11 @@ import editCity from './master/city/editCity'
 import states from './master/state'
 import brands from './master/brand'
 import SubAttributes from './master/subCat/SubAttributes'
+import product from './master/product'
 // //import users from '@src/views/user/store/reducer'
 import warehouse from './master/warehouse'
-
+import category from './master/category'
+import productSKU from './master/productSKU'
 const rootReducer = combineReducers({
   auth,
   navbar,
@@ -24,7 +26,10 @@ const rootReducer = combineReducers({
   states,
   brands,
   SubAttributes,
-  warehouse
+  warehouse,
+  product,
+  category,
+  productSKU
   //users
 })
 

@@ -413,7 +413,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/financialPartner/edit'))
   },
   {
-    path: '/edit-product',
+    path: '/edit-product/:id',
     component: lazy(() => import('../../views/master/product/editProduct'))
   },
   {

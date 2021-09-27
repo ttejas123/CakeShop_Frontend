@@ -9,12 +9,14 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** React Imports
-import { Fragment, useState, forwardRef } from 'react'
+import { Fragment, useState, forwardRef, useEffect } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
 import { data } from './data'
 import Select from 'react-select'
-
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { productSkuList, DeleteProductSku } from '@store/actions/master/productSKU'
 // ** Add New Modal Component
 
 // ** Third Party Components
@@ -37,6 +39,8 @@ import {
   Col,
   Badge, UncontrolledDropdown
 } from 'reactstrap'
+import ReactPagination from '@src/views/ExCompUse/reactCustPagin'
+import DeletePop from '@src/views/ExCompUse/delepePop.js'
 
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
@@ -53,10 +57,10 @@ const renderClient = row => {
     states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
     color = states[stateNum]
 
-  if (row.avatar.length) {
+  if (row.avatar) {
     return <Avatar className='mr-1' img={row.avatar} width='32' height='32'  />
   } else {
-    return <Avatar color={color || 'primary'} className='mr-1' content={row.Name || 'John Doe'} initials status="online" />
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.name.substring(0, 4) || 'John Doe'} initials status="online" />
   }
 }
 
@@ -74,62 +78,55 @@ const SkuList = () => {
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
 
-    const deleteData = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
+  const useDisplatch = useDispatch()
+  useEffect(() => {
+    useDisplatch(productSkuList(5, 0))
+   
+  }, [useDisplatch])
+  const DataTableD = useSelector(state => {
+    console.log(state.productSKU)
+    return state.productSKU
+  })
+
+  const deleteData = (id) => {
+    DeletePop(DeleteProductSku, id, useDisplatch, currentPage, productSkuList)
   }
 
   //columns
   const columns = [
-        {
-          name: 'approved by',
-          minWidth: '250px',
-          selector: 'approved_by[0].value',
-          sortable: true,
-          cell: row => (
-            <div className='d-flex justify-content-left align-items-center'>
-              {renderClient(row)}
-              <div className='d-flex flex-column'>
-                
-                  <span className='font-weight-bold'>{row.Name}</span>
-                <small className='text-truncate text-muted mb-0'>@{row.username}</small>
-              </div>
-            </div>
-          )
-        },
+  {
+    name: 'Name',
+    selector: 'name',
+    sortable: true,
+    minWidth: '150px'
+  },
         {
           name: 'SKU ID',
-          selector: 'SKU_ID',
+          selector: 'sku_id',
           sortable: true,
           minWidth: '150px'
         },
         {
           name: 'MOQ',
-          selector: 'MOQ',
+          selector: 'moq',
           sortable: true,
           minWidth: '150px'
         },
         {
           name: 'Customization available',
-          selector: 'Customization_available[0].value',
+          selector: 'customization_avail',
           sortable: true,
           minWidth: '150px'
         },
         {
           name: 'Inspection',
-          selector: 'Inspection[0].value',
+          selector: 'inspection',
           sortable: true,
           minWidth: '150px'
         },
         {
           name: 'sampling',
-          selector: 'sampling[0].value',
+          selector: 'sample_avail',
           sortable: true,
           minWidth: '150px'
         },
@@ -141,9 +138,16 @@ const SkuList = () => {
         },
         {
           name: 'Lead Time',
-          selector: 'Lead_Time',
+          selector: 'G_Sdelivary',
           sortable: true,
-          minWidth: '150px'
+          minWidth: '150px',
+          cell: row => {
+            return (
+              <div className='d-flex'>
+                {row.G_Sdelivary} days
+              </div>
+            )
+          }
         },
         {
           name: 'Actions',
@@ -153,7 +157,7 @@ const SkuList = () => {
               <div className='d-flex'>
                 <UncontrolledDropdown>
                   <DropdownToggle className='pr-1' tag='span'>
-                    <Trash size={15} onClick={ deleteData }/>
+                    <Trash size={15} onClick={() => deleteData(row.id) }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
                 <Link to={`/master/SKUs/edit/${row.id}`}>
@@ -256,18 +260,19 @@ const SkuList = () => {
 
         <DataTable
           noHeader
-          pagination
+          
           selectableRows
           columns={columns}
-          paginationPerPage={7}
+    
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
+          
+          data={DataTableD.data}
           selectableRowsComponent={BootstrapCheckbox}
         />
-        
+        <ReactPagination followData = {DataTableD} dispachReq={productSkuList} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+ 
       </Card>
       
     </Fragment>
