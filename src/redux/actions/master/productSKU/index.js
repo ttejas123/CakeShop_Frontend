@@ -31,6 +31,7 @@ export const productSkuList = (limit, start, search) => {
     product{
         name
     }
+    mrp
   }
   aggregate {
     count
@@ -50,8 +51,16 @@ export const productSkuList = (limit, start, search) => {
     }
 }
 
-export const Add = (data) => {
-    console.log(data)
+export const Add = (data, useDisplatch, List) => {
+    const attributesReturn = Object.keys(data.storeArray).map((val, index) => {
+          const attri = data.storeArray[val]
+          return (`{
+                    attribute: \"${attri.attributeID}\",
+                    value: \"${attri.label}\",
+                    attribute_value: \"${attri.id}\"
+                  }`)
+    })
+    //console.log(attributesReturn)
     const formdata = new FormData()
     let index = 0
     let index2 = 0
@@ -80,49 +89,25 @@ export const Add = (data) => {
                 return `\"${val.id}\"`
             })
             
-            const createQ = `mutation{
-                                  createProduct(input: {data: {
-                                    name: "${data.name}"
-                                    brand: "${data.brand}"
-                                    image: [${productImages}]
-                                    cgst: ${data.cgst}
-                                    ean_upc_code: "${data.ean}"
-                                    hsn_code: "${data.hsn}"
-                                    gst: ${data.gst}
-                                    sgst: ${data.sgst}
-                                    category: "${data.category}"
-                                    mrp: ${data.mrp}
-                                    description: "${data.description}"
-                                  }}){
-                                    product{
-                                      id
-                                      name
-                                      mrp
-                                      category{
-                                        category
-                                        parent_category{
-                                          category
-                                        }
-                                      }
-                                      image{
+            const createQ = `mutation {
+                                      AddSKU(
+                                        product: "${data.productID}"
+                                        sku_id: "${data.skuid}"
+                                        sku_title: "${data.sku_title}"
+                                        mrp: ${data.mrp}
+                                        images: [${productImages}]
+                                        product_attribute: [${attributesReturn}] 
+                                      ) 
+                                      {
                                         id
-                                        url
                                       }
-                                      slug
-                                      ean_upc_code
-                                      hsn_code
-                                      sgst
-                                      cgst
-                                      gst
-                                      description
-                                    }
-                                  }
-                                }`
+                                    }`
 
             axios.post(BaseUrl, {query: createQ}).then(res => {
                 //console.log(res.data.data)
+                useDisplatch(List(5, 0, data.productID))
                 return dispatch({
-                    type: 'ADDPRODUCT',
+                    type: 'ADDPRODUCTSKU',
                     payload: res.data.data
                 })
             })
@@ -160,7 +145,7 @@ export const EditC = (data) => {
     }
 }
 
-export const DeleteProductSku = (id, useDisplatch, List, currentPage) => {
+export const DeleteProductSku = (id, useDisplatch, List, currentPage, productID) => {
     const deleteQ = `mutation{
   deleteProductSku(input:{where: {id: "${id}"}}){
     productSku{
@@ -168,11 +153,16 @@ export const DeleteProductSku = (id, useDisplatch, List, currentPage) => {
     }
   }
 }`
+
     return dispatch => {
         //List
         axios.post(BaseUrl, {query: deleteQ}).then(res => {
             //console.log(res.data.data)
-            useDisplatch(List(5, currentPage * 5))
+            if (productID) {
+                useDisplatch(List(5, currentPage * 5, productID))
+            } else {
+                useDisplatch(List(5, currentPage * 5))
+            }
             return dispatch({
                 type: 'PRODUCTSKUDELETE',
                 payload: res.data.data
@@ -181,31 +171,68 @@ export const DeleteProductSku = (id, useDisplatch, List, currentPage) => {
     }
 }
 
-export const SpecificProduct = (id) => {
+export const SpecificProductSku = (id) => {
+    // const UserData = JSON.parse(localStorage.getItem('userData'))
+    // const UserName = UserData === null ? ("") : (UserData.username)
+    // const searchPro = search ? search : ""
+    //console.log(id)
+    const query = `query{
+  productSku(id: "${id}"){
+    id
+    sku_id
+    mrp
+    sku_title
+    images{
+      id
+      url
+    }
+    product_sku_attributes_mappings{
+      attribute{
+        id
+        display_name   
+      }
+      value
+      id
+    }
+    product{
+      id
+      name
+      category{
+        id
+      }
+    }
+  }
+}`
+
+    return dispatch => {
+        //List
+        axios.post(BaseUrl, {query}).then(res => {
+           // console.log(res.data.data)
+            
+            return dispatch({
+                type: 'SPECIFICPRODUCTSKU',
+                payload: res.data.data
+            })
+        })
+    }
+}
+
+export const SpecificProductAttribute = (id) => {
     // const UserData = JSON.parse(localStorage.getItem('userData'))
     // const UserName = UserData === null ? ("") : (UserData.username)
     // const searchPro = search ? search : ""
     const query = `query{
   product(id: "${id}"){
-    id
-              name
-              mrp
-              category{
-                category
-                parent_category{
-                  category
-                }
-              }
-              image{
-                url
-              }
-              slug
-              ean_upc_code
-              hsn_code
-              sgst
-              cgst
-              gst
-              description
+    attribute{
+      attribute_value_masters{
+        id
+        value
+      }
+      display_name
+      attribute_type{
+        type
+      } 
+    }
   }
 }`
 
@@ -215,7 +242,58 @@ export const SpecificProduct = (id) => {
             //console.log(res.data.data)
             
             return dispatch({
-                type: 'SPECIFICPRODUCT',
+                type: 'SPECIFICPRODUCTATTRIBUTE',
+                payload: res.data.data
+            })
+        })
+    }
+}
+
+export const recentAddedProduct = (productID, category, name) => {
+    return {
+        type: "RECENTADDEDPRODUCT",
+        payload: {
+            productID,
+            category,
+            name
+        }
+    }
+}
+
+export const productSpecificSkuList = (limit, start, id) => {
+    // const UserData = JSON.parse(localStorage.getItem('userData'))
+    // const UserName = UserData === null ? ("") : (UserData.username)
+    // const searchPro = search ? search : ""
+    const query = `query{
+   productSkusConnection(limit: ${limit}, start: ${start}, where:{
+    product: {
+      id: "${id}"
+    }
+  }){
+     values{
+      id
+      mrp
+      sku_title
+      sku_id
+      product_sku_attributes_mappings{
+        value
+        attribute{
+          display_name
+        }
+      }
+    }
+    aggregate{
+       count
+    }
+  }
+}`
+
+    return dispatch => {
+        //List
+        axios.post(BaseUrl, {query}).then(res => {
+            //console.log(res.data.data)
+            return dispatch({
+                type: 'PRODUCTSPECIFICSKULIST',
                 payload: res.data.data
             })
         })

@@ -133,19 +133,7 @@ const ProductList = () => {
   },
   {
     name: 'Product Category',
-    selector: 'product_Cat',
-    sortable: true,
-    minWidth: '150px'
-  },
-  {
-    name: 'Category',
     selector: 'category',
-    sortable: true,
-    minWidth: '150px'
-  },
-  {
-    name: 'Sub Category',
-    selector: 'subCategory',
     sortable: true,
     minWidth: '150px'
   },
@@ -225,7 +213,7 @@ const ProductList = () => {
                                                                             } }/>
             </DropdownToggle>
           </UncontrolledDropdown>
-          <Link  to={`/edit-product/${row.id}`}><Edit  
+          <Link  to={`/master/editproduct/${row.id}`}><Edit  
             size={15} >
                                  <Link to='/edit-product'/>
                                </Edit></Link>

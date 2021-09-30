@@ -417,12 +417,20 @@ const Routes = [
     component: lazy(() => import('../../views/master/product/editProduct'))
   },
   {
+    path: '/master/editproduct/:id',
+    component: lazy(() => import('../../views/master/product/edit'))
+  },
+  {
     path: '/add-product',
     component: lazy(() => import('../../views/master/product/add'))
   },
   {
     path: '/add-attribute',
     component: lazy(() => import('../../views/master/subCat/Attributes/add'))
+  },
+  {
+    path: '/edit-attribute/:id',
+    component: lazy(() => import('../../views/master/subCat/Attributes/edit'))
   },
   {
     path: '/master/Lead',

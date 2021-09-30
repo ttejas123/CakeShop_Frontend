@@ -1,7 +1,36 @@
 import { BaseUrl, BackEndUrl } from '@store/baseUrl'
+import Avatar from '@components/avatar'
+
+const renderClient = row => {
+  const stateNum = Math.floor(Math.random() * 6),
+    states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
+    color = states[stateNum]
+
+  if (row.image) {
+    return <Avatar className='mr-1' img={`${BackEndUrl}${row.image[0].url}`} width='32' height='32'  />
+  } else {
+    return <Avatar color={color || 'primary'} className='mr-1' content={row.name || 'John Doe'} initials status="online" />
+  }
+}
+
+const part = (data2) => {
+  return (<div key={data2.id} className='d-flex justify-content-left align-items-center'>
+          {renderClient(data2)}
+        <div className=''>
+                                          
+          <div className='user-info text-truncate d-flex flex-column'>
+            <span className='font-weight-bold'>{data2.name}</span>
+              <small className='text-truncate text-muted mb-0'>₹{data2.mrp}</small>
+          </div>
+                                         
+        </div>
+    </div>)
+}
 
 const initData = {
      data: [],
+     allProductDataList: [],
+     attributes:[],
      specPro: {},
      count: 0
 }
@@ -38,67 +67,83 @@ const todoReducer = (state = initData, action) => {
                 count: action.payload.productsConnection.aggregate.count,
                 data: DataArray
             }
+        case "SPECIFICPRODUCTATTRIBUTEFORPRODUCTEDIT": 
+            const productAttribute = action.payload.attributeMasters.map((val) => {
+                return {
+                    label: val.display_name,
+                    value: val.display_name,
+                    id: val.id
+                }
+            })
+            //console.log(productAttribute)
+            return {
+                ...state,
+                attribute: productAttribute
+            }
         case "SPECIFICPRODUCT": 
             
             const RawProductData = action.payload.product
-            const AllUrl = RawProductData.image.length !== 0 ? (RawProductData.image.map((val) => {
-                    return `${BackEndUrl}${val.url}`
-            })) : ([])
-                //console.log(val.createdAt) 
-            const SpecProduct =  {
-                    img: `${BackEndUrl}${RawProductData.image ? RawProductData.image[0].url : "/" }`.replaceAll('"', ''),
-                    images: AllUrl,
-                    imgID:  RawProductData.image ? RawProductData.image[0].id : null,
-                    name: RawProductData.name,
-                    mrp: RawProductData.mrp,
-                    ean_upc_code: RawProductData.ean_upc_code,
-                    hsn_code: RawProductData.hsn_code,
-                    sgst: RawProductData.sgst,
-                    cgst: RawProductData.cgst,
-                    gst: RawProductData.gst,
-                    description: RawProductData.description,
-                    category: RawProductData.category ? RawProductData.category.category : "---",
-                    Cat_id: RawProductData.category ? RawProductData.category.id : "",
-                    product_Cat: RawProductData.category ? RawProductData.category.parent_category ? RawProductData.category.parent_category.category : "---" : "---",
-                    slug: RawProductData.slug,
-                    // nosProduct: RawProductData.products.length || 0,
-                    // since: RawProductData.createdAt.split('T')[0],
-                    id: RawProductData.id
+            if (RawProductData) {
+                const AllUrl = RawProductData.image.length !== 0 ? (RawProductData.image.map((val) => {
+                        return `${BackEndUrl}${val.url}`
+                })) : ([])
+                const AllImgIDs = RawProductData.image.length !== 0 ? (RawProductData.image.map((val) => {
+                        return val.id
+                })) : ([])
+                // const Allattributes = RawProductData.attribute.length !== 0 ? (RawProductData.attribute.map((val) => {
+                //         return {label: val.display_name, value: val.display_name, id: val.id}
+                // })) : ([])
+                    //console.log(val.createdAt) 
+                const SpecProduct =  {
+                        img: `${BackEndUrl}${RawProductData.image ? RawProductData.image[0].url : "/" }`.replaceAll('"', ''),
+                        images: AllUrl,
+                        imgID:  RawProductData.image ? RawProductData.image[0].id : null,
+                        imgIds: AllImgIDs,
+                        name: RawProductData.name,
+                        mrp: RawProductData.mrp,
+                        ean: RawProductData.ean_upc_code,
+                        hsn: RawProductData.hsn_code,
+                        sgst: RawProductData.sgst,
+                        cgst: RawProductData.cgst,
+                        gst: RawProductData.gst,
+                        description: RawProductData.description,
+                        category: RawProductData.category ? {label: RawProductData.category.category, value: RawProductData.category.category, id: RawProductData.category.id} : "---",
+                        brand: RawProductData.brand ? {label: RawProductData.brand.name, value: RawProductData.brand.name, id: RawProductData.brand.id} : "---",
+                        //attribute: RawProductData.attribute ? Allattributes : [],
+                        Cat_id: RawProductData.category ? RawProductData.category.id : "",
+                        product_Cat: RawProductData.category ? RawProductData.category.parent_category ? RawProductData.category.parent_category.category : "---" : "---",
+                        slug: RawProductData.slug,
+                        // nosProduct: RawProductData.products.length || 0,
+                        // since: RawProductData.createdAt.split('T')[0],
+                        id: RawProductData.id
+                    }
+                
+                //console.log(DataArray)
+                return {
+                    ...state,
+                    specPro: SpecProduct
                 }
-            
-            //console.log(DataArray)
-            return {
-                ...state,
-                specPro: SpecProduct
+            } else {
+                return {
+                    ...state
+                }
             }
         case "ADDPRODUCT": 
-            console.log(action.payload)
             return {
                 ...state
             }
-            // const AddBrandData = action.payload.createBrand.brand
-            // const AddBrand = {
-            //     Logo: `${BackEndUrl}${AddBrandData.logo ? AddBrandData.logo.url : "/" }`.replaceAll('"', ''), 
-            //     Name: AddBrandData.name, 
-            //     nosProduct: AddBrandData.products ? AddBrandData.products.length : 0,
-            //     since: AddBrandData.createdAt.split('T')[0],
-            //     id: AddBrandData.id
-            // }
-            // console.log(AddBrand)
-            // return {
-            //     data: [...state.data, AddBrand]
-            // }
-        // // case "COUNTRYDD": 
-        // //     const filteredData = state.data
-        // //             .filter(
-        // //               stateId =>
-        // //                  eslint-disable operator-linebreak, implicit-arrow-linebreak 
-        // //                 (stateId.id !== action.payload.id)
-        // //             )
-        // //     //console.log(filteredData)
-        // //     return {
-        // //         data: [...filteredData]
-        // //     }
+        case "UPDATEDPRODUCT": 
+            return {
+                ...state
+            }
+        case "ALLPRODUCTLIST" :
+            const allProductDataList = action.payload.products.map((val) => {
+                return {value: val.id, label: part(val), id: val.id}                
+            }) 
+            return {
+                ...state,
+                allProductDataList
+            }
         case "PRODUCTDELETE":
             const deleteProduct = action.payload.deleteProduct.product
             if (deleteProduct !== null) {

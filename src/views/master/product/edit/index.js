@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 // ** User Edit Components
-import FromOtherSitesTab from './fromOtherSites'
+import FromExcelSheetTab from './addSku'
 import ByUserTab from './byUser'
-import FromExcelSheetTab from './fromExcelSheet'
+
 
 // ** Third Party Components
 import { User, Info, Share2, FileText, ShoppingCart } from 'react-feather'
@@ -21,30 +21,25 @@ const AddProduct = () => {
   const toggle = tab => setActiveTab(tab)
 
   return (
-    <Row className='app-user-edit'>
-      <Col sm='12'>
-        <Card>
-          <CardBody className='pt-2'>
+    <>
+        <Card className='p-0'>
+          <CardBody className='p-0 pt-1 pl-1'>
             <Nav pills>
               <NavItem>
                 <NavLink active={activeTab === '1'} onClick={() => toggle('1')}>
                   <User size={14} />
-                  <span className='align-middle d-none d-sm-block'>By User</span>
+                  <span className='align-middle d-none d-sm-block'>Edit By User</span>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink active={activeTab === '2'} onClick={() => toggle('2')}>
                   <FileText size={14} />
-                  <span className='align-middle d-none d-sm-block'>From Excel Sheet</span>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink active={activeTab === '3'} onClick={() => toggle('3')}>
-                  <ShoppingCart size={14} />
-                  <span className='align-middle d-none d-sm-block'>From amazon</span>
+                  <span className='align-middle d-none d-sm-block'>Sku Update</span>
                 </NavLink>
               </NavItem>
             </Nav>
+          </CardBody>
+        </Card>    
             <TabContent activeTab={activeTab}>
               <TabPane tabId='1'>
                 <ByUserTab/>
@@ -52,14 +47,9 @@ const AddProduct = () => {
               <TabPane tabId='2'>
                 <FromExcelSheetTab />
               </TabPane>
-              <TabPane tabId='3'>
-                <FromOtherSitesTab />
-              </TabPane>
             </TabContent>
-          </CardBody>
-        </Card>
-      </Col>
-    </Row>
+      
+    </>
   )
 }
 export default AddProduct

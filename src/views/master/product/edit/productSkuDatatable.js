@@ -7,16 +7,16 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-
+import AttributeModel from '@src/views/master/product/modelAttribute.js'
 // ** React Imports
 import { Fragment, useState, forwardRef, useEffect } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
-import { data } from './data'
+//import { data } from './data'
 import Select from 'react-select'
 //Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { productSkuList, DeleteProductSku } from '@store/actions/master/productSKU'
+import { productSkuList, DeleteProductSku, productSpecificSkuList } from '@store/actions/master/productSKU'
 // ** Add New Modal Component
 
 // ** Third Party Components
@@ -64,7 +64,7 @@ const renderClient = row => {
   }
 }
 
-const SkuList = () => {
+const SkuList = (props) => {
   const statusObj = {
         pending: 'light-secondary',
         approved: 'light-success',
@@ -77,25 +77,39 @@ const SkuList = () => {
   const [filteredData, setFilteredData] = useState([])
   const [currentId, setCurrentId] = useState('')
   const [Filter, setFilter] = useState('')
+  const [review, setreview] = useState({})
+  const [responseModel, setResponseModel] = useState(false)
+  const handleResponse = () => {
+    setResponseModel(!responseModel)
+  }
 
   const useDisplatch = useDispatch()
-  useEffect(() => {
-    useDisplatch(productSkuList(5, 0))
-   
-  }, [useDisplatch])
+  // useEffect(() => {
+  //   if (props.productID) {
+  //     useDisplatch(productSpecificSkuList(5, 0, props.productID.productID))
+  //   }
+  // }, [useDisplatch])
   const DataTableD = useSelector(state => {
     //console.log(state.productSKU)
     return state.productSKU
   })
 
   const deleteData = (id) => {
-    DeletePop(DeleteProductSku, id, useDisplatch, currentPage, productSkuList)
+    //console.log(props.productID.productID)
+    DeletePop(DeleteProductSku, id, useDisplatch, currentPage, productSpecificSkuList, props.productID)
   }
+
 
   //columns
   const columns = [
         {
-          name: 'Product Name',
+          name: 'ID',
+          selector: 'id',
+          sortable: true,
+          minWidth: '150px'
+        },
+        {
+          name: 'SKU Title',
           selector: 'name',
           sortable: true,
           minWidth: '150px'
@@ -107,35 +121,26 @@ const SkuList = () => {
           minWidth: '150px'
         },
         {
-          name: 'MOQ',
-          selector: 'moq',
-          sortable: true,
-          minWidth: '100px'
-        },
-        {
-          name: 'Lead Time',
-          selector: 'G_Sdelivary',
-          sortable: true,
-          minWidth: '100px',
-          cell: row => {
-            return (
-              <div className='d-flex'>
-                {row.G_Sdelivary} days
-              </div>
-            )
-          }
-        },
-        {
-          name: 'no of seller',
-          selector: 'no_of_seller',
-          sortable: true,
-          minWidth: '100px'
-        },
-        {
           name: 'MRP in ₹',
           selector: 'mrp',
           sortable: true,
           minWidth: '100px'
+        },
+        {
+          name: 'Attributes',
+          selector: 'att',
+          sortable: false,
+          minWidth: '100px',
+            cell: row => {
+              return (
+                <div className='d-flex' onClick={() => {
+                      setreview(row)
+                      setResponseModel(true)
+                }}>
+                  View 
+                </div>
+              )
+            }
         },
         {
           name: 'Actions',
@@ -157,93 +162,13 @@ const SkuList = () => {
         }
     ]
 
-
-  // ** Function to handle Modal toggle
-  const handleModal = () => {
-    setModal(!modal)
-  }
-
-  // ** Function to handle filter
-  const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = data.filter(item => {
-        
-        const startsWith =
-          item.Name.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.customizations.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().startsWith(value.toLowerCase()) 
-
-        const includes =
-          item.Name.toLowerCase().includes(value.toLowerCase()) ||
-          item.customizations.toLowerCase().includes(value.toLowerCase()) ||
-          item.deliveryDate.toLowerCase().includes(value.toLowerCase()) ||
-          item.Category[0].label.toLowerCase().includes(value.toLowerCase()) ||
-          item.subCategory[0].label.toLowerCase().includes(value.toLowerCase()) 
-
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
-  }
-
-  // ** Function to handle Pagination
-  const handlePagination = page => {
-    setCurrentPage(page.selected)
-  }
-
-  // ** Custom Pagination
-  const CustomPagination = () => (
-    <ReactPaginate
-      previousLabel=''
-      nextLabel=''
-      forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
-      breakLabel='...'
-      pageRangeDisplayed={2}
-      marginPagesDisplayed={2}
-      activeClassName='active'
-      pageClassName='page-item'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      nextLinkClassName='page-link'
-      nextClassName='page-item next'
-      previousClassName='page-item prev'
-      previousLinkClassName='page-link'
-      pageLinkClassName='page-link'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
-    />
-  )
-
-
   return (
     <Fragment>
 
       <Card>
 
         <CardHeader className='flex-md-row flex-column align-md-items-center align-items-start border-bottom'>
-          <CardTitle tag='h4'>SKU</CardTitle>
-          <div className='d-flex mt-md-0 mt-1'>
-            <Link to={`/master/SKUs/add`}>
-              <Button className='ml-2' color='primary'>
-                  <Plus size={15} />
-                  <span className='align-middle ml-50'>Add New</span>
-              </Button>
-            </Link>
-          </div>
+          <CardTitle tag='h4'>Product SKU</CardTitle>
         </CardHeader>
 
         <DataTable
@@ -260,7 +185,12 @@ const SkuList = () => {
           selectableRowsComponent={BootstrapCheckbox}
         />
         <ReactPagination followData = {DataTableD} dispachReq={productSkuList} currentPage={currentPage} setCurrentPage={setCurrentPage} />
- 
+        <AttributeModel
+          open={responseModel}
+          handleModal={handleResponse}
+          name={review.name}
+          data={review.attribute}
+        />
       </Card>
       
     </Fragment>

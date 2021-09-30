@@ -13,10 +13,13 @@ import {
     CustomInput,
     Label
   } from 'reactstrap'
-  
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { CreateKycType } from '@store/actions/master/kyc/kycType'
   const HorizontalForm = (props) => {
     
     const [values, setValues] = useState('')
+    const useDisplatch = useDispatch()
     const handleInputeChange = (event) => {
         const {name, value} = event.target
         setValues(
@@ -28,17 +31,10 @@ import {
       }
     
       const handleSubmit = () => {
-        console.log(values)
+        useDisplatch(CreateKycType(values))
         props.handleSubmit(values)
-        //prop.editAction(values)
-        //setValues(initialvalues)
       }
 
-    
-    //   const handleSubmit = () => {
-    //       console.log(name)
-    //       console.log(symbol)
-    //   }
     return (
       <Card>  
         <CardBody>

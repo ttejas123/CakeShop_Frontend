@@ -19,7 +19,12 @@ import 'uppy/dist/uppy.css'
 import '@uppy/status-bar/dist/style.css'
 import ProductSkuDataTable from './productSkuDatatable'
 const AddSku = (prop) => {
+  const {id} = useParams()
 
+  const useDisplatch = useDispatch()
+  useEffect(() => {
+    useDisplatch(productSpecificSkuList(5, 0, id))
+  }, [id])
   const initialvalues = {
     
   }
@@ -52,19 +57,17 @@ const AddSku = (prop) => {
     setFileArr([...fileArrs])
   })
 
-  const useDisplatch = useDispatch()
-
   const DataAttribute = useSelector(state => {
-    //console.log(state.productSKU)
+    //console.log(state.product)
     //recentAddedProduct
-    return state.productSKU
+    return state.product
   })
 
   useEffect(() => {
-   if (DataAttribute.recentAddedProduct) {
-      useDisplatch(PerticularCategory(DataAttribute.recentAddedProduct.category))
+   if (DataAttribute.specPro && DataAttribute.specPro.category) {
+      useDisplatch(PerticularCategory(DataAttribute.specPro.category.id))
    }
-  }, [DataAttribute.recentAddedProduct])
+  }, [DataAttribute.specPro])
 
   const CategoryAttributes = useSelector(state => {
     //console.log(state.category)
@@ -86,10 +89,6 @@ const AddSku = (prop) => {
 
   const submitHandle = (event) => {
     const { name, value } = event.target
-    // console.log({
-    //   ...values,
-    //   [name] : values
-    // })
     setValues({
       ...values,
       [name] : values
@@ -113,11 +112,10 @@ const AddSku = (prop) => {
     <Card>
     <Row>
       
-        <Col sm='12' className="pl-5 pt-2">
-          <h2 className="mb-1">Add SKU For {DataAttribute.recentAddedProduct ? DataAttribute.recentAddedProduct.name : ""}</h2>
-        </Col>
-      
-      <CardBody className='pl-3 pt-2'>
+      <CardBody>
+      <Col sm='12' >
+          <h4 className="mb-1">Add SKU For {DataAttribute.recentAddedProduct ? DataAttribute.recentAddedProduct.name : ""}</h4>
+      </Col>
       <Col sm='12'>
         <Form onSubmit={e => e.preventDefault()}>
           <Row>
@@ -203,12 +201,12 @@ const AddSku = (prop) => {
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
               <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' onClick={ e =>  {
                                                           submitHandle(e)
-                                                          console.log({...values,
-                                                            img: fileArr,
-                                                            productID: DataAttribute.recentAddedProduct.productID})
+                                                          // console.log({...values,
+                                                          //   img: fileArr,
+                                                          //   productID: id})
                                                           useDisplatch(Add({...values,
                                                             img: fileArr,
-                                                            productID: DataAttribute.recentAddedProduct.productID}, useDisplatch, productSpecificSkuList))
+                                                            productID: id}, useDisplatch, productSpecificSkuList))
                                                           setFileArr([])
                                                           setPreviewArr([])
                                                           setValues({})
@@ -226,7 +224,7 @@ const AddSku = (prop) => {
       </CardBody> 
     </Row>
     </Card>
-    <ProductSkuDataTable productID={DataAttribute.recentAddedProduct} />
+    <ProductSkuDataTable productID={DataAttribute.specPro.id} />
     
     </>
   )

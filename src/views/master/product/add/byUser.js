@@ -10,9 +10,10 @@ import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
 //Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { Add } from '@store/actions/master/product'
+import { Add, ProductAttribute } from '@store/actions/master/product'
+import { recentAddedProduct } from '@store/actions/master/productSKU'
 import { dropdownBrand } from '@store/actions/master/brand'
-import { fetchCategories } from '@store/actions/master/category'
+import { fetchCategories, ParentCategories, ChildCategories } from '@store/actions/master/category'
 import 'uppy/dist/uppy.css'
 import '@uppy/status-bar/dist/style.css'
 import '@styles/react/libs/file-uploader/file-uploader.scss'
@@ -120,8 +121,9 @@ const ByUserTab = () => {
     }
     const useDisplatch = useDispatch()
     useEffect(() => {
-      useDisplatch(fetchCategories())
+      useDisplatch(ParentCategories())
       useDisplatch(dropdownBrand())
+      useDisplatch(ProductAttribute())
     }, [useDisplatch])
     const DataTableD = useSelector(state => {
       //console.log(state.category)
@@ -131,6 +133,10 @@ const ByUserTab = () => {
       //console.log(state.category)
       return state.brands
     })
+    const productAtt = useSelector(state => {
+      //console.log(state.product.attribute)
+      return state.product
+     })
  // console.log(selectedUser)
 
   const initialvalues = {}
@@ -246,90 +252,92 @@ const ByUserTab = () => {
           <Input type='text' name='mrp' onChange={handleInputeChange} id='mrp' placeholder='Mrp' defaultValue={userData && userData.mrp} />
         </FormGroup>
       </Col>
-      <Col md='4' sm='12'>
-      <FormGroup>
-              <Label for='Category'>Category</Label>
-            <Select
-              id='Category'
-              className='react-select'
-              classNamePrefix='select'
-              isClearable={false}
-              options={DataTableD.data}
-              theme={selectThemeColors}
-              onChange={data => {
-                                setValues({
-                                  ...values,
-                                  category : data.id
-                                })
-                                // setSubCategoryOptions(data)
-                                // setSpecificationsData(optionSubCategory[data.id][0].specs)
-                                //  setValues(
-                                //           {
-                                //              ...values,
-                                //              Category : data
-                                //           } 
-                                //   )
-                                }
-                        }
-            />
-            </FormGroup> 
-      </Col>
-      <Col md='4' sm='12'>
-      <FormGroup>
-              <Label for='SubCategory'>Sub Category</Label>
-            <Select
-              id='SubCategory'
-              className='react-select'
-              classNamePrefix='select'
-              isClearable={false}
-              options={subCategoryOptions}
-              theme={selectThemeColors}
-              onChange={data => {
-                                 setValues(
-                                          {
-                                             ...values,
-                                             SubCategory : data
-                                          } 
-                                  )
-                                  setSpecificationsData(data.specs)
-                                }
-                        }
-            />
-            </FormGroup> 
-            </Col>
             <Col md='4' sm='12'>
-        <FormGroup>
-          <Label for='productCategory'>Product Category</Label>
-          <div style={{zIndex:1000, position:'relative'}}>
+                      <FormGroup>
+                        <Label for='attribute'>Select Product Attribute</Label>
                           <Select
-                            id='productCategory'
+                            id='attribute'
                             className='react-select'
                             classNamePrefix='select'
                             isClearable={false}
-                            options={optionProductCategory}
+                            isMulti
+                            options={productAtt.attribute}
                             theme={selectThemeColors}
-                            value={values.productCategory}
                             onChange={data => {
-                                               setValues(
-                                                        {
-                                                           ...values,
-                                                           productCategory : data
-                                                        } 
-                                                        //seller brand
-                                                )
-                                                
-                                              }
+                                              setValues({
+                                                ...values,
+                                                attribute : data
+                                              })
+                                        }
                                       }
-                    />
-                    </div>
-        </FormGroup>
-      </Col>
+                          />
+                      </FormGroup> 
+                </Col>
             <Col md='4' sm='12'>
         <FormGroup>
           <Label for='description'>Description</Label>
           <Input type='textarea' name='description' onChange={handleInputeChange} id='description' placeholder='Description' defaultValue={userData && userData.description} />
         </FormGroup>
       </Col>
+      <Col md='12' sm='12'>
+        <h4 className='d-block mb-1'>
+            < AtSign size={20} className='mr-50' />
+            <span className='align-middle'>Category</span>
+        </h4>
+      </Col>
+
+      <Col md='4' sm='12'>
+          <FormGroup>
+                  <Label for='Category'>Category</Label>
+                <Select
+                  id='Category'
+                  className='react-select'
+                  classNamePrefix='select'
+                  isClearable={false}
+                  options={DataTableD.categorys.parent}
+                  theme={selectThemeColors}
+                  onChange={data => {
+                                    useDisplatch(ChildCategories(data.id, 0))
+                                    setValues({
+                                      ...values,
+                                      category : data.id
+                                    })      
+                              }
+                            }
+                />
+          </FormGroup> 
+      </Col>
+      {Object.keys(DataTableD.subcategorys).map((val, index) => {
+          return (
+                <Col md='4' sm='12'>
+                    <FormGroup style={{zIndex:1000, position:'relative'}}>
+                        <Label for='SubCategory'>Sub Category {index}</Label>
+                          <Select
+
+                            id='SubCategory'
+                            className='react-select'
+                            classNamePrefix='select'
+                            isClearable={false}
+                            options={DataTableD.subcategorys[val]}
+                            theme={selectThemeColors}
+                            onChange={data => {
+                                              useDisplatch(ChildCategories(data.id, index + 1))
+                                              setValues(
+                                                        {
+                                                           ...values,
+                                                           category : data.id
+                                                        } 
+                                              )
+                                                //setSpecificationsData(data.specs)
+                                              }
+                                      }
+                          />
+                    </FormGroup> 
+                </Col>
+        )
+      })}
+
+
       <Col sm='12'>
           <h4 className='d-block mb-1'>
             < AtSign size={20} className='mr-50' />
@@ -409,15 +417,20 @@ const ByUserTab = () => {
       </CardBody>
       </Col>
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-              <Button.Ripple tag={Link} to='/product-list' className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary' onClick={() => { 
+              <Button.Ripple tag={Link} to='/master/product/create-sku' className='mb-1 mb-sm-0 mr-0 mr-sm-1' type='submit' color='primary' onClick={() => { 
                 // console.log({
                 //   ...values,
                 //   img: fileArr
                 // })
+                // useDisplatch(recentAddedProduct(
+                //   {
+                //   ...values,
+                //   img: fileArr
+                // }))
                 useDisplatch(Add({
                   ...values,
                   img: fileArr
-                }))
+                }, useDisplatch, recentAddedProduct))
               }
               }>
                 Save Changes

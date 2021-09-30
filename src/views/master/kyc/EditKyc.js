@@ -13,10 +13,12 @@ import {
     CustomInput,
     Label
   } from 'reactstrap'
-  
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { EditKycType } from '@store/actions/master/kyc/kycType'
   const EditForm = (props) => {
-      console.log(props.data)
-      const [values, setValues] = useState('')
+    const useDisplatch = useDispatch()
+    const [values, setValues] = useState('')
     const handleInputeChange = (event) => {
         const {name, value} = event.target
         setValues(
@@ -28,10 +30,11 @@ import {
       }
     
       const handleSubmit = () => {
-        console.log(values)
+        useDisplatch(EditKycType({
+          ...values,
+          id: props.data.id}))
         props.handleSubmit(values)
-        //prop.editAction(values)
-        //setValues(initialvalues)
+
       }
     return (
       <Card>  

@@ -334,6 +334,7 @@ const UserAccountTab = () => {
                                                                                     e.preventDefault()
                                                                                     setPreviewArr([])
                                                                                     setFileArr([])
+                                                                                    setimgIds([])
                                                                                     // uppy.totalProgress(0)
                                                                                   } }>
                 Reset Images

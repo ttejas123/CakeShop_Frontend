@@ -1,20 +1,21 @@
-// ** Custom Components
-//import { DropDownList } from '@progress/kendo-react-dropdowns'
-// ** Third Party Components
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 
 // ** React Imports
-import { Fragment, useState, forwardRef } from 'react'
+import { Fragment, useState, forwardRef, useEffect } from 'react'
 import { selectThemeColors } from '@utils'
 // ** Table Data & Columns
 import { data } from './data'
 import Select from 'react-select'
-
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { List, DeleteAttribute, specificAttribute } from '@store/actions/master/attribute'
+import ModelCat from './modelC'
 // ** Add New Modal Component
-
+import ReactPagination from '@src/views/ExCompUse/reactCustPagin'
+import DeletePop from '@src/views/ExCompUse/delepePop.js'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
 import DataTable from 'react-data-table-component'
@@ -78,8 +79,8 @@ const DataTableWithButtons = () => {
   }
   // ** States
   const [modal, setModal] = useState(false)
-   const [responseModel, setResponseModel] = useState(false)
-    const [reviewId, setreviewId] = useState(0)
+  const [responseModel, setResponseModel] = useState(false)
+  const [review, setreview] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [filteredData, setFilteredData] = useState([])
@@ -87,17 +88,6 @@ const DataTableWithButtons = () => {
   const [Filter, setFilter] = useState('')
   const [tooltipOpen, setTooltipOpen] = useState(false)
 
-   //deleteCountry
-  const deleteCountry = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm("Are you sure you want to delete")
- 
-      if (userselection === true) { 
-        console.log("Deleted")
-      } else {
-      console.log("not deleted ")
-      }
-  }
     //edit action
    const AddeditEvent = (val) => {
      //here we hande event which comming from addNewModel.js (Form for add and edit)
@@ -105,50 +95,68 @@ const DataTableWithButtons = () => {
       console.log(val)
   }
 
+  const useDisplatch = useDispatch()
+  useEffect(() => {
+    useDisplatch(List(5, 0))
+   
+  }, [useDisplatch])
+  const attributeData = useSelector(state => {
+    //console.log(state.warehouse)
+    return state.attribute
+  })
+
+     //deleteCountry
+  const deleteMain = (id) => {
+     DeletePop(DeleteAttribute, id, useDisplatch, currentPage, List)
+  }
+
   //columns
   const columns = [
         {
-          name: 'Attributes',
-          selector: 'subAttributes',
-          minWidth: '150px',
-          cell: row => (
-            <div key={row.id} className='d-flex align-items-center'>
-              <div className='user-info text-truncate'>
-                <span id="Attributess" className='d-block font-weight-bold text-truncate d-flex '>
-                {row.subAttributes.map((val, index) => {
-                  if (index < 1) {
-                    return (
-                      <div className="mr-1">{val.title} <a className="m-1 " href="#">view</a></div>
-                      )
-                  }
-                })
-                }
-                </span>
-                <UncontrolledTooltip className='d-block font-weight-bold text-truncate d-flex ' placement='top' target='Attributess'>
-                 
-                  {row.subAttributes.map((val, index) => {
-                   
-                      return (
-                        <><div className="">{val.title}</div><br/></>
-                        )
-                   
-                  })
-                  }
-                </UncontrolledTooltip>
-                
-              </div>
-            </div>
-          )
+          name: 'Name',
+          selector: 'name',
+          sortable: true,
+          minWidth: '150px'
         },
         {
-          name: 'Sub Category',
-          selector: 'subCat',
+          name: 'unit',
+          selector: 'unit',
+          sortable: true,
+          minWidth: '130px'
+        },
+        {
+          name: 'Attribute Values',
+          selector: 'Attvalues[0]',
           sortable: true,
           minWidth: '130px',
           cell: row => (
             <div key={row.id} className='d-flex align-items-center'>
               <div className='user-info text-truncate'>
-                <span className='d-block font-weight-bold text-truncate'>{row.subCat[0].value}</span>
+                <span className='d-block font-weight-bold text-truncate'>{row.Attvalues.map((val, index) => {
+                  return `  ${val},  `
+                })}</span>
+              </div>
+            </div>
+          )
+        },
+        {
+          name: 'Attribute Type',
+          selector: 'type',
+          sortable: true,
+          minWidth: '130px'
+        },
+        {
+          name: 'Categories',
+          selector: 'unit',
+          sortable: true,
+          minWidth: '130px',
+          cell: row => (
+            <div key={row.id} className='d-flex align-items-center'>
+              <div className='user-info text-truncate'>
+                <span className='d-block font-weight-bold text-truncate cursor-pointer' onClick={() => {
+                      setreview(row)
+                      setResponseModel(true)
+                }}>View</span>
               </div>
             </div>
           )
@@ -160,14 +168,14 @@ const DataTableWithButtons = () => {
             return (
               <div className='d-flex'>
                 <UncontrolledDropdown>
-                  <DropdownToggle className='pr-1' tag='span'>
+                  <DropdownToggle className='pr-1 cursor-pointer' tag='span'>
                     <Trash size={15} onClick={e => {
                                                                                     e.preventDefault()
-                                                                                    deleteCountry(row.id)
+                                                                                    deleteMain(row.id)
                                                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-                <Link to={`/add-attribute`}>
+                <Link to={`/edit-attribute/${row.id}`} onClick={() => useDisplatch(specificAttribute(row.id))}>
                   <Edit size={15} />
                 </Link>  
               </div>
@@ -215,62 +223,8 @@ const DataTableWithButtons = () => {
   }
   // ** Function to handle filter
   const handleFilter = e => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-    if (value.length) {
-      updatedData = data.filter(item => {
-        const startsWith =
-          item.subCat.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Cat.toLowerCase().startsWith(value.toLowerCase()) 
-          
-        const includes =
-          item.subCat.toLowerCase().includes(value.toLowerCase()) ||
-          item.Cat.toLowerCase().includes(value.toLowerCase()) 
-          
-
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-       })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
+    
   }
-
-  // ** Function to handle Pagination
-  const handlePagination = page => {
-    setCurrentPage(page.selected)
-  }
-
-  // ** Custom Pagination
-  const CustomPagination = () => (
-    <ReactPaginate
-      previousLabel=''
-      nextLabel=''
-      forcePage={currentPage}
-      onPageChange={page => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : data.length / 7 || 1}
-      breakLabel='...'
-      pageRangeDisplayed={2}
-      marginPagesDisplayed={2}
-      activeClassName='active'
-      pageClassName='page-item'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      nextLinkClassName='page-link'
-      nextClassName='page-item next'
-      previousClassName='page-item prev'
-      previousLinkClassName='page-link'
-      pageLinkClassName='page-link'
-      breakClassName='page-item'
-      breakLinkClassName='page-link'
-      containerClassName='pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1'
-    />
-  )
-
 
   return (
     <Fragment>
@@ -290,17 +244,23 @@ const DataTableWithButtons = () => {
 
         <DataTable
           noHeader
-          pagination
          
           columns={columns}
           paginationPerPage={7}
           className='react-dataTable'
           sortIcon={<ChevronDown size={10} />}
           paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={searchValue.length ? filteredData : data}
+         
+          data={attributeData.data}
           
         />
+        <ReactPagination followData = {attributeData} dispachReq={List} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <ModelCat
+        open={responseModel}
+        handleModal={handleResponse}
+        name={review.name}
+        data={review.categories}
+      />
         
       </Card>
     </Fragment>

@@ -10,7 +10,6 @@ import { IntlContext } from '@src/utility/context/Internationalization'
 const IntlDropdown = () => {
   // ** Context
   const intlContext = useContext(IntlContext)
-  console.log(intlContext)
 
   // ** Vars
   const langObj = {

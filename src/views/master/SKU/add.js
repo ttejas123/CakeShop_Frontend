@@ -9,7 +9,10 @@ import { useState, useEffect } from 'react'
 import Flatpickr from 'react-flatpickr'
 import { MoreVertical, User, Users, Edit, Calendar, FileText, Archive, Trash,  MapPin, DollarSign, X, Plus  } from 'react-feather'
 import { data } from './data'
-
+//Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { AllProductList } from '@store/actions/master/product'
+import { SpecificProductAttribute } from '@store/actions/master/productSKU'
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 // ** Custom Components
@@ -53,25 +56,26 @@ const AddSku = (prop) => {
   ]
 
   const initialvalues = {
-    id:1,
-    avatar:'',
-    username:"",
-    Name:"",
-
-    SKU_ID: 0,
-    MOQ: 0,
-    Customization_available:"",
-    Inspection:"",
-    sampling: "",
-    approved_by:"",
-    no_of_seller:0,
-    Created_Date:`${new Date().toGMTString()}`,
-    Lead_Time: `${new Date().toGMTString()}`
+    
   }
   const [selectedOption, setselectedOption] = useState()
   const [values, setValues] = useState(initialvalues)
   const [allDay, setAllDay] = useState(false)
   const [endPicker, setEndPicker] = useState(new Date())  
+
+  const useDisplatch = useDispatch()
+  useEffect(() => {
+    useDisplatch(AllProductList(5, 0))
+   
+  }, [useDisplatch])
+  const DataTableD = useSelector(state => {
+    //console.log(state.warehouse)
+    return state.product
+  })
+  const DataAttribute = useSelector(state => {
+    //console.log(state.productSKU)
+    return state.productSKU
+  })
 
   //for other input
   const handleInputeChange = (event) => {
@@ -116,20 +120,21 @@ const AddSku = (prop) => {
             
             <Col md='6' sm='12'>
               <FormGroup>
-              <Label for='approved_by'>Approved By</Label>
+              <Label for='approved_by'>Select Product</Label>
               <Select
                 id='approved_by'
                 className='react-select'
                 classNamePrefix='select'
                 isClearable={false}
-                options={optionApproveBy}
+                options={DataTableD.allProductDataList}
                 theme={selectThemeColors}
-                value={values.approved_by}
+                
                 onChange={data => {
+                                   useDisplatch(SpecificProductAttribute(data.id))
                                    setValues(
                                             {
                                                ...values,
-                                               approved_by : data
+                                               productId : data.id
                                             } 
                                     )
                                   }
@@ -143,168 +148,55 @@ const AddSku = (prop) => {
                 <Label for='SKU_ID'>SKU ID</Label>
                 <InputGroup>
                   
-                  <Input name="SKU_ID" onChange={handleInputeChange} id='SKU_ID' type="number" placeholder='Textile' value={values.SKU_ID} />
+                  <Input name="SKU_ID" onChange={handleInputeChange} id='SKU_ID' type="text" placeholder='SKU ID' value={values.SKU_ID} />
                 </InputGroup>
               </FormGroup>
             </Col>
 
             <Col md='6' sm='12'>
               <FormGroup>
-                    <Label for='Lead_Time'>Lead Time</Label>
-                     <InputGroup>
-                      <InputGroupAddon addonType='prepend'>
-                        <InputGroupText>
-                          <Calendar size={15} />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Flatpickr
-                      
-                      required
-                      id='endDate'
-                      // tag={Flatpickr}
-                      name='Lead_Time'
-                      className='form-control'
-                      onChange={(date) => setValues(
-                                                  {
-                                                    ...values,
-                                                    Lead_Time : date[0]
-                                                  }
-                                )}
-                      value={values.Lead_Time}
-                      options={{
-                        dateFormat: 'd-m-Y'
-                      }}
-                    />
-                  </InputGroup>
-              </FormGroup>
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-                    <Label for='Created_Date'>Created Date</Label>
-                     <InputGroup>
-                      <InputGroupAddon addonType='prepend'>
-                        <InputGroupText>
-                          <Calendar size={15} />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Flatpickr
-                      
-                      required
-                      id='endDate'
-                      // tag={Flatpickr}
-                      name='Created_Date'
-                      className='form-control'
-                      onChange={(date) => setValues(
-                                                  {
-                                                    ...values,
-                                                    Created_Date : date[0]
-                                                  }
-                                )}
-                      value={values.Created_Date}
-                      options={{
-                        dateFormat: 'd-m-Y'
-                      }}
-                    />
-                  </InputGroup>
-              </FormGroup>
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-                <Label for='MOQ'>MOQ</Label>
+                <Label for='MRP'>MRP</Label>
                 <InputGroup>
                   
-                  <Input name="MOQ" onChange={handleInputeChange} id='MOQ' type="number" placeholder='Textile' value={values.MOQ} />
+                  <Input name="MRP" onChange={handleInputeChange} id='MRP' type="number" placeholder='MRP in INR'/>
                 </InputGroup>
               </FormGroup>
             </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-              <Label for='Customization_available'>Customization Available</Label>
-              <Select
-                id='Customization_available'
-                className='react-select'
-                classNamePrefix='select'
-                isClearable={false}
-                options={optionCustomization_available}
-                theme={selectThemeColors}
-                value={values.Customization_available}
-                onChange={data => {
-                                   setValues(
-                                            {
-                                               ...values,
-                                               Customization_available : data
-                                            } 
-                                    )
-                                  }
-                          }
-              /> 
-              </FormGroup>  
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-              <Label for='Inspection'>Inspection</Label>
-              <Select
-                id='Inspection'
-                className='react-select'
-                classNamePrefix='select'
-                isClearable={false}
-                options={optionInspection}
-                theme={selectThemeColors}
-                value={values.Inspection}
-                onChange={data => {
-                                   setValues(
-                                            {
-                                               ...values,
-                                               Inspection : data
-                                            } 
-                                    )
-                                  }
-                          }
-              /> 
-              </FormGroup>  
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-              <Label for='sampling'>sampling</Label>
-              <Select
-                id='sampling'
-                className='react-select'
-                classNamePrefix='select'
-                isClearable={false}
-                options={optionsampling}
-                theme={selectThemeColors}
-                value={values.sampling}
-                onChange={data => {
-                                   setValues(
-                                            {
-                                               ...values,
-                                               sampling : data
-                                            } 
-                                    )
-                                  }
-                          }
-              /> 
-              </FormGroup>  
-            </Col>
-
-            <Col md='6' sm='12'>
-              <FormGroup>
-                <Label for='no_of_seller'>No Of Seller</Label>
-                <InputGroup>
-                  
-                  <Input name="no_of_seller" onChange={handleInputeChange} id='no_of_seller' placeholder='Textile' value={values.no_of_seller} />
-                </InputGroup>
-              </FormGroup>
-            </Col>
+            <Col md='12' sm='12'><h6>Attributes</h6></Col>
+            <>{
+              DataAttribute.attribute.map(item => {
+                return (
+                  <Col md='4' sm='12' key={item.id} >
+                    <FormGroup>
+                      <Label for={item.id}>{item.display_name}</Label>
+                      <Select
+                          id='{item.id}'
+                          className='react-select'
+                          classNamePrefix='select'
+                          isClearable={false}
+                          options={item.value}
+                          theme={selectThemeColors}
+                          onChange={(data) => {
+                            const type = item.display_name.split(" ")[0]
+                            setValues({
+                              ...values,
+                              storeArray: {
+                                ...values.storeArray,
+                                [type] : data
+                              }
+                            })
+                          }}
+                        /> 
+                    </FormGroup>
+                  </Col>
+                )
+              })
+            }</>
 
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
               <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' onClick={ e =>  {
                                                           submitHandle(e)
+                                                          console.log(values)
                                                         }
                                                       } color='primary'>
                 Save Changes

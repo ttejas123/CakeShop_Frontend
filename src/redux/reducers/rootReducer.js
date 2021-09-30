@@ -16,6 +16,8 @@ import product from './master/product'
 import warehouse from './master/warehouse'
 import category from './master/category'
 import productSKU from './master/productSKU'
+import kycType from './master/kyc/KycType'
+import attribute from './master/attribute'
 const rootReducer = combineReducers({
   auth,
   navbar,
@@ -29,7 +31,9 @@ const rootReducer = combineReducers({
   warehouse,
   product,
   category,
-  productSKU
+  productSKU,
+  kycType,
+  attribute
   //users
 })
 

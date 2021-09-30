@@ -4,6 +4,7 @@ import Uppy from '@uppy/core'
 import thumbnailGenerator from '@uppy/thumbnail-generator'
 import Repeater from '@components/repeater'
 import { X, Plus } from 'react-feather'
+import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { DragDrop } from '@uppy/react'
 // ** Custom Components
@@ -12,13 +13,30 @@ import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
 //Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { requiredDropdown, CreateAttribute, List } from '@store/actions/master/attribute'
+import { requiredDropdown, specificAttribute, List, editAttribute } from '@store/actions/master/attribute'
 // ** Third Party Components
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput, Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 
 const ByUserTab = () => {
-
-  const [count, setCount] = useState(1)
+  const useDisplatch = useDispatch()
+  useEffect(() => {
+    useDisplatch(requiredDropdown())
+   
+  }, [useDisplatch])
+  const attributeData = useSelector(state => {
+    console.log(state.attribute)
+    return state.attribute
+  })
+  const [values, setValues] = useState({})
+  const { id } = useParams()
+  useEffect(() => {
+    useDisplatch(specificAttribute(id))
+  }, [id])
+  useEffect(() => {
+    if (attributeData) {
+      setValues(attributeData.specificEdit)
+    }
+  }, [attributeData])
 
   const increaseCount = () => {
     setCount(count + 1)
@@ -35,7 +53,6 @@ const ByUserTab = () => {
     
   }
 
-  const [values, setValues] = useState(initialvalues)
   const handleInputeChange = (event) => {
     const {name, value} = event.target
     setValues(
@@ -52,16 +69,6 @@ const ByUserTab = () => {
     {value: "Sport's T-shirt", label: "Sport's T-shirt"}
   ]
 
-  const useDisplatch = useDispatch()
-  useEffect(() => {
-    useDisplatch(requiredDropdown())
-   
-  }, [useDisplatch])
-  const attributeData = useSelector(state => {
-    //console.log(state.attribute)
-    return state.attribute
-  })
-
   // ** Function to change user imag
 
 
@@ -71,7 +78,7 @@ const ByUserTab = () => {
 
                   <FormGroup>
                     <Label for={`attribute-name`}>Attribute Name</Label>
-                    <Input type='text' id='attribute' name='attribute' onChange={handleInputeChange} placeholder='Attribute Name' />
+                    <Input type='text' id='attribute' name='attribute' value={values.attribute} onChange={handleInputeChange} placeholder='Attribute Name' />
                   </FormGroup>
                 
         </Col>
@@ -87,10 +94,11 @@ const ByUserTab = () => {
                                     isMulti
                                     options={attributeData.dropdowns.catArray}
                                     theme={selectThemeColors}
+                                    value={values.categories}
                                     onChange={data => { 
                                                         setValues({
                                                           ...values,
-                                                          cat : data
+                                                          categories : data
                                                         })
                                                       }
                                               }
@@ -109,6 +117,7 @@ const ByUserTab = () => {
                                     isMulti
                                     options={attributeData.dropdowns.attValueArray}
                                     theme={selectThemeColors}
+                                    value={values.attVal}
                                     onChange={data => { 
                                                         setValues({
                                                           ...values,
@@ -121,7 +130,7 @@ const ByUserTab = () => {
         </Col>
         <Col md={4} >
                               <FormGroup>
-                                <Label for={`item-name`}>Select Attribute Type</Label>
+                                <Label for={`item-name`}>Select Attribute Default Values</Label>
                                 
                                 <Select
                                     id='BidStatus'
@@ -130,6 +139,7 @@ const ByUserTab = () => {
                                     isClearable={false}
                                     options={attributeData.dropdowns.attTypeArray}
                                     theme={selectThemeColors}
+                                    value={values.attType}
                                     onChange={data => { 
                                                         setValues({
                                                           ...values,
@@ -141,7 +151,10 @@ const ByUserTab = () => {
                               </FormGroup>
         </Col>
         <Col md={12}>
-          <Button.Ripple tag={Link} to='/master/attribute' color='primary' onClick={() => useDisplatch(CreateAttribute(values, useDisplatch, List))}>
+         <Button.Ripple tag={Link} to='/master/attribute' color='primary' onClick={() => {
+          useDisplatch(editAttribute(values, useDisplatch, List))
+          setValues("")
+        }}>
            
             <span className='align-middle'>Submit</span>
           </Button.Ripple>

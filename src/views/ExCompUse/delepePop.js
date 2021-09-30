@@ -17,7 +17,7 @@ const MySwal = withReactContent(Swal)
 //     })
 // }
 
-const handleConfirmText = (DeleteC, id, useDisplatch, currentPage, List) => {
+const handleConfirmText = (DeleteC, id, useDisplatch, currentPage, List, specificSearchID) => {
   //const useDisplatch = useDispatch()
     return MySwal.fire({
       title: 'Are you sure?',
@@ -32,9 +32,12 @@ const handleConfirmText = (DeleteC, id, useDisplatch, currentPage, List) => {
       buttonsStyling: false
     }).then(function (result) {
       if (result.value) {
-        //console.log("This is from PopUp")
-        useDisplatch(DeleteC(id, useDisplatch, List, currentPage))
-        // useDisplatch(List(5, currentPage * 5))
+        //console.log(specificSearchID)
+        if (specificSearchID) {
+          useDisplatch(DeleteC(id, useDisplatch, List, currentPage, specificSearchID))
+        } else { 
+          useDisplatch(DeleteC(id, useDisplatch, List, currentPage))
+        }
         MySwal.fire({
           icon: 'success',
           title: 'Deleted!',
