@@ -27,85 +27,6 @@ const ByUserTab = () => {
     const optionBrandSelection = []
 
     const optionProductCategory = []
-      const optionSubCategory = [
-          [   
-                {
-                    value: "MobilePhone",
-                    label: "Mobile Phone",
-                    specs :  
-                    [
-                    {id : "modelName", name : "Model Name", type : "text"},
-                    {id : "secondaryStorage", name : "Secondary Storage", type : "text"},
-                    {id : "ram", name : "RAM", type : "text"},
-                    {id : "os", name : "OS", type : "text"},
-                    {id : "size", name : "Size", type : "text"}
-                    ]
-                },
-                {
-                    value: "Tablet",
-                     label: "Tablet",
-                    specs : 
-                [
-                    {id : "modelName", name : "Model Name", type : "text"},
-                    {id : "secondaryStorage", name : "Secondary Storage", type : "text"},
-                    {id : "ram", name : "RAM", type : "text"},
-                    {id : "os", name : "OS", type : "text"},
-                    {id : "size", name : "Size", type : "text"}
-                ]
-            }
-          ],
-          [
-                {
-                    value: "Shirt",
-                    label: "Shirt",
-                    specs :  
-                [
-                    {id : "name", name : "Name", type : "text"},
-                    {id : "size", name : "Size", type : "text"},
-                    {id : "Color", name : "Shirt Color", type : "text"},
-                    {id : "material", name : "Material", type : "text"},
-                    {id : "washable", name : "Washable", type : "text"}
-                ]
-            },
-                {value: "Pant",
-                label: "Pant",
-                specs :
-                [
-                    {id : "name", name : "Name", type : "text"},
-                    {id : "size", name : "Size", type : "text"},
-                    {id : "color", name : "Pant Color", type : "text"},
-                    {id : "material", name : "Material", type : "text"},
-                    {id : "washable", name : "Washable", type : "text"}
-                ]
-            }
-          ],
-          [
-                {
-                 value: "FilpFlops",
-                 label: "Flip Flops",
-                 specs :
-                [
-                    {id : "name", name : "Name", type : "text"},
-                    {id : "size", name : "Size", type : "text"},
-                    {id : "color", name : "Flip-Flop Color", type : "text"},
-                    {id : "material", name : "Material", type : "text"},
-                    {id : "washable", name : "Washable", type : "text"}
-                ]
-            },
-                {
-                    value: "Shoes",
-                    label: "Shoes",
-                    specs :
-                [
-                    {id : "name", name : "Name", type : "text"},
-                    {id : "size", name : "Size", type : "text"},
-                    {id : "color", name : "Shoe Color", type : "text"},
-                    {id : "material", name : "Material", type : "text"},
-                    {id : "washable", name : "Washable", type : "text"}
-                ]
-            }
-          ]
-      ]
     const selectedUser = {
         avatar: "",
         company: "Yotz PVT LTD",
@@ -141,8 +62,8 @@ const ByUserTab = () => {
 
   const initialvalues = {}
 
-  const [subCategoryOptions, setSubCatOptions] = useState(optionSubCategory[0])
-  const [SpecificationsData, setSpecificationsData] = useState(optionSubCategory[0][0].specs)
+  //const [subCategoryOptions, setSubCatOptions] = useState(optionSubCategory[0])
+  //const [SpecificationsData, setSpecificationsData] = useState(optionSubCategory[0][0].specs)
   //console.log(SpecificationsData)
   const [values, setValues] = useState(initialvalues)
   
@@ -252,27 +173,27 @@ const ByUserTab = () => {
           <Input type='text' name='mrp' onChange={handleInputeChange} id='mrp' placeholder='Mrp' defaultValue={userData && userData.mrp} />
         </FormGroup>
       </Col>
-            <Col md='4' sm='12'>
-                      <FormGroup>
-                        <Label for='attribute'>Select Product Attribute</Label>
-                          <Select
-                            id='attribute'
-                            className='react-select'
-                            classNamePrefix='select'
-                            isClearable={false}
-                            isMulti
-                            options={productAtt.attribute}
-                            theme={selectThemeColors}
-                            onChange={data => {
-                                              setValues({
-                                                ...values,
-                                                attribute : data
-                                              })
-                                        }
-                                      }
-                          />
-                      </FormGroup> 
-                </Col>
+            {/*<Col md='4' sm='12'>
+                                  <FormGroup>
+                                    <Label for='attribute'>Select Product Attribute</Label>
+                                      <Select
+                                        id='attribute'
+                                        className='react-select'
+                                        classNamePrefix='select'
+                                        isClearable={false}
+                                        isMulti
+                                        options={productAtt.attribute}
+                                        theme={selectThemeColors}
+                                        onChange={data => {
+                                                          setValues({
+                                                            ...values,
+                                                            attribute : data
+                                                          })
+                                                    }
+                                                  }
+                                      />
+                                  </FormGroup> 
+                            </Col>*/}
             <Col md='4' sm='12'>
         <FormGroup>
           <Label for='description'>Description</Label>
@@ -336,7 +257,6 @@ const ByUserTab = () => {
                 </Col>
         )
       })}
-
 
       <Col sm='12'>
           <h4 className='d-block mb-1'>

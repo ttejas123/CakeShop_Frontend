@@ -116,32 +116,90 @@ export const Add = (data, useDisplatch, List) => {
      }
 }
 
-export const EditC = (data) => {
-    //console.log(data)
-    const updateQ = `mutation{
-  updateProduct(input:{where: {id: "${data.id}"}, data:{
-    name:"${data.name}"
-    category: "6123b92b062bef634cb4dc4e"
-    ean_upc_code: "${data.ean_upc_code}"
-    hsn_code: "${data.hsn_code}"
-    gst: ${data.gst}
-    description: "${data.description}"
-  }}){
-    product{
-      id
-    }
-  }
-}`
-    
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query: updateQ}).then(res => {
-            //console.log(res.data.data)
-            return dispatch({
-                type: 'UPDATEDPRODUCT',
-                payload: res.data.data
+export const EditC = (data, useDisplatch, List) => {
+    if (data.img.length > 0) {
+        const formdata1 = new FormData()
+        let index = 0
+        let index2 = 0
+        let stringForAppend = ''
+        
+        formdata1.append("operations", "{\n  \"query\": \"mutation($files: [Upload]!){multipleUpload(files: $files){id}}\",\n    \"variables\": {\n      \"files\": []\n   }\n}")
+        while (index2 < data.img.length) {
+            if (index2 === data.img.length - 1) {
+                stringForAppend =  `${stringForAppend} \"${index2}\": [\"variables.files.${index2}\"]  `
+            } else {
+                stringForAppend =  `${stringForAppend} \"${index2}\": [\"variables.files.${index2}\"],  `
+            }
+            ++index2
+        }
+        stringForAppend = `{${stringForAppend}}`
+        formdata1.append("map", `${stringForAppend}`)
+        
+        while (index < data.img.length) {
+            formdata1.append(`${index}`, data.img[index])
+             ++index
+        }
+
+        return dispatch => {
+            axios.post(BaseUrl, formdata1).then(res => {
+                let productImagesToUpload = res.data.data.multipleUpload.map((val) => {
+                    return val.id
+                })
+                const ImageIdNnewOne = [...data.imgIds, ...productImagesToUpload]
+                productImagesToUpload = ImageIdNnewOne.map((val) => {
+                    return `\"${val}\"`
+                })
+                // const attribute = data.attribute.map((val) => {
+                //     return `\"${val.id}\"`
+                // })
+                // console.log(productImagesToUpload)
+                // console.log(data.imgIds)
+                    const updateQ = `mutation{
+                                          UpdateSKU(
+                                            id: "${data.id}"
+                                            sku_id: "${data.productSku}"
+                                            sku_title: "${data.sku_title}"
+                                            images: [${productImagesToUpload}]
+                                            mrp: ${data.mrp}      
+                                            ){
+                                                id
+                                            }
+                                        }`
+                            axios.post(BaseUrl, {query: updateQ}).then(res => {
+                                //console.log(res.data.data)
+                                useDisplatch(List(5, 0, data.productID))
+                                return dispatch({
+                                    type: 'UPDATEDPRODUCT',
+                                    payload: res.data.data
+                                })
+                            })
+
             })
-        })
+        }
+    } else {
+            // const attributeQNoImg = data.attribute.map((val) => {
+            //         return `\"${val.id}\"`
+            // })
+                    const updateQNoImg = `mutation{
+                                          UpdateSKU(
+                                            id: "${data.id}"
+                                            sku_id: "${data.sku_id}"
+                                            sku_title: "${data.sku_title}"
+                                            mrp: ${data.mrp}      
+                                            ){
+                                                id
+                                            }
+                                        }`
+                        return dispatch => {
+                            axios.post(BaseUrl, {query: updateQNoImg}).then(res => {
+                                //console.log(res.data.data)
+                                useDisplatch(List(5, 0, data.productID))
+                                return dispatch({
+                                    type: 'UPDATEDPRODUCTSKU',
+                                    payload: res.data.data
+                                })
+                            })
+                        }
     }
 }
 

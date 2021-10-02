@@ -589,6 +589,14 @@ const Routes = [
     component: lazy(() => import('../../views/master/subCat/SubAttributes/add'))
   },
   {
+    path: '/dashboard/cateloge',
+    component: lazy(() => import('@src/views/dashboards/cateloge/Cateloge.js'))
+  },
+  {
+    path: '/dashboard/createcatalague',
+    component: lazy(() => import('@src/views/dashboards/cateloge/createCatalogue.js'))
+  },
+  {
     path: '/report/customer',
     component: lazy(() => import('../../views/report/customer'))
   },

@@ -79,10 +79,6 @@ export const Add = (data, useDisplatch, recentSku) => {
             const productImages = res.data.data.multipleUpload.map((val) => {
                 return `\"${val.id}\"`
             })
-
-            // const attribute = data.attribute.map((val) => {
-            //     return `\"${val.id}\"`
-            // })
             
             const createQ = `mutation{
                                   createProduct(input: {data: {
@@ -140,7 +136,7 @@ export const Add = (data, useDisplatch, recentSku) => {
 }
 
 export const EditC = (data, useDisplatch, List) => {
-    console.log(data)
+    //console.log(data)
     if (data.img.length > 0) {
         const formdata1 = new FormData()
         let index = 0

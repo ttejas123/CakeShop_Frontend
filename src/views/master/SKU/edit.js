@@ -1,7 +1,7 @@
 //Lead Time, SKU ID, MOQ, Customization available, Inspection, sampling, Added time, approved by, no of seller
 // ** React Imports
 import { ReactSortable } from 'react-sortablejs'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Repeater from '@components/repeater'
 import Select from 'react-select'
 import { selectThemeColors, isObjEmpty } from '@utils'
@@ -13,7 +13,7 @@ import { data } from './data'
 import { useSelector, useDispatch } from 'react-redux'
 import { PerticularCategory } from '@store/actions/master/category'
 import { AllProductList } from '@store/actions/master/product'
-import { SpecificProductAttribute, SpecificProductSku } from '@store/actions/master/productSKU'
+import { SpecificProductAttribute, SpecificProductSku, EditC, productSpecificSkuList } from '@store/actions/master/productSKU'
 // ** Styles
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import thumbnailGenerator from '@uppy/thumbnail-generator'
@@ -241,8 +241,13 @@ const AddSku = (prop) => {
             </Col>
 
             <Col className='d-flex flex-sm-row flex-column mt-2' sm='12'>
-              <Button.Ripple className='mb-1 mb-sm-0 mr-0 mr-sm-1' onClick={ e =>  {
-                                                          submitHandle(e)
+              <Button.Ripple tag={Link} to={`/master/editproduct/${values.productID}`} className='mb-1 mb-sm-0 mr-0 mr-sm-1' onClick={ e =>  {
+                                                          //submitHandle(e)
+                                                          useDisplatch(EditC({
+                                                                        ...values,
+                                                                        img: fileArr,
+                                                                        imgIds
+                                                                      }, useDisplatch, productSpecificSkuList))
                                                         }
                                                       } color='primary'>
                 Save Changes

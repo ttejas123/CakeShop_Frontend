@@ -35,7 +35,38 @@ export default [
         id: 'Catalogue',
         title: 'Catalogue',
         icon: <Circle size={20} />,
-        navLink: '/catalogue'
+        children: [
+                {
+                  id: 'CatalogueList',
+                  title: 'List',
+                  icon: <Circle size={20} />,
+                  navLink: '/dashboard/cateloge'
+                },
+                {
+                  id: 'createcatalague',
+                  title: 'Create',
+                  icon: <Circle size={20} />,
+                  navLink: '/dashboard/createcatalague'
+                },
+                {
+                  id: 'vas_transac',
+                  title: 'Transaction',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/vass/Transaction'
+                },
+                {
+                  id: 'vas_transc_add',
+                  title: 'Transaction Add',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/vass/trans/add'
+                },
+                {
+                  id: 'Order_List',
+                  title: 'Order List',
+                  icon: <Circle size={20} />,
+                  navLink: '/master/vass/orderlist'
+                }
+        ]
       }
     ]
   },
