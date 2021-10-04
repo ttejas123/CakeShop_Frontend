@@ -1,27 +1,30 @@
 // ** Custom Components
-import Avatar from '@components/avatar'
-import '@styles/react/libs/react-select/_react-select.scss'
-import '@styles/react/libs/tables/react-dataTable-component.scss'
+import Avatar from "@components/avatar"
+import "@styles/react/libs/react-select/_react-select.scss"
+import "@styles/react/libs/tables/react-dataTable-component.scss"
 
 // ** React Imports
-import { Fragment, useState, forwardRef, useEffect } from 'react'
+import { Fragment, useState, forwardRef, useEffect } from "react"
 
+import Loader from "../../ExCompUse/loader"
 import {
   fetchStates,
   addState,
   editState,
   delete__State
-} from '../../../redux/actions/master/state'
+} from "../../../redux/actions/master/state"
 
 // ** Table Data & Columns
-import { data } from './data'
+import { data } from "./data"
 
 // ** Add New Modal Component
-import ModelForm from './FormModel'
+import AddForm from "./AddState"
+import EditForm from "./EditState"
+import CustomPagination from "../../ExCompUse/ReactPagination"
 
 // ** Third Party Components
-import ReactPaginate from 'react-paginate'
-import DataTable from 'react-data-table-component'
+import ReactPaginate from "react-paginate"
+import DataTable from "react-data-table-component"
 import {
   ChevronDown,
   Share,
@@ -35,7 +38,7 @@ import {
   FileText,
   Archive,
   Trash
-} from 'react-feather'
+} from "react-feather"
 import {
   Card,
   CardHeader,
@@ -51,8 +54,8 @@ import {
   Col,
   Badge,
   UncontrolledDropdown
-} from 'reactstrap'
-import { useDispatch, useSelector } from 'react-redux'
+} from "reactstrap"
+import { useDispatch, useSelector } from "react-redux"
 
 // ** Bootstrap Checkbox Component
 const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
@@ -63,95 +66,108 @@ const BootstrapCheckbox = forwardRef(({ onClick, ...rest }, ref) => (
 ))
 
 const DataTableWithButtons = () => {
-  const states = useSelector((state) => state.states.states)
-  const count = useSelector((state) => state.states.count)
   const usedispatch = useDispatch()
+  //** CITY DATA fetched from back end
+  const states = useSelector((state) => {
+    return state.states
+  })
+  //** FETCHING cities on component load
   useEffect(() => {
-    usedispatch(fetchStates(count))
+    usedispatch(fetchStates(5, 0))
+    //** RESETTING state when component unmounts
+    return () => usedispatch({ type: "states_reset_list_page" })
   }, [usedispatch])
-  useEffect(() => {
-    return () => usedispatch({ type: 'states_reset_list_page' })
-  }, [])
-  // ** States
-  const [modal, setModal] = useState(false)
+
+  //** Pagination state
   const [currentPage, setCurrentPage] = useState(0)
-  const [searchValue, setSearchValue] = useState('')
-  const [filteredData, setFilteredData] = useState([])
-  const [currentId, setCurrentId] = useState('')
+  const [currentPageForSearch, setCurrentPageForSearch] = useState(0)
+  useEffect(() => {
+    setCurrentPageForSearch(currentPage)
+  }, [currentPage])
 
+  //** state when city is added or edited or cancelled editing or adding
   const [addClicked, setAddClicked] = useState(0)
+  const [editClicked, setEditClicked] = useState(0)
 
-  const handlePagination = (page) => {
-    console.log(page)
-    usedispatch(fetchStates(page.selected * 5))
-    setCurrentPage(page.selected)
+  //** state for sending props to edit component
+  const [editData, setEditData] = useState({})
+
+  //** Function to open add city component
+  const handleAddClick = () => {
+    if (!editClicked) {
+      setAddClicked(!addClicked)
+    }
   }
-  //deleteCountry
-  const deleteState = (val) => {
-    //here we passing id to delete this specific record
-    const userselection = confirm('Are you sure you want to delete')
 
+  //** Function to open edit city component
+  const handleEditClick = (item) => {
+    if (!addClicked) {
+      setEditClicked(!editClicked)
+      setEditData(item)
+    }
+  }
+
+  //** Function to handle cancel of edit city
+  const handleCancelOfEdit = () => {
+    setEditClicked(!editClicked)
+  }
+
+  //** Function to handle cancel of add city
+  const handleCancelOfAdd = () => {
+    setAddClicked(!addClicked)
+  }
+
+  //** Function to handle submit of add data
+  const handleSubmitOfAdd = ({ state, countryId }) => {
+    if (state === "") return
+    usedispatch(addState(state, countryId))
+    usedispatch(fetchStates(5, currentPage * 5))
+    setAddClicked(!addClicked)
+  }
+
+  //** Function to handle submission of data
+  const handleSubmitOfEdit = ({ whereId, countryId, state }) => {
+    if (!state) return
+    usedispatch(editState(whereId, state, countryId))
+    usedispatch(fetchStates(5, currentPage * 5))
+    setEditClicked(!editClicked)
+  }
+
+  const handleDelete = (data) => {
+    const userselection = confirm("Are you sure you want to delete")
     if (userselection === true) {
-      usedispatch(delete__State(val)).then((action) => {
-        console.log(action)
-        if (currentPage > 0 && states.length === 1) {
-          handlePagination({ selected: currentPage - 1 })
+      usedispatch(delete__State(data.id)).then(() => {
+        if (states.data.length === 1) {
+          let num = currentPage - 1
+          if (num < 1) num = 0
+          num *= 5
+          usedispatch(fetchStates(5, num)).then(() => {
+            setCurrentPage(currentPage - 1)
+          })
+        } else {
+          usedispatch(fetchStates(5, currentPage * 5))
         }
       })
-    }
-  }
-  //edit action
-  const AddeditEvent = (val) => {
-    //here we hande event which comming from addNewModel.js (Form for add and edit)
-    if (val.state === '') return setAddClicked(1)
-    if (val.whereId === '') {
-      usedispatch(addState(val.state, val.country)).then(() => setCurrentId(''))
     } else {
-      usedispatch(editState(val.whereId, val.state, val.country)).then(() => setCurrentId(''))
+      console.log("not deleted ")
     }
-    setAddClicked(0)
   }
-  const basicColumns = [
-    {
-      name: 'ID',
-      selector: 'StateName',
-      // sortable: true,
-      maxWidth: '100px'
-    }
-  ]
 
-  //columns
-  const columns = [
+  const stateColumns = [
     {
-      name: 'StateName',
-      selector: 'StateName',
+      name: "State",
+      selector: "StateName",
       sortable: true,
-      minWidth: '250px',
-      cell: (row) => (
-        <div className="d-flex align-items-center">
-          <div className="user-info text-truncate ml-1">
-            <span className="d-block font-weight-bold text-truncate">{row.StateName}</span>
-          </div>
-        </div>
-      )
+      minWidth: "250px"
     },
     {
-      name: 'Country',
-      selector: 'Country',
+      name: "Country",
+      selector: "Country",
       sortable: true,
-      minWidth: '250px',
-      cell: (row) => {
-        return (
-          <div className="d-flex align-items-center">
-            <div className="user-info text-truncate ml-1">
-              <span className="d-block font-weight-bold text-truncate">{row.Country}</span>
-            </div>
-          </div>
-        )
-      }
+      minWidth: "250px"
     },
     {
-      name: 'Actions',
+      name: "Actions",
       allowOverflow: true,
       cell: (row) => {
         return (
@@ -161,18 +177,16 @@ const DataTableWithButtons = () => {
                 <Trash
                   size={15}
                   onClick={(e) => {
-                    e.preventDefault()
-                    deleteState(row.id)
+                    handleDelete(row)
                   }}
                 />
               </DropdownToggle>
             </UncontrolledDropdown>
-
             <Edit
               size={15}
-              onClick={() => {
-                setCurrentId(row.id)
-                setAddClicked(!addClicked)
+              onClick={(e) => {
+                e.preventDefault()
+                handleEditClick(row)
               }}
             />
           </div>
@@ -181,91 +195,24 @@ const DataTableWithButtons = () => {
     }
   ]
 
-  // ** Function to handle toggle
-  const handleModal = () => {
-    if (addClicked === 1) {
-      setAddClicked(0)
-    } else {
-      setAddClicked(1)
-    }
-  }
-
-  // ** Function to handle filter
-  const handleFilter = (e) => {
-    const value = e.target.value
-    let updatedData = []
-    setSearchValue(value)
-
-    if (value.length) {
-      updatedData = states.filter((item) => {
-        const startsWith =
-          item.StateName.toLowerCase().startsWith(value.toLowerCase()) ||
-          item.Country.toLowerCase().startsWith(value.toLowerCase())
-
-        const includes =
-          item.StateName.toLowerCase().includes(value.toLowerCase()) ||
-          item.Country.toLowerCase().includes(value.toLowerCase())
-        if (startsWith) {
-          return startsWith
-        } else if (!startsWith && includes) {
-          return includes
-        } else return null
-      })
-      setFilteredData(updatedData)
-      setSearchValue(value)
-    }
-  }
-
-  // ** Function to handle Pagination
-
-  // ** Custom Pagination
-  const CustomPagination = () => (
-    <ReactPaginate
-      previousLabel=""
-      nextLabel=""
-      forcePage={currentPage}
-      onPageChange={(page) => handlePagination(page)}
-      pageCount={count / 5 || 1}
-      breakLabel="..."
-      pageRangeDisplayed={2}
-      marginPagesDisplayed={2}
-      activeClassName="active"
-      pageClassName="page-item"
-      breakClassName="page-item"
-      breakLinkClassName="page-link"
-      nextLinkClassName="page-link"
-      nextClassName="page-item next"
-      previousClassName="page-item prev"
-      previousLinkClassName="page-link"
-      pageLinkClassName="page-link"
-      breakClassName="page-item"
-      breakLinkClassName="page-link"
-      containerClassName="pagination react-paginate separated-pagination pagination-sm justify-content-end pr-1 mt-1"
-    />
-  )
-
   return (
     <Fragment>
       <Card>
-        <CardHeader className="flex-md-row flex-column align-md-items-center align-items-start border-bottom">
-          <CardTitle tag="h4">States List</CardTitle>
-          <div className="d-flex mt-md-0 mt-1">
-            {addClicked === 0 ? (
-              <Button className="ml-2" color="primary" onClick={handleModal}>
-                <Plus size={15} />
-                <span className="align-middle ml-50">Add Your State</span>
-              </Button>
-            ) : (
-              <span></span>
-            )}
-          </div>
+        <CardHeader className="border-bottom">
+          <CardTitle tag="h4">States</CardTitle>
+          <Button className="ml-2" color="primary" onClick={handleAddClick}>
+            <Plus size={15} />
+            <span className="align-middle ml-50">Add State</span>
+          </Button>
         </CardHeader>
         {addClicked ? (
-          <ModelForm
-            handleModal={handleModal}
-            editAction={AddeditEvent}
-            currentId={currentId}
-            data={states}
+          <AddForm handleCancel={handleCancelOfAdd} handleSubmit={handleSubmitOfAdd} />
+        ) : null}
+        {editClicked ? (
+          <EditForm
+            data={editData}
+            handleCancel={handleCancelOfEdit}
+            handleSubmit={handleSubmitOfEdit}
           />
         ) : null}
         <Row className="justify-content-end mx-0">
@@ -278,24 +225,45 @@ const DataTableWithButtons = () => {
               type="text"
               bsSize="sm"
               id="search-input"
-              value={searchValue}
-              onChange={handleFilter}
+              onChange={(e) => {
+                usedispatch(fetchStates(5, 0, e.target.value)).then(() => {
+                  if (e.target.value === "") {
+                    setCurrentPage(currentPageForSearch)
+                    usedispatch(fetchStates(5, currentPage * 5)).then(() => {
+                      setCurrentPageForSearch(currentPage)
+                    })
+                  }
+                })
+              }}
             />
           </Col>
         </Row>
-        <DataTable
-          noHeader
-          pagination
-          selectableRows
-          columns={columns}
-          paginationPerPage={5}
-          className="react-dataTable"
-          sortIcon={<ChevronDown size={10} />}
-          paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={states}
-          selectableRowsComponent={BootstrapCheckbox}
+        {states.fetchStatesLoading ? (
+          <Loader color="primary" divHeight="40vh" spinnerHeight="5rem" spinnerWidth="5rem" />
+        ) : (
+          <Fragment>
+            <DataTable
+              noHeader
+              selectableRowsNoSelectAll
+              columns={stateColumns}
+              className="react-dataTable"
+              sortIcon={<ChevronDown size={10} />}
+              data={states.data}
+            />
+          </Fragment>
+        )}
+        <CustomPagination
+          followData={states}
+          dispachReq={fetchStates}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
         />
+        {/* <CardFooter>
+        <CardText className='mb-0'>
+          <span className='font-weight-bold'>Note:</span>{' '}
+          <span>Use Intl Dropdown in Navbar to change table language</span>
+        </CardText>
+      </CardFooter> */}
       </Card>
     </Fragment>
   )

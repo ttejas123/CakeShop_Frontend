@@ -1,10 +1,11 @@
-import axios from 'axios'
-import { BaseUrl } from '@store/baseUrl' //Base Url
+import axios from "axios"
+import { BaseUrl } from "@store/baseUrl" //Base Url
 
-export const fetchStates = (start) => {
+export const fetchStates = (limit, start, searchQuery) => {
+  const searchPro = searchQuery ? searchQuery : ""
   const query = `
 query {
-  statesConnection(limit: 5, start: ${start}) {
+  statesConnection(sort:"createdAt:desc",limit: ${limit}, start: ${start},where:{name_contains:"${searchPro}"}) {
     values {
       name
       id
@@ -22,9 +23,10 @@ query {
 `
   return async (dispatch) => {
     try {
+      dispatch({ type: "fetch_states_loading" })
       const res = await axios.post(BaseUrl, { query })
       return dispatch({
-        type: 'states_fetched_list_page',
+        type: "states_fetched_list_page",
         payload: {
           states: res.data.data.statesConnection.values,
           count: res.data.data.statesConnection.aggregate.count
@@ -52,10 +54,11 @@ mutation{
 `
   return async (dispatch) => {
     try {
+      dispatch({ type: "add_state_loading" })
       const res = await axios.post(BaseUrl, { query })
       console.log(res.data.data)
       return dispatch({
-        type: 'state_added',
+        type: "state_added",
         payload: res.data.data.createState.state
       })
     } catch (error) {
@@ -80,9 +83,10 @@ mutation{
 `
   return async (dispatch) => {
     try {
+      dispatch({ type: "edit_state_loading" })
       const res = await axios.post(BaseUrl, { query })
       return dispatch({
-        type: 'state_edited',
+        type: "state_edited",
         payload: res.data.data.updateState.state
       })
     } catch (error) {
@@ -114,6 +118,7 @@ mutation{
 `
   return async (dispatch) => {
     try {
+      dispatch({ type: "fetch_states_loading" })
       const cityRes = await axios.post(BaseUrl, { query: queryToFetchCities })
       cityRes.data.data.citiesConnection.values.forEach(async (city) => {
         const queryToDeleteCities = `
@@ -129,7 +134,7 @@ mutation{
       })
 
       const res = await axios.post(BaseUrl, { query })
-      return dispatch({ type: 'state_deleted', payload: res.data.data.deleteState.state })
+      return dispatch({ type: "state_deleted", payload: res.data.data.deleteState.state })
     } catch (error) {
       console.log(error)
     }

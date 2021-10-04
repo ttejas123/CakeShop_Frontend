@@ -415,10 +415,10 @@ export default [
                 //   navLink: '/employee-view'
                 // },
                 {
-                  id: 'edit',
-                  title: 'Edit',
+                  id: 'add',
+                  title: 'Add',
                   icon: <Circle size={20} />,
-                  navLink: '/edit-employee'
+                  navLink: '/add-employee'
                 },
                 {
                   id: 'backupAccounts',

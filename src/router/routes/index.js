@@ -69,8 +69,12 @@ const Routes = [
     component: lazy(() => import('../../views/master/bids/edit'))
   },
   {
-    path: '/edit-employee',
+    path: '/edit-employee/:id',
     component: lazy(() => import('../../views/master/employee/editEmployee'))
+  },
+  {
+    path: '/add-employee',
+    component: lazy(() => import('../../views/master/employee/addEmployee'))
   },
   {
     path: '/backup-accounts',
@@ -161,7 +165,7 @@ const Routes = [
     component: lazy(() => import('../../views/master/corporate/corporateView/index'))
   },
   {
-    path: '/employee-view',
+    path: '/employee-view/:id',
     component: lazy(() => import('../../views/master/employee/employeeView'))
   },
   {

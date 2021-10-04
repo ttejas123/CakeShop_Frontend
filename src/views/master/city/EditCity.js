@@ -1,9 +1,10 @@
 //** React imports
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
 //** Redux imports
-import { useDispatch, useSelector } from 'react-redux'
-import { findCountries, findStates } from '@store/actions/master/city/editAddCity'
+import { useDispatch, useSelector } from "react-redux"
+import { findCountries, findStates } from "@store/actions/master/city/editAddCity"
+import Loader from "../../ExCompUse/loader"
 
 //** Imports for UI
 import {
@@ -19,152 +20,124 @@ import {
   Button,
   CustomInput,
   Label
-} from 'reactstrap'
+} from "reactstrap"
 
+import Select from "react-select"
 const EditForm = (props) => {
   const usedispatch = useDispatch()
-
+  const countries = useSelector((state) => state.editAddCity.countries)
+  const states = useSelector((state) => state.editAddCity.states)
   //** Fetching data to display default selection
   useEffect(() => {
     usedispatch(findCountries())
     usedispatch(findStates(props.data.country))
-    //** If component unmounts reset redux state for this component
-    return () => usedispatch({ type: 'reset_edit_add_city' })
+    return () => usedispatch({ type: "reset_edit_add_city" })
   }, [usedispatch])
 
   //** Setting values of countries, states, and cities fetched from api
-  const countries = useSelector((state) => state.editAddCity.countries)
-  const states = useSelector((state) => state.editAddCity.states)
+  const loading = useSelector((state) => state.city.editCitiesLoading)
 
   //** Local state for controlled input elements with
   //** default values set from previous component
   const [city, setCity] = useState(props.data.name)
-  const [state, setState] = useState(props.data.state)
-  const [country, setCountry] = useState(props.data.country)
+  const [state, setState] = useState({ value: props.data.state, label: props.data.state })
+  const [country, setCountry] = useState({ value: props.data.country, label: props.data.country })
 
   //** FUNC for handling input change
-  const handleInputChange = (event) => {
-    const { name, value } = event.target
-    switch (name) {
-      case 'country':
-        //** If country is changed then fetch states
-        //** and set value of state as the first element in states array fetched
-        setCountry(value)
-        usedispatch(findStates(value)).then((action) => {
-          setState(action.payload[0].name)
-          setCity('')
-        })
-        break
-
-      //** If state is changed then only change state value
-      case 'state':
-        setState(value)
-        setCity('')
-        break
-      case 'name':
-        setCity(value)
-    }
-  }
-
-  //** FUNC for submission of data
   const handleSubmit = () => {
-    const stateId = states.findIndex((s) => s.name === state)
     props.handleSubmit({
-      city: city !== props.data.name ? city : null,
-      stateId: states[stateId].id,
+      city,
+      stateId: state.id,
       whereId: props.data.id
     })
   }
   return (
-    <Card>
-      <CardBody>
-        <Form>
-          <Row>
-            <Col className="d-flex" md={{ size: 11, offset: 1 }}>
-              <FormGroup row md={{ size: 9, offset: 3 }}>
-                <Label sm="4" size="lg" for="country">
-                  Country
-                </Label>
-                <Col sm="7">
-                  <Input
-                    type="select"
-                    name="country"
-                    id="country"
-                    value={country}
-                    onChange={handleInputChange}
-                  >
-                    {countries.map((country) => (
-                      <option value={country.country_name}>{country.country_name}</option>
-                    ))}
-                  </Input>
-                </Col>
-              </FormGroup>
-
-              {/* <FormGroup className='ml-3' row>
-              <Label sm='4' size='lg' for='country'>
+    <Form>
+      <Col md="12" sm="12">
+        <Row className="mt-3 d-flex justify-content-center align-items-center">
+          <Col sm="3">
+            <FormGroup className="d-flex">
+              <Label size="lg" for="country">
                 Country
               </Label>
-              <Col sm='8'>
-                <Input type='email' name='Country' id='Country' defaultValue={props.data.country} placeholder='Country' onChange={handleInputChange}/>
+              <Col>
+                <Select
+                  id="country"
+                  name="country"
+                  className="react-select"
+                  classNamePrefix="select"
+                  isClearable={false}
+                  value={country}
+                  options={countries}
+                  onChange={(data) => {
+                    usedispatch(findStates(data.value)).then(() => {
+                      setCountry(data)
+                      setState({ value: "Select", label: "Select" })
+                    })
+                  }}
+                />
               </Col>
-            </FormGroup> */}
-              <FormGroup className="ml-3" row>
-                <Label sm="4" size="lg" for="state">
-                  State
-                </Label>
-                <Col sm="7">
-                  <Input
-                    type="select"
-                    name="state"
-                    id="state"
-                    value={state}
-                    onChange={handleInputChange}
-                  >
-                    {states.map((state) => (
-                      <option value={state.name}>{state.name}</option>
-                    ))}
-                  </Input>
-                </Col>
-              </FormGroup>
-              <FormGroup className="ml-3" row>
-                <Label sm="5" size="lg" for="name">
-                  City
-                </Label>
-                <Col sm="8">
-                  <Input
-                    type="text"
-                    name="name"
-                    innerRef={{required:true}}
-                    id="name"
-                    value={city}
-                    onChange={handleInputChange}
-                    placeholder="Enter City Name"
-                  />
-                </Col>
-              </FormGroup>
-            </Col>
-          </Row>
-          <FormGroup className="mb-0 mx-auto" row>
-            <Col className="d-flex" md={{ size: 8, offset: 5 }}>
-              <Button.Ripple
-                className="mr-1"
-                color="primary"
-                type="submit"
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleSubmit()
-                }}
-              >
-                Submit
-              </Button.Ripple>
-              <Button.Ripple outline color="secondary" type="reset" onClick={props.handleCancel}>
-                Cancel
-              </Button.Ripple>
-            </Col>
-          </FormGroup>
-        </Form>
-      </CardBody>
-    </Card>
+            </FormGroup>
+          </Col>
+
+          <Col sm="3">
+            <FormGroup className="d-flex">
+              <Label size="lg" for="state">
+                State
+              </Label>
+              <Col>
+                <Select
+                  id="state"
+                  name="country"
+                  className="react-select"
+                  classNamePrefix="select"
+                  isClearable={false}
+                  value={state}
+                  options={states}
+                  onChange={(data) => {
+                    setState(data)
+                    setCity("")
+                  }}
+                />
+              </Col>
+            </FormGroup>
+          </Col>
+          <Col sm="3">
+            <FormGroup className="d-flex">
+              <Label size="lg" for="city">
+                City
+              </Label>
+              <Col>
+                <Input
+                  name="city"
+                  id="city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </Col>
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row className="mt-1">
+          <Col sm="3" className="mx-auto">
+            <Button.Ripple
+              className="mr-1"
+              color="primary"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault()
+                handleSubmit()
+              }}
+            >
+              {loading ? <Loader color="light" /> : "Submit"}
+            </Button.Ripple>
+            <Button.Ripple outline color="secondary" type="reset" onClick={props.handleCancel}>
+              Cancel
+            </Button.Ripple>
+          </Col>
+        </Row>
+      </Col>
+    </Form>
   )
 }
 export default EditForm

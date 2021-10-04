@@ -1,11 +1,15 @@
 const initialState = {
   data: [],
   count: 0,
-  firstTimeFetch: false
+  fetchCitiesLoading: false,
+  editCitiesLoading: false,
+  addCitiesLoading: false
 }
 const cityReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'cities_fetched_city_list':
+    case "fetch_cities_loading":
+      return { ...state, fetchCitiesLoading: true }
+    case "cities_fetched_city_list":
       const dataArray = action.payload.cities.map((city) => {
         return {
           name: city.name,
@@ -18,37 +22,20 @@ const cityReducer = (state = initialState, action) => {
         ...state,
         data: dataArray,
         start: state.start + 5,
-        firstTimeFetch: true,
-        count: action.payload.count
+        count: action.payload.count,
+        fetchCitiesLoading: false
       }
-    case 'city_edited':
-      const dataArray2 = state.data.map((city) => {
-        if (city.id !== action.payload.id) return city
-        else {
-          return {
-            name: action.payload.name,
-            state: action.payload.state.name,
-            country: action.payload.state.country.country_name,
-            id: action.payload.id
-          }
-        }
-      })
-      return { ...state, data: dataArray2 }
-    case 'city_added':
-      const newCity = {
-        name: action.payload.name,
-        state: action.payload.state.name,
-        country: action.payload.state.country.country_name,
-        id: action.payload.id
-      }
-      return { ...state, data: [newCity, ...state.data], count: state.count + 1 }
-    case 'city_deleted':
-      return {
-        ...state,
-        data: state.data.filter((city) => city.id !== action.payload && city),
-        count: state.count - 1
-      }
-    case 'cities_reset_city_list':
+    case "edit_cities_loading":
+      return { ...state, editCitiesLoading: true }
+    case "city_edited":
+      return { ...state, editCitiesLoading: false }
+    case "add_cities_loading":
+      return { ...state, addCitiesLoading: true }
+    case "city_added":
+      return { ...state, addCitiesLoading: false }
+    case "city_deleted":
+      return { ...state, fetchCitiesLoading: false }
+    case "cities_reset_city_list":
       return initialState
     default:
       return state

@@ -1,14 +1,12 @@
 // ** React Imports
-import { BackEndUrl } from "@store/baseUrl" //Base Url
 import { useState, useEffect, Fragment } from "react"
 import { fileUpload, fileDelete } from "../../../redux/actions/file"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import Loader from "../../ExCompUse/loader"
 import EmployeeEditAddress from "./employeeEditAddress"
 // ** Custom Components
 import UserAvatar from "../../ExCompUse/UserAvatar"
 // ** Third Party Components
-import { Lock, Edit, Trash2, MapPin } from "react-feather"
 import {
   Media,
   Row,
@@ -24,37 +22,34 @@ import {
   Card,
   CardTitle
 } from "reactstrap"
+import { Edit } from "react-feather"
 import Select from "react-select"
 import { selectThemeColors } from "@utils"
 import { useForm } from "react-hook-form"
-import { fetchEmployee, updateEmployee } from "../../../redux/actions/master/employee"
-import { useParams, useHistory } from "react-router-dom"
+import { createEmplyee } from "../../../redux/actions/master/employee"
+import { useHistory } from "react-router-dom"
 
 const EditEmployee = () => {
   const history = useHistory()
   const usedispatch = useDispatch()
   const [isSubmittingAddress, setIsSubmittingAddress] = useState(false)
-  const [profile_pic, setProfilePic] = useState()
   const [isChanged, setIsChanged] = useState(false)
   const [file, setFile] = useState(null)
-  const { id } = useParams()
   const [values, setValues] = useState()
   const [submitLoading, setSubmitLoading] = useState(false)
   const optionRole = []
   useEffect(() => {
-    if (id) {
-      usedispatch(fetchEmployee(id)).then(({ payload }) => {
-        console.log(payload)
-        setValues({
-          ...payload,
-          profile_pic: {
-            url: payload.profile_pic ? `${BackEndUrl}${payload.profile_pic.url}` : "",
-            id: payload.profile_pic && payload.profile_pic.id
-          }
-        })
-        setProfilePic(payload.profile_pic && `${BackEndUrl}${payload.profile_pic.url}`)
-      })
-    }
+    setValues({
+      first_name: "",
+      last_name: "",
+      postcode: "",
+      email: "",
+      mobile: "",
+      is_onground_staff: false,
+      is_active: false,
+      emplyee_addresses: [],
+      profile_pic: { url: "" }
+    })
   }, [usedispatch])
   const { register, errors, control, setValue } = useForm({
     defaultValues: { isOnGround: "Yes", isActive: "Yes", roleAssigned: "Yes" }
@@ -62,7 +57,6 @@ const EditEmployee = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
-    console.log(value)
     setValues({ ...values, [name]: value })
     setIsChanged(true)
   }
@@ -72,37 +66,45 @@ const EditEmployee = () => {
         usedispatch(fileUpload(file)).then((newDpId) => {
           if (values.profile_pic !== null) usedispatch(fileDelete(values.profile_pic.id))
           usedispatch(
-            updateEmployee(
-              values.id,
+            createEmplyee(
               values.first_name,
               values.last_name,
               values.email,
               values.mobile,
+              "123456",
               values.is_onground_staff,
               values.is_active,
               newDpId
             )
-          )
+          ).then((action) => {
+            setValues({ ...values, id: action.payload })
+            if (values.emplyee_addresses.length === 0) {
+              history.push("/employee-list")
+            } else {
+              setIsSubmittingAddress(true)
+            }
+          })
         })
       } else {
         usedispatch(
-          updateEmployee(
-            values.id,
+          createEmplyee(
             values.first_name,
             values.last_name,
             values.email,
             values.mobile,
+            "123456",
             values.is_onground_staff,
             values.is_active
           )
-        )
+        ).then((action) => {
+          setValues({ ...values, id: action.payload })
+          if (values.emplyee_addresses.length === 0) {
+            history.push("/employee-list")
+          } else {
+            setIsSubmittingAddress(true)
+          }
+        })
       }
-    }
-
-    if (values.emplyee_addresses.length === 0) {
-      history.push("/employee-list")
-    } else {
-      setIsSubmittingAddress(true)
     }
   }
 
@@ -353,12 +355,9 @@ const EditEmployee = () => {
                           address={address}
                           key={index}
                           index={index}
-                          defaultCountry={
-                            values.emplyee_addresses[index].city.state.country.country_name
-                          }
-                          defaultState={values.emplyee_addresses[index].city.state.name}
-                          defaultCity={values.emplyee_addresses[index].city.name}
-                          defaultCityId={values.emplyee_addresses[index].city.id}
+                          defaultCountry="select"
+                          defaultState="select"
+                          defaultCity="select"
                           isSubmittingAddress={isSubmittingAddress}
                           setIsSubmittingAddress={setIsSubmittingAddress}
                         />
