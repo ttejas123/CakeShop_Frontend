@@ -1,23 +1,24 @@
 // ** React Imports
-import { Fragment, useState, useEffect } from 'react'
-import '@styles/react/libs/react-select/_react-select.scss'
-import '@styles/react/libs/tables/react-dataTable-component.scss'
+import { Fragment, useState, useEffect } from "react"
+import "@styles/react/libs/react-select/_react-select.scss"
+import "@styles/react/libs/tables/react-dataTable-component.scss"
 
 // Redux imports
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchCities, updateCity } from '@store/actions/master/city'
+import { useDispatch, useSelector } from "react-redux"
+import { fetchCities, updateCity, addCity, deleteCity } from "@store/actions/master/city"
 
 import ReactPagination from '@src/views/ExCompUse/reactCustPagin'
 import DeletePop from '@src/views/ExCompUse/delepePop.js'
 
 // ** Table Columns
-import { cityData } from './data'
+import { cityData } from "./data"
 
 // ** Third Party Components
-import ReactPaginate from 'react-paginate'
-import { FormattedMessage } from 'react-intl'
-import DataTable from 'react-data-table-component'
-import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus } from 'react-feather'
+import CustomPagination from "../../ExCompUse/ReactPagination"
+import Loader from "../../ExCompUse/loader"
+import { FormattedMessage } from "react-intl"
+import DataTable from "react-data-table-component"
+import { MoreVertical, Edit, FileText, Archive, Trash, ChevronDown, Plus } from "react-feather"
 import {
   Card,
   CardHeader,
@@ -26,213 +27,132 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button
-} from 'reactstrap'
+  Button,
+  Row,
+  Col,
+  Label,
+  Input,
+  Spinner
+} from "reactstrap"
 //import InputBasic from './AddCity'
-import HorizontalForm from './AddCity'
-import EditForm from './EditCity'
+import HorizontalForm from "./AddCity"
+import EditForm from "./EditCity"
 
 const CityList = () => {
-  const useDisplatch = useDispatch()
-  const start = useSelector((state) => {
-    return state.city.start
+  const usedispatch = useDispatch()
+  //** CITY DATA fetched from back end
+  const cities = useSelector((state) => {
+    return state.city
   })
-  const firstTimeFetch = useSelector((state) => {
-    return state.city.firstTimeFetch
-  })
+  //** FETCHING cities on component load
   useEffect(() => {
-    if (firstTimeFetch) return
-    useDisplatch(fetchCities(start))
-  }, [useDisplatch, firstTimeFetch])
-  const City = useSelector((state) => {
-    return state.city.data
-  })
-  //console.log(cityColumns)
-  // ** State
-  //   const data = [
-  //     {
-  //       name: "US Dollar",
-  //       symbol: "$"
-  //     },
-  //     {
-  //       name: "Canadian Dollar",
-  //       symbol: "$"
-  //     },
-  //     {
-  //       name: "Euro",
-  //       symbol: "€"
-  //     }
-  // ]
-  // console.log(data)
+    usedispatch(fetchCities(5, 0))
+    //** RESETTING state when component unmounts
+    return () => usedispatch({ type: "cities_reset_city_list" })
+  }, [usedispatch])
 
-  //   const cityColumns = [
-  //     {
-  //       name: 'city Name',
-  //       selector: 'name',
-  //       sortable: true,
-  //       minWidth: '200px'
-  //     },
-  //     {
-  //       name: 'Symbol',
-  //       selector: 'symbol',
-  //       sortable: false,
-  //       minWidth: '250px'
-  //     },
-  //     {
-  //       name: 'Actions',
-  //       allowOverflow: true,
-  //       cell: row => {
-  //         return (
-  //           <div className='d-flex'>
-  //             <UncontrolledDropdown>
-  //               <DropdownToggle className='pr-1' tag='span'>
-  //                 <MoreVertical size={15} />
-  //               </DropdownToggle>
-  //               <DropdownMenu right>
-  //                 <DropdownItem>
-  //                   <FileText size={15} />
-  //                   <span className='align-middle ml-50'>Details</span>
-  //                 </DropdownItem>
-  //                 <DropdownItem>
-  //                   <Archive size={15} />
-  //                   <span className='align-middle ml-50'>Archive</span>
-  //                 </DropdownItem>
-  //                 <DropdownItem>
-  //                   <Trash size={15} />
-  //                   <span className='align-middle ml-50'>Delete</span>
-  //                 </DropdownItem>
-  //               </DropdownMenu>
-  //             </UncontrolledDropdown>
-  //             <Edit size={15} />
-  //           </div>
-  //         )
-  //       }
-  //     }
-  //   ]
-
+  //** Pagination state
   const [currentPage, setCurrentPage] = useState(0)
-  const [searchValue, setSearchValue] = useState('')
-  const [filteredData, setFilteredData] = useState([])
+  const [currentPageForSearch, setCurrentPageForSearch] = useState(0)
+  useEffect(() => {
+    setCurrentPageForSearch(currentPage)
+  }, [currentPage])
+
+  //** state when city is added or edited or cancelled editing or adding
   const [addClicked, setAddClicked] = useState(0)
   const [editClicked, setEditClicked] = useState(0)
+
+  //** state for sending props to edit component
   const [editData, setEditData] = useState({})
 
-  // ** Function to handle pagination
-  const handlePagination = (page) => {
-    setCurrentPage(page.selected)
-  }
-
+  //** Function to open add city component
   const handleAddClick = () => {
     if (!editClicked) {
       setAddClicked(!addClicked)
     }
   }
 
+  //** Function to open edit city component
   const handleEditClick = (item) => {
     if (!addClicked) {
       setEditClicked(!editClicked)
       setEditData(item)
     }
-    //console.log(item)
   }
+
+  //** Function to handle cancel of edit city
   const handleCancelOfEdit = () => {
-    console.log('in Cancel')
     setEditClicked(!editClicked)
   }
+
+  //** Function to handle cancel of add city
   const handleCancelOfAdd = () => {
-    console.log('in Cancel')
-    setAddClicked(!addClicked)
-  }
-  const handleSubmitOfAdd = (data) => {
-    console.log('in submit', data)
     setAddClicked(!addClicked)
   }
 
+  //** Function to handle submit of add data
+  const handleSubmitOfAdd = (data) => {
+    if (data.city === "") {
+      return
+    }
+    const { city, stateId } = data
+    usedispatch(addCity(city, stateId))
+    usedispatch(fetchCities(5, currentPage * 5))
+    setAddClicked(!addClicked)
+  }
+
+  //** Function to handle submission of data
   const handleSubmitOfEdit = (data) => {
-    console.log(data)
     if (!data.city) {
       return setEditClicked(!editClicked)
     }
     const { city, stateId, whereId } = data
-    useDisplatch(updateCity(city, stateId, whereId))
-    console.log('here')
+    usedispatch(updateCity(city, stateId, whereId))
+    usedispatch(fetchCities(5, currentPage * 5))
+    setEditClicked(!editClicked)
   }
 
   const handleDelete = (data) => {
-    const userselection = confirm('Are you sure you want to delete')
-
+    const userselection = confirm("Are you sure you want to delete")
     if (userselection === true) {
-      console.log(' your record is deleted')
+      usedispatch(deleteCity(data.id)).then(() => {
+        if (cities.data.length === 1) {
+          let num = currentPage - 1
+          if (num < 1) num = 0
+          num *= 5
+          usedispatch(fetchCities(5, num)).then(() => {
+            setCurrentPage(currentPage - 1)
+          })
+        } else {
+          usedispatch(fetchCities(5, currentPage * 5))
+        }
+      })
     } else {
-      console.log('not deleted ')
+      console.log("not deleted ")
     }
   }
-  // ** Function to handle filter
-  // const handleFilter = e => {
-  //   const value = e.target.value
-  //   let updatedData = []
-  //   setSearchValue(value)
-
-  //   const status = {
-  //     1: { title: 'Current', color: 'light-primary' },
-  //     2: { title: 'Professional', color: 'light-success' },
-  //     3: { title: 'Rejected', color: 'light-danger' },
-  //     4: { title: 'Resigned', color: 'light-warning' },
-  //     5: { title: 'Applied', color: 'light-info' }
-  //   }
-
-  //   if (value.length) {
-  //     updatedData = data.filter(item => {
-  //       const startsWith =
-  //         item.full_name.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.post.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.email.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.age.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.salary.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         item.start_date.toLowerCase().startsWith(value.toLowerCase()) ||
-  //         status[item.status].title.toLowerCase().startsWith(value.toLowerCase())
-
-  //       const includes =
-  //         item.full_name.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.post.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.email.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.age.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.salary.toLowerCase().includes(value.toLowerCase()) ||
-  //         item.start_date.toLowerCase().includes(value.toLowerCase()) ||
-  //         status[item.status].title.toLowerCase().includes(value.toLowerCase())
-
-  //       if (startsWith) {
-  //         return startsWith
-  //       } else if (!startsWith && includes) {
-  //         return includes
-  //       } else return null
-  //     })
-  //     setFilteredData(updatedData)
-  //     setSearchValue(value)
-  //   }
-  // }
 
   const cityColumns = [
     {
-      name: 'City Name',
-      selector: 'name',
+      name: "City Name",
+      selector: "name",
       sortable: false,
-      minWidth: '250px'
+      minWidth: "250px"
     },
     {
-      name: 'State',
-      selector: 'state',
+      name: "State",
+      selector: "state",
       sortable: true,
-      minWidth: '250px'
+      minWidth: "250px"
     },
     {
-      name: 'Country',
-      selector: 'country',
+      name: "Country",
+      selector: "country",
       sortable: true,
-      minWidth: '250px'
+      minWidth: "250px"
     },
     {
-      name: 'Actions',
+      name: "Actions",
       allowOverflow: true,
       cell: (row) => {
         return (
@@ -260,52 +180,7 @@ const CityList = () => {
     }
   ]
 
-  // ** Pagination Previous Component
-  const Previous = () => {
-    return (
-      <Fragment>
-        <span className="align-middle d-none d-md-inline-block">
-          {/* <FormattedMessage id='Prev' /> */}
-        </span>
-      </Fragment>
-    )
-  }
-
-  // ** Pagination Next Component
-  const Next = () => {
-    return (
-      <Fragment>
-        <span className="align-middle d-none d-md-inline-block">
-          {/* <FormattedMessage id='Next' /> */}
-        </span>
-      </Fragment>
-    )
-  }
-
   // ** Custom Pagination Component
-  const CustomPagination = () => (
-    <ReactPaginate
-      previousLabel={<Previous size={15} />}
-      nextLabel={<Next size={15} />}
-      forcePage={currentPage}
-      onPageChange={(page) => handlePagination(page)}
-      pageCount={searchValue.length ? filteredData.length / 7 : cityData.length / 7 || 1}
-      breakLabel={'...'}
-      pageRangeDisplayed={2}
-      marginPagesDisplayed={2}
-      activeClassName={'active'}
-      pageClassName={'page-item'}
-      nextLinkClassName={'page-link'}
-      nextClassName={'page-item next'}
-      previousClassName={'page-item prev'}
-      previousLinkClassName={'page-link'}
-      pageLinkClassName={'page-link'}
-      breakClassName="page-item"
-      breakLinkClassName="page-link"
-      containerClassName={'pagination react-paginate pagination-sm justify-content-end pr-1 mt-1'}
-    />
-  )
-
   return (
     <Fragment>
       <Card>
@@ -326,32 +201,48 @@ const CityList = () => {
             handleSubmit={handleSubmitOfEdit}
           />
         ) : null}
-        {/* <Row className='justify-content-end mx-0'>
-        <Col className='d-flex align-items-center justify-content-end mt-1' md='6' sm='12'>
-          <Label className='mr-1' for='search-input-1'>
-            <FormattedMessage id='Search' />
-          </Label>
-          <Input
-            className='dataTable-filter mb-50'
-            type='text'
-            bsSize='sm'
-            id='search-input-1'
-            value={searchValue}
-            onChange={handleFilter}
-          />
-        </Col>
-      </Row> */}
-        <DataTable
-          noHeader
-          pagination
-          selectableRowsNoSelectAll
-          columns={cityColumns}
-          className="react-dataTable"
-          paginationPerPage={7}
-          sortIcon={<ChevronDown size={10} />}
-          paginationDefaultPage={currentPage + 1}
-          paginationComponent={CustomPagination}
-          data={City}
+        <Row className="justify-content-end mx-0">
+          <Col className="d-flex align-items-center justify-content-end mt-1" md="6" sm="12">
+            <Label className="mr-1" for="search-input">
+              Search
+            </Label>
+            <Input
+              className="dataTable-filter mb-50"
+              type="text"
+              bsSize="sm"
+              id="search-input"
+              onChange={(e) => {
+                usedispatch(fetchCities(5, 0, e.target.value)).then(() => {
+                  if (e.target.value === "") {
+                    setCurrentPage(currentPageForSearch)
+                    usedispatch(fetchCities(5, currentPage * 5)).then(() => {
+                      setCurrentPageForSearch(currentPage)
+                    })
+                  }
+                })
+              }}
+            />
+          </Col>
+        </Row>
+        {cities.fetchCitiesLoading ? (
+          <Loader color="primary" divHeight="40vh" spinnerHeight="5rem" spinnerWidth="5rem" />
+        ) : (
+          <Fragment>
+            <DataTable
+              noHeader
+              selectableRowsNoSelectAll
+              columns={cityColumns}
+              className="react-dataTable"
+              sortIcon={<ChevronDown size={10} />}
+              data={cities.data}
+            />
+          </Fragment>
+        )}
+        <CustomPagination
+          followData={cities}
+          dispachReq={fetchCities}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
         />
         {/* <CardFooter>
         <CardText className='mb-0'>

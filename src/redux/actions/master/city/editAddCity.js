@@ -1,6 +1,6 @@
 //** API imports
-import axios from 'axios'
-import { BaseUrl } from '@store/baseUrl' //Base Url
+import axios from "axios"
+import { BaseUrl } from "@store/baseUrl" //Base Url
 
 //* FUNC for fetching countries
 export const findCountries = () => {
@@ -14,10 +14,7 @@ query {
 `
   return async (dispatch) => {
     const res = await axios.post(BaseUrl, { query })
-    return dispatch({
-      type: 'countries_fetched',
-      payload: res.data.data
-    })
+    return dispatch({ type: "countries_fetched_for_edit", payload: res.data.data.countries })
   }
 }
 
@@ -36,35 +33,31 @@ query{
   return async (dispatch) => {
     const res = await axios.post(BaseUrl, { query })
     return dispatch({
-      type: 'states_fetched',
+      type: "states_fetched_for_edit",
       payload: res.data.data.statesConnection.values
     })
   }
 }
-
-//** FUNC for fetching cities
-export const findCities = (state_name) => {
+export const findCities = (state) => {
   const query = `
 query{
-  citiesConnection(where: {
-    state: {
-      name: "${state_name}"
-    }
-  }){
+  citiesConnection(where: {state: {name: "${state}"}}){
     values{
       id
       name
-    
     }
   }
 }
 `
   return async (dispatch) => {
-    const res = await axios.post(BaseUrl, { query })
+    try {
+      const res = await axios.post(BaseUrl, { query })
     return dispatch({
-      type: 'cities_fetched_for_edit',
+      type: "cities_fetched_for_edit",
       payload: res.data.data.citiesConnection.values
     })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
-

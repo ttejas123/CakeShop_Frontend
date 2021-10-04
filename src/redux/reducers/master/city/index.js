@@ -1,12 +1,16 @@
 const initialState = {
   data: [],
-  start: 0,
-  firstTimeFetch: false
+  count: 0,
+  fetchCitiesLoading: false,
+  editCitiesLoading: false,
+  addCitiesLoading: false
 }
 const cityReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'cities_fetched':
-      const dataArray = action.payload.map((city) => {
+    case "fetch_cities_loading":
+      return { ...state, fetchCitiesLoading: true }
+    case "cities_fetched_city_list":
+      const dataArray = action.payload.cities.map((city) => {
         return {
           name: city.name,
           state: city.state.name,
@@ -18,18 +22,21 @@ const cityReducer = (state = initialState, action) => {
         ...state,
         data: dataArray,
         start: state.start + 5,
-        firstTimeFetch: true
+        count: action.payload.count,
+        fetchCitiesLoading: false
       }
-    case "SELECTEDCITYLIST": 
-            //console.log(action.payload)
-            const DataSelectArray = action.payload.citiesConnection.values.map((val) => {  
-                return {value: val.name, label: val.name, id: val.id}
-            })
-            //console.log(DataArray)
-            return {
-                ...state,
-                data: DataSelectArray
-            }
+    case "edit_cities_loading":
+      return { ...state, editCitiesLoading: true }
+    case "city_edited":
+      return { ...state, editCitiesLoading: false }
+    case "add_cities_loading":
+      return { ...state, addCitiesLoading: true }
+    case "city_added":
+      return { ...state, addCitiesLoading: false }
+    case "city_deleted":
+      return { ...state, fetchCitiesLoading: false }
+    case "cities_reset_city_list":
+      return initialState
     default:
       return state
   }

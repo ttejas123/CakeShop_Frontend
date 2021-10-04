@@ -1,113 +1,152 @@
-import axios from 'axios'
-import { BaseUrl } from '@store/baseUrl' //Base Url
+import axios from "axios"
+import { BaseUrl } from "@store/baseUrl" //Base Url
 //const link = `${BaseUrl}/countries` //Link For Country Crud
 
 //const BaseUrl = `http://159.65.156.12:1337/graphql`
 
-export const List = () => {
-    const query = `query{
-                     countries{
-                  country_name
-                            id
-                  country_code
-    country_initial
-    currency
-  }                    }`
-
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query}).then(res => {
-            //console.log(res.data.data.countries)
-            return dispatch({
-                type: 'COUNTRYLIST',
-                payload: res.data.data.countries
-            })
-        })
-    }
-}
-
-export const dropdcountryList = () => {
-    const query = `query{
-                      countries{
-                        country_name
-                        id
-                      }
-                    }`
-
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query}).then(res => {
-            //console.log(res.data.data.countries)
-            return dispatch({
-                type: 'DROPDCOUNTRYLIST',
-                payload: res.data.data.countries
-            })
-        })
-    }
-}
-
-
-export const Create = () => {
-  
-    const createQ = `mutation($country_name: String!, $country_initial: String!, $country_code: String!){
-  createCountry(input:{data:{country_name: $country_name, country_code:$country_code,country_initial:$country_initial}}){
-    country{
-      id,
+export const fetchCountries = (limit, start, searchQuery) => {
+  const searchPro = searchQuery ? searchQuery : ""
+  const query = `
+query{
+  countriesConnection(limit:${limit},start:${start},where:{country_name_contains:"${searchPro}"}){
+    values{
       country_name
+      country_code
+      country_initial
+      id
+      currency
+    }
+    aggregate{
+      count
     }
   }
-}`
-    //Create
-  return dispatch => {
-        //List
-        axios.post(BaseUrl, {query: createQ, variables: { country_name: "Nepal", country_code: "977", country_initial: "NP"}}).then(res => {
-            console.log(res.data.data)
-            return dispatch({
-                type: 'COUNTRYADD',
-                payload: res.data.data
-            })
-        })
+}
+  `
+
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "fetch_countries_loading" })
+      const res = await axios.post(BaseUrl, { query })
+      return dispatch({
+        type: "countries_fetched_list_page",
+        payload: {
+          countries: res.data.data.countriesConnection.values,
+          count: res.data.data.countriesConnection.aggregate.count
+        }
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
   }
 }
-
-export const EditC = () => {
-    const updateQ = `mutation($id: ID!, $country_name: String!){
-                        updateCountry(input:{where:{id: $id},data:{country_name: $country_name}}){
-                          country{
-                            id,
-                            country_name
-                          }
-                        }
-                      }`
-    
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query: updateQ, variables: { id: "612c9cbf58550a7f14f4f69d", country_name: "Nepal"}}).then(res => {
-            //console.log(res.data.data)
-            return dispatch({
-                type: 'COUNTRYEDIT',
-                payload: res.data.data
-            })
-        })
-    }
+export const fetchCurrenciesForAddEdit = () => {
+  const query = `
+query{
+  currencies{
+    id
+    code
+    symbol
+  }
 }
-
-export const DeleteC = () => {
-    const deleteQ = `mutation($id: ID!){
-                      deleteCountry(input:{where:{id: $id}}){
-                        country{
-                          id,
-                          country_name
-                        }
-                      }
-                    }`
-    return dispatch => {
-        //List
-        axios.post(BaseUrl, {query: deleteQ, variables: { id: "612cbe0b58550a7f14f4f6a1"}}).then(res => {
-            return dispatch({
-                type: 'COUNTRYDELETE',
-                payload: res.data.data
-            })
-        })
+`
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(BaseUrl, { query })
+      return dispatch({
+        type: "fetched_currencied_for_add_edit",
+        payload: res.data.data.currencies
+      })
+    } catch (error) {
+      console.log(error)
     }
+  }
+}
+export const editCountry = (whereId, name, initial, code, currency) => {
+  console.log(whereId, name, initial, code, currency)
+  const query = `
+mutation{
+  updateCountry(input:
+  {
+  where:
+  {
+  id:"${whereId}"
+  }
+  ,data:
+  {
+  country_name:"${name}",
+  country_initial:"${initial}",
+  country_code:"${code}"
+  ,currency:"${currency}"}
+  }
+  ){
+country{
+  country_name,
+  country_initial
+  country_code,
+  id,
+  currency
+}
+  }
+}
+`
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "edit_country_loading" })
+      const res = await axios.post(BaseUrl, { query })
+      dispatch({ type: "country_edited", payload: res.data.data.updateCountry.country })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export const addCountry = (name, initial, code, currency) => {
+  const query = `
+mutation{
+  createCountry(input:{
+  data:
+  {
+  country_name:"${name}}",
+  country_initial:"${initial}",
+  country_code:"${initial}",
+  currency:"${currency}"
+  }
+  }){
+    country{
+      country_name
+      country_initial 
+      country_code
+      currency
+    }
+  }
+}
+`
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "add_country_loading" })
+      const res = await axios.post(BaseUrl, { query })
+      dispatch({ type: "country_added", payload: res.data.data.createCountry.country })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export const deleteCountry = (whereId) => {
+  const query = `
+mutation{
+deleteCountry(input:{where:{id:"${whereId}"}}){
+  country{
+    id
+  }
+}
+}
+`
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "fetch_countries_loading" })
+      const res = await axios.post(BaseUrl, { query })
+      dispatch({ type: "country_deleted" })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

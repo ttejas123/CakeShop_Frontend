@@ -23,10 +23,10 @@ import {
 } from "reactstrap"
 
 import Select from "react-select"
-const AddForm = (props) => {
+const EditForm = (props) => {
+  console.log(props)
   const usedispatch = useDispatch()
   const countries = useSelector((state) => state.editAddCity.countries)
-  const states = useSelector((state) => state.editAddCity.states)
   //** Fetching data to display default selection
   useEffect(() => {
     usedispatch(findCountries())
@@ -38,22 +38,26 @@ const AddForm = (props) => {
 
   //** Local state for controlled input elements with
   //** default values set from previous component
-  const [city, setCity] = useState("")
-  const [state, setState] = useState({ value: "Select", label: "Select" })
-  const [country, setCountry] = useState({ value: "Select", label: "Select" })
+  const [state, setState] = useState(props.data.StateName)
+  const [country, setCountry] = useState({
+    value: props.data.Country,
+    label: props.data.Country,
+    id: props.data.countryId
+  })
 
   //** FUNC for handling input change
   const handleSubmit = () => {
     props.handleSubmit({
-      city,
-      stateId: state.id
+      state,
+      countryId: country.id,
+      whereId: props.data.id
     })
   }
   return (
     <Form>
       <Col md="12" sm="12">
         <Row className="mt-3 d-flex justify-content-center align-items-center">
-          <Col sm="3">
+          <Col sm="4">
             <FormGroup className="d-flex">
               <Label size="lg" for="country">
                 Country
@@ -70,7 +74,6 @@ const AddForm = (props) => {
                   onChange={(data) => {
                     usedispatch(findStates(data.value)).then(() => {
                       setCountry(data)
-                      setState({ value: "Select", label: "Select" })
                     })
                   }}
                 />
@@ -78,41 +81,17 @@ const AddForm = (props) => {
             </FormGroup>
           </Col>
 
-          <Col sm="3">
+          <Col sm="4">
             <FormGroup className="d-flex">
               <Label size="lg" for="state">
                 State
               </Label>
               <Col>
-                <Select
-                  id="state"
-                  name="country"
-                  className="react-select"
-                  classNamePrefix="select"
-                  isClearable={false}
-                  value={state}
-                  options={states}
-                  onChange={(data) => {
-                    usedispatch(findCities(data.value)).then(() => {
-                      setState(data)
-                      setCity("")
-                    })
-                  }}
-                />
-              </Col>
-            </FormGroup>
-          </Col>
-          <Col sm="3">
-            <FormGroup className="d-flex">
-              <Label size="lg" for="city">
-                City
-              </Label>
-              <Col>
                 <Input
-                  name="city"
-                  id="city"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
+                  name="state"
+                  id="state"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
                 />
               </Col>
             </FormGroup>
@@ -140,4 +119,4 @@ const AddForm = (props) => {
     </Form>
   )
 }
-export default AddForm
+export default EditForm
