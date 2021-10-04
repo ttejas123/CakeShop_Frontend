@@ -58,6 +58,18 @@ const brandReducer = (state = initialState, action) => {
       return initialState
     case "brands_reset_list":
       return initialState
+    case "BRANDDROPDOWN":
+      const dataArrayDropdown = action.payload.brands.map((brand) => {
+        return {
+          label: brand.name,
+          value: brand.name,
+          id: brand.id
+        }
+      })
+      return {
+        ...state,
+        brands: dataArrayDropdown
+      }
     default:
       return state
   }
