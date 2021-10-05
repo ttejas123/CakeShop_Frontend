@@ -18,13 +18,6 @@ export default [
         icon: <Circle size={20} />,
         navLink: '/ogedashbaord'
       },
-      
-      {
-        id: 'Admin',
-        title: 'Admin',
-        icon: <Circle size={20} />,
-        navLink: '/adashboard'
-      },
       {
         id: 'Finances',
         title: 'Finances',
