@@ -39,11 +39,10 @@ const todoReducer = (state = initData, action) => {
 
     switch (action.type) {
         case "PRODUCTLIST": 
-            
+          try {    
             const DataArray = action.payload.productsConnection.values.map((val) => { 
-                //console.log(val.createdAt) 
                 return {
-                    img: `${BackEndUrl}${val.image ? val.image[0].url : "/" }`.replaceAll('"', ''), 
+                    img: `${BackEndUrl}${val.image.length ? val.image[0].url : "/" }`.replaceAll('"', ''), 
                     name: val.name,
                     mrp: val.mrp,
                     ean_upc_code: val.ean_upc_code,
@@ -61,13 +60,19 @@ const todoReducer = (state = initData, action) => {
                     id: val.id
                 }
             })
-            //console.log(DataArray)
             return {
                 ...state,
                 count: action.payload.productsConnection.aggregate.count,
                 data: DataArray
             }
+          } catch (e) {
+            console.log("Error in Product Listing")
+            return {
+                ...state
+            }
+          }
         case "SPECIFICPRODUCTATTRIBUTEFORPRODUCTEDIT": 
+          try { 
             const productAttribute = action.payload.attributeMasters.map((val) => {
                 return {
                     label: val.display_name,
@@ -75,11 +80,13 @@ const todoReducer = (state = initData, action) => {
                     id: val.id
                 }
             })
-            //console.log(productAttribute)
             return {
                 ...state,
                 attribute: productAttribute
             }
+          } catch (e) {
+            console.log(e)
+          }
         case "SPECIFICPRODUCT": 
             
             const RawProductData = action.payload.product

@@ -597,6 +597,10 @@ const Routes = [
     component: lazy(() => import('@src/views/dashboards/cateloge/createCatalogue.js'))
   },
   {
+    path: '/dashboard/updatecatalague/:id',
+    component: lazy(() => import('@src/views/dashboards/cateloge/updateCatalogue.js'))
+  },
+  {
     path: '/report/customer',
     component: lazy(() => import('../../views/report/customer'))
   },

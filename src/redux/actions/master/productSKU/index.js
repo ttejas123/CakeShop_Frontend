@@ -183,7 +183,7 @@ export const EditC = (data, useDisplatch, List) => {
                     const updateQNoImg = `mutation{
                                           UpdateSKU(
                                             id: "${data.id}"
-                                            sku_id: "${data.sku_id}"
+                                            sku_id: "${data.productSku}"
                                             sku_title: "${data.sku_title}"
                                             mrp: ${data.mrp}      
                                             ){

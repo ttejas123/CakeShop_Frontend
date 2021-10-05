@@ -292,9 +292,9 @@ const MyProducts = () => {
                                                   } }/>
                   </DropdownToggle>
                 </UncontrolledDropdown>
-               <Edit  
-                  size={15}>
-                                     </Edit>
+                <Link tag={Link} to={`/dashboard/updatecatalague/${row.id}`}>
+                  <Edit  size={15} />
+                </Link>
               </div>
             )
           }

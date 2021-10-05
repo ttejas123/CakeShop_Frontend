@@ -31,6 +31,7 @@ const initData = {
      count: 0,
      productList: [],
      skuList: [],
+     specificcalalogue: {},
      selectedskuProductData: {},
      dropdowns: {}
 }
@@ -47,15 +48,17 @@ const todoReducer = (state = initData, action) => {
                     // const categories = val.categories ? val.categories.map((cat) => {
                     //     return cat.category
                     // }) : []
-                    console.log(val.product_skus ? val.product_skus.images[0] ? `${BackEndUrl}/${val.product_skus.images[0].url}` : "" : "")
+                    //console.log(val.product_skus ? val.product_skus.images[0] ? `${BackEndUrl}/${val.product_skus.images[0].url}` : "" : "")
                     return {
                         customization_avail: val.customization_avail,
                         sample_avail: val.sample_avail,
                         mrp: val.product_skus ? val.product_skus.mrp : "",
                         sku_title: val.product_skus ? val.product_skus.sku_title : '',
+                        sku_id: val.product_skus ? val.product_skus.id : '',
                         ean_upc_code: val.product_skus ? val.product_skus.product ? val.product_skus.product.ean_upc_code : "" : "",
                         hsn_code: val.product_skus ? val.product_skus.product ? val.product_skus.product.hsn_code : "" : "",
                         delivery_days: val.delivery_days,
+                        avail_quantity: val.avail_quantity,
                         image: val.product_skus ? val.product_skus.images[0] ? `${BackEndUrl}${val.product_skus.images[0].url}` : "" : "",
                         moq: val.moq,
                         unit_price: val.unit_price,     
@@ -130,10 +133,48 @@ const todoReducer = (state = initData, action) => {
                 ...state,
                 productList
             }    
-        case "UPDATEATTRIBUTE":
-            return {
-                ...state
-            }
+        case "UPDATECALALOGUE":
+                    return {
+                        ...state
+                    }
+        case "FETCHONECATALOGUE": 
+                const specificCalalogue = action.payload.catalogue
+                // const AllUrl = specificCalalogue.product_images.length !== 0 ? (specificCalalogue.product_images.map((val) => {
+                //         return `${BackEndUrl}${val.url}`
+                // })) : ([])
+                // const AllImgIDs = specificCalalogue.product_images.length !== 0 ? (specificCalalogue.product_images.map((val) => {
+                //         return val.id
+                // })) : ([])
+
+                if (specificCalalogue) {
+                    const AllUrl = specificCalalogue.product_images.length !== 0 ? (specificCalalogue.product_images.map((val) => {
+                        return `${BackEndUrl}${val.url}`
+                    })) : ([])
+                    const AllImgIDs = specificCalalogue.product_images.length !== 0 ? (specificCalalogue.product_images.map((val) => {
+                            return val.id
+                    })) : ([])
+                    const specificcalalogue = {
+                        sku_id: specificCalalogue.product_skus ? specificCalalogue.product_skus.id : "",
+                        images: AllUrl,
+                        imgIds: AllImgIDs,
+                        custom: specificCalalogue.customization_avail,
+                        sampling: specificCalalogue.sample_avail,
+                        unit_price: specificCalalogue.unit_price,
+                        moq: specificCalalogue.moq,
+                        lead: specificCalalogue.delivery_days,
+                        totalInventry: specificCalalogue.avail_quantity,
+                        id: specificCalalogue.id
+                    }
+                    //console.log(specificcalalogue)
+                    return {
+                        ...state,
+                        specificcalalogue
+                    }
+                } else {
+                    return {
+                        ...state
+                    }
+                }
         case "DELETECATALOGE":
             const deleteUser = action.payload.deleteCatalogue.catalogue
             return {

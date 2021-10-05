@@ -118,6 +118,95 @@ export const createCat = (data, useDisplatch, List) => {
     }
 }
 
+export const EditC = (data, useDisplatch, List) => {
+    if (data.img.length > 0) {
+        const formdata1 = new FormData()
+        let index = 0
+        let index2 = 0
+        let stringForAppend = ''
+        
+        formdata1.append("operations", "{\n  \"query\": \"mutation($files: [Upload]!){multipleUpload(files: $files){id}}\",\n    \"variables\": {\n      \"files\": []\n   }\n}")
+        while (index2 < data.img.length) {
+            if (index2 === data.img.length - 1) {
+                stringForAppend =  `${stringForAppend} \"${index2}\": [\"variables.files.${index2}\"]  `
+            } else {
+                stringForAppend =  `${stringForAppend} \"${index2}\": [\"variables.files.${index2}\"],  `
+            }
+            ++index2
+        }
+        stringForAppend = `{${stringForAppend}}`
+        formdata1.append("map", `${stringForAppend}`)
+        
+        while (index < data.img.length) {
+            formdata1.append(`${index}`, data.img[index])
+             ++index
+        }
+
+        return dispatch => {
+            axios.post(BaseUrl, formdata1).then(res => {
+                let productImagesToUpload = res.data.data.multipleUpload.map((val) => {
+                    return val.id
+                })
+                const ImageIdNnewOne = [...data.imgIds, ...productImagesToUpload]
+                productImagesToUpload = ImageIdNnewOne.map((val) => {
+                    return `\"${val}\"`
+                })
+                    const updateQ = `mutation{
+                                          updateCatalogue(input: {where: {id: "${data.id}"} data: {
+                                            product_skus: "${data.skuId}"
+                                            unit_price: ${data.unit_price}
+                                            moq: ${data.moq}
+                                            delivery_days: ${data.lead}
+                                            sample_avail: ${data.sampling}
+                                            product_images:[${productImagesToUpload}]
+                                            avail_quantity: ${data.totalInventry}
+                                            customization_avail: ${data.custom}
+                                          }}){
+                                            catalogue{
+                                              id
+                                            }
+                                          }
+                                        }`
+                            axios.post(BaseUrl, {query: updateQ}).then(res => {
+                                //console.log(res.data.data)
+                                useDisplatch(List(5, 0))
+                                return dispatch({
+                                    type: 'UPDATECATALOGUE',
+                                    payload: res.data.data
+                                })
+                            })
+
+            })
+        }
+    } else {
+                    const updateQNoImg = `mutation{
+                                          updateCatalogue(input: {where: {id: "${data.id}"} data: {
+                                            product_skus: "${data.skuId}"
+                                            unit_price: ${data.unit_price}
+                                            moq: ${data.moq}
+                                            delivery_days: ${data.lead}
+                                            sample_avail: ${data.sampling}
+                                            avail_quantity: ${data.totalInventry}
+                                            customization_avail: ${data.custom}
+                                          }}){
+                                            catalogue{
+                                              id
+                                            }
+                                          }
+                                        }`
+                        return dispatch => {
+                            axios.post(BaseUrl, {query: updateQNoImg}).then(res => {
+                                //console.log(res.data.data)
+                                useDisplatch(List(5, 0))
+                                return dispatch({
+                                    type: 'UPDATECATALOGUE',
+                                    payload: res.data.data
+                                })
+                            })
+                        }
+    }
+}
+
 export const editAttribute = (data, useDisplatch, List) => {
   console.log(data)
   const attVal = data.attVal.map((val) => {
@@ -206,6 +295,7 @@ export const productSkuPrefetchData = (id) => {
     return dispatch => {
         //List
         axios.post(BaseUrl, {query: reuir}).then(res => {
+            //console.log(res.data.data)
             return dispatch({
                 type: 'PRODUCTSKUPREFETCHDATA',
                 payload: res.data.data
@@ -260,6 +350,37 @@ export const productSkuList = (id) => {
 
             return dispatch({
                 type: 'PRODUCTSPECPRODUCTSKULIST',
+                payload: res.data.data
+            })
+        })
+    }
+}
+
+export const specificCatalogue = (id) => {
+    const fetchOneCatalgueSkuId = `query{
+  catalogue(id: "${id}"){
+      id
+      product_skus{
+        id
+      }
+      unit_price
+      moq
+      product_images{
+        id
+        url
+      }
+      delivery_days
+      sample_avail
+      customization_avail
+      avail_quantity
+  }
+}`
+    return dispatch => {
+        //List
+        axios.post(BaseUrl, {query: fetchOneCatalgueSkuId}).then(res => {
+
+            return dispatch({
+                type: 'FETCHONECATALOGUE',
                 payload: res.data.data
             })
         })
