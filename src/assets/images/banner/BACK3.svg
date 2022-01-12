@@ -1,0 +1,36 @@
+<svg width="1440" height="1547" viewBox="0 0 1440 1547" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.56" filter="url(#filter0_f)">
+<path d="M1279.8 943.566C1018.12 811.331 838.59 639.632 878.798 560.066C919.006 480.5 1163.73 523.197 1425.4 655.432C1687.08 787.667 1866.61 959.366 1826.4 1038.93C1786.2 1118.5 1541.47 1075.8 1279.8 943.566Z" fill="#983B86"/>
+</g>
+<g opacity="0.5" filter="url(#filter1_f)">
+<path d="M-70.3147 406.333C-246.875 317.11 -322.608 111.41 -239.468 -53.1104C-156.329 -217.631 54.1987 -278.671 230.759 -189.447C407.319 -100.224 483.052 105.476 399.912 269.996C316.773 434.516 106.245 495.557 -70.3147 406.333Z" fill="url(#paint0_radial)"/>
+</g>
+<g opacity="0.5" filter="url(#filter2_f)">
+<path d="M1176.69 351.333C1000.13 262.11 924.392 56.4099 1007.53 -108.11C1090.67 -272.631 1301.2 -333.671 1477.76 -244.447C1654.32 -155.224 1730.05 50.4759 1646.91 214.996C1563.77 379.516 1353.25 440.557 1176.69 351.333Z" fill="url(#paint1_radial)"/>
+</g>
+<defs>
+<filter id="filter0_f" x="441.996" y="51.9995" width="1821.21" height="1495" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="182" result="effect1_foregroundBlur"/>
+</filter>
+<filter id="filter1_f" x="-464.004" y="-425" width="1088.45" height="1066.89" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="37" result="effect1_foregroundBlur"/>
+</filter>
+<filter id="filter2_f" x="782.996" y="-480" width="1088.45" height="1066.89" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="37" result="effect1_foregroundBlur"/>
+</filter>
+<radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(80.222 108.443) rotate(-153.191) scale(358.192 333.766)">
+<stop stop-color="#983B86"/>
+<stop offset="1" stop-color="#983B86" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1327.22 53.4429) rotate(-153.191) scale(358.192 333.766)">
+<stop stop-color="#358AAF"/>
+<stop offset="1" stop-color="#983B86" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

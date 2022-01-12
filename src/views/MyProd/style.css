@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+.heroSection {
+	height: 100vh;
+    padding-top: 100px;
+    /*background-image: url(../../assets/images/banner/BACK3.svg);*/
+    
+    background-image: url(../../assets/images/banner/BACK1.svg), url(../../assets/images/banner/BACK2.svg);
+    background-position: 0px -450px, 0px -160px;
+    background-size: cover, auto;
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: scroll, scroll;
+
+}
+
+.hearderFirst{
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -1px;
+    font-size: 5em; 
+    color: White;
+    text-align:left;
+    font-family: 'DM Serif Display', sans-serif;
+}
+
+.mainButton {
+	color: White;
+	font-family: 'Secular One', sans-serif;
+	margin-top: 30px;
+    margin-bottom: 24px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+   /* background-image: linear-gradient(
+180deg
+, hsla(0, 0%, 100%, 0.05), hsla(0, 0%, 100%, 0.05)), linear-gradient(
+53deg
+, #ff2d3c, #ff52c4);*/
+    background-image: linear-gradient(
+90deg
+, #4d194d, #212f45 52%, #0b525b);
+    box-shadow: 0 10px 38px -15px #ff0333;
+    -webkit-transition: all 240ms cubic-bezier(.661, .003, .25, 1);
+    transition: all 240ms cubic-bezier(.661, .003, .25, 1);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: normal;
+}
+.normalText{
+	font-family: 'Signika Negative', sans-serif;
+}
+
+.buttonStyle{
+    background-image: linear-gradient(
+90deg
+, #4d194d, #212f45 52%, #0b525b);
+}

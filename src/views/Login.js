@@ -88,11 +88,11 @@ const Login = () => {
           const data = { ...res.data.user, accessToken: res.data.jwt, refreshToken: res.data.jwt }
           console.log(data)
           usDispatch(handleLogin(data))
-          window.location.assign("/ccdashboard")
+          //window.location.assign("/")
           
-          // window.location.reload(false)
+          //window.location.reload(false)
           //ability.update(res.data.userData.ability)
-          //historyLocation.push(getHomeRouteForLoggedInUser(data.role))
+          historyLocation.push(getHomeRouteForLoggedInUser(data.role))
           toast.success(
             <ToastContent name={data.fullName || data.username || 'John Doe'} role={data.role || 'admin'} />,
             { transition: Slide, hideProgressBar: true, autoClose: 2000 }
@@ -114,7 +114,7 @@ const Login = () => {
  
          <div className='d-lg-flex align-items-center justify-content-center '>
 
-            <div className='mx-lg-5 px-lg-5 mx-1 py-5 py-lg-0'>
+            <div className='mx-lg-5 px-lg-5 mx-1 py-5 py-lg-0 d-none d-lg-block'>
                   <div className="">
                     <h3 className="pb-1">First time here ?</h3>
                     <h2 className="pb-1">Join now and get<br /> <span >20% OFF</span> for all <br /> products</h2>
@@ -129,11 +129,11 @@ const Login = () => {
                   </div>
             </div>
 
-            <div style={{height: '100vh'}} className='px-lg-5 mx-1 mx-lg-0 align-items-center d-flex'>
+            <div style={{height: '100vh'}} className='d-md-flex justify-content-center  px-lg-5 mx-1 mx-lg-0 align-items-center d-flex'>
             <Card className='mx-lg-5 '>
               <CardBody>
                 <CardTitle tag='h2' className='font-weight-bold mb-1'>
-                  Welcome to Bidoya!
+                  Welcome to Tejas!
                 </CardTitle>
 
                 {/* form to Add Data*/}
@@ -166,11 +166,11 @@ const Login = () => {
 
                     <FormGroup className='d-flex justify-content-between'>
                       <CustomInput type='checkbox' className='custom-control-Primary' id='remember-me' label='Remember Me' />
-                      <CustomInput type='checkbox' onChange={(e) => setchecked(e.target.checked) } className='custom-control-Primar1' id='Seller' label='As Seller' />
+                      
                     </FormGroup>
 
-                    <div className='d-flex justify-content-center'>
-                      <p className='text-center col-10'>Default Will be Buyer, To Login As Seller Please Check " As Seller".</p>
+                    <div className='d-lg-flex d-none justify-content-center'>
+                      <p className='text-center col-10'>This site is only for Educational Purpose! and also free to use.</p>
                     </div>
 
                     <Button.Ripple onClick={() => {
@@ -183,9 +183,9 @@ const Login = () => {
                 </Form>
 
                 <p className='text-center mt-2'>
-                  <span>New on our Bidoya?</span>
+                  <span>New here? </span>
                   <Link to='/register'>
-                    <span>Create your account</span>
+                    <span> Create your account</span>
                   </Link>
                 </p>
 

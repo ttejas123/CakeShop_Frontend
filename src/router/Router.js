@@ -87,13 +87,16 @@ const Router = () => {
        ** If user is not Logged in & route.meta.authRoute, !route.meta.publicRoute are undefined
        ** Then redirect user to login
        */
+      // console.log(route.meta)
+      
       return <Redirect to='/login' />
     } else if (route.meta && route.meta.authRoute && isUserLoggedIn()) {
-      console.log(route.meta)
-      // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
-      return <Redirect to='/ccdashboard' />
-    } else {
       //console.log(route.meta)
+      // ** If route has meta and authRole and user is Logged in then redirect user to home page (DefaultRoute)
+      return <Redirect to='/' />
+    } else {
+      // console.log(route.meta)
+      
       // ** If none of the above render component
       return <route.component {...props} />
     }
@@ -169,7 +172,7 @@ const Router = () => {
                             /*eslint-enable */
                           >
                             {/*<route.component {...props} />*/}
-                            <FinalRoute route={route} {...props} /> 
+                            <FinalRoute route={route} {...props} />
                           </LayoutWrapper>
                         </Suspense>
                       )

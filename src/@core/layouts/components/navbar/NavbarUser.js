@@ -27,7 +27,7 @@ const NavbarUser = props => {
       <ul className='navbar-nav d-xl-none d-flex align-items-center'>
         <NavItem className='mobile-menu mr-auto'>
           <NavLink className='nav-menu-main menu-toggle hidden-xs is-active' onClick={() => setMenuVisibility(true)}>
-            <Menu className='ficon' />
+            {/*<Menu className='ficon' />*/}
           </NavLink>
         </NavItem>
       </ul>
@@ -39,9 +39,9 @@ const NavbarUser = props => {
         </NavItem>
       </div>
       <ul className='nav navbar-nav align-items-center ml-auto'>
-         <IntlDropdown />
-        <NotificationDropdown />
-        <UserDropdown />
+       {/* <IntlDropdown />
+               <NotificationDropdown />*/}
+               <UserDropdown />
       </ul>
     </Fragment>
   )

@@ -1,0 +1,24 @@
+.ps-btn--warning {
+  border: 1px solid #FD8D27 !important;
+  background-color: #FD8D27 !important;
+  color: white !important;
+}
+
+.ps-btn--warning:hover {
+  background-color: white !important;
+  color: #FD8D27 !important;
+}
+
+.form-control {
+  outline: none;
+  
+  font-size: 14px;
+  
+  border: none;
+
+ 
+  border: 1px solid #ddd;
+  
+  
+  background-color: transparent;
+}
